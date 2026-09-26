@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dar Nour — Penthouses face à la baie d'Alger, Hydra</title>
+<meta name="description" content="Visitez en 3D le penthouse témoin de la résidence Dar Nour à Hydra : de la porte d'entrée à la terrasse avec piscine, face à la baie d'Alger. Site de démonstration.">
+<meta name="theme-color" content="#110e0b">
+<link rel="canonical" href="https://demos.youcef-ny.workers.dev/dar-nour-alger/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Dar Nour">
+<meta property="og:url" content="https://demos.youcef-ny.workers.dev/dar-nour-alger/">
+<meta property="og:title" content="Dar Nour — Entrez dans la lumière">
+<meta property="og:description" content="Visite 3D d'un penthouse face à la baie d'Alger. Faites défiler : la porte s'ouvre, chaque pièce se dévoile.">
+<meta property="og:image" content="https://demos.youcef-ny.workers.dev/dar-nour-alger/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Terrasse avec piscine à débordement face au coucher de soleil sur la baie d'Alger">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dar Nour — Entrez dans la lumière">
+<meta name="twitter:description" content="Visite 3D d'un penthouse face à la baie d'Alger.">
+<meta name="twitter:image" content="https://demos.youcef-ny.workers.dev/dar-nour-alger/img/og.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23110e0b'/%3E%3Cpath d='M18 50V30a14 14 0 0 1 28 0v20' fill='none' stroke='%23c7a15f' stroke-width='4'/%3E%3Ccircle cx='32' cy='31' r='5' fill='%23e3c48c'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500&display=swap&text=%D8%AF%D8%A7%D8%B1%20%D9%86%D9%88%D8%B1">
+<link rel="stylesheet" href="./style.css">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.core.js">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
+  }
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
+<script type="module" src="./app.js"></script>
+</head>
+<body class="is-loading">
+<a class="skip" href="#projet">Passer la visite 3D</a>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__mark">
+    <span class="loader__ar" lang="ar">دار نور</span>
+    <span class="loader__lat">Dar Nour</span>
+  </div>
+  <div class="loader__foot">
+    <span>Préparation de la visite</span>
+    <span><b id="pct">0</b>&nbsp;%</span>
+  </div>
+  <div class="loader__bar"><i id="loader-bar"></i></div>
+</div>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="Dar Nour, retour en haut">
+    <span class="brand__ar" lang="ar">دار نور</span>
+    <span class="brand__lat">Dar Nour</span>
+  </a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="#visite">Visite 3D</a>
+    <a href="#appartements">Appartements</a>
+    <a href="#prestations">Prestations</a>
+    <a href="#quartier">Hydra</a>
+  </nav>
+  <span class="demo-tag" title="Projet fictif créé pour la démonstration">Démo</span>
+  <a class="btn btn--small" href="#contact">Visite privée</a>
+</header>
+
+<main id="top">
+
+  <!-- ============ VISITE 3D ============ -->
+  <section class="visit" id="visite" aria-label="Visite 3D du penthouse">
+    <div class="visit__stage">
+      <canvas class="visit__canvas" id="scene" aria-hidden="true"></canvas>
+      <div class="visit__fallback" id="fallback" aria-hidden="true">
+        <img data-stop="accueil" src="img/accueil.webp" alt="" loading="lazy">
+        <img data-stop="entree" src="img/entree.webp" alt="" loading="lazy">
+        <img data-stop="sejour" src="img/sejour.webp" alt="" loading="lazy">
+        <img data-stop="cuisine" src="img/cuisine.webp" alt="" loading="lazy">
+        <img data-stop="suite" src="img/suite.webp" alt="" loading="lazy">
+        <img data-stop="bain" src="img/bain.webp" alt="" loading="lazy">
+        <img data-stop="terrasse" src="img/terrasse.webp" alt="" loading="lazy">
+        <img data-stop="vue" src="img/vue.webp" alt="" loading="lazy">
+      </div>
+      <div class="visit__shade"></div>
+
+      <div class="visit__ui">
+        <div class="hero">
+          <p class="eyebrow hero__eyebrow">Résidence Dar Nour · Hydra, Alger</p>
+          <h1 class="hero__title">Entrez dans <em>la lumière.</em></h1>
+          <p class="hero__lead">Penthouses et appartements face à la baie d'Alger. Faites défiler : la porte s'ouvre.</p>
+        </div>
+
+        <div class="scroll-hint" aria-hidden="true"><span>Faites défiler</span><i></i></div>
+
+        <ol class="rooms">
+          <li class="room" data-stop="entree">
+            <span class="room__n">01 <i>/ 07</i></span>
+            <h2 class="room__t">L'entrée</h2>
+            <p class="room__d">Sol en marbre de Carrare, porte pivot en noyer de 2,80 m et arche ouverte sur le séjour.</p>
+            <p class="room__m"><span>15 m²</span><span>Dressing invités</span></p>
+          </li>
+          <li class="room" data-stop="sejour">
+            <span class="room__n">02 <i>/ 07</i></span>
+            <h2 class="room__t">Le séjour</h2>
+            <p class="room__d">Cheminée en Nero Marquina, parquet en point de Hongrie et baies vitrées toute hauteur sur la mer.</p>
+            <p class="room__m"><span>73 m²</span><span>Vue mer</span></p>
+          </li>
+          <li class="room" data-stop="cuisine">
+            <span class="room__n">03 <i>/ 07</i></span>
+            <h2 class="room__t">Cuisine &amp; salle à manger</h2>
+            <p class="room__d">Îlot en marbre de 3,80 m, colonnes vert olive et table pour huit face au couchant.</p>
+            <p class="room__m"><span>78 m²</span><span>Cuisine équipée</span></p>
+          </li>
+          <li class="room" data-stop="suite">
+            <span class="room__n">04 <i>/ 07</i></span>
+            <h2 class="room__t">La suite parentale</h2>
+            <p class="room__d">Tête de lit capitonnée, voilages en lin et verrière cannelée vers la salle de bain.</p>
+            <p class="room__m"><span>73 m²</span><span>Coin lecture</span></p>
+          </li>
+          <li class="room" data-stop="bain">
+            <span class="room__n">05 <i>/ 07</i></span>
+            <h2 class="room__t">Le bain, face à la mer</h2>
+            <p class="room__d">Baignoire îlot devant la baie, double vasque suspendue et douche à l'italienne en marbre.</p>
+            <p class="room__m"><span>55 m²</span><span>Accès terrasse</span></p>
+          </li>
+          <li class="room" data-stop="terrasse">
+            <span class="room__n">06 <i>/ 07</i></span>
+            <h2 class="room__t">La terrasse &amp; la piscine</h2>
+            <p class="room__d">Piscine à débordement de 14 m, salon sous pergola et vue dégagée sur toute la baie.</p>
+            <p class="room__m"><span>150 m²</span><span>Piscine privée</span></p>
+          </li>
+          <li class="room room--final" data-stop="vue">
+            <span class="room__n">07 <i>/ 07</i></span>
+            <h2 class="room__t">Le penthouse, en entier</h2>
+            <p class="room__d">310 m² habitables et 150 m² de terrasse au dernier étage de la résidence.</p>
+            <p class="room__cta"><a class="btn" href="#contact" data-type="Penthouse">Recevoir le plan</a><a class="link" href="#appartements">Voir les autres appartements</a></p>
+          </li>
+        </ol>
+
+        <nav class="rail" aria-label="Aller à une pièce">
+          <button type="button" data-go="entree"><i></i><span>Entrée</span></button>
+          <button type="button" data-go="sejour"><i></i><span>Séjour</span></button>
+          <button type="button" data-go="cuisine"><i></i><span>Cuisine</span></button>
+          <button type="button" data-go="suite"><i></i><span>Suite</span></button>
+          <button type="button" data-go="bain"><i></i><span>Bain</span></button>
+          <button type="button" data-go="terrasse"><i></i><span>Terrasse</span></button>
+          <button type="button" data-go="vue"><i></i><span>Vue d'ensemble</span></button>
+        </nav>
+        <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LE PROJET ============ -->
+  <section class="manifesto light" id="projet">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>Le projet</p>
+      <p class="manifesto__text">Sur les hauteurs de Hydra, Dar Nour réunit vingt-quatre appartements tournés vers la baie. Une architecture blanche, des matériaux nobles, et la lumière d'Alger dans chaque pièce.</p>
+      <dl class="figures">
+        <div data-reveal><dt><span data-count="24">24</span></dt><dd>appartements seulement</dd></div>
+        <div data-reveal><dt><span data-count="12">12</span></dt><dd>étages, vue mer dès le 3<sup>e</sup></dd></div>
+        <div data-reveal><dt><span data-count="4">4</span></dt><dd>typologies, du F3 au penthouse</dd></div>
+        <div data-reveal><dt><span data-count="2027" data-from="1990">2027</span></dt><dd>remise des clés</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ APPARTEMENTS ============ -->
+  <section class="types light" id="appartements">
+    <div class="types__pin">
+      <header class="types__head wrap">
+        <p class="eyebrow">Appartements</p>
+        <h2 class="h2" data-split>Quatre façons de vivre la baie.</h2>
+      </header>
+      <div class="types__track">
+        <article class="type">
+          <figure class="type__img"><img src="img/sejour.webp" alt="Séjour lumineux avec canapé en bouclé et vue mer" loading="lazy" width="1600" height="1000"></figure>
+          <div class="type__body">
+            <p class="type__k">F3</p>
+            <h3 class="type__s">110 – 125 m²</h3>
+            <p class="type__d">2 chambres · 1 salle de bain · balcon de 14 m²</p>
+            <p class="type__p">Prix sur demande</p>
+            <a class="link" href="#contact" data-type="F3">Recevoir le plan →</a>
+          </div>
+        </article>
+        <article class="type">
+          <figure class="type__img"><img src="img/cuisine.webp" alt="Cuisine avec îlot en marbre et table à manger en noyer" loading="lazy" width="1600" height="1000"></figure>
+          <div class="type__body">
+            <p class="type__k">F4</p>
+            <h3 class="type__s">145 – 160 m²</h3>
+            <p class="type__d">3 chambres · 2 salles de bain · loggia de 20 m²</p>
+            <p class="type__p">Prix sur demande</p>
+            <a class="link" href="#contact" data-type="F4">Recevoir le plan →</a>
+          </div>
+        </article>
+        <article class="type">
+          <figure class="type__img"><img src="img/suite.webp" alt="Suite parentale avec tête de lit capitonnée" loading="lazy" width="1600" height="1000"></figure>
+          <div class="type__body">
+            <p class="type__k">F5</p>
+            <h3 class="type__s">185 – 200 m²</h3>
+            <p class="type__d">4 chambres · suite parentale · terrasse de 35 m²</p>
+            <p class="type__p">Prix sur demande</p>
+            <a class="link" href="#contact" data-type="F5">Recevoir le plan →</a>
+          </div>
+        </article>
+        <article class="type type--ph">
+          <figure class="type__img"><img src="img/terrasse.webp" alt="Terrasse avec piscine à débordement au coucher du soleil" loading="lazy" width="1600" height="1000"></figure>
+          <div class="type__body">
+            <p class="type__k">Penthouse</p>
+            <h3 class="type__s">310 m² + 150 m²</h3>
+            <p class="type__d">Dernier étage · piscine privée · terrasse plein ciel</p>
+            <p class="type__p">Prix sur demande</p>
+            <a class="link" href="#contact" data-type="Penthouse">Recevoir le plan →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PLAN ============ -->
+  <section class="plan light" id="plan">
+    <div class="wrap plan__grid">
+      <div class="plan__text">
+        <p class="eyebrow" data-reveal>Le penthouse</p>
+        <h2 class="h2" data-split>310 m², pièce par pièce.</h2>
+        <p class="plan__lead" data-reveal>Un plan traversant de 32 mètres : chaque pièce s'ouvre sur la terrasse et sur la mer.</p>
+        <ul class="plan__list">
+          <li data-room="entree"><span>Entrée &amp; dressing</span><b>15 m²</b></li>
+          <li data-room="sejour"><span>Séjour avec cheminée</span><b>73 m²</b></li>
+          <li data-room="cuisine"><span>Cuisine &amp; salle à manger</span><b>78 m²</b></li>
+          <li data-room="suite"><span>Suite parentale</span><b>73 m²</b></li>
+          <li data-room="bain"><span>Salle de bain</span><b>55 m²</b></li>
+          <li data-room="terrasse"><span>Terrasse &amp; piscine</span><b>150 m²</b></li>
+        </ul>
+      </div>
+      <figure class="plan__figure">
+        <svg viewBox="-6 -14 176 352" role="img" aria-labelledby="plan-title">
+          <title id="plan-title">Plan du penthouse : entrée, séjour, cuisine, suite, salle de bain et terrasse avec piscine</title>
+          <defs>
+            <pattern id="hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="4" stroke="currentColor" stroke-width=".6" opacity=".35"/></pattern>
+          </defs>
+          <!-- zones -->
+          <g class="zones">
+            <rect class="zone" data-room="entree" x="34" y="3" width="42" height="35"/>
+            <rect class="zone" data-room="sejour" x="3" y="40" width="102" height="71"/>
+            <rect class="zone" data-room="cuisine" x="3" y="111" width="102" height="82"/>
+            <rect class="zone" data-room="suite" x="3" y="195" width="102" height="73"/>
+            <rect class="zone" data-room="bain" x="3" y="268" width="102" height="57"/>
+            <rect class="zone" data-room="terrasse" x="105" y="40" width="52" height="285"/>
+          </g>
+          <!-- murs -->
+          <g class="walls">
+            <path class="w" pathLength="1" d="M48.5 3 H2.5 V325.5 H157 V38"/>
+            <path class="w" pathLength="1" d="M61.5 3 H105 V40"/>
+            <path class="w" pathLength="1" d="M33 3 V38"/>
+            <path class="w" pathLength="1" d="M76 3 V38"/>
+            <path class="w" pathLength="1" d="M2.5 39 H42.5 M67.5 39 H157"/>
+            <path class="w" pathLength="1" d="M2.5 194 H47.8 M62.2 194 H105"/>
+            <path class="w w--glass" pathLength="1" d="M105 40 V325"/>
+            <path class="w w--thin" pathLength="1" d="M2.5 268 H37.5 M56 268 H105"/>
+            <path class="w w--thin" pathLength="1" d="M157 40 V325"/>
+          </g>
+          <!-- mobilier -->
+          <g class="furn">
+            <rect class="f" x="5" y="56" width="5.3" height="44"/>
+            <rect class="f" x="61" y="58" width="10.5" height="35" rx="2"/>
+            <rect class="f" x="52" y="83" width="10" height="10" rx="2"/>
+            <circle class="f" cx="44.5" cy="75" r="6.4"/>
+            <rect class="f" x="5" y="121" width="6.4" height="70"/>
+            <rect class="f" x="26" y="134" width="11" height="38"/>
+            <ellipse class="f" cx="80.5" cy="154" rx="6.2" ry="14.5"/>
+            <rect class="f" x="6" y="220" width="22" height="22" rx="1.5"/>
+            <rect class="f" x="5" y="272" width="5.2" height="28"/>
+            <rect class="f" x="5" y="303" width="22" height="20"/>
+            <ellipse class="f" cx="84" cy="299" rx="4.6" ry="9.4"/>
+            <rect class="f" x="106" y="47" width="51" height="92" fill="url(#hatch)"/>
+            <rect class="f" x="108.5" y="198" width="19" height="7" rx="1"/>
+            <rect class="f" x="108.5" y="220" width="19" height="7" rx="1"/>
+            <rect class="f" x="108.5" y="242" width="19" height="7" rx="1"/>
+          </g>
+          <rect class="pool" x="130.5" y="181" width="24" height="136" rx="1"/>
+          <!-- textes -->
+          <g class="labels">
+            <text class="lbl" x="55" y="20">Entrée</text>
+            <text class="lbl" x="17.5" y="22" data-small>Dressing</text>
+            <text class="lbl" x="90.5" y="22" data-small>Cellier</text>
+            <text class="lbl" x="58" y="106">Séjour</text>
+            <text class="lbl" x="56" y="186">Cuisine · repas</text>
+            <text class="lbl" x="64" y="258">Suite</text>
+            <text class="lbl" x="50" y="316">Bain</text>
+            <text class="lbl lbl--v" x="121" y="175" transform="rotate(-90 121 175)">Terrasse</text>
+            <text class="lbl lbl--v lbl--pool" x="143" y="250" transform="rotate(-90 143 250)">Piscine</text>
+            <text class="lbl lbl--sea" x="165" y="120" transform="rotate(90 165 120)">Baie d'Alger →</text>
+          </g>
+          <text class="plan__scale" x="3" y="340">0 — 5 m</text>
+          <path class="plan__scale-bar" d="M36 338 H86"/>
+        </svg>
+        <figcaption>Plan indicatif, non contractuel.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ PRESTATIONS ============ -->
+  <section class="features" id="prestations">
+    <div class="wrap">
+      <header class="features__head">
+        <p class="eyebrow" data-reveal>Prestations</p>
+        <h2 class="h2" data-split>Le luxe se cache dans les détails.</h2>
+      </header>
+      <div class="cards">
+        <article class="card" style="--bg:#efe6d8;--fg:#1d1914">
+          <div class="card__top"><span class="card__n">01</span><svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 18 24 6l16 12-16 24z"/><path d="M8 18h32M18 18l6 24 6-24M18 18l6-12 6 12"/></svg></div>
+          <h3>Matériaux nobles</h3>
+          <p>Marbre de Carrare, parquet de chêne massif en point de Hongrie, menuiseries en noyer, robinetterie laiton brossé.</p>
+        </article>
+        <article class="card" style="--bg:#b3603b;--fg:#fff7ee">
+          <div class="card__top"><span class="card__n">02</span><svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="8"/><path d="M24 4v6M24 38v6M4 24h6M38 24h6M9.9 9.9l4.2 4.2M33.9 33.9l4.2 4.2M9.9 38.1l4.2-4.2M33.9 14.1l4.2-4.2"/></svg></div>
+          <h3>Confort toute l'année</h3>
+          <p>Climatisation gainable silencieuse, chauffage au sol, double vitrage à contrôle solaire sur toutes les baies.</p>
+        </article>
+        <article class="card" style="--bg:#3f4a3d;--fg:#f1ebe1">
+          <div class="card__top"><span class="card__n">03</span><svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="14" y="4" width="20" height="40" rx="4"/><path d="M21 38h6M19 17a7 7 0 0 1 10 0M16 13a11 11 0 0 1 16 0"/></svg></div>
+          <h3>Maison connectée</h3>
+          <p>Éclairage, voilages, climatisation et accès pilotés depuis votre téléphone, où que vous soyez.</p>
+        </article>
+        <article class="card" style="--bg:#1f2635;--fg:#efe7da">
+          <div class="card__top"><span class="card__n">04</span><svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 8 10v12c0 10 7 18 16 22 9-4 16-12 16-22V10z"/><path d="m17 24 5 5 9-10"/></svg></div>
+          <h3>Sécurité &amp; conciergerie</h3>
+          <p>Accès par badge, vidéosurveillance, gardiennage 24 h/24 et conciergerie pour les résidents.</p>
+        </article>
+        <article class="card" style="--bg:#d9c6a3;--fg:#1d1914">
+          <div class="card__top"><span class="card__n">05</span><svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 30h36l-4-12H10z"/><path d="M6 30v8h6v-4h24v4h6v-8"/><circle cx="14" cy="30" r="0"/><path d="M12 24h4M32 24h4"/></svg></div>
+          <h3>Parkings &amp; caves</h3>
+          <p>Deux niveaux de parking en sous-sol, bornes de recharge et caves privatives pour chaque appartement.</p>
+        </article>
+        <article class="card" style="--bg:#2b5561;--fg:#eef3f0">
+          <div class="card__top"><span class="card__n">06</span><svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="16" r="7"/><path d="M4 34c4 0 4 3 8 3s4-3 8-3 4 3 8 3 4-3 8-3 4 3 8 3M4 42c4 0 4 3 8 3s4-3 8-3 4 3 8 3 4-3 8-3 4 3 8 3"/></svg></div>
+          <h3>Rooftop &amp; jardins</h3>
+          <p>Jardins méditerranéens, piscine commune et rooftop réservés aux résidents, face à la baie.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUARTIER ============ -->
+  <section class="place light" id="quartier">
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Hydra</span><i>✦</i><span>Sidi Yahia</span><i>✦</i><span>El Biar</span><i>✦</i><span>Ben Aknoun</span><i>✦</i><span>Le Paradou</span><i>✦</i><span>Baie d'Alger</span><i>✦</i>
+        <span>Hydra</span><i>✦</i><span>Sidi Yahia</span><i>✦</i><span>El Biar</span><i>✦</i><span>Ben Aknoun</span><i>✦</i><span>Le Paradou</span><i>✦</i><span>Baie d'Alger</span><i>✦</i>
+      </div>
+    </div>
+    <div class="wrap place__grid">
+      <div class="place__text">
+        <p class="eyebrow" data-reveal>Emplacement</p>
+        <h2 class="h2" data-split>Hydra, sur les hauteurs d'Alger.</h2>
+        <p class="place__lead" data-reveal>Calme, verdoyant et central : un quartier résidentiel recherché, à quelques minutes du centre et des grands axes.</p>
+        <ul class="place__list">
+          <li data-reveal><b>Écoles</b><span>Établissements internationaux et lycées à proximité</span></li>
+          <li data-reveal><b>Affaires</b><span>Ambassades, banques et sièges d'entreprises</span></li>
+          <li data-reveal><b>Commerces</b><span>Restaurants, cafés et boutiques de Sidi Yahia</span></li>
+          <li data-reveal><b>Accès</b><span>Liaisons rapides vers le centre-ville et l'aéroport</span></li>
+        </ul>
+      </div>
+      <figure class="map">
+        <svg viewBox="0 0 400 320" role="img" aria-labelledby="map-title">
+          <title id="map-title">Carte stylisée de la baie d'Alger situant Hydra</title>
+          <path class="map__sea" d="M0 0H400V150C360 152 330 190 290 214 250 238 205 236 172 206 140 178 110 138 60 116 36 106 16 100 0 98Z"/>
+          <path class="map__coast" pathLength="1" d="M0 98C16 100 36 106 60 116 110 138 140 178 172 206 205 236 250 238 290 214 330 190 360 152 400 150"/>
+          <g class="map__routes">
+            <path class="map__route" pathLength="1" d="M118 258C128 230 140 214 160 200"/>
+            <path class="map__route" pathLength="1" d="M118 258C104 214 98 176 92 140"/>
+            <path class="map__route" pathLength="1" d="M118 258C190 280 280 282 344 262"/>
+          </g>
+          <g class="map__pts">
+            <circle cx="160" cy="200" r="4"/><text x="170" y="196">Centre-ville</text>
+            <circle cx="92" cy="140" r="4"/><text x="100" y="136">Casbah</text>
+            <circle cx="344" cy="262" r="4"/><text x="310" y="284">Aéroport</text>
+          </g>
+          <text class="map__bay" x="210" y="92">Baie d'Alger</text>
+          <g class="map__pin" transform="translate(118 258)">
+            <circle class="map__pulse" r="16"/>
+            <circle r="7"/>
+            <text x="-14" y="-16">Dar Nour · Hydra</text>
+          </g>
+        </svg>
+        <figcaption>Carte stylisée, non contractuelle.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ CHANTIER ============ -->
+  <section class="works light" id="chantier">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>Vente sur plan</p>
+      <h2 class="h2" data-split>Un calendrier clair, un paiement échelonné.</h2>
+      <ol class="timeline">
+        <li class="step is-done"><span class="step__y">2025</span><b>Lancement</b><p>Permis de construire obtenu, début des travaux.</p></li>
+        <li class="step is-now"><span class="step__y">2026</span><b>Gros œuvre</b><p>Structure en cours d'achèvement, étage après étage.</p></li>
+        <li class="step"><span class="step__y">2027</span><b>Finitions</b><p>Menuiseries, marbres, parquets, aménagements extérieurs.</p></li>
+        <li class="step"><span class="step__y">T4 2027</span><b>Remise des clés</b><p>Livraison et état des lieux avec l'architecte.</p></li>
+        <li class="timeline__line" aria-hidden="true"><i></i></li>
+      </ol>
+      <p class="works__note" data-reveal>Contrat de vente sur plan (VSP) notarié · paiement selon l'avancement des travaux · garantie du FGCMPI.</p>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="contact" id="contact">
+    <div class="wrap contact__grid">
+      <div>
+        <p class="eyebrow" data-reveal>Visite privée</p>
+        <h2 class="contact__title" data-split>Venez voir la mer depuis chez vous.</h2>
+        <p class="contact__lead" data-reveal>Appartement témoin ouvert sur rendez-vous, du samedi au jeudi. Un conseiller vous rappelle sous 24 h.</p>
+      </div>
+      <form class="form" id="form" novalidate data-reveal>
+        <label class="field"><span>Nom et prénom</span><input name="nom" autocomplete="name" required></label>
+        <label class="field"><span>Téléphone</span><input name="tel" type="tel" inputmode="tel" autocomplete="tel" required placeholder="05 / 06 / 07 …"></label>
+        <label class="field"><span>Appartement souhaité</span>
+          <select name="type" id="f-type">
+            <option>F3</option><option>F4</option><option>F5</option><option selected>Penthouse</option><option>Je ne sais pas encore</option>
+          </select>
+        </label>
+        <label class="field"><span>Message (facultatif)</span><textarea name="msg" rows="2"></textarea></label>
+        <button class="btn btn--big" type="submit"><span>Demander ma visite</span></button>
+        <p class="form__ok" id="form-ok" role="status" hidden>Merci ! Démo : sur le vrai site, votre demande arrive directement sur le WhatsApp du promoteur.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <p class="footer__brand"><span lang="ar">دار نور</span> Dar Nour</p>
+    <p class="footer__note">Projet fictif créé pour une démonstration : la résidence, les visuels 3D, les surfaces et les dates sont donnés à titre d'exemple.</p>
+    <p class="footer__credit">Site conçu par <a id="studio-link" href="../">Studio</a>. <a id="studio-wa" href="../" target="_blank" rel="noopener">Un site comme celui-ci pour votre promotion&nbsp;?</a></p>
+  </div>
+</footer>
+<script>
+  // filet de sécurité : si le script principal ne démarre pas, on retire l'écran de chargement
+  setTimeout(function () {
+    if (!document.body.classList.contains('is-loading')) return;
+    document.body.classList.remove('is-loading');
+    var l = document.getElementById('loader');
+    if (l) l.parentNode.removeChild(l);
+  }, 12000);
+</script>
+</body>
+</html>

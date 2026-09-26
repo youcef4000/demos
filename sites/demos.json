@@ -4,5 +4,14 @@
     "portfolio": "https://gba.youcef-ny.workers.dev",
     "whatsapp": "213558678038"
   },
-  "demos": []
+  "demos": [
+    {
+      "slug": "dar-nour-alger",
+      "title": "Dar Nour — penthouses face à la baie",
+      "sector": "Promotion immobilière",
+      "city": "Alger",
+      "color": "#c7a15f",
+      "public": true
+    }
+  ]
 }
