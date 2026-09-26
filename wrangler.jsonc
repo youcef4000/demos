@@ -1,0 +1,13 @@
+{
+  // Worker "demos" : sert tout le dossier sites/ tel quel, sans code serveur.
+  // Chaque demo vit dans sites/<nom-du-client>/ et repond sur /<nom-du-client>/.
+  // Le nom doit rester celui du Worker cree dans Cloudflare.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "demos",
+  "compatibility_date": "2026-09-01",
+  "workers_dev": true,
+  "assets": {
+    "directory": "./sites",
+    "not_found_handling": "404-page"
+  }
+}
