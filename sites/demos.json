@@ -6,12 +6,20 @@
   },
   "demos": [
     {
+      "slug": "villa-lumen-dubai",
+      "title": "Villa Lumen — Palm Jumeirah",
+      "sector": "Promotion immobilière",
+      "city": "Dubaï",
+      "color": "#d9b77c",
+      "public": true
+    },
+    {
       "slug": "dar-nour-alger",
       "title": "Dar Nour — penthouses face à la baie",
       "sector": "Promotion immobilière",
       "city": "Alger",
       "color": "#c7a15f",
-      "public": true
+      "public": false
     }
   ]
 }

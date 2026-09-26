@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Villa Lumen — Palm Jumeirah, Dubaï · visite de la villa</title>
+<meta name="description" content="Visite au scroll d'une villa sur la Palm Jumeirah : hall, séjour face à la mer, cuisine, suite, bain, bassin à débordement. Plan animé de chaque pièce. Site de démonstration.">
+<meta name="theme-color" content="#0e0c0a">
+<link rel="canonical" href="https://demos.youcef-ny.workers.dev/villa-lumen-dubai/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Villa Lumen">
+<meta property="og:url" content="https://demos.youcef-ny.workers.dev/villa-lumen-dubai/">
+<meta property="og:title" content="Villa Lumen — le soleil se couche dans l'axe du salon">
+<meta property="og:description" content="Palm Jumeirah, Dubaï. Faites défiler : on atterrit sur la palme, on pousse la porte, chaque pièce se dévoile avec son plan.">
+<meta property="og:image" content="https://images.pexels.com/photos/21856199/pexels-photo-21856199.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200&amp;h=630&amp;fit=crop">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Piscine à débordement face aux îles de la Palm, Dubaï">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Villa Lumen — Palm Jumeirah, Dubaï">
+<meta name="twitter:description" content="Visite au scroll d'une villa face à Dubai Marina, avec le plan de chaque pièce.">
+<meta name="twitter:image" content="https://images.pexels.com/photos/21856199/pexels-photo-21856199.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200&amp;h=630&amp;fit=crop">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e0c0a'/%3E%3Cpath d='M32 52V18M32 26q-10 0-16-8M32 26q10 0 16-8M32 34q-12 0-19-7M32 34q12 0 19-7' fill='none' stroke='%23d9b77c' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://images.pexels.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="./style.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
+<script type="module" src="./app.js"></script>
+</head>
+<body class="is-loading">
+<a class="skip" href="#projet">Passer la visite</a>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <p class="loader__mark">Villa <em>Lumen</em></p>
+  <p class="loader__place">Palme N · Palm Jumeirah · Dubaï</p>
+  <div class="loader__foot"><span>Chargement des photos</span><span><b id="pct">0</b>&nbsp;%</span></div>
+  <div class="loader__bar"><i id="loader-bar"></i></div>
+</div>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="Villa Lumen, retour en haut">Villa <em>Lumen</em></a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="#visite">Visite</a>
+    <a href="#villas">Les villas</a>
+    <a href="#plan">Plan</a>
+    <a href="#quartier">Palm Jumeirah</a>
+  </nav>
+  <span class="demo-tag" title="Projet fictif créé pour la démonstration">Démo</span>
+  <a class="btn btn--small" href="#contact">Visite privée</a>
+</header>
+
+<main id="top">
+
+  <!-- ============ VISITE AU SCROLL ============ -->
+  <section class="visit" id="visite" aria-label="Visite de la villa, pièce par pièce">
+    <div class="visit__stage">
+      <div class="shots">
+        <figure class="shot" data-stop="accueil"><img data-px="10593605" alt="Vue aérienne de la Palm Jumeirah, Dubaï" fetchpriority="high"></figure>
+        <figure class="shot" data-stop="villa"><img data-px="31817156" alt="Villa moderne avec piscine à débordement"></figure>
+        <figure class="shot" data-stop="entree"><img data-px="6957089" alt="Hall d'une villa avec escalier"></figure>
+        <figure class="shot" data-stop="sejour"><img data-px="31817163" alt="Séjour moderne ouvert sur la mer"></figure>
+        <figure class="shot" data-stop="cuisine"><img data-px="35189706" alt="Cuisine en marbre avec îlot"></figure>
+        <figure class="shot" data-stop="suite"><img data-px="8135502" alt="Suite parentale lumineuse"></figure>
+        <figure class="shot" data-stop="bain"><img data-px="7166639" alt="Baignoire îlot devant un mur en marbre"></figure>
+        <figure class="shot" data-stop="bassin"><img data-px="21856199" alt="Piscine à débordement face aux îles de la Palm, Dubaï"></figure>
+        <figure class="shot" data-stop="soir"><img data-px="19083506" alt="Dubai Marina illuminée la nuit"></figure>
+      </div>
+      <div class="door" aria-hidden="true"></div>
+      <div class="visit__shade"></div>
+
+      <div class="visit__ui">
+        <div class="hero">
+          <p class="eyebrow hero__eyebrow">Villa Lumen · Palme N · Palm Jumeirah, Dubaï</p>
+          <h1 class="hero__title">Le soleil se couche dans l'axe <em>du salon.</em></h1>
+          <p class="hero__lead">Villa de 520 m² sur la Palm Jumeirah, 36 m de plage privée face à Dubai Marina. Faites défiler&nbsp;: on atterrit sur la palme, puis on pousse la porte.</p>
+        </div>
+        <div class="scroll-hint" aria-hidden="true"><span>Faites défiler</span><i></i></div>
+
+        <ol class="rooms">
+          <li class="room" data-stop="villa">
+            <span class="room__n">01 <i>/ 08</i></span>
+            <h2 class="room__t">Palme N, côté ouest</h2>
+            <p class="room__d">La villa regarde le couchant et, de l'autre côté de l'eau, les tours de Dubai Marina.</p>
+            <p class="room__m"><span>Terrain 1 100 m²</span><span>Plage 36 m</span></p>
+          </li>
+          <li class="room" data-stop="entree">
+            <span class="room__n">02 <i>/ 08</i></span>
+            <h2 class="room__t">Le hall, 7 m sous plafond</h2>
+            <p class="room__d">Porte pivot de 3 m, escalier suspendu vers les quatre chambres de l'étage.</p>
+            <p class="room__m"><span>29 m²</span><span>Double hauteur</span></p>
+          </li>
+          <li class="room" data-stop="sejour">
+            <span class="room__n">03 <i>/ 08</i></span>
+            <h2 class="room__t">Le séjour, face à la mer</h2>
+            <p class="room__d">Baie coulissante de 6,40 m sans montant&nbsp;: grande ouverte, le séjour et la terrasse ne font qu'un.</p>
+            <p class="room__m"><span>82 m²</span><span>Plein ouest</span></p>
+          </li>
+          <li class="room" data-stop="cuisine">
+            <span class="room__n">04 <i>/ 08</i></span>
+            <h2 class="room__t">Cuisine, îlot de 4,20 m</h2>
+            <p class="room__d">Plan de travail et îlot en marbre Calacatta, office et cellier à l'arrière pour le service.</p>
+            <p class="room__m"><span>44 m²</span><span>+ office 30 m²</span></p>
+          </li>
+          <li class="room" data-stop="suite">
+            <span class="room__n">05 <i>/ 08</i></span>
+            <h2 class="room__t">La suite parentale</h2>
+            <p class="room__d">Lit face à la baie, dressing de 6 m², porte directe vers la salle de bain.</p>
+            <p class="room__m"><span>52 m²</span><span>Rez-de-jardin</span></p>
+          </li>
+          <li class="room" data-stop="bain">
+            <span class="room__n">06 <i>/ 08</i></span>
+            <h2 class="room__t">Le bain en marbre</h2>
+            <p class="room__d">Baignoire îlot, double vasque et douche à l'italienne, fenêtre sur la loggia.</p>
+            <p class="room__m"><span>30 m²</span><span>Marbre &amp; laiton</span></p>
+          </li>
+          <li class="room" data-stop="bassin">
+            <span class="room__n">07 <i>/ 08</i></span>
+            <h2 class="room__t">Le bassin à débordement</h2>
+            <p class="room__d">12 mètres de nage face aux îles de la Palm, puis 36 m de sable en accès direct.</p>
+            <p class="room__m"><span>Terrasse 150 m²</span><span>Bassin 12 × 4,5 m</span></p>
+          </li>
+          <li class="room room--final" data-stop="soir">
+            <span class="room__n">08 <i>/ 08</i></span>
+            <h2 class="room__t">Le soir, la Marina s'allume</h2>
+            <p class="room__d">Dubai Marina à 10 minutes, Burj Al Arab à 15, Downtown à 25. Remise des clés au 2<sup>e</sup> trimestre 2027.</p>
+            <p class="room__cta"><a class="btn" href="#contact" data-type="Villa Lumen">Recevoir le plan complet</a><a class="link" href="#villas">Voir les trois villas</a></p>
+          </li>
+        </ol>
+
+        <aside class="plancard" aria-hidden="true">
+          <div class="plancard__head"><span class="plancard__t">Plan</span><span class="plancard__n" id="plan-name">Palm Jumeirah</span></div>
+          <div class="plancard__views" id="plan-views"></div>
+          <div class="plancard__key" id="plan-key"></div>
+        </aside>
+
+        <nav class="rail" aria-label="Aller à une pièce">
+          <button type="button" data-go="villa"><i></i><span>La villa</span></button>
+          <button type="button" data-go="entree"><i></i><span>Hall</span></button>
+          <button type="button" data-go="sejour"><i></i><span>Séjour</span></button>
+          <button type="button" data-go="cuisine"><i></i><span>Cuisine</span></button>
+          <button type="button" data-go="suite"><i></i><span>Suite</span></button>
+          <button type="button" data-go="bain"><i></i><span>Bain</span></button>
+          <button type="button" data-go="bassin"><i></i><span>Bassin</span></button>
+          <button type="button" data-go="soir"><i></i><span>Le soir</span></button>
+        </nav>
+        <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LE PROJET ============ -->
+  <section class="manifesto light" id="projet">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>Le projet</p>
+      <p class="manifesto__text">Six villas seulement sur la palme N. Chacune a sa plage, son bassin à débordement et le couchant dans l'axe du séjour. En face, Dubai Marina&nbsp;; derrière, le croissant qui protège l'eau du large.</p>
+      <dl class="figures">
+        <div data-reveal><dt><span data-count="6">6</span></dt><dd>villas sur la palme</dd></div>
+        <div data-reveal><dt><span data-count="36">36</span><small>m</small></dt><dd>de plage privée par villa</dd></div>
+        <div data-reveal><dt><span data-count="520">520</span><small>m²</small></dt><dd>habitables, sur deux niveaux</dd></div>
+        <div data-reveal><dt><span data-count="2027" data-from="2000">2027</span></dt><dd>remise des clés, 2<sup>e</sup> trimestre</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ LES VILLAS (horizontal) ============ -->
+  <section class="types light" id="villas">
+    <div class="types__pin">
+      <header class="types__head wrap">
+        <p class="eyebrow">Les villas</p>
+        <h2 class="h2" data-split>Trois tailles, la même plage.</h2>
+      </header>
+      <div class="types__track">
+        <article class="type">
+          <figure class="type__img"><img data-px="31817155" data-max="1280" alt="Villa en bord de mer au design moderne"></figure>
+          <div class="type__body">
+            <p class="type__k">Villa Rivage</p>
+            <h3 class="type__s">4 chambres · 410 m²</h3>
+            <p class="type__d">Plage de 28 m, bassin de 10 m, rez-de-jardin ouvert sur trois côtés.</p>
+            <p class="type__p">Prix sur demande · 2 villas</p>
+            <a class="link" href="#contact" data-type="Villa Rivage">Recevoir le plan →</a>
+          </div>
+        </article>
+        <article class="type type--ph">
+          <figure class="type__img"><img data-px="29453302" data-max="1280" alt="Villa moderne avec piscine dans un jardin ensoleillé"></figure>
+          <div class="type__body">
+            <p class="type__k">Villa Lumen · celle de la visite</p>
+            <h3 class="type__s">5 chambres · 520 m²</h3>
+            <p class="type__d">Plage de 36 m, bassin de 12 m, suite parentale au rez-de-jardin.</p>
+            <p class="type__p">Prix sur demande · 3 villas</p>
+            <a class="link" href="#contact" data-type="Villa Lumen">Recevoir le plan →</a>
+          </div>
+        </article>
+        <article class="type">
+          <figure class="type__img"><img data-px="33837741" data-max="1280" alt="Chambre de luxe au décor moderne"></figure>
+          <div class="type__body">
+            <p class="type__k">Villa Signature</p>
+            <h3 class="type__s">6 chambres · 690 m²</h3>
+            <p class="type__d">Pointe de la palme, plage de 44 m, toit-terrasse avec cuisine d'été.</p>
+            <p class="type__p">Prix sur demande · 1 villa</p>
+            <a class="link" href="#contact" data-type="Villa Signature">Recevoir le plan →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PLAN ============ -->
+  <section class="plan light" id="plan">
+    <div class="wrap plan__grid">
+      <div class="plan__text">
+        <p class="eyebrow" data-reveal>Villa Lumen</p>
+        <h2 class="h2" data-split>Le rez-de-jardin, pièce par pièce.</h2>
+        <p class="plan__lead" data-reveal>Tout le rez-de-jardin donne vers l'ouest et la mer. L'étage réunit quatre chambres avec salle d'eau (190 m²).</p>
+        <ul class="plan__list">
+          <li data-room="entree"><span>Hall double hauteur</span><b>29 m²</b></li>
+          <li data-room="sejour"><span>Séjour</span><b>82 m²</b></li>
+          <li data-room="cuisine"><span>Cuisine</span><b>44 m²</b></li>
+          <li data-room="office"><span>Office &amp; cellier</span><b>30 m²</b></li>
+          <li data-room="suite"><span>Suite parentale</span><b>52 m²</b></li>
+          <li data-room="bain"><span>Salle de bain</span><b>30 m²</b></li>
+          <li data-room="terrasse"><span>Terrasse &amp; bassin</span><b>150 m²</b></li>
+        </ul>
+      </div>
+      <figure class="plan__figure">
+        <div id="plan-big"></div>
+        <figcaption>Plan indicatif, non contractuel. Mer à droite.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ PRESTATIONS (cartes photo empilées) ============ -->
+  <section class="features" id="prestations">
+    <div class="wrap">
+      <header class="features__head">
+        <p class="eyebrow" data-reveal>Dans chaque villa</p>
+        <h2 class="h2" data-split>Six choses qu'on ne trouve pas ailleurs sur la palme.</h2>
+      </header>
+      <div class="cards">
+        <article class="card" style="--bg:#e9dfcf;--fg:#1d1914">
+          <figure class="card__img"><img data-px="4705843" data-max="1280" alt="Marbre blanc veiné, en gros plan"></figure>
+          <div class="card__body"><span class="card__n">01</span><h3>Travertin &amp; Calacatta</h3><p>Sols en travertin romain, cuisine et bains en marbre Calacatta, robinetterie en laiton brossé.</p></div>
+        </article>
+        <article class="card" style="--bg:#a9552f;--fg:#fff6ec">
+          <figure class="card__img"><img data-px="7031704" data-max="1280" alt="Espace spa avec transats et baignoires"></figure>
+          <div class="card__body"><span class="card__n">02</span><h3>Un spa au jardin</h3><p>Pavillon avec hammam, sauna et douche froide, à dix pas du bassin.</p></div>
+        </article>
+        <article class="card" style="--bg:#3a4537;--fg:#f1ebe1">
+          <figure class="card__img"><img data-px="5990394" data-max="1280" alt="Lustre contemporain allumé"></figure>
+          <div class="card__body"><span class="card__n">03</span><h3>Scénario « couchant »</h3><p>Un geste sur le téléphone baisse les stores côté ouest, tamise le séjour et allume la terrasse.</p></div>
+        </article>
+        <article class="card" style="--bg:#1c2433;--fg:#efe7da">
+          <figure class="card__img"><img data-px="31080809" data-max="1280" alt="Hall de réception à l'ambiance chaleureuse"></figure>
+          <div class="card__body"><span class="card__n">04</span><h3>Conciergerie 24 h/24</h3><p>Accueil des invités, voiturier, entretien de la villa et du bassin pendant votre absence.</p></div>
+        </article>
+        <article class="card" style="--bg:#d4bf98;--fg:#1d1914">
+          <figure class="card__img"><img data-px="4624570" data-max="1280" alt="Yachts amarrés à Dubai Marina"></figure>
+          <div class="card__body"><span class="card__n">05</span><h3>La Marina en face</h3><p>Anneaux pour bateaux, restaurants et promenade de Dubai Marina à 10 minutes en voiture.</p></div>
+        </article>
+        <article class="card" style="--bg:#24535e;--fg:#eef3f0">
+          <figure class="card__img"><img data-px="29212670" data-max="1280" alt="Vue aérienne d'une plage de la Palm Jumeirah"></figure>
+          <div class="card__body"><span class="card__n">06</span><h3>36 m de sable</h3><p>Plage privée en accès direct depuis la terrasse, face au croissant de la Palm.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUARTIER ============ -->
+  <section class="place light" id="quartier">
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Palm Jumeirah</span><i>✦</i><span>Dubai Marina</span><i>✦</i><span>Burj Al Arab</span><i>✦</i><span>JBR</span><i>✦</i><span>Downtown</span><i>✦</i>
+        <span>Palm Jumeirah</span><i>✦</i><span>Dubai Marina</span><i>✦</i><span>Burj Al Arab</span><i>✦</i><span>JBR</span><i>✦</i><span>Downtown</span><i>✦</i>
+      </div>
+    </div>
+    <div class="wrap place__grid">
+      <div class="place__text">
+        <p class="eyebrow" data-reveal>Palm Jumeirah</p>
+        <h2 class="h2" data-split>Sur l'eau, à 10 minutes de tout.</h2>
+        <p class="place__lead" data-reveal>La Palm est une presqu'île artificielle de 16 palmes, fermée au large par un croissant de 11 km. On y achète en pleine propriété, y compris depuis l'étranger.</p>
+      </div>
+      <figure class="palm-map" id="palm-map"><figcaption>Carte stylisée. Temps de trajet indicatifs en voiture, hors heures de pointe.</figcaption></figure>
+    </div>
+    <div class="wrap spots">
+      <article class="spot">
+        <figure><img data-px="12369779" data-max="1280" alt="Boutre illuminé à Dubai Marina, la nuit"></figure>
+        <p class="spot__t"><b>Dubai Marina</b><span>10 min</span></p>
+      </article>
+      <article class="spot">
+        <figure><img data-px="18561239" data-max="1280" alt="Burj Al Arab au lever du soleil"></figure>
+        <p class="spot__t"><b>Burj Al Arab</b><span>15 min</span></p>
+      </article>
+      <article class="spot">
+        <figure><img data-px="19894545" data-max="1280" alt="Skyline de Dubaï et Burj Khalifa à l'heure dorée"></figure>
+        <p class="spot__t"><b>Burj Khalifa · Downtown</b><span>25 min</span></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ PAIEMENT ============ -->
+  <section class="works light" id="paiement">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>Vente sur plan</p>
+      <h2 class="h2" data-split>10 % pour réserver, 40 % à la remise des clés.</h2>
+      <ol class="timeline">
+        <li class="step is-done"><span class="step__y">10 %</span><b>Réservation</b><p>Contrat de vente et enregistrement au Dubai Land Department.</p></li>
+        <li class="step is-now"><span class="step__y">50 %</span><b>Pendant les travaux</b><p>Cinq appels de fonds, chacun lié à un stade de chantier constaté.</p></li>
+        <li class="step"><span class="step__y">40 %</span><b>Remise des clés</b><p>2<sup>e</sup> trimestre 2027, après visite de réception avec l'architecte.</p></li>
+        <li class="timeline__line" aria-hidden="true"><i></i></li>
+      </ol>
+      <p class="works__note" data-reveal>Frais d'enregistrement DLD de 4 % à la charge de l'acheteur · fonds versés sur un compte séquestre du projet.</p>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="contact" id="contact">
+    <div class="wrap contact__grid">
+      <div>
+        <p class="eyebrow" data-reveal>Visite privée</p>
+        <h2 class="contact__title" data-split>Sur place, ou en visio depuis Alger.</h2>
+        <p class="contact__lead" data-reveal>Un conseiller francophone vous fait visiter la villa témoin en direct, pièce par pièce, avec le plan à l'écran.</p>
+      </div>
+      <form class="form" id="form" novalidate data-reveal>
+        <label class="field"><span>Nom et prénom</span><input name="nom" autocomplete="name" required></label>
+        <label class="field"><span>Téléphone (WhatsApp)</span><input name="tel" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+213 …"></label>
+        <label class="field"><span>Villa</span>
+          <select name="type" id="f-type">
+            <option>Villa Rivage</option><option selected>Villa Lumen</option><option>Villa Signature</option>
+          </select>
+        </label>
+        <label class="field"><span>Visite</span>
+          <select name="mode"><option>En visio</option><option>Sur place, à Dubaï</option></select>
+        </label>
+        <button class="btn btn--big" type="submit"><span>Demander ma visite</span></button>
+        <p class="form__ok" id="form-ok" role="status" hidden>Merci ! Démo : sur le vrai site, votre demande arrive directement sur le WhatsApp du promoteur.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <p class="footer__brand">Villa <em>Lumen</em></p>
+    <p class="footer__note">Projet fictif créé pour une démonstration : la résidence, les surfaces, les plans et le calendrier sont des exemples. Les lieux et les photos sont réels.</p>
+    <p class="footer__credit">Site conçu par <a id="studio-link" href="../">Studio</a>. <a id="studio-wa" href="../" target="_blank" rel="noopener">Un site comme celui-ci pour votre projet&nbsp;?</a></p>
+    <details class="credits">
+      <summary>Crédits photo (Pexels, licence libre)</summary>
+      <p>
+        <a href="https://www.pexels.com/photo/aerial-view-of-palm-jumeirah-10593605/" target="_blank" rel="noopener">Palm Jumeirah — Abid Ali</a> ·
+        <a href="https://www.pexels.com/photo/modern-luxury-villa-with-infinity-pool-31817156/" target="_blank" rel="noopener">Villa — Ahmet Çötür</a> ·
+        <a href="https://www.pexels.com/photo/interior-of-luxury-house-with-staircase-6957089/" target="_blank" rel="noopener">Hall — Max Vakhtbovych</a> ·
+        <a href="https://www.pexels.com/photo/luxurious-modern-living-room-with-ocean-view-31817163/" target="_blank" rel="noopener">Séjour — Ahmet Çötür</a> ·
+        <a href="https://www.pexels.com/photo/modern-luxury-kitchen-interior-design-with-marble-35189706/" target="_blank" rel="noopener">Cuisine — Rana Matloob Hussain</a> ·
+        <a href="https://www.pexels.com/photo/bright-luxury-bedroom-interior-design-8135502/" target="_blank" rel="noopener">Suite — Max Vakhtbovych</a> ·
+        <a href="https://www.pexels.com/photo/a-bathtub-near-the-marble-wall-7166639/" target="_blank" rel="noopener">Bain — Max Vakhtbovych</a> ·
+        <a href="https://www.pexels.com/photo/infinity-pool-with-view-of-the-palm-islands-in-dubai-21856199/" target="_blank" rel="noopener">Bassin — Vincent Rivaud</a> ·
+        <a href="https://www.pexels.com/photo/sea-coast-of-dubai-at-night-19083506/" target="_blank" rel="noopener">Marina — Collab Media</a> ·
+        <a href="https://www.pexels.com/photo/luxury-seaside-villa-with-modern-interior-design-31817155/" target="_blank" rel="noopener">Villa Rivage — Ahmet Çötür</a> ·
+        <a href="https://www.pexels.com/photo/modern-luxury-villa-with-pool-in-sunlit-garden-29453302/" target="_blank" rel="noopener">Villa Lumen — Joachim Hoholm</a> ·
+        <a href="https://www.pexels.com/photo/luxury-bedroom-interior-with-modern-decor-33837741/" target="_blank" rel="noopener">Villa Signature — Faisal Nisar</a> ·
+        <a href="https://www.pexels.com/photo/close-up-shot-of-a-marble-4705843/" target="_blank" rel="noopener">Marbre</a> ·
+        <a href="https://www.pexels.com/photo/interior-of-modern-luxury-spa-zone-with-loungers-and-bathtubs-7031704/" target="_blank" rel="noopener">Spa — Max Vakhtbovych</a> ·
+        <a href="https://www.pexels.com/photo/modern-chandelier-5990394/" target="_blank" rel="noopener">Lustre — Sonny Sixteen</a> ·
+        <a href="https://www.pexels.com/photo/elegant-luxury-hotel-lobby-with-warm-ambiance-31080809/" target="_blank" rel="noopener">Réception — Musa Ortaç</a> ·
+        <a href="https://www.pexels.com/photo/yachts-in-dubai-marina-4624570/" target="_blank" rel="noopener">Yachts — Denys Gromov</a> ·
+        <a href="https://www.pexels.com/photo/aerial-view-of-palm-jumeirah-beach-in-dubai-29212670/" target="_blank" rel="noopener">Plage — Nelemson G</a> ·
+        <a href="https://www.pexels.com/photo/illuminated-boat-in-dubai-at-night-12369779/" target="_blank" rel="noopener">Dubai Marina — Ermal Photography</a> ·
+        <a href="https://www.pexels.com/photo/burj-al-arab-at-sunrise-in-dubai-uae-18561239/" target="_blank" rel="noopener">Burj Al Arab</a> ·
+        <a href="https://www.pexels.com/photo/skyline-of-dubai-with-burj-khalifa-at-golden-hour-19894545/" target="_blank" rel="noopener">Burj Khalifa</a>
+      </p>
+    </details>
+  </div>
+</footer>
+
+<script>
+  // Photos servies par le CDN de Pexels (tailles adaptées à l'écran), avant même le script principal.
+  (function () {
+    var widths = [640, 960, 1280, 1920];
+    document.querySelectorAll('img[data-px]').forEach(function (img) {
+      var id = img.getAttribute('data-px');
+      var max = +(img.getAttribute('data-max') || 1920);
+      var url = function (w) { return 'https://images.pexels.com/photos/' + id + '/pexels-photo-' + id + '.jpeg?auto=compress&cs=tinysrgb&w=' + w; };
+      img.decoding = 'async';
+      img.srcset = widths.filter(function (w) { return w <= max; }).map(function (w) { return url(w) + ' ' + w + 'w'; }).join(', ');
+      img.sizes = img.closest('.shot') ? '100vw' : '(min-width: 1024px) 50vw, 90vw';
+      img.src = url(Math.min(1280, max));
+      img.addEventListener('error', function () { img.parentNode.classList.add('is-missing'); });
+    });
+  })();
+  // filet de sécurité : si le script principal ne démarre pas, on retire l'écran de chargement
+  setTimeout(function () {
+    if (!document.body.classList.contains('is-loading')) return;
+    document.body.classList.remove('is-loading');
+    var l = document.getElementById('loader');
+    if (l) l.parentNode.removeChild(l);
+  }, 12000);
+</script>
+</body>
+</html>
