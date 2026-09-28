@@ -6,6 +6,14 @@
   },
   "demos": [
     {
+      "slug": "stickprod",
+      "title": "Stickprod — la spirale des réalisations",
+      "sector": "Production audiovisuelle",
+      "city": "Alger",
+      "color": "#ff4a1c",
+      "public": false
+    },
+    {
       "slug": "villa-lumen-dubai",
       "title": "Villa Lumen — Palm Jumeirah",
       "sector": "Promotion immobilière",
