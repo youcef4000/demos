@@ -2,6 +2,8 @@
 
 Sites de démonstration pour prospects. Un dossier par démo dans `sites/`, un seul Worker Cloudflare pour tout servir.
 
+En ligne sur **https://demos.bornzstudio.com** (domaine branché dans l'onglet **Domains** du Worker `demos`).
+
 | Adresse | Contenu |
 |---|---|
 | `/` | Galerie des démos marquées `public` dans `sites/demos.json` |
