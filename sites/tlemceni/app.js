@@ -18,7 +18,7 @@ const params = new URLSearchParams(location.search);
 const PREVIEW = params.has('preview');
 const LANGS = ['fr', 'ar', 'en'];
 
-const PARTS = ['laces', 'tongue', 'heel', 'toe', 'badge', 'upper', 'insole', 'midsole', 'outsole'];
+const PARTS = ['laces', 'tongue', 'heel', 'toe', 'upper', 'insole', 'midsole', 'outsole'];
 const TAU = Math.PI * 2;
 
 // Vues : la chaussure reste au centre et tourne d'un cran à chaque étape pour montrer la pièce.
@@ -29,19 +29,19 @@ const V = (o) => ({ rx: 0, rz: 0, lift: 0.5, azim: 0.2, tx: 0, sx: 0, sy: 0.1, s
 // `ex` : pièces écartées (cumulatif), `focus` : pièces mises en avant, `anchor` : pièce désignée par le trait.
 const STEPS = [
   { id: 'laces', ex: { laces: 1 }, focus: ['laces'], anchor: 'laces', view: V({ ry: 0.05, elev: 0.46, dist: 7.3, ty: 0.92 }) },
-  { id: 'tige', ex: { badge: 1 }, focus: ['upper', 'badge'], anchor: 'badge', view: V({ ry: 0.35, elev: 0.16, dist: 7.3, ty: 0.92, mob: 1.16 }) },
+  { id: 'tige', focus: ['upper'], anchor: 'upper', view: V({ ry: 0.35, elev: 0.16, dist: 7.3, ty: 0.92, mob: 1.16 }) },
   { id: 'tongue', ex: { tongue: 1 }, focus: ['tongue'], anchor: 'tongue', view: V({ ry: 1.0, elev: 0.36, dist: 7.5, ty: 0.92 }) },
   { id: 'renforts', ex: { heel: 1, toe: 1 }, focus: ['heel', 'toe'], anchor: 'heel', view: V({ ry: 1.75, elev: 0.26, dist: 7.6, ty: 0.88, mob: 1.2 }) },
   { id: 'doublure', xray: 1, focus: ['upper'], anchor: 'lining', view: V({ ry: 2.55, elev: 0.74, dist: 7.8, ty: 0.72, mob: 1.25 }) },
   { id: 'semelle', ex: { insole: 1, midsole: 1, outsole: 0.68 }, focus: ['insole'], anchor: 'insole', view: V({ ry: 3.3, elev: 0.34, dist: 9.6, ty: 0.55, mob: 1.25 }) },
   { id: 'amorti', ex: { outsole: 1 }, focus: ['midsole'], anchor: 'midsole', view: V({ ry: 4.1, elev: 0.2, dist: 10.4, ty: 0.4, mob: 1.25 }) },
   { id: 'adherence', flip: 1, focus: ['outsole'], anchor: 'outsole', view: V({ ry: TAU + 0.05, elev: 0.1, dist: 10.6, ty: 0.36, mob: 1.25 }) },
-  { id: 'ensemble', flip: 0.5, focus: PARTS, tags: 1, view: V({ ry: TAU + 0.6, elev: 0.28, dist: 11.2, ty: 0.42, mob: 1.2 }) },
+  { id: 'ensemble', flip: 0.8, focus: PARTS, tags: 1, view: V({ ry: TAU + 0.6, elev: 0.28, dist: 11.2, ty: 0.42, mob: 1.2 }) },
   { id: 'final', reset: true, focus: PARTS, view: { ...HERO, ry: HERO.ry + 2 * TAU } },
 ];
 const LOCAL_LINING = { x: -0.95, y: 0.52, z: 0 };
 const TAGS = [
-  ['01', 'laces'], ['02', 'badge'], ['03', 'tongue'], ['04', 'heel'], ['04', 'toe'],
+  ['01', 'laces'], ['02', 'upper'], ['03', 'tongue'], ['04', 'heel'], ['04', 'toe'],
   ['05', 'upper', LOCAL_LINING], ['06', 'insole'], ['07', 'midsole'], ['08', 'outsole'],
 ];
 

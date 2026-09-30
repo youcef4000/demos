@@ -18,14 +18,14 @@
         "en": "Grey orange"
       },
       "colors": {
-        "mesh": "#c2c4c0",
-        "skin": "#f3f3f0",
-        "line": "#3b3e44",
-        "accent": "#ee6a24",
-        "midsole": "#45484e",
-        "outsole": "#ee6a24",
-        "laces": "#ececea",
-        "lining": "#b8552c"
+        "mesh": "#abaca9",
+        "skin": "#bcbdba",
+        "line": "#4b4d52",
+        "accent": "#e07650",
+        "midsole": "#4a4c51",
+        "outsole": "#df7a55",
+        "laces": "#bebebb",
+        "lining": "#45474c"
       }
     },
     {
@@ -283,14 +283,14 @@
       "en": "The laces"
     },
     "s1.d": {
-      "fr": "Lacets tressés et embouts gainés, six paires d'œillets : un laçage qui tient toute la journée.",
-      "ar": "أربطة مضفورة بأطراف مغلّفة، وستة أزواج من الثقوب: ربطة تصمد طوال اليوم.",
-      "en": "Braided laces with sheathed tips and six pairs of eyelets: lacing that holds all day."
+      "fr": "Lacets ronds et épais, passés dans six paires d'œillets gansés : un laçage qui tient toute la journée.",
+      "ar": "أربطة دائرية سميكة تمرّ عبر ستة أزواج من الثقوب المخيطة: ربطة تصمد طوال اليوم.",
+      "en": "Thick round laces through six pairs of stitched eyelets: lacing that holds all day."
     },
     "s1.c1": {
-      "fr": "Tressés",
-      "ar": "مضفورة",
-      "en": "Braided"
+      "fr": "Lacets ronds",
+      "ar": "أربطة دائرية",
+      "en": "Round laces"
     },
     "s1.c2": {
       "fr": "Six œillets",
@@ -303,9 +303,9 @@
       "en": "The upper"
     },
     "s4.d": {
-      "fr": "Mesh respirant, renforts soudés et coutures doubles : légère mais solide. Sur le côté, notre sceau.",
-      "ar": "نسيج شبكي يسمح بالتهوية، تدعيمات ملحومة وخياطة مزدوجة: خفيف لكنه متين. وعلى الجانب، ختمنا.",
-      "en": "Breathable mesh, welded overlays and double stitching: light yet tough. On the side, our seal."
+      "fr": "Du mesh respirant sous des renforts cousus : cinq fentes côté extérieur, un tracé noir côté intérieur. Légère mais solide.",
+      "ar": "نسيج شبكي يسمح بالتهوية تحت تدعيمات مخيطة: خمس فتحات على الجانب الخارجي وخطوط سوداء على الجانب الداخلي. خفيف لكنه متين.",
+      "en": "Breathable mesh under stitched overlays: five slots on the outside, black lines on the inside. Light yet tough."
     },
     "s4.c1": {
       "fr": "Mesh respirant",
@@ -313,14 +313,14 @@
       "en": "Breathable mesh"
     },
     "s4.c2": {
-      "fr": "Coutures doubles",
-      "ar": "خياطة مزدوجة",
-      "en": "Double stitching"
+      "fr": "Renforts cousus",
+      "ar": "تدعيمات مخيطة",
+      "en": "Stitched overlays"
     },
     "s4.c3": {
-      "fr": "Renforts",
-      "ar": "تدعيمات",
-      "en": "Overlays"
+      "fr": "Tracé noir",
+      "ar": "خطوط سوداء",
+      "en": "Black lines"
     },
     "s2.t": {
       "fr": "La languette",
@@ -328,19 +328,19 @@
       "en": "The tongue"
     },
     "s2.d": {
-      "fr": "Rembourrée pour protéger le cou-de-pied du serrage. Elle porte notre étiquette tissée, en arabe.",
-      "ar": "مبطّن ليحمي ظهر القدم من الشدّ، ويحمل علامتنا المنسوجة بالعربية.",
-      "en": "Padded to protect the top of the foot from pressure. It carries our woven label, in Arabic."
+      "fr": "En mesh, avec une tirette pour l'enfiler et deux passants qui gardent le lacet bien au centre.",
+      "ar": "من النسيج الشبكي، مع حلقة لسحبه عند اللبس وحلقتين تُبقيان الرباط في الوسط.",
+      "en": "Mesh, with a pull tab to slip it on and two loops that keep the lace centred."
     },
     "s2.c1": {
-      "fr": "Rembourrée",
-      "ar": "مبطّن",
-      "en": "Padded"
+      "fr": "Tirette",
+      "ar": "حلقة سحب",
+      "en": "Pull tab"
     },
     "s2.c2": {
-      "fr": "Étiquette tissée",
-      "ar": "علامة منسوجة",
-      "en": "Woven label"
+      "fr": "Deux passants",
+      "ar": "حلقتان للرباط",
+      "en": "Two lace loops"
     },
     "s3.t": {
       "fr": "Les renforts",
@@ -348,9 +348,9 @@
       "en": "Reinforcements"
     },
     "s3.d": {
-      "fr": "Un contrefort qui tient le talon, un bout renforcé contre les cailloux et l'usure. Le 13 de Tlemcen est gravé à l'arrière.",
-      "ar": "كعب مدعّم يثبّت القدم، ومقدّمة مقوّاة ضد الحجارة والتآكل. ورقم تلمسان 13 محفور في الخلف.",
-      "en": "A heel counter that locks the heel in, a reinforced toe against stones and wear. Tlemcen’s 13 is embossed at the back."
+      "fr": "Un contrefort anthracite zébré d'orange tient le talon, un bout festonné et perforé protège des cailloux. La boucle à l'arrière aide à chausser.",
+      "ar": "كعب مدعّم رمادي داكن بخطوط برتقالية يثبّت القدم، ومقدّمة مقوّاة ومثقوبة تحمي من الحجارة. والحلقة في الخلف تسهّل اللبس.",
+      "en": "A charcoal heel counter striped with orange locks the heel in, a scalloped, perforated toe cap guards against stones. The heel loop helps you slip it on."
     },
     "s3.c1": {
       "fr": "Maintien du talon",
@@ -358,9 +358,9 @@
       "en": "Heel hold"
     },
     "s3.c2": {
-      "fr": "Anti-usure",
-      "ar": "ضد التآكل",
-      "en": "Anti-wear"
+      "fr": "Bout protégé",
+      "ar": "مقدّمة محمية",
+      "en": "Protected toe"
     },
     "s5.t": {
       "fr": "La doublure",
@@ -408,9 +408,9 @@
       "en": "The cushioning"
     },
     "s7.d": {
-      "fr": "Une semelle intermédiaire épaisse, plus haute au talon, qui absorbe les chocs de la marche et des longues journées debout.",
-      "ar": "نعل أوسط سميك، أعلى عند الكعب، يمتصّ صدمات المشي وساعات الوقوف الطويلة.",
-      "en": "A thick midsole, higher at the heel, that absorbs the shock of walking and long days on your feet."
+      "fr": "Une semelle intermédiaire épaisse, plus haute au talon et nervurée sur les flancs, qui absorbe les chocs de la marche et des longues journées debout.",
+      "ar": "نعل أوسط سميك، أعلى عند الكعب ومضلّع على الجانبين، يمتصّ صدمات المشي وساعات الوقوف الطويلة.",
+      "en": "A thick midsole, higher at the heel and ribbed along the sides, that absorbs the shock of walking and long days on your feet."
     },
     "s7.c1": {
       "fr": "Légère",
@@ -428,9 +428,9 @@
       "en": "The grip"
     },
     "s8.d": {
-      "fr": "Des crampons en caoutchouc, profonds et espacés, qui accrochent sur tous les terrains… et notre 13 couronné sous le pied.",
-      "ar": "نتوءات مطاطية عميقة ومتباعدة تتشبّث بكل الأراضي… ورقمنا 13 المتوّج تحت القدم.",
-      "en": "Deep, widely spaced rubber lugs that grip on any terrain… and our crowned 13 underfoot."
+      "fr": "Des crampons en Y, en triangle et en chevron qui accrochent sur tous les terrains, et deux fenêtres qui allègent la semelle.",
+      "ar": "نتوءات مطاطية على شكل Y ومثلثات وأسهم تتشبّث بكل الأراضي، ونافذتان تخفّفان النعل.",
+      "en": "Y-shaped, triangular and chevron lugs that grip on any terrain, with two windows that lighten the sole."
     },
     "s8.c1": {
       "fr": "Tout terrain",
@@ -448,9 +448,9 @@
       "en": "Overview"
     },
     "s9.t": {
-      "fr": "Neuf pièces. Une seule paire.",
-      "ar": "تسع قطع. زوج واحد.",
-      "en": "Nine parts. One pair."
+      "fr": "Huit pièces. Une seule paire.",
+      "ar": "ثماني قطع. زوج واحد.",
+      "en": "Eight parts. One pair."
     },
     "s9.d": {
       "fr": "Chaque pièce est coupée, piquée et assemblée à l'usine, en Algérie.",
@@ -478,9 +478,9 @@
       "en": "All our worlds ↓"
     },
     "s10.note": {
-      "fr": "Modèle 3D d'illustration, d'après un modèle de la boutique.",
-      "ar": "نموذج ثلاثي الأبعاد للتوضيح، مستوحى من موديل في المتجر.",
-      "en": "Illustrative 3D model, based on a shoe from the store."
+      "fr": "Modèle 3D reconstitué d'après les photos d'un modèle de la boutique.",
+      "ar": "نموذج ثلاثي الأبعاد أُعيد بناؤه من صور موديل في المتجر.",
+      "en": "3D model rebuilt from photos of a shoe from the store."
     },
     "m.eyebrow": {
       "fr": "Le 13",

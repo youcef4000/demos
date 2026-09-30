@@ -9,7 +9,7 @@ export function createScene(canvas, { mobile = false, reducedMotion = false } = 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.NeutralToneMapping;
-  renderer.toneMappingExposure = 1.0;
+  renderer.toneMappingExposure = 0.92;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFShadowMap;
   renderer.setClearColor(0x000000, 0);
@@ -27,7 +27,7 @@ export function createScene(canvas, { mobile = false, reducedMotion = false } = 
 
   const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 60);
 
-  // --- lumières : une douche principale, un contre-jour rouge (couleur de la marque)
+  // --- lumières : une douche principale, un contre-jour chaud qui détache la silhouette
   const key = new THREE.DirectionalLight(0xfff4e6, 2.4);
   key.position.set(-2.2, 5.5, 3.6);
   key.castShadow = true;
@@ -42,7 +42,7 @@ export function createScene(canvas, { mobile = false, reducedMotion = false } = 
   key.shadow.normalBias = 0.012;
   key.shadow.radius = 4;
   scene.add(key, key.target);
-  const rim = new THREE.DirectionalLight(0xff2a36, 1.2);
+  const rim = new THREE.DirectionalLight(0xff8a5c, 0.5);
   rim.position.set(1.5, 2.6, -5.5);
   scene.add(rim);
   const fill = new THREE.DirectionalLight(0xdfe8ff, 0.45);
@@ -92,8 +92,8 @@ export function createScene(canvas, { mobile = false, reducedMotion = false } = 
 
   // --- état piloté de l'extérieur (GSAP)
   const state = {
-    explode: { laces: 0, tongue: 0, heel: 0, toe: 0, badge: 0, upper: 0, insole: 0, midsole: 0, outsole: 0 },
-    dim: { laces: 0, tongue: 0, heel: 0, toe: 0, badge: 0, upper: 0, insole: 0, midsole: 0, outsole: 0 },
+    explode: { laces: 0, tongue: 0, heel: 0, toe: 0, upper: 0, insole: 0, midsole: 0, outsole: 0 },
+    dim: { laces: 0, tongue: 0, heel: 0, toe: 0, upper: 0, insole: 0, midsole: 0, outsole: 0 },
     flip: 0,
     xray: 0,
     squash: 0,

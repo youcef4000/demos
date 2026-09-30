@@ -1,4 +1,5 @@
-// Tlemceni — la basket « Runner 13 », modélisée pièce par pièce dans le code.
+// Tlemceni — la basket « Trail 13 », modélisée pièce par pièce dans le code, d'après les
+// photos du modèle vendu en boutique (fentes de mesh, contrefort zébré, crampons en Y).
 // Aucun fichier 3D à télécharger : semelles, tige, languette, lacets et renforts sont des
 // géométries calculées, habillées de textures dessinées sur canvas. Chaque pièce vit dans son
 // propre groupe pour pouvoir être écartée des autres (vue éclatée) au fil du scroll.
@@ -38,8 +39,8 @@ function curve1(pts) {
 const L = 2.9, X0 = -1.45, X1 = 1.45;
 const X_BACK = -1.36, X_THROAT = 0.52, X_RIDGE_END = 1.3;
 const RIM = 0.045; // épaisseur du rebord de la semelle intermédiaire
-const OUT_T = 0.05; // épaisseur de la semelle extérieure (hors crampons)
-const LUG = 0.05; // hauteur des crampons
+const OUT_T = 0.06; // épaisseur de la semelle extérieure (hors crampons)
+const LUG = 0.045; // hauteur des crampons
 
 // demi-largeurs de la semelle (avant arrondi du talon et de la pointe)
 const WL = curve1([[-1.45, 0.35], [-1.1, 0.36], [-0.6, 0.35], [-0.2, 0.37], [0.2, 0.42], [0.55, 0.455], [0.85, 0.44], [1.1, 0.39], [1.3, 0.33], [1.45, 0.28]]);
@@ -64,15 +65,15 @@ function halfW(x, side, inset = 0) {
 
 const spring = (x) => 0.14 * smooth(0.25, 1.45, x) ** 2; // la pointe se relève
 const bevel = (x) => 0.05 * smooth(-1.05, -1.45, x) ** 2; // biseau du talon
-const footbed = (x) => lerp(0.265, 0.162, smooth(-0.95, 0.65, x)); // 10 mm de drop
-const RIM_L = curve1([[-1.45, 0.15], [-1.15, 0.13], [-0.8, 0.075], [-0.5, 0.048], [0, 0.038], [0.6, 0.038], [1.1, 0.05], [1.45, 0.075]]);
-const RIM_M = curve1([[-1.45, 0.15], [-1.15, 0.13], [-0.8, 0.085], [-0.5, 0.075], [-0.1, 0.066], [0.4, 0.044], [1.1, 0.05], [1.45, 0.075]]);
+const footbed = (x) => lerp(0.285, 0.185, smooth(-0.95, 0.65, x)); // 10 mm de drop
+const RIM_L = curve1([[-1.45, 0.15], [-1.15, 0.13], [-0.8, 0.08], [-0.5, 0.058], [0, 0.055], [0.6, 0.062], [1.1, 0.072], [1.3, 0.09], [1.45, 0.12]]);
+const RIM_M = curve1([[-1.45, 0.15], [-1.15, 0.13], [-0.8, 0.088], [-0.5, 0.08], [-0.1, 0.072], [0.4, 0.062], [1.1, 0.072], [1.3, 0.09], [1.45, 0.12]]);
 const rimY = (x, side) => footbed(x) + (side > 0 ? RIM_L(x) : RIM_M(x));
 
 // ouverture du chaussant : demi-largeur, hauteur du bord ; arête du dessus de pied
 const OW = curve1([[-1.36, 0.25], [-1.1, 0.27], [-0.85, 0.262], [-0.6, 0.205], [-0.4, 0.155], [0, 0.138], [0.3, 0.128], [0.52, 0.12]]);
-const OY = curve1([[-1.36, 0.9], [-1.25, 0.865], [-1.0, 0.79], [-0.78, 0.81], [-0.6, 0.86], [-0.42, 0.88], [-0.1, 0.8], [0.25, 0.71], [0.52, 0.635]]);
-const RY = curve1([[0.52, 0.635], [0.8, 0.58], [1.05, 0.525], [1.2, 0.49], [1.3, 0.462]]);
+const OY = curve1([[-1.36, 0.95], [-1.25, 0.915], [-1.0, 0.835], [-0.78, 0.85], [-0.6, 0.9], [-0.42, 0.925], [-0.1, 0.855], [0.25, 0.775], [0.52, 0.705]]);
+const RY = curve1([[0.52, 0.705], [0.8, 0.665], [1.05, 0.62], [1.2, 0.585], [1.3, 0.55]]);
 function openW(x) {
   const a = X_BACK, b = X_THROAT;
   if (x <= a || x >= b) return 0;
@@ -218,6 +219,30 @@ function tube(curve, segs, radial, rFn, closed = false) {
   return makeGeometry(pos, uv, idx);
 }
 
+// Sangle plate le long d'une courbe : largeur selon `across`, épaisseur perpendiculaire.
+function ribbon(curve, segs, width, thick, across = V3(0, 0, 1)) {
+  const pos = [], uv = [], idx = [];
+  const RAD = 16;
+  const p = V3(), T = V3(), N = V3();
+  const len = curve.getLength();
+  for (let i = 0; i <= segs; i++) {
+    const t = i / segs;
+    curve.getPointAt(t, p);
+    curve.getTangentAt(t, T);
+    N.crossVectors(T, across).normalize();
+    for (let j = 0; j <= RAD; j++) {
+      const a = (j / RAD) * PI * 2;
+      const c = Math.cos(a), s = Math.sin(a);
+      // superellipse : section rectangulaire aux bords arrondis
+      const cx = (Math.sign(c) * Math.abs(c) ** 0.3 * width) / 2, sy = (Math.sign(s) * Math.abs(s) ** 0.3 * thick) / 2;
+      pos.push(p.x + across.x * cx + N.x * sy, p.y + across.y * cx + N.y * sy, p.z + across.z * cx + N.z * sy);
+      uv.push(t * len * 6, j / RAD);
+    }
+  }
+  gridIndex(segs, RAD, 0, true, idx);
+  return makeGeometry(pos, uv, idx);
+}
+
 /* ------------------------------------------------------------------ */
 /* Tige : surface paramétrée (θ autour du pied, t du bas vers le haut)  */
 /* ------------------------------------------------------------------ */
@@ -264,7 +289,7 @@ function column(theta) {
   }
   const n = planNormal(theta);
   const dy = T.y - B1.y;
-  const bulge = lerp(0.028, 0.05, f) + 0.035 * smooth(1.0, 1.4, x) + 0.035 * smooth(-1.1, -1.4, x);
+  const bulge = lerp(0.028, 0.05, f) + 0.05 * smooth(0.95, 1.4, x) + 0.035 * smooth(-1.1, -1.4, x);
   const K1 = V3(B1.x + n.x * bulge, B1.y + dy * 0.45, B1.z + n.z * bulge);
   const dp = V3(B1.x - T.x, 0, B1.z - T.z);
   const hl = dp.length();
@@ -274,6 +299,7 @@ function column(theta) {
   return { x, side, B, B1, K1, K2, T, f };
 }
 const T0 = 0.1; // part de la colonne cachée dans le rebord
+const tv = (v) => T0 + v * (1 - T0); // hauteur visible (0 au ras du rebord, 1 au bord) -> t
 function colPoint(c, t, out = V3()) {
   if (t <= T0) return out.copy(c.B).lerp(c.B1, t / T0);
   const s = (t - T0) / (1 - T0), r = 1 - s;
@@ -452,6 +478,41 @@ function braidTile(size) {
   return c;
 }
 
+// Maille technique vue de près : filet clair percé d'alvéoles en quinconce (raccordable).
+function netTile(step, base, hole) {
+  const w = Math.max(4, Math.round(step)), h = Math.max(4, Math.round(step * 0.86));
+  const c = makeCanvas(w, h), ctx = c.getContext('2d');
+  ctx.fillStyle = base;
+  ctx.fillRect(0, 0, w, h);
+  ctx.fillStyle = hole;
+  for (const [cx, cy] of [[0, 0], [w, 0], [0, h], [w, h], [w / 2, h / 2]]) {
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - h * 0.34);
+    ctx.lineTo(cx + w * 0.34, cy);
+    ctx.lineTo(cx, cy + h * 0.34);
+    ctx.lineTo(cx - w * 0.34, cy);
+    ctx.closePath();
+    ctx.fill();
+  }
+  return c;
+}
+// Sangle tissée : côtes fines dans le sens de la longueur.
+function webTile(size) {
+  const c = makeCanvas(size, size), ctx = c.getContext('2d');
+  ctx.fillStyle = '#808080';
+  ctx.fillRect(0, 0, size, size);
+  const n = 8, step = size / n;
+  for (let i = 0; i < n; i++) {
+    const g = ctx.createLinearGradient(0, i * step, 0, (i + 1) * step);
+    g.addColorStop(0, '#404040');
+    g.addColorStop(0.5, '#d0d0d0');
+    g.addColorStop(1, '#404040');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, i * step, size, step);
+  }
+  return c;
+}
+
 function crownPath(ctx, cx, cy, w) {
   // couronne à trois pointes (clin d'œil au logo de la marque)
   const h = w * 0.62;
@@ -472,7 +533,7 @@ function crownPath(ctx, cx, cy, w) {
 /* ------------------------------------------------------------------ */
 export const PALETTE_KEYS = ['mesh', 'skin', 'line', 'accent', 'midsole', 'outsole', 'laces', 'lining'];
 export const COLORWAYS = {
-  trail: { mesh: '#c2c4c0', skin: '#f3f3f0', line: '#3b3e44', accent: '#ee6a24', midsole: '#45484e', outsole: '#ee6a24', laces: '#ececea', lining: '#b8552c' },
+  trail: { mesh: '#abaca9', skin: '#bcbdba', line: '#4b4d52', accent: '#e07650', midsole: '#4a4c51', outsole: '#df7a55', laces: '#bebebb', lining: '#45474c' },
   blanc: { mesh: '#e4e0d8', skin: '#f6f3ed', line: '#17171a', accent: '#c8102e', midsole: '#f3f0e8', outsole: '#1c1c1f', laces: '#f4f1ea', lining: '#9e1320' },
   noir: { mesh: '#2d2e31', skin: '#1e1f21', line: '#0e0e0f', accent: '#c8102e', midsole: '#1f1f22', outsole: '#121214', laces: '#1a1a1c', lining: '#18181a' },
   sable: { mesh: '#c9b28c', skin: '#dbc8a3', line: '#6b4a2c', accent: '#8a5a33', midsole: '#efe6d3', outsole: '#a4642c', laces: '#efe6d4', lining: '#6d4a2e' },
@@ -483,20 +544,30 @@ function shadeHex(hex, k) {
   else c.multiplyScalar(1 + k);
   return `#${c.getHexString()}`;
 }
+function mixHex(a, b, k) {
+  return `#${new THREE.Color(a).lerp(new THREE.Color(b), k).getHexString()}`;
+}
 const lum = (hex) => {
   const c = new THREE.Color(hex);
   return 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b;
 };
 function derive(p) {
   const P = { ...COLORWAYS.trail, ...p };
+  const dark = (hex, k) => shadeHex(hex, lum(hex) > 0.3 ? -k : k * 0.8);
+  const insole = shadeHex(P.lining, lum(P.lining) > 0.25 ? -0.72 : -0.5);
   return {
     ...P,
-    perf: shadeHex(P.mesh, lum(P.mesh) > 0.3 ? -0.35 : 0.25),
-    thread: P.line,
-    counter: P.line, toe: P.line, collar: P.line, eyestay: P.line, eyelet: P.line, tab: P.line,
-    badge: P.accent, badgeInk: '#ffffff', label: P.accent, threadAccent: P.accent,
-    tongue: P.skin, insole: shadeHex(P.line, -0.35), insoleInk: P.accent,
-    midLine: shadeHex(P.midsole, lum(P.midsole) > 0.3 ? -0.16 : 0.22),
+    perf: dark(P.mesh, 0.55), // trous de la maille
+    thread: dark(P.skin, 0.22), // piqûres ton sur ton
+    piping: shadeHex(P.skin, 0.5),
+    counter: P.line, toe: P.line, collar: P.line, tab: P.line,
+    eyelet: dark(P.skin, 0.5),
+    patch: mixHex(P.line, P.skin, 0.3), // pastille au sommet des oeillets
+    web: shadeHex(P.line, 0.14), // sangles : tirette de languette, passants
+    mark: '#ffffff', label: P.line, ink: shadeHex(P.line, -0.6), // lignes noires imprimées
+    tongue: P.mesh, insole, insoleInk: lum(insole) > 0.45 ? '#141414' : '#f4f4f1',
+    midLine: shadeHex(P.midsole, lum(P.midsole) > 0.3 ? -0.14 : 0.16),
+    window: shadeHex(P.midsole, lum(P.midsole) > 0.3 ? -0.08 : 0.06), // fenêtres sous la semelle
   };
 }
 
@@ -533,216 +604,183 @@ export function createSneaker({ quality = 1 } = {}) {
 
   // --- tuiles de détail partagées
   const grainH = grainTile(hi ? 512 : 256, 7, hi ? 6 : 3.5);
-  const grainN = keep(toTex(heightToNormal(grainH, 2.2), false, [1, 1]));
   const foamN = keep(toTex(heightToNormal(noiseTile(256, 3, 70, 0.8), 1.2), false, [10, 7]));
   const meshN = keep(toTex(heightToNormal(meshTile(128), 3), false, [60, 8]));
   const braidN = keep(toTex(heightToNormal(braidTile(64), 4), false, [60, 1]));
+  const webN = keep(toTex(heightToNormal(webTile(64), 3), false, [12, 2]));
+  const shellGrainN = keep(toTex(heightToNormal(grainH, 1.6), false, [5, 1.4])); // grain fin des renforts
 
   /* ---------------- tige : textures couleur / rugosité / relief ---------------- */
   const upperColor = makeCanvas(TW, TH);
   const upperRough = makeCanvas(TW, TH);
   const upperHeight = makeCanvas(TW, TH);
-  const px = (x, side, t) => [arcU(thetaAt(x, side)) * TW, (1 - t) * TH];
+  // (x le long du pied, v en hauteur : 0 au ras de la semelle, 1 au bord du chaussant) -> pixels
+  const px = (x, side, v) => [arcU(thetaAt(x, side)) * TW, (1 - tv(v)) * TH];
   const unit = TW / ARC.total; // pixels par unité le long du pied
+  const toPx = (side, pts) => pts.map(([x, v]) => px(x, side, v));
 
-  // zones (en coordonnées x du pied, t de la colonne), dessinées pour chaque côté
-  function eyestayPath(ctx, side) {
-    ctx.beginPath();
-    const xs = [];
-    for (let x = -0.56; x <= X_THROAT - 0.01; x += 0.02) xs.push(x);
-    const low = (x) => 0.8 - 0.06 * smooth(0.1, X_THROAT, x) + 0.18 * smooth(-0.4, -0.56, x);
-    xs.forEach((x, i) => {
-      const [a, b] = px(x, side, 1.001);
-      i ? ctx.lineTo(a, b) : ctx.moveTo(a, b);
-    });
-    for (let i = xs.length - 1; i >= 0; i--) {
-      const [a, b] = px(xs[i], side, low(xs[i]));
-      ctx.lineTo(a, b);
-    }
-    ctx.closePath();
-    return low;
-  }
-  // Modèle trail : panneaux de mesh perforé encadrés d'une cage de lignes, en coordonnées (x, t).
-  const PANELS = [
-    [[-0.78, 0.68], [-0.53, 0.74], [-0.48, 0.5], [-0.74, 0.45]],
-    [[-0.73, 0.38], [-0.47, 0.44], [-0.43, 0.25], [-0.7, 0.21]],
-    [[-0.37, 0.74], [-0.03, 0.76], [-0.1, 0.52], [-0.39, 0.48]],
-    [[-0.38, 0.41], [-0.09, 0.46], [-0.01, 0.31], [-0.36, 0.27]],
-    [[0.07, 0.74], [0.4, 0.73], [0.47, 0.46], [0.07, 0.48]],
-    [[0.09, 0.4], [0.5, 0.38], [0.64, 0.3], [0.07, 0.32]],
-    [[0.62, 0.97], [1.16, 0.99], [1.14, 0.58], [0.66, 0.52]],
+  // Relevé sur les photos du modèle : fenêtres de maille sous les renforts lisses.
+  // Côté extérieur : grande fenêtre sous le col, cinq fentes arrondies en éventail, avant-pied en maille.
+  const REAR_L = [[-1.27, 0.56], [-0.7, 0.48], [-0.56, 0.52], [-0.5, 1.04], [-1.27, 1.04]];
+  const SLOTS_L = [
+    [[-0.615, 0.385], [-0.6, 0.425], [-0.19, 0.8], [-0.175, 0.69]],
+    [[-0.09, 0.71], [0.0, 0.77], [-0.125, 0.285], [-0.227, 0.315]],
+    [[0.147, 0.61], [0.237, 0.6], [0.243, 0.19], [-0.018, 0.2]],
+    [[0.317, 0.79], [0.419, 0.78], [0.442, 0.335], [0.352, 0.345]],
+    [[0.538, 0.79], [0.6, 0.78], [0.707, 0.28], [0.611, 0.28]],
   ];
-  const polyPath = (ctx, side, pts, scale = 1) => {
-    const c = pts.reduce((a, [x, t]) => [a[0] + x / pts.length, a[1] + t / pts.length], [0, 0]);
-    ctx.beginPath();
-    pts.forEach(([x, t], i) => {
-      const [a, b] = px(c[0] + (x - c[0]) * scale, side, c[1] + (t - c[1]) * scale);
-      i ? ctx.lineTo(a, b) : ctx.moveTo(a, b);
+  // Côté intérieur : fenêtres en triangle et trapèze, soulignées de lignes noires « circuit ».
+  const REAR_M = [[-1.22, 0.62], [-0.68, 0.55], [-0.57, 0.62], [-0.54, 1.04], [-1.22, 1.04]];
+  const WINS_M = [
+    [[-0.33, 0.53], [-0.2, 0.75], [0.07, 0.77], [-0.1, 0.51]],
+    [[-0.1, 0.3], [0.18, 0.62], [0.18, 0.2]],
+    [[0.33, 0.74], [0.42, 0.76], [0.47, 0.29], [0.36, 0.29]],
+    [[0.55, 0.79], [0.62, 0.8], [0.73, 0.25], [0.63, 0.23]],
+  ];
+  const LINES_M = [
+    { w: 1, pts: [[-0.47, 0.45], [-0.19, 0.32], [0.126, 0.75], [0.286, 0.68], [0.286, 0.2], [0.52, 0.22]] },
+    { w: 1, pts: [[-0.6, 0.7], [-0.4, 0.62], [-0.27, 0.86], [0.2, 0.88]] },
+    { w: 1, dash: true, pts: [[-0.66, 0.54], [-0.5, 0.465]] },
+    { w: 1, dash: true, pts: [[0.51, 0.28], [0.51, 0.66]] },
+    { w: 0.4, pts: [[-0.62, 0.36], [-0.22, 0.17], [0.22, 0.17], [0.25, 0.11], [0.95, 0.11]] },
+  ];
+  const VAMP = [[0.68, 1.04], [0.7, 0.74], [0.82, 0.5], [1.42, 0.46], [1.42, 1.04]];
+  const PATCH = [[-0.5, 0.86], [-0.36, 0.88], [-0.36, 0.975], [-0.5, 0.965]]; // pastille du dernier oeillet
+
+  // polygone (pixels) décalé de d vers l'extérieur
+  function offsetPoly(P, d) {
+    let area = 0;
+    for (let i = 0; i < P.length; i++) {
+      const a = P[i], b = P[(i + 1) % P.length];
+      area += a[0] * b[1] - b[0] * a[1];
+    }
+    const sg = area > 0 ? 1 : -1;
+    return P.map((c, i) => {
+      const a = P[(i + P.length - 1) % P.length], b = P[(i + 1) % P.length];
+      const l1 = Math.hypot(c[0] - a[0], c[1] - a[1]) || 1, l2 = Math.hypot(b[0] - c[0], b[1] - c[1]) || 1;
+      const n1 = [(sg * (c[1] - a[1])) / l1, (-sg * (c[0] - a[0])) / l1];
+      const n2 = [(sg * (b[1] - c[1])) / l2, (-sg * (b[0] - c[0])) / l2];
+      let m = [n1[0] + n2[0], n1[1] + n2[1]];
+      const lm = Math.hypot(m[0], m[1]) || 1;
+      m = [m[0] / lm, m[1] / lm];
+      const k = d / Math.max(0.35, m[0] * n1[0] + m[1] * n1[1]);
+      return [c[0] + m[0] * k, c[1] + m[1] * k];
     });
-    ctx.closePath();
-  };
-  // bande de protection (pare-boue) au ras de la semelle, de la voûte jusqu'au bout
-  const bandTop = (x) => 0.2 + 0.035 * smooth(0.5, 0.9, x) + 0.02 * Math.sin(x * 9);
-  function bandPath(ctx, side) {
+  }
+  // contour à coins arrondis
+  function roundPath(ctx, P, r) {
+    const n = P.length;
     ctx.beginPath();
-    const xs = [];
-    for (let x = -0.16; x <= 1.3; x += 0.02) xs.push(x);
-    xs.forEach((x, i) => {
-      const [a, b] = px(x, side, i === 0 ? 0 : bandTop(x) * smooth(-0.16, -0.05, x));
-      i ? ctx.lineTo(a, b) : ctx.moveTo(a, b);
-    });
-    for (let i = xs.length - 1; i >= 0; i--) {
-      const [a, b] = px(xs[i], side, -0.01);
-      ctx.lineTo(a, b);
+    for (let i = 0; i < n; i++) {
+      const a = P[(i + n - 1) % n], c = P[i], b = P[(i + 1) % n];
+      const la = Math.hypot(c[0] - a[0], c[1] - a[1]) || 1, lb = Math.hypot(b[0] - c[0], b[1] - c[1]) || 1;
+      const rr = Math.min(r, la * 0.45, lb * 0.45);
+      const p0 = [c[0] + ((a[0] - c[0]) / la) * rr, c[1] + ((a[1] - c[1]) / la) * rr];
+      const p1 = [c[0] + ((b[0] - c[0]) / lb) * rr, c[1] + ((b[1] - c[1]) / lb) * rr];
+      if (i) ctx.lineTo(p0[0], p0[1]);
+      else ctx.moveTo(p0[0], p0[1]);
+      ctx.quadraticCurveTo(c[0], c[1], p1[0], p1[1]);
     }
     ctx.closePath();
   }
-  // bande orange à l'arrière, zébrée de trois traits
-  const REAR = [[-1.03, 0.08], [-0.86, 0.08], [-0.9, 0.84], [-1.07, 0.84]];
-  function collarPath(ctx, side) {
-    // col rembourré, en haut à l'arrière
+  function linePath(ctx, side, pts) {
     ctx.beginPath();
-    const xs = [];
-    for (let x = XI0; x <= -0.52; x += 0.02) xs.push(x);
-    xs.forEach((x, i) => {
-      const [a, b] = px(x, side, 1.001);
-      i ? ctx.lineTo(a, b) : ctx.moveTo(a, b);
-    });
-    for (let i = xs.length - 1; i >= 0; i--) {
-      const x = xs[i];
-      const t = 0.8 + 0.2 * smooth(-0.7, -0.52, x);
-      const [a, b] = px(x, side, t);
-      ctx.lineTo(a, b);
-    }
-    ctx.closePath();
+    toPx(side, pts).forEach(([a, b], i) => (i ? ctx.lineTo(a, b) : ctx.moveTo(a, b)));
   }
+  function curvePath(ctx, side, x0, x1, vFn) {
+    ctx.beginPath();
+    for (let x = x0, i = 0; x <= x1 + 1e-6; x += 0.015, i++) {
+      const [a, b] = px(x, side, vFn(x));
+      i ? ctx.lineTo(a, b) : ctx.moveTo(a, b);
+    }
+  }
+  // piqûre : sillon dans le relief, fil en pointillé dans la couleur
+  function stitch(ctx, layer, pathFn, color, sw, dash) {
+    ctx.save();
+    pathFn();
+    if (layer === 'height') {
+      ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+      ctx.lineWidth = sw * 2.6;
+      ctx.stroke();
+    }
+    ctx.setLineDash([dash, dash * 0.75]);
+    ctx.strokeStyle = layer === 'color' ? color : layer === 'rough' ? '#cfcfcf' : '#ffffff';
+    ctx.lineWidth = sw;
+    ctx.stroke();
+    ctx.restore();
+  }
+
   function drawUpper(cw, layer) {
     const ctx = (layer === 'color' ? upperColor : layer === 'rough' ? upperRough : upperHeight).getContext('2d');
     const W = TW, H = TH;
     const C = layer === 'color', R = layer === 'rough', Hh = layer === 'height';
     const pick = (color, rough, height) => (C ? color : R ? rough : height);
-    const lw = Math.max(2, unit * 0.018); // épaisseur des lignes de la cage
-    const sw = Math.max(1.2, unit * 0.005); // fil des piqûres
-    const dash = unit * 0.02;
+    const sw = Math.max(1.2, unit * 0.0045); // fil des piqûres
+    const dash = unit * 0.016;
+    const rad = unit * 0.035; // arrondi des fenêtres
+    const net = ctx.createPattern(netTile(unit * 0.026, pick(cw.mesh, '#e2e2e2', '#6a6a6a'), pick(cw.perf, '#ffffff', '#161616')), 'repeat');
     ctx.save();
     ctx.setLineDash([]);
-    // peau de base (renfort lisse)
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    // peau synthétique de base (renforts lisses)
     if (Hh) {
       ctx.fillStyle = ctx.createPattern(grainH, 'repeat');
       ctx.fillRect(0, 0, W, H);
-      ctx.fillStyle = 'rgba(128,128,128,0.55)';
+      ctx.fillStyle = 'rgba(128,128,128,0.6)';
       ctx.fillRect(0, 0, W, H);
     } else {
-      ctx.fillStyle = pick(cw.skin, '#8a8a8a');
+      ctx.fillStyle = pick(cw.skin, '#b8b8b8');
       ctx.fillRect(0, 0, W, H);
     }
-    for (const side of [1, -1]) {
-      // panneaux de mesh perforé
-      for (const pts of PANELS) {
-        polyPath(ctx, side, pts);
-        ctx.fillStyle = pick(cw.mesh, '#e8e8e8', '#5c5c5c');
-        ctx.fill();
+    const opening = (P) => {
+      roundPath(ctx, P, rad);
+      ctx.fillStyle = net;
+      ctx.fill();
+      if (!R) {
+        // ombre portée du bord du renfort sur la maille
         ctx.save();
-        polyPath(ctx, side, pts, 0.9);
         ctx.clip();
-        ctx.fillStyle = pick(cw.perf, '#ffffff', '#1c1c1c');
-        const step = unit * 0.027, rad = unit * 0.0078;
-        const [[x0], [x1]] = [pts.reduce((m, p) => (p[0] < m[0] ? p : m)), pts.reduce((m, p) => (p[0] > m[0] ? p : m))];
-        for (let x = x0, row = 0; x <= x1; x += step / unit / 1.0, row++) {
-          for (let t = 0.2; t <= 1.0; t += (step / TH) * (TH / (unit * 0.62))) {
-            const [a, b] = px(x + (Math.round(t * 100) % 2 ? step / unit / 2 : 0), side, t);
-            ctx.beginPath();
-            ctx.arc(a, b, rad, 0, PI * 2);
-            ctx.fill();
-          }
-        }
+        roundPath(ctx, P, rad);
+        ctx.strokeStyle = Hh ? 'rgba(0,0,0,0.35)' : 'rgba(0,0,0,0.13)';
+        ctx.lineWidth = unit * 0.012;
+        ctx.stroke();
         ctx.restore();
       }
-      // pare-boue
-      bandPath(ctx, side);
-      ctx.fillStyle = pick(cw.line, '#6a6a6a', '#c0c0c0');
-      ctx.fill();
-      // bande arrière
-      polyPath(ctx, side, REAR);
-      ctx.fillStyle = pick(cw.accent, '#7a7a7a', '#b0b0b0');
-      ctx.fill();
-      ctx.save();
-      polyPath(ctx, side, REAR);
-      ctx.clip();
-      ctx.strokeStyle = pick(cw.line, '#6a6a6a', '#d0d0d0');
-      ctx.lineWidth = unit * 0.022;
-      for (const t of [0.3, 0.45, 0.6]) {
-        const [a0, b0] = px(-1.12, side, t - 0.05);
-        const [a1, b1] = px(-0.8, side, t + 0.06);
-        ctx.beginPath();
-        ctx.moveTo(a0, b0);
-        ctx.lineTo(a1, b1);
-        ctx.stroke();
-      }
-      ctx.restore();
-      // col
-      collarPath(ctx, side);
-      ctx.fillStyle = pick(cw.collar, '#b0b0b0', '#a0a0a0');
-      ctx.fill();
-      // oeillets
-      const low = eyestayPath(ctx, side);
-      ctx.fillStyle = pick(cw.eyestay, '#707070', '#c8c8c8');
-      ctx.fill();
-      // cage : contours des panneaux, en relief
-      ctx.lineJoin = 'round';
-      for (const pts of PANELS) {
-        polyPath(ctx, side, pts);
-        ctx.strokeStyle = pick(cw.line, '#6a6a6a', '#e6e6e6');
-        ctx.lineWidth = lw;
-        ctx.stroke();
-      }
-      // piqûres le long de la cage, du pare-boue et des oeillets
-      const stitch2 = (pathFn) => {
-        ctx.save();
-        pathFn();
-        if (Hh) {
-          ctx.strokeStyle = 'rgba(0,0,0,0.45)';
-          ctx.lineWidth = sw * 2.4;
+      stitch(ctx, layer, () => roundPath(ctx, offsetPoly(P, unit * 0.011), rad * 1.3), cw.thread, sw, dash);
+    };
+    for (const side of [1, -1]) {
+      const lat = side > 0;
+      // avant-pied en maille, sous le pare-pierre
+      opening(toPx(side, VAMP));
+      opening(toPx(side, lat ? REAR_L : REAR_M));
+      for (const pts of lat ? SLOTS_L : WINS_M) opening(toPx(side, pts));
+      // lignes noires imprimées (côté intérieur)
+      if (!lat) {
+        for (const l of LINES_M) {
+          ctx.save();
+          linePath(ctx, side, l.pts);
+          ctx.lineCap = l.dash ? 'butt' : 'round';
+          if (l.dash) ctx.setLineDash([unit * 0.05, unit * 0.028]);
+          ctx.strokeStyle = pick(cw.ink, '#5a5a5a', 'rgba(255,255,255,0.35)');
+          ctx.lineWidth = unit * 0.02 * l.w;
           ctx.stroke();
+          ctx.restore();
         }
-        ctx.setLineDash([dash, dash * 0.7]);
-        ctx.strokeStyle = pick(cw.thread, '#d0d0d0', '#ffffff');
-        ctx.lineWidth = sw;
-        ctx.stroke();
-        ctx.restore();
-      };
-      for (const pts of PANELS) stitch2(() => polyPath(ctx, side, pts, 1.1));
-      stitch2(() => {
-        ctx.beginPath();
-        for (let x = -0.1, i = 0; x <= 1.25; x += 0.02, i++) {
-          const [a, b] = px(x, side, bandTop(x) + 0.028);
-          i ? ctx.lineTo(a, b) : ctx.moveTo(a, b);
-        }
-      });
-      ctx.save();
-      ctx.setLineDash([dash, dash * 0.7]);
-      ctx.strokeStyle = pick(cw.threadAccent, '#d0d0d0', '#ffffff');
-      ctx.lineWidth = sw;
-      ctx.beginPath();
-      for (let x = -0.46, i = 0; x <= X_THROAT - 0.03; x += 0.02, i++) {
-        const [a, b] = px(x, side, low(x) + 0.03);
-        i ? ctx.lineTo(a, b) : ctx.moveTo(a, b);
       }
+      // pastille au sommet des oeillets
+      roundPath(ctx, toPx(side, PATCH), unit * 0.008);
+      ctx.fillStyle = pick(cw.patch, '#7a7a7a', '#a8a8a8');
+      ctx.fill();
+      // passepoil clair le long des oeillets et du col
+      ctx.save();
+      curvePath(ctx, side, -1.36, X_THROAT, () => 0.992);
+      ctx.strokeStyle = pick(cw.piping, '#9a9a9a', '#b8b8b8');
+      ctx.lineWidth = unit * 0.009;
       ctx.stroke();
       ctx.restore();
-      // marquage sur le pare-boue
-      if (!R) {
-        const [a, b] = px(0.3, side, 0.1);
-        ctx.save();
-        ctx.translate(a, b);
-        if (side < 0) ctx.scale(-1, 1);
-        ctx.font = `800 ${Math.round(unit * 0.055)}px Archivo, Arial, sans-serif`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillStyle = pick(cw.accent, '', '#ffffff');
-        ctx.fillText('TLEMCENI · 13', 0, 0);
-        ctx.restore();
-      }
+      // piqûres des oeillets
+      stitch(ctx, layer, () => curvePath(ctx, side, -0.5, X_THROAT - 0.02, () => 0.9), cw.thread, sw, dash);
     }
     if (C) {
       // ombre de contact au ras de la semelle
@@ -764,13 +802,16 @@ export function createSneaker({ quality = 1 } = {}) {
 
   const matUpper = new THREE.MeshPhysicalMaterial({
     map: upperMap, normalMap: upperNormalT, normalScale: new THREE.Vector2(0.9, 0.9), roughnessMap: upperRoughT, roughness: 0.78,
-    clearcoat: 0.12, clearcoatRoughness: 0.55, sheen: 0.25, sheenRoughness: 0.8,
+    clearcoat: 0.05, clearcoatRoughness: 0.6, sheen: 0.12, sheenRoughness: 0.8,
   });
-  const matLining = new THREE.MeshPhysicalMaterial({ color: '#9e1320', normalMap: meshN, roughness: 0.85, sheen: 1, sheenRoughness: 0.5, side: THREE.DoubleSide });
+  const matLining = new THREE.MeshPhysicalMaterial({ color: '#45474c', normalMap: meshN, roughness: 0.85, sheen: 1, sheenRoughness: 0.5, side: THREE.DoubleSide });
   const matCollar = new THREE.MeshPhysicalMaterial({ color: '#1b1b1e', normalMap: meshN, normalScale: new THREE.Vector2(0.5, 0.5), roughness: 0.8, sheen: 0.8, sheenRoughness: 0.6 });
-  const matEyelet = new THREE.MeshStandardMaterial({ color: '#2b2b2f', metalness: 0.9, roughness: 0.32 });
-  const matTab = new THREE.MeshPhysicalMaterial({ color: '#c8102e', roughness: 0.6, sheen: 0.6 });
-  const matLaces = new THREE.MeshPhysicalMaterial({ color: '#f4f1ea', normalMap: braidN, normalScale: new THREE.Vector2(0.8, 0.8), roughness: 0.8, sheen: 0.7, sheenRoughness: 0.6 });
+  // oeillets : simples trous gansés dans le renfort, pas d'anneau métallique
+  const matEyelet = new THREE.MeshStandardMaterial({ color: '#8d8d8a', metalness: 0, roughness: 0.7 });
+  // sangles tissées : boucle du talon, tirette de languette, passants de lacet
+  const matTab = new THREE.MeshPhysicalMaterial({ color: '#4b4d52', normalMap: webN, normalScale: new THREE.Vector2(0.7, 0.7), roughness: 0.7, sheen: 0.6, sheenRoughness: 0.5, side: THREE.DoubleSide });
+  const matWeb = new THREE.MeshPhysicalMaterial({ color: '#616369', normalMap: webN, normalScale: new THREE.Vector2(0.7, 0.7), roughness: 0.7, sheen: 0.6, sheenRoughness: 0.5, side: THREE.DoubleSide });
+  const matLaces = new THREE.MeshPhysicalMaterial({ color: '#d9d9d6', normalMap: braidN, normalScale: new THREE.Vector2(0.8, 0.8), roughness: 0.8, sheen: 0.7, sheenRoughness: 0.6 });
 
   /* ---------------- tige ---------------- */
   const pUpper = part('upper', V3(-0.35, 0.62, 0.36), V3(0, 0, 0));
@@ -819,7 +860,7 @@ export function createSneaker({ quality = 1 } = {}) {
     const curve = new THREE.CatmullRomCurve3(pts, false, 'centripetal');
     const rAt = (t) => {
       const p2 = curve.getPointAt(t);
-      return 0.012 + 0.034 * smooth(-0.25, -0.75, p2.x);
+      return 0.012 + 0.03 * smooth(-0.25, -0.75, p2.x);
     };
     const cg = tube(curve, hi ? 260 : 160, hi ? 14 : 10, rAt);
     // on descend légèrement le bourrelet pour qu'il chevauche le bord
@@ -828,35 +869,19 @@ export function createSneaker({ quality = 1 } = {}) {
     cg.computeVertexNormals();
     add(pUpper, cg, matCollar, { dim: false });
     pUpper.collarMat = matCollar;
-    // tirette du talon
-    const shape = new THREE.Shape();
-    const rr = (s, w, h, r) => {
-      s.moveTo(-w / 2 + r, -h / 2);
-      s.lineTo(w / 2 - r, -h / 2);
-      s.quadraticCurveTo(w / 2, -h / 2, w / 2, -h / 2 + r);
-      s.lineTo(w / 2, h / 2 - r);
-      s.quadraticCurveTo(w / 2, h / 2, w / 2 - r, h / 2);
-      s.lineTo(-w / 2 + r, h / 2);
-      s.quadraticCurveTo(-w / 2, h / 2, -w / 2, h / 2 - r);
-      s.lineTo(-w / 2, -h / 2 + r);
-      s.quadraticCurveTo(-w / 2, -h / 2, -w / 2 + r, -h / 2);
-      return s;
-    };
-    rr(shape, 0.13, 0.22, 0.04);
-    const hole = new THREE.Path();
-    rr(hole, 0.07, 0.07, 0.025);
-    hole.curves.forEach((c) => {
-      if (c.v0) c.v0.y += 0.04;
-      if (c.v1) c.v1.y += 0.04;
-      if (c.v2) c.v2.y += 0.04;
-    });
-    shape.holes.push(hole);
-    const tg = new THREE.ExtrudeGeometry(shape, { depth: 0.014, bevelEnabled: true, bevelThickness: 0.005, bevelSize: 0.005, bevelSegments: 2, curveSegments: 8 });
-    const tab = add(pUpper, tg, matTab, { dim: false });
+    // boucle du talon : sangle tissée repliée, penchée vers l'arrière
+    const n0 = upperNormal(0, 0.8);
     const top = openPt(X_BACK, 1);
-    tab.position.set(top.x - 0.045, top.y - 0.02, 0);
-    tab.rotation.set(0, -PI / 2, 0);
-    tab.rotateX(-0.22);
+    const loop = new THREE.CatmullRomCurve3([
+      upperPoint(0, 0.74).addScaledVector(n0, 0.012),
+      upperPoint(0, 0.95).addScaledVector(n0, 0.016),
+      top.clone().add(V3(-0.11, 0.11, 0)),
+      top.clone().add(V3(-0.15, 0.19, 0)),
+      top.clone().add(V3(-0.085, 0.19, 0)),
+      top.clone().add(V3(-0.03, 0.085, 0)),
+      top.clone().add(V3(0.02, -0.03, 0)),
+    ], false, 'centripetal');
+    add(pUpper, ribbon(loop, hi ? 80 : 50, 0.08, 0.014), matTab, { dim: false });
     pUpper.tabMat = matTab;
   }
 
@@ -879,26 +904,32 @@ export function createSneaker({ quality = 1 } = {}) {
     }
   }
   {
-    const tg = new THREE.TorusGeometry(0.02, 0.0065, 8, hi ? 20 : 14);
+    // trou gansé : bourrelet discret et fond sombre
+    const tg = new THREE.TorusGeometry(0.0165, 0.0042, 8, hi ? 20 : 14);
     const m = new THREE.InstancedMesh(keep(tg), matEyelet, EYE * 2);
+    const hg = new THREE.CircleGeometry(0.0145, hi ? 18 : 12);
+    const matHole = new THREE.MeshBasicMaterial({ color: '#141416' });
+    const h = new THREE.InstancedMesh(keep(hg), matHole, EYE * 2);
     const o = new THREE.Object3D();
     let k = 0;
     for (const side of [1, -1]) {
       for (const e of eyelets[side]) {
-        o.position.copy(e.p).addScaledVector(e.n, 0.004);
+        o.position.copy(e.p).addScaledVector(e.n, 0.0035);
         o.quaternion.setFromUnitVectors(V3(0, 0, 1), e.n);
         o.updateMatrix();
-        m.setMatrixAt(k++, o.matrix);
+        m.setMatrixAt(k, o.matrix);
+        o.position.copy(e.p).addScaledVector(e.n, 0.0015);
+        o.updateMatrix();
+        h.setMatrixAt(k++, o.matrix);
       }
     }
-    m.castShadow = true;
-    pUpper.group.add(m);
+    pUpper.group.add(m, h);
     pUpper.eyeletMat = matEyelet;
   }
 
   const pLaces = part('laces', V3(-0.5, 1.02, 0.1), V3(0, 0.82, 0));
   {
-    const R = 0.0165;
+    const R = 0.019;
     const lift = (e, h) => e.p.clone().addScaledVector(e.n, h);
     const topAt = (x) => OY(clamp(x, -0.9, X_THROAT)) + spring(x) + 0.05;
     const segs = [];
@@ -986,15 +1017,16 @@ export function createSneaker({ quality = 1 } = {}) {
 
   // --- languette
   const tongueColor = makeCanvas(512, 1024);
-  const matTongue = new THREE.MeshPhysicalMaterial({ map: keep(toTex(tongueColor, true)), normalMap: grainN, roughness: 0.75, sheen: 0.4, sheenRoughness: 0.7 });
+  const tongueN = keep(toTex(heightToNormal(meshTile(128), 3), false, [3, 6]));
+  const matTongue = new THREE.MeshPhysicalMaterial({ map: keep(toTex(tongueColor, true)), normalMap: tongueN, normalScale: new THREE.Vector2(0.6, 0.6), roughness: 0.8, sheen: 0.5, sheenRoughness: 0.6 });
   const pTongue = part('tongue', V3(-0.47, 0.99, 0), V3(-0.1, 0.48, 0));
   const tongueCurve = new THREE.CatmullRomCurve3([
     V3(0.72, RY(0.72) + spring(0.72) - 0.05, 0),
     V3(0.45, OY(0.45) + spring(0.45) - 0.012, 0),
     V3(0.1, OY(0.1) + spring(0.1) - 0.004, 0),
     V3(-0.26, OY(-0.26) + 0.004, 0),
-    V3(-0.42, 0.915, 0),
-    V3(-0.52, 1.0, 0),
+    V3(-0.42, 0.96, 0),
+    V3(-0.52, 1.045, 0),
   ], false, 'centripetal');
   const tongueLen = tongueCurve.getLength();
   {
@@ -1022,6 +1054,31 @@ export function createSneaker({ quality = 1 } = {}) {
     };
     const g = pillow(mid, hi ? 60 : 40, hi ? 24 : 16, thick, (a, b) => [b, a]);
     add(pTongue, g, matTongue);
+    // passants de lacet (sangle cousue à plat) et tirette en haut de la languette
+    const onTop = (a, h) => {
+      const c = tongueCurve.getPointAt(a), tg = tongueCurve.getTangentAt(a);
+      const n = V3(-tg.y, tg.x, 0).normalize();
+      if (n.y < 0) n.negate();
+      return { p: c.addScaledVector(n, thick(a, 0.5) + h), tg, n };
+    };
+    const kg = new RoundedBoxGeometry(0.1, 0.012, 0.052, 2, 0.005);
+    for (const a of [0.2, 0.55]) {
+      const { p, tg } = onTop(a, 0.004);
+      const m = add(pTongue, kg.clone(), matWeb);
+      m.position.copy(p);
+      m.rotation.z = Math.atan2(tg.y, tg.x);
+    }
+    keep(kg);
+    const t0 = onTop(0.86, 0.002), t1 = onTop(0.97, 0.004);
+    const pull = new THREE.CatmullRomCurve3([
+      t0.p,
+      t1.p,
+      t1.p.clone().addScaledVector(t1.tg, 0.05).addScaledVector(t1.n, 0.02),
+      t1.p.clone().addScaledVector(t1.tg, 0.035).addScaledVector(t1.n, 0.045),
+      t1.p.clone().addScaledVector(t1.tg, -0.01).addScaledVector(t1.n, 0.022),
+      t0.p.clone().addScaledVector(t0.n, 0.012),
+    ], false, 'centripetal');
+    add(pTongue, ribbon(pull, hi ? 50 : 32, 0.07, 0.009), matWeb);
   }
 
   // --- semelle intérieure (anatomique, amovible)
@@ -1090,7 +1147,7 @@ export function createSneaker({ quality = 1 } = {}) {
     add(pMid, g, matMid);
     // relief : grain de mousse + lignes moulées sur les parois
     const ctx = midHeight.getContext('2d');
-    ctx.fillStyle = ctx.createPattern(noiseTile(256, 9, 50, 0.7), 'repeat');
+    ctx.fillStyle = ctx.createPattern(noiseTile(256, 9, 22, 0.9), 'repeat');
     ctx.fillRect(0, 0, 1024, 512);
     midLines(ctx, 1024, 512, (c) => {
       c.strokeStyle = 'rgba(20,20,20,0.9)';
@@ -1099,29 +1156,32 @@ export function createSneaker({ quality = 1 } = {}) {
     matMid.normalMap = keep(toTex(heightToNormal(midHeight, 3, false), false));
     matMid.normalScale = new THREE.Vector2(0.9, 0.9);
   }
-  // Lignes moulées : une vague haute et deux chevrons, sur chaque paroi extérieure.
+  // Lignes moulées relevées sur le modèle : un éventail de trois nervures au talon,
+  // de longues rainures vers l'avant (deux côté extérieur, cinq côté intérieur).
   function midLines(ctx, W, H, style) {
     const [k0, k1, k2, k3] = midMarks;
     const wall = (side, f) => (side > 0 ? lerp(k0, k1, f) : lerp(k3, k2, f));
     const P = (side, u, f) => [u * W, H * (1 - wall(side, f))];
+    const poly = (side, pts) => {
+      ctx.beginPath();
+      pts.forEach(([u, f], i) => {
+        const [a, b] = P(side, u, f);
+        i ? ctx.lineTo(a, b) : ctx.moveTo(a, b);
+      });
+      ctx.stroke();
+    };
     for (const side of [1, -1]) {
       ctx.save();
       style(ctx);
       ctx.lineCap = 'round';
-      ctx.beginPath();
-      for (let u = 0.01, i = 0; u <= 0.99; u += 0.01, i++) {
-        const [a, b] = P(side, u, 0.74 + 0.07 * Math.sin(u * 9.5));
-        i ? ctx.lineTo(a, b) : ctx.moveTo(a, b);
+      ctx.lineJoin = 'round';
+      for (let i = 0; i < 3; i++) {
+        poly(side, [[0.004, 0.8 - 0.2 * i], [0.19 - 0.025 * i, 0.72 - 0.21 * i], [0.31 - 0.03 * i, 0.4 - 0.13 * i], [0.415 - 0.03 * i, 0.07]]);
       }
-      ctx.stroke();
-      for (const [u0, u1, u2] of [[0.04, 0.2, 0.36], [0.4, 0.58, 0.74], [0.76, 0.86, 0.96]]) {
-        ctx.beginPath();
-        const [a0, b0] = P(side, u0, 0.2);
-        const [a1, b1] = P(side, u1, 0.62);
-        const [a2, b2] = P(side, u2, 0.2);
-        ctx.moveTo(a0, b0);
-        ctx.quadraticCurveTo(a1, b1, a2, b2);
-        ctx.stroke();
+      const n = side > 0 ? 2 : 5;
+      for (let j = 0; j < n; j++) {
+        const f = side > 0 ? 0.3 + 0.28 * j : 0.16 + 0.13 * j;
+        poly(side, [[0.43 + 0.012 * j, 0.1 + 0.04 * j], [0.55, f], [0.8, f + 0.02], [0.95 - 0.015 * j, f + 0.04]]);
       }
       ctx.restore();
     }
@@ -1158,24 +1218,81 @@ export function createSneaker({ quality = 1 } = {}) {
     // la semelle pivote autour de son centre quand on la retourne
     pOut.pivot = V3(0, 0.03, 0);
   }
-  // crampons en relief : chevrons sous le pied, crampons de bord qui remontent sur le côté
+  // Crampons relevés sur la semelle du modèle : barres en chevron au talon, crampons en Y,
+  // triangles au médio-pied, crampons de bord qui remontent sur le flanc. Les deux fenêtres
+  // (talon, avant-pied) restent lisses : la semelle intermédiaire y apparaît.
+  // Placement en (u le long du pied, w en fraction de la demi-largeur, signe = côté).
+  const LUGS = [];
+  for (const sg of [1, -1]) {
+    for (let i = 0; i < 4; i++) LUGS.push({ type: 'bar', u: 0.05 + 0.042 * i, w: sg * 0.53, rot: sg * 0.62 });
+    for (const [u, w, r] of [[0.255, 0.6, 0.3], [0.36, 0.36, -0.2], [0.715, 0.5, 0.5], [0.83, 0.58, 0.1], [0.945, 0.36, 0.9]]) {
+      LUGS.push({ type: 'y', u, w: sg * w, rot: sg * r });
+    }
+    for (const [u, w, r] of [[0.425, 0.14, 0], [0.425, 0.55, 1], [0.475, 0.34, 2], [0.475, 0.74, 0.5], [0.53, 0.14, 1.5], [0.53, 0.54, 0.2],
+      [0.58, 0.32, 2.4], [0.585, 0.73, 1.2], [0.635, 0.52, 0.3], [0.66, 0.26, 1.8], [0.765, 0.34, 0.9], [0.78, 0.74, 2.2], [0.885, 0.38, 0.4]]) {
+      LUGS.push({ type: 'tri', u, w: sg * w, rot: sg * r });
+    }
+  }
+  LUGS.push({ type: 'tri', u: 0.975, w: 0, rot: PI / 2 });
   {
-    const matLug = new THREE.MeshPhysicalMaterial({ color: '#ee6a24', roughness: 0.8, sheen: 0.15 });
+    const matLug = new THREE.MeshPhysicalMaterial({ color: '#df7a55', roughness: 0.82, sheen: 0.15 });
     pOut.lugMat = matLug;
     pOut.mats.push(matLug);
     const bottomY = (x) => bevel(x) + spring(x);
     const slope = (x) => Math.atan2(bottomY(x + 0.01) - bottomY(x - 0.01), 0.02);
-    const lugs = [];
-    // chevrons sous la semelle (la cambrure reste lisse, avec le logo)
-    for (let x = X0 + 0.16; x < X1 - 0.14; x += 0.13) {
-      if (x > -0.62 && x < -0.06) continue;
-      for (const side of [1, -1]) {
-        const w = halfW(x, side);
-        for (const zf of [0.26, 0.62]) {
-          if (w * (1 - zf) < 0.1) continue;
-          lugs.push({ x, y: bottomY(x) - LUG / 2 + 0.004, z: side * w * zf, ry: side * 0.5, rz: slope(x), s: [0.13, LUG + 0.008, 0.055] });
-        }
+    // forme 2D (plan x, z) extrudée vers le bas sur la hauteur d'un crampon
+    const ext = (shape) => {
+      const g = new THREE.ExtrudeGeometry(shape, { depth: LUG - 0.004, bevelEnabled: true, bevelThickness: 0.005, bevelSize: 0.006, bevelSegments: 2, curveSegments: 6 });
+      g.rotateX(PI / 2);
+      return keep(g);
+    };
+    const star = (n, fn) => {
+      const pts = [];
+      for (let k = 0; k < 3; k++) {
+        const a = PI / 2 + (k * 2 * PI) / 3;
+        const d = [Math.cos(a), Math.sin(a)], q = [-d[1], d[0]];
+        pts.push(...fn(d, q, a));
       }
+      const s = n ? new THREE.Path() : new THREE.Shape();
+      pts.forEach(([x, y], i) => (i ? s.lineTo(x, y) : s.moveTo(x, y)));
+      s.closePath();
+      return s;
+    };
+    const RL = 0.08; // crampon en Y : trois bras épais, rainure en Y au centre
+    const yShape = star(0, (d, q, a) => [
+      [d[0] * RL - q[0] * RL * 0.5, d[1] * RL - q[1] * RL * 0.5],
+      [d[0] * RL + q[0] * RL * 0.5, d[1] * RL + q[1] * RL * 0.5],
+      [Math.cos(a + PI / 3) * RL * 0.45, Math.sin(a + PI / 3) * RL * 0.45],
+    ]);
+    const g = RL * 0.16, lg = RL * 0.64;
+    yShape.holes.push(star(1, (d, q, a) => [
+      [d[0] * lg - q[0] * g, d[1] * lg - q[1] * g],
+      [d[0] * lg + q[0] * g, d[1] * lg + q[1] * g],
+      [Math.cos(a + PI / 3) * g * 1.2, Math.sin(a + PI / 3) * g * 1.2],
+    ]));
+    const triShape = star(0, (d) => [[d[0] * 0.058, d[1] * 0.058]]);
+    const barShape = new THREE.Shape();
+    barShape.moveTo(-0.095, -0.018);
+    barShape.lineTo(0.095, -0.018);
+    barShape.lineTo(0.095, 0.018);
+    barShape.lineTo(-0.095, 0.018);
+    barShape.closePath();
+    const geos = { y: ext(yShape), tri: ext(triShape), bar: ext(barShape) };
+    const o = new THREE.Object3D();
+    for (const type of Object.keys(geos)) {
+      const list = LUGS.filter((l) => l.type === type);
+      const m = new THREE.InstancedMesh(geos[type], matLug, list.length);
+      list.forEach((l, i) => {
+        const x = X0 + l.u * L;
+        o.position.set(x, bottomY(x) + 0.001, l.w * halfW(x, l.w >= 0 ? 1 : -1));
+        o.rotation.set(0, l.rot, slope(x), 'ZYX');
+        o.scale.set(1, 1, 1);
+        o.updateMatrix();
+        m.setMatrixAt(i, o.matrix);
+      });
+      m.castShadow = true;
+      m.receiveShadow = true;
+      pOut.group.add(m);
     }
     // crampons de bord, à pas régulier le long du contour
     const ring = [];
@@ -1187,24 +1304,26 @@ export function createSneaker({ quality = 1 } = {}) {
       const x = X0 + ((1 - Math.cos(PI * sN)) / 2) * L;
       ring.push(V3(x, 0, (lat ? 1 : -1) * halfW(x, lat ? 1 : -1) * 1.012));
     }
-    let acc = 0.05;
+    const edge = [];
+    let acc = 0.09;
     for (let i = 0; i < N; i++) {
       const p = ring[i], q = ring[(i + 1) % N];
       acc += p.distanceTo(q);
-      if (acc < 0.118) continue;
+      if (acc < 0.185) continue;
       acc = 0;
       const prev = ring[(i + N - 1) % N];
       const tx = q.x - prev.x, tz = q.z - prev.z, l = Math.hypot(tx, tz) || 1;
       const nx = -tz / l, nz = tx / l; // normale extérieure
-      const arch = p.z < 0 && p.x > -0.62 && p.x < -0.08 ? 0.7 : 1;
-      lugs.push({ x: p.x + nx * 0.008, y: bottomY(p.x) - LUG + (LUG + 0.05) / 2, z: p.z + nz * 0.008, ry: -Math.atan2(tz, tx), rz: 0, s: [0.085 * arch, (LUG + 0.05) * (arch < 1 ? 0.85 : 1), 0.08] });
+      const arch = p.z < 0 && p.x > -0.62 && p.x < -0.08 ? 0.75 : 1;
+      // part du crampon qui remonte sur le flanc : davantage au talon et à la pointe
+      const up = 0.018 + 0.05 * Math.max(smooth(-0.9, -1.4, p.x), smooth(0.9, 1.4, p.x));
+      edge.push({ x: p.x - nx * 0.006, y: bottomY(p.x) - LUG + (LUG + up) / 2, z: p.z - nz * 0.006, ry: -Math.atan2(tz, tx), s: [0.158 * arch, LUG + up, 0.05] });
     }
-    const geo = keep(new RoundedBoxGeometry(1, 1, 1, 2, 0.22));
-    const m = new THREE.InstancedMesh(geo, matLug, lugs.length);
-    const o = new THREE.Object3D();
-    lugs.forEach((l, i) => {
+    const geo = keep(new RoundedBoxGeometry(1, 1, 1, 2, 0.2));
+    const m = new THREE.InstancedMesh(geo, matLug, edge.length);
+    edge.forEach((l, i) => {
       o.position.set(l.x, l.y, l.z);
-      o.rotation.set(0, l.ry, l.rz, 'YXZ');
+      o.rotation.set(0, l.ry, 0);
       o.scale.set(...l.s);
       o.updateMatrix();
       m.setMatrixAt(i, o.matrix);
@@ -1269,243 +1388,217 @@ export function createSneaker({ quality = 1 } = {}) {
     return makeGeometry(pos, uv, idx);
   }
 
-  // --- contrefort de talon
-  const counterColor = makeCanvas(1024, 256);
-  const counterHeight = makeCanvas(1024, 256);
-  const matCounter = new THREE.MeshPhysicalMaterial({ map: keep(toTex(counterColor, true)), normalMap: keep(toTex(heightToNormal(drawCounterHeight(), 2.5, false), false)), roughness: 0.42, clearcoat: 0.35, clearcoatRoughness: 0.35 });
-  const pHeel = part('heel', V3(-1.52, 0.66, 0), V3(-0.55, 0.06, 0));
-  const TH_H = thetaAt(-0.78, 1); // étendue du contrefort de chaque côté
+  // Les renforts gardent le repère de la tige : u = position autour du pied, v = t.
+  // Leurs textures se dessinent donc avec les mêmes coordonnées (x, côté, v) que la tige.
+  const signedU = (theta) => (theta >= 0 ? arcU(theta) : arcU(1 + theta) - 1);
+
+  // --- contrefort de talon : coque anthracite au bord en diagonale, bande orange zébrée
+  const XF_H = -0.2; // pointe avant du contrefort, au ras de la semelle
+  const hTop = (x) => 0.56 * clamp((XF_H - x) / (XF_H + 1.25)) + 0.03 * smooth(-1.25, -1.41, x);
+  const hBand = (x) => 0.29 * clamp((-0.46 - x) / (-0.46 + 1.25)) + 0.02 * smooth(-1.25, -1.41, x);
+  const TH_HL = thetaAt(XF_H, 1), TH_HM = 1 - thetaAt(XF_H, -1);
   const heelFn = (a, b) => {
     const s = a * 2 - 1; // -1 intérieur, 1 extérieur
-    const theta = s * TH_H;
-    const e = 1 - Math.abs(s);
-    const top = 0.18 + 0.62 * Math.pow(Math.sin((PI / 2) * Math.min(1, e / 0.95)), 0.8) - 0.06 * Math.abs(s);
-    const bot = 0.02;
-    return { theta, t: lerp(bot, Math.max(bot + 0.02, top), b) };
+    const theta = s >= 0 ? s * TH_HL : s * TH_HM;
+    const { x } = perim(theta);
+    return { theta, t: lerp(0.02, Math.max(0.03, tv(hTop(x))), b) };
   };
-  add(pHeel, shell(heelFn, hi ? 90 : 60, hi ? 18 : 12, 0.004, 0.026, (a, b) => [a, b]), matCounter);
-  function drawCounterHeight() {
-    const c = counterHeight, ctx = c.getContext('2d');
-    ctx.fillStyle = ctx.createPattern(grainH, 'repeat');
-    ctx.fillRect(0, 0, c.width, c.height);
-    // piqûre le long du bord haut
-    ctx.save();
-    ctx.strokeStyle = 'rgba(0,0,0,0.45)';
-    ctx.lineWidth = 5;
-    ctx.beginPath();
-    ctx.moveTo(0, c.height * 0.1);
-    ctx.lineTo(c.width, c.height * 0.1);
-    ctx.stroke();
-    ctx.strokeStyle = '#fff';
-    ctx.lineWidth = 2.2;
-    ctx.setLineDash([10, 7]);
-    ctx.stroke();
-    ctx.restore();
-    // 13 en relief au centre du talon
-    ctx.fillStyle = '#ffffff';
-    ctx.font = `800 ${Math.round(c.height * 0.36)}px Archivo, Arial, sans-serif`;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.save();
-    ctx.translate(c.width / 2, c.height * 0.5);
-    ctx.scale(0.75, 1);
-    ctx.fillText('13', 0, 0);
-    ctx.restore();
-    crownPath(ctx, c.width / 2, c.height * 0.22, c.height * 0.12);
-    ctx.fill();
-    return c;
-  }
-  function drawCounterColor(cw) {
-    const c = counterColor, ctx = c.getContext('2d'), W = c.width, H = c.height;
+  const UH0 = signedU(-TH_HM) - 0.01, UH1 = signedU(TH_HL) + 0.01;
+  const heelUV = (a, b) => {
+    const { theta, t } = heelFn(a, b);
+    return [(signedU(theta) - UH0) / (UH1 - UH0), t];
+  };
+  const hpx = (c, x, side, v) => [((signedU(side > 0 ? thetaAt(x, 1) : thetaAt(x, -1) - 1) - UH0) / (UH1 - UH0)) * c.width, (1 - tv(v)) * c.height];
+  const counterColor = makeCanvas(hi ? 2048 : 1024, hi ? 512 : 256);
+  const matCounter = new THREE.MeshPhysicalMaterial({ map: keep(toTex(counterColor, true)), normalMap: shellGrainN, normalScale: new THREE.Vector2(0.5, 0.5), roughness: 0.52, clearcoat: 0.25, clearcoatRoughness: 0.4 });
+  const pHeel = part('heel', V3(-1.52, 0.66, 0), V3(-0.55, 0.06, 0));
+  add(pHeel, shell(heelFn, hi ? 110 : 70, hi ? 18 : 12, 0.004, 0.024, heelUV), matCounter);
+  function drawCounter(c, cw) {
+    const ctx = c.getContext('2d'), W = c.width, H = c.height;
+    const k = W / 2048;
+    const P = (x, side, v) => hpx(c, x, side, v);
+    const path = (side, x0, x1, vFn) => {
+      ctx.beginPath();
+      for (let x = x0, i = 0; x <= x1 + 1e-6; x += 0.01, i++) {
+        const [a, b] = P(x, side, vFn(x));
+        i ? ctx.lineTo(a, b) : ctx.moveTo(a, b);
+      }
+    };
     ctx.fillStyle = cw.counter;
     ctx.fillRect(0, 0, W, H);
-    // bandes d'accent vers l'avant, de chaque côté (a = 0 intérieur, 1 extérieur)
-    ctx.save();
-    ctx.strokeStyle = cw.accent;
-    ctx.lineCap = 'round';
-    for (const a of [0.16, 0.24, 0.76, 0.84]) {
-      ctx.lineWidth = W * 0.022;
-      ctx.beginPath();
-      ctx.moveTo(W * (a - 0.03), H * 0.95);
-      ctx.lineTo(W * (a + 0.03), H * 0.2);
-      ctx.stroke();
-    }
-    ctx.restore();
-    ctx.save();
-    ctx.strokeStyle = shadeHex(cw.counter, 0.35);
-    ctx.lineWidth = 2.2;
-    ctx.setLineDash([10, 7]);
-    ctx.beginPath();
-    ctx.moveTo(0, H * 0.1);
-    ctx.lineTo(W, H * 0.1);
-    ctx.stroke();
-    ctx.restore();
-    ctx.fillStyle = cw.accent;
-    ctx.font = `800 ${Math.round(H * 0.36)}px Archivo, Arial, sans-serif`;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.save();
-    ctx.translate(W / 2, H * 0.5);
-    ctx.scale(0.75, 1);
-    ctx.fillText('13', 0, 0);
-    ctx.restore();
-    crownPath(ctx, W / 2, H * 0.22, H * 0.12);
-    ctx.fill();
-    ctx.save();
-    ctx.translate(W * 0.64, H * 0.55);
-    ctx.fillStyle = cw.badgeInk;
-    ctx.globalAlpha = 0.85;
-    ctx.font = `700 ${Math.round(H * 0.1)}px Archivo, Arial, sans-serif`;
-    ctx.textAlign = 'center';
-    ctx.fillText('TLEMCENI', 0, 0);
-    ctx.restore();
-  }
-
-  // --- bout renforcé (pare-pierre)
-  const toeColor = makeCanvas(1024, 256);
-  const matToe = new THREE.MeshPhysicalMaterial({ map: keep(toTex(toeColor, true)), normalMap: grainN, normalScale: new THREE.Vector2(0.6, 0.6), roughness: 0.6, clearcoat: 0.15, clearcoatRoughness: 0.5 });
-  const pToe = part('toe', V3(1.56, 0.36, 0), V3(0.52, 0.02, 0));
-  const TH_T = 0.5 - thetaAt(0.78, 1);
-  const toeFn = (a, b) => {
-    const s = a * 2 - 1;
-    const theta = 0.5 + s * TH_T;
-    const e = 1 - Math.abs(s);
-    const top = 0.14 + 0.3 * Math.pow(Math.sin((PI / 2) * Math.min(1, e / 0.9)), 1.2);
-    return { theta, t: lerp(0.02, top, b) };
-  };
-  add(pToe, shell(toeFn, hi ? 80 : 50, hi ? 12 : 8, 0.004, 0.02, (a, b) => [a, b]), matToe);
-  function drawToe(cw) {
-    const c = toeColor, ctx = c.getContext('2d'), W = c.width, H = c.height;
-    ctx.fillStyle = cw.toe;
-    ctx.fillRect(0, 0, W, H);
-    // perforations sur le dessus du bout
-    ctx.fillStyle = shadeHex(cw.toe, lum(cw.toe) > 0.3 ? -0.3 : 0.28);
-    for (let x = 0.3, r = 0; x <= 0.7; x += 0.018, r++) {
-      for (let y = 0.25; y <= 0.62; y += 0.07) {
+    for (const side of [1, -1]) {
+      // bande orange entre deux diagonales
+      path(side, -1.42, XF_H, (x) => hTop(x) + 0.04);
+      for (let x = XF_H; x >= -1.42 - 1e-6; x -= 0.01) {
+        const [a, b] = P(x, side, x > -0.46 ? -0.06 : hBand(x));
+        ctx.lineTo(a, b);
+      }
+      ctx.closePath();
+      ctx.fillStyle = cw.accent;
+      ctx.fill();
+      // deux traits anthracite dans la bande
+      const mid = (x) => lerp(hBand(x), hTop(x), 0.6);
+      for (const [xa, xb] of [[-1.13, -0.95], [-0.74, -0.57]]) {
         ctx.beginPath();
-        ctx.arc(W * (x + (Math.round(y * 100) % 2 ? 0.009 : 0)), H * y, W * 0.0035, 0, PI * 2);
+        [[xa, hBand(xa) - 0.01], [xb, hBand(xb) - 0.01], [xb + 0.08, mid(xb + 0.08)], [xa + 0.08, mid(xa + 0.08)]].forEach(([x, v], i) => {
+          const [a, b] = P(x, side, v);
+          i ? ctx.lineTo(a, b) : ctx.moveTo(a, b);
+        });
+        ctx.closePath();
+        ctx.fillStyle = cw.counter;
         ctx.fill();
       }
+      // piqûres : bord haut du contrefort et bas de la bande
+      for (const [x1, vFn] of [[XF_H - 0.04, (x) => hTop(x) - 0.035], [-0.51, (x) => hBand(x) + 0.03]]) {
+        ctx.save();
+        path(side, -1.42, x1, vFn);
+        ctx.setLineDash([16 * k, 11 * k]);
+        ctx.strokeStyle = shadeHex(cw.accent, -0.3);
+        ctx.lineWidth = 2.6 * k;
+        ctx.stroke();
+        ctx.restore();
+      }
     }
+    // petit monogramme blanc à l'arrière de la bande, côté extérieur
+    const [a, b] = P(-1.2, 1, lerp(hBand(-1.2), hTop(-1.2), 0.5));
     ctx.save();
-    ctx.strokeStyle = shadeHex(cw.toe, 0.35);
-    ctx.lineWidth = 2.2;
-    ctx.setLineDash([10, 7]);
-    ctx.beginPath();
-    ctx.moveTo(0, H * 0.12);
-    ctx.lineTo(W, H * 0.12);
-    ctx.stroke();
+    ctx.translate(a, b);
+    ctx.fillStyle = cw.mark;
+    ctx.globalAlpha = 0.9;
+    crownPath(ctx, 0, -H * 0.045, H * 0.045);
+    ctx.fill();
+    ctx.font = `800 ${Math.round(H * 0.07)}px Archivo, Arial, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('13', 0, H * 0.02);
     ctx.restore();
   }
 
-  // --- badge « 13 » (côté extérieur)
-  const badgeColor = makeCanvas(512, 512);
-  const badgeHeight = makeCanvas(256, 256);
-  const matBadge = new THREE.MeshPhysicalMaterial({ map: keep(toTex(badgeColor, true)), roughness: 0.38, clearcoat: 0.6, clearcoatRoughness: 0.25 });
-  const pBadge = part('badge', V3(-0.6, 0.58, 0.47), V3(0.05, 0.12, 0.55));
-  {
-    const thC = thetaAt(-0.6, 1), tC = 0.42;
-    const pc = upperPoint(thC, tC);
-    const dth = (0.13 / upperPoint(thC + 0.01, tC).distanceTo(pc)) * 0.01;
-    const dt = (0.13 / upperPoint(thC, tC + 0.02).distanceTo(pc)) * 0.02;
-    const fn = (a, b) => ({ theta: thC + Math.cos(a * PI * 2) * b * dth, t: tC + Math.sin(a * PI * 2) * b * dt });
-    const uvFn = (a, b) => [0.5 + 0.5 * b * Math.cos(a * PI * 2), 0.5 + 0.5 * b * Math.sin(a * PI * 2)];
-    const g = shell(fn, hi ? 48 : 32, hi ? 10 : 6, 0.006, 0.03, uvFn, [false, true, false, false]);
-    add(pBadge, g, matBadge);
-    const ctx = badgeHeight.getContext('2d');
-    ctx.fillStyle = '#000';
-    ctx.fillRect(0, 0, 256, 256);
-    matBadge.normalMap = keep(toTex(heightToNormal(drawBadge(badgeHeight, { badge: '#000', badgeInk: '#fff' }, true), 3, false), false));
-  }
-  function drawBadge(c, cw, height = false) {
-    const ctx = c.getContext('2d'), s = c.width;
-    ctx.fillStyle = cw.badge;
-    ctx.fillRect(0, 0, s, s);
-    // le badge est vu depuis l'extérieur : texte dans le bon sens côté latéral
-    ctx.save();
-    ctx.translate(s / 2, s / 2);
-    ctx.scale(1, -1);
-    ctx.rotate(0);
-    ctx.strokeStyle = cw.badgeInk;
-    ctx.lineWidth = s * 0.03;
-    ctx.beginPath();
-    ctx.arc(0, 0, s * 0.4, 0, PI * 2);
-    ctx.stroke();
-    ctx.fillStyle = cw.badgeInk;
-    ctx.font = `800 ${Math.round(s * 0.36)}px Archivo, Arial, sans-serif`;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.scale(-1, 1);
-    ctx.scale(-1, -1);
-    ctx.save();
-    ctx.scale(0.82, 1);
-    ctx.fillText('13', 0, s * 0.06);
-    ctx.restore();
-    crownPath(ctx, 0, -s * 0.2, s * 0.17);
-    ctx.fill();
-    ctx.restore();
-    if (height) {
-      const blur = makeCanvas(s, s), b = blur.getContext('2d');
-      b.filter = 'blur(1.2px)';
-      b.drawImage(c, 0, 0);
-      return blur;
+  // --- pare-pierre : bout anthracite perforé, bord festonné
+  const XF_T = 0.86;
+  const tTop = (x) => clamp(0.8 * smooth(XF_T, 1.02, x) + 0.12 * smooth(1.05, 1.38, x) + 0.022 * Math.sin((x - 1.0) * 30) * smooth(1.0, 1.08, x) * (1 - smooth(1.26, 1.36, x)));
+  const TH_TL = 0.5 - thetaAt(XF_T, 1), TH_TM = thetaAt(XF_T, -1) - 0.5;
+  const toeFn = (a, b) => {
+    const s = a * 2 - 1; // -1 extérieur, 1 intérieur
+    const theta = 0.5 + (s < 0 ? s * TH_TL : s * TH_TM);
+    const { x } = perim(theta);
+    return { theta, t: lerp(0.02, Math.max(0.03, tv(tTop(x))), b) };
+  };
+  const UT0 = arcU(0.5 - TH_TL) - 0.01, UT1 = arcU(0.5 + TH_TM) + 0.01;
+  const toeUV = (a, b) => {
+    const { theta, t } = toeFn(a, b);
+    return [(arcU(theta) - UT0) / (UT1 - UT0), t];
+  };
+  const tpx = (c, x, side, v) => [((arcU(thetaAt(x, side)) - UT0) / (UT1 - UT0)) * c.width, (1 - tv(v)) * c.height];
+  const toeColor = makeCanvas(hi ? 2048 : 1024, hi ? 512 : 256);
+  const matToe = new THREE.MeshPhysicalMaterial({ map: keep(toTex(toeColor, true)), normalMap: shellGrainN, normalScale: new THREE.Vector2(0.5, 0.5), roughness: 0.55, clearcoat: 0.2, clearcoatRoughness: 0.45 });
+  const pToe = part('toe', V3(1.56, 0.36, 0), V3(0.52, 0.02, 0));
+  add(pToe, shell(toeFn, hi ? 90 : 60, hi ? 16 : 10, 0.004, 0.02, toeUV), matToe);
+  function drawToe(cw) {
+    const c = toeColor, ctx = c.getContext('2d'), W = c.width, H = c.height;
+    const k = W / 2048;
+    const P = (x, side, v) => tpx(c, x, side, v);
+    ctx.fillStyle = cw.toe;
+    ctx.fillRect(0, 0, W, H);
+    for (const side of [1, -1]) {
+      // double piqûre le long du bord festonné
+      for (const dv of [0.035, 0.07]) {
+        ctx.save();
+        ctx.beginPath();
+        for (let x = XF_T + 0.05, i = 0; x <= 1.42; x += 0.006, i++) {
+          const [a, b] = P(x, side, tTop(x) - dv);
+          i ? ctx.lineTo(a, b) : ctx.moveTo(a, b);
+        }
+        ctx.setLineDash([14 * k, 10 * k]);
+        ctx.strokeStyle = shadeHex(cw.toe, lum(cw.toe) > 0.3 ? -0.3 : 0.3);
+        ctx.lineWidth = 2.4 * k;
+        ctx.stroke();
+        ctx.restore();
+      }
+      // perforations d'aération sur le flanc du bout
+      for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 2; j++) {
+          const [a, b] = P(1.1 + i * 0.05 + j * 0.025, side, 0.42 + j * 0.13);
+          ctx.beginPath();
+          ctx.arc(a, b, 6.5 * k, 0, PI * 2);
+          ctx.fillStyle = '#0b0b0c';
+          ctx.fill();
+          ctx.strokeStyle = shadeHex(cw.toe, 0.18);
+          ctx.lineWidth = 2 * k;
+          ctx.stroke();
+        }
+      }
     }
-    return c;
   }
 
   /* ---------------- décor des textures selon le coloris ---------------- */
   function drawTongue(cw) {
     const c = tongueColor, ctx = c.getContext('2d'), W = c.width, H = c.height;
-    ctx.fillStyle = cw.tongue;
+    // maille respirante (u = travers, v = long ; le haut de la languette est en haut du canvas)
+    ctx.fillStyle = ctx.createPattern(netTile(W * 0.05, cw.tongue, cw.perf), 'repeat');
     ctx.fillRect(0, 0, W, H);
-    // étiquette tissée en haut de la languette (u = travers, v = long)
-    const y0 = H * (1 - 0.93), y1 = H * (1 - 0.78);
-    ctx.fillStyle = cw.label;
-    ctx.fillRect(W * 0.3, y0, W * 0.4, y1 - y0);
+    // bords gansés
+    ctx.fillStyle = cw.skin;
+    ctx.fillRect(0, 0, W * 0.05, H);
+    ctx.fillRect(W * 0.95, 0, W * 0.05, H);
+    // renfort lisse en haut de la languette, porte le monogramme
+    const y1 = H * 0.3;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(W, 0);
+    ctx.lineTo(W, y1 - H * 0.04);
+    ctx.quadraticCurveTo(W / 2, y1 + H * 0.05, 0, y1 - H * 0.04);
+    ctx.closePath();
+    ctx.fill();
     ctx.save();
-    ctx.translate(W / 2, (y0 + y1) / 2);
+    ctx.setLineDash([9, 7]);
+    ctx.strokeStyle = cw.thread;
+    ctx.lineWidth = 2.2;
+    ctx.beginPath();
+    ctx.moveTo(0, y1 - H * 0.055);
+    ctx.quadraticCurveTo(W / 2, y1 + H * 0.035, W, y1 - H * 0.055);
+    ctx.stroke();
+    ctx.strokeRect(W * 0.07, H * 0.01, W * 0.86, H * 0.97);
+    ctx.restore();
+    ctx.save();
+    ctx.translate(W / 2, H * 0.19);
     ctx.rotate(PI);
-    ctx.fillStyle = cw.badgeInk;
+    ctx.fillStyle = cw.label;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.font = `400 ${Math.round(W * 0.085)}px "Aref Ruqaa", serif`;
-    ctx.fillText('التلمساني', 0, -H * 0.018);
-    ctx.font = `800 ${Math.round(W * 0.04)}px Archivo, Arial, sans-serif`;
-    ctx.fillText('TLEMCENI · 13', 0, H * 0.04);
-    ctx.restore();
-    // bord surpiqué
-    ctx.save();
-    ctx.strokeStyle = cw.thread;
-    ctx.lineWidth = 2;
-    ctx.setLineDash([8, 6]);
-    ctx.strokeRect(W * 0.06, H * 0.02, W * 0.88, H * 0.9);
+    crownPath(ctx, 0, -H * 0.03, W * 0.1);
+    ctx.fill();
+    ctx.font = `800 ${Math.round(W * 0.09)}px Archivo, Arial, sans-serif`;
+    ctx.fillText('13', 0, H * 0.018);
     ctx.restore();
   }
   function drawInsole(cw) {
     const c = insoleColor, ctx = c.getContext('2d'), W = c.width, H = c.height;
     ctx.fillStyle = cw.insole;
     ctx.fillRect(0, 0, W, H);
-    // zones anatomiques discrètes
-    ctx.fillStyle = 'rgba(255,255,255,0.05)';
-    for (let i = 0; i < 26; i++) {
-      for (let j = 0; j < 9; j++) {
-        const x = W * (0.45 + i * 0.02), y = H * (0.12 + j * 0.095) + (i % 2 ? H * 0.045 : 0);
-        ctx.beginPath();
-        ctx.arc(x, y, W * 0.0045, 0, PI * 2);
-        ctx.fill();
-      }
-    }
-    // logo au talon : lisible depuis le dessus, pointe vers la droite
+    // tissu de propreté : fines côtes
+    ctx.fillStyle = 'rgba(255,255,255,0.035)';
+    for (let y = 0; y < H; y += 4) ctx.fillRect(0, y, W, 1.5);
+    // marquage blanc, lisible depuis le dessus, pointe vers la droite
     ctx.save();
-    ctx.translate(W * 0.2, H * 0.5);
+    ctx.translate(W * 0.34, H * 0.5);
     ctx.scale(1, -1);
     ctx.fillStyle = cw.insoleInk;
+    ctx.strokeStyle = cw.insoleInk;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.font = `400 ${Math.round(H * 0.3)}px "Aref Ruqaa", serif`;
-    ctx.fillText('التلمساني', 0, -H * 0.06);
-    ctx.font = `800 ${Math.round(H * 0.1)}px Archivo, Arial, sans-serif`;
-    ctx.fillText('TLEMCENI · 13', 0, H * 0.2);
+    ctx.font = `400 ${Math.round(H * 0.2)}px "Aref Ruqaa", serif`;
+    ctx.fillText('التلمساني', 0, -H * 0.1);
+    ctx.font = `800 ${Math.round(H * 0.075)}px Archivo, Arial, sans-serif`;
+    ctx.fillText('TLEMCENI', 0, H * 0.1);
+    // pointure dans un cercle, comme sur le modèle
+    ctx.translate(W * 0.13, 0);
+    ctx.lineWidth = H * 0.012;
+    ctx.beginPath();
+    ctx.arc(0, 0, H * 0.075, 0, PI * 2);
+    ctx.stroke();
+    ctx.font = `700 ${Math.round(H * 0.075)}px Archivo, Arial, sans-serif`;
+    ctx.fillText('40', 0, H * 0.004);
     ctx.restore();
   }
   function drawMidsole(cw) {
@@ -1514,69 +1607,65 @@ export function createSneaker({ quality = 1 } = {}) {
     ctx.fillRect(0, 0, W, H);
     midLines(ctx, W, H, (x) => {
       x.strokeStyle = cw.midLine;
-      x.lineWidth = H * 0.012;
+      x.lineWidth = H * 0.009;
     });
   }
+  // fenêtres lisses sous la semelle, en (u, w) comme les crampons
+  const HEEL_WIN = [[-0.02, 0.17], [0.17, 0.15], [0.24, 0.33], [0.35, 0], [0.24, -0.33], [0.17, -0.15], [-0.02, -0.17]];
+  const FORE_WIN = [[0.51, 0], [0.87, 0.28], [0.945, 0], [0.87, -0.28]];
   function drawOutsole(cw) {
     const c = outColor, ctx = c.getContext('2d'), W = c.width, H = c.height;
     ctx.fillStyle = cw.outsole;
     ctx.fillRect(0, 0, W, H);
-    const X = (x) => ((x - X0) / L) * W, Z = (z) => ((z + 0.6) / 1.2) * H;
-    // contour de la semelle (vue de dessous)
-    const outline = () => {
+    const UW = (u, w) => {
+      const x = X0 + u * L;
+      return [((x - X0) / L) * W, ((w * halfW(x, w >= 0 ? 1 : -1) + 0.6) / 1.2) * H];
+    };
+    const poly = (pts) => {
       ctx.beginPath();
-      for (let i = 0; i <= 120; i++) {
-        const x = X0 + (i / 120) * L;
-        const z = halfW(x, 1) - 0.035;
-        i ? ctx.lineTo(X(x), Z(z)) : ctx.moveTo(X(x), Z(Math.max(0, z)));
-      }
-      for (let i = 120; i >= 0; i--) {
-        const x = X0 + (i / 120) * L;
-        ctx.lineTo(X(x), Z(-(halfW(x, -1) - 0.035)));
-      }
+      pts.forEach(([u, w], i) => {
+        const [a, b] = UW(u, w);
+        i ? ctx.lineTo(a, b) : ctx.moveTo(a, b);
+      });
       ctx.closePath();
     };
-    ctx.save();
-    outline();
-    ctx.clip();
-    const light = shade(cw.outsole, 0.22), dark = shade(cw.outsole, -0.35);
-    // crampons en chevrons
-    ctx.strokeStyle = dark;
-    ctx.lineWidth = W * 0.006;
-    for (let x = -1.45; x < 1.5; x += 0.075) {
-      if (x > -0.62 && x < -0.05) continue;
+    // grain de la gomme
+    ctx.fillStyle = 'rgba(0,0,0,0.05)';
+    const r = rng(5);
+    for (let i = 0; i < 6000; i++) ctx.fillRect(r() * W, r() * H, 2, 2);
+    // rainures de flexion
+    ctx.strokeStyle = shade(cw.outsole, -0.2);
+    ctx.lineWidth = W * 0.0035;
+    for (const u of [0.405, 0.625, 0.9]) {
       ctx.beginPath();
-      ctx.moveTo(X(x - 0.05), Z(-0.6));
-      ctx.lineTo(X(x + 0.03), Z(0));
-      ctx.lineTo(X(x - 0.05), Z(0.6));
+      for (let w = -1, i = 0; w <= 1.001; w += 0.05, i++) {
+        const [a, b] = UW(u + 0.025 * (1 - w * w), w);
+        i ? ctx.lineTo(a, b) : ctx.moveTo(a, b);
+      }
       ctx.stroke();
     }
-    // lignes de flexion
-    ctx.strokeStyle = shade(cw.outsole, -0.5);
-    ctx.lineWidth = W * 0.004;
-    for (const x of [0.45, 0.72, 0.98]) {
-      ctx.beginPath();
-      ctx.moveTo(X(x), Z(-0.6));
-      ctx.lineTo(X(x + 0.04), Z(0.6));
+    // fenêtres : la semelle intermédiaire apparaît, avec une facette plus claire
+    for (const win of [HEEL_WIN, FORE_WIN]) {
+      poly(win);
+      ctx.fillStyle = cw.window;
+      ctx.fill();
+      ctx.strokeStyle = shade(cw.outsole, -0.35);
+      ctx.lineWidth = W * 0.004;
       ctx.stroke();
+      const cu = win.reduce((s, p) => s + p[0], 0) / win.length;
+      poly(win.map(([u, w]) => [cu + (u - cu) * 0.55, w * 0.45]));
+      ctx.fillStyle = shade(cw.window, 0.08);
+      ctx.fill();
     }
-    // zone centrale lisse avec logo
-    ctx.fillStyle = shade(cw.outsole, 0.06);
-    ctx.beginPath();
-    ctx.ellipse(X(-0.34), Z(0.02), W * 0.11, H * 0.3, 0, 0, PI * 2);
-    ctx.fill();
+    // marquage discret dans la fenêtre avant
+    const [a, b] = UW(0.8, 0);
     ctx.save();
-    ctx.translate(X(-0.34), Z(0.02));
-    ctx.fillStyle = light;
+    ctx.translate(a, b);
+    ctx.fillStyle = shade(cw.window, 0.2);
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.font = `800 ${Math.round(H * 0.24)}px Archivo, Arial, sans-serif`;
-    ctx.fillText('13', 0, H * 0.03);
-    crownPath(ctx, 0, -H * 0.15, H * 0.1);
-    ctx.fill();
-    ctx.font = `700 ${Math.round(H * 0.045)}px Archivo, Arial, sans-serif`;
-    ctx.fillText('TLEMCENI', 0, H * 0.19);
-    ctx.restore();
+    ctx.font = `800 ${Math.round(H * 0.045)}px Archivo, Arial, sans-serif`;
+    ctx.fillText('TLEMCENI', 0, 0);
     ctx.restore();
   }
   function shade(hex, k) {
@@ -1587,17 +1676,16 @@ export function createSneaker({ quality = 1 } = {}) {
   }
 
   // `which` : nom d'un coloris intégré, ou palette { mesh, skin, line, accent, ... } venue de l'admin
+  const xrayTint = new THREE.Color();
   function setColorway(which) {
     const base = typeof which === 'string' ? COLORWAYS[which] || COLORWAYS.trail : which || COLORWAYS.trail;
     const cw = derive(base);
     drawUpper(cw, 'color');
     upperMap.needsUpdate = true;
-    drawCounterColor(cw);
+    drawCounter(counterColor, cw);
     matCounter.map.needsUpdate = true;
     drawToe(cw);
     matToe.map.needsUpdate = true;
-    drawBadge(badgeColor, cw);
-    matBadge.map.needsUpdate = true;
     drawTongue(cw);
     matTongue.map.needsUpdate = true;
     drawInsole(cw);
@@ -1612,6 +1700,8 @@ export function createSneaker({ quality = 1 } = {}) {
     matLaces.color.set(cw.laces);
     matEyelet.color.set(cw.eyelet);
     matTab.color.set(cw.tab);
+    matWeb.color.set(cw.web);
+    xrayTint.set(cw.accent);
     parts.laces.agletMat.color.set(shade(cw.laces, -0.12));
     for (const p of Object.values(parts)) for (const m of p.mats) m.userData.base = m.color.clone();
     for (const p of Object.values(parts)) p.group.userData.dim = -1; // force la réapplication de l'atténuation
@@ -1658,7 +1748,7 @@ export function createSneaker({ quality = 1 } = {}) {
       }
       m.opacity = 1 - x * 0.86;
     }
-    matLining.emissive.set(matLining.color).multiplyScalar(x * 0.35);
+    matLining.emissive.copy(xrayTint).multiplyScalar(x * 0.5);
     up.lining.renderOrder = tr ? -1 : 0;
   }
 

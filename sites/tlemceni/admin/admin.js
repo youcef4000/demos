@@ -77,8 +77,8 @@ const STEPS = [
 ];
 
 const PALETTE = [
-  ['mesh', 'Mesh (panneaux)'], ['skin', 'Tige (renfort clair)'], ['line', 'Lignes, bout, col'], ['accent', 'Accent (bande, logo)'],
-  ['midsole', 'Semelle intermédiaire'], ['outsole', 'Crampons'], ['laces', 'Lacets'], ['lining', 'Doublure'],
+  ['mesh', 'Mesh (fentes, avant-pied)'], ['skin', 'Tige (renforts lisses)'], ['line', 'Talon, bout, col, lignes'], ['accent', 'Bande du talon'],
+  ['midsole', 'Semelle intermédiaire'], ['outsole', 'Semelle et crampons'], ['laces', 'Lacets'], ['lining', 'Doublure et semelle intérieure'],
 ];
 
 const IMAGES = [
