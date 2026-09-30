@@ -103,6 +103,7 @@ export function createScene(canvas, { mobile = false, reducedMotion = false } = 
     ry: -0.5, rx: 0, rz: 0, lift: 0.45, // chaussure
     azim: 0.32, elev: 0.28, dist: 7.2, tx: 0, ty: 0.42, tz: 0, // caméra
     sx: 0, sy: 0, // décalage à l'écran (fraction de la largeur / hauteur)
+    syM: 0, mob: 1, // sur écran étroit : décalage vertical et recul de la caméra
     shadow: 1, spin: 0,
     ilift: 0, iry: 0, // décalages de l'animation d'entrée
   };
@@ -120,9 +121,10 @@ export function createScene(canvas, { mobile = false, reducedMotion = false } = 
   resize();
 
   // Distance de caméra qui garde la chaussure entière, quel que soit le format d'écran.
+  const narrow = () => W < 900;
   function fitDistance(d) {
     const a = camera.aspect;
-    const k = mobile ? 0.95 : 1.45;
+    const k = narrow() ? 0.95 : 1.45;
     return a < k ? d * Math.pow(k / a, 0.92) : d;
   }
 
@@ -136,7 +138,8 @@ export function createScene(canvas, { mobile = false, reducedMotion = false } = 
     holder.position.set(0, view.lift + view.ilift + bob, 0);
     holder.rotation.set(view.rx + pointer.sy * 0.06, view.ry + view.iry + pointer.sx * 0.14 + (reducedMotion ? 0 : Math.sin(time * 0.5) * 0.08 * view.spin), view.rz);
     sneaker.update(state);
-    const d = fitDistance(view.dist);
+    const nar = narrow();
+    const d = fitDistance(view.dist * (nar ? view.mob : 1));
     target.set(view.tx, view.ty, view.tz);
     camera.position.set(
       target.x + d * Math.cos(view.elev) * Math.sin(view.azim),
@@ -144,7 +147,8 @@ export function createScene(canvas, { mobile = false, reducedMotion = false } = 
       target.z + d * Math.cos(view.elev) * Math.cos(view.azim),
     );
     camera.lookAt(target);
-    if (view.sx || view.sy) camera.setViewOffset(W, H, -view.sx * W, view.sy * H, W, H);
+    const sx = nar ? 0 : view.sx, sy = nar ? view.syM : view.sy;
+    if (sx || sy) camera.setViewOffset(W, H, -sx * W, sy * H, W, H);
     else camera.clearViewOffset();
     contact.material.opacity = 0.85 * view.shadow;
     floor.material.opacity = 0.32 * view.shadow;

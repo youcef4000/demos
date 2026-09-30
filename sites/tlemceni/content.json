@@ -1,0 +1,931 @@
+{
+  "version": 1,
+  "links": {
+    "shop": "https://tlemcenii.set.shop/",
+    "tiktok": "https://www.tiktok.com/@eltelemsani13",
+    "tiktokQamis": "https://www.tiktok.com/@tlemceniqamis",
+    "facebook": "https://web.facebook.com/tlemcani.shoes",
+    "instagram": "https://www.instagram.com/tlemceni_13k/",
+    "whatsapp": ""
+  },
+  "colorways": [
+    {
+      "id": "trail",
+      "visible": true,
+      "name": {
+        "fr": "Gris orange",
+        "ar": "رمادي برتقالي",
+        "en": "Grey orange"
+      },
+      "colors": {
+        "mesh": "#c2c4c0",
+        "skin": "#f3f3f0",
+        "line": "#3b3e44",
+        "accent": "#ee6a24",
+        "midsole": "#45484e",
+        "outsole": "#ee6a24",
+        "laces": "#ececea",
+        "lining": "#b8552c"
+      }
+    },
+    {
+      "id": "blanc",
+      "visible": true,
+      "name": {
+        "fr": "Blanc 13",
+        "ar": "أبيض 13",
+        "en": "White 13"
+      },
+      "colors": {
+        "mesh": "#e4e0d8",
+        "skin": "#f6f3ed",
+        "line": "#17171a",
+        "accent": "#c8102e",
+        "midsole": "#f3f0e8",
+        "outsole": "#1c1c1f",
+        "laces": "#f4f1ea",
+        "lining": "#9e1320"
+      }
+    },
+    {
+      "id": "noir",
+      "visible": true,
+      "name": {
+        "fr": "Noir total",
+        "ar": "أسود كامل",
+        "en": "All black"
+      },
+      "colors": {
+        "mesh": "#2d2e31",
+        "skin": "#1e1f21",
+        "line": "#0e0e0f",
+        "accent": "#c8102e",
+        "midsole": "#1f1f22",
+        "outsole": "#121214",
+        "laces": "#1a1a1c",
+        "lining": "#18181a"
+      }
+    },
+    {
+      "id": "sable",
+      "visible": true,
+      "name": {
+        "fr": "Sable",
+        "ar": "رملي",
+        "en": "Sand"
+      },
+      "colors": {
+        "mesh": "#c9b28c",
+        "skin": "#dbc8a3",
+        "line": "#6b4a2c",
+        "accent": "#8a5a33",
+        "midsole": "#efe6d3",
+        "outsole": "#a4642c",
+        "laces": "#efe6d4",
+        "lining": "#6d4a2e"
+      }
+    }
+  ],
+  "images": {
+    "u1.hero": "img/r-runner-trail.webp",
+    "u1.m1": "img/modele-reel.webp",
+    "u1.m2": "img/r-sandale.webp",
+    "u1.m3": "img/r-claquette.webp",
+    "u2.hero": "img/r-qamis.webp",
+    "u2.m1": "img/tk-qamis.webp",
+    "u3.hero": "img/r-parfum.webp",
+    "u3.m1": "img/tk-coffret.webp",
+    "u3.m2": "img/tk-parfum.webp",
+    "wall.1": "img/tk-chaine.webp",
+    "wall.2": "img/tk-usine.webp",
+    "wall.3": "img/tk-atelier.webp",
+    "wall.4": "img/tk-cartons.webp"
+  },
+  "stats": [
+    {
+      "value": 236200,
+      "label": {
+        "fr": "abonnés TikTok · @eltelemsani13",
+        "ar": "متابع على تيك توك · @eltelemsani13",
+        "en": "TikTok followers · @eltelemsani13"
+      }
+    },
+    {
+      "value": 1800000,
+      "label": {
+        "fr": "« j’aime » sur ses vidéos",
+        "ar": "إعجاب على فيديوهاته",
+        "en": "likes on his videos"
+      }
+    },
+    {
+      "value": 2100000,
+      "label": {
+        "fr": "vues pour une seule vidéo",
+        "ar": "مشاهدة لفيديو واحد",
+        "en": "views on a single video"
+      }
+    },
+    {
+      "value": 21400,
+      "label": {
+        "fr": "abonnés · @tlemceniqamis",
+        "ar": "متابع · @tlemceniqamis",
+        "en": "followers · @tlemceniqamis"
+      }
+    }
+  ],
+  "stores": [
+    {
+      "name": "Chevalley",
+      "nameAr": "شوفالي",
+      "soon": false,
+      "maps": "https://www.google.com/maps/search/?api=1&query=Tlemceni+Shoes+Chevalley+Alger",
+      "text": {
+        "fr": "Face à la station-service. Chaussures, qamis et parfums.",
+        "ar": "مقابل محطة البنزين. أحذية، أقمصة وعطور.",
+        "en": "Opposite the petrol station. Shoes, qamis and fragrances."
+      }
+    },
+    {
+      "name": "Douéra",
+      "nameAr": "دويرة",
+      "soon": false,
+      "maps": "https://www.google.com/maps/search/?api=1&query=Tlemceni+Shoes+Douera",
+      "text": {
+        "fr": "Chaussures pour toute la famille.",
+        "ar": "أحذية لكل العائلة.",
+        "en": "Shoes for the whole family."
+      }
+    },
+    {
+      "name": "Reghaïa",
+      "nameAr": "الرغاية",
+      "soon": true,
+      "maps": "",
+      "text": {
+        "fr": "Ouverture prochaine, إن شاء الله.",
+        "ar": "الافتتاح قريبًا، إن شاء الله.",
+        "en": "Opening soon, inshallah."
+      }
+    }
+  ],
+  "reel": [
+    {
+      "image": "img/tk-vitrine.webp",
+      "alt": "L’enseigne Tlemceni Shoes"
+    },
+    {
+      "image": "img/tk-foule.webp",
+      "alt": "Foule dans la boutique"
+    },
+    {
+      "image": "img/tk-baskets.webp",
+      "alt": "Présentation de deux baskets"
+    },
+    {
+      "image": "img/tk-ouverture.webp",
+      "alt": "Ouverture d’une boutique, foule devant l’entrée"
+    },
+    {
+      "image": "img/tk-sandales.webp",
+      "alt": "Mur de sandales pour homme"
+    },
+    {
+      "image": "img/tk-chaine.webp",
+      "alt": "Baskets sur la chaîne de fabrication"
+    }
+  ],
+  "event": {
+    "show": true,
+    "start": "2026-10-07T09:00",
+    "end": "2026-10-10T19:00"
+  },
+  "texts": {
+    "skip": {
+      "fr": "Passer l'animation 3D",
+      "ar": "تخطّي الحركة ثلاثية الأبعاد",
+      "en": "Skip the 3D animation"
+    },
+    "loader": {
+      "fr": "On lace la paire…",
+      "ar": "نجهّز الزوج…",
+      "en": "Lacing up…"
+    },
+    "nav.eclate": {
+      "fr": "La basket",
+      "ar": "الحذاء",
+      "en": "The sneaker"
+    },
+    "nav.univers": {
+      "fr": "Univers",
+      "ar": "عوالمنا",
+      "en": "Worlds"
+    },
+    "nav.usine": {
+      "fr": "L'usine",
+      "ar": "المصنع",
+      "en": "The factory"
+    },
+    "nav.pro": {
+      "fr": "Revendeurs",
+      "ar": "للتجّار",
+      "en": "Resellers"
+    },
+    "nav.boutiques": {
+      "fr": "Boutiques",
+      "ar": "المحلات",
+      "en": "Stores"
+    },
+    "cta.order": {
+      "fr": "Commander",
+      "ar": "اطلب الآن",
+      "en": "Order"
+    },
+    "hero.eyebrow": {
+      "fr": "Chaussures · Qamis · Parfums — Algérie",
+      "ar": "أحذية · أقمصة · عطور — الجزائر",
+      "en": "Shoes · Qamis · Fragrances — Algeria"
+    },
+    "hero.title": {
+      "fr": "Fabriqué en Algérie.\n*Porté partout.*",
+      "ar": "صُنع في الجزائر.\n*يُلبس في كل مكان.*",
+      "en": "Made in Algeria.\n*Worn everywhere.*"
+    },
+    "hero.lead": {
+      "fr": "Des chaussures sorties de notre usine, une communauté de plus de 236 000 abonnés. Faites défiler : la basket se démonte sous vos yeux.",
+      "ar": "أحذية تخرج من مصنعنا، ومجتمع يتجاوز 236 ألف متابع. مرّر إلى الأسفل: الحذاء يتفكّك أمام عينيك.",
+      "en": "Shoes straight from our factory, a community of more than 236,000 followers. Scroll: the sneaker comes apart before your eyes."
+    },
+    "hero.chip1": {
+      "fr": "Cuir naturel",
+      "ar": "جلد طبيعي",
+      "en": "Natural leather"
+    },
+    "hero.chip2": {
+      "fr": "Fabrication locale",
+      "ar": "صناعة محلية",
+      "en": "Made locally"
+    },
+    "hero.chip3": {
+      "fr": "Chevalley · Douéra",
+      "ar": "شوفالي · دويرة",
+      "en": "Chevalley · Douéra"
+    },
+    "hero.scroll": {
+      "fr": "Faites défiler pour démonter",
+      "ar": "مرّر لتفكيك الحذاء",
+      "en": "Scroll to take it apart"
+    },
+    "s1.t": {
+      "fr": "Les lacets",
+      "ar": "الأربطة",
+      "en": "The laces"
+    },
+    "s1.d": {
+      "fr": "Lacets tressés et embouts gainés, six paires d'œillets : un laçage qui tient toute la journée.",
+      "ar": "أربطة مضفورة بأطراف مغلّفة، وستة أزواج من الثقوب: ربطة تصمد طوال اليوم.",
+      "en": "Braided laces with sheathed tips and six pairs of eyelets: lacing that holds all day."
+    },
+    "s1.c1": {
+      "fr": "Tressés",
+      "ar": "مضفورة",
+      "en": "Braided"
+    },
+    "s1.c2": {
+      "fr": "Six œillets",
+      "ar": "ستة ثقوب",
+      "en": "Six eyelets"
+    },
+    "s4.t": {
+      "fr": "La tige",
+      "ar": "وجه الحذاء",
+      "en": "The upper"
+    },
+    "s4.d": {
+      "fr": "Mesh respirant, renforts soudés et coutures doubles : légère mais solide. Sur le côté, notre sceau.",
+      "ar": "نسيج شبكي يسمح بالتهوية، تدعيمات ملحومة وخياطة مزدوجة: خفيف لكنه متين. وعلى الجانب، ختمنا.",
+      "en": "Breathable mesh, welded overlays and double stitching: light yet tough. On the side, our seal."
+    },
+    "s4.c1": {
+      "fr": "Mesh respirant",
+      "ar": "نسيج مُهوّى",
+      "en": "Breathable mesh"
+    },
+    "s4.c2": {
+      "fr": "Coutures doubles",
+      "ar": "خياطة مزدوجة",
+      "en": "Double stitching"
+    },
+    "s4.c3": {
+      "fr": "Renforts",
+      "ar": "تدعيمات",
+      "en": "Overlays"
+    },
+    "s2.t": {
+      "fr": "La languette",
+      "ar": "اللسان",
+      "en": "The tongue"
+    },
+    "s2.d": {
+      "fr": "Rembourrée pour protéger le cou-de-pied du serrage. Elle porte notre étiquette tissée, en arabe.",
+      "ar": "مبطّن ليحمي ظهر القدم من الشدّ، ويحمل علامتنا المنسوجة بالعربية.",
+      "en": "Padded to protect the top of the foot from pressure. It carries our woven label, in Arabic."
+    },
+    "s2.c1": {
+      "fr": "Rembourrée",
+      "ar": "مبطّن",
+      "en": "Padded"
+    },
+    "s2.c2": {
+      "fr": "Étiquette tissée",
+      "ar": "علامة منسوجة",
+      "en": "Woven label"
+    },
+    "s3.t": {
+      "fr": "Les renforts",
+      "ar": "التدعيمات",
+      "en": "Reinforcements"
+    },
+    "s3.d": {
+      "fr": "Un contrefort qui tient le talon, un bout renforcé contre les cailloux et l'usure. Le 13 de Tlemcen est gravé à l'arrière.",
+      "ar": "كعب مدعّم يثبّت القدم، ومقدّمة مقوّاة ضد الحجارة والتآكل. ورقم تلمسان 13 محفور في الخلف.",
+      "en": "A heel counter that locks the heel in, a reinforced toe against stones and wear. Tlemcen’s 13 is embossed at the back."
+    },
+    "s3.c1": {
+      "fr": "Maintien du talon",
+      "ar": "تثبيت الكعب",
+      "en": "Heel hold"
+    },
+    "s3.c2": {
+      "fr": "Anti-usure",
+      "ar": "ضد التآكل",
+      "en": "Anti-wear"
+    },
+    "s5.t": {
+      "fr": "La doublure",
+      "ar": "البطانة",
+      "en": "The lining"
+    },
+    "s5.d": {
+      "fr": "À l'intérieur, une maille respirante, douce contre la peau, qui évacue la chaleur et évite les frottements.",
+      "ar": "من الداخل، نسيج شبكي يسمح بالتهوية، ناعم على البشرة، يطرد الحرارة ويمنع الاحتكاك.",
+      "en": "Inside, a breathable mesh, soft against the skin, that draws heat away and prevents rubbing."
+    },
+    "s5.c1": {
+      "fr": "Respirante",
+      "ar": "تهوية",
+      "en": "Breathable"
+    },
+    "s5.c2": {
+      "fr": "Anti-frottement",
+      "ar": "ضد الاحتكاك",
+      "en": "Anti-friction"
+    },
+    "s6.t": {
+      "fr": "La semelle anatomique",
+      "ar": "النعل الداخلي الطبي",
+      "en": "The anatomical insole"
+    },
+    "s6.d": {
+      "fr": "Elle épouse la voûte plantaire et amortit chaque pas. Un souci de « مشطة » ? C'est ici que tout se joue.",
+      "ar": "يحتضن قوس القدم ويخفّف كل خطوة. عندك مشكل في المشطة؟ هنا يبدأ الحل.",
+      "en": "It follows the arch of your foot and cushions every step. Arch pain? This is where it gets solved."
+    },
+    "s6.c1": {
+      "fr": "Soutien de la voûte",
+      "ar": "دعم قوس القدم",
+      "en": "Arch support"
+    },
+    "s6.c2": {
+      "fr": "Amovible",
+      "ar": "قابل للنزع",
+      "en": "Removable"
+    },
+    "s7.t": {
+      "fr": "L'amorti",
+      "ar": "امتصاص الصدمات",
+      "en": "The cushioning"
+    },
+    "s7.d": {
+      "fr": "Une semelle intermédiaire épaisse, plus haute au talon, qui absorbe les chocs de la marche et des longues journées debout.",
+      "ar": "نعل أوسط سميك، أعلى عند الكعب، يمتصّ صدمات المشي وساعات الوقوف الطويلة.",
+      "en": "A thick midsole, higher at the heel, that absorbs the shock of walking and long days on your feet."
+    },
+    "s7.c1": {
+      "fr": "Légère",
+      "ar": "خفيف",
+      "en": "Lightweight"
+    },
+    "s7.c2": {
+      "fr": "Absorbe les chocs",
+      "ar": "يمتصّ الصدمات",
+      "en": "Shock-absorbing"
+    },
+    "s8.t": {
+      "fr": "L'adhérence",
+      "ar": "الثبات",
+      "en": "The grip"
+    },
+    "s8.d": {
+      "fr": "Des crampons en caoutchouc, profonds et espacés, qui accrochent sur tous les terrains… et notre 13 couronné sous le pied.",
+      "ar": "نتوءات مطاطية عميقة ومتباعدة تتشبّث بكل الأراضي… ورقمنا 13 المتوّج تحت القدم.",
+      "en": "Deep, widely spaced rubber lugs that grip on any terrain… and our crowned 13 underfoot."
+    },
+    "s8.c1": {
+      "fr": "Tout terrain",
+      "ar": "لكل الأراضي",
+      "en": "All-terrain"
+    },
+    "s8.c2": {
+      "fr": "Antidérapante",
+      "ar": "مانع للانزلاق",
+      "en": "Non-slip"
+    },
+    "s9.n": {
+      "fr": "Vue d'ensemble",
+      "ar": "نظرة شاملة",
+      "en": "Overview"
+    },
+    "s9.t": {
+      "fr": "Neuf pièces. Une seule paire.",
+      "ar": "تسع قطع. زوج واحد.",
+      "en": "Nine parts. One pair."
+    },
+    "s9.d": {
+      "fr": "Chaque pièce est coupée, piquée et assemblée à l'usine, en Algérie.",
+      "ar": "كل قطعة تُقصّ وتُخاط وتُجمَّع في المصنع، في الجزائر.",
+      "en": "Every part is cut, stitched and assembled at the factory, in Algeria."
+    },
+    "s10.n": {
+      "fr": "Trail 13",
+      "ar": "Trail 13",
+      "en": "Trail 13"
+    },
+    "s10.t": {
+      "fr": "Assemblée chez nous.\nChoisissez sa couleur.",
+      "ar": "مُجمَّع عندنا.\nاختر لونه.",
+      "en": "Built in-house.\nPick its colour."
+    },
+    "cta.shop": {
+      "fr": "Voir la boutique en ligne",
+      "ar": "زيارة المتجر الإلكتروني",
+      "en": "Visit the online store"
+    },
+    "cta.univers": {
+      "fr": "Tous nos univers ↓",
+      "ar": "كل عوالمنا ↓",
+      "en": "All our worlds ↓"
+    },
+    "s10.note": {
+      "fr": "Modèle 3D d'illustration, d'après un modèle de la boutique.",
+      "ar": "نموذج ثلاثي الأبعاد للتوضيح، مستوحى من موديل في المتجر.",
+      "en": "Illustrative 3D model, based on a shoe from the store."
+    },
+    "m.eyebrow": {
+      "fr": "Le 13",
+      "ar": "الرقم 13",
+      "en": "The 13"
+    },
+    "m.text": {
+      "fr": "13, c'est le code de Tlemcen. La ville dont nous portons le nom, brodé sur chaque paire et gravé sous chaque semelle.",
+      "ar": "13 هو رمز ولاية تلمسان. المدينة التي نحمل اسمها، مطرّزًا على كل زوج ومحفورًا تحت كل نعل.",
+      "en": "13 is Tlemcen’s code. The city whose name we carry, stitched on every pair and engraved under every sole."
+    },
+    "m.f1t": {
+      "fr": "Fabrication locale",
+      "ar": "صناعة محلية",
+      "en": "Made locally"
+    },
+    "m.f1d": {
+      "fr": "Notre propre usine, en Algérie : nous maîtrisons chaque étape, du cuir à la boîte.",
+      "ar": "مصنعنا الخاص في الجزائر: نتحكّم في كل مرحلة، من الجلد إلى العلبة.",
+      "en": "Our own factory in Algeria: we control every step, from leather to box."
+    },
+    "m.f2t": {
+      "fr": "Cuir naturel",
+      "ar": "جلد طبيعي",
+      "en": "Natural leather"
+    },
+    "m.f2d": {
+      "fr": "Nos chaussures « médicales » sont en cuir 100 % naturel, pensées pour le confort au quotidien.",
+      "ar": "أحذيتنا الطبية من جلد طبيعي 100%، مصمّمة للراحة اليومية.",
+      "en": "Our “medical” shoes are 100% natural leather, designed for everyday comfort."
+    },
+    "m.f3t": {
+      "fr": "Trois univers",
+      "ar": "ثلاثة عوالم",
+      "en": "Three worlds"
+    },
+    "m.f3d": {
+      "fr": "Chaussures, qamis et parfums : tout ce qu'il faut pour s'habiller, sous un seul nom.",
+      "ar": "أحذية، أقمصة وعطور: كل ما تحتاجه لأناقتك، تحت اسم واحد.",
+      "en": "Shoes, qamis and fragrances: everything you need to dress well, under one name."
+    },
+    "u.eyebrow": {
+      "fr": "Nos univers",
+      "ar": "عوالمنا",
+      "en": "Our worlds"
+    },
+    "u.title": {
+      "fr": "Trois maisons, un seul nom.",
+      "ar": "ثلاثة بيوت، اسم واحد.",
+      "en": "Three houses, one name."
+    },
+    "u1.t": {
+      "fr": "Chaussures",
+      "ar": "أحذية",
+      "en": "Shoes"
+    },
+    "u1.d": {
+      "fr": "Baskets, sandales, claquettes et chaussures médicales en cuir naturel. Plusieurs marques, une même exigence de confort.",
+      "ar": "أحذية رياضية، صنادل، شلاكات وأحذية طبية من الجلد الطبيعي. عدّة علامات، ونفس الحرص على الراحة.",
+      "en": "Sneakers, sandals, slides and medical shoes in natural leather. Several brands, the same focus on comfort."
+    },
+    "u1.l1": {
+      "fr": "Baskets",
+      "ar": "رياضية",
+      "en": "Sneakers"
+    },
+    "u1.l2": {
+      "fr": "Sandales",
+      "ar": "صنادل",
+      "en": "Sandals"
+    },
+    "u1.l3": {
+      "fr": "Claquettes",
+      "ar": "شلاكات",
+      "en": "Slides"
+    },
+    "u1.l4": {
+      "fr": "Médicales cuir",
+      "ar": "طبية من الجلد",
+      "en": "Leather medical"
+    },
+    "u.cta": {
+      "fr": "Voir la collection →",
+      "ar": "تصفّح المجموعة ←",
+      "en": "See the collection →"
+    },
+    "u2.t": {
+      "fr": "Qamis",
+      "ar": "أقمصة",
+      "en": "Qamis"
+    },
+    "u2.d": {
+      "fr": "Des qamis pour le quotidien, le vendredi et les fêtes. Coupes classiques ou modernes, à essayer en boutique.",
+      "ar": "أقمصة لكل يوم، ليوم الجمعة وللأعياد. قصّات كلاسيكية أو عصرية، جرّبها في المحل.",
+      "en": "Qamis for every day, for Fridays and for celebrations. Classic or modern cuts, to try on in store."
+    },
+    "u2.l1": {
+      "fr": "Classiques",
+      "ar": "كلاسيكية",
+      "en": "Classic"
+    },
+    "u2.l2": {
+      "fr": "Modernes",
+      "ar": "عصرية",
+      "en": "Modern"
+    },
+    "u2.l3": {
+      "fr": "Fêtes",
+      "ar": "أعياد",
+      "en": "Celebrations"
+    },
+    "u2.cta": {
+      "fr": "Voir sur TikTok →",
+      "ar": "شاهد على تيك توك ←",
+      "en": "Watch on TikTok →"
+    },
+    "u3.t": {
+      "fr": "Parfums",
+      "ar": "عطور",
+      "en": "Fragrances"
+    },
+    "u3.d": {
+      "fr": "Senteurs orientales, musc et coffrets cadeaux. Le parfum qui accompagne le qamis, disponible dans les mêmes boutiques.",
+      "ar": "روائح شرقية، مسك وعلب هدايا. العطر الذي يرافق القميص، متوفّر في نفس المحلات.",
+      "en": "Oriental scents, musk and gift boxes. The fragrance that goes with the qamis, in the same stores."
+    },
+    "u3.l1": {
+      "fr": "Orientaux",
+      "ar": "شرقية",
+      "en": "Oriental"
+    },
+    "u3.l2": {
+      "fr": "Musc",
+      "ar": "مسك",
+      "en": "Musk"
+    },
+    "u3.l3": {
+      "fr": "Coffrets",
+      "ar": "علب هدايا",
+      "en": "Gift boxes"
+    },
+    "f.eyebrow": {
+      "fr": "L'usine",
+      "ar": "المصنع",
+      "en": "The factory"
+    },
+    "f.title": {
+      "fr": "De la peau à la paire.",
+      "ar": "من الجلد إلى الزوج.",
+      "en": "From hide to pair."
+    },
+    "f.lead": {
+      "fr": "Nous ne revendons pas des chaussures : nous les fabriquons. Voici le chemin d'une paire dans notre usine.",
+      "ar": "نحن لا نعيد بيع الأحذية: نحن نصنعها. هذا مسار زوج واحد داخل مصنعنا.",
+      "en": "We don’t resell shoes: we make them. Here is the journey of one pair through our factory."
+    },
+    "f.1t": {
+      "fr": "Le patronage",
+      "ar": "الباترون",
+      "en": "Pattern making"
+    },
+    "f.1d": {
+      "fr": "Chaque modèle est dessiné puis découpé en gabarits, pointure par pointure.",
+      "ar": "كل موديل يُرسم ثم يُقطّع إلى قوالب، مقاسًا بمقاس.",
+      "en": "Each model is drawn, then cut into templates, size by size."
+    },
+    "f.2t": {
+      "fr": "La coupe",
+      "ar": "القصّ",
+      "en": "Cutting"
+    },
+    "f.2d": {
+      "fr": "Le cuir est choisi, contrôlé, puis coupé à l'emporte-pièce sans perdre un centimètre.",
+      "ar": "يُنتقى الجلد ويُفحص ثم يُقصّ بالمكبس دون تضييع سنتيمتر واحد.",
+      "en": "The leather is selected, checked, then die-cut without wasting an inch."
+    },
+    "f.3t": {
+      "fr": "La piqûre",
+      "ar": "الخياطة",
+      "en": "Stitching"
+    },
+    "f.3d": {
+      "fr": "Les pièces de la tige sont assemblées en coutures doubles, renforts compris.",
+      "ar": "تُجمع قطع وجه الحذاء بخياطة مزدوجة، مع التدعيمات.",
+      "en": "The pieces of the upper are joined with double stitching, reinforcements included."
+    },
+    "f.4t": {
+      "fr": "Le montage",
+      "ar": "التركيب",
+      "en": "Lasting"
+    },
+    "f.4d": {
+      "fr": "La tige est tendue sur une forme en volume : c'est elle qui donne son chaussant à la paire.",
+      "ar": "يُشدّ الوجه على قالب مجسّم: هو الذي يمنح الزوج مقاسه وراحته.",
+      "en": "The upper is stretched over a 3D last: that is what gives the pair its fit."
+    },
+    "f.5t": {
+      "fr": "Le semelage",
+      "ar": "تركيب النعل",
+      "en": "Soling"
+    },
+    "f.5d": {
+      "fr": "Semelle intermédiaire et semelle crantée sont collées puis pressées sur la tige.",
+      "ar": "يُلصق النعل الأوسط والنعل المحزّز ثم يُضغطان على الوجه.",
+      "en": "Midsole and lugged outsole are glued, then pressed onto the upper."
+    },
+    "f.6t": {
+      "fr": "Le contrôle",
+      "ar": "المراقبة",
+      "en": "Inspection"
+    },
+    "f.6d": {
+      "fr": "Chaque paire est vérifiée, mise en boîte et préparée pour les boutiques et les commandes.",
+      "ar": "يُفحص كل زوج ويُعبّأ في علبته ويُجهّز للمحلات والطلبيات.",
+      "en": "Every pair is checked, boxed and prepared for our stores and orders."
+    },
+    "p.eyebrow": {
+      "fr": "Guide des pointures",
+      "ar": "دليل المقاسات",
+      "en": "Size guide"
+    },
+    "p.title": {
+      "fr": "La bonne pointure du premier coup.",
+      "ar": "المقاس الصحيح من أول مرة.",
+      "en": "The right size, first time."
+    },
+    "p.lead": {
+      "fr": "Posez le pied sur une feuille, tracez le talon et le gros orteil, mesurez. Moins d'échanges, moins de retours : tout le monde y gagne.",
+      "ar": "ضع قدمك على ورقة، ارسم خطًّا عند الكعب وآخر عند الإصبع الكبير، ثم قِس المسافة. تبديل أقل، إرجاع أقل: الكل رابح.",
+      "en": "Stand on a sheet of paper, mark your heel and your big toe, measure. Fewer exchanges, fewer returns: everyone wins."
+    },
+    "p.label": {
+      "fr": "Longueur de votre pied",
+      "ar": "طول قدمك",
+      "en": "Your foot length"
+    },
+    "p.out": {
+      "fr": "Votre pointure",
+      "ar": "مقاسك",
+      "en": "Your size (EU)"
+    },
+    "p.note": {
+      "fr": "Guide indicatif. Entre deux pointures, prenez la plus grande.",
+      "ar": "دليل تقريبي. إذا كنت بين مقاسين، خذ الأكبر.",
+      "en": "Indicative guide. Between two sizes, choose the larger one."
+    },
+    "c.eyebrow": {
+      "fr": "La communauté",
+      "ar": "المجتمع",
+      "en": "The community"
+    },
+    "c.title": {
+      "fr": "Une marque que l'Algérie suit chaque jour.",
+      "ar": "علامة تتابعها الجزائر كل يوم.",
+      "en": "A brand Algeria follows every day."
+    },
+    "c.src": {
+      "fr": "Chiffres affichés sur TikTok le 30 septembre 2026.",
+      "ar": "الأرقام الظاهرة على تيك توك بتاريخ 30 سبتمبر 2026.",
+      "en": "Figures shown on TikTok on 30 September 2026."
+    },
+    "e.eyebrow": {
+      "fr": "Rencontre",
+      "ar": "لقاء",
+      "en": "Meet us"
+    },
+    "e.title": {
+      "fr": "Abdelkarim Zerouali « Tlemceni », intervenant à l'ECSEL EXPO 2026.",
+      "ar": "عبد الكريم زروالي «التلمساني»، متحدّث في ECSEL EXPO 2026.",
+      "en": "Abdelkarim Zerouali “Tlemceni”, speaker at ECSEL EXPO 2026."
+    },
+    "e.lead": {
+      "fr": "Le fondateur partage son expérience avec les e-commerçants algériens : fabriquer, vendre en ligne, livrer.",
+      "ar": "المؤسّس يشارك تجربته مع التجّار الإلكترونيين الجزائريين: التصنيع، البيع عبر الإنترنت والتوصيل.",
+      "en": "The founder shares his experience with Algerian e-merchants: manufacturing, selling online, delivering."
+    },
+    "e.month": {
+      "fr": "octobre 2026",
+      "ar": "أكتوبر 2026",
+      "en": "October 2026"
+    },
+    "e.place": {
+      "fr": "SAFEX, Pavillon central · Alger",
+      "ar": "سافكس، الجناح المركزي · الجزائر العاصمة",
+      "en": "SAFEX, Central Pavilion · Algiers"
+    },
+    "e.d": {
+      "fr": "jours",
+      "ar": "يوم",
+      "en": "days"
+    },
+    "e.h": {
+      "fr": "heures",
+      "ar": "ساعة",
+      "en": "hours"
+    },
+    "e.m": {
+      "fr": "minutes",
+      "ar": "دقيقة",
+      "en": "minutes"
+    },
+    "e.done": {
+      "fr": "Merci à tous ceux qui sont venus nous voir.",
+      "ar": "شكرًا لكل من زارنا.",
+      "en": "Thank you to everyone who came to see us."
+    },
+    "r.eyebrow": {
+      "fr": "Revendeurs · Grossistes · Export",
+      "ar": "تجّار التجزئة · الجملة · التصدير",
+      "en": "Resellers · Wholesale · Export"
+    },
+    "r.title": {
+      "fr": "Vendez Tlemceni, en Algérie et ailleurs.",
+      "ar": "بِع التلمساني، في الجزائر وخارجها.",
+      "en": "Sell Tlemceni, in Algeria and abroad."
+    },
+    "r.lead": {
+      "fr": "Boutique, e-commerçant, grossiste ou importateur à l'étranger : laissez vos coordonnées, l'équipe commerciale vous recontacte avec le catalogue et les conditions.",
+      "ar": "صاحب محل، تاجر إلكتروني، تاجر جملة أو مستورد في الخارج: اترك معلوماتك، وسيتواصل معك الفريق التجاري بالكتالوج والشروط.",
+      "en": "Store owner, e-merchant, wholesaler or importer abroad: leave your details and our sales team will get back to you with the catalogue and terms."
+    },
+    "r.l1": {
+      "fr": "Achat direct à l'usine, sans intermédiaire.",
+      "ar": "شراء مباشر من المصنع، دون وسطاء.",
+      "en": "Buy direct from the factory, no middleman."
+    },
+    "r.l2": {
+      "fr": "Chaussures, qamis et parfums sur une même commande.",
+      "ar": "أحذية، أقمصة وعطور في طلبية واحدة.",
+      "en": "Shoes, qamis and fragrances in a single order."
+    },
+    "r.l3": {
+      "fr": "Diaspora et export : un interlocuteur dédié.",
+      "ar": "الجالية والتصدير: محاور مخصّص لك.",
+      "en": "Diaspora and export: a dedicated contact."
+    },
+    "r.f1": {
+      "fr": "Nom et prénom",
+      "ar": "الاسم واللقب",
+      "en": "Full name"
+    },
+    "r.f2": {
+      "fr": "Téléphone / WhatsApp",
+      "ar": "الهاتف / واتساب",
+      "en": "Phone / WhatsApp"
+    },
+    "r.f3": {
+      "fr": "Ville ou pays",
+      "ar": "المدينة أو البلد",
+      "en": "City or country"
+    },
+    "r.f4": {
+      "fr": "Vous êtes",
+      "ar": "أنت",
+      "en": "You are"
+    },
+    "r.p1": {
+      "fr": "Boutique",
+      "ar": "محل",
+      "en": "Store"
+    },
+    "r.p2": {
+      "fr": "E-commerçant",
+      "ar": "تاجر إلكتروني",
+      "en": "E-merchant"
+    },
+    "r.p3": {
+      "fr": "Grossiste",
+      "ar": "تاجر جملة",
+      "en": "Wholesaler"
+    },
+    "r.p4": {
+      "fr": "Export",
+      "ar": "تصدير",
+      "en": "Export"
+    },
+    "r.f5": {
+      "fr": "Intéressé par",
+      "ar": "مهتم بـ",
+      "en": "Interested in"
+    },
+    "r.submit": {
+      "fr": "Recevoir le catalogue revendeur",
+      "ar": "احصل على كتالوج التجّار",
+      "en": "Get the reseller catalogue"
+    },
+    "r.ok": {
+      "fr": "Merci ! Démo : sur le vrai site, votre demande arrive directement sur le WhatsApp de l'équipe commerciale.",
+      "ar": "شكرًا! نسخة تجريبية: في الموقع الحقيقي يصل طلبك مباشرة إلى واتساب الفريق التجاري.",
+      "en": "Thank you! Demo: on the real site, your request goes straight to the sales team’s WhatsApp."
+    },
+    "b.eyebrow": {
+      "fr": "Nos boutiques",
+      "ar": "محلاتنا",
+      "en": "Our stores"
+    },
+    "b.title": {
+      "fr": "Venez essayer.",
+      "ar": "تعال وجرّب.",
+      "en": "Come and try them on."
+    },
+    "b.go": {
+      "fr": "Itinéraire →",
+      "ar": "الاتجاهات ←",
+      "en": "Directions →"
+    },
+    "b.soon": {
+      "fr": "Bientôt",
+      "ar": "قريبًا",
+      "en": "Soon"
+    },
+    "b.4t": {
+      "fr": "En ligne",
+      "ar": "عبر الإنترنت",
+      "en": "Online"
+    },
+    "b.4": {
+      "fr": "Commandez depuis votre téléphone, livraison à domicile.",
+      "ar": "اطلب من هاتفك، مع التوصيل إلى المنزل.",
+      "en": "Order from your phone, delivered to your door."
+    },
+    "foot.note": {
+      "fr": "Site de démonstration réalisé pour Tlemceni. Le modèle 3D et les visuels de produits sont des illustrations ; les photos proviennent des vidéos publiques de la marque.",
+      "ar": "موقع تجريبي أُنجز لعلامة التلمساني. النموذج ثلاثي الأبعاد وصور المنتجات للتوضيح، والصور الأخرى مأخوذة من فيديوهات العلامة المنشورة.",
+      "en": "Demo website made for Tlemceni. The 3D model and product visuals are illustrations; the photos come from the brand’s public videos."
+    },
+    "foot.by": {
+      "fr": "Site conçu par",
+      "ar": "تصميم الموقع:",
+      "en": "Website by"
+    },
+    "foot.wa": {
+      "fr": "Un site comme celui-ci pour votre marque ?",
+      "ar": "تريد موقعًا مثل هذا لعلامتك؟",
+      "en": "Want a site like this for your brand?"
+    },
+    "e.live": {
+      "fr": "L'expo a commencé : on vous attend !",
+      "ar": "المعرض جارٍ الآن: نلتقي هناك!",
+      "en": "The expo is on now: see you there!"
+    },
+    "meta.title": {
+      "fr": "Tlemceni — Chaussures, qamis et parfums fabriqués en Algérie",
+      "ar": "التلمساني — أحذية وأقمصة وعطور صُنعت في الجزائر",
+      "en": "Tlemceni — Shoes, qamis and fragrances made in Algeria"
+    }
+  }
+}

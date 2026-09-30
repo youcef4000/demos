@@ -1,58 +1,60 @@
-// Tlemceni — orchestration : chargement, basket démontée au scroll, langues et animations des sections.
-import { DICT } from './i18n.js';
+// Tlemceni — orchestration : contenu (content.json ou espace admin), basket démontée au scroll,
+// langues (FR, AR, EN) et animations des sections.
+import { loadContent, esc, rich, formatStat, algiersTime } from './store.js';
 
 const { gsap, ScrollTrigger, SplitText, Lenis } = window;
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const pad = (n) => String(n).padStart(2, '0');
 
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const coarse = matchMedia('(pointer: coarse)').matches;
 const mobile = coarse || innerWidth < 900;
 const narrow = () => innerWidth < 900;
 const rtl = () => document.documentElement.dir === 'rtl';
+const params = new URLSearchParams(location.search);
+const PREVIEW = params.has('preview');
+const LANGS = ['fr', 'ar', 'en'];
 
 const PARTS = ['laces', 'tongue', 'heel', 'toe', 'badge', 'upper', 'insole', 'midsole', 'outsole'];
 const TAU = Math.PI * 2;
 
-// Vues de la caméra : chaussure (ry, rx, rz, lift) et caméra (azim, elev, dist, tx, ty, sx, sy).
-const HERO = { ry: -0.55, rx: 0.04, rz: 0.05, lift: 0.5, azim: 0.22, elev: 0.2, dist: 6.6, tx: 0, ty: 0.45, sx: 0.15, sy: 0.05, shadow: 1, spin: 1 };
-const V = (o) => ({ rx: 0, rz: 0, lift: 0.5, azim: 0.2, tx: 0, sx: 0.17, sy: 0, shadow: 0, spin: 0, ...o });
+// Vues : la chaussure reste au centre et tourne d'un cran à chaque étape pour montrer la pièce.
+// sy : décalage vertical à l'écran (ordinateur), syM et mob : décalage et recul sur écran étroit.
+const HERO = { ry: -0.6, rx: 0.04, rz: 0.05, lift: 0.5, azim: 0.2, elev: 0.2, dist: 5.9, tx: 0, ty: 0.45, sx: 0, sy: 0.1, syM: 0.12, mob: 1.16, shadow: 1, spin: 1 };
+const V = (o) => ({ rx: 0, rz: 0, lift: 0.5, azim: 0.2, tx: 0, sx: 0, sy: 0.1, syM: 0.17, mob: 1.12, shadow: 0, spin: 0, ...o });
 
-// Étapes de la vue éclatée. `ex` : pièces écartées (cumulatif), `focus` : pièces mises en avant.
+// `ex` : pièces écartées (cumulatif), `focus` : pièces mises en avant, `anchor` : pièce désignée par le trait.
 const STEPS = [
-  { id: 'laces', ex: { laces: 1 }, focus: ['laces'], anchor: 'laces', view: V({ ry: -0.45, elev: 0.4, dist: 8.2, ty: 0.95 }) },
-  { id: 'tongue', ex: { tongue: 1 }, focus: ['tongue'], anchor: 'tongue', view: V({ ry: -0.8, elev: 0.34, dist: 8.0, ty: 0.85 }) },
-  { id: 'renforts', ex: { heel: 1, toe: 1 }, focus: ['heel', 'toe'], anchor: 'heel', view: V({ ry: -0.14, elev: 0.18, dist: 9.0, ty: 0.7, mob: 1.42 }) },
-  { id: 'tige', ex: { badge: 1 }, focus: ['upper', 'badge'], anchor: 'badge', view: V({ ry: -0.06, elev: 0.12, dist: 8.2, ty: 0.75, mob: 1.38 }) },
-  { id: 'doublure', xray: 1, focus: ['upper'], anchor: 'lining', view: V({ ry: -0.9, elev: 0.52, dist: 8.8, ty: 0.6, mob: 1.2 }) },
-  { id: 'semelle', ex: { insole: 1, midsole: 1, outsole: 0.68 }, focus: ['insole'], anchor: 'insole', view: V({ ry: -0.42, elev: 0.36, dist: 10.2, ty: 0.3 }) },
-  { id: 'amorti', ex: { outsole: 1 }, focus: ['midsole'], anchor: 'midsole', view: V({ ry: -0.26, elev: 0.2, dist: 10.6, ty: 0.25 }) },
-  { id: 'adherence', flip: 1, focus: ['outsole'], anchor: 'outsole', view: V({ ry: -0.12, elev: 0.1, dist: 10.8, ty: 0.2 }) },
-  { id: 'ensemble', flip: 0.5, focus: PARTS, tags: 1, view: V({ ry: -0.5, elev: 0.26, dist: 11.6, ty: 0.3, sx: 0.1, sy: 0.06 }) },
-  { id: 'final', reset: true, focus: PARTS, view: { ...HERO, ry: HERO.ry + TAU, sx: 0.17, sy: 0.02 } },
+  { id: 'laces', ex: { laces: 1 }, focus: ['laces'], anchor: 'laces', view: V({ ry: 0.05, elev: 0.46, dist: 7.3, ty: 0.92 }) },
+  { id: 'tige', ex: { badge: 1 }, focus: ['upper', 'badge'], anchor: 'badge', view: V({ ry: 0.35, elev: 0.16, dist: 7.3, ty: 0.92, mob: 1.16 }) },
+  { id: 'tongue', ex: { tongue: 1 }, focus: ['tongue'], anchor: 'tongue', view: V({ ry: 1.0, elev: 0.36, dist: 7.5, ty: 0.92 }) },
+  { id: 'renforts', ex: { heel: 1, toe: 1 }, focus: ['heel', 'toe'], anchor: 'heel', view: V({ ry: 1.75, elev: 0.26, dist: 7.6, ty: 0.88, mob: 1.2 }) },
+  { id: 'doublure', xray: 1, focus: ['upper'], anchor: 'lining', view: V({ ry: 2.55, elev: 0.74, dist: 7.8, ty: 0.72, mob: 1.25 }) },
+  { id: 'semelle', ex: { insole: 1, midsole: 1, outsole: 0.68 }, focus: ['insole'], anchor: 'insole', view: V({ ry: 3.3, elev: 0.34, dist: 9.6, ty: 0.55, mob: 1.25 }) },
+  { id: 'amorti', ex: { outsole: 1 }, focus: ['midsole'], anchor: 'midsole', view: V({ ry: 4.1, elev: 0.2, dist: 10.4, ty: 0.4, mob: 1.25 }) },
+  { id: 'adherence', flip: 1, focus: ['outsole'], anchor: 'outsole', view: V({ ry: TAU + 0.05, elev: 0.1, dist: 10.6, ty: 0.36, mob: 1.25 }) },
+  { id: 'ensemble', flip: 0.5, focus: PARTS, tags: 1, view: V({ ry: TAU + 0.6, elev: 0.28, dist: 11.2, ty: 0.42, mob: 1.2 }) },
+  { id: 'final', reset: true, focus: PARTS, view: { ...HERO, ry: HERO.ry + 2 * TAU } },
 ];
 const LOCAL_LINING = { x: -0.95, y: 0.52, z: 0 };
 const TAGS = [
-  ['01', 'laces'], ['02', 'tongue'], ['03', 'heel'], ['03', 'toe'], ['04', 'badge'],
+  ['01', 'laces'], ['02', 'badge'], ['03', 'tongue'], ['04', 'heel'], ['04', 'toe'],
   ['05', 'upper', LOCAL_LINING], ['06', 'insole'], ['07', 'midsole'], ['08', 'outsole'],
 ];
 
-const FR_EXTRA = { 'e.live': "L'expo a commencé : on vous attend !" };
-const TITLES = {
-  fr: document.title,
-  ar: 'التلمساني — أحذية وأقمصة وعطور صُنعت في الجزائر',
-  en: 'Tlemceni — Shoes, qamis and fragrances made in Algeria',
-};
-
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
+let C = null; // contenu du site
 let lang = 'fr';
-const FR = {};
+const FR = {}; // textes de secours lus dans la page
 const splits = [];
 let lenis = null;
 let scene = null;
+let needsRender = true;
+let explodeNav = null; // repères de la vue éclatée (aperçu admin)
 
 main().catch((err) => {
   console.error(err);
@@ -61,9 +63,15 @@ main().catch((err) => {
 });
 
 async function main() {
-  captureFR();
-  const wanted = pickLang();
-  if (wanted !== 'fr') setLang(wanted, { initial: true });
+  $$('[data-i18n]').forEach((el) => (FR[el.dataset.i18n] ??= el.innerHTML));
+  try {
+    ({ content: C } = await loadContent({ preview: PREVIEW }));
+  } catch (err) {
+    console.warn('content.json illisible : textes de la page conservés.', err);
+    C = { texts: {}, links: {}, images: {}, colorways: [], stats: [], stores: [], reel: [], event: { show: true } };
+  }
+  applyStatic();
+  setLang(pickLang(), { initial: true });
 
   const loaderEl = $('#loader');
   if (!gsap || !ScrollTrigger) {
@@ -74,7 +82,7 @@ async function main() {
   }
   gsap.registerPlugin(ScrollTrigger, SplitText);
   ScrollTrigger.config({ ignoreMobileResize: true });
-  if (!location.hash) scrollTo(0, 0);
+  if (!location.hash && !PREVIEW) scrollTo(0, 0);
 
   // --- chargement
   const pct = $('#pct'), bar = $('#loader-bar');
@@ -89,7 +97,7 @@ async function main() {
   if (!reduce && Lenis && !coarse) {
     lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 0.9 });
     lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((t) => lenis.raf(t * 1000));
+    gsap.ticker.add((tt) => lenis.raf(tt * 1000));
     gsap.ticker.lagSmoothing(0);
     lenis.stop();
   } else {
@@ -102,6 +110,8 @@ async function main() {
   try {
     const { createScene } = await import('./scene.js');
     scene = createScene($('#scene'), { mobile, reducedMotion: reduce });
+    const first = visibleColorways()[0];
+    if (first) scene.setColorway(first.colors);
     await Promise.race([scene.warm(), wait(6000)]);
   } catch (err) {
     console.warn('3D indisponible, images fixes à la place.', err);
@@ -115,42 +125,140 @@ async function main() {
   bindLinks();
   bindLang();
   studioCredit();
+  if (PREVIEW) setupPreview();
 
   await Promise.race([document.fonts ? document.fonts.ready : null, wait(2000)]);
   fake.kill();
   gsap.to(load, { v: 100, duration: 0.4, ease: 'power1.out', onUpdate: paint });
   gsap.to(loaderEl, {
-    yPercent: -100, duration: 1.1, ease: 'expo.inOut', delay: 0.45,
+    yPercent: -100, duration: PREVIEW ? 0.4 : 1.1, ease: 'expo.inOut', delay: PREVIEW ? 0 : 0.45,
     onComplete: () => loaderEl.remove(),
   });
   document.body.classList.remove('is-loading');
   lenis?.start();
   ScrollTrigger.refresh();
-  if (location.hash && $(location.hash)) setTimeout(() => scrollToTarget($(location.hash), true), 900);
+  if (PREVIEW) restorePreviewScroll();
+  else if (location.hash && $(location.hash)) setTimeout(() => scrollToTarget($(location.hash), true), 900);
   intro();
+}
+
+/* ------------------------------------------------------------------ */
+/* Contenu                                                             */
+/* ------------------------------------------------------------------ */
+const L = (o) => (o && typeof o === 'object' ? o[lang] || o.fr || '' : o || '');
+function t(key) {
+  const v = C?.texts?.[key];
+  if (v) return rich(v[lang] || v.fr || '', lang);
+  return FR[key] ?? '';
+}
+const visibleColorways = () => (C.colorways || []).filter((c) => c.visible !== false && c.colors);
+
+// Ce qui ne dépend pas de la langue : liens, images, événement
+function applyStatic() {
+  $$('[data-link]').forEach((a) => {
+    const url = C.links?.[a.dataset.link];
+    if (url) a.href = url;
+  });
+  $$('[data-img]').forEach((img) => {
+    const src = C.images?.[img.dataset.img];
+    if (src && img.getAttribute('src') !== src) {
+      img.src = src;
+      if (/^data:|^https?:/.test(src)) {
+        img.removeAttribute('width');
+        img.removeAttribute('height');
+      }
+    }
+  });
+  if (C.event && C.event.show === false) $('#ecsel')?.setAttribute('hidden', '');
+}
+
+// Tout ce qui s'écrit dans la langue courante
+function applyTexts() {
+  $$('[data-i18n]').forEach((el) => {
+    const v = t(el.dataset.i18n);
+    if (v && el.innerHTML !== v) el.innerHTML = v;
+  });
+  const title = C.texts?.['meta.title'];
+  if (title) document.title = title[lang] || title.fr;
+  renderStats();
+  renderStores();
+  renderReel();
+  renderSwatches();
+}
+
+function renderStats() {
+  const dl = $('#stats');
+  if (!dl || !C.stats?.length) return;
+  dl.innerHTML = C.stats
+    .map((s, i) => {
+      const f = formatStat(s.value, lang);
+      return `<div data-reveal><dt><span class="num" data-stat="${i}">${f.num}</span>${f.unit ? ` <small>${esc(f.unit)}</small>` : '<small></small>'}</dt><dd>${rich(L(s.label), lang)}</dd></div>`;
+    })
+    .join('');
+}
+
+function renderStores() {
+  const box = $('#stores');
+  if (!box || !C.stores) return;
+  const online = $('#store-online');
+  box.innerHTML = C.stores
+    .map(
+      (st, i) => `<article class="store${st.soon ? ' store--soon' : ''}" data-reveal>
+        <p class="store__n">${pad(i + 1)}</p>
+        <h3>${esc(st.name)}${st.nameAr ? ` <span lang="ar">${esc(st.nameAr)}</span>` : ''}</h3>
+        <p>${rich(L(st.text), lang)}</p>
+        ${st.soon ? `<span class="tag">${t('b.soon')}</span>` : st.maps ? `<a class="link" href="${esc(st.maps)}" target="_blank" rel="noopener">${t('b.go')}</a>` : ''}
+      </article>`,
+    )
+    .join('');
+  if (online) box.append(online);
+}
+
+function renderReel() {
+  const track = $('#reel-track');
+  if (!track || !C.reel?.length) return;
+  const link = esc(C.links?.tiktok || '#');
+  const item = (r, dup) =>
+    `<a href="${link}" target="_blank" rel="noopener"${dup ? ' aria-hidden="true" tabindex="-1"' : ''}><img class="duo" src="${esc(r.image)}" alt="${dup ? '' : esc(r.alt || '')}" loading="lazy" width="398" height="450"></a>`;
+  // la liste est doublée pour que le défilement boucle sans saut
+  track.innerHTML = C.reel.map((r) => item(r, false)).join('') + C.reel.map((r) => item(r, true)).join('');
+}
+
+let currentCw = 0;
+function renderSwatches() {
+  const box = $('#swatches');
+  const list = visibleColorways();
+  if (!box || !list.length) return;
+  currentCw = Math.min(currentCw, list.length - 1);
+  box.innerHTML = list
+    .map(
+      (c, i) => `<button type="button" role="radio" aria-checked="${i === currentCw}" data-cw="${i}" style="--a:${esc(c.colors.skin)};--b:${esc(c.colors.accent)}"><i></i><span>${esc(L(c.name))}</span></button>`,
+    )
+    .join('');
+}
+
+function selectColorway(i) {
+  const list = visibleColorways();
+  if (!list[i]) return;
+  currentCw = i;
+  $$('#swatches button').forEach((x) => x.setAttribute('aria-checked', String(+x.dataset.cw === i)));
+  if (scene) {
+    scene.setColorway(list[i].colors);
+    needsRender = true;
+  }
 }
 
 /* ------------------------------------------------------------------ */
 /* Langues                                                             */
 /* ------------------------------------------------------------------ */
-function captureFR() {
-  $$('[data-i18n]').forEach((el) => {
-    const k = el.dataset.i18n;
-    if (!(k in FR)) FR[k] = el.innerHTML;
-  });
-  Object.assign(FR, FR_EXTRA);
-}
 function pickLang() {
-  const q = new URLSearchParams(location.search).get('lang');
-  if (q && (q === 'fr' || DICT[q])) return q;
+  const q = params.get('lang');
+  if (LANGS.includes(q)) return q;
   try {
     const s = localStorage.getItem('tlemceni-lang');
-    if (s && (s === 'fr' || DICT[s])) return s;
+    if (LANGS.includes(s)) return s;
   } catch (e) { /* stockage indisponible */ }
   return 'fr';
-}
-function t(k) {
-  return (lang === 'fr' ? FR[k] : DICT[lang][k] ?? FR[k]) ?? k;
 }
 
 function setLang(next, { initial = false } = {}) {
@@ -163,16 +271,12 @@ function setLang(next, { initial = false } = {}) {
     const l = document.createElement('link');
     l.id = 'font-ar';
     l.rel = 'stylesheet';
-    l.href = 'https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300..700&display=swap';
+    l.href = 'https://fonts.googleapis.com/css2?family=Rakkas&display=swap';
     document.head.append(l);
   }
   revertSplits();
-  $$('[data-i18n]').forEach((el) => {
-    const v = t(el.dataset.i18n);
-    if (v != null && el.innerHTML !== v) el.innerHTML = v;
-  });
+  applyTexts();
   $$('.lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === next)));
-  document.title = TITLES[next] || TITLES.fr;
   try {
     localStorage.setItem('tlemceni-lang', next);
   } catch (e) { /* stockage indisponible */ }
@@ -197,19 +301,8 @@ function buildExplode() {
   const S = scene?.state, VW = scene?.view;
   const tagState = { a: 0 };
   const labels = { hero: 0 };
-  const MOVE = 1.1, HOLD = 0.95;
-  const dir = () => (rtl() ? -1 : 1);
-  const viewFor = (v) => {
-    const o = { ...v };
-    delete o.mob;
-    if (narrow()) {
-      o.sx = 0;
-      o.sy = v === HERO ? 0.12 : 0.17;
-      if (!v.spin) o.dist = v.dist * (v.mob || 1.1); // pièces écartées : plus de recul sur écran étroit
-    } else o.sx = (v.sx || 0) * dir();
-    return o;
-  };
-  if (VW) Object.assign(VW, viewFor(HERO));
+  const MOVE = 1.15, HOLD = 0.95;
+  if (VW) Object.assign(VW, HERO);
 
   // hero -> première étape
   tl.to('.hero', { autoAlpha: 0, y: -40, duration: 0.45, ease: 'power2.in' }, 0.15);
@@ -217,17 +310,15 @@ function buildExplode() {
   tl.to('.x__ar', { autoAlpha: 0, duration: 0.5 }, 0.15);
   tl.to('.x__word', { opacity: 0.45, duration: 0.6 }, 0.3);
 
-  const fallback = !scene;
   const imgA = $('#fallback img[data-v="assembled"]'), imgB = $('#fallback img[data-v="exploded"]');
-  if (fallback) tl.set(imgA, { autoAlpha: 1 }, 0);
+  if (!scene) tl.set(imgA, { autoAlpha: 1 }, 0);
 
   let t0 = 0.6;
   let prev = null;
   const ex = Object.fromEntries(PARTS.map((p) => [p, 0]));
-  const viewTweens = [];
   for (const step of STEPS) {
     const el = $(`.step[data-step="${step.id}"]`);
-    if (prev) tl.to(prev, { autoAlpha: 0, y: -24, duration: 0.3, ease: 'power1.in' }, t0);
+    if (prev) tl.to(prev, { autoAlpha: 0, y: 24, duration: 0.3, ease: 'power1.in' }, t0);
     if (step.reset) PARTS.forEach((p) => (ex[p] = 0));
     Object.assign(ex, step.ex || {});
     if (S) {
@@ -235,9 +326,7 @@ function buildExplode() {
       tl.to(S.explode, { ...ex, duration: MOVE, ease: step.reset ? 'power3.inOut' : 'power2.inOut' }, t0);
       tl.to(S.dim, { ...dim, duration: MOVE * 0.6, ease: 'power1.inOut' }, t0 + (step.reset ? 0.3 : 0));
       tl.to(S, { xray: step.xray || 0, flip: step.flip || 0, duration: MOVE, ease: 'power2.inOut' }, t0);
-      const vt = gsap.to(VW, { ...viewFor(step.view), duration: MOVE + 0.25, ease: 'power2.inOut' });
-      viewTweens.push([vt, step.view]);
-      tl.add(vt, t0);
+      tl.to(VW, { ...step.view, duration: MOVE + 0.25, ease: 'power2.inOut' }, t0);
     } else {
       const toB = !step.reset;
       tl.to(toB ? imgA : imgB, { autoAlpha: 0, duration: MOVE * 0.5 }, t0);
@@ -247,7 +336,7 @@ function buildExplode() {
     t0 += MOVE;
     labels[step.id] = t0;
     tl.set(el, { autoAlpha: 1, y: 0 }, t0 - 0.36);
-    tl.fromTo(el.children, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.36, stagger: 0.05, ease: 'power2.out', immediateRender: false }, t0 - 0.36);
+    tl.fromTo(el.children, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.36, stagger: 0.06, ease: 'power2.out', immediateRender: false }, t0 - 0.36);
     t0 += step.id === 'final' ? 0.6 : HOLD;
     prev = el;
   }
@@ -256,22 +345,6 @@ function buildExplode() {
 
   const unit = mobile ? 54 : 60; // hauteur de scroll (vh) par seconde de timeline
   section.style.height = `${Math.round(tl.duration() * unit + 100)}vh`;
-
-  // les vues changent selon la largeur et le sens de lecture : on les recalcule
-  const refreshViews = () => {
-    for (const [vt, v] of viewTweens) {
-      const o = viewFor(v);
-      vt.vars.sx = o.sx;
-      vt.vars.sy = o.sy;
-      vt.vars.dist = o.dist;
-      vt.invalidate();
-    }
-    tl.invalidate();
-    const tt = tl.time();
-    tl.time(0).time(tt);
-    if (VW && tt < 0.6) Object.assign(VW, viewFor(HERO), { spin: VW.spin });
-  };
-  document.addEventListener('langchange', refreshViews);
 
   // progression, étape courante
   const barEl = $('#progress');
@@ -306,7 +379,8 @@ function buildExplode() {
       if (Math.abs(tl.time() - lt) > 0.01) tl.time(lt);
     },
   });
-  if (location.search.includes('debug')) window.tlemceni = { tl, labels, st, scene };
+  explodeNav = { tl, labels, st };
+  if (params.has('debug')) window.tlemceni = { tl, labels, st, scene, content: C };
 
   railBtns.forEach((b) =>
     b.addEventListener('click', () => {
@@ -316,20 +390,15 @@ function buildExplode() {
     }),
   );
 
-  // coloris
-  $$('.swatches button').forEach((b) =>
-    b.addEventListener('click', () => {
-      $$('.swatches button').forEach((x) => x.setAttribute('aria-checked', String(x === b)));
-      if (scene) {
-        scene.setColorway(b.dataset.cw);
-        needsRender = true;
-      }
-    }),
-  );
+  // coloris (les boutons sont redessinés à chaque changement de langue)
+  $('#swatches')?.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-cw]');
+    if (b) selectColorway(+b.dataset.cw);
+  });
 
   if (!scene) return;
 
-  // --- repère : trait entre la carte et la pièce, pastilles numérotées sur la vue d'ensemble
+  // --- repère : trait entre la légende et la pièce, pastilles numérotées sur la vue d'ensemble
   const svg = $('#lines'), line = $('#line'), dot = $('#dot'), ring = $('#ring');
   const tagsBox = $('#tags');
   const tagEls = TAGS.map(([n]) => {
@@ -339,8 +408,8 @@ function buildExplode() {
     return s;
   });
   const stepEls = STEPS.map((s) => [s, $(`.step[data-step="${s.id}"]`)]);
-  const local = (o) => (o ? new scene.sneaker.root.position.constructor(o.x, o.y, o.z) : null);
-  const liningLocal = local(LOCAL_LINING);
+  const V3 = scene.sneaker.root.position.constructor;
+  const liningLocal = new V3(LOCAL_LINING.x, LOCAL_LINING.y, LOCAL_LINING.z);
   function overlay() {
     let active = null, alpha = 0;
     for (const [s, el] of stepEls) {
@@ -353,18 +422,9 @@ function buildExplode() {
     if (active && alpha > 0.02) {
       const [s, el] = active;
       const p = scene.project(s.anchor === 'lining' ? 'upper' : s.anchor, s.anchor === 'lining' ? liningLocal : null);
-      const title = el.querySelector('.step__t');
-      const r = title.getBoundingClientRect();
       const box = el.getBoundingClientRect();
-      let d;
-      if (narrow()) {
-        const x0 = clamp(p.x, box.left + 28, box.right - 28), y0 = box.top - 6;
-        d = `M${x0.toFixed(1)} ${y0.toFixed(1)} V${((p.y + y0) / 2).toFixed(1)} L${p.x.toFixed(1)} ${p.y.toFixed(1)}`;
-      } else {
-        const x0 = rtl() ? r.left - 22 : r.right + 22, y0 = r.top + r.height / 2;
-        const xm = x0 + (p.x - x0) * 0.45;
-        d = `M${x0.toFixed(1)} ${y0.toFixed(1)} H${xm.toFixed(1)} L${p.x.toFixed(1)} ${p.y.toFixed(1)}`;
-      }
+      const x0 = clamp(p.x, box.left + 28, box.right - 28), y0 = box.top - 6;
+      const d = `M${x0.toFixed(1)} ${y0.toFixed(1)} V${((p.y + y0) / 2).toFixed(1)} L${p.x.toFixed(1)} ${p.y.toFixed(1)}`;
       line.setAttribute('d', d);
       dot.setAttribute('cx', p.x.toFixed(1));
       dot.setAttribute('cy', p.y.toFixed(1));
@@ -387,7 +447,6 @@ function buildExplode() {
   let active = true;
   ScrollTrigger.create({ trigger: section, start: 'top bottom', end: 'bottom top', onToggle: (s) => (active = s.isActive) });
   let sig = '';
-  let needsRender = true;
   gsap.ticker.add((time, dt) => {
     if (!active || document.hidden) return;
     const v = scene.view;
@@ -407,14 +466,11 @@ function buildExplode() {
   let w = innerWidth, h = innerHeight;
   addEventListener('resize', () => {
     if (innerWidth === w && Math.abs(innerHeight - h) < 160) return;
-    const crossed = (w < 900) !== (innerWidth < 900);
     w = innerWidth;
     h = innerHeight;
     scene.resize();
-    if (crossed) refreshViews();
     needsRender = true;
   });
-  // rendu forcé après changement de langue (les cartes bougent)
   document.addEventListener('langchange', () => (needsRender = true));
 }
 
@@ -427,7 +483,7 @@ function intro() {
   gsap.from(heroKids, { autoAlpha: 0, y: 30, duration: 1, stagger: 0.08, ease: 'power3.out', delay: 0.75 });
   gsap.from('.x__word span', { yPercent: 40, autoAlpha: 0, duration: 1.4, ease: 'expo.out', delay: 0.55 });
   gsap.from('.x__glow', { autoAlpha: 0, duration: 1.4, delay: 0.4 });
-  if (scene) {
+  if (scene && !PREVIEW) {
     gsap.fromTo(scene.view, { ilift: 2.4, iry: -2.6 }, { ilift: 0, iry: 0, duration: 1.8, ease: 'power3.out', delay: 0.5 });
   }
 }
@@ -440,11 +496,10 @@ function makeSplits(animate) {
     const split = SplitText.create(el, { type: 'lines', mask: 'lines', linesClass: 'ln' });
     splits.push(split);
     if (!animate || reduce) return;
-    const tw = gsap.from(split.lines, {
+    split._tw = gsap.from(split.lines, {
       yPercent: 110, duration: 1, stagger: 0.08, ease: 'expo.out',
       scrollTrigger: { trigger: el, start: 'top 86%', once: true },
     });
-    split._tw = tw;
   });
 }
 function revertSplits() {
@@ -456,17 +511,20 @@ function revertSplits() {
   }
 }
 
+function reveal(els) {
+  if (reduce || !els.length) return;
+  gsap.set(els, { autoAlpha: 0, y: 34 });
+  ScrollTrigger.batch(els, {
+    start: 'top 90%',
+    once: true,
+    onEnter: (b) => gsap.to(b, { autoAlpha: 1, y: 0, duration: 0.9, stagger: 0.08, ease: 'power3.out', overwrite: true }),
+  });
+}
+
 function buildSections() {
   makeSplits(true);
-
-  // apparitions
+  reveal($$('[data-reveal]'));
   if (!reduce) {
-    gsap.set('[data-reveal]', { autoAlpha: 0, y: 34 });
-    ScrollTrigger.batch('[data-reveal]', {
-      start: 'top 90%',
-      once: true,
-      onEnter: (els) => gsap.to(els, { autoAlpha: 1, y: 0, duration: 0.9, stagger: 0.08, ease: 'power3.out', overwrite: true }),
-    });
     // le 13 monte et grandit
     gsap.fromTo('.manifeste__num span', { yPercent: 25, scale: 0.82 }, {
       yPercent: -8, scale: 1, ease: 'none',
@@ -483,31 +541,38 @@ function buildSections() {
       gsap.to(paths, { strokeDashoffset: 0, duration: 1.4, stagger: 0.12, ease: 'power2.inOut', scrollTrigger: { trigger: li, start: 'top 85%', once: true } });
     });
   }
-
+  counters();
   buildUnivers();
   document.addEventListener('langchange', () => {
     makeSplits(false);
+    counters(true);
     buildUnivers();
     ScrollTrigger.refresh();
   });
-
-  // chiffres
-  $$('[data-count]').forEach((el) => {
-    const to = parseFloat(el.dataset.count), dec = +el.dataset.dec || 0;
-    const fmt = (v) => v.toFixed(dec).replace('.', lang === 'en' ? '.' : ',');
-    if (reduce) return;
-    const o = { v: 0 };
-    el.textContent = fmt(0);
-    gsap.to(o, {
-      v: to, duration: 1.8, ease: 'power3.out', onUpdate: () => (el.textContent = fmt(o.v)),
-      scrollTrigger: { trigger: el, start: 'top 90%', once: true },
-    });
-    document.addEventListener('langchange', () => (el.textContent = fmt(o.v || to)));
-  });
-
   sizeGuide();
   countdown();
   form();
+}
+
+// Chiffres de la communauté : ils défilent jusqu'à leur valeur quand ils apparaissent.
+let counterTriggers = [];
+function counters(instant = false) {
+  counterTriggers.forEach((s) => s.kill());
+  counterTriggers = [];
+  $$('#stats [data-stat]').forEach((el) => {
+    const s = C.stats[+el.dataset.stat];
+    const unit = el.nextElementSibling;
+    const paint = (v) => {
+      const f = formatStat(v, lang);
+      el.textContent = f.num;
+      if (unit) unit.textContent = f.unit;
+    };
+    if (reduce || instant) return paint(s.value);
+    const o = { v: 0 };
+    paint(0);
+    const tw = gsap.to(o, { v: s.value, duration: 1.8, ease: 'power3.out', onUpdate: () => paint(o.v), scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
+    counterTriggers.push(tw.scrollTrigger);
+  });
 }
 
 // Univers : défilement horizontal épinglé sur ordinateur, cartes empilées sur mobile.
@@ -523,10 +588,10 @@ function buildUnivers() {
   const dist = () => Math.max(0, track.scrollWidth - innerWidth);
   const tw = gsap.to(track, { x: () => (rtl() ? dist() : -dist()), ease: 'none' });
   universST = ScrollTrigger.create({
-    trigger: '.univers',
+    trigger: '.univers__pin',
     start: 'top top',
     end: () => `+=${dist()}`,
-    pin: '.univers__pin',
+    pin: true,
     scrub: 0.8,
     animation: tw,
     invalidateOnRefresh: true,
@@ -546,12 +611,12 @@ function sizeGuide() {
   }
   ruler.innerHTML = html;
   const update = () => {
-    const L = parseFloat(range.value);
-    const size = Math.round(1.5 * (L + 1.5) - 0.25);
-    cm.textContent = `${L.toFixed(1).replace('.', lang === 'en' ? '.' : ',')} ${lang === 'ar' ? 'سم' : 'cm'}`;
+    const len = parseFloat(range.value);
+    const size = Math.round(1.5 * (len + 1.5) - 0.25);
+    cm.textContent = `${len.toFixed(1).replace('.', lang === 'en' ? '.' : ',')} ${lang === 'ar' ? 'سم' : 'cm'}`;
     eu.textContent = size;
-    g.style.transform = `scale(${(L / 32).toFixed(3)})`;
-    measure.setAttribute('d', `M200 ${HEEL} V ${(HEEL - L * PX).toFixed(1)}`);
+    g.style.transform = `scale(${(len / 32).toFixed(3)})`;
+    measure.setAttribute('d', `M200 ${HEEL} V ${(HEEL - len * PX).toFixed(1)}`);
   };
   range.addEventListener('input', update);
   document.addEventListener('langchange', update);
@@ -559,8 +624,8 @@ function sizeGuide() {
 }
 
 function countdown() {
-  const start = Date.UTC(2026, 9, 7, 8, 0); // 7 octobre 2026, 9 h à Alger
-  const end = Date.UTC(2026, 9, 10, 18, 0);
+  const start = algiersTime(C.event?.start) || Date.UTC(2026, 9, 7, 8, 0);
+  const end = algiersTime(C.event?.end) || Date.UTC(2026, 9, 10, 18, 0);
   const d = $('#cd-d'), h = $('#cd-h'), m = $('#cd-m'), box = $('#count'), done = $('#count-done');
   const tick = () => {
     const now = Date.now();
@@ -576,15 +641,15 @@ function countdown() {
     s -= dd * 86400;
     const hh = Math.floor(s / 3600);
     s -= hh * 3600;
-    const mm = Math.floor(s / 60);
-    d.textContent = String(dd).padStart(2, '0');
-    h.textContent = String(hh).padStart(2, '0');
-    m.textContent = String(mm).padStart(2, '0');
+    d.textContent = pad(dd);
+    h.textContent = pad(hh);
+    m.textContent = pad(Math.floor(s / 60));
   };
   tick();
   setInterval(tick, 20000);
 }
 
+// Formulaire revendeurs : ouvre WhatsApp avec la demande si un numéro est renseigné dans l'admin.
 function form() {
   const f = $('#form'), ok = $('#form-ok');
   f.addEventListener('submit', (e) => {
@@ -600,7 +665,13 @@ function form() {
       bad.focus();
       return;
     }
-    // démo : rien n'est envoyé
+    const wa = String(C.links?.whatsapp || '').replace(/\D/g, '');
+    if (wa) {
+      const fd = new FormData(f);
+      const uni = fd.getAll('univers').join(', ') || '—';
+      const txt = `Bonjour Tlemceni,\n\nDemande revendeur\nNom : ${fd.get('nom')}\nTéléphone : ${fd.get('tel')}\nVille / pays : ${fd.get('ville') || '—'}\nProfil : ${fd.get('profil')}\nIntéressé par : ${uni}`;
+      open(`https://wa.me/${wa}?text=${encodeURIComponent(txt)}`, '_blank', 'noopener');
+    }
     ok.hidden = false;
     f.reset();
     if (!reduce) gsap.from(ok, { autoAlpha: 0, y: 10, duration: 0.5 });
@@ -625,8 +696,7 @@ function buildNav() {
       last = y;
     },
   });
-  const links = $$('.nav__links a');
-  links.forEach((a) => {
+  $$('.nav__links a').forEach((a) => {
     const sec = $(a.getAttribute('href'));
     if (!sec) return;
     ScrollTrigger.create({
@@ -654,6 +724,39 @@ function bindLinks() {
     e.preventDefault();
     scrollToTarget(target);
   });
+}
+
+/* ------------------------------------------------------------------ */
+/* Aperçu dans l'espace admin                                          */
+/* ------------------------------------------------------------------ */
+function setupPreview() {
+  addEventListener('message', (e) => {
+    if (e.origin !== location.origin || !e.data) return;
+    if (e.data.type === 'goto') {
+      const tg = String(e.data.target || '');
+      if (tg.startsWith('step:') && explodeNav) {
+        const { labels, st, tl } = explodeNav;
+        const y = st.start + ((labels[tg.slice(5)] ?? 0) / tl.duration()) * (st.end - st.start) + 2;
+        if (lenis) lenis.scrollTo(y, { immediate: true });
+        else scrollTo(0, y);
+      } else if (tg.startsWith('#') && $(tg)) scrollToTarget($(tg), true);
+    }
+    if (e.data.type === 'colorway') selectColorway(+e.data.index || 0);
+    if (e.data.type === 'lang' && LANGS.includes(e.data.lang)) setLang(e.data.lang);
+  });
+  addEventListener('scroll', () => {
+    try {
+      sessionStorage.setItem('tlemceni:preview-scroll', String(scrollY));
+    } catch {}
+  }, { passive: true });
+}
+function restorePreviewScroll() {
+  let y = 0;
+  try {
+    y = Number(sessionStorage.getItem('tlemceni:preview-scroll') || 0);
+  } catch {}
+  if (y) (lenis ? lenis.scrollTo(y, { immediate: true }) : scrollTo(0, y));
+  if (parent !== window) parent.postMessage({ type: 'preview-ready' }, location.origin);
 }
 
 function studioCredit() {
