@@ -332,9 +332,9 @@
       "en": "The tongue"
     },
     "s2.d": {
-      "fr": "En mesh, avec une tirette pour l'enfiler et deux passants qui gardent le lacet bien au centre.",
-      "ar": "من النسيج الشبكي، مع حلقة لسحبه عند اللبس وحلقتين تُبقيان الرباط في الوسط.",
-      "en": "Mesh, with a pull tab to slip it on and two loops that keep the lace centred."
+      "fr": "En mesh, avec une tirette pour l'enfiler, deux passants qui gardent le lacet au centre et le kangourou de la marque.",
+      "ar": "من النسيج الشبكي، مع حلقة لسحبه عند اللبس، وحلقتين تُبقيان الرباط في الوسط، وشعار الكنغر الخاص بالعلامة.",
+      "en": "Mesh, with a pull tab to slip it on, two loops that keep the lace centred and the brand's kangaroo."
     },
     "s2.c1": {
       "fr": "Tirette",
@@ -542,9 +542,9 @@
       "en": "Shoes"
     },
     "u1.d": {
-      "fr": "Baskets, sandales, claquettes et chaussures médicales en cuir naturel. Plusieurs marques, une même exigence de confort.",
-      "ar": "أحذية رياضية، صنادل، شلاكات وأحذية طبية من الجلد الطبيعي. عدّة علامات، ونفس الحرص على الراحة.",
-      "en": "Sneakers, sandals, slides and medical shoes in natural leather. Several brands, the same focus on comfort."
+      "fr": "Baskets, sandales, claquettes et chaussures médicales en cuir naturel. Plusieurs marques, dont Kangaroo, une même exigence de confort.",
+      "ar": "أحذية رياضية، صنادل، شلاكات وأحذية طبية من الجلد الطبيعي. عدّة علامات، منها Kangaroo، ونفس الحرص على الراحة.",
+      "en": "Sneakers, sandals, slides and medical shoes in natural leather. Several brands, including Kangaroo, the same focus on comfort."
     },
     "u1.l1": {
       "fr": "Baskets",

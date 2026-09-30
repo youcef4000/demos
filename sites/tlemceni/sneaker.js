@@ -1538,7 +1538,8 @@ export function createSneaker({ quality = 1 } = {}) {
   }
 
   /* ---------------- décor des textures selon le coloris ---------------- */
-  function drawTongue(cw) {
+  // `logos` : logos de la marque relevés sur les photos (coloris photo), sinon monogramme dessiné
+  function drawTongue(cw, logos = null) {
     const c = tongueColor, ctx = c.getContext('2d'), W = c.width, H = c.height;
     // maille respirante (u = travers, v = long ; le haut de la languette est en haut du canvas)
     ctx.fillStyle = ctx.createPattern(netTile(W * 0.05, cw.tongue, cw.perf), 'repeat');
@@ -1568,23 +1569,48 @@ export function createSneaker({ quality = 1 } = {}) {
     ctx.restore();
     ctx.save();
     ctx.translate(W / 2, H * 0.19);
-    ctx.rotate(PI);
-    ctx.fillStyle = cw.label;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    crownPath(ctx, 0, -H * 0.03, W * 0.1);
-    ctx.fill();
-    ctx.font = `800 ${Math.round(W * 0.09)}px Archivo, Arial, sans-serif`;
-    ctx.fillText('13', 0, H * 0.018);
+    if (logos) {
+      // kangourou gris foncé, comme sur la languette du modèle
+      const img = tint(logos.tongue, shadeHex(cw.line, -0.2));
+      ctx.scale(-1, 1);
+      ctx.drawImage(img, -W * 0.23, -H * 0.042, W * 0.46, H * 0.084);
+    } else {
+      ctx.rotate(PI);
+      ctx.fillStyle = cw.label;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      crownPath(ctx, 0, -H * 0.03, W * 0.1);
+      ctx.fill();
+      ctx.font = `800 ${Math.round(W * 0.09)}px Archivo, Arial, sans-serif`;
+      ctx.fillText('13', 0, H * 0.018);
+    }
     ctx.restore();
   }
-  function drawInsole(cw) {
+  // logo (blanc sur transparent) recoloré
+  function tint(img, color) {
+    const c = makeCanvas(img.width, img.height), x = c.getContext('2d');
+    x.drawImage(img, 0, 0);
+    x.globalCompositeOperation = 'source-in';
+    x.fillStyle = color;
+    x.fillRect(0, 0, c.width, c.height);
+    return c;
+  }
+  function drawInsole(cw, logos = null) {
     const c = insoleColor, ctx = c.getContext('2d'), W = c.width, H = c.height;
     ctx.fillStyle = cw.insole;
     ctx.fillRect(0, 0, W, H);
     // tissu de propreté : fines côtes
     ctx.fillStyle = 'rgba(255,255,255,0.035)';
     for (let y = 0; y < H; y += 4) ctx.fillRect(0, y, W, 1.5);
+    if (logos) {
+      // marquage du modèle : KANGAROO et la pointure, en blanc, côté talon
+      ctx.save();
+      ctx.translate(W * 0.205, H * 0.5);
+      ctx.scale(-1, 1);
+      ctx.drawImage(tint(logos.insole, cw.insoleInk), -W * 0.126, -H * 0.1, W * 0.252, H * 0.2);
+      ctx.restore();
+      return;
+    }
     // marquage blanc, lisible depuis le dessus, pointe vers la droite
     ctx.save();
     ctx.translate(W * 0.34, H * 0.5);
@@ -1691,19 +1717,31 @@ export function createSneaker({ quality = 1 } = {}) {
   function loadPhotoMaps() {
     if (!photoMaps) {
       const loader = new THREE.TextureLoader();
-      photoMaps = Promise.all(
-        Object.entries(PHOTO_MAPS).map(async ([k, f]) => {
+      const img = async (f) => {
+        const im = new Image();
+        im.src = new URL(`./img/tex/${f}.webp`, import.meta.url).href;
+        await im.decode();
+        return im;
+      };
+      photoMaps = Promise.all([
+        ...Object.entries(PHOTO_MAPS).map(async ([k, f]) => {
           const t = await loader.loadAsync(new URL(`./img/tex/${f}${hi ? '' : '-m'}.webp`, import.meta.url).href);
           t.colorSpace = THREE.SRGBColorSpace;
           t.anisotropy = 8;
           return [k, keep(t)];
         }),
-      ).then(Object.fromEntries);
+        Promise.all([img('logo-languette'), img('logo-semelle')]).then(([tongue, insole]) => ['logos', { tongue, insole }]),
+      ]).then(Object.fromEntries);
     }
     return photoMaps;
   }
   function usePhoto(maps) {
     for (const [k, m] of Object.entries(photoMats)) m.map = maps ? maps[k] : drawnMaps[k];
+    // logos de la marque (Kangaroo) sur la languette et la semelle intérieure
+    drawTongue(lastCw, maps && maps.logos);
+    matTongue.map.needsUpdate = true;
+    drawInsole(lastCw, maps && maps.logos);
+    matInsole.map.needsUpdate = true;
     // relief des crampons tiré de la photo du dessous (le rouge est clair sur la gomme, sombre dans les creux)
     matOut.bumpMap = maps ? maps.outsole : null;
     matOut.bumpScale = 3;
@@ -1711,6 +1749,7 @@ export function createSneaker({ quality = 1 } = {}) {
     pOut.bottomLugs.forEach((m) => (m.visible = !maps)); // les crampons sont dans la photo du dessous
   }
   let colorSeq = 0;
+  let lastCw = null;
 
   // `which` : nom d'un coloris intégré, ou palette { mesh, skin, line, accent, ... } venue de l'admin.
   // Avec `photo`, les pièces prennent les textures photo une fois chargées (promesse renvoyée).
@@ -1718,6 +1757,7 @@ export function createSneaker({ quality = 1 } = {}) {
   function setColorway(which, { photo = false } = {}) {
     const base = typeof which === 'string' ? COLORWAYS[which] || COLORWAYS.trail : which || COLORWAYS.trail;
     const cw = derive(base);
+    lastCw = cw;
     drawUpper(cw, 'color');
     upperMap.needsUpdate = true;
     drawCounter(counterColor, cw);
