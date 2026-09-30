@@ -6,6 +6,14 @@
   },
   "demos": [
     {
+      "slug": "tlemceni",
+      "title": "Tlemceni — la basket, pièce par pièce",
+      "sector": "Chaussures & mode",
+      "city": "Alger",
+      "color": "#d21f2b",
+      "public": false
+    },
+    {
       "slug": "stickprod",
       "title": "Stickprod — la spirale des réalisations",
       "sector": "Production audiovisuelle",

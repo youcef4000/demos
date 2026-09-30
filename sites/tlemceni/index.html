@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tlemceni — Chaussures, qamis et parfums fabriqués en Algérie</title>
+<meta name="description" content="Tlemceni (التلمساني) : baskets, sandales, claquettes et chaussures en cuir naturel fabriquées en Algérie, qamis et parfums. Faites défiler : la basket se démonte pièce par pièce.">
+<meta name="theme-color" content="#0b0b0c">
+<link rel="canonical" href="https://demos.bornzstudio.com/tlemceni/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="ar_DZ">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:site_name" content="Tlemceni">
+<meta property="og:url" content="https://demos.bornzstudio.com/tlemceni/">
+<meta property="og:title" content="Tlemceni — Fabriqué en Algérie, pièce par pièce">
+<meta property="og:description" content="Faites défiler : la basket Tlemceni se démonte sous vos yeux, du lacet à la semelle. Chaussures, qamis et parfums.">
+<meta property="og:image" content="https://demos.bornzstudio.com/tlemceni/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="La basket Tlemceni en vue éclatée : lacets, languette, tige, renforts et semelles séparés">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tlemceni — Fabriqué en Algérie, pièce par pièce">
+<meta name="twitter:description" content="La basket Tlemceni se démonte au scroll, du lacet à la semelle.">
+<meta name="twitter:image" content="https://demos.bornzstudio.com/tlemceni/img/og.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230b0b0c' stroke='%23d21f2b' stroke-width='4'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial Black,Arial' font-weight='900' font-size='26' fill='%23f3efe8'%3E13%3C/text%3E%3Cpath d='M22 17l4 3 6-6 6 6 4-3v6H22z' fill='%23d8b56a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap">
+<link rel="stylesheet" href="./style.css">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.core.js">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
+  }
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
+<script type="module" src="./app.js"></script>
+</head>
+<body class="is-loading">
+<svg class="svg-defs" aria-hidden="true" focusable="false"><filter id="duotone" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncR type="table" tableValues="0.05 0.62 0.98"/><feFuncG type="table" tableValues="0.04 0.1 0.93"/><feFuncB type="table" tableValues="0.05 0.13 0.88"/></feComponentTransfer></filter></svg>
+<a class="skip" href="#manifeste" data-i18n="skip">Passer l'animation 3D</a>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__mark">
+    <span class="loader__ar" lang="ar">التلمساني</span>
+    <span class="loader__num"><b id="pct">0</b></span>
+  </div>
+  <div class="loader__foot">
+    <span data-i18n="loader">On lace la paire…</span>
+    <span class="loader__lat">TLEMCENI · 13</span>
+  </div>
+  <div class="loader__bar"><i id="loader-bar"></i></div>
+</div>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="Tlemceni, retour en haut">
+    <span class="brand__seal" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18.5"/><path d="M13 12.5l3 2.2 4-4.4 4 4.4 3-2.2v4.2H13z"/><text x="20" y="30">13</text></svg></span>
+    <span class="brand__ar" lang="ar">التلمساني</span>
+    <span class="brand__lat">Tlemceni</span>
+  </a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="#eclate" data-i18n="nav.eclate">La basket</a>
+    <a href="#univers" data-i18n="nav.univers">Univers</a>
+    <a href="#usine" data-i18n="nav.usine">L'usine</a>
+    <a href="#pro" data-i18n="nav.pro">Revendeurs</a>
+    <a href="#boutiques" data-i18n="nav.boutiques">Boutiques</a>
+  </nav>
+  <div class="lang" role="group" aria-label="Langue / اللغة / Language">
+    <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+    <button type="button" data-lang="ar" aria-pressed="false" lang="ar">ع</button>
+    <button type="button" data-lang="en" aria-pressed="false">EN</button>
+  </div>
+  <a class="btn btn--small btn--red nav__cta" href="https://tlemcenii.set.shop/" target="_blank" rel="noopener" data-i18n="cta.order">Commander</a>
+</header>
+
+<main id="top">
+
+  <!-- ============ LA BASKET, PIÈCE PAR PIÈCE ============ -->
+  <section class="x" id="eclate" aria-label="La basket Tlemceni, pièce par pièce">
+    <div class="x__stage">
+      <div class="x__bg" aria-hidden="true">
+        <div class="x__glow"></div>
+        <p class="x__word"><span>TLEMCENI</span></p>
+        <p class="x__ar" lang="ar">التلمساني</p>
+      </div>
+      <canvas class="x__canvas" id="scene" aria-hidden="true"></canvas>
+      <div class="x__fallback" id="fallback" aria-hidden="true">
+        <img src="img/basket.webp" alt="" data-v="assembled" width="1140" height="528">
+        <img src="img/eclate.webp" alt="" data-v="exploded" width="1084" height="1198">
+      </div>
+      <svg class="x__lines" id="lines" aria-hidden="true"><path id="line" d=""/><circle id="dot" r="5"/><circle id="ring" r="14"/></svg>
+      <div class="x__tags" id="tags" aria-hidden="true"></div>
+
+      <div class="x__ui">
+        <div class="hero">
+          <p class="eyebrow hero__eyebrow"><span class="dotlive"></span><span data-i18n="hero.eyebrow">Chaussures · Qamis · Parfums — Algérie</span></p>
+          <h1 class="hero__title" data-i18n="hero.title">Fabriqué en Algérie.<br><em>Porté partout.</em></h1>
+          <p class="hero__lead" data-i18n="hero.lead">Des chaussures sorties de notre usine, une communauté de plus de 236&nbsp;000 abonnés. Faites défiler&nbsp;: la basket se démonte sous vos yeux.</p>
+          <div class="hero__meta">
+            <span class="chip" data-i18n="hero.chip1">Cuir naturel</span>
+            <span class="chip" data-i18n="hero.chip2">Fabrication locale</span>
+            <span class="chip" data-i18n="hero.chip3">Chevalley · Douéra</span>
+          </div>
+        </div>
+        <div class="scroll-hint" aria-hidden="true"><i></i><span data-i18n="hero.scroll">Faites défiler pour démonter</span></div>
+
+        <ol class="steps" id="steps">
+          <li class="step" data-step="laces">
+            <p class="step__n">01 <i>/ 08</i></p>
+            <h2 class="step__t" data-i18n="s1.t">Les lacets</h2>
+            <p class="step__d" data-i18n="s1.d">Lacets tressés et embouts gainés, six paires d'œillets métal&nbsp;: un laçage qui tient toute la journée.</p>
+            <p class="step__c"><span data-i18n="s1.c1">Tressés</span><span data-i18n="s1.c2">Œillets métal</span></p>
+          </li>
+          <li class="step" data-step="tongue">
+            <p class="step__n">02 <i>/ 08</i></p>
+            <h2 class="step__t" data-i18n="s2.t">La languette</h2>
+            <p class="step__d" data-i18n="s2.d">Rembourrée pour protéger le cou-de-pied du serrage. Elle porte notre étiquette tissée, en arabe.</p>
+            <p class="step__c"><span data-i18n="s2.c1">Rembourrée</span><span data-i18n="s2.c2">Étiquette tissée</span></p>
+          </li>
+          <li class="step" data-step="renforts">
+            <p class="step__n">03 <i>/ 08</i></p>
+            <h2 class="step__t" data-i18n="s3.t">Les renforts</h2>
+            <p class="step__d" data-i18n="s3.d">Un contrefort qui tient le talon, un bout renforcé contre l'usure. Le 13 de Tlemcen est gravé à l'arrière.</p>
+            <p class="step__c"><span data-i18n="s3.c1">Maintien du talon</span><span data-i18n="s3.c2">Anti-usure</span></p>
+          </li>
+          <li class="step" data-step="tige">
+            <p class="step__n">04 <i>/ 08</i></p>
+            <h2 class="step__t" data-i18n="s4.t">La tige</h2>
+            <p class="step__d" data-i18n="s4.d">Cuir naturel, coutures doubles et perforations au bout pour laisser respirer le pied. Sur le côté, notre sceau.</p>
+            <p class="step__c"><span data-i18n="s4.c1">Cuir naturel</span><span data-i18n="s4.c2">Coutures doubles</span><span data-i18n="s4.c3">Perforée</span></p>
+          </li>
+          <li class="step" data-step="doublure">
+            <p class="step__n">05 <i>/ 08</i></p>
+            <h2 class="step__t" data-i18n="s5.t">La doublure</h2>
+            <p class="step__d" data-i18n="s5.d">À l'intérieur, une maille respirante, douce contre la peau, qui évacue la chaleur et évite les frottements.</p>
+            <p class="step__c"><span data-i18n="s5.c1">Respirante</span><span data-i18n="s5.c2">Anti-frottement</span></p>
+          </li>
+          <li class="step" data-step="semelle">
+            <p class="step__n">06 <i>/ 08</i></p>
+            <h2 class="step__t" data-i18n="s6.t">La semelle anatomique</h2>
+            <p class="step__d" data-i18n="s6.d">Elle épouse la voûte plantaire et amortit chaque pas. Un souci de «&nbsp;<bdi lang="ar">مشطة</bdi>&nbsp;»&nbsp;? C'est ici que tout se joue.</p>
+            <p class="step__c"><span data-i18n="s6.c1">Soutien de la voûte</span><span data-i18n="s6.c2">Amovible</span></p>
+          </li>
+          <li class="step" data-step="amorti">
+            <p class="step__n">07 <i>/ 08</i></p>
+            <h2 class="step__t" data-i18n="s7.t">L'amorti</h2>
+            <p class="step__d" data-i18n="s7.d">Une semelle intermédiaire légère, plus épaisse au talon, qui absorbe les chocs de la marche et des longues journées debout.</p>
+            <p class="step__c"><span data-i18n="s7.c1">Légère</span><span data-i18n="s7.c2">Absorbe les chocs</span></p>
+          </li>
+          <li class="step" data-step="adherence">
+            <p class="step__n">08 <i>/ 08</i></p>
+            <h2 class="step__t" data-i18n="s8.t">L'adhérence</h2>
+            <p class="step__d" data-i18n="s8.d">Caoutchouc cranté, rainures de flexion à l'avant du pied… et notre 13 couronné, sous chaque pas.</p>
+            <p class="step__c"><span data-i18n="s8.c1">Antidérapante</span><span data-i18n="s8.c2">Flexible</span></p>
+          </li>
+          <li class="step step--wide" data-step="ensemble">
+            <p class="step__n" data-i18n="s9.n">Vue d'ensemble</p>
+            <h2 class="step__t" data-i18n="s9.t">Neuf pièces. Une seule paire.</h2>
+            <p class="step__d" data-i18n="s9.d">Chaque pièce est coupée, piquée et assemblée à l'usine, en Algérie.</p>
+          </li>
+          <li class="step step--final" data-step="final">
+            <p class="step__n" data-i18n="s10.n">Runner 13</p>
+            <h2 class="step__t" data-i18n="s10.t">Assemblée chez nous.<br>Choisissez sa couleur.</h2>
+            <div class="swatches" role="radiogroup" aria-label="Coloris">
+              <button type="button" role="radio" aria-checked="true" data-cw="blanc" style="--a:#f1eee8;--b:#c8102e"><i></i><span data-i18n="cw.blanc">Blanc 13</span></button>
+              <button type="button" role="radio" aria-checked="false" data-cw="noir" style="--a:#1c1c1e;--b:#c8102e"><i></i><span data-i18n="cw.noir">Noir total</span></button>
+              <button type="button" role="radio" aria-checked="false" data-cw="sable" style="--a:#d8c6a4;--b:#8a5a33"><i></i><span data-i18n="cw.sable">Sable</span></button>
+              <button type="button" role="radio" aria-checked="false" data-cw="corail" style="--a:#cfd2d4;--b:#f06449"><i></i><span data-i18n="cw.corail">Gris corail</span></button>
+            </div>
+            <p class="step__cta"><a class="btn btn--red" href="https://tlemcenii.set.shop/" target="_blank" rel="noopener" data-i18n="cta.shop">Voir la boutique en ligne</a><a class="link" href="#univers" data-i18n="cta.univers">Tous nos univers ↓</a></p>
+            <p class="step__note" data-i18n="s10.note">Modèle 3D d'illustration.</p>
+          </li>
+        </ol>
+
+        <nav class="rail" aria-label="Aller à une pièce">
+          <button type="button" data-go="laces"><i></i><span data-i18n="s1.t">Les lacets</span></button>
+          <button type="button" data-go="tongue"><i></i><span data-i18n="s2.t">La languette</span></button>
+          <button type="button" data-go="renforts"><i></i><span data-i18n="s3.t">Les renforts</span></button>
+          <button type="button" data-go="tige"><i></i><span data-i18n="s4.t">La tige</span></button>
+          <button type="button" data-go="doublure"><i></i><span data-i18n="s5.t">La doublure</span></button>
+          <button type="button" data-go="semelle"><i></i><span data-i18n="s6.t">La semelle anatomique</span></button>
+          <button type="button" data-go="amorti"><i></i><span data-i18n="s7.t">L'amorti</span></button>
+          <button type="button" data-go="adherence"><i></i><span data-i18n="s8.t">L'adhérence</span></button>
+          <button type="button" data-go="final"><i></i><span data-i18n="s10.n">Runner 13</span></button>
+        </nav>
+        <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LE 13 ============ -->
+  <section class="manifeste light" id="manifeste">
+    <div class="wrap manifeste__grid">
+      <div class="manifeste__num" aria-hidden="true"><span>13</span></div>
+      <div class="manifeste__body">
+        <p class="eyebrow" data-reveal data-i18n="m.eyebrow">Le 13</p>
+        <p class="manifeste__text" data-split data-i18n="m.text">13, c'est le code de Tlemcen. La ville dont nous portons le nom, brodé sur chaque paire et gravé sous chaque semelle.</p>
+        <ul class="facts">
+          <li data-reveal><b data-i18n="m.f1t">Fabrication locale</b><span data-i18n="m.f1d">Notre propre usine, en Algérie&nbsp;: nous maîtrisons chaque étape, du cuir à la boîte.</span></li>
+          <li data-reveal><b data-i18n="m.f2t">Cuir naturel</b><span data-i18n="m.f2d">Nos chaussures «&nbsp;médicales&nbsp;» sont en cuir 100&nbsp;% naturel, pensées pour le confort au quotidien.</span></li>
+          <li data-reveal><b data-i18n="m.f3t">Trois univers</b><span data-i18n="m.f3d">Chaussures, qamis et parfums&nbsp;: tout ce qu'il faut pour s'habiller, sous un seul nom.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TROIS MAISONS ============ -->
+  <section class="univers" id="univers">
+    <div class="univers__pin">
+      <header class="univers__head wrap">
+        <p class="eyebrow" data-i18n="u.eyebrow">Nos univers</p>
+        <h2 class="h2" data-split data-i18n="u.title">Trois maisons, un seul nom.</h2>
+      </header>
+      <div class="univers__track">
+        <article class="uni uni--shoes">
+          <div class="uni__media">
+            <img class="uni__hero" src="img/r-runner-blanc.webp" alt="Basket Runner 13 blanche, contrefort rouge" loading="lazy" width="1336" height="649">
+            <div class="uni__minis">
+              <img src="img/r-sandale.webp" alt="Sandale en cuir" loading="lazy" width="648" height="453">
+              <img src="img/r-claquette.webp" alt="Claquette" loading="lazy" width="650" height="454">
+              <img src="img/r-runner-corail.webp" alt="Basket Runner 13 gris et corail" loading="lazy" width="672" height="316">
+            </div>
+          </div>
+          <div class="uni__body">
+            <p class="uni__k">01 · <span lang="ar">أحذية</span></p>
+            <h3 class="uni__t" data-i18n="u1.t">Chaussures</h3>
+            <p class="uni__d" data-i18n="u1.d">Baskets, sandales, claquettes et chaussures médicales en cuir naturel. Plusieurs marques, une même exigence de confort.</p>
+            <ul class="uni__list"><li data-i18n="u1.l1">Baskets</li><li data-i18n="u1.l2">Sandales</li><li data-i18n="u1.l3">Claquettes</li><li data-i18n="u1.l4">Médicales cuir</li></ul>
+            <a class="link" href="https://tlemcenii.set.shop/" target="_blank" rel="noopener" data-i18n="u.cta">Voir la collection →</a>
+          </div>
+        </article>
+        <article class="uni uni--qamis">
+          <div class="uni__media">
+            <img class="uni__hero" src="img/r-qamis.webp" alt="Qamis blanc sur cintre, broderie au col" loading="lazy" width="721" height="912">
+            <div class="uni__minis">
+              <img class="duo" src="img/tk-qamis.webp" alt="En boutique, présentation des qamis (extrait TikTok)" loading="lazy" width="396" height="360">
+            </div>
+          </div>
+          <div class="uni__body">
+            <p class="uni__k">02 · <span lang="ar">أقمصة</span></p>
+            <h3 class="uni__t" data-i18n="u2.t">Qamis</h3>
+            <p class="uni__d" data-i18n="u2.d">Des qamis pour le quotidien, le vendredi et les fêtes. Coupes classiques ou modernes, à essayer en boutique.</p>
+            <ul class="uni__list"><li data-i18n="u2.l1">Classiques</li><li data-i18n="u2.l2">Modernes</li><li data-i18n="u2.l3">Fêtes</li></ul>
+            <a class="link" href="https://www.tiktok.com/@tlemceniqamis" target="_blank" rel="noopener" data-i18n="u2.cta">Voir sur TikTok →</a>
+          </div>
+        </article>
+        <article class="uni uni--parfums">
+          <div class="uni__media">
+            <img class="uni__hero" src="img/r-parfum.webp" alt="Flacon de parfum ambré, bouchon doré" loading="lazy" width="630" height="767">
+            <div class="uni__minis">
+              <img class="duo" src="img/tk-coffret.webp" alt="Coffret de six parfums (extrait TikTok)" loading="lazy" width="396" height="434">
+              <img class="duo" src="img/tk-parfum.webp" alt="Flacon et boîte de parfum (extrait TikTok)" loading="lazy" width="396" height="450">
+            </div>
+          </div>
+          <div class="uni__body">
+            <p class="uni__k">03 · <span lang="ar">عطور</span></p>
+            <h3 class="uni__t" data-i18n="u3.t">Parfums</h3>
+            <p class="uni__d" data-i18n="u3.d">Senteurs orientales, musc et coffrets cadeaux. Le parfum qui accompagne le qamis, disponible dans les mêmes boutiques.</p>
+            <ul class="uni__list"><li data-i18n="u3.l1">Orientaux</li><li data-i18n="u3.l2">Musc</li><li data-i18n="u3.l3">Coffrets</li></ul>
+            <a class="link" href="https://www.tiktok.com/@tlemceniqamis" target="_blank" rel="noopener" data-i18n="u2.cta">Voir sur TikTok →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ L'USINE ============ -->
+  <section class="usine light" id="usine">
+    <div class="wrap">
+      <header class="usine__head">
+        <p class="eyebrow" data-reveal data-i18n="f.eyebrow">L'usine</p>
+        <h2 class="h2" data-split data-i18n="f.title">De la peau à la paire.</h2>
+        <p class="usine__lead" data-reveal data-i18n="f.lead">Nous ne revendons pas des chaussures&nbsp;: nous les fabriquons. Voici le chemin d'une paire dans notre usine.</p>
+      </header>
+      <ol class="process">
+        <li class="proc" data-reveal>
+          <svg viewBox="0 0 120 90" aria-hidden="true"><path class="d" d="M14 70 C 24 40, 50 26, 80 30 C 98 32, 108 44, 106 58 L 104 70 Z"/><path class="d" d="M30 70 L 30 52 M 50 70 L 50 42 M 70 70 L 70 36 M 90 70 L 90 44"/><path class="d thin" d="M8 78 H 112"/></svg>
+          <span class="proc__n">01</span><h3 data-i18n="f.1t">Le patronage</h3><p data-i18n="f.1d">Chaque modèle est dessiné puis découpé en gabarits, pointure par pointure.</p>
+        </li>
+        <li class="proc" data-reveal>
+          <svg viewBox="0 0 120 90" aria-hidden="true"><path class="d" d="M10 62 L 60 18 L 110 62 Z"/><path class="d" d="M36 64 C 46 50, 74 50, 84 64"/><circle class="d" cx="38" cy="30" r="7"/><circle class="d" cx="38" cy="50" r="7"/><path class="d" d="M44 34 L 70 44 M 44 46 L 70 36"/></svg>
+          <span class="proc__n">02</span><h3 data-i18n="f.2t">La coupe</h3><p data-i18n="f.2d">Le cuir est choisi, contrôlé, puis coupé à l'emporte-pièce sans perdre un centimètre.</p>
+        </li>
+        <li class="proc" data-reveal>
+          <svg viewBox="0 0 120 90" aria-hidden="true"><path class="d" d="M20 20 H 84 V 36 H 20 Z"/><path class="d" d="M60 36 V 58"/><path class="d thin" d="M58 58 L 62 58"/><path class="d" d="M10 70 H 110" stroke-dasharray="6 5"/><path class="d" d="M84 26 H 100 V 70"/></svg>
+          <span class="proc__n">03</span><h3 data-i18n="f.3t">La piqûre</h3><p data-i18n="f.3d">Les pièces de la tige sont assemblées en coutures doubles, renforts compris.</p>
+        </li>
+        <li class="proc" data-reveal>
+          <svg viewBox="0 0 120 90" aria-hidden="true"><path class="d" d="M16 62 C 20 40, 40 28, 64 30 C 86 32, 104 46, 106 62 Z"/><path class="d" d="M40 30 L 36 12 H 58 L 62 30"/><path class="d thin" d="M12 70 H 108"/></svg>
+          <span class="proc__n">04</span><h3 data-i18n="f.4t">Le montage</h3><p data-i18n="f.4d">La tige est tendue sur une forme en volume&nbsp;: c'est elle qui donne son chaussant à la paire.</p>
+        </li>
+        <li class="proc" data-reveal>
+          <svg viewBox="0 0 120 90" aria-hidden="true"><path class="d" d="M12 50 H 108 C 108 60, 100 66, 90 66 H 22 C 16 66, 12 60, 12 50 Z"/><path class="d" d="M16 42 H 104"/><path class="d thin" d="M26 66 V 74 M 46 66 V 74 M 66 66 V 74 M 86 66 V 74"/></svg>
+          <span class="proc__n">05</span><h3 data-i18n="f.5t">Le semelage</h3><p data-i18n="f.5d">Semelle intermédiaire et semelle crantée sont collées puis pressées sur la tige.</p>
+        </li>
+        <li class="proc" data-reveal>
+          <svg viewBox="0 0 120 90" aria-hidden="true"><path class="d" d="M18 34 H 102 V 74 H 18 Z"/><path class="d" d="M18 34 L 30 18 H 90 L 102 34"/><path class="d" d="M44 54 L 56 64 L 78 44"/></svg>
+          <span class="proc__n">06</span><h3 data-i18n="f.6t">Le contrôle</h3><p data-i18n="f.6d">Chaque paire est vérifiée, mise en boîte et préparée pour les boutiques et les commandes.</p>
+        </li>
+      </ol>
+      <div class="usine__wall" aria-label="Dans l'usine et en boutique (extraits TikTok)">
+        <img class="duo" src="img/tk-chaine.webp" alt="Chaîne de fabrication de baskets" loading="lazy" width="396" height="434">
+        <img class="duo" src="img/tk-usine.webp" alt="Atelier, machine de montage" loading="lazy" width="396" height="458">
+        <img class="duo" src="img/tk-atelier.webp" alt="Atelier, piles de semelles" loading="lazy" width="396" height="452">
+        <img class="duo" src="img/tk-cartons.webp" alt="Cartons de paires prêts à partir" loading="lazy" width="396" height="450">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ POINTURE ============ -->
+  <section class="size" id="pointure">
+    <div class="wrap size__grid">
+      <div class="size__text">
+        <p class="eyebrow" data-reveal data-i18n="p.eyebrow">Guide des pointures</p>
+        <h2 class="h2" data-split data-i18n="p.title">La bonne pointure du premier coup.</h2>
+        <p class="size__lead" data-reveal data-i18n="p.lead">Posez le pied sur une feuille, tracez le talon et le gros orteil, mesurez. Moins d'échanges, moins de retours&nbsp;: tout le monde y gagne.</p>
+        <label class="size__field" data-reveal>
+          <span data-i18n="p.label">Longueur de votre pied</span>
+          <output id="size-cm">26,0 cm</output>
+          <input type="range" id="size-range" min="22" max="31" step="0.5" value="26" aria-describedby="size-out">
+        </label>
+        <p class="size__out" id="size-out" aria-live="polite"><span data-i18n="p.out">Votre pointure</span> <b id="size-eu">41</b></p>
+        <p class="size__note" data-i18n="p.note">Guide indicatif. Entre deux pointures, prenez la plus grande.</p>
+      </div>
+      <figure class="size__fig" aria-hidden="true">
+        <svg viewBox="0 0 220 360" id="foot">
+          <g class="ruler"></g>
+          <g id="foot-g">
+            <path class="foot" d="M110 336 C 76 336 64 312 64 280 C 64 244 70 214 70 186 C 70 150 58 124 58 96 C 58 56 82 30 116 30 C 150 30 162 58 162 92 C 162 132 150 160 150 196 C 150 228 156 252 156 282 C 156 316 142 336 110 336 Z"/>
+            <circle class="toe" cx="92" cy="18" r="11"/><circle class="toe" cx="118" cy="12" r="12"/><circle class="toe" cx="140" cy="18" r="9"/><circle class="toe" cx="156" cy="30" r="7.5"/><circle class="toe" cx="166" cy="46" r="6.5"/>
+          </g>
+          <path class="measure" id="measure" d="M200 8 V 336"/>
+        </svg>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ COMMUNAUTÉ ============ -->
+  <section class="commu" id="communaute">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal data-i18n="c.eyebrow">La communauté</p>
+      <h2 class="h2" data-split data-i18n="c.title">Une marque que l'Algérie suit chaque jour.</h2>
+      <dl class="stats">
+        <div data-reveal><dt><span data-count="236.2" data-dec="1">236,2</span>&nbsp;K</dt><dd data-i18n="c.s1">abonnés TikTok · @eltelemsani13</dd></div>
+        <div data-reveal><dt><span data-count="1.8" data-dec="1">1,8</span>&nbsp;M</dt><dd data-i18n="c.s2">«&nbsp;j'aime&nbsp;» sur ses vidéos</dd></div>
+        <div data-reveal><dt><span data-count="2.1" data-dec="1">2,1</span>&nbsp;M</dt><dd data-i18n="c.s3">vues pour une seule vidéo</dd></div>
+        <div data-reveal><dt><span data-count="21.4" data-dec="1">21,4</span>&nbsp;K</dt><dd data-i18n="c.s4">abonnés · @tlemceniqamis</dd></div>
+      </dl>
+      <p class="stats__src" data-i18n="c.src">Chiffres affichés sur TikTok le 30 septembre 2026.</p>
+    </div>
+    <div class="reel" aria-label="Extraits des vidéos TikTok">
+      <div class="reel__track">
+        <a href="https://www.tiktok.com/@eltelemsani13" target="_blank" rel="noopener"><img class="duo" src="img/tk-vitrine.webp" alt="L'enseigne Tlemceni Shoes" loading="lazy" width="398" height="458"></a>
+        <a href="https://www.tiktok.com/@eltelemsani13" target="_blank" rel="noopener"><img class="duo" src="img/tk-foule.webp" alt="Foule dans la boutique" loading="lazy" width="398" height="450"></a>
+        <a href="https://www.tiktok.com/@eltelemsani13" target="_blank" rel="noopener"><img class="duo" src="img/tk-baskets.webp" alt="Présentation de deux baskets" loading="lazy" width="398" height="410"></a>
+        <a href="https://www.tiktok.com/@eltelemsani13" target="_blank" rel="noopener"><img class="duo" src="img/tk-ouverture.webp" alt="Ouverture d'une boutique, foule devant l'entrée" loading="lazy" width="398" height="370"></a>
+        <a href="https://www.tiktok.com/@eltelemsani13" target="_blank" rel="noopener"><img class="duo" src="img/tk-sandales.webp" alt="Mur de sandales pour homme" loading="lazy" width="396" height="340"></a>
+        <a href="https://www.tiktok.com/@eltelemsani13" target="_blank" rel="noopener"><img class="duo" src="img/tk-chaine.webp" alt="Baskets sur la chaîne de fabrication" loading="lazy" width="396" height="434"></a>
+      </div>
+    </div>
+    <div class="wrap commu__cta">
+      <a class="btn btn--ghost" href="https://www.tiktok.com/@eltelemsani13" target="_blank" rel="noopener">TikTok · @eltelemsani13</a>
+      <a class="btn btn--ghost" href="https://web.facebook.com/tlemcani.shoes" target="_blank" rel="noopener">Facebook · Tlemceni Shoes</a>
+      <a class="btn btn--ghost" href="https://www.instagram.com/tlemceni_13k/" target="_blank" rel="noopener">Instagram · @tlemceni_13k</a>
+    </div>
+  </section>
+
+  <!-- ============ ECSEL EXPO ============ -->
+  <section class="event" id="ecsel">
+    <div class="wrap event__grid">
+      <div>
+        <p class="eyebrow" data-reveal data-i18n="e.eyebrow">Rencontre</p>
+        <h2 class="h2" data-split data-i18n="e.title">Abdelkarim Zerouali «&nbsp;Tlemceni&nbsp;», intervenant à l'ECSEL EXPO 2026.</h2>
+        <p class="event__lead" data-reveal data-i18n="e.lead">Le fondateur partage son expérience avec les e-commerçants algériens&nbsp;: fabriquer, vendre en ligne, livrer.</p>
+      </div>
+      <div class="event__card" data-reveal>
+        <p class="event__date"><b>07–10</b> <span data-i18n="e.month">octobre 2026</span></p>
+        <p class="event__place" data-i18n="e.place">SAFEX, Pavillon central · Alger</p>
+        <div class="count" id="count" aria-live="off">
+          <div><b id="cd-d">00</b><span data-i18n="e.d">jours</span></div>
+          <div><b id="cd-h">00</b><span data-i18n="e.h">heures</span></div>
+          <div><b id="cd-m">00</b><span data-i18n="e.m">minutes</span></div>
+        </div>
+        <p class="event__done" id="count-done" hidden data-i18n="e.done">Merci à tous ceux qui sont venus nous voir.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REVENDEURS & EXPORT ============ -->
+  <section class="pro light" id="pro">
+    <div class="wrap pro__grid">
+      <div>
+        <p class="eyebrow" data-reveal data-i18n="r.eyebrow">Revendeurs · Grossistes · Export</p>
+        <h2 class="h2" data-split data-i18n="r.title">Vendez Tlemceni, en Algérie et ailleurs.</h2>
+        <p class="pro__lead" data-reveal data-i18n="r.lead">Boutique, e-commerçant, grossiste ou importateur à l'étranger&nbsp;: laissez vos coordonnées, l'équipe commerciale vous recontacte avec le catalogue et les conditions.</p>
+        <ul class="pro__list">
+          <li data-reveal><b>01</b><span data-i18n="r.l1">Achat direct à l'usine, sans intermédiaire.</span></li>
+          <li data-reveal><b>02</b><span data-i18n="r.l2">Chaussures, qamis et parfums sur une même commande.</span></li>
+          <li data-reveal><b>03</b><span data-i18n="r.l3">Diaspora et export&nbsp;: un interlocuteur dédié.</span></li>
+        </ul>
+      </div>
+      <form class="form" id="form" novalidate data-reveal>
+        <label class="field"><span data-i18n="r.f1">Nom et prénom</span><input name="nom" autocomplete="name" required></label>
+        <label class="field"><span data-i18n="r.f2">Téléphone / WhatsApp</span><input name="tel" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+213 …"></label>
+        <label class="field"><span data-i18n="r.f3">Ville ou pays</span><input name="ville" autocomplete="address-level2"></label>
+        <fieldset class="field field--chips">
+          <legend data-i18n="r.f4">Vous êtes</legend>
+          <label><input type="radio" name="profil" value="boutique" checked><span data-i18n="r.p1">Boutique</span></label>
+          <label><input type="radio" name="profil" value="ecommerce"><span data-i18n="r.p2">E-commerçant</span></label>
+          <label><input type="radio" name="profil" value="grossiste"><span data-i18n="r.p3">Grossiste</span></label>
+          <label><input type="radio" name="profil" value="export"><span data-i18n="r.p4">Export</span></label>
+        </fieldset>
+        <fieldset class="field field--chips">
+          <legend data-i18n="r.f5">Intéressé par</legend>
+          <label><input type="checkbox" name="univers" value="chaussures" checked><span data-i18n="u1.t">Chaussures</span></label>
+          <label><input type="checkbox" name="univers" value="qamis"><span data-i18n="u2.t">Qamis</span></label>
+          <label><input type="checkbox" name="univers" value="parfums"><span data-i18n="u3.t">Parfums</span></label>
+        </fieldset>
+        <button class="btn btn--red btn--big" type="submit"><span data-i18n="r.submit">Recevoir le catalogue revendeur</span></button>
+        <p class="form__ok" id="form-ok" role="status" hidden data-i18n="r.ok">Merci&nbsp;! Démo&nbsp;: sur le vrai site, votre demande arrive directement sur le WhatsApp de l'équipe commerciale.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ BOUTIQUES ============ -->
+  <section class="stores" id="boutiques">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal data-i18n="b.eyebrow">Nos boutiques</p>
+      <h2 class="h2" data-split data-i18n="b.title">Venez essayer.</h2>
+      <div class="stores__grid">
+        <article class="store" data-reveal>
+          <p class="store__n">01</p>
+          <h3>Chevalley <span lang="ar">شوفالي</span></h3>
+          <p data-i18n="b.1">Face à la station-service. Chaussures, qamis et parfums.</p>
+          <a class="link" href="https://www.google.com/maps/search/?api=1&amp;query=Tlemceni+Shoes+Chevalley+Alger" target="_blank" rel="noopener" data-i18n="b.go">Itinéraire →</a>
+        </article>
+        <article class="store" data-reveal>
+          <p class="store__n">02</p>
+          <h3>Douéra <span lang="ar">دويرة</span></h3>
+          <p data-i18n="b.2">Chaussures pour toute la famille.</p>
+          <a class="link" href="https://www.google.com/maps/search/?api=1&amp;query=Tlemceni+Shoes+Douera" target="_blank" rel="noopener" data-i18n="b.go">Itinéraire →</a>
+        </article>
+        <article class="store store--soon" data-reveal>
+          <p class="store__n">03</p>
+          <h3>Reghaïa <span lang="ar">الرغاية</span></h3>
+          <p data-i18n="b.3">Ouverture prochaine, <bdi lang="ar">إن شاء الله</bdi>.</p>
+          <span class="tag" data-i18n="b.soon">Bientôt</span>
+        </article>
+        <article class="store store--online" data-reveal>
+          <p class="store__n">24/7</p>
+          <h3 data-i18n="b.4t">En ligne</h3>
+          <p data-i18n="b.4">Commandez depuis votre téléphone, livraison à domicile.</p>
+          <a class="link" href="https://tlemcenii.set.shop/" target="_blank" rel="noopener" data-i18n="cta.order">Commander</a>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p class="footer__ar" lang="ar" aria-hidden="true">التلمساني</p>
+    <div class="footer__grid">
+      <p class="footer__brand">Tlemceni · 13</p>
+      <p class="footer__links">
+        <a href="https://www.tiktok.com/@eltelemsani13" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://web.facebook.com/tlemcani.shoes" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/tlemceni_13k/" target="_blank" rel="noopener">Instagram</a>
+      </p>
+      <p class="footer__note" data-i18n="foot.note">Site de démonstration réalisé pour Tlemceni. Le modèle 3D et les visuels de produits sont des illustrations&nbsp;; les photos proviennent des vidéos publiques de la marque.</p>
+      <p class="footer__credit"><span data-i18n="foot.by">Site conçu par</span> <a id="studio-link" href="../">Studio</a>. <a id="studio-wa" href="../" target="_blank" rel="noopener" data-i18n="foot.wa">Un site comme celui-ci pour votre marque&nbsp;?</a></p>
+    </div>
+  </div>
+</footer>
+<script>
+  // filet de sécurité : si le script principal ne démarre pas, on retire l'écran de chargement
+  setTimeout(function () {
+    if (!document.body.classList.contains('is-loading')) return;
+    document.body.classList.remove('is-loading');
+    var l = document.getElementById('loader');
+    if (l) l.parentNode.removeChild(l);
+  }, 12000);
+</script>
+</body>
+</html>
