@@ -321,3 +321,6 @@ body { overflow-x: clip; }
 .item__img img { width: 96px; }
 .card .f { align-content: start; }
 @media (min-width: 1024px) and (max-width: 1599px) { .status span { display: none; } }
+
+.cw__photo { margin: 4px 0 14px; }
+.cw__photo .f__hint { margin-top: 6px; }

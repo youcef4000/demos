@@ -12,20 +12,21 @@
     {
       "id": "trail",
       "visible": true,
+      "photo": true,
       "name": {
         "fr": "Gris orange",
         "ar": "رمادي برتقالي",
         "en": "Grey orange"
       },
       "colors": {
-        "mesh": "#abaca9",
-        "skin": "#bcbdba",
-        "line": "#4b4d52",
-        "accent": "#e07650",
-        "midsole": "#4a4c51",
-        "outsole": "#df7a55",
-        "laces": "#bebebb",
-        "lining": "#45474c"
+        "mesh": "#959392",
+        "skin": "#abaaa9",
+        "line": "#484b51",
+        "accent": "#b86d55",
+        "midsole": "#4f5256",
+        "outsole": "#c47552",
+        "laces": "#b5b3b1",
+        "lining": "#38393d"
       }
     },
     {
@@ -45,7 +46,8 @@
         "outsole": "#1c1c1f",
         "laces": "#f4f1ea",
         "lining": "#9e1320"
-      }
+      },
+      "photo": false
     },
     {
       "id": "noir",
@@ -64,7 +66,8 @@
         "outsole": "#121214",
         "laces": "#1a1a1c",
         "lining": "#18181a"
-      }
+      },
+      "photo": false
     },
     {
       "id": "sable",
@@ -83,7 +86,8 @@
         "outsole": "#a4642c",
         "laces": "#efe6d4",
         "lining": "#6d4a2e"
-      }
+      },
+      "photo": false
     }
   ],
   "images": {
@@ -478,9 +482,9 @@
       "en": "All our worlds ↓"
     },
     "s10.note": {
-      "fr": "Modèle 3D reconstitué d'après les photos d'un modèle de la boutique.",
-      "ar": "نموذج ثلاثي الأبعاد أُعيد بناؤه من صور موديل في المتجر.",
-      "en": "3D model rebuilt from photos of a shoe from the store."
+      "fr": "Modèle 3D habillé avec les photos du vrai modèle, prises en boutique.",
+      "ar": "نموذج ثلاثي الأبعاد مكسوّ بصور الموديل الحقيقي، التُقطت في المتجر.",
+      "en": "3D model wrapped in photos of the real shoe, taken in store."
     },
     "m.eyebrow": {
       "fr": "Le 13",

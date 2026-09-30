@@ -194,8 +194,8 @@ export function createScene(canvas, { mobile = false, reducedMotion = false } = 
       pointer.x = x;
       pointer.y = y;
     },
-    setColorway(name) {
-      sneaker.setColorway(name);
+    setColorway(name, opts) {
+      return sneaker.setColorway(name, opts);
     },
   };
 }

@@ -451,6 +451,8 @@ function viewColorways(el) {
           <button class="icon-b icon-b--danger" type="button" data-rm aria-label="Supprimer"${list.length <= 1 ? ' disabled' : ''}>${ICON.trash}</button>
         </div>
         ${lfield(`colorways.${i}.name`, 'Nom du coloris')}
+        <div class="cw__photo">${toggle({ label: 'Habillé avec les photos du vrai modèle', path: `colorways.${i}.photo`, checked: !!cw.photo })}
+          <p class="f__hint">${cw.photo ? 'Tige, talon, bout et semelles viennent des photos : les couleurs ci-dessous servent aux lacets, à la languette, à la doublure et aux zones que les photos ne montrent pas.' : 'Modèle dessiné : toutes les pièces prennent les couleurs ci-dessous.'}</p></div>
         <div class="colors">${PALETTE.map(
           ([k, label]) => `<label class="color"><input type="color" data-cw="${i}" data-key="${k}" value="${esc(cw.colors[k])}"><span>${esc(label)}<small>${esc(cw.colors[k])}</small></span></label>`,
         ).join('')}</div>
@@ -480,7 +482,13 @@ function viewColorways(el) {
     showIn(i, true);
   });
   el.addEventListener('field', (e) => {
-    if (e.detail.dataset.path?.endsWith('.visible')) render();
+    const path = e.detail.dataset.path || '';
+    if (path.endsWith('.visible')) render();
+    if (path.endsWith('.photo')) {
+      saveDraft(C);
+      render();
+      showIn(+path.split('.')[1], true);
+    }
   });
   el.addEventListener('click', async (e) => {
     const box = e.target.closest('.cw');
@@ -507,7 +515,7 @@ function viewColorways(el) {
       return render();
     }
     if (e.target.closest('[data-add]')) {
-      list.push({ id: `cw-${Date.now().toString(36)}`, visible: true, name: { fr: 'Nouveau coloris', ar: '', en: '' }, colors: clone(list[0]?.colors || original.colorways[0].colors) });
+      list.push({ id: `cw-${Date.now().toString(36)}`, visible: true, photo: false, name: { fr: 'Nouveau coloris', ar: '', en: '' }, colors: clone(list[0]?.colors || original.colorways[0].colors) });
       changed();
       render();
     }

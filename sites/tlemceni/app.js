@@ -111,7 +111,8 @@ async function main() {
     const { createScene } = await import('./scene.js');
     scene = createScene($('#scene'), { mobile, reducedMotion: reduce });
     const first = visibleColorways()[0];
-    if (first) scene.setColorway(first.colors);
+    // coloris photo : on attend les textures (bornées) pour ne pas montrer la version dessinée
+    if (first) await Promise.race([scene.setColorway(first.colors, { photo: !!first.photo }), wait(8000)]);
     await Promise.race([scene.warm(), wait(6000)]);
   } catch (err) {
     console.warn('3D indisponible, images fixes à la place.', err);
@@ -243,7 +244,7 @@ function selectColorway(i) {
   currentCw = i;
   $$('#swatches button').forEach((x) => x.setAttribute('aria-checked', String(+x.dataset.cw === i)));
   if (scene) {
-    scene.setColorway(list[i].colors);
+    scene.setColorway(list[i].colors, { photo: !!list[i].photo }).then(() => (needsRender = true));
     needsRender = true;
   }
 }

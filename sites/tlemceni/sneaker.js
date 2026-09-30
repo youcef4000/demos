@@ -37,9 +37,10 @@ function curve1(pts) {
 /* côté extérieur (latéral) en z positif, sol en y = 0.                */
 /* ------------------------------------------------------------------ */
 const L = 2.9, X0 = -1.45, X1 = 1.45;
-const X_BACK = -1.36, X_THROAT = 0.52, X_RIDGE_END = 1.3;
+const X_BACK = -1.36, X_THROAT = 0.7, X_RIDGE_END = 1.3;
 const RIM = 0.045; // épaisseur du rebord de la semelle intermédiaire
-const OUT_T = 0.06; // épaisseur de la semelle extérieure (hors crampons)
+// épaisseur de la semelle extérieure (hors crampons) : elle remonte sur la pointe et un peu au talon
+const outT = (x) => 0.06 + 0.2 * smooth(1.1, 1.47, x) + 0.04 * smooth(-1.2, -1.45, x);
 const LUG = 0.045; // hauteur des crampons
 
 // demi-largeurs de la semelle (avant arrondi du talon et de la pointe)
@@ -65,15 +66,16 @@ function halfW(x, side, inset = 0) {
 
 const spring = (x) => 0.14 * smooth(0.25, 1.45, x) ** 2; // la pointe se relève
 const bevel = (x) => 0.05 * smooth(-1.05, -1.45, x) ** 2; // biseau du talon
-const footbed = (x) => lerp(0.285, 0.185, smooth(-0.95, 0.65, x)); // 10 mm de drop
-const RIM_L = curve1([[-1.45, 0.15], [-1.15, 0.13], [-0.8, 0.08], [-0.5, 0.058], [0, 0.055], [0.6, 0.062], [1.1, 0.072], [1.3, 0.09], [1.45, 0.12]]);
-const RIM_M = curve1([[-1.45, 0.15], [-1.15, 0.13], [-0.8, 0.088], [-0.5, 0.08], [-0.1, 0.072], [0.4, 0.062], [1.1, 0.072], [1.3, 0.09], [1.45, 0.12]]);
+const footbed = (x) => lerp(0.37, 0.24, smooth(-0.95, 0.65, x)); // 13 mm de drop
+const RIM_L = curve1([[-1.45, 0.15], [-1.2, 0.12], [-1.0, 0.1], [-0.8, 0.088], [-0.6, 0.089], [-0.3, 0.1], [-0.1, 0.088], [0.1, 0.074], [0.3, 0.061], [0.5, 0.055], [0.7, 0.05], [1.0, 0.043], [1.1, 0.045], [1.2, 0.058], [1.3, 0.087], [1.38, 0.128], [1.45, 0.16]]);
+const RIM_M = curve1([[-1.45, 0.15], [-1.2, 0.12], [-1.0, 0.1], [-0.8, 0.09], [-0.6, 0.096], [-0.3, 0.108], [-0.1, 0.095], [0.1, 0.08], [0.3, 0.064], [0.5, 0.056], [0.7, 0.05], [1.0, 0.043], [1.1, 0.045], [1.2, 0.058], [1.3, 0.087], [1.38, 0.128], [1.45, 0.16]]);
 const rimY = (x, side) => footbed(x) + (side > 0 ? RIM_L(x) : RIM_M(x));
 
-// ouverture du chaussant : demi-largeur, hauteur du bord ; arête du dessus de pied
-const OW = curve1([[-1.36, 0.25], [-1.1, 0.27], [-0.85, 0.262], [-0.6, 0.205], [-0.4, 0.155], [0, 0.138], [0.3, 0.128], [0.52, 0.12]]);
-const OY = curve1([[-1.36, 0.95], [-1.25, 0.915], [-1.0, 0.835], [-0.78, 0.85], [-0.6, 0.9], [-0.42, 0.925], [-0.1, 0.855], [0.25, 0.775], [0.52, 0.705]]);
-const RY = curve1([[0.52, 0.705], [0.8, 0.665], [1.05, 0.62], [1.2, 0.585], [1.3, 0.55]]);
+// ouverture du chaussant : demi-largeur, hauteur du bord ; arête du dessus de pied.
+// Hauteurs relevées sur la photo de profil du modèle (col haut au talon, laçage long).
+const OW = curve1([[-1.36, 0.25], [-1.1, 0.27], [-0.85, 0.262], [-0.6, 0.205], [-0.4, 0.155], [0, 0.138], [0.3, 0.128], [0.52, 0.12], [0.7, 0.112]]);
+const OY = curve1([[-1.36, 1.2], [-1.3, 1.225], [-1.25, 1.155], [-1.2, 1.08], [-1.1, 0.993], [-1.0, 0.957], [-0.9, 0.953], [-0.8, 0.97], [-0.7, 1.018], [-0.6, 1.13], [-0.52, 1.2], [-0.45, 1.222], [-0.3, 1.186], [-0.1, 1.085], [0.1, 1.008], [0.3, 0.921], [0.5, 0.849], [0.7, 0.785]]);
+const RY = curve1([[0.7, 0.785], [0.8, 0.753], [0.9, 0.728], [1.0, 0.7], [1.1, 0.665], [1.2, 0.618], [1.3, 0.565]]);
 function openW(x) {
   const a = X_BACK, b = X_THROAT;
   if (x <= a || x >= b) return 0;
@@ -621,13 +623,13 @@ export function createSneaker({ quality = 1 } = {}) {
 
   // Relevé sur les photos du modèle : fenêtres de maille sous les renforts lisses.
   // Côté extérieur : grande fenêtre sous le col, cinq fentes arrondies en éventail, avant-pied en maille.
-  const REAR_L = [[-1.27, 0.56], [-0.7, 0.48], [-0.56, 0.52], [-0.5, 1.04], [-1.27, 1.04]];
+  const REAR_L = [[-1.4, 0.87], [-1.22, 0.74], [-0.99, 0.8], [-0.8, 0.71], [-0.67, 0.69], [-0.56, 0.68], [-0.5, 1.04], [-1.4, 1.04]];
   const SLOTS_L = [
-    [[-0.615, 0.385], [-0.6, 0.425], [-0.19, 0.8], [-0.175, 0.69]],
-    [[-0.09, 0.71], [0.0, 0.77], [-0.125, 0.285], [-0.227, 0.315]],
-    [[0.147, 0.61], [0.237, 0.6], [0.243, 0.19], [-0.018, 0.2]],
-    [[0.317, 0.79], [0.419, 0.78], [0.442, 0.335], [0.352, 0.345]],
-    [[0.538, 0.79], [0.6, 0.78], [0.707, 0.28], [0.611, 0.28]],
+    [[-0.693, 0.479], [-0.682, 0.514], [-0.264, 0.652], [-0.259, 0.565]],
+    [[-0.165, 0.624], [-0.071, 0.724], [-0.189, 0.256], [-0.306, 0.235]],
+    [[0.082, 0.586], [0.176, 0.624], [0.181, 0.261], [-0.089, 0.177]],
+    [[0.258, 0.751], [0.364, 0.804], [0.388, 0.423], [0.294, 0.396]],
+    [[0.488, 0.771], [0.552, 0.788], [0.663, 0.395], [0.563, 0.379]],
   ];
   // Côté intérieur : fenêtres en triangle et trapèze, soulignées de lignes noires « circuit ».
   const REAR_M = [[-1.22, 0.62], [-0.68, 0.55], [-0.57, 0.62], [-0.54, 1.04], [-1.22, 1.04]];
@@ -644,8 +646,8 @@ export function createSneaker({ quality = 1 } = {}) {
     { w: 1, dash: true, pts: [[0.51, 0.28], [0.51, 0.66]] },
     { w: 0.4, pts: [[-0.62, 0.36], [-0.22, 0.17], [0.22, 0.17], [0.25, 0.11], [0.95, 0.11]] },
   ];
-  const VAMP = [[0.68, 1.04], [0.7, 0.74], [0.82, 0.5], [1.42, 0.46], [1.42, 1.04]];
-  const PATCH = [[-0.5, 0.86], [-0.36, 0.88], [-0.36, 0.975], [-0.5, 0.965]]; // pastille du dernier oeillet
+  const VAMP = [[0.74, 1.04], [0.77, 0.74], [0.88, 0.52], [1.42, 0.46], [1.42, 1.04]];
+  const PATCH = [[-0.52, 0.83], [-0.33, 0.85], [-0.33, 0.96], [-0.52, 0.95]]; // pastille du dernier oeillet
 
   // polygone (pixels) décalé de d vers l'extérieur
   function offsetPoly(P, d) {
@@ -814,7 +816,7 @@ export function createSneaker({ quality = 1 } = {}) {
   const matLaces = new THREE.MeshPhysicalMaterial({ color: '#d9d9d6', normalMap: braidN, normalScale: new THREE.Vector2(0.8, 0.8), roughness: 0.8, sheen: 0.7, sheenRoughness: 0.6 });
 
   /* ---------------- tige ---------------- */
-  const pUpper = part('upper', V3(-0.35, 0.62, 0.36), V3(0, 0, 0));
+  const pUpper = part('upper', V3(-0.3, 0.72, 0.4), V3(0, 0, 0));
   {
     const NT = hi ? 220 : 150, NV = hi ? 40 : 28;
     const cols = [];
@@ -860,7 +862,7 @@ export function createSneaker({ quality = 1 } = {}) {
     const curve = new THREE.CatmullRomCurve3(pts, false, 'centripetal');
     const rAt = (t) => {
       const p2 = curve.getPointAt(t);
-      return 0.012 + 0.03 * smooth(-0.25, -0.75, p2.x);
+      return 0.012 + 0.042 * smooth(-0.3, -0.75, p2.x) * (1 - 0.45 * smooth(-1.1, -1.36, p2.x));
     };
     const cg = tube(curve, hi ? 260 : 160, hi ? 14 : 10, rAt);
     // on descend légèrement le bourrelet pour qu'il chevauche le bord
@@ -890,7 +892,7 @@ export function createSneaker({ quality = 1 } = {}) {
   const eyelets = { 1: [], [-1]: [] };
   for (const side of [1, -1]) {
     for (let i = 0; i < EYE; i++) {
-      const x = lerp(0.38, -0.34, i / (EYE - 1));
+      const x = lerp(0.55, -0.35, i / (EYE - 1));
       const th = thetaAt(x, side);
       const T = upperPoint(th, 1);
       let t = 1, p = V3();
@@ -927,7 +929,7 @@ export function createSneaker({ quality = 1 } = {}) {
     pUpper.eyeletMat = matEyelet;
   }
 
-  const pLaces = part('laces', V3(-0.5, 1.02, 0.1), V3(0, 0.82, 0));
+  const pLaces = part('laces', V3(-0.2, 1.25, 0.1), V3(0, 0.82, 0));
   {
     const R = 0.019;
     const lift = (e, h) => e.p.clone().addScaledVector(e.n, h);
@@ -1019,14 +1021,14 @@ export function createSneaker({ quality = 1 } = {}) {
   const tongueColor = makeCanvas(512, 1024);
   const tongueN = keep(toTex(heightToNormal(meshTile(128), 3), false, [3, 6]));
   const matTongue = new THREE.MeshPhysicalMaterial({ map: keep(toTex(tongueColor, true)), normalMap: tongueN, normalScale: new THREE.Vector2(0.6, 0.6), roughness: 0.8, sheen: 0.5, sheenRoughness: 0.6 });
-  const pTongue = part('tongue', V3(-0.47, 0.99, 0), V3(-0.1, 0.48, 0));
+  const pTongue = part('tongue', V3(-0.47, 1.28, 0), V3(-0.1, 0.48, 0));
   const tongueCurve = new THREE.CatmullRomCurve3([
-    V3(0.72, RY(0.72) + spring(0.72) - 0.05, 0),
-    V3(0.45, OY(0.45) + spring(0.45) - 0.012, 0),
-    V3(0.1, OY(0.1) + spring(0.1) - 0.004, 0),
+    V3(0.9, RY(0.9) + spring(0.9) - 0.05, 0),
+    V3(0.63, OY(0.63) + spring(0.63) - 0.012, 0),
+    V3(0.2, OY(0.2) + spring(0.2) - 0.004, 0),
     V3(-0.26, OY(-0.26) + 0.004, 0),
-    V3(-0.42, 0.96, 0),
-    V3(-0.52, 1.045, 0),
+    V3(-0.42, OY(-0.42) + 0.045, 0),
+    V3(-0.52, OY(-0.52) + 0.12, 0),
   ], false, 'centripetal');
   const tongueLen = tongueCurve.getLength();
   {
@@ -1084,7 +1086,7 @@ export function createSneaker({ quality = 1 } = {}) {
   // --- semelle intérieure (anatomique, amovible)
   const insoleColor = makeCanvas(1024, 384);
   const matInsole = new THREE.MeshPhysicalMaterial({ map: keep(toTex(insoleColor, true)), normalMap: foamN, normalScale: new THREE.Vector2(0.4, 0.4), roughness: 0.92, sheen: 0.5, sheenRoughness: 0.7 });
-  const pInsole = part('insole', V3(-0.9, 0.42, 0), V3(0, -0.44, 0));
+  const pInsole = part('insole', V3(-0.9, 0.5, 0), V3(0, -0.44, 0));
   {
     const ins = IN + 0.004;
     const mid = (a, b) => {
@@ -1110,13 +1112,13 @@ export function createSneaker({ quality = 1 } = {}) {
   const midColor = makeCanvas(1024, 512);
   const midHeight = makeCanvas(1024, 512);
   const matMid = new THREE.MeshPhysicalMaterial({ map: keep(toTex(midColor, true)), roughness: 0.66, sheen: 0.2 });
-  const pMid = part('midsole', V3(-0.95, 0.26, 0.37), V3(0, -0.84, 0));
+  const pMid = part('midsole', V3(-0.95, 0.3, 0.37), V3(0, -0.84, 0));
   let midMarks;
   {
     const K = [];
     const sect = (x) => {
       const wl = halfW(x, 1), wm = halfW(x, -1);
-      const yb = bevel(x) + OUT_T, yf = footbed(x), rl = rimY(x, 1), rm = rimY(x, -1);
+      const yb = bevel(x) + outT(x), yf = footbed(x), rl = rimY(x, 1), rm = rimY(x, -1);
       const tl = Math.min(RIM, wl * 0.45), tm = Math.min(RIM, wm * 0.45);
       const rbl = Math.min(0.03, wl * 0.5), rbm = Math.min(0.03, wm * 0.5);
       const rfl = Math.min(0.014, (wl - tl) * 0.5), rfm = Math.min(0.014, (wm - tm) * 0.5);
@@ -1193,7 +1195,7 @@ export function createSneaker({ quality = 1 } = {}) {
   {
     const sect = (x) => {
       const wl = halfW(x, 1) * 1.012, wm = halfW(x, -1) * 1.012;
-      const yb = bevel(x), yt = yb + OUT_T;
+      const yb = bevel(x), yt = yb + outT(x);
       const rbl = Math.min(0.022, wl * 0.5), rbm = Math.min(0.022, wm * 0.5);
       const rtl = Math.min(0.008, wl * 0.3), rtm = Math.min(0.008, wm * 0.3);
       const P = pathBuilder();
@@ -1279,6 +1281,7 @@ export function createSneaker({ quality = 1 } = {}) {
     barShape.closePath();
     const geos = { y: ext(yShape), tri: ext(triShape), bar: ext(barShape) };
     const o = new THREE.Object3D();
+    pOut.bottomLugs = [];
     for (const type of Object.keys(geos)) {
       const list = LUGS.filter((l) => l.type === type);
       const m = new THREE.InstancedMesh(geos[type], matLug, list.length);
@@ -1293,6 +1296,7 @@ export function createSneaker({ quality = 1 } = {}) {
       m.castShadow = true;
       m.receiveShadow = true;
       pOut.group.add(m);
+      pOut.bottomLugs.push(m);
     }
     // crampons de bord, à pas régulier le long du contour
     const ring = [];
@@ -1393,9 +1397,10 @@ export function createSneaker({ quality = 1 } = {}) {
   const signedU = (theta) => (theta >= 0 ? arcU(theta) : arcU(1 + theta) - 1);
 
   // --- contrefort de talon : coque anthracite au bord en diagonale, bande orange zébrée
-  const XF_H = -0.2; // pointe avant du contrefort, au ras de la semelle
-  const hTop = (x) => 0.56 * clamp((XF_H - x) / (XF_H + 1.25)) + 0.03 * smooth(-1.25, -1.41, x);
-  const hBand = (x) => 0.29 * clamp((-0.46 - x) / (-0.46 + 1.25)) + 0.02 * smooth(-1.25, -1.41, x);
+  // bord haut et bas de la bande orange, relevés sur la photo (v : 0 au ras de la semelle, 1 au bord)
+  const XF_H = -0.28; // pointe avant du contrefort, au ras de la semelle
+  const hTop = curve1([[-1.42, 0.6], [-1.27, 0.58], [-1.1, 0.62], [-0.93, 0.55], [-0.75, 0.37], [-0.58, 0.18], [-0.41, 0.065], [XF_H, 0]]);
+  const hBand = curve1([[-1.42, 0.4], [-1.23, 0.33], [-1.04, 0.3], [-0.78, 0.156], [-0.58, 0.057], [-0.41, 0]]);
   const TH_HL = thetaAt(XF_H, 1), TH_HM = 1 - thetaAt(XF_H, -1);
   const heelFn = (a, b) => {
     const s = a * 2 - 1; // -1 intérieur, 1 extérieur
@@ -1411,7 +1416,7 @@ export function createSneaker({ quality = 1 } = {}) {
   const hpx = (c, x, side, v) => [((signedU(side > 0 ? thetaAt(x, 1) : thetaAt(x, -1) - 1) - UH0) / (UH1 - UH0)) * c.width, (1 - tv(v)) * c.height];
   const counterColor = makeCanvas(hi ? 2048 : 1024, hi ? 512 : 256);
   const matCounter = new THREE.MeshPhysicalMaterial({ map: keep(toTex(counterColor, true)), normalMap: shellGrainN, normalScale: new THREE.Vector2(0.5, 0.5), roughness: 0.52, clearcoat: 0.25, clearcoatRoughness: 0.4 });
-  const pHeel = part('heel', V3(-1.52, 0.66, 0), V3(-0.55, 0.06, 0));
+  const pHeel = part('heel', V3(-1.52, 0.8, 0), V3(-0.55, 0.06, 0));
   add(pHeel, shell(heelFn, hi ? 110 : 70, hi ? 18 : 12, 0.004, 0.024, heelUV), matCounter);
   function drawCounter(c, cw) {
     const ctx = c.getContext('2d'), W = c.width, H = c.height;
@@ -1475,8 +1480,9 @@ export function createSneaker({ quality = 1 } = {}) {
   }
 
   // --- pare-pierre : bout anthracite perforé, bord festonné
-  const XF_T = 0.86;
-  const tTop = (x) => clamp(0.8 * smooth(XF_T, 1.02, x) + 0.12 * smooth(1.05, 1.38, x) + 0.022 * Math.sin((x - 1.0) * 30) * smooth(1.0, 1.08, x) * (1 - smooth(1.26, 1.36, x)));
+  const XF_T = 0.745;
+  const TOE_EDGE = curve1([[XF_T, 0], [0.786, 0.27], [0.832, 0.51], [0.9, 0.64], [0.98, 0.71], [1.1, 0.8], [1.156, 0.88], [1.2, 0.93], [1.45, 0.95]]);
+  const tTop = (x) => clamp(TOE_EDGE(x) + 0.02 * Math.sin((x - 1.0) * 30) * smooth(1.0, 1.08, x) * (1 - smooth(1.2, 1.3, x)));
   const TH_TL = 0.5 - thetaAt(XF_T, 1), TH_TM = thetaAt(XF_T, -1) - 0.5;
   const toeFn = (a, b) => {
     const s = a * 2 - 1; // -1 extérieur, 1 intérieur
@@ -1675,9 +1681,41 @@ export function createSneaker({ quality = 1 } = {}) {
     return `#${c.getHexString()}`;
   }
 
-  // `which` : nom d'un coloris intégré, ou palette { mesh, skin, line, accent, ... } venue de l'admin
+  /* ---------------- textures photo (le modèle réel) ---------------- */
+  // Les photos du modèle en boutique, projetées sur chaque pièce par un outil de préparation
+  // hors ligne, remplacent les textures dessinées quand le coloris le demande (`photo: true`).
+  const PHOTO_MAPS = { upper: 'tige', counter: 'talon', toe: 'bout', midsole: 'semelle-inter', outsole: 'dessous' };
+  const photoMats = { upper: matUpper, counter: matCounter, toe: matToe, midsole: matMid, outsole: matOut };
+  const drawnMaps = Object.fromEntries(Object.entries(photoMats).map(([k, m]) => [k, m.map]));
+  let photoMaps = null;
+  function loadPhotoMaps() {
+    if (!photoMaps) {
+      const loader = new THREE.TextureLoader();
+      photoMaps = Promise.all(
+        Object.entries(PHOTO_MAPS).map(async ([k, f]) => {
+          const t = await loader.loadAsync(new URL(`./img/tex/${f}${hi ? '' : '-m'}.webp`, import.meta.url).href);
+          t.colorSpace = THREE.SRGBColorSpace;
+          t.anisotropy = 8;
+          return [k, keep(t)];
+        }),
+      ).then(Object.fromEntries);
+    }
+    return photoMaps;
+  }
+  function usePhoto(maps) {
+    for (const [k, m] of Object.entries(photoMats)) m.map = maps ? maps[k] : drawnMaps[k];
+    // relief des crampons tiré de la photo du dessous (le rouge est clair sur la gomme, sombre dans les creux)
+    matOut.bumpMap = maps ? maps.outsole : null;
+    matOut.bumpScale = 3;
+    matOut.needsUpdate = true;
+    pOut.bottomLugs.forEach((m) => (m.visible = !maps)); // les crampons sont dans la photo du dessous
+  }
+  let colorSeq = 0;
+
+  // `which` : nom d'un coloris intégré, ou palette { mesh, skin, line, accent, ... } venue de l'admin.
+  // Avec `photo`, les pièces prennent les textures photo une fois chargées (promesse renvoyée).
   const xrayTint = new THREE.Color();
-  function setColorway(which) {
+  function setColorway(which, { photo = false } = {}) {
     const base = typeof which === 'string' ? COLORWAYS[which] || COLORWAYS.trail : which || COLORWAYS.trail;
     const cw = derive(base);
     drawUpper(cw, 'color');
@@ -1706,6 +1744,21 @@ export function createSneaker({ quality = 1 } = {}) {
     for (const p of Object.values(parts)) for (const m of p.mats) m.userData.base = m.color.clone();
     for (const p of Object.values(parts)) p.group.userData.dim = -1; // force la réapplication de l'atténuation
     current = typeof which === 'string' ? which : 'custom';
+    const seq = ++colorSeq;
+    if (!photo) {
+      usePhoto(null);
+      return Promise.resolve(false);
+    }
+    return loadPhotoMaps().then(
+      (maps) => {
+        if (seq === colorSeq) usePhoto(maps);
+        return true;
+      },
+      (err) => {
+        console.warn('Textures photo indisponibles : textures dessinées à la place.', err);
+        return false;
+      },
+    );
   }
   let current = 'trail';
   setColorway('trail');
@@ -1766,6 +1819,14 @@ export function createSneaker({ quality = 1 } = {}) {
       return current;
     },
     anchorWorld,
+    // pour l'outil de préparation des textures photo : géométrie des pièces et textures dessinées
+    get bake() {
+      return {
+        column, colPoint, perim, arcU, halfW, rimY, spring, OY, RY, openPt, X_THROAT, X_BACK, X_RIDGE_END, X0, L, T0, midMarks,
+        UH: [UH0, UH1], UT: [UT0, UT1], XF_H, XF_T, hTop, tTop,
+        canvases: { upper: upperColor, counter: counterColor, toe: toeColor, midsole: midColor, outsole: outColor },
+      };
+    },
     dispose() {
       disposables.forEach((d) => d.dispose && d.dispose());
     },
