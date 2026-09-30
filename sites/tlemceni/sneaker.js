@@ -39,9 +39,10 @@ function curve1(pts) {
 const L = 2.9, X0 = -1.45, X1 = 1.45;
 const X_BACK = -1.36, X_THROAT = 0.7, X_RIDGE_END = 1.3;
 const RIM = 0.045; // épaisseur du rebord de la semelle intermédiaire
-// épaisseur de la semelle extérieure (hors crampons) : elle remonte sur la pointe et un peu au talon
-const outT = (x) => 0.06 + 0.2 * smooth(1.1, 1.47, x) + 0.04 * smooth(-1.2, -1.45, x);
-const LUG = 0.045; // hauteur des crampons
+// Semelle extérieure relevée sur la photo de profil du modèle : épaisseur (hors crampons),
+// fine partout, un peu plus épaisse sous la voûte.
+const outT = curve1([[-1.45, 0.03], [-1.3, 0.032], [-1.1, 0.05], [-0.95, 0.057], [-0.45, 0.062], [0.1, 0.065], [0.4, 0.04], [0.6, 0.03], [0.9, 0.03], [1.13, 0.03], [1.29, 0.042], [1.45, 0.055]]);
+const LUG = 0.025; // hauteur des crampons
 
 // demi-largeurs de la semelle (avant arrondi du talon et de la pointe)
 const WL = curve1([[-1.45, 0.35], [-1.1, 0.36], [-0.6, 0.35], [-0.2, 0.37], [0.2, 0.42], [0.55, 0.455], [0.85, 0.44], [1.1, 0.39], [1.3, 0.33], [1.45, 0.28]]);
@@ -65,8 +66,10 @@ function halfW(x, side, inset = 0) {
 }
 
 const spring = (x) => 0.14 * smooth(0.25, 1.45, x) ** 2; // la pointe se relève
-const bevel = (x) => 0.05 * smooth(-1.05, -1.45, x) ** 2; // biseau du talon
-const footbed = (x) => lerp(0.37, 0.24, smooth(-0.95, 0.65, x)); // 13 mm de drop
+// galbe du dessous en plus de la cambrure : talon arrondi et pointe relevée (semelle « rocker »)
+const ROCK = curve1([[-1.45, 0.2], [-1.4, 0.135], [-1.34, 0.1], [-1.28, 0.074], [-1.2, 0.05], [-1.1, 0.038], [-1.0, 0.026], [-0.9, 0.016], [-0.7, 0.006], [-0.5, 0.001], [-0.35, 0], [0.9, 0], [1.0, 0], [1.1, 0.025], [1.2, 0.06], [1.26, 0.088], [1.32, 0.125], [1.38, 0.18], [1.45, 0.24]]);
+const bevel = (x) => Math.max(0, ROCK(x));
+const footbed = (x) => lerp(0.35, 0.22, smooth(-0.95, 0.65, x)); // 13 mm de drop
 const RIM_L = curve1([[-1.45, 0.15], [-1.2, 0.12], [-1.0, 0.1], [-0.8, 0.088], [-0.6, 0.089], [-0.3, 0.1], [-0.1, 0.088], [0.1, 0.074], [0.3, 0.061], [0.5, 0.055], [0.7, 0.05], [1.0, 0.043], [1.1, 0.045], [1.2, 0.058], [1.3, 0.087], [1.38, 0.128], [1.45, 0.16]]);
 const RIM_M = curve1([[-1.45, 0.15], [-1.2, 0.12], [-1.0, 0.1], [-0.8, 0.09], [-0.6, 0.096], [-0.3, 0.108], [-0.1, 0.095], [0.1, 0.08], [0.3, 0.064], [0.5, 0.056], [0.7, 0.05], [1.0, 0.043], [1.1, 0.045], [1.2, 0.058], [1.3, 0.087], [1.38, 0.128], [1.45, 0.16]]);
 const rimY = (x, side) => footbed(x) + (side > 0 ? RIM_L(x) : RIM_M(x));
@@ -74,8 +77,8 @@ const rimY = (x, side) => footbed(x) + (side > 0 ? RIM_L(x) : RIM_M(x));
 // ouverture du chaussant : demi-largeur, hauteur du bord ; arête du dessus de pied.
 // Hauteurs relevées sur la photo de profil du modèle (col haut au talon, laçage long).
 const OW = curve1([[-1.36, 0.25], [-1.1, 0.27], [-0.85, 0.262], [-0.6, 0.205], [-0.4, 0.155], [0, 0.138], [0.3, 0.128], [0.52, 0.12], [0.7, 0.112]]);
-const OY = curve1([[-1.36, 1.2], [-1.3, 1.225], [-1.25, 1.155], [-1.2, 1.08], [-1.1, 0.993], [-1.0, 0.957], [-0.9, 0.953], [-0.8, 0.97], [-0.7, 1.018], [-0.6, 1.13], [-0.52, 1.2], [-0.45, 1.222], [-0.3, 1.186], [-0.1, 1.085], [0.1, 1.008], [0.3, 0.921], [0.5, 0.849], [0.7, 0.785]]);
-const RY = curve1([[0.7, 0.785], [0.8, 0.753], [0.9, 0.728], [1.0, 0.7], [1.1, 0.665], [1.2, 0.618], [1.3, 0.565]]);
+const OY = curve1([[-1.36, 1.18], [-1.3, 1.205], [-1.25, 1.135], [-1.2, 1.06], [-1.1, 0.973], [-1.0, 0.937], [-0.9, 0.933], [-0.8, 0.95], [-0.7, 0.998], [-0.6, 1.11], [-0.52, 1.18], [-0.45, 1.202], [-0.3, 1.166], [-0.1, 1.065], [0.1, 0.988], [0.3, 0.901], [0.5, 0.829], [0.7, 0.765]]);
+const RY = curve1([[0.7, 0.765], [0.8, 0.733], [0.9, 0.708], [1.0, 0.68], [1.1, 0.645], [1.2, 0.598], [1.3, 0.545]]);
 function openW(x) {
   const a = X_BACK, b = X_THROAT;
   if (x <= a || x >= b) return 0;
@@ -1319,15 +1322,17 @@ export function createSneaker({ quality = 1 } = {}) {
       const tx = q.x - prev.x, tz = q.z - prev.z, l = Math.hypot(tx, tz) || 1;
       const nx = -tz / l, nz = tx / l; // normale extérieure
       const arch = p.z < 0 && p.x > -0.62 && p.x < -0.08 ? 0.75 : 1;
-      // part du crampon qui remonte sur le flanc : davantage au talon et à la pointe
-      const up = 0.018 + 0.05 * Math.max(smooth(-0.9, -1.4, p.x), smooth(0.9, 1.4, p.x));
-      edge.push({ x: p.x - nx * 0.006, y: bottomY(p.x) - LUG + (LUG + up) / 2, z: p.z - nz * 0.006, ry: -Math.atan2(tz, tx), s: [0.158 * arch, LUG + up, 0.05] });
+      // part du crampon qui remonte sur le flanc : un peu plus au talon et à la pointe
+      const up = 0.012 + 0.03 * Math.max(smooth(-0.9, -1.4, p.x), smooth(0.9, 1.4, p.x));
+      // incliné comme le dessous (talon et pointe relevés)
+      const rz = Math.atan(((bottomY(p.x + 0.01) - bottomY(p.x - 0.01)) / 0.02) * (tx / l));
+      edge.push({ x: p.x - nx * 0.014, y: bottomY(p.x) - LUG + (LUG + up) / 2, z: p.z - nz * 0.014, ry: -Math.atan2(tz, tx), rz, s: [0.12 * arch, LUG + up, 0.04] });
     }
     const geo = keep(new RoundedBoxGeometry(1, 1, 1, 2, 0.2));
     const m = new THREE.InstancedMesh(geo, matLug, edge.length);
     edge.forEach((l, i) => {
       o.position.set(l.x, l.y, l.z);
-      o.rotation.set(0, l.ry, 0);
+      o.rotation.set(0, l.ry, l.rz, 'YXZ');
       o.scale.set(...l.s);
       o.updateMatrix();
       m.setMatrixAt(i, o.matrix);
