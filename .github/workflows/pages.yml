@@ -1,0 +1,34 @@
+# Miroir des démos sur GitHub Pages, hors du réseau Cloudflare :
+# https://youcef4000.github.io/demos/<slug>/
+# Sert le même dossier sites/ que le Worker, à chaque push sur main.
+# À activer une seule fois : Settings → Pages → Source : « GitHub Actions ».
+name: Miroir GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: sites
+      - id: deployment
+        uses: actions/deploy-pages@v4

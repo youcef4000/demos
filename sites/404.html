@@ -16,7 +16,11 @@
   <main>
     <h1>Cette démo n'existe pas.</h1>
     <p>Le lien est peut-être incomplet, ou la démo a été retirée.</p>
-    <a href="/">Voir toutes les démos</a>
+    <a href="/" id="home">Voir toutes les démos</a>
   </main>
+  <script>
+    // Sur le miroir GitHub Pages, la galerie vit dans /demos/
+    if (location.hostname.endsWith('github.io')) document.getElementById('home').href = '/' + location.pathname.split('/')[1] + '/';
+  </script>
 </body>
 </html>

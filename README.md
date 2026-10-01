@@ -4,6 +4,8 @@ Sites de démonstration pour prospects. Un dossier par démo dans `sites/`, un s
 
 En ligne sur **https://demos.bornzstudio.com** (domaine branché dans l'onglet **Domains** du Worker `demos`).
 
+Miroir hors Cloudflare : **https://youcef4000.github.io/demos/** (GitHub Pages, même dossier `sites/`, publié à chaque push sur `main`). Utile quand un réseau n'arrive pas à joindre Cloudflare. Activation unique : **Settings → Pages → Source : GitHub Actions**.
+
 | Adresse | Contenu |
 |---|---|
 | `/` | Galerie des démos marquées `public` dans `sites/demos.json` |
