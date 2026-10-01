@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Melissa Atelier — espace atelier</title>
+<meta name="description" content="L'espace de gestion de l'atelier Melissa : planning des rendez-vous, modèles à réaliser, production, réalisations, stock, achats, commandes et clientes.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f6efe7">
+<meta property="og:title" content="Melissa Atelier — espace atelier">
+<meta property="og:description" content="Planning, production, stock, achats et commandes : l'espace de gestion de l'atelier Melissa.">
+<meta property="og:image" content="https://demos.bornzstudio.com/melissa-atelier/img/og.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='31' fill='%23f6efe7'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Didot,Bodoni 72,Georgia,serif' font-size='38' fill='%239a6f75'%3EM%3C/text%3E%3Cpath d='M32 17c-5-3.6-6.4-6.8-4.4-8.4 1.6-1.3 3.6-.4 4.4 1.3.8-1.7 2.8-2.6 4.4-1.3 2 1.6.6 4.8-4.4 8.4z' fill='none' stroke='%239a6f75' stroke-width='1.6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&display=swap">
+<link rel="stylesheet" href="./admin.css">
+<script type="module" src="./admin.js"></script>
+</head>
+<body>
+<svg class="defs" aria-hidden="true" focusable="false">
+  <symbol id="heart" viewBox="0 0 24 24"><path d="M12 20.5C5.2 15.6 3 11.4 4.6 8.2c1.4-2.7 5-3 7.4.2 2.4-3.2 6-2.9 7.4-.2 1.6 3.2-.6 7.4-7.4 12.3z"/><path d="M12 20.5c1.2 1.4 3.4 2 5.6 1.4"/></symbol>
+</svg>
+
+<!-- ============ CONNEXION ============ -->
+<section class="login" id="login" hidden>
+  <canvas class="login__silk" id="silk" aria-hidden="true"></canvas>
+  <form class="login__card" id="login-form">
+    <p class="wordmark login__mark">Mel<span class="wordmark__i">ı<svg aria-hidden="true"><use href="#heart"/></svg></span>ssa</p>
+    <p class="login__kicker">Espace atelier</p>
+    <label class="f">
+      <span class="f__label">Mot de passe</span>
+      <input type="password" id="login-pass" autocomplete="current-password" required>
+    </label>
+    <p class="login__err" id="login-err" role="alert"></p>
+    <button class="b b--dark b--block" type="submit">Entrer dans l'atelier</button>
+    <p class="login__hint">Démo&nbsp;: le mot de passe est <b>melissa</b>. En production, chaque membre de l'équipe a son propre accès.</p>
+  </form>
+  <a class="login__back" href="../">← Retour au site</a>
+</section>
+
+<!-- ============ APPLICATION ============ -->
+<div class="app" id="app" hidden>
+  <aside class="side" id="side">
+    <a class="side__brand" href="#/aujourdhui">
+      <span class="wordmark">Mel<span class="wordmark__i">ı<svg aria-hidden="true"><use href="#heart"/></svg></span>ssa</span>
+      <small>Espace atelier</small>
+    </a>
+    <nav class="side__nav" id="side-nav" aria-label="Rubriques"></nav>
+    <div class="side__foot">
+      <a class="side__link" href="../" target="_blank" rel="noopener">Voir le site ↗</a>
+      <button class="side__link" type="button" data-logout>Se déconnecter</button>
+    </div>
+  </aside>
+
+  <main class="main" id="main">
+    <header class="mtop">
+      <a class="mtop__brand" href="#/aujourdhui"><span class="wordmark">Mel<span class="wordmark__i">ı<svg aria-hidden="true"><use href="#heart"/></svg></span>ssa</span><small>Atelier</small></a>
+      <a class="mtop__site" href="../" target="_blank" rel="noopener">Voir le site ↗</a>
+    </header>
+    <div class="demo" id="demo-banner"><span>Démo : données d'exemple, gardées dans ce navigateur.</span> <button type="button" data-reset>Réinitialiser</button></div>
+    <div class="view" id="view" tabindex="-1"></div>
+  </main>
+
+  <nav class="tabs" id="tabs" aria-label="Rubriques principales"></nav>
+</div>
+
+<!-- Fenêtre (formulaires, fiches) -->
+<dialog class="sheet" id="sheet" aria-labelledby="sheet-title">
+  <form class="sheet__form" id="sheet-form" method="dialog" novalidate>
+    <header class="sheet__head">
+      <h2 id="sheet-title"></h2>
+      <button class="sheet__x" type="button" data-sheet-close aria-label="Fermer">×</button>
+    </header>
+    <div class="sheet__body" id="sheet-body"></div>
+    <footer class="sheet__foot" id="sheet-foot"></footer>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Melissa Atelier — Création et confection de mode féminine à Alger</title>
+<meta name="description" content="Melissa Atelier &amp; Melissa Mode : ensembles, kimonos, chemises et robes dessinés, coupés et cousus dans notre atelier à Alger. Boutique à Baba Hassen, vente en gros et livraison dans toutes les wilayas.">
+<meta name="theme-color" content="#f6efe7">
+<link rel="canonical" href="https://demos.bornzstudio.com/melissa-atelier/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Melissa Atelier">
+<meta property="og:url" content="https://demos.bornzstudio.com/melissa-atelier/">
+<meta property="og:title" content="Melissa Atelier — du croquis à la pièce, à Alger">
+<meta property="og:description" content="Des pièces féminines dessinées, coupées et cousues dans notre atelier. Collection, savoir-faire, vente en gros et prise de rendez-vous.">
+<meta property="og:image" content="https://demos.bornzstudio.com/melissa-atelier/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Melissa Atelier : le nom de la marque sur un fond de satin ivoire, entouré de photos de la collection">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Melissa Atelier — du croquis à la pièce, à Alger">
+<meta name="twitter:description" content="Des pièces féminines dessinées, coupées et cousues dans notre atelier.">
+<meta name="twitter:image" content="https://demos.bornzstudio.com/melissa-atelier/img/og.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='31' fill='%23f6efe7'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Didot,Bodoni 72,Georgia,serif' font-size='38' fill='%239a6f75'%3EM%3C/text%3E%3Cpath d='M32 17c-5-3.6-6.4-6.8-4.4-8.4 1.6-1.3 3.6-.4 4.4 1.3.8-1.7 2.8-2.6 4.4-1.3 2 1.6.6 4.8-4.4 8.4z' fill='none' stroke='%239a6f75' stroke-width='1.6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..800&family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&family=Amiri:wght@400;700&display=swap">
+<link rel="stylesheet" href="./style.css">
+<script>
+  (function (h) {
+    h.classList.add('js');
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('motion');
+    // Filet de sécurité : si les scripts ne se chargent pas, tout reste visible.
+    setTimeout(function () { if (!h.classList.contains('booted')) h.classList.remove('motion'); }, 7000);
+  })(document.documentElement);
+</script>
+<link rel="preload" as="image" href="img/sac-melissa.webp">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/Flip.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
+<script type="module" src="./app.js"></script>
+</head>
+<body class="is-loading">
+<svg class="defs" aria-hidden="true" focusable="false">
+  <symbol id="heart" viewBox="0 0 24 24"><path d="M12 20.5C5.2 15.6 3 11.4 4.6 8.2c1.4-2.7 5-3 7.4.2 2.4-3.2 6-2.9 7.4-.2 1.6 3.2-.6 7.4-7.4 12.3z"/><path d="M12 20.5c1.2 1.4 3.4 2 5.6 1.4"/></symbol>
+  <symbol id="needle" viewBox="0 0 48 48"><path d="M40 6L9 37"/><ellipse cx="37.6" cy="8.4" rx="3.6" ry="1.4" transform="rotate(-45 37.6 8.4)"/><path d="M37 9c-6 2-10 9-6 14 4 5 12 2 10 9-1.6 5.4-9 6-14 4" class="thread"/></symbol>
+  <symbol id="arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  <symbol id="wa" viewBox="0 0 24 24"><path d="M12 2.6a9.4 9.4 0 0 0-8.1 14.1L2.6 21.4l4.8-1.3A9.4 9.4 0 1 0 12 2.6zm0 17.1c-1.5 0-2.9-.4-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A7.8 7.8 0 1 1 12 19.7zm4.3-5.8c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.4 6.4 0 0 1-3.2-2.8c-.2-.4.2-.4.7-1.3.1-.1 0-.3 0-.4l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1c0 1.2.9 2.4 1 2.6.1.2 1.8 2.7 4.3 3.8 1.6.7 2.2.7 3 .6.5-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2l-.4-.3z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.6"/></symbol>
+  <symbol id="phone" viewBox="0 0 24 24"><path d="M5 3.5h3.2l1.6 4.2-2.2 1.4a11 11 0 0 0 5.3 5.3l1.4-2.2 4.2 1.6V17a2.5 2.5 0 0 1-2.7 2.5A15.5 15.5 0 0 1 2.5 6.2 2.5 2.5 0 0 1 5 3.5z"/></symbol>
+  <symbol id="ig" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></symbol>
+</svg>
+<a class="skip" href="#atelier">Aller au contenu</a>
+
+<!-- ============ CHARGEMENT ============ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__inner">
+    <p class="loader__word"><span>M</span><span>e</span><span>l</span><span class="loader__i">ı<svg><use href="#heart"/></svg></span><span>s</span><span>s</span><span>a</span></p>
+    <svg class="loader__seam" viewBox="0 0 320 12" preserveAspectRatio="none"><path class="loader__seam-base" d="M2 6H318"/><path class="loader__seam-fill" id="loader-seam" d="M2 6H318"/></svg>
+    <p class="loader__meta"><span>Atelier · Alger</span><span><b id="pct">0</b>%</span></p>
+  </div>
+  <svg class="loader__curve" viewBox="0 0 100 20" preserveAspectRatio="none"><path id="loader-curve" d="M0 0H100V0Q50 0 0 0Z"/></svg>
+</div>
+
+<div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__ring"><em id="cursor-label">Voir</em></span><span class="cursor__dot"></span></div>
+
+<!-- Couture de progression -->
+<div class="seam" id="seam" aria-hidden="true">
+  <i class="seam__base"></i>
+  <i class="seam__fill" id="seam-fill"></i>
+  <svg class="seam__needle" id="seam-needle" viewBox="0 0 48 48"><use href="#needle"/></svg>
+</div>
+
+<!-- ============ NAVIGATION ============ -->
+<header class="nav" id="nav">
+  <a class="nav__brand" href="#top" aria-label="Melissa Atelier, retour en haut">
+    <span class="wordmark">Mel<span class="wordmark__i">ı<svg aria-hidden="true"><use href="#heart"/></svg></span>ssa</span>
+    <small>Atelier</small>
+  </a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="#atelier" data-link>L'atelier</a>
+    <a href="#savoir-faire" data-link>Savoir-faire</a>
+    <a href="#collection" data-link>Collection</a>
+    <a href="#gros" data-link>En gros</a>
+    <a href="#boutique" data-link>Boutique</a>
+  </nav>
+  <a class="btn btn--dark btn--sm nav__cta" href="#rendez-vous" data-magnetic><span>Rendez-vous</span></a>
+  <button class="nav__burger" id="burger" type="button" aria-expanded="false" aria-controls="menu"><span class="sr-only">Menu</span><i></i><i></i></button>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <div class="menu__bg" aria-hidden="true"><i style="--c:#e7c4c1"></i><i style="--c:#a8ae95"></i><i style="--c:#f6efe7"></i></div>
+  <nav class="menu__links" aria-label="Menu">
+    <a href="#atelier"><small>01</small>L'atelier</a>
+    <a href="#savoir-faire"><small>02</small>Savoir-faire</a>
+    <a href="#palette"><small>03</small>La palette</a>
+    <a href="#collection"><small>04</small>Collection</a>
+    <a href="#gros"><small>05</small>En gros</a>
+    <a href="#rendez-vous"><small>06</small>Rendez-vous</a>
+    <a href="#boutique"><small>07</small>Boutique</a>
+  </nav>
+  <div class="menu__foot">
+    <a href="tel:+213551698984"><svg><use href="#phone"/></svg>05 51 69 89 84</a>
+    <a href="https://www.instagram.com/melissa_.mode/" target="_blank" rel="noopener"><svg><use href="#ig"/></svg>@melissa_.mode</a>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ============ ACCUEIL ============ -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <canvas class="hero__silk" id="silk" aria-hidden="true"></canvas>
+    <div class="hero__veil" aria-hidden="true"></div>
+
+    <div class="hero__frames" aria-hidden="true">
+      <figure class="frame frame--a" data-depth="0.5"><div class="frame__in"><img src="img/sac-melissa.webp" alt="" width="554" height="660" fetchpriority="high"></div></figure>
+      <figure class="frame frame--b" data-depth="1.1"><div class="frame__in"><img src="img/croquis.webp" alt="" width="554" height="660"></div></figure>
+      <figure class="frame frame--c" data-depth="0.8"><div class="frame__in"><img src="img/pastels.webp" alt="" width="554" height="660"></div></figure>
+      <figure class="frame frame--d" data-depth="1.4"><div class="frame__in"><img src="img/tissus.webp" alt="" width="554" height="470"></div></figure>
+    </div>
+
+    <div class="hero__content">
+      <p class="hero__kicker"><span>Création &amp; confection</span><span class="hero__dot" aria-hidden="true"></span><span>Alger</span></p>
+      <h1 class="hero__title" id="hero-title">
+        <span class="sr-only">Melissa Atelier</span>
+        <span class="hero__word" aria-hidden="true"><span>M</span><span>e</span><span>l</span><span class="hero__i">ı<svg><use href="#heart"/></svg></span><span>s</span><span>s</span><span>a</span></span>
+      </h1>
+      <p class="hero__sub" aria-hidden="true"><em>Atelier</em><span>&amp;</span><em>Mode</em></p>
+      <p class="hero__lead">Ensembles, kimonos, chemises et robes&nbsp;: des pièces féminines dessinées, coupées et cousues dans notre atelier, jusqu'au dernier bouton.</p>
+      <div class="hero__cta">
+        <a class="btn btn--dark" href="#collection" data-magnetic><span>Voir la collection</span><svg><use href="#arrow"/></svg></a>
+        <a class="btn btn--line" href="#rendez-vous" data-magnetic><span>Prendre rendez-vous</span></a>
+      </div>
+    </div>
+
+    <div class="badge" id="badge" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><defs><path id="badge-circle" d="M100 100m-76 0a76 76 0 1 1 152 0a76 76 0 1 1-152 0"/></defs><text><textPath href="#badge-circle" textLength="474" lengthAdjust="spacing">Atelier Melissa · Création · Confection · Alger ·</textPath></text></svg>
+      <svg class="badge__heart"><use href="#heart"/></svg>
+    </div>
+
+    <a class="hero__scroll" href="#atelier"><span>Faites défiler</span><i aria-hidden="true"></i></a>
+  </section>
+
+  <!-- ============ RUBANS ============ -->
+  <div class="ribbons" aria-hidden="true">
+    <div class="ribbon ribbon--a"><div class="ribbon__track" data-dir="-1">
+      <span>Création</span><svg><use href="#heart"/></svg><span>Patronage</span><svg><use href="#heart"/></svg><span>Coupe</span><svg><use href="#heart"/></svg><span>Couture</span><svg><use href="#heart"/></svg><span>Finitions</span><svg><use href="#heart"/></svg><span>Vente en gros</span><svg><use href="#heart"/></svg><span>Livraison dans toutes les wilayas</span><svg><use href="#heart"/></svg>
+    </div></div>
+    <div class="ribbon ribbon--b"><div class="ribbon__track" data-dir="1">
+      <span lang="ar">جودة عالية</span><i></i><span>Délais respectés</span><i></i><span lang="ar">إتقان في أدق التفاصيل</span><i></i><span>Paiement main à main</span><i></i><span lang="ar">توصيل لجميع الولايات</span><i></i><span>Boutique à Baba Hassen</span><i></i>
+    </div></div>
+  </div>
+
+  <!-- ============ MANIFESTE ============ -->
+  <section class="manifeste" id="atelier" aria-labelledby="manifeste-kicker">
+    <div class="wrap">
+      <p class="kicker" id="manifeste-kicker"><span>01</span>L'atelier</p>
+      <p class="manifeste__text" id="manifeste-text">Chez Melissa, chaque modèle naît d'un <span class="pill"><img src="img/croquis.webp" alt="" loading="lazy"></span> croquis, prend forme dans un tissu <span class="pill"><img src="img/tissus.webp" alt="" loading="lazy"></span> choisi à la main, et ne quitte l'atelier <span class="pill"><img src="img/production.webp" alt="" loading="lazy"></span> qu'une fois parfait, jusque dans le moindre détail.</p>
+
+      <div class="pillars">
+        <article class="pillar">
+          <svg class="pillar__icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="22"/><path d="M32 14v8M32 42v8M14 32h8M42 32h8"/><circle cx="32" cy="32" r="5"/></svg>
+          <p class="pillar__num">01</p>
+          <h2 class="pillar__title">Qualité &amp; précision</h2>
+          <p class="pillar__ar" lang="ar" dir="rtl">جودة عالية وإتقان في أدق التفاصيل</p>
+          <p class="pillar__text">Des coutures nettes, des finitions soignées et des tissus choisis pour bien tomber.</p>
+        </article>
+        <article class="pillar">
+          <svg class="pillar__icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="34" r="22"/><path d="M32 20v14l9 6M26 6h12M32 6v6"/></svg>
+          <p class="pillar__num">02</p>
+          <h2 class="pillar__title">Délais respectés</h2>
+          <p class="pillar__ar" lang="ar" dir="rtl">سرعة في التنفيذ واحترام المواعيد</p>
+          <p class="pillar__text">Rapidité d'exécution et rendez-vous tenus&nbsp;: une date annoncée est une date respectée.</p>
+        </article>
+        <article class="pillar">
+          <svg class="pillar__icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 22l24-12 24 12-24 12z"/><path d="M8 22v22l24 12 24-12V22M32 34v22"/></svg>
+          <p class="pillar__num">03</p>
+          <h2 class="pillar__title">Vente en gros</h2>
+          <p class="pillar__ar" lang="ar" dir="rtl">بيع بالجملة توصيل لجميع الولايات</p>
+          <p class="pillar__text">Boutiques et revendeuses commandent en gros, livrées dans toutes les wilayas.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ L'ATELIER EN GRAND ============ -->
+  <section class="zoom" id="production" aria-labelledby="zoom-title">
+    <div class="zoom__pin">
+      <h2 class="zoom__title" id="zoom-title"><span class="zoom__l"><span class="zoom__w">Là où</span></span> <span class="zoom__r"><span class="zoom__w"><em>tout</em> se coud</span></span></h2>
+      <div class="zoom__media" id="zoom-media">
+        <img src="img/production.webp" alt="Dans l'atelier Melissa, une couturière ajuste un tissu crème à côté d'une machine à coudre, devant des étagères de pièces pliées" width="782" height="1304" loading="lazy">
+      </div>
+      <p class="zoom__cap zoom__cap--a"><b>Melissa Production</b>Notre atelier de confection</p>
+      <p class="zoom__cap zoom__cap--b">Coupe, couture, finitions et contrôle&nbsp;: tout se fait sous le même toit, à Alger.</p>
+    </div>
+  </section>
+
+  <!-- ============ SAVOIR-FAIRE ============ -->
+  <section class="process" id="savoir-faire" aria-labelledby="process-title">
+    <div class="process__pin">
+      <header class="process__head">
+        <p class="kicker"><span>02</span>Savoir-faire</p>
+        <h2 class="process__title" id="process-title">Du croquis <em>à la pièce</em></h2>
+      </header>
+      <div class="process__track" id="process-track">
+        <article class="step">
+          <p class="step__num">01</p>
+          <figure class="step__media"><img src="img/croquis.webp" alt="La créatrice présente un croquis de mode" loading="lazy" width="554" height="660"></figure>
+          <div class="step__body"><h3>Le croquis</h3><p>Tout commence au crayon&nbsp;: la silhouette, les volumes, le col, la manche, le détail qui fera la différence.</p></div>
+        </article>
+        <article class="step">
+          <p class="step__num">02</p>
+          <figure class="step__media"><img src="img/tissus.webp" alt="Rouleaux de tissus aux couleurs douces : rose, vert, crème" loading="lazy" width="554" height="470"></figure>
+          <div class="step__body"><h3>La matière</h3><p>Lin, crêpe, satin, broderies&nbsp;: on touche, on compare, on choisit le tissu qui tombera juste.</p></div>
+        </article>
+        <article class="step step--draw">
+          <p class="step__num">03</p>
+          <figure class="step__media step__media--paper">
+            <svg class="draw" viewBox="0 0 300 360" aria-hidden="true">
+              <path class="draw__grid" d="M0 60H300M0 120H300M0 180H300M0 240H300M0 300H300M60 0V360M120 0V360M180 0V360M240 0V360"/>
+              <path d="M88 40c22 14 40 16 62 16s40-2 62-16l26 70-34 12 8 210H88l8-210-34-12z"/>
+              <path class="draw__dash" d="M150 70v240M118 330l32 -20 32 20"/>
+              <path class="draw__dash" d="M100 120c18 10 34 12 50 12s32-2 50-12"/>
+              <circle cx="150" cy="96" r="3"/><circle cx="150" cy="150" r="3"/><circle cx="150" cy="204" r="3"/>
+              <text x="198" y="186">38 cm</text><text x="40" y="70">ÉPAULE</text>
+            </svg>
+          </figure>
+          <div class="step__body"><h3>Le patron</h3><p>Le modèle est traduit en patron, puis décliné taille par taille pour garder la même allure du S au XL.</p></div>
+        </article>
+        <article class="step step--draw">
+          <p class="step__num">04</p>
+          <figure class="step__media step__media--fabric">
+            <svg class="draw draw--cut" viewBox="0 0 300 360" aria-hidden="true">
+              <path class="draw__dash" d="M30 300C80 250 110 190 150 170s110-40 130-100"/>
+              <g class="scissors"><circle cx="-14" cy="-8" r="9"/><circle cx="-14" cy="12" r="9"/><path d="M-6-4L30 8M-6 8L30-4"/></g>
+            </svg>
+          </figure>
+          <div class="step__body"><h3>La coupe</h3><p>Le tissu est posé, les pièces tracées puis coupées avec précision, en série comme à l'unité.</p></div>
+        </article>
+        <article class="step">
+          <p class="step__num">05</p>
+          <figure class="step__media"><img src="img/production.webp" alt="Une couturière travaille à côté d'une machine à coudre professionnelle" loading="lazy" width="782" height="1304"></figure>
+          <div class="step__body"><h3>La confection</h3><p>Nos couturières assemblent chaque pièce sur machines professionnelles, couture après couture.</p></div>
+        </article>
+        <article class="step">
+          <p class="step__num">06</p>
+          <figure class="step__media"><img src="img/satin.webp" alt="Chemise en satin ivoire nouée dans le dos" loading="lazy" width="488" height="660"></figure>
+          <div class="step__body"><h3>Les finitions</h3><p>Boutons, ourlets, repassage, contrôle&nbsp;: une pièce ne part que si elle est parfaite.</p></div>
+        </article>
+        <article class="step">
+          <p class="step__num">07</p>
+          <figure class="step__media"><img src="img/sac-melissa.webp" alt="Une cliente avec un sac Melissa Mode" loading="lazy" width="554" height="660"></figure>
+          <div class="step__body"><h3>Jusqu'à vous</h3><p>En boutique à Baba Hassen, ou livrée chez vous et payée à la réception.</p></div>
+        </article>
+      </div>
+      <div class="tape" aria-hidden="true">
+        <div class="tape__band" id="tape-band"></div>
+        <p class="tape__read"><b id="tape-cm">0</b> cm</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PALETTE ============ -->
+  <section class="palette" id="palette" aria-labelledby="palette-title">
+    <div class="palette__pin">
+      <div class="palette__text">
+        <p class="kicker"><span>03</span>La palette</p>
+        <h2 class="sr-only" id="palette-title">Les couleurs de la saison</h2>
+        <div class="palette__names" id="palette-names" aria-live="off"></div>
+        <p class="palette__desc" id="palette-desc"></p>
+        <ol class="palette__dots" id="palette-dots" aria-hidden="true"></ol>
+      </div>
+      <div class="palette__stage">
+        <div class="palette__swatch" id="palette-swatch" aria-hidden="true"></div>
+        <div class="palette__photos" id="palette-photos"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COLLECTION ============ -->
+  <section class="collection" id="collection" aria-labelledby="collection-title">
+    <div class="wrap">
+      <header class="collection__head">
+        <p class="kicker"><span>04</span>Collection</p>
+        <h2 class="h2 reveal-lines" id="collection-title">Les pièces <em>de l'atelier</em></h2>
+        <p class="collection__lead">Réalisées chez nous, disponibles en boutique ou livrées chez vous. Touchez un modèle pour le demander&nbsp;: on vous répond avec les tailles et couleurs disponibles.</p>
+      </header>
+      <div class="collection__grid" id="collection-grid"></div>
+    </div>
+  </section>
+
+  <!-- ============ EN GROS ============ -->
+  <section class="gros" id="gros" aria-labelledby="gros-title">
+    <div class="gros__outline" aria-hidden="true"><span>En gros · بالجملة · En gros · بالجملة ·</span></div>
+    <div class="wrap gros__grid">
+      <div>
+        <p class="kicker kicker--light"><span>05</span>Melissa Production</p>
+        <h2 class="h2 gros__title reveal-lines" id="gros-title">Vous tenez une boutique&nbsp;? <em>Proposez nos modèles.</em></h2>
+        <p class="gros__lead">L'atelier produit en série pour les boutiques et revendeuses, avec livraison dans toutes les wilayas. Demandez le catalogue et les conditions de vente en gros.</p>
+        <a class="btn btn--ivory" id="gros-wa" href="https://wa.me/213551698984" target="_blank" rel="noopener" data-magnetic><svg><use href="#wa"/></svg><span>Demander le catalogue</span></a>
+      </div>
+      <ol class="gros__list">
+        <li><b>01</b><span>Choisissez vos modèles et couleurs dans le catalogue.</span></li>
+        <li><b>02</b><span>L'atelier confirme les quantités et le délai de production.</span></li>
+        <li><b>03</b><span>Votre commande est livrée dans votre wilaya.</span></li>
+      </ol>
+    </div>
+    <svg class="gros__route" viewBox="0 0 1200 160" preserveAspectRatio="none" aria-hidden="true">
+      <path id="route" d="M-10 120C160 40 300 150 460 90S760 10 900 70s220 60 310 0"/>
+      <g id="parcel"><rect x="-14" y="-11" width="28" height="22" rx="3"/><path d="M-14-3h28M0-11v8"/></g>
+    </svg>
+  </section>
+
+  <!-- ============ COMMUNAUTÉ ============ -->
+  <section class="insta" id="communaute" aria-labelledby="insta-title">
+    <div class="wrap insta__grid">
+      <div class="insta__text">
+        <p class="kicker"><span>06</span>Communauté</p>
+        <h2 class="h2 reveal-lines" id="insta-title">Une communauté <em>qui grandit</em> avec nous</h2>
+        <div class="insta__stats">
+          <a class="stat" href="https://www.instagram.com/melissa_.mode/" target="_blank" rel="noopener">
+            <span class="stat__num"><b data-count="357" data-dec="0">357&nbsp;k</b></span>
+            <span class="stat__label">abonnés · @melissa_.mode</span>
+          </a>
+          <a class="stat" href="https://www.instagram.com/melissa._.atelier/" target="_blank" rel="noopener">
+            <span class="stat__num"><b data-count="85.7" data-dec="1">85,7&nbsp;k</b></span>
+            <span class="stat__label">abonnés · @melissa._.atelier</span>
+          </a>
+        </div>
+        <p class="insta__note">Chiffres Instagram relevés le 1<sup>er</sup> octobre 2026.</p>
+      </div>
+      <div class="insta__wall" aria-hidden="true">
+        <div class="wall" id="wall">
+          <div class="wall__col"><img src="img/defile.webp" alt="" loading="lazy"><img src="img/accueil.webp" alt="" loading="lazy"><img src="img/brodes.webp" alt="" loading="lazy"><img src="img/debuts.webp" alt="" loading="lazy"></div>
+          <div class="wall__col"><img src="img/boutique-rose.webp" alt="" loading="lazy"><img src="img/jaune.webp" alt="" loading="lazy"><img src="img/atelier-bureau.webp" alt="" loading="lazy"><img src="img/ciel.webp" alt="" loading="lazy"></div>
+          <div class="wall__col"><img src="img/pois.webp" alt="" loading="lazy"><img src="img/consultation.webp" alt="" loading="lazy"><img src="img/marron-voile.webp" alt="" loading="lazy"><img src="img/blazer.webp" alt="" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RENDEZ-VOUS ============ -->
+  <section class="rdv" id="rendez-vous" aria-labelledby="rdv-title">
+    <div class="wrap rdv__grid">
+      <div class="rdv__intro">
+        <p class="kicker"><span>07</span>Rendez-vous</p>
+        <h2 class="h2 reveal-lines" id="rdv-title">Venez nous voir <em>à l'atelier</em></h2>
+        <p class="rdv__lead">Essayage, pièce sur-mesure, achat en gros ou visite de l'atelier&nbsp;: choisissez un créneau, nous vous rappelons pour confirmer.</p>
+        <figure class="rdv__photo"><img src="img/consultation.webp" alt="Rendez-vous à l'atelier Melissa, autour d'une table" loading="lazy" width="554" height="660"></figure>
+      </div>
+
+      <form class="book" id="book" novalidate>
+        <fieldset class="book__group">
+          <legend><b>1</b>Motif de la visite</legend>
+          <div class="chips" id="book-types"></div>
+        </fieldset>
+        <fieldset class="book__group">
+          <legend><b>2</b>Le jour</legend>
+          <div class="days" id="book-days"></div>
+        </fieldset>
+        <fieldset class="book__group">
+          <legend><b>3</b>L'heure</legend>
+          <div class="slots" id="book-slots"></div>
+        </fieldset>
+        <fieldset class="book__group">
+          <legend><b>4</b>Vos coordonnées</legend>
+          <div class="book__fields">
+            <label class="field"><span>Prénom et nom</span><input id="book-name" name="name" autocomplete="name" required></label>
+            <label class="field"><span>Téléphone</span><input id="book-phone" name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="05 .. .. .. .." required></label>
+            <label class="field field--wide"><span>Un mot sur votre demande <i>(facultatif)</i></span><input id="book-note" name="note"></label>
+          </div>
+        </fieldset>
+        <p class="book__err" id="book-err" role="alert"></p>
+        <div class="book__foot">
+          <p class="book__sum" id="book-sum">Choisissez un jour et une heure.</p>
+          <button class="btn btn--dark" type="submit" data-magnetic><span>Envoyer la demande</span><svg><use href="#arrow"/></svg></button>
+        </div>
+        <div class="book__done" id="book-done" hidden tabindex="-1">
+          <svg class="book__check" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="36"/><path d="M24 41l11 11 22-24"/></svg>
+          <h3>Demande envoyée</h3>
+          <p id="book-done-text"></p>
+          <div class="book__done-actions">
+            <a class="btn btn--dark" id="book-wa" href="#" target="_blank" rel="noopener"><svg><use href="#wa"/></svg><span>Confirmer aussi sur WhatsApp</span></a>
+            <button class="btn btn--line" type="button" id="book-again"><span>Nouvelle demande</span></button>
+          </div>
+          <p class="book__demo">Démo&nbsp;: la demande apparaît dans <a href="admin/">l'espace atelier</a>, à confirmer dans le planning.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ BOUTIQUE ============ -->
+  <section class="boutique" id="boutique" aria-labelledby="boutique-title">
+    <div class="wrap boutique__grid">
+      <figure class="boutique__photo"><img src="img/boutique-rose.webp" alt="La boutique Melissa, son enseigne dorée et un ensemble rose sur mannequin" loading="lazy" width="488" height="660"></figure>
+      <div class="boutique__info">
+        <p class="kicker"><span>08</span>La boutique</p>
+        <h2 class="h2 reveal-lines" id="boutique-title">Melissa Mode, <em>Baba Hassen</em></h2>
+        <dl class="infos">
+          <div><dt>Adresse</dt><dd>Baba Hassen, Alger</dd></div>
+          <div><dt>Téléphone</dt><dd><a href="tel:+213551698984">05 51 69 89 84</a></dd></div>
+          <div><dt>Livraison</dt><dd>Disponible, paiement main à main</dd></div>
+          <div><dt>Revendeuses</dt><dd>Vente en gros, toutes les wilayas</dd></div>
+        </dl>
+        <div class="boutique__cta">
+          <a class="btn btn--dark" href="https://maps.google.com/?q=36.694389,2.980012" target="_blank" rel="noopener" data-magnetic><svg><use href="#pin"/></svg><span>Itinéraire</span></a>
+          <a class="btn btn--line" href="tel:+213551698984" data-magnetic><svg><use href="#phone"/></svg><span>Appeler</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ PIED DE PAGE ============ -->
+<footer class="footer" id="footer">
+  <div class="footer__inner">
+    <div class="wrap footer__top">
+      <p class="footer__line">Le prochain modèle se dessine déjà.<br><em>Suivez-le depuis l'atelier.</em></p>
+      <ul class="footer__links">
+        <li><a href="https://www.instagram.com/melissa_.mode/" target="_blank" rel="noopener"><svg><use href="#ig"/></svg>@melissa_.mode</a></li>
+        <li><a href="https://www.instagram.com/melissa._.atelier/" target="_blank" rel="noopener"><svg><use href="#ig"/></svg>@melissa._.atelier</a></li>
+        <li><a href="tel:+213551698984"><svg><use href="#phone"/></svg>05 51 69 89 84</a></li>
+        <li><a href="admin/"><svg><use href="#needle"/></svg>Espace atelier</a></li>
+      </ul>
+    </div>
+    <p class="footer__word" aria-hidden="true"><span>M</span><span>e</span><span>l</span><span class="footer__i">ı<svg><use href="#heart"/></svg></span><span>s</span><span>s</span><span>a</span></p>
+    <div class="wrap footer__bottom">
+      <p>Démo de site&nbsp;: photos issues des publications Instagram publiques de Melissa Mode et Melissa Atelier.</p>
+      <p class="footer__credit">Site conçu par <a id="studio-link" href="../">Studio</a>. <a id="studio-wa" href="../" target="_blank" rel="noopener">Un site comme celui-ci&nbsp;?</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- Fiche d'un modèle -->
+<div class="quick" id="quick" hidden>
+  <div class="quick__backdrop" data-close></div>
+  <div class="quick__card" role="dialog" aria-modal="true" aria-labelledby="quick-title">
+    <figure class="quick__media" id="quick-media"></figure>
+    <div class="quick__body">
+      <p class="kicker" id="quick-coll"></p>
+      <h3 class="quick__title" id="quick-title"></h3>
+      <p class="quick__desc" id="quick-desc"></p>
+      <div class="quick__colors" id="quick-colors"></div>
+      <div class="quick__cta">
+        <a class="btn btn--dark" id="quick-wa" href="#" target="_blank" rel="noopener"><svg><use href="#wa"/></svg><span>Demander ce modèle</span></a>
+        <a class="btn btn--line" href="#rendez-vous" data-close><span>Essayer en boutique</span></a>
+      </div>
+    </div>
+    <button class="quick__close" type="button" data-close aria-label="Fermer">×</button>
+  </div>
+</div>
+</body>
+</html>

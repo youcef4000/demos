@@ -6,6 +6,14 @@
   },
   "demos": [
     {
+      "slug": "melissa-atelier",
+      "title": "Melissa Atelier — du croquis à la pièce",
+      "sector": "Mode féminine",
+      "city": "Alger",
+      "color": "#9a6f75",
+      "public": false
+    },
+    {
       "slug": "tlemceni",
       "title": "Tlemceni — la basket, pièce par pièce",
       "sector": "Chaussures & mode",
