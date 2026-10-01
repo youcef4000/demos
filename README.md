@@ -23,6 +23,24 @@ Dans Cloudflare : **Workers & Pages → Create → Import a repository** → `yo
 
 Ensuite, chaque push sur `main` met en ligne les nouvelles démos en une à deux minutes.
 
+## Servir demos.bornzstudio.com par GitHub Pages plutôt que par Cloudflare
+
+Si certains réseaux n'arrivent pas à joindre Cloudflare (`ERR_CONNECTION_TIMED_OUT`), on fait pointer
+`demos.bornzstudio.com` vers GitHub Pages. L'adresse ne change pas, le Worker reste en secours sur
+`demos.youcef-ny.workers.dev`.
+
+1. **GitHub** → dépôt `demos` → **Settings → Pages** : Source **GitHub Actions** ; **Custom domain** :
+   `demos.bornzstudio.com` → **Save**.
+2. **Cloudflare** → Worker `demos` → **Domains** : retirer `demos.bornzstudio.com`
+   (**⋯ → Remove**).
+3. **Cloudflare** → `bornzstudio.com` → **DNS → Records → Add record** : type `CNAME`, nom `demos`,
+   cible `youcef4000.github.io`, **Proxy status : DNS only** (nuage gris, obligatoire pour que
+   GitHub crée le certificat HTTPS).
+4. **GitHub → Settings → Pages** : attendre « DNS check successful », puis cocher **Enforce HTTPS**
+   (certificat prêt en 15 à 60 minutes).
+
+Chaque push sur `main` met ensuite à jour les deux hébergements.
+
 ## Ajouter une démo
 
 1. Créer `sites/<slug>/index.html` (et ses fichiers, avec des chemins relatifs).
