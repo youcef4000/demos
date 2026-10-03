@@ -1,0 +1,4584 @@
+{
+ "version": 1,
+ "updatedAt": null,
+ "brand": {
+  "name": "Algerian Product"
+ },
+ "defaultLang": "fr",
+ "languages": [
+  {
+   "code": "fr",
+   "name": "Français",
+   "dir": "ltr",
+   "enabled": true
+  },
+  {
+   "code": "en",
+   "name": "English",
+   "dir": "ltr",
+   "enabled": true
+  },
+  {
+   "code": "ar",
+   "name": "العربية",
+   "dir": "rtl",
+   "enabled": true
+  },
+  {
+   "code": "es",
+   "name": "Español",
+   "dir": "ltr",
+   "enabled": true
+  }
+ ],
+ "contact": {
+  "email": "contact@algerianproduct.com",
+  "whatsapp": "",
+  "phone": "",
+  "office": {
+   "fr": "Canada · Algérie",
+   "en": "Canada · Algeria",
+   "ar": "كندا · الجزائر",
+   "es": "Canadá · Argelia"
+  },
+  "socials": {
+   "linkedin": "",
+   "instagram": "",
+   "facebook": "",
+   "tiktok": "",
+   "youtube": ""
+  },
+  "notifyEmail": "direction@algerianproduct.com"
+ },
+ "text": {
+  "nav.products": {
+   "fr": "Produits",
+   "en": "Products",
+   "ar": "المنتجات",
+   "es": "Productos"
+  },
+  "nav.regions": {
+   "fr": "Régions",
+   "en": "Regions",
+   "ar": "المناطق",
+   "es": "Regiones"
+  },
+  "nav.markets": {
+   "fr": "Marchés",
+   "en": "Markets",
+   "ar": "الأسواق",
+   "es": "Mercados"
+  },
+  "nav.services": {
+   "fr": "Export & services",
+   "en": "Export & services",
+   "ar": "التصدير والخدمات",
+   "es": "Exportación y servicios"
+  },
+  "nav.about": {
+   "fr": "La maison",
+   "en": "About us",
+   "ar": "من نحن",
+   "es": "Quiénes somos"
+  },
+  "nav.quote": {
+   "fr": "Demander un devis",
+   "en": "Request a quote",
+   "ar": "اطلب عرض سعر",
+   "es": "Solicitar presupuesto"
+  },
+  "nav.contact": {
+   "fr": "Contact",
+   "en": "Contact",
+   "ar": "اتصل بنا",
+   "es": "Contacto"
+  },
+  "nav.home": {
+   "fr": "Accueil",
+   "en": "Home",
+   "ar": "الرئيسية",
+   "es": "Inicio"
+  },
+  "nav.menu": {
+   "fr": "Menu",
+   "en": "Menu",
+   "ar": "القائمة",
+   "es": "Menú"
+  },
+  "nav.close": {
+   "fr": "Fermer",
+   "en": "Close",
+   "ar": "إغلاق",
+   "es": "Cerrar"
+  },
+  "nav.lang": {
+   "fr": "Langue",
+   "en": "Language",
+   "ar": "اللغة",
+   "es": "Idioma"
+  },
+  "common.skip": {
+   "fr": "Aller au contenu",
+   "en": "Skip to content",
+   "ar": "انتقل إلى المحتوى",
+   "es": "Ir al contenido"
+  },
+  "common.example": {
+   "fr": "Exemple",
+   "en": "Example",
+   "ar": "مثال",
+   "es": "Ejemplo"
+  },
+  "common.discover": {
+   "fr": "Découvrir",
+   "en": "Discover",
+   "ar": "اكتشف",
+   "es": "Descubrir"
+  },
+  "common.back": {
+   "fr": "Retour",
+   "en": "Back",
+   "ar": "رجوع",
+   "es": "Volver"
+  },
+  "film.rec": {
+   "fr": "L'Algérie vue du ciel",
+   "en": "Algeria from above",
+   "ar": "الجزائر من السماء",
+   "es": "Argelia desde el cielo"
+  },
+  "film.episode": {
+   "fr": "Épisode 01",
+   "en": "Episode 01",
+   "ar": "الحلقة 01",
+   "es": "Episodio 01"
+  },
+  "film.skip": {
+   "fr": "Passer l'introduction",
+   "en": "Skip the intro",
+   "ar": "تخطَّ المقدمة",
+   "es": "Saltar la introducción"
+  },
+  "film.play": {
+   "fr": "Lecture",
+   "en": "Play",
+   "ar": "تشغيل",
+   "es": "Reproducir"
+  },
+  "film.pause": {
+   "fr": "Pause",
+   "en": "Pause",
+   "ar": "إيقاف مؤقت",
+   "es": "Pausa"
+  },
+  "film.loading": {
+   "fr": "Préparation du relief",
+   "en": "Preparing the terrain",
+   "ar": "جارٍ تجهيز التضاريس",
+   "es": "Preparando el relieve"
+  },
+  "film.alt": {
+   "fr": "Alt.",
+   "en": "Alt.",
+   "ar": "الارتفاع",
+   "es": "Alt."
+  },
+  "film.seeProduct": {
+   "fr": "Voir le produit",
+   "en": "See the product",
+   "ar": "عرض المنتج",
+   "es": "Ver el producto"
+  },
+  "film.chapters": {
+   "fr": "Chapitres du film",
+   "en": "Film chapters",
+   "ar": "فصول الفيلم",
+   "es": "Capítulos de la película"
+  },
+  "film.finaleKicker": {
+   "fr": "Une terre, mille savoir-faire",
+   "en": "One land, a thousand crafts",
+   "ar": "أرض واحدة وألف حرفة",
+   "es": "Una tierra, mil oficios"
+  },
+  "film.finaleTitle": {
+   "fr": "Du local au *monde*.",
+   "en": "From local to *global*.",
+   "ar": "من السوق المحلي إلى *العالم*.",
+   "es": "De lo local al *mundo*."
+  },
+  "film.aerial": {
+   "fr": "Vue aérienne",
+   "en": "Aerial view",
+   "ar": "منظر جوي",
+   "es": "Vista aérea"
+  },
+  "home.kicker": {
+   "fr": "Algerian Product",
+   "en": "Algerian Product",
+   "ar": "Algerian Product",
+   "es": "Algerian Product"
+  },
+  "home.title": {
+   "fr": "Ce que l'Algérie fait de meilleur, *présenté au monde*.",
+   "en": "The best of what Algeria makes, *presented to the world*.",
+   "ar": "أفضل ما تصنعه الجزائر، *نقدّمه للعالم*.",
+   "es": "Lo mejor que produce Argelia, *presentado al mundo*."
+  },
+  "home.lead": {
+   "fr": "Produits du terroir, artisanat, textile, matériaux, industrie : une seule marque pour faire connaître la qualité et la diversité de la production algérienne, et la relier aux importateurs du monde entier.",
+   "en": "Food and agriculture, crafts, textiles, materials, industry: one brand to showcase the quality and diversity of Algerian production, and connect it with importers worldwide.",
+   "ar": "منتجات فلاحية وغذائية، حِرف تقليدية، نسيج، مواد بناء وصناعة: علامة واحدة تُعرّف بجودة الإنتاج الجزائري وتنوّعه، وتربطه بالمستوردين في كل أنحاء العالم.",
+   "es": "Alimentación y agricultura, artesanía, textil, materiales, industria: una sola marca para dar a conocer la calidad y la diversidad de la producción argelina y conectarla con importadores de todo el mundo."
+  },
+  "home.ctaProducts": {
+   "fr": "Explorer les produits",
+   "en": "Explore the products",
+   "ar": "استكشف المنتجات",
+   "es": "Explorar los productos"
+  },
+  "home.ctaQuote": {
+   "fr": "Demander un devis",
+   "en": "Request a quote",
+   "ar": "اطلب عرض سعر",
+   "es": "Solicitar presupuesto"
+  },
+  "home.scroll": {
+   "fr": "Défiler",
+   "en": "Scroll",
+   "ar": "مرّر",
+   "es": "Desliza"
+  },
+  "about.kicker": {
+   "fr": "La maison",
+   "en": "About us",
+   "ar": "من نحن",
+   "es": "Quiénes somos"
+  },
+  "about.manifesto": {
+   "fr": "Algerian Product fait connaître ce que l'Algérie produit de meilleur — dans ses champs, ses ateliers et ses usines — et le relie aux marchés du monde.",
+   "en": "Algerian Product brings the best of what Algeria produces — in its fields, its workshops and its factories — to the markets of the world.",
+   "ar": "تُعرّف Algerian Product بأفضل ما تنتجه الجزائر — في حقولها وورشاتها ومصانعها — وتربطه بأسواق العالم.",
+   "es": "Algerian Product da a conocer lo mejor que produce Argelia —en sus campos, sus talleres y sus fábricas— y lo conecta con los mercados del mundo."
+  },
+  "about.vision.title": {
+   "fr": "Vision",
+   "en": "Vision",
+   "ar": "الرؤية",
+   "es": "Visión"
+  },
+  "about.vision.text": {
+   "fr": "Que « produit en Algérie » devienne, partout dans le monde, une promesse de qualité et d’authenticité.",
+   "en": "For “made in Algeria” to become, all over the world, a promise of quality and authenticity.",
+   "ar": "أن تصبح عبارة «صُنع في الجزائر» وعدًا بالجودة والأصالة في كل مكان من العالم.",
+   "es": "Que «hecho en Argelia» se convierta, en todo el mundo, en una promesa de calidad y autenticidad."
+  },
+  "about.mission.title": {
+   "fr": "Mission",
+   "en": "Mission",
+   "ar": "الرسالة",
+   "es": "Misión"
+  },
+  "about.mission.text": {
+   "fr": "Sélectionner les meilleurs producteurs algériens, présenter leurs produits avec exigence et accompagner chaque échange, de la première demande au conteneur livré.",
+   "en": "Select the best Algerian producers, present their products with care, and support every exchange from the first enquiry to the delivered container.",
+   "ar": "انتقاء أفضل المنتجين الجزائريين، وتقديم منتجاتهم باحترافية، ومرافقة كل تعامل من أول طلب حتى وصول الحاوية.",
+   "es": "Seleccionar a los mejores productores argelinos, presentar sus productos con rigor y acompañar cada intercambio, desde la primera consulta hasta el contenedor entregado."
+  },
+  "about.strategy.title": {
+   "fr": "Stratégie internationale",
+   "en": "International strategy",
+   "ar": "الاستراتيجية الدولية",
+   "es": "Estrategia internacional"
+  },
+  "about.strategy.text": {
+   "fr": "Commencer là où la demande existe déjà — diaspora, Europe francophone, pays du Golfe — puis ouvrir de nouveaux marchés filière par filière, avec des partenaires locaux.",
+   "en": "Start where demand already exists — the diaspora, French-speaking Europe, the Gulf — then open new markets sector by sector, with local partners.",
+   "ar": "البدء حيث يوجد الطلب أصلًا — الجالية، أوروبا الناطقة بالفرنسية، دول الخليج — ثم فتح أسواق جديدة قطاعًا بعد قطاع مع شركاء محليين.",
+   "es": "Empezar donde la demanda ya existe —la diáspora, la Europa francófona, los países del Golfo— y abrir después nuevos mercados, sector por sector, con socios locales."
+  },
+  "about.valuesTitle": {
+   "fr": "Nos valeurs",
+   "en": "Our values",
+   "ar": "قيمنا",
+   "es": "Nuestros valores"
+  },
+  "sectors.kicker": {
+   "fr": "Les filières",
+   "en": "The sectors",
+   "ar": "القطاعات",
+   "es": "Los sectores"
+  },
+  "sectors.title": {
+   "fr": "Un label, *toutes les filières*.",
+   "en": "One label, *every sector*.",
+   "ar": "علامة واحدة، *لكل القطاعات*.",
+   "es": "Un sello, *todos los sectores*."
+  },
+  "sectors.lead": {
+   "fr": "Algerian Product n'est pas une marque agricole. C'est la vitrine de tout ce que le pays sait produire, du champ à l'usine.",
+   "en": "Algerian Product is not a farming brand. It is a showcase for everything the country knows how to make, from field to factory.",
+   "ar": "Algerian Product ليست علامة فلاحية فقط، بل واجهة لكل ما يُتقن هذا البلد إنتاجه، من الحقل إلى المصنع.",
+   "es": "Algerian Product no es una marca agrícola. Es el escaparate de todo lo que el país sabe producir, del campo a la fábrica."
+  },
+  "sectors.explore": {
+   "fr": "Explorer la filière",
+   "en": "Explore the sector",
+   "ar": "استكشف القطاع",
+   "es": "Explorar el sector"
+  },
+  "sectors.count": {
+   "fr": "{n} produits",
+   "en": "{n} products",
+   "ar": "{n} منتجات",
+   "es": "{n} productos"
+  },
+  "seal.kicker": {
+   "fr": "L'identité",
+   "en": "The identity",
+   "ar": "الهوية",
+   "es": "La identidad"
+  },
+  "seal.title": {
+   "fr": "Une signature, *de la caisse de dattes au conteneur*.",
+   "en": "One signature, *from a box of dates to a container*.",
+   "ar": "توقيع واحد، *من علبة التمر إلى الحاوية*.",
+   "es": "Una firma, *de la caja de dátiles al contenedor*."
+  },
+  "seal.lead": {
+   "fr": "Le sceau Algerian Product s'appose sur un flacon, une étiquette de tapis, un sac de ciment ou une carte de visite. L'étoile à huit branches vient du patrimoine géométrique algérien ; le cercle, c'est le monde qu'elle rejoint.",
+   "en": "The Algerian Product seal works on a bottle, a carpet tag, a cement bag or a business card. The eight-pointed star comes from Algeria’s geometric heritage; the circle is the world it reaches.",
+   "ar": "يوضع ختم Algerian Product على قارورة، أو بطاقة زربية، أو كيس إسمنت، أو بطاقة أعمال. النجمة الثمانية مستوحاة من التراث الهندسي الجزائري، والدائرة هي العالم الذي تنفتح عليه.",
+   "es": "El sello Algerian Product funciona en una botella, una etiqueta de alfombra, un saco de cemento o una tarjeta de visita. La estrella de ocho puntas procede del patrimonio geométrico argelino; el círculo es el mundo al que llega."
+  },
+  "seal.bottle": {
+   "fr": "Flacon d'huile",
+   "en": "Oil bottle",
+   "ar": "قارورة زيت",
+   "es": "Botella de aceite"
+  },
+  "seal.box": {
+   "fr": "Coffret de dattes",
+   "en": "Box of dates",
+   "ar": "علبة تمور",
+   "es": "Caja de dátiles"
+  },
+  "seal.tag": {
+   "fr": "Étiquette de tapis",
+   "en": "Carpet tag",
+   "ar": "بطاقة زربية",
+   "es": "Etiqueta de alfombra"
+  },
+  "seal.bag": {
+   "fr": "Sac de ciment",
+   "en": "Cement bag",
+   "ar": "كيس إسمنت",
+   "es": "Saco de cemento"
+  },
+  "seal.container": {
+   "fr": "Conteneur 40 pieds",
+   "en": "40-foot container",
+   "ar": "حاوية 40 قدمًا",
+   "es": "Contenedor de 40 pies"
+  },
+  "seal.label": {
+   "fr": "Étiquette textile",
+   "en": "Garment label",
+   "ar": "ملصق ملابس",
+   "es": "Etiqueta textil"
+  },
+  "featured.kicker": {
+   "fr": "Sélection",
+   "en": "Selection",
+   "ar": "مختارات",
+   "es": "Selección"
+  },
+  "featured.title": {
+   "fr": "Des produits qui *voyagent bien*.",
+   "en": "Products that *travel well*.",
+   "ar": "منتجات *تعبر الحدود*.",
+   "es": "Productos que *viajan bien*."
+  },
+  "featured.all": {
+   "fr": "Tout le catalogue",
+   "en": "Full catalogue",
+   "ar": "كل الكتالوج",
+   "es": "Todo el catálogo"
+  },
+  "atlas.kicker": {
+   "fr": "L'atlas",
+   "en": "The atlas",
+   "ar": "الأطلس",
+   "es": "El atlas"
+  },
+  "atlas.title": {
+   "fr": "Chaque région, *son savoir-faire*.",
+   "en": "Every region, *its own craft*.",
+   "ar": "لكل منطقة *حرفتها*.",
+   "es": "Cada región, *su saber hacer*."
+  },
+  "atlas.lead": {
+   "fr": "Des oasis des Ziban aux crêtes de Kabylie, des ateliers de Constantine aux usines de Bordj Bou Arreridj : la carte de ce que l'Algérie sait faire.",
+   "en": "From the Ziban oases to the ridges of Kabylia, from the workshops of Constantine to the factories of Bordj Bou Arreridj: a map of what Algeria knows how to make.",
+   "ar": "من واحات الزيبان إلى قمم القبائل، ومن ورشات قسنطينة إلى مصانع برج بوعريريج: خريطة لما تُتقنه الجزائر.",
+   "es": "De los oasis del Ziban a las cumbres de Cabilia, de los talleres de Constantina a las fábricas de Bordj Bou Arreridj: el mapa de lo que Argelia sabe hacer."
+  },
+  "atlas.replay": {
+   "fr": "Revoir le survol",
+   "en": "Replay the flyover",
+   "ar": "أعد مشاهدة الجولة",
+   "es": "Volver a ver el vuelo"
+  },
+  "markets.kicker": {
+   "fr": "Marchés",
+   "en": "Markets",
+   "ar": "الأسواق",
+   "es": "Mercados"
+  },
+  "markets.title": {
+   "fr": "D'Alger vers *le reste du monde*.",
+   "en": "From Algiers *to the rest of the world*.",
+   "ar": "من الجزائر العاصمة *إلى بقية العالم*.",
+   "es": "De Argel *al resto del mundo*."
+  },
+  "markets.lead": {
+   "fr": "Les marchés visés, par ordre de priorité. Cette carte évolue avec le projet : chaque nouveau pays s’ajoute depuis l’espace d’administration.",
+   "en": "Target markets, in order of priority. This map grows with the project: each new country is added from the admin area.",
+   "ar": "الأسواق المستهدفة حسب الأولوية. تتطور هذه الخريطة مع المشروع، وتُضاف كل دولة جديدة من لوحة الإدارة.",
+   "es": "Mercados objetivo, por orden de prioridad. Este mapa evoluciona con el proyecto: cada nuevo país se añade desde el panel de administración."
+  },
+  "markets.priority": {
+   "fr": "Prioritaire",
+   "en": "Priority",
+   "ar": "أولوية",
+   "es": "Prioritario"
+  },
+  "markets.developing": {
+   "fr": "En développement",
+   "en": "Developing",
+   "ar": "قيد التطوير",
+   "es": "En desarrollo"
+  },
+  "markets.soon": {
+   "fr": "Prochainement",
+   "en": "Coming next",
+   "ar": "قريبًا",
+   "es": "Próximamente"
+  },
+  "markets.hub": {
+   "fr": "Alger",
+   "en": "Algiers",
+   "ar": "الجزائر العاصمة",
+   "es": "Argel"
+  },
+  "services.kicker": {
+   "fr": "Export & services",
+   "en": "Export & services",
+   "ar": "التصدير والخدمات",
+   "es": "Exportación y servicios"
+  },
+  "services.title": {
+   "fr": "Du producteur *au quai de destination*.",
+   "en": "From the producer *to the destination port*.",
+   "ar": "من المنتج *إلى ميناء الوصول*.",
+   "es": "Del productor *al puerto de destino*."
+  },
+  "services.lead": {
+   "fr": "Un seul interlocuteur pour sourcer, contrôler, emballer, expédier et suivre. Vous parlez à une équipe, pas à une chaîne d’intermédiaires.",
+   "en": "One point of contact to source, check, pack, ship and follow up. You deal with one team, not a chain of middlemen.",
+   "ar": "محاور واحد للتوريد والمراقبة والتغليف والشحن والمتابعة. تتعامل مع فريق واحد، لا مع سلسلة من الوسطاء.",
+   "es": "Un solo interlocutor para abastecer, controlar, embalar, enviar y hacer el seguimiento. Trata con un equipo, no con una cadena de intermediarios."
+  },
+  "audience.kicker": {
+   "fr": "Pour qui",
+   "en": "Who it’s for",
+   "ar": "لمن نعمل",
+   "es": "Para quién"
+  },
+  "audience.title": {
+   "fr": "Pensé pour les acheteurs *professionnels*.",
+   "en": "Built for *professional* buyers.",
+   "ar": "مصمَّم للمشترين *المحترفين*.",
+   "es": "Pensado para compradores *profesionales*."
+  },
+  "audience.importers": {
+   "fr": "Importateurs",
+   "en": "Importers",
+   "ar": "المستوردون",
+   "es": "Importadores"
+  },
+  "audience.distributors": {
+   "fr": "Distributeurs",
+   "en": "Distributors",
+   "ar": "الموزعون",
+   "es": "Distribuidores"
+  },
+  "audience.wholesalers": {
+   "fr": "Grossistes",
+   "en": "Wholesalers",
+   "ar": "تجار الجملة",
+   "es": "Mayoristas"
+  },
+  "audience.chains": {
+   "fr": "Chaînes de magasins",
+   "en": "Retail chains",
+   "ar": "سلاسل المتاجر",
+   "es": "Cadenas de tiendas"
+  },
+  "audience.food": {
+   "fr": "Industriels & marques",
+   "en": "Manufacturers & brands",
+   "ar": "الشركات الصناعية والعلامات",
+   "es": "Industriales y marcas"
+  },
+  "audience.retail": {
+   "fr": "Détaillants & e-commerce",
+   "en": "Retailers & e-commerce",
+   "ar": "تجار التجزئة والتجارة الإلكترونية",
+   "es": "Minoristas y comercio electrónico"
+  },
+  "audience.trading": {
+   "fr": "Sociétés de négoce",
+   "en": "Trading companies",
+   "ar": "شركات التجارة الدولية",
+   "es": "Empresas de comercio internacional"
+  },
+  "audience.partners": {
+   "fr": "Partenaires & institutions",
+   "en": "Partners & institutions",
+   "ar": "الشركاء والمؤسسات",
+   "es": "Socios e instituciones"
+  },
+  "producers.kicker": {
+   "fr": "Producteurs algériens",
+   "en": "Algerian producers",
+   "ar": "المنتجون الجزائريون",
+   "es": "Productores argelinos"
+  },
+  "producers.title": {
+   "fr": "Vous produisez en Algérie ? *Rejoignez le réseau.*",
+   "en": "You produce in Algeria? *Join the network.*",
+   "ar": "تُنتج في الجزائر؟ *انضم إلى الشبكة.*",
+   "es": "¿Produce en Argelia? *Únase a la red.*"
+  },
+  "producers.text": {
+   "fr": "Agriculteurs, coopératives, artisans, PME et industriels : présentez votre production, nous étudions chaque dossier et vous mettons en relation avec des acheteurs étrangers.",
+   "en": "Farmers, cooperatives, artisans, SMEs and manufacturers: present your production; we review every application and connect you with foreign buyers.",
+   "ar": "فلاحون، تعاونيات، حرفيون، مؤسسات صغيرة ومتوسطة وصناعيون: قدّموا إنتاجكم، ندرس كل ملف ونربطكم بمشترين من الخارج.",
+   "es": "Agricultores, cooperativas, artesanos, pymes e industriales: presente su producción; estudiamos cada solicitud y le ponemos en contacto con compradores extranjeros."
+  },
+  "producers.cta": {
+   "fr": "Proposer mes produits",
+   "en": "Submit my products",
+   "ar": "اقترح منتجاتي",
+   "es": "Proponer mis productos"
+  },
+  "cta.kicker": {
+   "fr": "Parlons-en",
+   "en": "Let’s talk",
+   "ar": "لنتحدث",
+   "es": "Hablemos"
+  },
+  "cta.title": {
+   "fr": "Votre prochain conteneur *commence ici*.",
+   "en": "Your next container *starts here*.",
+   "ar": "حاويتك القادمة *تبدأ من هنا*.",
+   "es": "Su próximo contenedor *empieza aquí*."
+  },
+  "cta.text": {
+   "fr": "Dites-nous ce que vous cherchez, en quelle quantité et pour quel pays. Nous revenons vers vous avec une offre sous 48 heures ouvrées.",
+   "en": "Tell us what you are looking for, in what quantity and for which country. We get back to you with an offer within 2 business days.",
+   "ar": "أخبرونا بما تبحثون عنه، وبأي كمية، ولأي بلد. نعود إليكم بعرض خلال 48 ساعة عمل.",
+   "es": "Díganos qué busca, en qué cantidad y para qué país. Le responderemos con una oferta en 48 horas laborables."
+  },
+  "cta.whatsapp": {
+   "fr": "Écrire sur WhatsApp",
+   "en": "Message on WhatsApp",
+   "ar": "راسلنا عبر واتساب",
+   "es": "Escribir por WhatsApp"
+  },
+  "cta.email": {
+   "fr": "Envoyer un e-mail",
+   "en": "Send an email",
+   "ar": "أرسل بريدًا إلكترونيًا",
+   "es": "Enviar un correo"
+  },
+  "footer.tagline": {
+   "fr": "Le meilleur de l'Algérie, présenté au monde.",
+   "en": "The best of Algeria, presented to the world.",
+   "ar": "أفضل ما في الجزائر، نقدّمه للعالم.",
+   "es": "Lo mejor de Argelia, presentado al mundo."
+  },
+  "footer.explore": {
+   "fr": "Explorer",
+   "en": "Explore",
+   "ar": "استكشف",
+   "es": "Explorar"
+  },
+  "footer.contact": {
+   "fr": "Contact",
+   "en": "Contact",
+   "ar": "اتصل بنا",
+   "es": "Contacto"
+  },
+  "footer.follow": {
+   "fr": "Suivre",
+   "en": "Follow",
+   "ar": "تابعونا",
+   "es": "Síganos"
+  },
+  "footer.demo": {
+   "fr": "Démo conçue par Bornz Studio. Produits, régions, marchés et statistiques sont des exemples ; les illustrations et le survol 3D sont créés pour la démo.",
+   "en": "Demo designed by Bornz Studio. Products, regions, markets and statistics are examples; the illustrations and 3D flyover were created for the demo.",
+   "ar": "نموذج من تصميم Bornz Studio. المنتجات والمناطق والأسواق والإحصائيات أمثلة، والرسوم والجولة ثلاثية الأبعاد أُنجزت لهذا النموذج.",
+   "es": "Demo diseñada por Bornz Studio. Productos, regiones, mercados y estadísticas son ejemplos; las ilustraciones y el vuelo 3D se crearon para la demo."
+  },
+  "footer.admin": {
+   "fr": "Espace admin",
+   "en": "Admin area",
+   "ar": "لوحة الإدارة",
+   "es": "Panel de administración"
+  },
+  "catalogue.kicker": {
+   "fr": "Catalogue",
+   "en": "Catalogue",
+   "ar": "الكتالوج",
+   "es": "Catálogo"
+  },
+  "catalogue.title": {
+   "fr": "Le catalogue *Algerian Product*.",
+   "en": "The *Algerian Product* catalogue.",
+   "ar": "كتالوج *Algerian Product*.",
+   "es": "El catálogo *Algerian Product*."
+  },
+  "catalogue.lead": {
+   "fr": "Filtrez par filière ou par région, ouvrez une fiche et ajoutez les produits qui vous intéressent à votre demande de devis.",
+   "en": "Filter by sector or region, open a product sheet and add the products you are interested in to your quote request.",
+   "ar": "صفِّ حسب القطاع أو المنطقة، افتح بطاقة المنتج وأضف المنتجات التي تهمّك إلى طلب عرض السعر.",
+   "es": "Filtre por sector o región, abra una ficha y añada los productos que le interesen a su solicitud de presupuesto."
+  },
+  "catalogue.search": {
+   "fr": "Rechercher un produit, une région…",
+   "en": "Search a product, a region…",
+   "ar": "ابحث عن منتج أو منطقة…",
+   "es": "Buscar un producto, una región…"
+  },
+  "catalogue.all": {
+   "fr": "Tout",
+   "en": "All",
+   "ar": "الكل",
+   "es": "Todo"
+  },
+  "catalogue.allRegions": {
+   "fr": "Toutes les régions",
+   "en": "All regions",
+   "ar": "كل المناطق",
+   "es": "Todas las regiones"
+  },
+  "catalogue.empty": {
+   "fr": "Aucun produit ne correspond. Essayez une autre filière ou un autre mot.",
+   "en": "No product matches. Try another sector or word.",
+   "ar": "لا يوجد منتج مطابق. جرّب قطاعًا أو كلمة أخرى.",
+   "es": "Ningún producto coincide. Pruebe otro sector u otra palabra."
+  },
+  "catalogue.results": {
+   "fr": "{n} produits",
+   "en": "{n} products",
+   "ar": "{n} منتجات",
+   "es": "{n} productos"
+  },
+  "catalogue.note": {
+   "fr": "Catalogue d'exemple : des produits représentatifs des filières algériennes. Producteurs, formats et certifications sont confirmés au cas par cas.",
+   "en": "Sample catalogue: products representative of Algerian sectors. Producers, formats and certifications are confirmed case by case.",
+   "ar": "كتالوج تجريبي: منتجات تمثّل القطاعات الجزائرية. يتم تأكيد المنتجين والأحجام والشهادات حسب كل حالة.",
+   "es": "Catálogo de ejemplo: productos representativos de los sectores argelinos. Productores, formatos y certificaciones se confirman caso por caso."
+  },
+  "catalogue.add": {
+   "fr": "Ajouter au devis",
+   "en": "Add to quote",
+   "ar": "أضف إلى الطلب",
+   "es": "Añadir al presupuesto"
+  },
+  "catalogue.added": {
+   "fr": "Dans votre devis",
+   "en": "In your quote",
+   "ar": "في طلبك",
+   "es": "En su presupuesto"
+  },
+  "catalogue.view": {
+   "fr": "Voir la fiche",
+   "en": "View sheet",
+   "ar": "عرض البطاقة",
+   "es": "Ver ficha"
+  },
+  "product.origin": {
+   "fr": "Origine",
+   "en": "Origin",
+   "ar": "المنشأ",
+   "es": "Origen"
+  },
+  "product.country": {
+   "fr": "Algérie",
+   "en": "Algeria",
+   "ar": "الجزائر",
+   "es": "Argelia"
+  },
+  "product.sector": {
+   "fr": "Filière",
+   "en": "Sector",
+   "ar": "القطاع",
+   "es": "Sector"
+  },
+  "product.about": {
+   "fr": "Le produit",
+   "en": "The product",
+   "ar": "المنتج",
+   "es": "El producto"
+  },
+  "product.formats": {
+   "fr": "Conditionnements & formats",
+   "en": "Packaging & formats",
+   "ar": "التعبئة والأحجام",
+   "es": "Envases y formatos"
+  },
+  "product.specs": {
+   "fr": "Spécifications",
+   "en": "Specifications",
+   "ar": "المواصفات",
+   "es": "Especificaciones"
+  },
+  "product.certs": {
+   "fr": "Certifications & documents",
+   "en": "Certifications & documents",
+   "ar": "الشهادات والوثائق",
+   "es": "Certificaciones y documentos"
+  },
+  "product.certsNote": {
+   "fr": "Selon le producteur retenu. Fiches techniques, certificats et analyses sont transmis avec l’offre.",
+   "en": "Depending on the selected producer. Data sheets, certificates and lab analyses are sent with the offer.",
+   "ar": "حسب المنتج المختار. تُرسل البطاقات التقنية والشهادات والتحاليل مع العرض.",
+   "es": "Según el productor seleccionado. Fichas técnicas, certificados y análisis se envían con la oferta."
+  },
+  "product.logistics": {
+   "fr": "Logistique",
+   "en": "Logistics",
+   "ar": "اللوجستيك",
+   "es": "Logística"
+  },
+  "product.moq": {
+   "fr": "Commande minimale",
+   "en": "Minimum order",
+   "ar": "الحد الأدنى للطلب",
+   "es": "Pedido mínimo"
+  },
+  "product.hs": {
+   "fr": "Code SH (indicatif)",
+   "en": "HS code (indicative)",
+   "ar": "رمز النظام المنسق (استرشادي)",
+   "es": "Código SA (indicativo)"
+  },
+  "product.incoterms": {
+   "fr": "Incoterms",
+   "en": "Incoterms",
+   "ar": "شروط التسليم",
+   "es": "Incoterms"
+  },
+  "product.leadtime": {
+   "fr": "Délai indicatif",
+   "en": "Indicative lead time",
+   "ar": "المدة الاسترشادية",
+   "es": "Plazo indicativo"
+  },
+  "product.related": {
+   "fr": "Dans la même filière",
+   "en": "In the same sector",
+   "ar": "من القطاع نفسه",
+   "es": "Del mismo sector"
+  },
+  "product.quoteNow": {
+   "fr": "Demander un devis",
+   "en": "Request a quote",
+   "ar": "اطلب عرض سعر",
+   "es": "Solicitar presupuesto"
+  },
+  "product.whatsapp": {
+   "fr": "Question sur WhatsApp",
+   "en": "Ask on WhatsApp",
+   "ar": "سؤال عبر واتساب",
+   "es": "Preguntar por WhatsApp"
+  },
+  "product.notFound": {
+   "fr": "Ce produit n’existe pas ou n’est plus présenté.",
+   "en": "This product does not exist or is no longer listed.",
+   "ar": "هذا المنتج غير موجود أو لم يعد معروضًا.",
+   "es": "Este producto no existe o ya no se presenta."
+  },
+  "product.illustration": {
+   "fr": "Illustration",
+   "en": "Illustration",
+   "ar": "رسم توضيحي",
+   "es": "Ilustración"
+  },
+  "basket.title": {
+   "fr": "Votre demande",
+   "en": "Your request",
+   "ar": "طلبك",
+   "es": "Su solicitud"
+  },
+  "basket.go": {
+   "fr": "Finaliser la demande",
+   "en": "Complete the request",
+   "ar": "أكمل الطلب",
+   "es": "Completar la solicitud"
+  },
+  "basket.remove": {
+   "fr": "Retirer",
+   "en": "Remove",
+   "ar": "إزالة",
+   "es": "Quitar"
+  },
+  "basket.count": {
+   "fr": "{n} produit(s) dans votre demande",
+   "en": "{n} product(s) in your request",
+   "ar": "{n} منتج في طلبك",
+   "es": "{n} producto(s) en su solicitud"
+  },
+  "quote.kicker": {
+   "fr": "Demande de devis",
+   "en": "Request a quote",
+   "ar": "طلب عرض سعر",
+   "es": "Solicitud de presupuesto"
+  },
+  "quote.title": {
+   "fr": "Dites-nous *ce qu’il vous faut*.",
+   "en": "Tell us *what you need*.",
+   "ar": "أخبرونا *بما تحتاجون*.",
+   "es": "Díganos *qué necesita*."
+  },
+  "quote.lead": {
+   "fr": "Quatre étapes, deux minutes. Votre demande arrive directement à la direction, qui vous répond sous 48 heures ouvrées.",
+   "en": "Four steps, two minutes. Your request goes straight to management, who reply within 2 business days.",
+   "ar": "أربع خطوات ودقيقتان. يصل طلبك مباشرة إلى الإدارة التي ترد عليك خلال 48 ساعة عمل.",
+   "es": "Cuatro pasos, dos minutos. Su solicitud llega directamente a la dirección, que responde en 48 horas laborables."
+  },
+  "quote.tabQuote": {
+   "fr": "Demande de devis",
+   "en": "Quote request",
+   "ar": "طلب عرض سعر",
+   "es": "Presupuesto"
+  },
+  "quote.tabProducer": {
+   "fr": "Devenir producteur partenaire",
+   "en": "Become a partner producer",
+   "ar": "كن منتجًا شريكًا",
+   "es": "Ser productor asociado"
+  },
+  "quote.tabContact": {
+   "fr": "Nous écrire",
+   "en": "Write to us",
+   "ar": "راسلنا",
+   "es": "Escríbanos"
+  },
+  "quote.step1": {
+   "fr": "Produits",
+   "en": "Products",
+   "ar": "المنتجات",
+   "es": "Productos"
+  },
+  "quote.step2": {
+   "fr": "Livraison",
+   "en": "Delivery",
+   "ar": "التسليم",
+   "es": "Entrega"
+  },
+  "quote.step3": {
+   "fr": "Vos coordonnées",
+   "en": "Your details",
+   "ar": "بياناتك",
+   "es": "Sus datos"
+  },
+  "quote.step4": {
+   "fr": "Récapitulatif",
+   "en": "Summary",
+   "ar": "الملخص",
+   "es": "Resumen"
+  },
+  "quote.pick": {
+   "fr": "Choisissez un ou plusieurs produits",
+   "en": "Choose one or more products",
+   "ar": "اختر منتجًا أو أكثر",
+   "es": "Elija uno o varios productos"
+  },
+  "quote.qty": {
+   "fr": "Quantité",
+   "en": "Quantity",
+   "ar": "الكمية",
+   "es": "Cantidad"
+  },
+  "quote.unit": {
+   "fr": "Unité",
+   "en": "Unit",
+   "ar": "الوحدة",
+   "es": "Unidad"
+  },
+  "quote.u.kg": {
+   "fr": "kg",
+   "en": "kg",
+   "ar": "كغ",
+   "es": "kg"
+  },
+  "quote.u.t": {
+   "fr": "tonnes",
+   "en": "tonnes",
+   "ar": "طن",
+   "es": "toneladas"
+  },
+  "quote.u.carton": {
+   "fr": "cartons",
+   "en": "cartons",
+   "ar": "كرتونة",
+   "es": "cajas"
+  },
+  "quote.u.pallet": {
+   "fr": "palettes",
+   "en": "pallets",
+   "ar": "منصة",
+   "es": "palés"
+  },
+  "quote.u.c20": {
+   "fr": "conteneurs 20′",
+   "en": "20′ containers",
+   "ar": "حاوية 20 قدمًا",
+   "es": "contenedores 20′"
+  },
+  "quote.u.c40": {
+   "fr": "conteneurs 40′",
+   "en": "40′ containers",
+   "ar": "حاوية 40 قدمًا",
+   "es": "contenedores 40′"
+  },
+  "quote.u.pcs": {
+   "fr": "pièces",
+   "en": "pieces",
+   "ar": "قطعة",
+   "es": "piezas"
+  },
+  "quote.u.m2": {
+   "fr": "m²",
+   "en": "m²",
+   "ar": "م²",
+   "es": "m²"
+  },
+  "quote.noProduct": {
+   "fr": "Ajoutez au moins un produit.",
+   "en": "Add at least one product.",
+   "ar": "أضف منتجًا واحدًا على الأقل.",
+   "es": "Añada al menos un producto."
+  },
+  "quote.other": {
+   "fr": "Autre produit (précisez dans le message)",
+   "en": "Other product (specify in the message)",
+   "ar": "منتج آخر (حدّده في الرسالة)",
+   "es": "Otro producto (indíquelo en el mensaje)"
+  },
+  "quote.country": {
+   "fr": "Pays de destination",
+   "en": "Destination country",
+   "ar": "بلد الوجهة",
+   "es": "País de destino"
+  },
+  "quote.city": {
+   "fr": "Ville ou port d’arrivée",
+   "en": "City or port of arrival",
+   "ar": "مدينة أو ميناء الوصول",
+   "es": "Ciudad o puerto de llegada"
+  },
+  "quote.incoterm": {
+   "fr": "Incoterm souhaité",
+   "en": "Preferred Incoterm",
+   "ar": "شرط التسليم المفضل",
+   "es": "Incoterm preferido"
+  },
+  "quote.incotermHelp": {
+   "fr": "Pas sûr ? Laissez « À conseiller », nous vous proposerons le plus adapté.",
+   "en": "Not sure? Leave “Advise me” and we will suggest the best fit.",
+   "ar": "غير متأكد؟ اترك «اقترحوا عليّ» وسنقترح الأنسب.",
+   "es": "¿No está seguro? Deje «Aconséjenme» y le propondremos el más adecuado."
+  },
+  "quote.incotermAdvise": {
+   "fr": "À conseiller",
+   "en": "Advise me",
+   "ar": "اقترحوا عليّ",
+   "es": "Aconséjenme"
+  },
+  "quote.date": {
+   "fr": "Date souhaitée",
+   "en": "Target date",
+   "ar": "التاريخ المطلوب",
+   "es": "Fecha deseada"
+  },
+  "quote.frequency": {
+   "fr": "Fréquence",
+   "en": "Frequency",
+   "ar": "التكرار",
+   "es": "Frecuencia"
+  },
+  "quote.f.once": {
+   "fr": "Commande ponctuelle",
+   "en": "One-off order",
+   "ar": "طلب لمرة واحدة",
+   "es": "Pedido puntual"
+  },
+  "quote.f.monthly": {
+   "fr": "Mensuelle",
+   "en": "Monthly",
+   "ar": "شهري",
+   "es": "Mensual"
+  },
+  "quote.f.quarterly": {
+   "fr": "Trimestrielle",
+   "en": "Quarterly",
+   "ar": "فصلي",
+   "es": "Trimestral"
+  },
+  "quote.f.yearly": {
+   "fr": "Annuelle / saisonnière",
+   "en": "Yearly / seasonal",
+   "ar": "سنوي / موسمي",
+   "es": "Anual / de temporada"
+  },
+  "quote.company": {
+   "fr": "Société",
+   "en": "Company",
+   "ar": "الشركة",
+   "es": "Empresa"
+  },
+  "quote.name": {
+   "fr": "Nom et prénom",
+   "en": "Full name",
+   "ar": "الاسم واللقب",
+   "es": "Nombre y apellidos"
+  },
+  "quote.role": {
+   "fr": "Fonction",
+   "en": "Job title",
+   "ar": "الوظيفة",
+   "es": "Cargo"
+  },
+  "quote.email": {
+   "fr": "E-mail professionnel",
+   "en": "Business email",
+   "ar": "البريد الإلكتروني المهني",
+   "es": "Correo profesional"
+  },
+  "quote.phone": {
+   "fr": "Téléphone / WhatsApp",
+   "en": "Phone / WhatsApp",
+   "ar": "الهاتف / واتساب",
+   "es": "Teléfono / WhatsApp"
+  },
+  "quote.buyerType": {
+   "fr": "Vous êtes",
+   "en": "You are",
+   "ar": "أنتم",
+   "es": "Usted es"
+  },
+  "quote.t.importer": {
+   "fr": "Importateur",
+   "en": "Importer",
+   "ar": "مستورد",
+   "es": "Importador"
+  },
+  "quote.t.distributor": {
+   "fr": "Distributeur",
+   "en": "Distributor",
+   "ar": "موزع",
+   "es": "Distribuidor"
+  },
+  "quote.t.wholesaler": {
+   "fr": "Grossiste",
+   "en": "Wholesaler",
+   "ar": "تاجر جملة",
+   "es": "Mayorista"
+  },
+  "quote.t.chain": {
+   "fr": "Chaîne de magasins / supermarchés",
+   "en": "Retail / supermarket chain",
+   "ar": "سلسلة متاجر / سوبرماركت",
+   "es": "Cadena de tiendas / supermercados"
+  },
+  "quote.t.industry": {
+   "fr": "Industriel / marque",
+   "en": "Manufacturer / brand",
+   "ar": "شركة صناعية / علامة",
+   "es": "Industrial / marca"
+  },
+  "quote.t.retailer": {
+   "fr": "Détaillant / e-commerce",
+   "en": "Retailer / e-commerce",
+   "ar": "تاجر تجزئة / متجر إلكتروني",
+   "es": "Minorista / comercio electrónico"
+  },
+  "quote.t.trading": {
+   "fr": "Société de négoce",
+   "en": "Trading company",
+   "ar": "شركة تجارة دولية",
+   "es": "Empresa de comercio internacional"
+  },
+  "quote.t.other": {
+   "fr": "Autre",
+   "en": "Other",
+   "ar": "أخرى",
+   "es": "Otro"
+  },
+  "quote.message": {
+   "fr": "Message (qualité, emballage, marque blanche…)",
+   "en": "Message (grade, packaging, private label…)",
+   "ar": "رسالة (الجودة، التغليف، العلامة الخاصة…)",
+   "es": "Mensaje (calidad, envase, marca blanca…)"
+  },
+  "quote.next": {
+   "fr": "Continuer",
+   "en": "Continue",
+   "ar": "متابعة",
+   "es": "Continuar"
+  },
+  "quote.prev": {
+   "fr": "Retour",
+   "en": "Back",
+   "ar": "رجوع",
+   "es": "Atrás"
+  },
+  "quote.send": {
+   "fr": "Envoyer la demande",
+   "en": "Send the request",
+   "ar": "أرسل الطلب",
+   "es": "Enviar la solicitud"
+  },
+  "quote.consent": {
+   "fr": "J'accepte que mes informations soient utilisées pour répondre à ma demande.",
+   "en": "I agree that my information may be used to answer my request.",
+   "ar": "أوافق على استخدام معلوماتي للرد على طلبي.",
+   "es": "Acepto que mis datos se utilicen para responder a mi solicitud."
+  },
+  "quote.required": {
+   "fr": "Champ obligatoire",
+   "en": "Required field",
+   "ar": "حقل إلزامي",
+   "es": "Campo obligatorio"
+  },
+  "quote.invalidEmail": {
+   "fr": "Adresse e-mail invalide",
+   "en": "Invalid email address",
+   "ar": "بريد إلكتروني غير صالح",
+   "es": "Correo electrónico no válido"
+  },
+  "quote.successTitle": {
+   "fr": "Demande envoyée.",
+   "en": "Request sent.",
+   "ar": "تم إرسال الطلب.",
+   "es": "Solicitud enviada."
+  },
+  "quote.successText": {
+   "fr": "Merci. Votre demande {ref} est arrivée à la direction. Vous recevrez une réponse sous 48 heures ouvrées.",
+   "en": "Thank you. Your request {ref} has reached management. You will receive a reply within 2 business days.",
+   "ar": "شكرًا لكم. وصل طلبكم {ref} إلى الإدارة، وستتلقون ردًّا خلال 48 ساعة عمل.",
+   "es": "Gracias. Su solicitud {ref} ha llegado a la dirección. Recibirá una respuesta en 48 horas laborables."
+  },
+  "quote.demoNote": {
+   "fr": "Démo : la demande est enregistrée dans ce navigateur et visible dans l’espace admin.",
+   "en": "Demo: the request is stored in this browser and visible in the admin area.",
+   "ar": "نموذج تجريبي: يُحفظ الطلب في هذا المتصفح ويظهر في لوحة الإدارة.",
+   "es": "Demo: la solicitud se guarda en este navegador y se ve en el panel de administración."
+  },
+  "quote.again": {
+   "fr": "Nouvelle demande",
+   "en": "New request",
+   "ar": "طلب جديد",
+   "es": "Nueva solicitud"
+  },
+  "quote.seeAdmin": {
+   "fr": "Voir dans l’admin",
+   "en": "See it in the admin",
+   "ar": "شاهده في لوحة الإدارة",
+   "es": "Verla en el panel"
+  },
+  "producer.lead": {
+   "fr": "Présentez votre entreprise et vos produits. Nous étudions chaque dossier et revenons vers vous sous deux semaines.",
+   "en": "Introduce your company and products. We review every application and get back to you within two weeks.",
+   "ar": "عرّفوا بمؤسستكم ومنتجاتكم. ندرس كل ملف ونعود إليكم خلال أسبوعين.",
+   "es": "Presente su empresa y sus productos. Estudiamos cada solicitud y le respondemos en dos semanas."
+  },
+  "producer.wilaya": {
+   "fr": "Wilaya",
+   "en": "Province (wilaya)",
+   "ar": "الولاية",
+   "es": "Provincia (wilaya)"
+  },
+  "producer.products": {
+   "fr": "Produits proposés",
+   "en": "Products offered",
+   "ar": "المنتجات المقترحة",
+   "es": "Productos ofrecidos"
+  },
+  "producer.capacity": {
+   "fr": "Capacité (par mois ou par saison)",
+   "en": "Capacity (per month or season)",
+   "ar": "القدرة الإنتاجية (شهريًا أو موسميًا)",
+   "es": "Capacidad (por mes o temporada)"
+  },
+  "producer.certs": {
+   "fr": "Certifications disponibles",
+   "en": "Available certifications",
+   "ar": "الشهادات المتوفرة",
+   "es": "Certificaciones disponibles"
+  },
+  "producer.exports": {
+   "fr": "Exportez-vous déjà ?",
+   "en": "Do you already export?",
+   "ar": "هل تُصدّرون حاليًا؟",
+   "es": "¿Ya exporta?"
+  },
+  "producer.yes": {
+   "fr": "Oui",
+   "en": "Yes",
+   "ar": "نعم",
+   "es": "Sí"
+  },
+  "producer.no": {
+   "fr": "Pas encore",
+   "en": "Not yet",
+   "ar": "ليس بعد",
+   "es": "Todavía no"
+  },
+  "producer.send": {
+   "fr": "Envoyer ma candidature",
+   "en": "Send my application",
+   "ar": "أرسل طلبي",
+   "es": "Enviar mi solicitud"
+  },
+  "producer.successTitle": {
+   "fr": "Candidature reçue.",
+   "en": "Application received.",
+   "ar": "تم استلام طلبكم.",
+   "es": "Solicitud recibida."
+  },
+  "producer.successText": {
+   "fr": "Merci. Votre dossier {ref} est entre nos mains ; nous revenons vers vous sous deux semaines.",
+   "en": "Thank you. Your application {ref} is in our hands; we will get back to you within two weeks.",
+   "ar": "شكرًا لكم. ملفكم {ref} بين أيدينا، وسنعود إليكم خلال أسبوعين.",
+   "es": "Gracias. Su solicitud {ref} está en nuestras manos; le responderemos en dos semanas."
+  },
+  "contact.lead": {
+   "fr": "Une question sur la marque, un partenariat, la presse ? Écrivez-nous, ou passez par WhatsApp.",
+   "en": "A question about the brand, a partnership, press? Write to us, or use WhatsApp.",
+   "ar": "سؤال عن العلامة، أو شراكة، أو للصحافة؟ راسلونا أو تواصلوا عبر واتساب.",
+   "es": "¿Una pregunta sobre la marca, una colaboración, prensa? Escríbanos o use WhatsApp."
+  },
+  "contact.subject": {
+   "fr": "Sujet",
+   "en": "Subject",
+   "ar": "الموضوع",
+   "es": "Asunto"
+  },
+  "contact.message": {
+   "fr": "Message",
+   "en": "Message",
+   "ar": "الرسالة",
+   "es": "Mensaje"
+  },
+  "contact.send": {
+   "fr": "Envoyer le message",
+   "en": "Send the message",
+   "ar": "أرسل الرسالة",
+   "es": "Enviar el mensaje"
+  },
+  "contact.successTitle": {
+   "fr": "Message envoyé.",
+   "en": "Message sent.",
+   "ar": "تم إرسال الرسالة.",
+   "es": "Mensaje enviado."
+  },
+  "contact.successText": {
+   "fr": "Merci, nous vous répondons rapidement.",
+   "en": "Thank you, we will reply shortly.",
+   "ar": "شكرًا، سنرد عليكم قريبًا.",
+   "es": "Gracias, le responderemos en breve."
+  },
+  "contact.email": {
+   "fr": "E-mail",
+   "en": "Email",
+   "ar": "البريد الإلكتروني",
+   "es": "Correo"
+  },
+  "contact.whatsapp": {
+   "fr": "WhatsApp",
+   "en": "WhatsApp",
+   "ar": "واتساب",
+   "es": "WhatsApp"
+  },
+  "contact.office": {
+   "fr": "Bureaux",
+   "en": "Offices",
+   "ar": "المكاتب",
+   "es": "Oficinas"
+  }
+ },
+ "sectors": [
+  {
+   "id": "terroir",
+   "color": "#8f5a22",
+   "pattern": "palm",
+   "name": {
+    "fr": "Terroir & alimentaire",
+    "en": "Food & agriculture",
+    "ar": "المنتجات الفلاحية والغذائية",
+    "es": "Alimentación y agricultura"
+   },
+   "desc": {
+    "fr": "Dattes, huile d’olive, figues, agrumes, blé dur, miel : les produits d’une terre qui va de la Méditerranée au Sahara.",
+    "en": "Dates, olive oil, figs, citrus, durum wheat, honey: the produce of a land that runs from the Mediterranean to the Sahara.",
+    "ar": "تمور، زيت زيتون، تين، حمضيات، قمح صلب، عسل: خيرات أرض تمتد من المتوسط إلى الصحراء.",
+    "es": "Dátiles, aceite de oliva, higos, cítricos, trigo duro, miel: los frutos de una tierra que va del Mediterráneo al Sáhara."
+   },
+   "visible": true,
+   "order": 0
+  },
+  {
+   "id": "artisanat",
+   "color": "#9b3a26",
+   "pattern": "star",
+   "name": {
+    "fr": "Artisanat & arts de la table",
+    "en": "Crafts & tableware",
+    "ar": "الحرف التقليدية وأدوات المائدة",
+    "es": "Artesanía y menaje"
+   },
+   "desc": {
+    "fr": "Tapis du M’zab, cuivre de Constantine, poterie kabyle, argent touareg : des gestes transmis de génération en génération.",
+    "en": "M’zab carpets, Constantine copper, Kabyle pottery, Tuareg silver: skills handed down through generations.",
+    "ar": "زرابي ميزاب، نحاس قسنطينة، فخار القبائل، فضة الطوارق: مهارات متوارثة جيلًا بعد جيل.",
+    "es": "Alfombras del M’zab, cobre de Constantina, cerámica cabileña, plata tuareg: oficios transmitidos de generación en generación."
+   },
+   "visible": true,
+   "order": 1
+  },
+  {
+   "id": "textile",
+   "color": "#2e3d68",
+   "pattern": "weave",
+   "name": {
+    "fr": "Textile & mode",
+    "en": "Textiles & fashion",
+    "ar": "النسيج والأزياء",
+    "es": "Textil y moda"
+   },
+   "desc": {
+    "fr": "Broderie de Tlemcen, tissage, denim et confection : du fil à la pièce finie, pour les marques et les distributeurs.",
+    "en": "Tlemcen embroidery, weaving, denim and garment making: from yarn to finished piece, for brands and distributors.",
+    "ar": "تطريز تلمسان، النسيج، الدنيم والخياطة: من الخيط إلى القطعة الجاهزة، للعلامات والموزعين.",
+    "es": "Bordado de Tlemcen, tejido, denim y confección: del hilo a la prenda terminada, para marcas y distribuidores."
+   },
+   "visible": true,
+   "order": 2
+  },
+  {
+   "id": "materiaux",
+   "color": "#5f6470",
+   "pattern": "tile",
+   "name": {
+    "fr": "Céramique & matériaux",
+    "en": "Ceramics & materials",
+    "ar": "الخزف ومواد البناء",
+    "es": "Cerámica y materiales"
+   },
+   "desc": {
+    "fr": "Carreaux, faïence, ciment, verre : des matériaux produits à grande échelle, prêts pour les chantiers étrangers.",
+    "en": "Tiles, earthenware, cement, glass: materials produced at scale, ready for building sites abroad.",
+    "ar": "بلاط، خزف، إسمنت، زجاج: مواد تُنتج على نطاق واسع وجاهزة لورشات البناء في الخارج.",
+    "es": "Baldosas, loza, cemento, vidrio: materiales producidos a gran escala, listos para obras en el extranjero."
+   },
+   "visible": true,
+   "order": 3
+  },
+  {
+   "id": "industrie",
+   "color": "#1d5a52",
+   "pattern": "grid",
+   "name": {
+    "fr": "Industrie & manufacture",
+    "en": "Industry & manufacturing",
+    "ar": "الصناعة والتصنيع",
+    "es": "Industria y manufactura"
+   },
+   "desc": {
+    "fr": "Électroménager, électronique, emballages : des usines algériennes qui fabriquent pour le marché local et, de plus en plus, pour l’export.",
+    "en": "Home appliances, electronics, packaging: Algerian factories making for the home market and, increasingly, for export.",
+    "ar": "أجهزة كهرومنزلية، إلكترونيات، تغليف: مصانع جزائرية تنتج للسوق المحلية وتتجه أكثر فأكثر نحو التصدير.",
+    "es": "Electrodomésticos, electrónica, envases: fábricas argelinas que producen para el mercado local y, cada vez más, para la exportación."
+   },
+   "visible": true,
+   "order": 4
+  },
+  {
+   "id": "beaute",
+   "color": "#7a4a68",
+   "pattern": "arch",
+   "name": {
+    "fr": "Beauté & bien-être",
+    "en": "Beauty & wellness",
+    "ar": "التجميل والعناية",
+    "es": "Belleza y bienestar"
+   },
+   "desc": {
+    "fr": "Huile de figue de Barbarie, savon à l’huile d’olive, eaux florales : des soins naturels issus des ressources du pays.",
+    "en": "Prickly pear seed oil, olive oil soap, floral waters: natural care made from the country’s resources.",
+    "ar": "زيت بذور التين الشوكي، صابون زيت الزيتون، ماء الزهر: منتجات عناية طبيعية من موارد البلاد.",
+    "es": "Aceite de higo chumbo, jabón de aceite de oliva, aguas florales: cuidados naturales elaborados con los recursos del país."
+   },
+   "visible": true,
+   "order": 5
+  }
+ ],
+ "products": [
+  {
+   "image": "",
+   "visible": true,
+   "featured": true,
+   "id": "dattes-deglet-nour",
+   "sector": "terroir",
+   "art": "dates",
+   "color": "#7a4317",
+   "region": "biskra",
+   "place": {
+    "fr": "Tolga, oasis des Ziban",
+    "en": "Tolga, Ziban oases",
+    "ar": "طولقة، واحات الزيبان",
+    "es": "Tolga, oasis del Ziban"
+   },
+   "name": {
+    "fr": "Dattes Deglet Nour",
+    "en": "Deglet Nour dates",
+    "ar": "تمور دقلة نور",
+    "es": "Dátiles Deglet Nour"
+   },
+   "short": {
+    "fr": "La « datte de lumière », translucide et mielleuse.",
+    "en": "The “date of light”: translucent and honeyed.",
+    "ar": "«تمرة النور»، شفافة وعسلية المذاق.",
+    "es": "El «dátil de luz»: translúcido y meloso."
+   },
+   "desc": {
+    "fr": "Cultivée dans les palmeraies des Ziban, la Deglet Nour est la variété phare de l’Algérie. Sa chair ambrée et translucide, peu fibreuse, se conserve bien et voyage bien. Disponible en branchettes, en vrac, dénoyautée ou en pâte pour l’industrie.",
+    "en": "Grown in the palm groves of the Ziban, Deglet Nour is Algeria’s flagship variety. Its amber, translucent, low-fibre flesh keeps and travels well. Available on the branch, loose, pitted or as paste for the food industry.",
+    "ar": "تُزرع دقلة نور في نخيل الزيبان، وهي الصنف الأشهر في الجزائر. لُبّها الكهرماني الشفاف قليل الألياف، تُحفظ جيدًا وتتحمل السفر. متوفرة بالعراجين، سائبة، منزوعة النوى أو عجينةً للصناعات الغذائية.",
+    "es": "Cultivado en los palmerales del Ziban, el Deglet Nour es la variedad emblemática de Argelia. Su pulpa ambarina, translúcida y poco fibrosa se conserva y viaja bien. Disponible en rama, a granel, deshuesado o en pasta para la industria."
+   },
+   "formats": [
+    {
+     "label": {
+      "fr": "Branchettes — coffret 500 g / 1 kg",
+      "en": "On the branch — 500 g / 1 kg box",
+      "ar": "بالعراجين — علبة 500 غ / 1 كغ",
+      "es": "En rama — caja de 500 g / 1 kg"
+     }
+    },
+    {
+     "label": {
+      "fr": "Vrac — carton 5 kg / 10 kg",
+      "en": "Loose — 5 kg / 10 kg carton",
+      "ar": "سائبة — كرتونة 5 كغ / 10 كغ",
+      "es": "A granel — caja de 5 kg / 10 kg"
+     }
+    },
+    {
+     "label": {
+      "fr": "Dénoyautées — barquette 250 g",
+      "en": "Pitted — 250 g tray",
+      "ar": "منزوعة النوى — علبة 250 غ",
+      "es": "Deshuesados — bandeja de 250 g"
+     }
+    },
+    {
+     "label": {
+      "fr": "Pâte de dattes — seau 10 kg",
+      "en": "Date paste — 10 kg pail",
+      "ar": "عجينة التمر — دلو 10 كغ",
+      "es": "Pasta de dátil — cubo de 10 kg"
+     }
+    }
+   ],
+   "specs": [
+    {
+     "k": {
+      "fr": "Variété",
+      "en": "Variety",
+      "ar": "الصنف",
+      "es": "Variedad"
+     },
+     "v": {
+      "fr": "Deglet Nour",
+      "en": "Deglet Nour",
+      "ar": "دقلة نور",
+      "es": "Deglet Nour"
+     }
+    },
+    {
+     "k": {
+      "fr": "Calibre",
+      "en": "Grade",
+      "ar": "العيار",
+      "es": "Calibre"
+     },
+     "v": {
+      "fr": "Extra, catégorie I",
+      "en": "Extra, class I",
+      "ar": "ممتاز، الدرجة الأولى",
+      "es": "Extra, categoría I"
+     }
+    },
+    {
+     "k": {
+      "fr": "Saison",
+      "en": "Season",
+      "ar": "الموسم",
+      "es": "Temporada"
+     },
+     "v": {
+      "fr": "Récolte d’octobre à décembre",
+      "en": "Harvest October to December",
+      "ar": "الجني من أكتوبر إلى ديسمبر",
+      "es": "Cosecha de octubre a diciembre"
+     }
+    },
+    {
+     "k": {
+      "fr": "Conservation",
+      "en": "Storage",
+      "ar": "الحفظ",
+      "es": "Conservación"
+     },
+     "v": {
+      "fr": "12 mois au frais et au sec",
+      "en": "12 months, cool and dry",
+      "ar": "12 شهرًا في مكان بارد وجاف",
+      "es": "12 meses en lugar fresco y seco"
+     }
+    }
+   ],
+   "certs": [
+    "ig",
+    "haccp",
+    "organic",
+    "globalgap"
+   ],
+   "hs": "0804.10",
+   "moq": {
+    "fr": "1 palette",
+    "en": "1 pallet",
+    "ar": "منصة واحدة",
+    "es": "1 palé"
+   },
+   "leadtime": {
+    "fr": "2 à 3 semaines",
+    "en": "2 to 3 weeks",
+    "ar": "من أسبوعين إلى 3 أسابيع",
+    "es": "2 a 3 semanas"
+   },
+   "order": 0,
+   "incoterms": [
+    "EXW",
+    "FOB",
+    "CIF",
+    "DAP"
+   ]
+  },
+  {
+   "image": "",
+   "visible": true,
+   "featured": true,
+   "id": "huile-olive-kabylie",
+   "sector": "terroir",
+   "art": "oil",
+   "color": "#55591e",
+   "region": "tizi",
+   "place": {
+    "fr": "Kabylie, Djurdjura",
+    "en": "Kabylia, Djurdjura",
+    "ar": "القبائل، جرجرة",
+    "es": "Cabilia, Djurdjura"
+   },
+   "name": {
+    "fr": "Huile d’olive extra vierge",
+    "en": "Extra virgin olive oil",
+    "ar": "زيت زيتون بكر ممتاز",
+    "es": "Aceite de oliva virgen extra"
+   },
+   "short": {
+    "fr": "Oliveraies de montagne, pressée à froid.",
+    "en": "Mountain groves, cold pressed.",
+    "ar": "زياتين جبلية، معصور على البارد.",
+    "es": "Olivares de montaña, prensado en frío."
+   },
+   "desc": {
+    "fr": "Sur les crêtes de Kabylie, l’olivier fait partie du paysage et des familles. Récoltée en début de saison et pressée à froid, cette huile offre un fruité vert, une amertume nette et une belle tenue en bouche. Variété dominante : Chemlal.",
+    "en": "On the ridges of Kabylia, olive trees are part of the landscape and of family life. Harvested early and cold pressed, this oil offers a green fruitiness, clean bitterness and good length. Main variety: Chemlal.",
+    "ar": "على قمم القبائل، الزيتون جزء من المشهد ومن حياة العائلات. يُجنى في بداية الموسم ويُعصر على البارد، فيمنح زيتًا بنكهة فاكهية خضراء ومرارة واضحة ومذاق ثابت. الصنف الغالب: شملال.",
+    "es": "En las cumbres de Cabilia, el olivo forma parte del paisaje y de las familias. Cosechado al inicio de la temporada y prensado en frío, este aceite ofrece un frutado verde, un amargor nítido y buena persistencia. Variedad principal: Chemlal."
+   },
+   "formats": [
+    {
+     "label": {
+      "fr": "Bouteille verre 250 ml / 500 ml / 750 ml",
+      "en": "Glass bottle 250 ml / 500 ml / 750 ml",
+      "ar": "قارورة زجاج 250 / 500 / 750 مل",
+      "es": "Botella de vidrio 250 / 500 / 750 ml"
+     }
+    },
+    {
+     "label": {
+      "fr": "Bidon 5 L",
+      "en": "5 L tin",
+      "ar": "دلو 5 لترات",
+      "es": "Lata de 5 L"
+     }
+    },
+    {
+     "label": {
+      "fr": "Vrac — IBC 1 000 L",
+      "en": "Bulk — 1,000 L IBC",
+      "ar": "سائب — حاوية 1000 لتر",
+      "es": "Granel — IBC de 1.000 L"
+     }
+    },
+    {
+     "label": {
+      "fr": "Marque blanche sur demande",
+      "en": "Private label on request",
+      "ar": "علامة خاصة عند الطلب",
+      "es": "Marca blanca bajo pedido"
+     }
+    }
+   ],
+   "specs": [
+    {
+     "k": {
+      "fr": "Catégorie",
+      "en": "Grade",
+      "ar": "الفئة",
+      "es": "Categoría"
+     },
+     "v": {
+      "fr": "Extra vierge",
+      "en": "Extra virgin",
+      "ar": "بكر ممتاز",
+      "es": "Virgen extra"
+     }
+    },
+    {
+     "k": {
+      "fr": "Acidité",
+      "en": "Acidity",
+      "ar": "الحموضة",
+      "es": "Acidez"
+     },
+     "v": {
+      "fr": "≤ 0,8 % (analyse par lot)",
+      "en": "≤ 0.8% (lab test per batch)",
+      "ar": "≤ 0.8% (تحليل لكل دفعة)",
+      "es": "≤ 0,8 % (análisis por lote)"
+     }
+    },
+    {
+     "k": {
+      "fr": "Extraction",
+      "en": "Extraction",
+      "ar": "الاستخلاص",
+      "es": "Extracción"
+     },
+     "v": {
+      "fr": "À froid, moulin moderne",
+      "en": "Cold, modern mill",
+      "ar": "على البارد، معصرة حديثة",
+      "es": "En frío, almazara moderna"
+     }
+    },
+    {
+     "k": {
+      "fr": "Récolte",
+      "en": "Harvest",
+      "ar": "الجني",
+      "es": "Cosecha"
+     },
+     "v": {
+      "fr": "Novembre à janvier",
+      "en": "November to January",
+      "ar": "من نوفمبر إلى جانفي",
+      "es": "De noviembre a enero"
+     }
+    }
+   ],
+   "certs": [
+    "iso22000",
+    "haccp",
+    "organic"
+   ],
+   "hs": "1509.20",
+   "moq": {
+    "fr": "500 bouteilles ou 1 IBC",
+    "en": "500 bottles or 1 IBC",
+    "ar": "500 قارورة أو حاوية IBC",
+    "es": "500 botellas o 1 IBC"
+   },
+   "leadtime": {
+    "fr": "3 semaines",
+    "en": "3 weeks",
+    "ar": "3 أسابيع",
+    "es": "3 semanas"
+   },
+   "order": 1,
+   "incoterms": [
+    "EXW",
+    "FOB",
+    "CIF",
+    "DAP"
+   ]
+  },
+  {
+   "image": "",
+   "visible": true,
+   "featured": true,
+   "id": "figues-beni-maouche",
+   "sector": "terroir",
+   "art": "figs",
+   "color": "#5a2443",
+   "region": "bejaia",
+   "place": {
+    "fr": "Beni Maouche, Petite Kabylie",
+    "en": "Beni Maouche, Lesser Kabylia",
+    "ar": "بني معوش، القبائل الصغرى",
+    "es": "Beni Maouche, Pequeña Cabilia"
+   },
+   "name": {
+    "fr": "Figues sèches de Beni Maouche",
+    "en": "Beni Maouche dried figs",
+    "ar": "تين بني معوش المجفف",
+    "es": "Higos secos de Beni Maouche"
+   },
+   "short": {
+    "fr": "Séchées au soleil, labellisées indication géographique.",
+    "en": "Sun dried, with a geographical indication label.",
+    "ar": "مجففة تحت الشمس، تحمل علامة المؤشر الجغرافي.",
+    "es": "Secados al sol, con indicación geográfica."
+   },
+   "desc": {
+    "fr": "Cueillies à maturité sur les pentes de Beni Maouche puis séchées au soleil sur claies, ces figues sont reconnues par une indication géographique. Peau fine, cœur moelleux et sucré : un produit de terroir apprécié des épiceries fines.",
+    "en": "Picked ripe on the slopes of Beni Maouche and sun dried on racks, these figs are recognised by a geographical indication. Thin skin, soft and sweet heart: a terroir product prized by delicatessens.",
+    "ar": "تُقطف ناضجة من منحدرات بني معوش ثم تُجفف تحت الشمس على أطباق، وهي معترف بها بمؤشر جغرافي. قشرة رقيقة وقلب طري وحلو: منتج محلي مطلوب لدى المتاجر الراقية.",
+    "es": "Recogidos maduros en las laderas de Beni Maouche y secados al sol en cañizos, estos higos cuentan con indicación geográfica. Piel fina, corazón tierno y dulce: un producto de terruño apreciado por las tiendas gourmet."
+   },
+   "formats": [
+    {
+     "label": {
+      "fr": "Sachet kraft 250 g / 500 g",
+      "en": "Kraft bag 250 g / 500 g",
+      "ar": "كيس كرافت 250 غ / 500 غ",
+      "es": "Bolsa kraft 250 g / 500 g"
+     }
+    },
+    {
+     "label": {
+      "fr": "Colliers traditionnels",
+      "en": "Traditional strings",
+      "ar": "عقود تقليدية",
+      "es": "Collares tradicionales"
+     }
+    },
+    {
+     "label": {
+      "fr": "Carton 5 kg",
+      "en": "5 kg carton",
+      "ar": "كرتونة 5 كغ",
+      "es": "Caja de 5 kg"
+     }
+    }
+   ],
+   "specs": [
+    {
+     "k": {
+      "fr": "Séchage",
+      "en": "Drying",
+      "ar": "التجفيف",
+      "es": "Secado"
+     },
+     "v": {
+      "fr": "Naturel, au soleil",
+      "en": "Natural, in the sun",
+      "ar": "طبيعي تحت الشمس",
+      "es": "Natural, al sol"
+     }
+    },
+    {
+     "k": {
+      "fr": "Humidité",
+      "en": "Moisture",
+      "ar": "الرطوبة",
+      "es": "Humedad"
+     },
+     "v": {
+      "fr": "Selon norme du pays de destination",
+      "en": "Per destination country standard",
+      "ar": "حسب معايير بلد الوجهة",
+      "es": "Según la norma del país de destino"
+     }
+    },
+    {
+     "k": {
+      "fr": "Saison",
+      "en": "Season",
+      "ar": "الموسم",
+      "es": "Temporada"
+     },
+     "v": {
+      "fr": "Août à octobre",
+      "en": "August to October",
+      "ar": "من أوت إلى أكتوبر",
+      "es": "De agosto a octubre"
+     }
+    }
+   ],
+   "certs": [
+    "ig",
+    "haccp"
+   ],
+   "hs": "0804.20",
+   "moq": {
+    "fr": "200 kg",
+    "en": "200 kg",
+    "ar": "200 كغ",
+    "es": "200 kg"
+   },
+   "leadtime": {
+    "fr": "2 semaines",
+    "en": "2 weeks",
+    "ar": "أسبوعان",
+    "es": "2 semanas"
+   },
+   "order": 2,
+   "incoterms": [
+    "EXW",
+    "FOB",
+    "CIF",
+    "DAP"
+   ]
+  },
+  {
+   "image": "",
+   "visible": true,
+   "featured": false,
+   "id": "oranges-mitidja",
+   "sector": "terroir",
+   "art": "orange",
+   "color": "#c4601a",
+   "region": "blida",
+   "place": {
+    "fr": "Plaine de la Mitidja",
+    "en": "Mitidja plain",
+    "ar": "سهل متيجة",
+    "es": "Llanura de la Mitidja"
+   },
+   "name": {
+    "fr": "Oranges de la Mitidja",
+    "en": "Mitidja oranges",
+    "ar": "برتقال متيجة",
+    "es": "Naranjas de la Mitidja"
+   },
+   "short": {
+    "fr": "Thomson et Washington navel, cueillies à la main.",
+    "en": "Thomson and Washington navel, hand picked.",
+    "ar": "طومسون وواشنطن نافل، مقطوفة باليد.",
+    "es": "Thomson y Washington navel, recogidas a mano."
+   },
+   "desc": {
+    "fr": "Entre l’Atlas blidéen et la mer, la Mitidja est le grand verger d’agrumes de l’Algérie. Oranges navel juteuses et parfumées, clémentines et citrons, calibrés et conditionnés en station.",
+    "en": "Between the Blida Atlas and the sea, the Mitidja is Algeria’s great citrus orchard. Juicy, fragrant navel oranges, clementines and lemons, graded and packed in station.",
+    "ar": "بين أطلس البليدة والبحر، تُعدّ متيجة البستان الكبير للحمضيات في الجزائر. برتقال نافل عصيري وعطر، وكليمنتين وليمون، مُعيّرة ومعبأة في محطات التوضيب.",
+    "es": "Entre el Atlas de Blida y el mar, la Mitidja es el gran huerto de cítricos de Argelia. Naranjas navel jugosas y aromáticas, clementinas y limones, calibrados y envasados en central."
+   },
+   "formats": [
+    {
+     "label": {
+      "fr": "Carton 10 kg / 15 kg",
+      "en": "10 kg / 15 kg carton",
+      "ar": "كرتونة 10 / 15 كغ",
+      "es": "Caja de 10 / 15 kg"
+     }
+    },
+    {
+     "label": {
+      "fr": "Filet 2 kg",
+      "en": "2 kg net",
+      "ar": "شبكة 2 كغ",
+      "es": "Malla de 2 kg"
+     }
+    },
+    {
+     "label": {
+      "fr": "Palette — conteneur frigorifique",
+      "en": "Pallet — reefer container",
+      "ar": "منصة — حاوية مبردة",
+      "es": "Palé — contenedor refrigerado"
+     }
+    }
+   ],
+   "specs": [
+    {
+     "k": {
+      "fr": "Variétés",
+      "en": "Varieties",
+      "ar": "الأصناف",
+      "es": "Variedades"
+     },
+     "v": {
+      "fr": "Thomson, Washington navel, clémentine",
+      "en": "Thomson, Washington navel, clementine",
+      "ar": "طومسون، واشنطن نافل، كليمنتين",
+      "es": "Thomson, Washington navel, clementina"
+     }
+    },
+    {
+     "k": {
+      "fr": "Saison",
+      "en": "Season",
+      "ar": "الموسم",
+      "es": "Temporada"
+     },
+     "v": {
+      "fr": "Novembre à avril",
+      "en": "November to April",
+      "ar": "من نوفمبر إلى أفريل",
+      "es": "De noviembre a abril"
+     }
+    },
+    {
+     "k": {
+      "fr": "Transport",
+      "en": "Transport",
+      "ar": "النقل",
+      "es": "Transporte"
+     },
+     "v": {
+      "fr": "Froid positif, 4 à 6 °C",
+      "en": "Chilled, 4 to 6 °C",
+      "ar": "تبريد بين 4 و6 درجات",
+      "es": "Refrigerado, de 4 a 6 °C"
+     }
+    }
+   ],
+   "certs": [
+    "globalgap",
+    "haccp"
+   ],
+   "hs": "0805.10",
+   "moq": {
+    "fr": "1 conteneur 40′ reefer",
+    "en": "1 × 40′ reefer",
+    "ar": "حاوية مبردة 40 قدمًا",
+    "es": "1 contenedor 40′ refrigerado"
+   },
+   "leadtime": {
+    "fr": "1 à 2 semaines en saison",
+    "en": "1 to 2 weeks in season",
+    "ar": "من أسبوع إلى أسبوعين في الموسم",
+    "es": "1 a 2 semanas en temporada"
+   },
+   "order": 3,
+   "incoterms": [
+    "EXW",
+    "FOB",
+    "CIF",
+    "DAP"
+   ]
+  },
+  {
+   "image": "",
+   "visible": true,
+   "featured": true,
+   "id": "couscous-ble-dur",
+   "sector": "terroir",
+   "art": "wheat",
+   "color": "#a77f2c",
+   "region": "setif",
+   "place": {
+    "fr": "Hauts Plateaux",
+    "en": "High Plateaus",
+    "ar": "الهضاب العليا",
+    "es": "Altiplanicies"
+   },
+   "name": {
+    "fr": "Couscous & semoule de blé dur",
+    "en": "Couscous & durum wheat semolina",
+    "ar": "الكسكس وسميد القمح الصلب",
+    "es": "Cuscús y sémola de trigo duro"
+   },
+   "short": {
+    "fr": "Du blé des Hauts Plateaux à la graine roulée.",
+    "en": "From High Plateau wheat to rolled grain.",
+    "ar": "من قمح الهضاب العليا إلى الحبة المفتولة.",
+    "es": "Del trigo de las altiplanicies al grano enrollado."
+   },
+   "desc": {
+    "fr": "Les Hauts Plateaux sétifiens sont une terre de céréales. Couscous fin, moyen ou gros, semoules et produits roulés à l’ancienne : le plat national, préparé pour les rayons du monde entier.",
+    "en": "The High Plateaus around Sétif are cereal country. Fine, medium or coarse couscous, semolinas and traditionally rolled products: the national dish, made for shelves around the world.",
+    "ar": "الهضاب العليا السطايفية أرض الحبوب. كسكس رقيق ومتوسط وغليظ، وسميد ومنتجات مفتولة على الطريقة التقليدية: الطبق الوطني مُحضَّر لرفوف العالم.",
+    "es": "Las altiplanicies de Sétif son tierra de cereales. Cuscús fino, mediano o grueso, sémolas y productos enrollados a la antigua: el plato nacional, preparado para los lineales de todo el mundo."
+   },
+   "formats": [
+    {
+     "label": {
+      "fr": "Paquet 500 g / 1 kg",
+      "en": "500 g / 1 kg pack",
+      "ar": "علبة 500 غ / 1 كغ",
+      "es": "Paquete de 500 g / 1 kg"
+     }
+    },
+    {
+     "label": {
+      "fr": "Sac 5 kg / 25 kg",
+      "en": "5 kg / 25 kg bag",
+      "ar": "كيس 5 / 25 كغ",
+      "es": "Saco de 5 / 25 kg"
+     }
+    },
+    {
+     "label": {
+      "fr": "Marque blanche sur demande",
+      "en": "Private label on request",
+      "ar": "علامة خاصة عند الطلب",
+      "es": "Marca blanca bajo pedido"
+     }
+    }
+   ],
+   "specs": [
+    {
+     "k": {
+      "fr": "Matière première",
+      "en": "Raw material",
+      "ar": "المادة الأولية",
+      "es": "Materia prima"
+     },
+     "v": {
+      "fr": "Blé dur",
+      "en": "Durum wheat",
+      "ar": "قمح صلب",
+      "es": "Trigo duro"
+     }
+    },
+    {
+     "k": {
+      "fr": "Grains",
+      "en": "Grain sizes",
+      "ar": "أحجام الحبة",
+      "es": "Granulometría"
+     },
+     "v": {
+      "fr": "Fin, moyen, gros",
+      "en": "Fine, medium, coarse",
+      "ar": "رقيق، متوسط، غليظ",
+      "es": "Fino, mediano, grueso"
+     }
+    },
+    {
+     "k": {
+      "fr": "Conservation",
+      "en": "Shelf life",
+      "ar": "مدة الصلاحية",
+      "es": "Vida útil"
+     },
+     "v": {
+      "fr": "24 mois",
+      "en": "24 months",
+      "ar": "24 شهرًا",
+      "es": "24 meses"
+     }
+    }
+   ],
+   "certs": [
+    "iso22000",
+    "haccp",
+    "halal"
+   ],
+   "hs": "1902.40",
+   "moq": {
+    "fr": "1 palette",
+    "en": "1 pallet",
+    "ar": "منصة واحدة",
+    "es": "1 palé"
+   },
+   "leadtime": {
+    "fr": "2 semaines",
+    "en": "2 weeks",
+    "ar": "أسبوعان",
+    "es": "2 semanas"
+   },
+   "order": 4,
+   "incoterms": [
+    "EXW",
+    "FOB",
+    "CIF",
+    "DAP"
+   ]
+  },
+  {
+   "image": "",
+   "visible": true,
+   "featured": false,
+   "id": "miel-jujubier",
+   "sector": "terroir",
+   "art": "honey",
+   "color": "#b0741a",
+   "region": "djelfa",
+   "place": {
+    "fr": "Steppe et Atlas saharien",
+    "en": "Steppe and Saharan Atlas",
+    "ar": "السهوب والأطلس الصحراوي",
+    "es": "Estepa y Atlas sahariano"
+   },
+   "name": {
+    "fr": "Miel de jujubier (sidr)",
+    "en": "Jujube (sidr) honey",
+    "ar": "عسل السدر",
+    "es": "Miel de azufaifo (sidr)"
+   },
+   "short": {
+    "fr": "Un miel rare, butiné sur le jujubier sauvage.",
+    "en": "A rare honey from wild jujube blossom.",
+    "ar": "عسل نادر من أزهار السدر البري.",
+    "es": "Una miel rara de flor de azufaifo silvestre."
+   },
+   "desc": {
+    "fr": "Dans les steppes du centre, les abeilles butinent le jujubier sauvage à la fin de l’été. Il en sort un miel ambré, épais et aromatique, très recherché dans les pays du Golfe. Production limitée, lots tracés par rucher.",
+    "en": "In the central steppes, bees forage on wild jujube at the end of summer. The result is an amber, thick and aromatic honey, much sought after in the Gulf. Limited production, batches traced by apiary.",
+    "ar": "في سهوب الوسط، يجني النحل رحيق السدر البري في آخر الصيف، فيُنتج عسلًا كهرمانيًا كثيفًا وعطريًا مطلوبًا جدًا في دول الخليج. إنتاج محدود ودفعات متتبَّعة حسب المنحل.",
+    "es": "En las estepas del centro, las abejas liban el azufaifo silvestre a finales del verano. El resultado es una miel ambarina, espesa y aromática, muy buscada en los países del Golfo. Producción limitada, lotes trazados por colmenar."
+   },
+   "formats": [
+    {
+     "label": {
+      "fr": "Pot verre 250 g / 500 g / 1 kg",
+      "en": "Glass jar 250 g / 500 g / 1 kg",
+      "ar": "برطمان زجاج 250 / 500 غ / 1 كغ",
+      "es": "Tarro de vidrio 250 / 500 g / 1 kg"
+     }
+    },
+    {
+     "label": {
+      "fr": "Coffret cadeau",
+      "en": "Gift box",
+      "ar": "علبة هدايا",
+      "es": "Estuche regalo"
+     }
+    }
+   ],
+   "specs": [
+    {
+     "k": {
+      "fr": "Origine florale",
+      "en": "Floral source",
+      "ar": "المصدر الزهري",
+      "es": "Origen floral"
+     },
+     "v": {
+      "fr": "Jujubier sauvage (Ziziphus)",
+      "en": "Wild jujube (Ziziphus)",
+      "ar": "السدر البري",
+      "es": "Azufaifo silvestre (Ziziphus)"
+     }
+    },
+    {
+     "k": {
+      "fr": "Analyses",
+      "en": "Lab tests",
+      "ar": "التحاليل",
+      "es": "Análisis"
+     },
+     "v": {
+      "fr": "Pollinique et physico-chimique par lot",
+      "en": "Pollen and physico-chemical per batch",
+      "ar": "تحليل حبوب اللقاح والتحليل الفيزيوكيميائي لكل دفعة",
+      "es": "Polínico y fisicoquímico por lote"
+     }
+    }
+   ],
+   "certs": [
+    "haccp",
+    "halal"
+   ],
+   "hs": "0409.00",
+   "moq": {
+    "fr": "100 kg",
+    "en": "100 kg",
+    "ar": "100 كغ",
+    "es": "100 kg"
+   },
+   "leadtime": {
+    "fr": "2 semaines",
+    "en": "2 weeks",
+    "ar": "أسبوعان",
+    "es": "2 semanas"
+   },
+   "order": 5,
+   "incoterms": [
+    "EXW",
+    "FOB",
+    "CIF",
+    "DAP"
+   ]
+  },
+  {
+   "image": "",
+   "visible": true,
+   "featured": false,
+   "id": "concentre-tomate",
+   "sector": "terroir",
+   "art": "tomato",
+   "color": "#a3301f",
+   "region": "guelma",
+   "place": {
+    "fr": "Est algérien",
+    "en": "Eastern Algeria",
+    "ar": "الشرق الجزائري",
+    "es": "Este de Argelia"
+   },
+   "name": {
+    "fr": "Concentré de tomate",
+    "en": "Tomato paste",
+    "ar": "معجون الطماطم",
+    "es": "Concentrado de tomate"
+   },
+   "short": {
+    "fr": "Tomates de plein champ, transformées en saison.",
+    "en": "Field tomatoes, processed in season.",
+    "ar": "طماطم الحقول، تُحوَّل في موسمها.",
+    "es": "Tomates de campo, transformados en temporada."
+   },
+   "desc": {
+    "fr": "Dans l’Est du pays, la tomate industrielle est récoltée l’été et transformée sur place. Double et triple concentré, en boîte ou en fût aseptique, pour la distribution comme pour l’industrie.",
+    "en": "In the east of the country, processing tomatoes are harvested in summer and processed locally. Double and triple concentrate, in cans or aseptic drums, for retail and for industry.",
+    "ar": "في شرق البلاد، تُجنى الطماطم الصناعية صيفًا وتُحوَّل في عين المكان. مركّز مضاعف وثلاثي، في علب أو براميل معقّمة، للتوزيع وللصناعة.",
+    "es": "En el este del país, el tomate industrial se cosecha en verano y se transforma in situ. Doble y triple concentrado, en lata o en bidón aséptico, para la distribución y para la industria."
+   },
+   "formats": [
+    {
+     "label": {
+      "fr": "Boîte 400 g / 800 g",
+      "en": "400 g / 800 g can",
+      "ar": "علبة 400 / 800 غ",
+      "es": "Lata de 400 / 800 g"
+     }
+    },
+    {
+     "label": {
+      "fr": "Boîte 4,5 kg (CHR)",
+      "en": "4.5 kg can (food service)",
+      "ar": "علبة 4.5 كغ (للمطاعم)",
+      "es": "Lata de 4,5 kg (hostelería)"
+     }
+    },
+    {
+     "label": {
+      "fr": "Fût aseptique 220 L",
+      "en": "220 L aseptic drum",
+      "ar": "برميل معقّم 220 لترًا",
+      "es": "Bidón aséptico de 220 L"
+     }
+    }
+   ],
+   "specs": [
+    {
+     "k": {
+      "fr": "Brix",
+      "en": "Brix",
+      "ar": "بريكس",
+      "es": "Brix"
+     },
+     "v": {
+      "fr": "28–30 ° / 36–38 °",
+      "en": "28–30° / 36–38°",
+      "ar": "28–30 / 36–38",
+      "es": "28–30° / 36–38°"
+     }
+    },
+    {
+     "k": {
+      "fr": "Conservation",
+      "en": "Shelf life",
+      "ar": "مدة الصلاحية",
+      "es": "Vida útil"
+     },
+     "v": {
+      "fr": "24 mois",
+      "en": "24 months",
+      "ar": "24 شهرًا",
+      "es": "24 meses"
+     }
+    }
+   ],
+   "certs": [
+    "iso22000",
+    "haccp",
+    "halal"
+   ],
+   "hs": "2002.90",
+   "moq": {
+    "fr": "1 conteneur 20′",
+    "en": "1 × 20′ container",
+    "ar": "حاوية 20 قدمًا",
+    "es": "1 contenedor 20′"
+   },
+   "leadtime": {
+    "fr": "3 semaines",
+    "en": "3 weeks",
+    "ar": "3 أسابيع",
+    "es": "3 semanas"
+   },
+   "order": 6,
+   "incoterms": [
+    "EXW",
+    "FOB",
+    "CIF",
+    "DAP"
+   ]
+  },
+  {
+   "image": "",
+   "visible": true,
+   "featured": true,
+   "id": "tapis-mzab",
+   "sector": "artisanat",
+   "art": "carpet",
+   "color": "#8e2e20",
+   "region": "ghardaia",
+   "place": {
+    "fr": "Vallée du M’zab",
+    "en": "M’zab valley",
+    "ar": "وادي ميزاب",
+    "es": "Valle del M’zab"
+   },
+   "name": {
+    "fr": "Tapis du M’zab",
+    "en": "M’zab carpets",
+    "ar": "زرابي ميزاب",
+    "es": "Alfombras del M’zab"
+   },
+   "short": {
+    "fr": "Laine tissée à la main, motifs géométriques.",
+    "en": "Hand-woven wool, geometric patterns.",
+    "ar": "صوف منسوج يدويًا بزخارف هندسية.",
+    "es": "Lana tejida a mano, motivos geométricos."
+   },
+   "desc": {
+    "fr": "Dans la vallée du M’zab, inscrite au patrimoine mondial de l’UNESCO, les tisserandes perpétuent des tapis aux losanges et aux couleurs franches. Chaque pièce est unique, en laine naturelle, et peut être réalisée sur mesure pour les décorateurs et les hôtels.",
+    "en": "In the M’zab valley, a UNESCO World Heritage site, weavers keep alive carpets with lozenges and bold colours. Each piece is unique, in natural wool, and can be made to measure for designers and hotels.",
+    "ar": "في وادي ميزاب المصنّف تراثًا عالميًا لدى اليونسكو، تواصل النساجات صنع زرابي بمعيّنات وألوان صريحة. كل قطعة فريدة من الصوف الطبيعي، ويمكن إنجازها حسب الطلب للمصممين والفنادق.",
+    "es": "En el valle del M’zab, patrimonio mundial de la UNESCO, las tejedoras mantienen vivas alfombras de rombos y colores francos. Cada pieza es única, de lana natural, y puede hacerse a medida para decoradores y hoteles."
+   },
+   "formats": [
+    {
+     "label": {
+      "fr": "Tapis 120 × 180 cm à 200 × 300 cm",
+      "en": "Rugs from 120 × 180 cm to 200 × 300 cm",
+      "ar": "زرابي من 120×180 إلى 200×300 سم",
+      "es": "Alfombras de 120 × 180 a 200 × 300 cm"
+     }
+    },
+    {
+     "label": {
+      "fr": "Sur mesure (projets hôteliers)",
+      "en": "Made to measure (hotel projects)",
+      "ar": "حسب الطلب (مشاريع فندقية)",
+      "es": "A medida (proyectos hoteleros)"
+     }
+    },
+    {
+     "label": {
+      "fr": "Coussins et petites pièces",
+      "en": "Cushions and small pieces",
+      "ar": "وسائد وقطع صغيرة",
+      "es": "Cojines y piezas pequeñas"
+     }
+    }
+   ],
+   "specs": [
+    {
+     "k": {
+      "fr": "Matière",
+      "en": "Material",
+      "ar": "المادة",
+      "es": "Material"
+     },
+     "v": {
+      "fr": "Laine de mouton, teintures sélectionnées",
+      "en": "Sheep’s wool, selected dyes",
+      "ar": "صوف الغنم وأصباغ مختارة",
+      "es": "Lana de oveja, tintes seleccionados"
+     }
+    },
+    {
+     "k": {
+      "fr": "Fabrication",
+      "en": "Making",
+      "ar": "الصنع",
+      "es": "Fabricación"
+     },
+     "v": {
+      "fr": "Tissage à la main, métier vertical",
+      "en": "Hand woven, vertical loom",
+      "ar": "نسيج يدوي على منسج عمودي",
+      "es": "Tejido a mano, telar vertical"
+     }
+    },
+    {
+     "k": {
+      "fr": "Délai sur mesure",
+      "en": "Bespoke lead time",
+      "ar": "مدة الطلبيات الخاصة",
+      "es": "Plazo a medida"
+     },
+     "v": {
+      "fr": "6 à 10 semaines",
+      "en": "6 to 10 weeks",
+      "ar": "من 6 إلى 10 أسابيع",
+      "es": "6 a 10 semanas"
+     }
+    }
+   ],
+   "certs": [
+    "origin",
+    "handmade"
+   ],
+   "hs": "5701 / 5702",
+   "moq": {
+    "fr": "À la pièce",
+    "en": "Per piece",
+    "ar": "بالقطعة",
+    "es": "Por pieza"
+   },
+   "leadtime": {
+    "fr": "Stock : 1 semaine",
+    "en": "In stock: 1 week",
+    "ar": "من المخزون: أسبوع",
+    "es": "En stock: 1 semana"
+   },
+   "order": 7,
+   "incoterms": [
+    "EXW",
+    "FOB",
+    "CIF",
+    "DAP"
+   ]
+  },
+  {
+   "image": "",
+   "visible": true,
+   "featured": true,
+   "id": "cuivre-constantine",
+   "sector": "artisanat",
+   "art": "tray",
+   "color": "#a2552f",
+   "region": "constantine",
+   "place": {
+    "fr": "Médina de Constantine",
+    "en": "Constantine medina",
+    "ar": "المدينة العتيقة بقسنطينة",
+    "es": "Medina de Constantina"
+   },
+   "name": {
+    "fr": "Cuivre ciselé de Constantine",
+    "en": "Constantine chased copper",
+    "ar": "نحاس قسنطينة المنقوش",
+    "es": "Cobre cincelado de Constantina"
+   },
+   "short": {
+    "fr": "Plateaux, aiguières et lanternes martelés à la main.",
+    "en": "Hand-hammered trays, ewers and lanterns.",
+    "ar": "صوانٍ وأباريق وفوانيس مطروقة يدويًا.",
+    "es": "Bandejas, aguamaniles y faroles martillados a mano."
+   },
+   "desc": {
+    "fr": "Dans les ateliers de la vieille ville, les dinandiers martèlent et ciselent le cuivre comme on le fait depuis des siècles. Plateaux (sniwa), aiguières, lanternes : des pièces de décoration et d’arts de la table pour les boutiques et les hôtels.",
+    "en": "In the workshops of the old town, coppersmiths hammer and chase copper as they have for centuries. Trays (sniwa), ewers, lanterns: decorative and tableware pieces for shops and hotels.",
+    "ar": "في ورشات المدينة القديمة، يطرق النحّاسون النحاس وينقشونه كما يُفعل منذ قرون. صوانٍ (صينية)، أباريق، فوانيس: قطع للزينة وأدوات المائدة للمتاجر والفنادق.",
+    "es": "En los talleres del casco antiguo, los caldereros martillan y cincelan el cobre como se hace desde hace siglos. Bandejas (sniwa), aguamaniles, faroles: piezas de decoración y menaje para tiendas y hoteles."
+   },
+   "formats": [
+    {
+     "label": {
+      "fr": "Plateaux Ø 30 à 80 cm",
+      "en": "Trays Ø 30 to 80 cm",
+      "ar": "صوانٍ بقطر 30 إلى 80 سم",
+      "es": "Bandejas Ø 30 a 80 cm"
+     }
+    },
+    {
+     "label": {
+      "fr": "Aiguières et bassins",
+      "en": "Ewers and basins",
+      "ar": "أباريق وطسوت",
+      "es": "Aguamaniles y jofainas"
+     }
+    },
+    {
+     "label": {
+      "fr": "Lanternes et luminaires",
+      "en": "Lanterns and lights",
+      "ar": "فوانيس وإنارة",
+      "es": "Faroles y lámparas"
+     }
+    }
+   ],
+   "specs": [
+    {
+     "k": {
+      "fr": "Matière",
+      "en": "Material",
+      "ar": "المادة",
+      "es": "Material"
+     },
+     "v": {
+      "fr": "Cuivre rouge ou jaune, finition étamée possible",
+      "en": "Red or yellow copper, tin-lined option",
+      "ar": "نحاس أحمر أو أصفر، مع إمكانية التقصير",
+      "es": "Cobre rojo o amarillo, opción estañada"
+     }
+    },
+    {
+     "k": {
+      "fr": "Décor",
+      "en": "Decoration",
+      "ar": "الزخرفة",
+      "es": "Decoración"
+     },
+     "v": {
+      "fr": "Ciselé à la main",
+      "en": "Hand chased",
+      "ar": "منقوش يدويًا",
+      "es": "Cincelado a mano"
+     }
+    }
+   ],
+   "certs": [
+    "origin",
+    "handmade"
+   ],
+   "hs": "7418.10",
+   "moq": {
+    "fr": "20 pièces",
+    "en": "20 pieces",
+    "ar": "20 قطعة",
+    "es": "20 piezas"
+   },
+   "leadtime": {
+    "fr": "4 à 6 semaines",
+    "en": "4 to 6 weeks",
+    "ar": "من 4 إلى 6 أسابيع",
+    "es": "4 a 6 semanas"
+   },
+   "order": 8,
+   "incoterms": [
+    "EXW",
+    "FOB",
+    "CIF",
+    "DAP"
+   ]
+  },
+  {
+   "image": "",
+   "visible": true,
+   "featured": false,
+   "id": "poterie-kabyle",
+   "sector": "artisanat",
+   "art": "pot",
+   "color": "#9a4724",
+   "region": "tizi",
+   "place": {
+    "fr": "Villages de Kabylie",
+    "en": "Kabyle villages",
+    "ar": "قرى القبائل",
+    "es": "Pueblos de Cabilia"
+   },
+   "name": {
+    "fr": "Poterie kabyle peinte",
+    "en": "Painted Kabyle pottery",
+    "ar": "فخار القبائل المزخرف",
+    "es": "Cerámica cabileña pintada"
+   },
+   "short": {
+    "fr": "Modelée et peinte à la main par des potières.",
+    "en": "Hand shaped and painted by women potters.",
+    "ar": "تشكّلها وتزخرفها الخزّافات يدويًا.",
+    "es": "Modelada y pintada a mano por alfareras."
+   },
+   "desc": {
+    "fr": "Façonnée sans tour, polie puis peinte de motifs géométriques à l’ocre et au brun, la poterie kabyle est un art féminin transmis de mère en fille. Jarres, plats, lampes à huile : des pièces fortes pour la décoration.",
+    "en": "Shaped without a wheel, polished, then painted with geometric motifs in ochre and brown, Kabyle pottery is a women’s craft passed from mother to daughter. Jars, dishes, oil lamps: statement pieces for interiors.",
+    "ar": "يُشكَّل فخار القبائل دون دولاب، ثم يُصقل ويُزخرف بنقوش هندسية بالمغرة والبني، وهو فن نسوي يُتوارث من الأم إلى البنت. جرار، صحون، قناديل: قطع مميزة للديكور.",
+    "es": "Modelada sin torno, pulida y pintada con motivos geométricos en ocre y marrón, la cerámica cabileña es un arte femenino transmitido de madre a hija. Tinajas, fuentes, candiles: piezas protagonistas para la decoración."
+   },
+   "formats": [
+    {
+     "label": {
+      "fr": "Pièces décoratives (jarres, plats, lampes)",
+      "en": "Decorative pieces (jars, dishes, lamps)",
+      "ar": "قطع زينة (جرار، صحون، قناديل)",
+      "es": "Piezas decorativas (tinajas, fuentes, candiles)"
+     }
+    },
+    {
+     "label": {
+      "fr": "Séries pour boutiques et concept-stores",
+      "en": "Runs for shops and concept stores",
+      "ar": "سلاسل للمتاجر والمحلات المفاهيمية",
+      "es": "Series para tiendas y concept stores"
+     }
+    }
+   ],
+   "specs": [
+    {
+     "k": {
+      "fr": "Matière",
+      "en": "Material",
+      "ar": "المادة",
+      "es": "Material"
+     },
+     "v": {
+      "fr": "Argile locale, pigments naturels",
+      "en": "Local clay, natural pigments",
+      "ar": "طين محلي وأصباغ طبيعية",
+      "es": "Arcilla local, pigmentos naturales"
+     }
+    },
+    {
+     "k": {
+      "fr": "Usage",
+      "en": "Use",
+      "ar": "الاستعمال",
+      "es": "Uso"
+     },
+     "v": {
+      "fr": "Décoratif",
+      "en": "Decorative",
+      "ar": "للزينة",
+      "es": "Decorativo"
+     }
+    }
+   ],
+   "certs": [
+    "origin",
+    "handmade"
+   ],
+   "hs": "6913.90",
+   "moq": {
+    "fr": "30 pièces",
+    "en": "30 pieces",
+    "ar": "30 قطعة",
+    "es": "30 piezas"
+   },
+   "leadtime": {
+    "fr": "4 semaines",
+    "en": "4 weeks",
+    "ar": "4 أسابيع",
+    "es": "4 semanas"
+   },
+   "order": 9,
+   "incoterms": [
+    "EXW",
+    "FOB",
+    "CIF",
+    "DAP"
+   ]
+  },
+  {
+   "image": "",
+   "visible": true,
+   "featured": false,
+   "id": "argent-touareg",
+   "sector": "artisanat",
+   "art": "silver",
+   "color": "#5d636b",
+   "region": "tamanrasset",
+   "place": {
+    "fr": "Hoggar",
+    "en": "Hoggar",
+    "ar": "الهقار",
+    "es": "Hoggar"
+   },
+   "name": {
+    "fr": "Bijoux en argent touaregs",
+    "en": "Tuareg silver jewellery",
+    "ar": "حلي الطوارق الفضية",
+    "es": "Joyería tuareg de plata"
+   },
+   "short": {
+    "fr": "Croix, bracelets et bagues gravés à la main.",
+    "en": "Hand-engraved crosses, bracelets and rings.",
+    "ar": "صلبان وأساور وخواتم منقوشة يدويًا.",
+    "es": "Cruces, brazaletes y anillos grabados a mano."
+   },
+   "desc": {
+    "fr": "Au pied du Hoggar, les forgerons touaregs travaillent l’argent selon des formes anciennes : croix, bracelets, pendentifs gravés de motifs géométriques. Des bijoux de caractère pour les créateurs et les boutiques de design.",
+    "en": "At the foot of the Hoggar, Tuareg smiths work silver in ancient forms: crosses, bracelets, pendants engraved with geometric motifs. Jewellery with character for designers and design shops.",
+    "ar": "عند سفح الهقار، يصوغ الحدادون الطوارق الفضة بأشكال عريقة: صلبان، أساور، قلائد منقوشة بزخارف هندسية. حلي ذات طابع للمصممين ومتاجر التصميم.",
+    "es": "Al pie del Hoggar, los herreros tuareg trabajan la plata según formas antiguas: cruces, brazaletes, colgantes grabados con motivos geométricos. Joyas con carácter para creadores y tiendas de diseño."
+   },
+   "formats": [
+    {
+     "label": {
+      "fr": "Pièces à l’unité",
+      "en": "Single pieces",
+      "ar": "قطع منفردة",
+      "es": "Piezas sueltas"
+     }
+    },
+    {
+     "label": {
+      "fr": "Collections pour boutiques",
+      "en": "Collections for shops",
+      "ar": "مجموعات للمتاجر",
+      "es": "Colecciones para tiendas"
+     }
+    }
+   ],
+   "specs": [
+    {
+     "k": {
+      "fr": "Métal",
+      "en": "Metal",
+      "ar": "المعدن",
+      "es": "Metal"
+     },
+     "v": {
+      "fr": "Argent, titre selon l’atelier",
+      "en": "Silver, fineness per workshop",
+      "ar": "فضة، العيار حسب الورشة",
+      "es": "Plata, ley según el taller"
+     }
+    },
+    {
+     "k": {
+      "fr": "Fabrication",
+      "en": "Making",
+      "ar": "الصنع",
+      "es": "Fabricación"
+     },
+     "v": {
+      "fr": "Fonte et gravure à la main",
+      "en": "Hand cast and engraved",
+      "ar": "صب ونقش يدوي",
+      "es": "Fundición y grabado a mano"
+     }
+    }
+   ],
+   "certs": [
+    "origin",
+    "handmade"
+   ],
+   "hs": "7113.11",
+   "moq": {
+    "fr": "10 pièces",
+    "en": "10 pieces",
+    "ar": "10 قطع",
+    "es": "10 piezas"
+   },
+   "leadtime": {
+    "fr": "3 à 5 semaines",
+    "en": "3 to 5 weeks",
+    "ar": "من 3 إلى 5 أسابيع",
+    "es": "3 a 5 semanas"
+   },
+   "order": 10,
+   "incoterms": [
+    "EXW",
+    "FOB",
+    "CIF",
+    "DAP"
+   ]
+  },
+  {
+   "image": "",
+   "visible": true,
+   "featured": true,
+   "id": "broderie-tlemcen",
+   "sector": "textile",
+   "art": "embroidery",
+   "color": "#5e2038",
+   "region": "tlemcen",
+   "place": {
+    "fr": "Médina de Tlemcen",
+    "en": "Tlemcen medina",
+    "ar": "المدينة العتيقة بتلمسان",
+    "es": "Medina de Tremecén"
+   },
+   "name": {
+    "fr": "Broderie & tissage de Tlemcen",
+    "en": "Tlemcen embroidery & weaving",
+    "ar": "تطريز ونسيج تلمسان",
+    "es": "Bordado y tejido de Tremecén"
+   },
+   "short": {
+    "fr": "Fil d’or, velours et soie : le savoir-faire de la chedda.",
+    "en": "Gold thread, velvet and silk: the craft of the chedda.",
+    "ar": "خيط الذهب والمخمل والحرير: صنعة الشدّة.",
+    "es": "Hilo de oro, terciopelo y seda: el oficio de la chedda."
+   },
+   "desc": {
+    "fr": "Tlemcen est connue pour ses broderies au fil d’or et pour la chedda, le costume nuptial inscrit au patrimoine immatériel de l’UNESCO. Pièces brodées, étoffes tissées, accessoires : pour les maisons de couture, les créateurs et les boutiques.",
+    "en": "Tlemcen is known for its gold-thread embroidery and for the chedda, the bridal costume on UNESCO’s intangible heritage list. Embroidered pieces, woven fabrics, accessories: for couture houses, designers and boutiques.",
+    "ar": "تشتهر تلمسان بالتطريز بخيط الذهب وبالشدّة، لباس العروس المسجل في التراث اللامادي لليونسكو. قطع مطرزة، أقمشة منسوجة، إكسسوارات: لدور الأزياء والمصممين والمتاجر.",
+    "es": "Tremecén es conocida por sus bordados en hilo de oro y por la chedda, el traje nupcial inscrito en el patrimonio inmaterial de la UNESCO. Piezas bordadas, tejidos, accesorios: para casas de costura, diseñadores y boutiques."
+   },
+   "formats": [
+    {
+     "label": {
+      "fr": "Pièces brodées sur commande",
+      "en": "Embroidered pieces to order",
+      "ar": "قطع مطرزة حسب الطلب",
+      "es": "Piezas bordadas por encargo"
+     }
+    },
+    {
+     "label": {
+      "fr": "Étoffes au mètre",
+      "en": "Fabrics by the metre",
+      "ar": "أقمشة بالمتر",
+      "es": "Tejidos por metros"
+     }
+    },
+    {
+     "label": {
+      "fr": "Accessoires (pochettes, ceintures)",
+      "en": "Accessories (clutches, belts)",
+      "ar": "إكسسوارات (حقائب يد، أحزمة)",
+      "es": "Accesorios (bolsos de mano, cinturones)"
+     }
+    }
+   ],
+   "specs": [
+    {
+     "k": {
+      "fr": "Matières",
+      "en": "Materials",
+      "ar": "المواد",
+      "es": "Materiales"
+     },
+     "v": {
+      "fr": "Velours, soie, fil doré",
+      "en": "Velvet, silk, gold thread",
+      "ar": "مخمل، حرير، خيط مذهب",
+      "es": "Terciopelo, seda, hilo dorado"
+     }
+    },
+    {
+     "k": {
+      "fr": "Fabrication",
+      "en": "Making",
+      "ar": "الصنع",
+      "es": "Fabricación"
+     },
+     "v": {
+      "fr": "Main et machine, finitions main",
+      "en": "Hand and machine, hand finished",
+      "ar": "يدوي وآلي، بلمسات يدوية",
+      "es": "A mano y a máquina, acabados a mano"
+     }
+    }
+   ],
+   "certs": [
+    "origin",
+    "handmade"
+   ],
+   "hs": "5810",
+   "moq": {
+    "fr": "Selon la pièce",
+    "en": "Depends on the piece",
+    "ar": "حسب القطعة",
+    "es": "Según la pieza"
+   },
+   "leadtime": {
+    "fr": "4 à 8 semaines",
+    "en": "4 to 8 weeks",
+    "ar": "من 4 إلى 8 أسابيع",
+    "es": "4 a 8 semanas"
+   },
+   "order": 11,
+   "incoterms": [
+    "EXW",
+    "FOB",
+    "CIF",
+    "DAP"
+   ]
+  },
+  {
+   "image": "",
+   "visible": true,
+   "featured": false,
+   "id": "denim-confection",
+   "sector": "textile",
+   "art": "denim",
+   "color": "#26365e",
+   "region": "relizane",
+   "place": {
+    "fr": "Pôle textile de l’Ouest",
+    "en": "Western textile hub",
+    "ar": "القطب النسيجي بالغرب",
+    "es": "Polo textil del oeste"
+   },
+   "name": {
+    "fr": "Denim & confection",
+    "en": "Denim & garment making",
+    "ar": "الدنيم والخياطة الجاهزة",
+    "es": "Denim y confección"
+   },
+   "short": {
+    "fr": "Tissu denim et vêtements pour les marques.",
+    "en": "Denim fabric and garments for brands.",
+    "ar": "قماش الدنيم وملابس للعلامات التجارية.",
+    "es": "Tejido denim y prendas para marcas."
+   },
+   "desc": {
+    "fr": "L’Algérie s’est dotée d’un pôle textile intégré, de la filature à la confection. Tissus denim, pantalons, vestes et vêtements de travail, fabriqués en série pour les marques et la grande distribution.",
+    "en": "Algeria has built an integrated textile hub, from spinning to garment making. Denim fabric, trousers, jackets and workwear, made at scale for brands and mass retail.",
+    "ar": "أنشأت الجزائر قطبًا نسيجيًا متكاملًا من الغزل إلى الخياطة. أقمشة دنيم، سراويل، سترات وملابس عمل تُصنع بكميات كبيرة للعلامات التجارية والتوزيع الواسع.",
+    "es": "Argelia cuenta con un polo textil integrado, de la hilatura a la confección. Tejidos denim, pantalones, chaquetas y ropa de trabajo, fabricados en serie para marcas y gran distribución."
+   },
+   "formats": [
+    {
+     "label": {
+      "fr": "Tissu au rouleau",
+      "en": "Fabric by the roll",
+      "ar": "قماش باللفّة",
+      "es": "Tejido en rollo"
+     }
+    },
+    {
+     "label": {
+      "fr": "Vêtements finis, marque du client",
+      "en": "Finished garments, client brand",
+      "ar": "ملابس جاهزة بعلامة الزبون",
+      "es": "Prendas terminadas, marca del cliente"
+     }
+    }
+   ],
+   "specs": [
+    {
+     "k": {
+      "fr": "Grammages",
+      "en": "Weights",
+      "ar": "الأوزان",
+      "es": "Gramajes"
+     },
+     "v": {
+      "fr": "Selon cahier des charges",
+      "en": "Per specification",
+      "ar": "حسب دفتر الشروط",
+      "es": "Según pliego de condiciones"
+     }
+    },
+    {
+     "k": {
+      "fr": "Capacité",
+      "en": "Capacity",
+      "ar": "القدرة",
+      "es": "Capacidad"
+     },
+     "v": {
+      "fr": "Séries industrielles",
+      "en": "Industrial runs",
+      "ar": "سلاسل صناعية",
+      "es": "Series industriales"
+     }
+    }
+   ],
+   "certs": [
+    "iso9001",
+    "oekotex"
+   ],
+   "hs": "5209.42 / 6203.42",
+   "moq": {
+    "fr": "Selon modèle",
+    "en": "Per style",
+    "ar": "حسب الموديل",
+    "es": "Según modelo"
+   },
+   "leadtime": {
+    "fr": "6 à 10 semaines",
+    "en": "6 to 10 weeks",
+    "ar": "من 6 إلى 10 أسابيع",
+    "es": "6 a 10 semanas"
+   },
+   "order": 12,
+   "incoterms": [
+    "EXW",
+    "FOB",
+    "CIF",
+    "DAP"
+   ]
+  },
+  {
+   "image": "",
+   "visible": true,
+   "featured": true,
+   "id": "carreaux-ceramique",
+   "sector": "materiaux",
+   "art": "tiles",
+   "color": "#1d4a86",
+   "region": "multi",
+   "place": {
+    "fr": "Usines du Nord",
+    "en": "Northern plants",
+    "ar": "مصانع الشمال",
+    "es": "Plantas del norte"
+   },
+   "name": {
+    "fr": "Carreaux de céramique & faïence",
+    "en": "Ceramic & wall tiles",
+    "ar": "بلاط السيراميك والفايونس",
+    "es": "Baldosas cerámicas y azulejos"
+   },
+   "short": {
+    "fr": "Sol et mur, du grès cérame aux décors traditionnels.",
+    "en": "Floor and wall, from porcelain to traditional patterns.",
+    "ar": "للأرضيات والجدران، من الخزف الحجري إلى الزخارف التقليدية.",
+    "es": "Suelo y pared, del gres porcelánico a los motivos tradicionales."
+   },
+   "desc": {
+    "fr": "L’industrie céramique algérienne produit carreaux de sol, faïence murale et grès cérame en grands volumes. Des décors contemporains aux motifs inspirés du zellige, pour les promoteurs, les distributeurs et les grands chantiers.",
+    "en": "Algeria’s ceramics industry produces floor tiles, wall tiles and porcelain stoneware in large volumes. From contemporary designs to zellige-inspired patterns, for developers, distributors and large projects.",
+    "ar": "تنتج صناعة السيراميك الجزائرية بلاط الأرضيات والفايونس والخزف الحجري بكميات كبيرة، من التصاميم العصرية إلى الزخارف المستوحاة من الزليج، للمرقين والموزعين والمشاريع الكبرى.",
+    "es": "La industria cerámica argelina produce baldosas de suelo, azulejos y gres porcelánico en grandes volúmenes. De diseños contemporáneos a motivos inspirados en el zellige, para promotores, distribuidores y grandes obras."
+   },
+   "formats": [
+    {
+     "label": {
+      "fr": "Formats 20 × 20 à 60 × 120 cm",
+      "en": "Sizes 20 × 20 to 60 × 120 cm",
+      "ar": "مقاسات من 20×20 إلى 60×120 سم",
+      "es": "Formatos de 20 × 20 a 60 × 120 cm"
+     }
+    },
+    {
+     "label": {
+      "fr": "Cartons palettisés",
+      "en": "Palletised cartons",
+      "ar": "كرتونات على منصات",
+      "es": "Cajas paletizadas"
+     }
+    }
+   ],
+   "specs": [
+    {
+     "k": {
+      "fr": "Types",
+      "en": "Types",
+      "ar": "الأنواع",
+      "es": "Tipos"
+     },
+     "v": {
+      "fr": "Grès cérame, faïence, sol",
+      "en": "Porcelain, wall, floor",
+      "ar": "خزف حجري، فايونس، أرضيات",
+      "es": "Gres porcelánico, azulejo, suelo"
+     }
+    },
+    {
+     "k": {
+      "fr": "Normes",
+      "en": "Standards",
+      "ar": "المعايير",
+      "es": "Normas"
+     },
+     "v": {
+      "fr": "EN 14411 selon gamme",
+      "en": "EN 14411 per range",
+      "ar": "EN 14411 حسب التشكيلة",
+      "es": "EN 14411 según gama"
+     }
+    }
+   ],
+   "certs": [
+    "iso9001",
+    "ce"
+   ],
+   "hs": "6907",
+   "moq": {
+    "fr": "1 conteneur 20′",
+    "en": "1 × 20′ container",
+    "ar": "حاوية 20 قدمًا",
+    "es": "1 contenedor 20′"
+   },
+   "leadtime": {
+    "fr": "3 à 4 semaines",
+    "en": "3 to 4 weeks",
+    "ar": "من 3 إلى 4 أسابيع",
+    "es": "3 a 4 semanas"
+   },
+   "order": 13,
+   "incoterms": [
+    "EXW",
+    "FOB",
+    "CIF",
+    "DAP"
+   ]
+  },
+  {
+   "image": "",
+   "visible": true,
+   "featured": false,
+   "id": "ciment",
+   "sector": "materiaux",
+   "art": "cement",
+   "color": "#62605a",
+   "region": "multi",
+   "place": {
+    "fr": "Cimenteries algériennes",
+    "en": "Algerian cement plants",
+    "ar": "مصانع الإسمنت الجزائرية",
+    "es": "Cementeras argelinas"
+   },
+   "name": {
+    "fr": "Ciment & clinker",
+    "en": "Cement & clinker",
+    "ar": "الإسمنت والكلنكر",
+    "es": "Cemento y clínker"
+   },
+   "short": {
+    "fr": "Un pays devenu exportateur de ciment.",
+    "en": "A country that now exports cement.",
+    "ar": "بلد أصبح مُصدّرًا للإسمنت.",
+    "es": "Un país que ahora exporta cemento."
+   },
+   "desc": {
+    "fr": "Avec ses capacités de production, l’Algérie exporte désormais ciment et clinker vers l’Afrique et l’Europe. Ciment gris en sacs ou en vrac, clinker en navire : pour les négociants et les grands projets d’infrastructure.",
+    "en": "With its production capacity, Algeria now exports cement and clinker to Africa and Europe. Grey cement in bags or bulk, clinker by vessel: for traders and major infrastructure projects.",
+    "ar": "بفضل قدراتها الإنتاجية، أصبحت الجزائر تصدّر الإسمنت والكلنكر نحو إفريقيا وأوروبا. إسمنت رمادي في أكياس أو سائب، وكلنكر بالسفن: للتجار ومشاريع البنية التحتية الكبرى.",
+    "es": "Gracias a su capacidad de producción, Argelia exporta ahora cemento y clínker a África y Europa. Cemento gris en sacos o a granel, clínker por buque: para comerciantes y grandes proyectos de infraestructura."
+   },
+   "formats": [
+    {
+     "label": {
+      "fr": "Sac 50 kg",
+      "en": "50 kg bag",
+      "ar": "كيس 50 كغ",
+      "es": "Saco de 50 kg"
+     }
+    },
+    {
+     "label": {
+      "fr": "Big bag 1,5 t",
+      "en": "1.5 t big bag",
+      "ar": "كيس كبير 1.5 طن",
+      "es": "Big bag de 1,5 t"
+     }
+    },
+    {
+     "label": {
+      "fr": "Vrac navire (clinker)",
+      "en": "Bulk vessel (clinker)",
+      "ar": "سائب بالسفن (كلنكر)",
+      "es": "Granel por buque (clínker)"
+     }
+    }
+   ],
+   "specs": [
+    {
+     "k": {
+      "fr": "Types",
+      "en": "Types",
+      "ar": "الأنواع",
+      "es": "Tipos"
+     },
+     "v": {
+      "fr": "CEM I, CEM II, clinker",
+      "en": "CEM I, CEM II, clinker",
+      "ar": "CEM I، CEM II، كلنكر",
+      "es": "CEM I, CEM II, clínker"
+     }
+    },
+    {
+     "k": {
+      "fr": "Normes",
+      "en": "Standards",
+      "ar": "المعايير",
+      "es": "Normas"
+     },
+     "v": {
+      "fr": "EN 197-1 selon usine",
+      "en": "EN 197-1 per plant",
+      "ar": "EN 197-1 حسب المصنع",
+      "es": "EN 197-1 según planta"
+     }
+    }
+   ],
+   "certs": [
+    "iso9001",
+    "ce"
+   ],
+   "hs": "2523.29",
+   "moq": {
+    "fr": "Selon port et volume",
+    "en": "Depends on port and volume",
+    "ar": "حسب الميناء والكمية",
+    "es": "Según puerto y volumen"
+   },
+   "leadtime": {
+    "fr": "Sur programme",
+    "en": "Scheduled",
+    "ar": "حسب البرنامج",
+    "es": "Según programación"
+   },
+   "order": 14,
+   "incoterms": [
+    "EXW",
+    "FOB",
+    "CIF",
+    "DAP"
+   ]
+  },
+  {
+   "image": "",
+   "visible": true,
+   "featured": false,
+   "id": "verre",
+   "sector": "materiaux",
+   "art": "glass",
+   "color": "#2f6170",
+   "region": "oran",
+   "place": {
+    "fr": "Ouest algérien",
+    "en": "Western Algeria",
+    "ar": "الغرب الجزائري",
+    "es": "Oeste de Argelia"
+   },
+   "name": {
+    "fr": "Verre plat & emballages en verre",
+    "en": "Flat glass & glass packaging",
+    "ar": "الزجاج المسطح وعبوات الزجاج",
+    "es": "Vidrio plano y envases de vidrio"
+   },
+   "short": {
+    "fr": "Pour le bâtiment et l’agroalimentaire.",
+    "en": "For construction and food packaging.",
+    "ar": "للبناء والصناعات الغذائية.",
+    "es": "Para la construcción y la alimentación."
+   },
+   "desc": {
+    "fr": "Verre float, verre feuilleté, bouteilles et bocaux : l’industrie verrière algérienne fournit le bâtiment et les conditionneurs, en Algérie comme à l’export.",
+    "en": "Float glass, laminated glass, bottles and jars: Algeria’s glass industry supplies construction and packers, at home and abroad.",
+    "ar": "زجاج عائم، زجاج مصفّح، قوارير وبرطمانات: تزوّد صناعة الزجاج الجزائرية قطاع البناء ومؤسسات التعبئة محليًا وللتصدير.",
+    "es": "Vidrio flotado, vidrio laminado, botellas y tarros: la industria vidriera argelina abastece a la construcción y a los envasadores, en Argelia y para la exportación."
+   },
+   "formats": [
+    {
+     "label": {
+      "fr": "Plaques jumbo et formats découpés",
+      "en": "Jumbo sheets and cut sizes",
+      "ar": "ألواح كبيرة ومقاسات مقطوعة",
+      "es": "Planchas jumbo y formatos cortados"
+     }
+    },
+    {
+     "label": {
+      "fr": "Bouteilles et bocaux sur palette",
+      "en": "Bottles and jars on pallets",
+      "ar": "قوارير وبرطمانات على منصات",
+      "es": "Botellas y tarros en palé"
+     }
+    }
+   ],
+   "specs": [
+    {
+     "k": {
+      "fr": "Épaisseurs",
+      "en": "Thicknesses",
+      "ar": "السماكات",
+      "es": "Espesores"
+     },
+     "v": {
+      "fr": "3 à 12 mm",
+      "en": "3 to 12 mm",
+      "ar": "من 3 إلى 12 مم",
+      "es": "De 3 a 12 mm"
+     }
+    }
+   ],
+   "certs": [
+    "iso9001",
+    "ce"
+   ],
+   "hs": "7005 / 7010",
+   "moq": {
+    "fr": "1 conteneur 20′",
+    "en": "1 × 20′ container",
+    "ar": "حاوية 20 قدمًا",
+    "es": "1 contenedor 20′"
+   },
+   "leadtime": {
+    "fr": "3 à 5 semaines",
+    "en": "3 to 5 weeks",
+    "ar": "من 3 إلى 5 أسابيع",
+    "es": "3 a 5 semanas"
+   },
+   "order": 15,
+   "incoterms": [
+    "EXW",
+    "FOB",
+    "CIF",
+    "DAP"
+   ]
+  },
+  {
+   "image": "",
+   "visible": true,
+   "featured": true,
+   "id": "electromenager",
+   "sector": "industrie",
+   "art": "appliance",
+   "color": "#22302d",
+   "region": "bba",
+   "place": {
+    "fr": "Pôle électronique",
+    "en": "Electronics hub",
+    "ar": "القطب الإلكتروني",
+    "es": "Polo electrónico"
+   },
+   "name": {
+    "fr": "Électroménager & électronique",
+    "en": "Home appliances & electronics",
+    "ar": "الأجهزة الكهرومنزلية والإلكترونية",
+    "es": "Electrodomésticos y electrónica"
+   },
+   "short": {
+    "fr": "Téléviseurs, réfrigérateurs, climatiseurs, assemblés en Algérie.",
+    "en": "TVs, fridges, air conditioners, assembled in Algeria.",
+    "ar": "تلفزيونات، ثلاجات، مكيفات، مُركّبة في الجزائر.",
+    "es": "Televisores, frigoríficos, aires acondicionados, montados en Argelia."
+   },
+   "desc": {
+    "fr": "Bordj Bou Arreridj est devenue le pôle de l’électronique algérienne. Téléviseurs, réfrigérateurs, climatiseurs et petit électroménager sont produits pour le marché national et exportés vers l’Afrique et l’Europe.",
+    "en": "Bordj Bou Arreridj has become the centre of Algerian electronics. TVs, fridges, air conditioners and small appliances are made for the domestic market and exported to Africa and Europe.",
+    "ar": "أصبحت برج بوعريريج قطب الإلكترونيات في الجزائر. تُنتج فيها التلفزيونات والثلاجات والمكيفات والأجهزة الصغيرة للسوق الوطنية وتُصدَّر نحو إفريقيا وأوروبا.",
+    "es": "Bordj Bou Arreridj se ha convertido en el polo de la electrónica argelina. Televisores, frigoríficos, aires acondicionados y pequeño electrodoméstico se fabrican para el mercado nacional y se exportan a África y Europa."
+   },
+   "formats": [
+    {
+     "label": {
+      "fr": "Conteneurs mixtes par gamme",
+      "en": "Mixed containers by range",
+      "ar": "حاويات مختلطة حسب التشكيلة",
+      "es": "Contenedores mixtos por gama"
+     }
+    },
+    {
+     "label": {
+      "fr": "Marque du distributeur possible",
+      "en": "Distributor brand possible",
+      "ar": "إمكانية علامة الموزع",
+      "es": "Posible marca del distribuidor"
+     }
+    }
+   ],
+   "specs": [
+    {
+     "k": {
+      "fr": "Gammes",
+      "en": "Ranges",
+      "ar": "التشكيلات",
+      "es": "Gamas"
+     },
+     "v": {
+      "fr": "TV, froid, climatisation, petit électroménager",
+      "en": "TV, refrigeration, air conditioning, small appliances",
+      "ar": "تلفزيون، تبريد، تكييف، أجهزة صغيرة",
+      "es": "TV, frío, climatización, pequeño electrodoméstico"
+     }
+    },
+    {
+     "k": {
+      "fr": "Garantie",
+      "en": "Warranty",
+      "ar": "الضمان",
+      "es": "Garantía"
+     },
+     "v": {
+      "fr": "Selon contrat de distribution",
+      "en": "Per distribution contract",
+      "ar": "حسب عقد التوزيع",
+      "es": "Según contrato de distribución"
+     }
+    }
+   ],
+   "certs": [
+    "iso9001",
+    "ce"
+   ],
+   "hs": "8418 / 8415 / 8528",
+   "moq": {
+    "fr": "1 conteneur 40′",
+    "en": "1 × 40′ container",
+    "ar": "حاوية 40 قدمًا",
+    "es": "1 contenedor 40′"
+   },
+   "leadtime": {
+    "fr": "4 à 6 semaines",
+    "en": "4 to 6 weeks",
+    "ar": "من 4 إلى 6 أسابيع",
+    "es": "4 a 6 semanas"
+   },
+   "order": 16,
+   "incoterms": [
+    "EXW",
+    "FOB",
+    "CIF",
+    "DAP"
+   ]
+  },
+  {
+   "image": "",
+   "visible": true,
+   "featured": true,
+   "id": "huile-figue-barbarie",
+   "sector": "beaute",
+   "art": "cactus",
+   "color": "#6d2f52",
+   "region": "soukahras",
+   "place": {
+    "fr": "Est algérien",
+    "en": "Eastern Algeria",
+    "ar": "الشرق الجزائري",
+    "es": "Este de Argelia"
+   },
+   "name": {
+    "fr": "Huile de pépins de figue de Barbarie",
+    "en": "Prickly pear seed oil",
+    "ar": "زيت بذور التين الشوكي",
+    "es": "Aceite de semilla de higo chumbo"
+   },
+   "short": {
+    "fr": "Un soin précieux, pressé à froid.",
+    "en": "A precious cold-pressed beauty oil.",
+    "ar": "زيت عناية ثمين معصور على البارد.",
+    "es": "Un aceite de belleza precioso, prensado en frío."
+   },
+   "desc": {
+    "fr": "Il faut des tonnes de fruits pour obtenir un litre de cette huile pressée à froid, réputée pour le soin de la peau. Coopératives de l’Est, flacons verre ou vrac pour les marques cosmétiques.",
+    "en": "It takes tonnes of fruit to produce one litre of this cold-pressed oil, prized for skincare. Cooperatives in the east, glass bottles or bulk for cosmetic brands.",
+    "ar": "يتطلب لتر واحد من هذا الزيت المعصور على البارد أطنانًا من الثمار، وهو معروف بفوائده للبشرة. تعاونيات الشرق، قوارير زجاجية أو سائب لعلامات التجميل.",
+    "es": "Hacen falta toneladas de fruta para obtener un litro de este aceite prensado en frío, apreciado para el cuidado de la piel. Cooperativas del este, frascos de vidrio o granel para marcas cosméticas."
+   },
+   "formats": [
+    {
+     "label": {
+      "fr": "Flacon 15 ml / 30 ml / 50 ml",
+      "en": "15 ml / 30 ml / 50 ml bottle",
+      "ar": "قارورة 15 / 30 / 50 مل",
+      "es": "Frasco de 15 / 30 / 50 ml"
+     }
+    },
+    {
+     "label": {
+      "fr": "Vrac 1 L / 5 L pour marques",
+      "en": "Bulk 1 L / 5 L for brands",
+      "ar": "سائب 1 / 5 لترات للعلامات",
+      "es": "Granel 1 L / 5 L para marcas"
+     }
+    }
+   ],
+   "specs": [
+    {
+     "k": {
+      "fr": "Extraction",
+      "en": "Extraction",
+      "ar": "الاستخلاص",
+      "es": "Extracción"
+     },
+     "v": {
+      "fr": "Pression à froid",
+      "en": "Cold pressed",
+      "ar": "عصر على البارد",
+      "es": "Prensado en frío"
+     }
+    },
+    {
+     "k": {
+      "fr": "INCI",
+      "en": "INCI",
+      "ar": "INCI",
+      "es": "INCI"
+     },
+     "v": {
+      "fr": "Opuntia ficus-indica seed oil",
+      "en": "Opuntia ficus-indica seed oil",
+      "ar": "Opuntia ficus-indica seed oil",
+      "es": "Opuntia ficus-indica seed oil"
+     }
+    }
+   ],
+   "certs": [
+    "organic",
+    "cosmos"
+   ],
+   "hs": "1515.90",
+   "moq": {
+    "fr": "5 L",
+    "en": "5 L",
+    "ar": "5 لترات",
+    "es": "5 L"
+   },
+   "leadtime": {
+    "fr": "2 à 3 semaines",
+    "en": "2 to 3 weeks",
+    "ar": "من أسبوعين إلى 3 أسابيع",
+    "es": "2 a 3 semanas"
+   },
+   "order": 17,
+   "incoterms": [
+    "EXW",
+    "FOB",
+    "CIF",
+    "DAP"
+   ]
+  },
+  {
+   "image": "",
+   "visible": true,
+   "featured": false,
+   "id": "savon-olive",
+   "sector": "beaute",
+   "art": "soap",
+   "color": "#5f6a49",
+   "region": "tizi",
+   "place": {
+    "fr": "Kabylie",
+    "en": "Kabylia",
+    "ar": "القبائل",
+    "es": "Cabilia"
+   },
+   "name": {
+    "fr": "Savon à l’huile d’olive",
+    "en": "Olive oil soap",
+    "ar": "صابون زيت الزيتون",
+    "es": "Jabón de aceite de oliva"
+   },
+   "short": {
+    "fr": "Saponifié à froid, sans parfum ajouté.",
+    "en": "Cold-process, unscented.",
+    "ar": "مصبّن على البارد، دون عطر مضاف.",
+    "es": "Saponificado en frío, sin perfume añadido."
+   },
+   "desc": {
+    "fr": "Fabriqué à partir d’huile d’olive de Kabylie, ce savon est saponifié à froid puis séché plusieurs semaines. Doux, simple, en pain ou en marque blanche pour les boutiques et les hôtels.",
+    "en": "Made from Kabyle olive oil, this soap is cold-process and cured for several weeks. Gentle and simple, as bars or private label for shops and hotels.",
+    "ar": "يُصنع هذا الصابون من زيت زيتون القبائل، ويُصبّن على البارد ثم يُجفف عدة أسابيع. لطيف وبسيط، قطعًا أو بعلامة خاصة للمتاجر والفنادق.",
+    "es": "Elaborado con aceite de oliva de Cabilia, este jabón se saponifica en frío y se cura durante varias semanas. Suave y sencillo, en pastilla o en marca blanca para tiendas y hoteles."
+   },
+   "formats": [
+    {
+     "label": {
+      "fr": "Pain 100 g / 150 g",
+      "en": "100 g / 150 g bar",
+      "ar": "قطعة 100 / 150 غ",
+      "es": "Pastilla de 100 / 150 g"
+     }
+    },
+    {
+     "label": {
+      "fr": "Format hôtel 30 g",
+      "en": "Hotel size 30 g",
+      "ar": "حجم فندقي 30 غ",
+      "es": "Formato hotel de 30 g"
+     }
+    }
+   ],
+   "specs": [
+    {
+     "k": {
+      "fr": "Procédé",
+      "en": "Process",
+      "ar": "الطريقة",
+      "es": "Proceso"
+     },
+     "v": {
+      "fr": "Saponification à froid",
+      "en": "Cold process",
+      "ar": "تصبين على البارد",
+      "es": "Saponificación en frío"
+     }
+    }
+   ],
+   "certs": [
+    "cosmos"
+   ],
+   "hs": "3401.11",
+   "moq": {
+    "fr": "500 pains",
+    "en": "500 bars",
+    "ar": "500 قطعة",
+    "es": "500 pastillas"
+   },
+   "leadtime": {
+    "fr": "3 semaines",
+    "en": "3 weeks",
+    "ar": "3 أسابيع",
+    "es": "3 semanas"
+   },
+   "order": 18,
+   "incoterms": [
+    "EXW",
+    "FOB",
+    "CIF",
+    "DAP"
+   ]
+  },
+  {
+   "image": "",
+   "visible": true,
+   "featured": false,
+   "id": "eau-de-rose",
+   "sector": "beaute",
+   "art": "rose",
+   "color": "#9c5262",
+   "region": "blida",
+   "place": {
+    "fr": "Blida, « la ville des roses »",
+    "en": "Blida, “city of roses”",
+    "ar": "البليدة، «مدينة الورود»",
+    "es": "Blida, «la ciudad de las rosas»"
+   },
+   "name": {
+    "fr": "Eau de rose & fleur d’oranger",
+    "en": "Rose & orange blossom water",
+    "ar": "ماء الورد وماء الزهر",
+    "es": "Agua de rosas y de azahar"
+   },
+   "short": {
+    "fr": "Distillées selon la tradition blidéenne.",
+    "en": "Distilled the Blida way.",
+    "ar": "مقطّرة على الطريقة البليدية.",
+    "es": "Destiladas según la tradición de Blida."
+   },
+   "desc": {
+    "fr": "Surnommée « la ville des roses », Blida distille depuis longtemps les pétales de rose et la fleur de bigaradier. Des eaux florales pour la pâtisserie, la cosmétique et les épiceries fines.",
+    "en": "Nicknamed “the city of roses”, Blida has long distilled rose petals and bitter-orange blossom. Floral waters for pastry, cosmetics and delicatessens.",
+    "ar": "تُلقب البليدة بـ«مدينة الورود»، وتقطّر منذ زمن بعيد بتلات الورد وزهر النارنج. مياه زهرية للحلويات والتجميل والمتاجر الراقية.",
+    "es": "Apodada «la ciudad de las rosas», Blida destila desde hace mucho los pétalos de rosa y la flor del naranjo amargo. Aguas florales para repostería, cosmética y tiendas gourmet."
+   },
+   "formats": [
+    {
+     "label": {
+      "fr": "Flacon verre 250 ml",
+      "en": "250 ml glass bottle",
+      "ar": "قارورة زجاج 250 مل",
+      "es": "Botella de vidrio de 250 ml"
+     }
+    },
+    {
+     "label": {
+      "fr": "Vrac 5 L / 20 L",
+      "en": "Bulk 5 L / 20 L",
+      "ar": "سائب 5 / 20 لترًا",
+      "es": "Granel 5 L / 20 L"
+     }
+    }
+   ],
+   "specs": [
+    {
+     "k": {
+      "fr": "Procédé",
+      "en": "Process",
+      "ar": "الطريقة",
+      "es": "Proceso"
+     },
+     "v": {
+      "fr": "Distillation à la vapeur",
+      "en": "Steam distillation",
+      "ar": "تقطير بالبخار",
+      "es": "Destilación al vapor"
+     }
+    }
+   ],
+   "certs": [
+    "haccp"
+   ],
+   "hs": "3301.90",
+   "moq": {
+    "fr": "200 flacons",
+    "en": "200 bottles",
+    "ar": "200 قارورة",
+    "es": "200 frascos"
+   },
+   "leadtime": {
+    "fr": "2 semaines",
+    "en": "2 weeks",
+    "ar": "أسبوعان",
+    "es": "2 semanas"
+   },
+   "order": 19,
+   "incoterms": [
+    "EXW",
+    "FOB",
+    "CIF",
+    "DAP"
+   ]
+  }
+ ],
+ "regions": [
+  {
+   "id": "biskra",
+   "name": {
+    "fr": "Biskra",
+    "en": "Biskra",
+    "ar": "بسكرة",
+    "es": "Biskra"
+   },
+   "lat": 34.85,
+   "lon": 5.73
+  },
+  {
+   "id": "tizi",
+   "name": {
+    "fr": "Tizi Ouzou",
+    "en": "Tizi Ouzou",
+    "ar": "تيزي وزو",
+    "es": "Tizi Ouzou"
+   },
+   "lat": 36.71,
+   "lon": 4.05
+  },
+  {
+   "id": "bejaia",
+   "name": {
+    "fr": "Béjaïa",
+    "en": "Béjaïa",
+    "ar": "بجاية",
+    "es": "Bugía"
+   },
+   "lat": 36.55,
+   "lon": 4.85
+  },
+  {
+   "id": "blida",
+   "name": {
+    "fr": "Blida",
+    "en": "Blida",
+    "ar": "البليدة",
+    "es": "Blida"
+   },
+   "lat": 36.47,
+   "lon": 2.83
+  },
+  {
+   "id": "setif",
+   "name": {
+    "fr": "Sétif",
+    "en": "Sétif",
+    "ar": "سطيف",
+    "es": "Sétif"
+   },
+   "lat": 36.19,
+   "lon": 5.41
+  },
+  {
+   "id": "djelfa",
+   "name": {
+    "fr": "Djelfa",
+    "en": "Djelfa",
+    "ar": "الجلفة",
+    "es": "Djelfa"
+   },
+   "lat": 34.67,
+   "lon": 3.25
+  },
+  {
+   "id": "guelma",
+   "name": {
+    "fr": "Guelma",
+    "en": "Guelma",
+    "ar": "قالمة",
+    "es": "Guelma"
+   },
+   "lat": 36.46,
+   "lon": 7.43
+  },
+  {
+   "id": "ghardaia",
+   "name": {
+    "fr": "Ghardaïa",
+    "en": "Ghardaïa",
+    "ar": "غرداية",
+    "es": "Gardaya"
+   },
+   "lat": 32.49,
+   "lon": 3.67
+  },
+  {
+   "id": "constantine",
+   "name": {
+    "fr": "Constantine",
+    "en": "Constantine",
+    "ar": "قسنطينة",
+    "es": "Constantina"
+   },
+   "lat": 36.36,
+   "lon": 6.61
+  },
+  {
+   "id": "tamanrasset",
+   "name": {
+    "fr": "Tamanrasset",
+    "en": "Tamanrasset",
+    "ar": "تمنراست",
+    "es": "Tamanrasset"
+   },
+   "lat": 22.79,
+   "lon": 5.52
+  },
+  {
+   "id": "tlemcen",
+   "name": {
+    "fr": "Tlemcen",
+    "en": "Tlemcen",
+    "ar": "تلمسان",
+    "es": "Tremecén"
+   },
+   "lat": 34.88,
+   "lon": -1.32
+  },
+  {
+   "id": "relizane",
+   "name": {
+    "fr": "Relizane",
+    "en": "Relizane",
+    "ar": "غليزان",
+    "es": "Relizane"
+   },
+   "lat": 35.74,
+   "lon": 0.56
+  },
+  {
+   "id": "multi",
+   "name": {
+    "fr": "Plusieurs wilayas",
+    "en": "Several provinces",
+    "ar": "عدة ولايات",
+    "es": "Varias provincias"
+   },
+   "lat": null,
+   "lon": null
+  },
+  {
+   "id": "bba",
+   "name": {
+    "fr": "Bordj Bou Arreridj",
+    "en": "Bordj Bou Arreridj",
+    "ar": "برج بوعريريج",
+    "es": "Bordj Bou Arreridj"
+   },
+   "lat": 36.07,
+   "lon": 4.76
+  },
+  {
+   "id": "oran",
+   "name": {
+    "fr": "Oran",
+    "en": "Oran",
+    "ar": "وهران",
+    "es": "Orán"
+   },
+   "lat": 35.7,
+   "lon": -0.63
+  },
+  {
+   "id": "soukahras",
+   "name": {
+    "fr": "Souk Ahras",
+    "en": "Souk Ahras",
+    "ar": "سوق أهراس",
+    "es": "Souk Ahras"
+   },
+   "lat": 36.29,
+   "lon": 7.95
+  }
+ ],
+ "film": [
+  {
+   "id": "tlemcen",
+   "lat": 34.88,
+   "lon": -1.32,
+   "product": "broderie-tlemcen",
+   "heading": -12,
+   "area": {
+    "fr": "Oranie",
+    "en": "Oran region",
+    "ar": "الغرب الوهراني",
+    "es": "Oranesado"
+   },
+   "line": {
+    "fr": "Le fil d’or et la soie de la chedda.",
+    "en": "The gold thread and silk of the chedda.",
+    "ar": "خيط الذهب وحرير الشدّة.",
+    "es": "El hilo de oro y la seda de la chedda."
+   },
+   "video": "",
+   "visible": true
+  },
+  {
+   "id": "blida",
+   "lat": 36.47,
+   "lon": 2.83,
+   "product": "oranges-mitidja",
+   "heading": 8,
+   "area": {
+    "fr": "Mitidja",
+    "en": "Mitidja",
+    "ar": "متيجة",
+    "es": "Mitidja"
+   },
+   "line": {
+    "fr": "Le grand verger d’agrumes, entre l’Atlas et la mer.",
+    "en": "The great citrus orchard, between the Atlas and the sea.",
+    "ar": "بستان الحمضيات الكبير بين الأطلس والبحر.",
+    "es": "El gran huerto de cítricos, entre el Atlas y el mar."
+   },
+   "video": "",
+   "visible": true
+  },
+  {
+   "id": "tizi",
+   "lat": 36.71,
+   "lon": 4.05,
+   "product": "huile-olive-kabylie",
+   "heading": -6,
+   "area": {
+    "fr": "Kabylie",
+    "en": "Kabylia",
+    "ar": "القبائل",
+    "es": "Cabilia"
+   },
+   "line": {
+    "fr": "Les oliviers de montagne, au pied du Djurdjura.",
+    "en": "Mountain olive groves at the foot of the Djurdjura.",
+    "ar": "زيتون الجبال عند سفح جرجرة.",
+    "es": "Olivares de montaña al pie del Djurdjura."
+   },
+   "video": "",
+   "visible": true
+  },
+  {
+   "id": "bejaia",
+   "lat": 36.55,
+   "lon": 4.85,
+   "product": "figues-beni-maouche",
+   "heading": 14,
+   "area": {
+    "fr": "Petite Kabylie",
+    "en": "Lesser Kabylia",
+    "ar": "القبائل الصغرى",
+    "es": "Pequeña Cabilia"
+   },
+   "line": {
+    "fr": "Les figues de Beni Maouche, séchées au soleil.",
+    "en": "Beni Maouche figs, dried in the sun.",
+    "ar": "تين بني معوش المجفف تحت الشمس.",
+    "es": "Los higos de Beni Maouche, secados al sol."
+   },
+   "video": "",
+   "visible": true
+  },
+  {
+   "id": "bba",
+   "lat": 36.07,
+   "lon": 4.76,
+   "product": "electromenager",
+   "heading": -10,
+   "area": {
+    "fr": "Hauts Plateaux",
+    "en": "High Plateaus",
+    "ar": "الهضاب العليا",
+    "es": "Altiplanicies"
+   },
+   "line": {
+    "fr": "La capitale de l’électronique algérienne.",
+    "en": "The capital of Algerian electronics.",
+    "ar": "عاصمة الإلكترونيات الجزائرية.",
+    "es": "La capital de la electrónica argelina."
+   },
+   "video": "",
+   "visible": true
+  },
+  {
+   "id": "setif",
+   "lat": 36.19,
+   "lon": 5.41,
+   "product": "couscous-ble-dur",
+   "heading": 6,
+   "area": {
+    "fr": "Hauts Plateaux",
+    "en": "High Plateaus",
+    "ar": "الهضاب العليا",
+    "es": "Altiplanicies"
+   },
+   "line": {
+    "fr": "Les terres à blé, du champ à la graine roulée.",
+    "en": "Wheat country, from the field to rolled grain.",
+    "ar": "أرض القمح، من الحقل إلى الحبة المفتولة.",
+    "es": "Tierra de trigo, del campo al grano enrollado."
+   },
+   "video": "",
+   "visible": true
+  },
+  {
+   "id": "constantine",
+   "lat": 36.36,
+   "lon": 6.61,
+   "product": "cuivre-constantine",
+   "heading": 16,
+   "area": {
+    "fr": "Ville des ponts",
+    "en": "City of bridges",
+    "ar": "مدينة الجسور",
+    "es": "Ciudad de los puentes"
+   },
+   "line": {
+    "fr": "Le cuivre ciselé de la vieille ville.",
+    "en": "The chased copper of the old town.",
+    "ar": "النحاس المنقوش في المدينة القديمة.",
+    "es": "El cobre cincelado del casco antiguo."
+   },
+   "video": "",
+   "visible": true
+  },
+  {
+   "id": "biskra",
+   "lat": 34.85,
+   "lon": 5.73,
+   "product": "dattes-deglet-nour",
+   "heading": -14,
+   "area": {
+    "fr": "Les Ziban",
+    "en": "The Ziban",
+    "ar": "الزيبان",
+    "es": "El Ziban"
+   },
+   "line": {
+    "fr": "La Deglet Nour, « datte de lumière » des oasis.",
+    "en": "Deglet Nour, the oases’ “date of light”.",
+    "ar": "دقلة نور، «تمرة النور» في الواحات.",
+    "es": "El Deglet Nour, el «dátil de luz» de los oasis."
+   },
+   "video": "",
+   "visible": true
+  },
+  {
+   "id": "ghardaia",
+   "lat": 32.49,
+   "lon": 3.67,
+   "product": "tapis-mzab",
+   "heading": 10,
+   "area": {
+    "fr": "Vallée du M’zab",
+    "en": "M’zab valley",
+    "ar": "وادي ميزاب",
+    "es": "Valle del M’zab"
+   },
+   "line": {
+    "fr": "Les tapis tissés de la pentapole du M’zab.",
+    "en": "The woven carpets of the M’zab pentapolis.",
+    "ar": "زرابي مدن ميزاب الخمس.",
+    "es": "Las alfombras tejidas de la pentápolis del M’zab."
+   },
+   "video": "",
+   "visible": true
+  },
+  {
+   "id": "tamanrasset",
+   "lat": 22.79,
+   "lon": 5.52,
+   "product": "argent-touareg",
+   "heading": -8,
+   "area": {
+    "fr": "Hoggar",
+    "en": "Hoggar",
+    "ar": "الهقار",
+    "es": "Hoggar"
+   },
+   "line": {
+    "fr": "L’argent touareg, forgé au pied des montagnes.",
+    "en": "Tuareg silver, forged at the foot of the mountains.",
+    "ar": "فضة الطوارق المصوغة عند سفح الجبال.",
+    "es": "La plata tuareg, forjada al pie de las montañas."
+   },
+   "video": "",
+   "visible": true
+  }
+ ],
+ "markets": [
+  {
+   "id": "ca",
+   "code": "CA",
+   "city": {
+    "fr": "Montréal · Toronto",
+    "en": "Montreal · Toronto",
+    "ar": "مونتريال · تورونتو",
+    "es": "Montreal · Toronto"
+   },
+   "lat": 45.5,
+   "lon": -73.57,
+   "status": "priority",
+   "visible": true
+  },
+  {
+   "id": "fr",
+   "code": "FR",
+   "city": {
+    "fr": "Paris · Marseille",
+    "en": "Paris · Marseille",
+    "ar": "باريس · مرسيليا",
+    "es": "París · Marsella"
+   },
+   "lat": 48.86,
+   "lon": 2.35,
+   "status": "priority",
+   "visible": true
+  },
+  {
+   "id": "ae",
+   "code": "AE",
+   "city": {
+    "fr": "Dubaï",
+    "en": "Dubai",
+    "ar": "دبي",
+    "es": "Dubái"
+   },
+   "lat": 25.2,
+   "lon": 55.27,
+   "status": "priority",
+   "visible": true
+  },
+  {
+   "id": "be",
+   "code": "BE",
+   "city": {
+    "fr": "Bruxelles · Anvers",
+    "en": "Brussels · Antwerp",
+    "ar": "بروكسل · أنتويرب",
+    "es": "Bruselas · Amberes"
+   },
+   "lat": 50.85,
+   "lon": 4.35,
+   "status": "developing",
+   "visible": true
+  },
+  {
+   "id": "es",
+   "code": "ES",
+   "city": {
+    "fr": "Barcelone · Valence",
+    "en": "Barcelona · Valencia",
+    "ar": "برشلونة · فالنسيا",
+    "es": "Barcelona · Valencia"
+   },
+   "lat": 41.39,
+   "lon": 2.17,
+   "status": "developing",
+   "visible": true
+  },
+  {
+   "id": "gb",
+   "code": "GB",
+   "city": {
+    "fr": "Londres",
+    "en": "London",
+    "ar": "لندن",
+    "es": "Londres"
+   },
+   "lat": 51.51,
+   "lon": -0.13,
+   "status": "developing",
+   "visible": true
+  },
+  {
+   "id": "sa",
+   "code": "SA",
+   "city": {
+    "fr": "Riyad · Djeddah",
+    "en": "Riyadh · Jeddah",
+    "ar": "الرياض · جدة",
+    "es": "Riad · Yeda"
+   },
+   "lat": 24.71,
+   "lon": 46.68,
+   "status": "developing",
+   "visible": true
+  },
+  {
+   "id": "qa",
+   "code": "QA",
+   "city": {
+    "fr": "Doha",
+    "en": "Doha",
+    "ar": "الدوحة",
+    "es": "Doha"
+   },
+   "lat": 25.29,
+   "lon": 51.53,
+   "status": "developing",
+   "visible": true
+  },
+  {
+   "id": "sn",
+   "code": "SN",
+   "city": {
+    "fr": "Dakar",
+    "en": "Dakar",
+    "ar": "داكار",
+    "es": "Dakar"
+   },
+   "lat": 14.69,
+   "lon": -17.44,
+   "status": "developing",
+   "visible": true
+  },
+  {
+   "id": "de",
+   "code": "DE",
+   "city": {
+    "fr": "Hambourg",
+    "en": "Hamburg",
+    "ar": "هامبورغ",
+    "es": "Hamburgo"
+   },
+   "lat": 53.55,
+   "lon": 9.99,
+   "status": "soon",
+   "visible": true
+  },
+  {
+   "id": "tr",
+   "code": "TR",
+   "city": {
+    "fr": "Istanbul",
+    "en": "Istanbul",
+    "ar": "إسطنبول",
+    "es": "Estambul"
+   },
+   "lat": 41.01,
+   "lon": 28.98,
+   "status": "soon",
+   "visible": true
+  },
+  {
+   "id": "us",
+   "code": "US",
+   "city": {
+    "fr": "New York",
+    "en": "New York",
+    "ar": "نيويورك",
+    "es": "Nueva York"
+   },
+   "lat": 40.71,
+   "lon": -74,
+   "status": "soon",
+   "visible": true
+  },
+  {
+   "id": "ci",
+   "code": "CI",
+   "city": {
+    "fr": "Abidjan",
+    "en": "Abidjan",
+    "ar": "أبيدجان",
+    "es": "Abiyán"
+   },
+   "lat": 5.36,
+   "lon": -4.01,
+   "status": "soon",
+   "visible": true
+  },
+  {
+   "id": "cn",
+   "code": "CN",
+   "city": {
+    "fr": "Shanghai",
+    "en": "Shanghai",
+    "ar": "شنغهاي",
+    "es": "Shanghái"
+   },
+   "lat": 31.23,
+   "lon": 121.47,
+   "status": "soon",
+   "visible": true
+  }
+ ],
+ "services": [
+  {
+   "id": "sourcing",
+   "icon": "sourcing",
+   "title": {
+    "fr": "Sourcing & sélection",
+    "en": "Sourcing & selection",
+    "ar": "التوريد والانتقاء",
+    "es": "Abastecimiento y selección"
+   },
+   "text": {
+    "fr": "Nous identifions les producteurs, visitons les sites et vérifions les capacités avant de vous les proposer.",
+    "en": "We identify producers, visit their sites and check capacity before putting them forward.",
+    "ar": "نحدد المنتجين ونزور مواقعهم ونتحقق من قدراتهم قبل اقتراحهم عليكم.",
+    "es": "Identificamos productores, visitamos sus instalaciones y comprobamos su capacidad antes de proponérselos."
+   }
+  },
+  {
+   "id": "quality",
+   "icon": "quality",
+   "title": {
+    "fr": "Qualité & conformité",
+    "en": "Quality & compliance",
+    "ar": "الجودة والمطابقة",
+    "es": "Calidad y conformidad"
+   },
+   "text": {
+    "fr": "Échantillons, analyses, certificats d’origine et sanitaires : chaque lot est préparé selon les normes du pays de destination.",
+    "en": "Samples, lab tests, certificates of origin and health certificates: every batch is prepared to destination-country standards.",
+    "ar": "عينات، تحاليل، شهادات المنشأ والشهادات الصحية: تُحضَّر كل دفعة وفق معايير بلد الوجهة.",
+    "es": "Muestras, análisis, certificados de origen y sanitarios: cada lote se prepara según las normas del país de destino."
+   }
+  },
+  {
+   "id": "packaging",
+   "icon": "packaging",
+   "title": {
+    "fr": "Emballage & étiquetage",
+    "en": "Packaging & labelling",
+    "ar": "التغليف والملصقات",
+    "es": "Envase y etiquetado"
+   },
+   "text": {
+    "fr": "Emballages export, étiquettes multilingues, marque blanche ou co-branding Algerian Product.",
+    "en": "Export packaging, multilingual labels, private label or Algerian Product co-branding.",
+    "ar": "تغليف للتصدير، ملصقات متعددة اللغات، علامة خاصة أو علامة مشتركة مع Algerian Product.",
+    "es": "Embalaje de exportación, etiquetas multilingües, marca blanca o co-branding Algerian Product."
+   }
+  },
+  {
+   "id": "logistics",
+   "icon": "logistics",
+   "title": {
+    "fr": "Logistique & expédition",
+    "en": "Logistics & shipping",
+    "ar": "اللوجستيك والشحن",
+    "es": "Logística y envío"
+   },
+   "text": {
+    "fr": "Groupage ou conteneur complet, maritime ou aérien, dédouanement export et suivi jusqu’au port d’arrivée.",
+    "en": "Groupage or full container, sea or air freight, export customs clearance and tracking to the port of arrival.",
+    "ar": "شحن مجمّع أو حاوية كاملة، بحرًا أو جوًا، مع التخليص الجمركي للتصدير والمتابعة حتى ميناء الوصول.",
+    "es": "Grupaje o contenedor completo, marítimo o aéreo, despacho aduanero de exportación y seguimiento hasta el puerto de llegada."
+   }
+  },
+  {
+   "id": "support",
+   "icon": "support",
+   "title": {
+    "fr": "Accompagnement international",
+    "en": "International support",
+    "ar": "المرافقة الدولية",
+    "es": "Acompañamiento internacional"
+   },
+   "text": {
+    "fr": "Un interlocuteur dans votre langue, des réponses rapides et un suivi après livraison pour préparer la commande suivante.",
+    "en": "A contact who speaks your language, quick answers and after-delivery follow-up to prepare the next order.",
+    "ar": "محاور يتحدث لغتكم، وردود سريعة، ومتابعة بعد التسليم لتحضير الطلبية القادمة.",
+    "es": "Un interlocutor en su idioma, respuestas rápidas y seguimiento tras la entrega para preparar el siguiente pedido."
+   }
+  }
+ ],
+ "values": [
+  {
+   "id": "quality",
+   "title": {
+    "fr": "Qualité",
+    "en": "Quality",
+    "ar": "الجودة",
+    "es": "Calidad"
+   },
+   "text": {
+    "fr": "Nous ne présentons que ce que nous ferions goûter, porter ou installer chez nous.",
+    "en": "We only put forward what we would eat, wear or install at home.",
+    "ar": "لا نقدم إلا ما نرضاه لأنفسنا تذوقًا ولباسًا واستعمالًا.",
+    "es": "Solo presentamos lo que comeríamos, vestiríamos o instalaríamos en casa."
+   }
+  },
+  {
+   "id": "authenticity",
+   "title": {
+    "fr": "Authenticité",
+    "en": "Authenticity",
+    "ar": "الأصالة",
+    "es": "Autenticidad"
+   },
+   "text": {
+    "fr": "Une origine claire, des producteurs nommés, des savoir-faire respectés.",
+    "en": "Clear origin, named producers, respected know-how.",
+    "ar": "منشأ واضح، ومنتجون معروفون، ومهارات محترَمة.",
+    "es": "Origen claro, productores con nombre, oficios respetados."
+   }
+  },
+  {
+   "id": "traceability",
+   "title": {
+    "fr": "Traçabilité",
+    "en": "Traceability",
+    "ar": "التتبع",
+    "es": "Trazabilidad"
+   },
+   "text": {
+    "fr": "Du lot à la wilaya, chaque produit peut être suivi jusqu’à sa source.",
+    "en": "From batch to province, every product can be traced back to its source.",
+    "ar": "من الدفعة إلى الولاية، يمكن تتبع كل منتج حتى مصدره.",
+    "es": "Del lote a la provincia, cada producto puede rastrearse hasta su origen."
+   }
+  },
+  {
+   "id": "openness",
+   "title": {
+    "fr": "Ouverture",
+    "en": "Openness",
+    "ar": "الانفتاح",
+    "es": "Apertura"
+   },
+   "text": {
+    "fr": "Plusieurs langues, plusieurs marchés, une seule exigence.",
+    "en": "Several languages, several markets, one standard.",
+    "ar": "لغات متعددة، أسواق متعددة، ومعيار واحد.",
+    "es": "Varios idiomas, varios mercados, una sola exigencia."
+   }
+  }
+ ],
+ "certs": {
+  "iso22000": {
+   "fr": "ISO 22000",
+   "en": "ISO 22000",
+   "ar": "ISO 22000",
+   "es": "ISO 22000"
+  },
+  "haccp": {
+   "fr": "HACCP",
+   "en": "HACCP",
+   "ar": "HACCP",
+   "es": "HACCP"
+  },
+  "iso9001": {
+   "fr": "ISO 9001",
+   "en": "ISO 9001",
+   "ar": "ISO 9001",
+   "es": "ISO 9001"
+  },
+  "organic": {
+   "fr": "Bio (selon lot)",
+   "en": "Organic (per batch)",
+   "ar": "عضوي (حسب الدفعة)",
+   "es": "Ecológico (según lote)"
+  },
+  "halal": {
+   "fr": "Halal",
+   "en": "Halal",
+   "ar": "حلال",
+   "es": "Halal"
+  },
+  "ig": {
+   "fr": "Indication géographique",
+   "en": "Geographical indication",
+   "ar": "مؤشر جغرافي",
+   "es": "Indicación geográfica"
+  },
+  "globalgap": {
+   "fr": "GLOBALG.A.P.",
+   "en": "GLOBALG.A.P.",
+   "ar": "GLOBALG.A.P.",
+   "es": "GLOBALG.A.P."
+  },
+  "ce": {
+   "fr": "Marquage CE",
+   "en": "CE marking",
+   "ar": "علامة CE",
+   "es": "Marcado CE"
+  },
+  "oekotex": {
+   "fr": "OEKO-TEX (selon gamme)",
+   "en": "OEKO-TEX (per range)",
+   "ar": "OEKO-TEX (حسب التشكيلة)",
+   "es": "OEKO-TEX (según gama)"
+  },
+  "cosmos": {
+   "fr": "COSMOS (selon producteur)",
+   "en": "COSMOS (per producer)",
+   "ar": "COSMOS (حسب المنتج)",
+   "es": "COSMOS (según productor)"
+  },
+  "origin": {
+   "fr": "Certificat d’origine",
+   "en": "Certificate of origin",
+   "ar": "شهادة المنشأ",
+   "es": "Certificado de origen"
+  },
+  "handmade": {
+   "fr": "Fait main",
+   "en": "Handmade",
+   "ar": "صنع يدوي",
+   "es": "Hecho a mano"
+  }
+ },
+ "seo": {
+  "home": {
+   "title": {
+    "fr": "Algerian Product — le meilleur de l’Algérie, présenté au monde",
+    "en": "Algerian Product — the best of Algeria, presented to the world",
+    "ar": "Algerian Product — أفضل ما في الجزائر نقدّمه للعالم",
+    "es": "Algerian Product — lo mejor de Argelia, presentado al mundo"
+   },
+   "description": {
+    "fr": "Dattes, huile d’olive, artisanat, textile, céramique, industrie : Algerian Product fait connaître les produits algériens et les relie aux importateurs du monde entier. Demande de devis en ligne.",
+    "en": "Dates, olive oil, crafts, textiles, ceramics, industry: Algerian Product showcases Algerian products and connects them with importers worldwide. Request a quote online.",
+    "ar": "تمور، زيت زيتون، حرف، نسيج، خزف، صناعة: تعرّف Algerian Product بالمنتجات الجزائرية وتربطها بالمستوردين في العالم. اطلب عرض سعر عبر الإنترنت.",
+    "es": "Dátiles, aceite de oliva, artesanía, textil, cerámica, industria: Algerian Product da a conocer los productos argelinos y los conecta con importadores de todo el mundo. Solicite presupuesto en línea."
+   }
+  },
+  "catalogue": {
+   "title": {
+    "fr": "Catalogue des produits algériens — Algerian Product",
+    "en": "Algerian products catalogue — Algerian Product",
+    "ar": "كتالوج المنتجات الجزائرية — Algerian Product",
+    "es": "Catálogo de productos argelinos — Algerian Product"
+   },
+   "description": {
+    "fr": "Six filières, des dizaines de produits algériens prêts pour l’export : terroir, artisanat, textile, matériaux, industrie, beauté.",
+    "en": "Six sectors, dozens of export-ready Algerian products: food, crafts, textiles, materials, industry, beauty.",
+    "ar": "ستة قطاعات وعشرات المنتجات الجزائرية الجاهزة للتصدير: غذاء، حرف، نسيج، مواد، صناعة، تجميل.",
+    "es": "Seis sectores, decenas de productos argelinos listos para exportar: alimentación, artesanía, textil, materiales, industria, belleza."
+   }
+  },
+  "quote": {
+   "title": {
+    "fr": "Demander un devis — Algerian Product",
+    "en": "Request a quote — Algerian Product",
+    "ar": "اطلب عرض سعر — Algerian Product",
+    "es": "Solicitar presupuesto — Algerian Product"
+   },
+   "description": {
+    "fr": "Produits, quantités, pays de destination : envoyez votre demande, la direction vous répond sous 48 heures ouvrées.",
+    "en": "Products, quantities, destination country: send your request, management replies within 2 business days.",
+    "ar": "المنتجات والكميات وبلد الوجهة: أرسل طلبك وترد الإدارة خلال 48 ساعة عمل.",
+    "es": "Productos, cantidades, país de destino: envíe su solicitud, la dirección responde en 48 horas laborables."
+   }
+  }
+ }
+}

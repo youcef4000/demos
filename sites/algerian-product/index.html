@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Algerian Product — le meilleur de l’Algérie, présenté au monde</title>
+<meta name="description" content="Dattes, huile d’olive, artisanat, textile, céramique, industrie : Algerian Product fait connaître les produits algériens et les relie aux importateurs du monde entier. Demande de devis en ligne.">
+<meta name="theme-color" content="#0c1110">
+<link rel="canonical" href="https://demos.bornzstudio.com/algerian-product/">
+<link rel="alternate" hreflang="fr" href="https://demos.bornzstudio.com/algerian-product/?lang=fr">
+<link rel="alternate" hreflang="en" href="https://demos.bornzstudio.com/algerian-product/?lang=en">
+<link rel="alternate" hreflang="ar" href="https://demos.bornzstudio.com/algerian-product/?lang=ar">
+<link rel="alternate" hreflang="es" href="https://demos.bornzstudio.com/algerian-product/?lang=es">
+<link rel="alternate" hreflang="x-default" href="https://demos.bornzstudio.com/algerian-product/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Algerian Product">
+<meta property="og:url" content="https://demos.bornzstudio.com/algerian-product/">
+<meta property="og:title" content="Algerian Product — le meilleur de l’Algérie, présenté au monde">
+<meta property="og:description" content="Un survol de l’Algérie région par région, et les produits qui en viennent : terroir, artisanat, textile, matériaux, industrie. Catalogue, marchés et demande de devis en 4 langues.">
+<meta property="og:image" content="https://demos.bornzstudio.com/algerian-product/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Le relief de l’Algérie vu du ciel, avec le sceau Algerian Product">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Algerian Product — le meilleur de l’Algérie, présenté au monde">
+<meta name="twitter:description" content="Un survol de l’Algérie région par région, et les produits qui en viennent.">
+<meta name="twitter:image" content="https://demos.bornzstudio.com/algerian-product/img/og.jpg">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter+Tight:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="./style.css">
+<script src="./boot.js"></script>
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js" } }</script>
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.core.js">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
+<script type="module" src="./home.js"></script>
+</head>
+<body class="page-home">
+<a class="skip" href="#maison" data-t="common.skip">Aller au contenu</a>
+<header class="hdr" id="hdr"></header>
+
+<main id="main">
+  <!-- ============ FILM ============ -->
+  <section class="film" id="film" aria-label="Algerian Product">
+    <div class="film__stage" id="film-stage"></div>
+    <div class="film__pins" id="film-pins" aria-hidden="true"></div>
+    <div class="film__shade" aria-hidden="true"></div>
+    <div class="film__grain" aria-hidden="true"></div>
+
+    <div class="film__hud" aria-hidden="true">
+      <p class="hud__rec"><span class="hud__dot"></span><span data-t="film.episode">Épisode 01</span> · <span data-t="film.rec">L’Algérie vue du ciel</span></p>
+      <dl class="hud__data">
+        <div><dt>LAT</dt><dd id="hud-lat">36°45′N</dd></div>
+        <div><dt>LON</dt><dd id="hud-lon">3°03′E</dd></div>
+        <div><dt data-t="film.alt">Alt.</dt><dd id="hud-alt">—</dd></div>
+      </dl>
+    </div>
+
+    <div class="film__intro" id="film-intro">
+      <p class="kicker"><span class="kicker__seal" id="intro-seal"></span><span data-t="home.kicker">Algerian Product</span></p>
+      <h1 class="film__title" data-t-rich="home.title">Ce que l’Algérie fait de meilleur, <em>présenté au monde</em>.</h1>
+      <p class="film__lead" data-t="home.lead">Produits du terroir, artisanat, textile, matériaux, industrie : une seule marque pour faire connaître la qualité et la diversité de la production algérienne, et la relier aux importateurs du monde entier.</p>
+      <div class="film__ctas">
+        <a class="btn btn--light" href="produits.html" data-link="produits.html"><span data-t="home.ctaProducts">Explorer les produits</span><span class="btn__ico" data-icon="arrow"></span></a>
+        <a class="btn btn--ghost" href="devis.html" data-link="devis.html"><span data-t="home.ctaQuote">Demander un devis</span></a>
+      </div>
+    </div>
+
+    <div class="film__chapter" id="film-chapter" aria-live="polite"></div>
+    <aside class="film__finder" id="film-finder" aria-hidden="true"></aside>
+
+    <div class="film__nav">
+      <button class="film__play" id="film-play" type="button" data-t-attr="aria-label:film.pause"><span data-icon="pause"></span></button>
+      <ol class="film__steps" id="film-steps" data-t-attr="aria-label:film.chapters"></ol>
+      <a class="film__skip" href="#maison"><span data-t="film.skip">Passer l’introduction</span><span data-icon="arrow"></span></a>
+    </div>
+
+    <div class="film__loader" id="film-loader" aria-hidden="true">
+      <div class="loader__mark" id="loader-mark"></div>
+      <p class="loader__label"><span data-t="film.loading">Préparation du relief</span> <span id="loader-pct">0</span>%</p>
+    </div>
+  </section>
+
+  <!-- ============ LA MAISON ============ -->
+  <section class="sec sec--paper maison" id="maison">
+    <div class="wrap">
+      <p class="kicker" data-t="about.kicker">La maison</p>
+      <p class="manifesto" id="manifesto" data-t="about.manifesto">Algerian Product fait connaître ce que l’Algérie produit de meilleur — dans ses champs, ses ateliers et ses usines — et le relie aux marchés du monde.</p>
+      <div class="pillars">
+        <article class="pillar" data-reveal>
+          <span class="pillar__n">01</span>
+          <h3 data-t="about.vision.title">Vision</h3>
+          <p data-t="about.vision.text"></p>
+        </article>
+        <article class="pillar" data-reveal>
+          <span class="pillar__n">02</span>
+          <h3 data-t="about.mission.title">Mission</h3>
+          <p data-t="about.mission.text"></p>
+        </article>
+        <article class="pillar" data-reveal>
+          <span class="pillar__n">03</span>
+          <h3 data-t="about.strategy.title">Stratégie internationale</h3>
+          <p data-t="about.strategy.text"></p>
+        </article>
+      </div>
+      <div class="values">
+        <h3 class="values__title" data-t="about.valuesTitle">Nos valeurs</h3>
+        <ul class="values__list" id="values"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FILIÈRES ============ -->
+  <section class="sec sec--ink sectors" id="filieres">
+    <div class="wrap sectors__head">
+      <p class="kicker" data-t="sectors.kicker">Les filières</p>
+      <h2 class="h2" data-t-rich="sectors.title" data-split>Un label, <em>toutes les filières</em>.</h2>
+      <p class="lead" data-t="sectors.lead" data-reveal></p>
+    </div>
+    <div class="sectors__pin" id="sectors-pin">
+      <div class="sectors__track" id="sectors-track"></div>
+      <div class="sectors__progress" aria-hidden="true"><span id="sectors-bar"></span></div>
+    </div>
+  </section>
+
+  <!-- ============ IDENTITÉ ============ -->
+  <section class="sec sec--paper identity" id="identite">
+    <div class="wrap identity__grid">
+      <div class="identity__text">
+        <p class="kicker" data-t="seal.kicker">L’identité</p>
+        <h2 class="h2" data-t-rich="seal.title" data-split>Une signature, <em>de la caisse de dattes au conteneur</em>.</h2>
+        <p class="lead" data-t="seal.lead" data-reveal></p>
+      </div>
+      <div class="identity__stage" id="identity-stage">
+        <div class="identity__seal" id="identity-seal"></div>
+        <ul class="mockups" id="mockups"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SÉLECTION ============ -->
+  <section class="sec sec--ink featured" id="selection">
+    <div class="wrap">
+      <div class="sec__head">
+        <div>
+          <p class="kicker" data-t="featured.kicker">Sélection</p>
+          <h2 class="h2" data-t-rich="featured.title" data-split>Des produits qui <em>voyagent bien</em>.</h2>
+        </div>
+        <a class="link-arrow" href="produits.html" data-link="produits.html"><span data-t="featured.all">Tout le catalogue</span><span data-icon="arrow"></span></a>
+      </div>
+      <div class="cards" id="featured"></div>
+    </div>
+  </section>
+
+  <!-- ============ ATLAS ============ -->
+  <section class="sec sec--paper atlas" id="regions">
+    <div class="wrap atlas__grid">
+      <div class="atlas__text">
+        <p class="kicker" data-t="atlas.kicker">L’atlas</p>
+        <h2 class="h2" data-t-rich="atlas.title" data-split>Chaque région, <em>son savoir-faire</em>.</h2>
+        <p class="lead" data-t="atlas.lead" data-reveal></p>
+        <ol class="atlas__list" id="atlas-list"></ol>
+        <button class="btn btn--dark" id="atlas-replay" type="button"><span data-icon="play"></span><span data-t="atlas.replay">Revoir le survol</span></button>
+      </div>
+      <div class="atlas__map" id="atlas-map"></div>
+    </div>
+  </section>
+
+  <!-- ============ MARCHÉS ============ -->
+  <section class="sec sec--ink markets" id="marches">
+    <div class="wrap">
+      <div class="sec__head sec__head--stack">
+        <p class="kicker" data-t="markets.kicker">Marchés</p>
+        <h2 class="h2" data-t-rich="markets.title" data-split>D’Alger vers <em>le reste du monde</em>.</h2>
+        <p class="lead" data-t="markets.lead" data-reveal></p>
+      </div>
+      <div class="world" id="world"></div>
+      <div class="markets__lists" id="markets-lists"></div>
+    </div>
+  </section>
+
+  <!-- ============ POUR QUI ============ -->
+  <section class="sec sec--paper audience" id="pour-qui">
+    <div class="wrap">
+      <p class="kicker" data-t="audience.kicker">Pour qui</p>
+      <h2 class="h2" data-t-rich="audience.title" data-split>Pensé pour les acheteurs <em>professionnels</em>.</h2>
+    </div>
+    <div class="marquee" id="audience" aria-hidden="false"></div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="sec sec--paper services" id="services">
+    <div class="wrap services__grid">
+      <div class="services__head">
+        <p class="kicker" data-t="services.kicker">Export &amp; services</p>
+        <h2 class="h2" data-t-rich="services.title" data-split>Du producteur <em>au quai de destination</em>.</h2>
+        <p class="lead" data-t="services.lead" data-reveal></p>
+      </div>
+      <ol class="steps" id="steps">
+        <li class="steps__line" aria-hidden="true"><span id="steps-fill"></span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ PRODUCTEURS ============ -->
+  <section class="producers" id="producteurs">
+    <div class="producers__pattern" id="producers-pattern" aria-hidden="true"></div>
+    <div class="wrap producers__inner">
+      <p class="kicker" data-t="producers.kicker">Producteurs algériens</p>
+      <h2 class="h2" data-t-rich="producers.title" data-split>Vous produisez en Algérie ? <em>Rejoignez le réseau.</em></h2>
+      <p class="lead" data-t="producers.text" data-reveal></p>
+      <a class="btn btn--light" href="devis.html#producteur" data-link="devis.html#producteur"><span data-t="producers.cta">Proposer mes produits</span><span data-icon="arrow"></span></a>
+    </div>
+  </section>
+
+  <!-- ============ APPEL FINAL ============ -->
+  <section class="sec sec--ink final" id="contact">
+    <div class="final__seal" id="final-seal" aria-hidden="true"></div>
+    <div class="wrap final__inner">
+      <p class="kicker" data-t="cta.kicker">Parlons-en</p>
+      <h2 class="final__title" data-t-rich="cta.title" data-split>Votre prochain conteneur <em>commence ici</em>.</h2>
+      <p class="lead" data-t="cta.text" data-reveal></p>
+      <div class="final__ctas" id="final-ctas"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="ftr" id="ftr"></footer>
+<a class="basket" id="basket" href="devis.html" hidden></a>
+</body>
+</html>

@@ -6,6 +6,14 @@
   },
   "demos": [
     {
+      "slug": "algerian-product",
+      "title": "Algerian Product — l’Algérie vue du ciel, ses produits pour le monde",
+      "sector": "Export & marque pays",
+      "city": "Canada · Algérie",
+      "color": "#0d5a45",
+      "public": false
+    },
+    {
       "slug": "melissa-atelier",
       "title": "Melissa Atelier — du croquis à la pièce",
       "sector": "Mode féminine",
