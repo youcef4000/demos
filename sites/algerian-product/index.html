@@ -33,9 +33,6 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter+Tight:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="./style.css">
 <script src="./boot.js"></script>
-<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js" } }</script>
-<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js">
-<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.core.js">
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" defer></script>
@@ -50,7 +47,7 @@
   <!-- ============ FILM ============ -->
   <section class="film" id="film" aria-label="Algerian Product">
     <div class="film__stage" id="film-stage"></div>
-    <div class="film__pins" id="film-pins" aria-hidden="true"></div>
+    <div class="film__frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <div class="film__shade" aria-hidden="true"></div>
     <div class="film__grain" aria-hidden="true"></div>
 
@@ -59,7 +56,7 @@
       <dl class="hud__data">
         <div><dt>LAT</dt><dd id="hud-lat">36°45′N</dd></div>
         <div><dt>LON</dt><dd id="hud-lon">3°03′E</dd></div>
-        <div><dt data-t="film.alt">Alt.</dt><dd id="hud-alt">—</dd></div>
+        <div><dt>TC</dt><dd id="hud-alt">00:00:00</dd></div>
       </dl>
     </div>
 
@@ -82,10 +79,6 @@
       <a class="film__skip" href="#maison"><span data-t="film.skip">Passer l’introduction</span><span data-icon="arrow"></span></a>
     </div>
 
-    <div class="film__loader" id="film-loader" aria-hidden="true">
-      <div class="loader__mark" id="loader-mark"></div>
-      <p class="loader__label"><span data-t="film.loading">Préparation du relief</span> <span id="loader-pct">0</span>%</p>
-    </div>
   </section>
 
   <!-- ============ LA MAISON ============ -->
@@ -120,6 +113,7 @@
           <p data-t="about.strategy.text"></p>
         </article>
       </div>
+      <a class="link-arrow more" href="maison.html" data-link="maison.html"><span data-t="common.more">En savoir plus</span><span data-icon="arrow"></span></a>
     </div>
   </section>
 
@@ -192,7 +186,8 @@
         <h2 class="h2" data-t-rich="atlas.title" data-split>Chaque région, <em>son savoir-faire</em>.</h2>
         <p class="lead" data-t="atlas.lead" data-reveal></p>
         <ol class="atlas__list" id="atlas-list"></ol>
-        <button class="btn btn--dark" id="atlas-replay" type="button"><span data-icon="play"></span><span data-t="atlas.replay">Revoir le survol</span></button>
+        <div class="atlas__ctas"><button class="btn btn--dark" id="atlas-replay" type="button"><span data-icon="play"></span><span data-t="atlas.replay">Revoir le survol</span></button>
+        <a class="link-arrow more" href="regions.html" data-link="regions.html"><span data-t="common.more">En savoir plus</span><span data-icon="arrow"></span></a></div>
       </div>
       <div class="atlas__map" id="atlas-map"></div>
     </div>
@@ -205,6 +200,7 @@
         <p class="kicker" data-t="markets.kicker">Marchés</p>
         <h2 class="h2" data-t-rich="markets.title" data-split>D’Alger vers <em>le reste du monde</em>.</h2>
         <p class="lead" data-t="markets.lead" data-reveal></p>
+        <a class="link-arrow more" href="marches.html" data-link="marches.html"><span data-t="common.more">En savoir plus</span><span data-icon="arrow"></span></a>
       </div>
       <div class="world" id="world"></div>
       <div class="markets__lists" id="markets-lists"></div>
@@ -227,6 +223,7 @@
         <p class="kicker" data-t="services.kicker">Export &amp; services</p>
         <h2 class="h2" data-t-rich="services.title" data-split>Du producteur <em>au quai de destination</em>.</h2>
         <p class="lead" data-t="services.lead" data-reveal></p>
+        <a class="link-arrow more" href="services.html" data-link="services.html"><span data-t="common.more">En savoir plus</span><span data-icon="arrow"></span></a>
       </div>
       <ol class="steps" id="steps">
         <li class="steps__line" aria-hidden="true"><span id="steps-fill"></span></li>

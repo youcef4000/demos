@@ -2,7 +2,7 @@
 import { esc } from '../../store.js';
 import { S, ml, bind, t } from '../ui.js';
 
-const PAGES = [['home', 'Accueil', ''], ['catalogue', 'Catalogue', 'produits.html'], ['quote', 'Demande de devis', 'devis.html']];
+const PAGES = [['home', 'Accueil', ''], ['about', 'La maison', 'maison.html'], ['regions', 'Régions', 'regions.html'], ['markets', 'Marchés', 'marches.html'], ['services', 'Export & services', 'services.html'], ['catalogue', 'Catalogue', 'produits.html'], ['quote', 'Demande de devis', 'devis.html']];
 const CHECKS = [
   ['Une adresse par langue (?lang=fr, ?lang=en…) et balises hreflang', true],
   ['Titre, description et image de partage (Open Graph) sur chaque page', true],

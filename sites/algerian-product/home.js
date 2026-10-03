@@ -1,79 +1,130 @@
-// Accueil : le film d'introduction (survol région par région), puis les sections animées.
+// Accueil : le film d'introduction (vidéos aériennes région par région), puis les sections animées.
 import { boot, ready, reduced, href, esc, fillIcons } from './site.js';
 import { track } from './store.js';
 import { emblem, seal, patternSvg, illustration, productVisual, icon, starPath } from './art.js';
 import { productCard, bindAddButtons, sectorOf, regionOf, visibleProducts, productUrl, dms } from './ui.js';
-import { createFilm, createFlatFilm, webglAvailable } from './film.js';
 import { BOX, LAND, ALGERIA, WORLD } from './geo.js';
 
-const ctx = await boot('home');
+const PAGE = document.body.dataset.page || 'home';
+const ctx = await boot(PAGE);
 const { content: C, i18n, gsap, ST } = ctx;
 const $ = (s, r = document) => r.querySelector(s);
 const desktop = matchMedia('(min-width: 900px)');
 const rtl = i18n.dir === 'rtl';
 
-/* ============================================================== */
-/* Film                                                            */
-/* ============================================================== */
+const M = C.media || {};
+const mediaAt = (path) => path.split('.').reduce((o, k) => o?.[k], M);
+const products = visibleProducts(C);
+const sectors = C.sectors.filter((s) => s.visible !== false).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+let replayFilm = null;
+document.querySelectorAll('img[data-media]').forEach((img) => {
+  const src = mediaAt(img.dataset.media);
+  if (src) {
+    img.src = src;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+  } else img.closest('figure')?.remove();
+});
+// En-tête des pages intérieures : photo qui se dévoile, titre ligne à ligne
+if ($('.phero') && gsap && !reduced) {
+  gsap.fromTo('.phero__img', { scale: 1.25 }, { scale: 1.02, duration: 2.4, ease: 'expo.out' });
+  gsap.from('.phero__inner > *', { y: 40, autoAlpha: 0, duration: 1.2, ease: 'expo.out', stagger: 0.09, delay: 0.15 });
+  if (ST) gsap.to('.phero__img', { yPercent: 14, ease: 'none', scrollTrigger: { trigger: '.phero', start: 'top top', end: 'bottom top', scrub: true } });
+}
 const regions = C.film
   .filter((f) => f.visible !== false)
   .map((f) => ({ ...f, name: regionOf(C, f.id)?.name || f.id, product: C.products.find((p) => p.id === f.product) }));
 
+
+/* ============================================================== */
+/* Film                                                            */
+/* ============================================================== */
+if ($('#film')) {
 $('#intro-seal').innerHTML = emblem();
-$('#loader-mark').innerHTML = `${emblem('loader__emblem')}`;
 
 const steps = $('#film-steps');
 steps.innerHTML = regions
   .map((r, i) => `<li><button type="button" data-i="${i}"><span class="st__bar"><i></i></span><span class="st__name">${esc(i18n.t(r.name))}</span></button></li>`)
   .join('');
 
-const pinsEl = $('#film-pins');
-pinsEl.innerHTML = regions
-  .map((r, i) => `<div class="pin" data-i="${i}"><span class="pin__beam"></span><span class="pin__dot"></span><span class="pin__label">${esc(i18n.t(r.name))}</span></div>`)
-  .join('');
-const pins = [...pinsEl.children];
-
 const stage = $('#film-stage');
 const filmEl = $('#film');
-const loader = $('#film-loader');
-const pct = $('#loader-pct');
-let film;
-try {
-  if (!webglAvailable()) throw new Error('webgl');
-  film = await createFilm({ mount: stage, reduced, onProgress: (p) => (pct.textContent = Math.round(p * 100)) });
-  filmEl.classList.add('film--3d');
-} catch (err) {
-  if (err?.message !== 'webgl') console.warn('Film 3D indisponible, carte plate', err);
-  film = createFlatFilm({ mount: stage });
-  filmEl.classList.add('film--flat');
-}
-loader.classList.add('is-done');
 
-// Lecture de l'en-tête de données (coordonnées, altitude) et des repères
+// Le film : des plans plein écran (photo du lieu, puis la vidéo aérienne quand elle est prête) en fondu enchaîné
+const saveData = !!navigator.connection?.saveData;
+const pool = new Map();
+function videoFor(key, src) {
+  if (!src || reduced || saveData) return null;
+  let v = pool.get(key);
+  if (!v) {
+    v = document.createElement('video');
+    v.muted = true;
+    v.loop = true;
+    v.playsInline = true;
+    v.setAttribute('playsinline', '');
+    v.setAttribute('aria-hidden', 'true');
+    v.preload = 'auto';
+    v.className = 'cine__video';
+    v.src = src;
+    v.addEventListener('playing', () => v.classList.add('is-on'));
+    pool.set(key, v);
+  }
+  return v;
+}
+const preload = (i) => regions[i] && videoFor(regions[i].id, regions[i].video);
 const hudLat = $('#hud-lat');
 const hudLon = $('#hud-lon');
 const hudAlt = $('#hud-alt');
+let tcTimer = null;
+function shot(key, photo, video, lat, lon) {
+  const layer = document.createElement('div');
+  layer.className = 'cine__layer';
+  if (photo) layer.innerHTML = `<img class="cine__poster" src="${esc(photo)}" alt="" decoding="async">`;
+  const v = videoFor(key, video);
+  pool.forEach((x) => x !== v && x.pause());
+  if (v) {
+    layer.appendChild(v);
+    try {
+      v.currentTime = 0;
+    } catch {}
+    v.play().catch(() => {});
+  }
+  const old = [...stage.querySelectorAll('.cine__layer')];
+  stage.appendChild(layer);
+  if (lat != null) {
+    hudLat.textContent = dms(lat, 'N', 'S');
+    hudLon.textContent = dms(lon, 'E', 'W');
+  }
+  const t0 = performance.now();
+  clearInterval(tcTimer);
+  tcTimer = setInterval(() => {
+    const t = (performance.now() - t0) / 1000;
+    hudAlt.textContent = `00:${String(Math.floor(t)).padStart(2, '0')}:${String(Math.floor((t % 1) * 25)).padStart(2, '0')}`;
+  }, 80);
+  return new Promise((resolve) => {
+    if (gsap && !reduced) {
+      gsap.fromTo(layer, { autoAlpha: 0, clipPath: 'inset(8% 8% 8% 8%)' }, { autoAlpha: 1, clipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'expo.inOut', onComplete: () => (old.forEach((o) => o.remove()), resolve()) });
+      gsap.fromTo(layer.querySelectorAll('img, video'), { scale: 1.22 }, { scale: 1.04, duration: 12, ease: 'none' });
+    } else {
+      old.forEach((o) => o.remove());
+      resolve();
+    }
+  });
+}
+const film = {
+  show(kind, r) {
+    const M = C.media || {};
+    if (kind === 'region') return shot(r.id, r.photo, r.video, r.lat, r.lon);
+    return shot('finale', M.finale?.photo, M.finale?.video, 36.75, 3.06);
+  },
+  setRunning(on) {
+    pool.forEach((v) => (on && v.isConnected ? v.play().catch(() => {}) : v.pause()));
+  },
+};
 let mode = 'opening';
 let idx = -1;
-film.onFrame(({ lon, lat, alt }) => {
-  hudLat.textContent = dms(lat, 'N', 'S');
-  hudLon.textContent = dms(lon, 'E', 'W');
-  hudAlt.textContent = alt ? `${i18n.num(Math.round(alt / 1000))} km` : '—';
-  for (let i = 0; i < pins.length; i++) {
-    const r = regions[i];
-    const p = film.project(r.lon, r.lat);
-    const el = pins[i];
-    el.style.transform = `translate3d(${p.x.toFixed(1)}px, ${p.y.toFixed(1)}px, 0)`;
-    el.classList.toggle('is-off', !p.visible || p.y < 120 || (mode === 'region' && i !== idx));
-  }
-});
 
 function setPins() {
-  pins.forEach((el, i) => {
-    el.classList.toggle('is-active', mode === 'region' && i === idx);
-    el.classList.toggle('is-label', mode === 'overview' || mode === 'finale');
-    el.classList.toggle('is-dim', mode === 'region' && i !== idx);
-  });
   [...steps.querySelectorAll('button')].forEach((b, i) => {
     b.classList.toggle('is-active', i === idx && mode === 'region');
     b.classList.toggle('is-done', mode === 'finale' || (mode === 'region' && i < idx));
@@ -96,82 +147,21 @@ function chapterHtml(r, i) {
     ${p ? `<a class="ch__link" href="${productUrl(p)}">${esc(i18n.ui('film.seeProduct'))}${icon('arrow')}</a>` : ''}
   </div>`;
 }
-// Vidéos aériennes : un élément <video> par région, gardé en mémoire ; la suivante se charge à l'avance
-const saveData = !!navigator.connection?.saveData;
-const pool = new Map();
-function videoFor(key, src) {
-  if (!src || reduced || saveData) return null;
-  let v = pool.get(key);
-  if (!v) {
-    v = document.createElement('video');
-    v.muted = true;
-    v.loop = true;
-    v.playsInline = true;
-    v.setAttribute('playsinline', '');
-    v.setAttribute('aria-hidden', 'true');
-    v.preload = 'auto';
-    v.className = 'fm__video';
-    v.src = src;
-    v.addEventListener('playing', () => v.classList.add('is-on'));
-    pool.set(key, v);
-  }
-  return v;
-}
-const preload = (i) => regions[i] && videoFor(regions[i].id, regions[i].video);
-
-function mediaHtml({ name, lat, lon, photo, real, label, product }) {
-  const s = product && sectorOf(C, product.sector);
-  return `<div class="fm">
-    <div class="fm__screen">
-      ${photo ? `<img class="fm__poster" src="${esc(photo)}" alt="" decoding="async">` : ''}
-      <span class="fm__corner fm__corner--tl"></span><span class="fm__corner fm__corner--tr"></span>
-      <span class="fm__corner fm__corner--bl"></span><span class="fm__corner fm__corner--br"></span>
-      <p class="fm__label"><span class="hud__dot"></span>REC · ${esc(label)}</p>
-      <p class="fm__tc" dir="ltr">00:00:00:00</p>
-      <p class="fm__place">${esc(name)}${lat != null ? ` · <span dir="ltr">${dms(lat, 'N', 'S')} ${dms(lon, 'E', 'W')}</span>` : ''}</p>
-      <span class="fm__scan" aria-hidden="true"></span>
-    </div>
-    ${product ? `<a class="fm__product" href="${productUrl(product)}">
-      <span class="fm__pimg">${productVisual(product, s, { cls: 'fm__pv' })}</span>
-      <span class="fm__ptext"><small>${esc(i18n.ui('film.flagship'))}</small><b>${esc(i18n.t(product.name))}</b><em>${esc(i18n.ui('film.seeProduct'))}${icon('arrow')}</em></span></a>` : ''}
-  </div>`;
-}
-let tcTimer = null;
-function mountMedia(key, src, data) {
-  finder.innerHTML = mediaHtml(data);
-  const screen = finder.querySelector('.fm__screen');
-  const v = videoFor(key, src);
-  pool.forEach((x) => x !== v && x.pause());
-  if (v) {
-    screen.insertBefore(v, screen.querySelector('.fm__corner'));
-    v.currentTime = 0;
-    v.play().catch(() => {});
-  }
-  finder.classList.add('is-on');
-  const tc = finder.querySelector('.fm__tc');
-  const t0 = performance.now();
-  clearInterval(tcTimer);
-  tcTimer = setInterval(() => {
-    const t = (performance.now() - t0) / 1000;
-    const f = Math.floor((t % 1) * 25);
-    tc.textContent = `00:00:${String(Math.floor(t)).padStart(2, '0')}:${String(f).padStart(2, '0')}`;
-  }, 80);
-  if (gsap && !reduced) {
-    gsap.fromTo(screen, { clipPath: 'inset(48% 0% 48% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, ease: 'expo.inOut' });
-    gsap.fromTo(finder.querySelector('.fm__poster'), { scale: 1.25 }, { scale: 1.06, duration: 9, ease: 'none' });
-    gsap.from(finder.querySelector('.fm__product'), { x: 60, y: 30, rotate: 6, autoAlpha: 0, duration: 1.1, ease: 'expo.out', delay: 0.45 });
-    gsap.from(finder.querySelectorAll('.fm__label, .fm__tc, .fm__place'), { autoAlpha: 0, y: 8, duration: 0.6, stagger: 0.08, delay: 0.7 });
-  }
-}
+// À droite : la vraie photo du produit phare, et la mention de la vidéo
 function finderFor(r) {
-  mountMedia(r.id, r.video, {
-    name: i18n.t(r.name),
-    lat: r.lat,
-    lon: r.lon,
-    photo: r.photo,
-    label: i18n.ui(r.realVideo ? 'film.realAerial' : 'film.illusAerial'),
-    product: r.product,
-  });
+  const p = r.product;
+  const s = p && sectorOf(C, p.sector);
+  finder.innerHTML = `<div class="fm">
+    <p class="fm__label"><span class="hud__dot"></span>REC · ${esc(i18n.ui(r.realVideo ? 'film.realAerial' : 'film.illusAerial'))}</p>
+    ${p ? `<a class="fm__product" href="${productUrl(p)}">
+      <span class="fm__pimg">${productVisual(p, s, { cls: 'fm__pv' })}</span>
+      <span class="fm__ptext"><small>${esc(i18n.ui('film.flagship'))}</small><b>${esc(i18n.t(p.name))}</b><em>${esc(i18n.ui('film.seeProduct'))}${icon('arrow')}</em></span></a>` : ''}
+  </div>`;
+  finder.classList.add('is-on');
+  if (gsap && !reduced) {
+    gsap.fromTo(finder.querySelector('.fm__product'), { x: rtl ? -80 : 80, rotate: rtl ? -5 : 5, autoAlpha: 0 }, { x: 0, rotate: 0, autoAlpha: 1, duration: 1.2, ease: 'expo.out', delay: 0.2 });
+    gsap.from(finder.querySelector('.fm__label'), { autoAlpha: 0, y: 10, duration: 0.6, delay: 0.5 });
+  }
 }
 function finaleHtml() {
   return `<div class="ch ch--finale">
@@ -193,10 +183,6 @@ function show(el, html) {
 }
 function hide(el) {
   el.classList.remove('is-on');
-  if (el === finder) {
-    clearInterval(tcTimer);
-    pool.forEach((v) => v.pause());
-  }
 }
 
 let token = 0;
@@ -261,8 +247,6 @@ async function go(target, { instant = false } = {}) {
     await film.show('overview', null, { instant });
     if (my !== token) return;
     show(chapter, finaleHtml());
-    const fm = C.media?.finale;
-    if (fm) mountMedia('finale', fm.video, { name: i18n.ui('markets.hub'), lat: 36.75, lon: 3.06, photo: fm.photo, label: i18n.ui('film.realAerial') });
     schedule(9000);
     return;
   }
@@ -313,7 +297,16 @@ new IntersectionObserver(
   { threshold: 0.15 }
 ).observe(filmEl);
 
-await go('opening', { instant: true });
+replayFilm = (i) => {
+    if (ctx.lenis) ctx.lenis.scrollTo(0, { duration: 1.6 });
+    else scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+    playing = !reduced;
+    setPlayBtn();
+    setTimeout(() => go(i), 600);
+  };
+  const askChapter = new URLSearchParams(location.search).get('chapter');
+  await go('opening', { instant: true });
+  if (askChapter != null && regions[Number(askChapter)]) go(Number(askChapter));
 if (reduced) {
   playing = false;
   setPlayBtn();
@@ -323,22 +316,14 @@ if (gsap && ST && !reduced) {
   gsap.to('.film__shade', { opacity: 1, ease: 'none', scrollTrigger: { trigger: filmEl, start: 'top top', end: 'bottom top', scrub: true } });
   gsap.to(stage, { yPercent: 18, ease: 'none', scrollTrigger: { trigger: filmEl, start: 'top top', end: 'bottom top', scrub: true } });
 }
+}
 
 /* ============================================================== */
 /* La maison : manifeste mot à mot, bandeau de paysages, piliers    */
 /* ============================================================== */
-const M = C.media || {};
-const mediaAt = (path) => path.split('.').reduce((o, k) => o?.[k], M);
-document.querySelectorAll('img[data-media]').forEach((img) => {
-  const src = mediaAt(img.dataset.media);
-  if (src) {
-    img.src = src;
-    img.loading = 'lazy';
-    img.decoding = 'async';
-  } else img.closest('figure')?.remove();
-});
+if ($('#manifesto') || $('[data-img-reveal]')) {
 const manifesto = $('#manifesto');
-if (gsap && ST && !reduced) {
+if (manifesto && gsap && ST && !reduced) {
   const words = manifesto.textContent.trim().split(/\s+/);
   manifesto.innerHTML = words.map((w) => `<span class="w">${esc(w)}</span>`).join(' ');
   gsap.fromTo(manifesto.querySelectorAll('.w'), { opacity: 0.12, y: 6 }, { opacity: 1, y: 0, stagger: 0.05, ease: 'none', scrollTrigger: { trigger: manifesto, start: 'top 80%', end: 'bottom 45%', scrub: true } });
@@ -348,10 +333,10 @@ if (gsap && ST && !reduced) {
   const names = ['Biskra', 'Constantine', 'Béjaïa', 'Kabylie', 'Ghardaïa', 'Tlemcen', 'Sahara', 'Atlas', 'Chetma', 'Aurès'];
   const tile = (src, i, big) => `<figure class="strip__tile${big ? '' : ' strip__tile--sm'}"><img src="${esc(src)}" alt="" loading="lazy" decoding="async"><figcaption>${esc(names[i] || '')}</figcaption></figure>`;
   const rows = document.querySelectorAll('.strip__row');
-  rows[0].innerHTML = [...strip, ...strip].map((s, i) => tile(s, i % strip.length, true)).join('');
+  if (rows.length) rows[0].innerHTML = [...strip, ...strip].map((s, i) => tile(s, i % strip.length, true)).join('');
   const rev = [...strip].reverse();
-  rows[1].innerHTML = [...rev, ...rev].map((s, i) => tile(s, strip.length - 1 - (i % strip.length), false)).join('');
-  if (gsap && ST && !reduced) {
+  if (rows.length) rows[1].innerHTML = [...rev, ...rev].map((s, i) => tile(s, strip.length - 1 - (i % strip.length), false)).join('');
+  if (rows.length && gsap && ST && !reduced) {
     rows.forEach((row) => {
       const dir = Number(row.dataset.dir) * (rtl ? -1 : 1);
       gsap.fromTo(row, { xPercent: dir > 0 ? 0 : -30 }, { xPercent: dir > 0 ? -30 : 0, ease: 'none', scrollTrigger: { trigger: '#strip', start: 'top bottom', end: 'bottom top', scrub: 0.4 } });
@@ -370,10 +355,12 @@ if (gsap && ST && !reduced) {
   });
   gsap.from('.pillar > :not(figure)', { y: 30, autoAlpha: 0, duration: 1, ease: 'expo.out', stagger: 0.05, scrollTrigger: { trigger: '.pillars', start: 'top 70%' } });
 }
+}
 
 /* ============================================================== */
 /* Valeurs : cartes photo qui s'ouvrent au survol                  */
 /* ============================================================== */
+if ($('#values')) {
 {
   const vals = C.values || [];
   const imgs = M.values || [];
@@ -400,12 +387,12 @@ if (gsap && ST && !reduced) {
     if (!desktop.matches) cards.forEach((c) => ST.create({ trigger: c, start: 'top 60%', end: 'bottom 40%', onToggle: (s) => s.isActive && open(c) }));
   }
 }
+}
 
 /* ============================================================== */
 /* Filières : panneaux photo en défilement horizontal              */
 /* ============================================================== */
-const products = visibleProducts(C);
-const sectors = C.sectors.filter((s) => s.visible !== false).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+if ($('#sectors-track')) {
 $('#sectors-track').innerHTML = sectors
   .map((s, i) => {
     const list = products.filter((p) => p.sector === s.id);
@@ -456,10 +443,12 @@ if (gsap && ST && !reduced) {
     document.querySelectorAll('.sector__bg img').forEach((img) => gsap.fromTo(img, { yPercent: -8, scale: 1.2 }, { yPercent: 8, scale: 1.05, ease: 'none', scrollTrigger: { trigger: img.closest('.sector'), start: 'top bottom', end: 'bottom top', scrub: true } }));
   });
 }
+}
 
 /* ============================================================== */
 /* Identité : le sceau se pose sur de vrais produits               */
 /* ============================================================== */
+if ($('#supports')) {
 const mockList = ['seal.bottle', 'seal.box', 'seal.tag', 'seal.bag', 'seal.container', 'seal.label'];
 {
   const photos = M.stamps || [];
@@ -512,10 +501,12 @@ const mockList = ['seal.bottle', 'seal.box', 'seal.tag', 'seal.bag', 'seal.conta
   }
   items.forEach((li) => li.addEventListener('click', () => setStep(Number(li.dataset.i))));
 }
+}
 
 /* ============================================================== */
 /* Sélection                                                        */
 /* ============================================================== */
+if ($('#featured')) {
 const featured = products.filter((p) => p.featured).slice(0, 8);
 const featEl = $('#featured');
 featEl.innerHTML = featured.map((p) => productCard(p, ctx)).join('');
@@ -523,10 +514,12 @@ bindAddButtons(featEl, ctx);
 if (gsap && ST && !reduced) {
   gsap.from(featEl.children, { y: 70, autoAlpha: 0, duration: 1.1, ease: 'expo.out', stagger: 0.07, scrollTrigger: { trigger: featEl, start: 'top 85%' } });
 }
+}
 
 /* ============================================================== */
 /* Atlas : carte plate de l'Algérie et liste des régions            */
 /* ============================================================== */
+if ($('#atlas-map')) {
 {
   const B = { w: -9.2, e: 12.4, s: 18.6, n: 37.6 };
   const KX = Math.cos((28 * Math.PI) / 180);
@@ -570,18 +563,12 @@ if (gsap && ST && !reduced) {
     el.addEventListener('focus', () => hl(Number(el.dataset.i)));
     el.addEventListener('mouseleave', () => hl(-1));
   });
-  const replay = (i) => {
-    if (ctx.lenis) ctx.lenis.scrollTo(0, { duration: 1.6 });
-    else scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
-    playing = !reduced;
-    setPlayBtn();
-    setTimeout(() => go(i), 600);
-  };
+  const replay = (i) => (replayFilm ? replayFilm(i) : (location.href = href(`./?chapter=${i}#film`)));
   $('#atlas-list').addEventListener('click', (e) => {
     const b = e.target.closest('button[data-i]');
     if (b) replay(Number(b.dataset.i));
   });
-  $('#atlas-replay').addEventListener('click', () => replay(0));
+  $('#atlas-replay')?.addEventListener('click', () => replay(0));
   if (gsap && ST && !reduced) {
     const dzp = document.querySelector('.atlas__dz');
     const L = dzp.getTotalLength();
@@ -589,10 +576,59 @@ if (gsap && ST && !reduced) {
     gsap.from('.atlas__pin', { scale: 0, transformOrigin: 'center', duration: 0.7, ease: 'back.out(2)', stagger: 0.08, delay: 0.8, scrollTrigger: { trigger: '#atlas-map', start: 'top 75%' } });
   }
 }
+}
+
+/* ============================================================== */
+/* Régions en détail (page Régions)                                 */
+/* ============================================================== */
+if ($('#region-cards')) {
+  const el = $('#region-cards');
+  el.innerHTML = regions
+    .map((r, i) => {
+      const p = r.product;
+      const s = p && sectorOf(C, p.sector);
+      return `<article class="rcard" data-i="${i}">
+        <div class="rcard__media">${r.photo ? `<img src="${esc(r.photo)}" alt="" loading="lazy" decoding="async">` : ''}
+          ${r.video ? `<button class="rcard__play" type="button" data-video="${esc(r.video)}">${icon('play')}<span>${esc(i18n.ui('page.regions.watch'))}</span></button>` : ''}
+          <span class="rcard__n">${String(i + 1).padStart(2, '0')}</span></div>
+        <div class="rcard__body">
+          <p class="rcard__meta">${esc(i18n.t(r.area))} · <span dir="ltr">${dms(r.lat, 'N', 'S')} ${dms(r.lon, 'E', 'W')}</span></p>
+          <h3>${esc(i18n.t(r.name))}</h3>
+          <p class="rcard__line">${esc(i18n.t(r.line))}</p>
+          ${p ? `<a class="rcard__prod" href="${productUrl(p)}"><span>${productVisual(p, s, { cls: 'rcard__pv' })}</span><span><small>${esc(i18n.ui('film.flagship'))}</small><b>${esc(i18n.t(p.name))}</b></span>${icon('arrow')}</a>` : ''}
+          <p class="rcard__credit">${esc(i18n.ui(r.realVideo ? 'film.realAerial' : 'film.illusAerial'))}</p>
+        </div>
+      </article>`;
+    })
+    .join('');
+  el.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-video]');
+    if (!b) return;
+    const media = b.closest('.rcard__media');
+    el.querySelectorAll('.rcard__media video').forEach((v) => v.pause());
+    let v = media.querySelector('video');
+    if (!v) {
+      v = document.createElement('video');
+      Object.assign(v, { muted: true, loop: true, playsInline: true, src: b.dataset.video });
+      v.setAttribute('playsinline', '');
+      v.addEventListener('playing', () => media.classList.add('is-playing'));
+      media.insertBefore(v, b);
+    }
+    v.play().catch(() => {});
+    track('film', { chapter: regions[Number(b.closest('.rcard').dataset.i)]?.id, from: 'regions' });
+  });
+  if (gsap && ST && !reduced) {
+    el.querySelectorAll('.rcard').forEach((c) => {
+      gsap.from(c, { y: 80, autoAlpha: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: c, start: 'top 88%' } });
+      gsap.fromTo(c.querySelector('.rcard__media img'), { scale: 1.3 }, { scale: 1.02, ease: 'none', scrollTrigger: { trigger: c, start: 'top bottom', end: 'bottom top', scrub: true } });
+    });
+  }
+}
 
 /* ============================================================== */
 /* Marchés : carte du monde en points et arcs depuis Alger          */
 /* ============================================================== */
+if ($('#world')) {
 {
   const DEGR = Math.PI / 180;
   const ee = (lon, lat) => {
@@ -651,19 +687,23 @@ if (gsap && ST && !reduced) {
     gsap.from('.world__city', { scale: 0, transformOrigin: 'center', duration: 0.6, ease: 'back.out(2)', stagger: 0.09, delay: 1.2, scrollTrigger: { trigger: '#world', start: 'top 70%' } });
   }
 }
+}
 
 /* ============================================================== */
 /* Pour qui : défilé des types d'acheteurs                          */
 /* ============================================================== */
+if ($('#audience')) {
 {
   const keys = ['importers', 'distributors', 'wholesalers', 'chains', 'food', 'retail', 'trading', 'partners'];
   const row = keys.map((k) => `<span>${esc(i18n.ui('audience.' + k))}</span><svg viewBox="0 0 40 40" aria-hidden="true"><path d="${starPath(20, 20, 13)}"/></svg>`).join('');
   $('#audience').innerHTML = `<div class="marquee__row"><div class="marquee__inner">${row}${row}</div></div><div class="marquee__row marquee__row--rev"><div class="marquee__inner">${row}${row}</div></div>`;
 }
+}
 
 /* ============================================================== */
 /* Services : les étapes de l'export                                */
 /* ============================================================== */
+if ($('#steps')) {
 {
   const list = $('#steps');
   list.insertAdjacentHTML(
@@ -679,22 +719,25 @@ if (gsap && ST && !reduced) {
     list.querySelectorAll('.step').forEach((el) => ST.create({ trigger: el, start: 'top 65%', onEnter: () => el.classList.add('is-lit'), onLeaveBack: () => el.classList.remove('is-lit') }));
   } else list.querySelectorAll('.step').forEach((el) => el.classList.add('is-lit'));
 }
+}
 
 /* ============================================================== */
 /* Producteurs et appel final                                       */
 /* ============================================================== */
-$('#producers-pattern').innerHTML = patternSvg('star', 'producers__svg');
-$('#final-seal').innerHTML = seal('final__sealsvg');
+if ($('#producers-pattern') || $('#final-ctas')) {
+if ($('#producers-pattern')) $('#producers-pattern').innerHTML = patternSvg('star', 'producers__svg');
+if ($('#final-seal')) $('#final-seal').innerHTML = seal('final__sealsvg');
 {
   const ct = C.contact || {};
   const wa = String(ct.whatsapp || '').replace(/\D/g, '');
-  $('#final-ctas').innerHTML = `<a class="btn btn--light btn--lg" href="${href('devis.html')}">${esc(i18n.ui('nav.quote'))}${icon('arrow')}</a>
+  if ($('#final-ctas')) $('#final-ctas').innerHTML = `<a class="btn btn--light btn--lg" href="${href('devis.html')}">${esc(i18n.ui('nav.quote'))}${icon('arrow')}</a>
     ${ct.email ? `<a class="btn btn--ghost" href="mailto:${esc(ct.email)}">${icon('mail')}${esc(i18n.ui('cta.email'))}</a>` : ''}
     ${wa ? `<a class="btn btn--ghost" href="https://wa.me/${wa}" target="_blank" rel="noopener">${icon('wa')}${esc(i18n.ui('cta.whatsapp'))}</a>` : ''}`;
   document.querySelectorAll('#final-ctas a, .film__ctas a, .hdr__cta').forEach((a) => a.addEventListener('click', () => track('cta', { name: a.getAttribute('href') })));
 }
 if (gsap && ST && !reduced) {
   gsap.to('#final-seal svg', { rotate: -90, ease: 'none', scrollTrigger: { trigger: '#contact', start: 'top bottom', end: 'bottom top', scrub: true } });
+}
 }
 
 // Profondeur de lecture (pour les statistiques)

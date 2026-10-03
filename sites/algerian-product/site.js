@@ -27,10 +27,10 @@ function renderHeader(c, i18n, page) {
   const home = page === 'home' ? '' : './';
   const nav = [
     ['produits.html', 'nav.products', page === 'catalogue' || page === 'product'],
-    [`${home}#regions`, 'nav.regions'],
-    [`${home}#marches`, 'nav.markets'],
-    [`${home}#services`, 'nav.services'],
-    [`${home}#maison`, 'nav.about'],
+    ['regions.html', 'nav.regions', page === 'regions'],
+    ['marches.html', 'nav.markets', page === 'markets'],
+    ['services.html', 'nav.services', page === 'services'],
+    ['maison.html', 'nav.about', page === 'about'],
   ];
   const langs = i18n.languages;
   const langItems = langs
@@ -130,9 +130,10 @@ function renderFooter(c, i18n) {
     <div class="ftr__col">
       <h3>${esc(i18n.ui('footer.explore'))}</h3>
       <a href="${href('produits.html')}">${esc(i18n.ui('nav.products'))}</a>
-      <a href="${href('./#regions')}">${esc(i18n.ui('nav.regions'))}</a>
-      <a href="${href('./#marches')}">${esc(i18n.ui('nav.markets'))}</a>
-      <a href="${href('./#services')}">${esc(i18n.ui('nav.services'))}</a>
+      <a href="${href('regions.html')}">${esc(i18n.ui('nav.regions'))}</a>
+      <a href="${href('marches.html')}">${esc(i18n.ui('nav.markets'))}</a>
+      <a href="${href('services.html')}">${esc(i18n.ui('nav.services'))}</a>
+      <a href="${href('maison.html')}">${esc(i18n.ui('nav.about'))}</a>
       <a href="${href('devis.html')}">${esc(i18n.ui('nav.quote'))}</a>
     </div>
     <div class="ftr__col">

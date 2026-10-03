@@ -1,5 +1,5 @@
 {
- "version": 2,
+ "version": 3,
  "updatedAt": null,
  "brand": {
   "name": "Algerian Product"
@@ -1376,6 +1376,132 @@
    "en": "Applied to",
    "ar": "يوضع على",
    "es": "Aplicado en"
+  },
+  "common.more": {
+   "fr": "En savoir plus",
+   "en": "Learn more",
+   "ar": "اعرف المزيد",
+   "es": "Saber más"
+  },
+  "page.about.title": {
+   "fr": "Une marque pour *tout ce que l’Algérie produit*.",
+   "en": "A brand for *everything Algeria makes*.",
+   "ar": "علامة لكل *ما تنتجه الجزائر*.",
+   "es": "Una marca para *todo lo que produce Argelia*."
+  },
+  "page.about.lead": {
+   "fr": "Née entre l’Algérie et le Canada, Algerian Product rassemble des producteurs de toutes les filières sous une même signature, pensée pour les acheteurs du monde entier.",
+   "en": "Born between Algeria and Canada, Algerian Product brings producers from every sector under one signature, designed for buyers around the world.",
+   "ar": "وُلدت Algerian Product بين الجزائر وكندا، وتجمع منتجين من كل القطاعات تحت توقيع واحد موجّه للمشترين في العالم.",
+   "es": "Nacida entre Argelia y Canadá, Algerian Product reúne a productores de todos los sectores bajo una misma firma, pensada para compradores de todo el mundo."
+  },
+  "page.about.storyTitle": {
+   "fr": "Pourquoi maintenant",
+   "en": "Why now",
+   "ar": "لماذا الآن",
+   "es": "Por qué ahora"
+  },
+  "page.about.story": {
+   "fr": "L’Algérie produit beaucoup et exporte de plus en plus, mais ses produits restent peu connus à l’étranger, présentés en ordre dispersé. Algerian Product leur donne une vitrine commune, des fiches claires, des langues que les acheteurs parlent et un interlocuteur qui suit chaque commande jusqu’au bout.",
+   "en": "Algeria produces a great deal and exports more every year, yet its products remain little known abroad and are presented piecemeal. Algerian Product gives them a shared showcase, clear product sheets, the languages buyers speak, and one contact who follows every order through.",
+   "ar": "تنتج الجزائر الكثير وتصدّر أكثر فأكثر، لكن منتجاتها ما زالت قليلة الشهرة في الخارج وتُعرض بشكل متفرق. تمنحها Algerian Product واجهة مشتركة، وبطاقات واضحة، ولغات يتحدثها المشترون، ومحاورًا يتابع كل طلبية حتى النهاية.",
+   "es": "Argelia produce mucho y exporta cada vez más, pero sus productos siguen siendo poco conocidos fuera y se presentan de forma dispersa. Algerian Product les da un escaparate común, fichas claras, los idiomas de los compradores y un interlocutor que sigue cada pedido hasta el final."
+  },
+  "page.regions.title": {
+   "fr": "Dix régions, *dix savoir-faire*.",
+   "en": "Ten regions, *ten crafts*.",
+   "ar": "عشر مناطق، *عشر حِرف*.",
+   "es": "Diez regiones, *diez oficios*."
+  },
+  "page.regions.lead": {
+   "fr": "Chaque wilaya a son produit, son climat et ses gestes. Survolez la carte, puis ouvrez la région qui vous intéresse.",
+   "en": "Each province has its product, its climate and its craft. Explore the map, then open the region you are interested in.",
+   "ar": "لكل ولاية منتجها ومناخها ومهاراتها. تصفّح الخريطة ثم افتح المنطقة التي تهمك.",
+   "es": "Cada provincia tiene su producto, su clima y su oficio. Recorra el mapa y abra la región que le interese."
+  },
+  "page.regions.watch": {
+   "fr": "Voir la vidéo",
+   "en": "Watch the video",
+   "ar": "شاهد الفيديو",
+   "es": "Ver el vídeo"
+  },
+  "page.markets.title": {
+   "fr": "Les marchés *que nous ouvrons*.",
+   "en": "The markets *we are opening*.",
+   "ar": "الأسواق *التي نفتحها*.",
+   "es": "Los mercados *que abrimos*."
+  },
+  "page.markets.lead": {
+   "fr": "Diaspora, Europe francophone, pays du Golfe, Afrique de l’Ouest : une stratégie par étapes, marché par marché.",
+   "en": "Diaspora, French-speaking Europe, the Gulf, West Africa: a step-by-step strategy, market by market.",
+   "ar": "الجالية، أوروبا الناطقة بالفرنسية، دول الخليج، غرب إفريقيا: استراتيجية على مراحل، سوقًا بعد سوق.",
+   "es": "Diáspora, Europa francófona, países del Golfo, África occidental: una estrategia por etapas, mercado a mercado."
+  },
+  "page.markets.howTitle": {
+   "fr": "Comment nous ouvrons un marché",
+   "en": "How we open a market",
+   "ar": "كيف نفتح سوقًا",
+   "es": "Cómo abrimos un mercado"
+  },
+  "page.markets.how1": {
+   "fr": "Étudier la demande, les normes et les droits de douane du pays.",
+   "en": "Study the country’s demand, standards and customs duties.",
+   "ar": "دراسة الطلب والمعايير والرسوم الجمركية في البلد.",
+   "es": "Estudiar la demanda, las normas y los aranceles del país."
+  },
+  "page.markets.how2": {
+   "fr": "Trouver un premier partenaire local : importateur, distributeur ou chaîne.",
+   "en": "Find a first local partner: importer, distributor or chain.",
+   "ar": "إيجاد شريك محلي أول: مستورد أو موزع أو سلسلة متاجر.",
+   "es": "Encontrar un primer socio local: importador, distribuidor o cadena."
+  },
+  "page.markets.how3": {
+   "fr": "Livrer un premier conteneur test, puis installer des commandes régulières.",
+   "en": "Ship a first test container, then set up regular orders.",
+   "ar": "شحن حاوية تجريبية أولى ثم إرساء طلبيات منتظمة.",
+   "es": "Enviar un primer contenedor de prueba y después establecer pedidos regulares."
+  },
+  "page.services.title": {
+   "fr": "L’export, *sans les intermédiaires*.",
+   "en": "Export, *without the middlemen*.",
+   "ar": "التصدير *دون وسطاء*.",
+   "es": "La exportación, *sin intermediarios*."
+  },
+  "page.services.lead": {
+   "fr": "De la sélection du producteur au port de destination, une seule équipe s’occupe de tout et vous tient informé à chaque étape.",
+   "en": "From selecting the producer to the destination port, one team handles everything and keeps you informed at every step.",
+   "ar": "من اختيار المنتج إلى ميناء الوصول، فريق واحد يتكفل بكل شيء ويُطلعكم على كل مرحلة.",
+   "es": "De la selección del productor al puerto de destino, un solo equipo se ocupa de todo y le informa en cada etapa."
+  },
+  "page.services.incoTitle": {
+   "fr": "Les Incoterms, en clair",
+   "en": "Incoterms, made simple",
+   "ar": "شروط التسليم ببساطة",
+   "es": "Los Incoterms, en claro"
+  },
+  "inco.EXW": {
+   "fr": "Vous enlevez la marchandise chez le producteur.",
+   "en": "You collect the goods at the producer’s site.",
+   "ar": "تستلمون البضاعة من عند المنتج.",
+   "es": "Usted recoge la mercancía en las instalaciones del productor."
+  },
+  "inco.FOB": {
+   "fr": "Nous livrons à bord du navire, au port algérien.",
+   "en": "We deliver on board the vessel at the Algerian port.",
+   "ar": "نسلّم على متن السفينة في الميناء الجزائري.",
+   "es": "Entregamos a bordo del buque, en el puerto argelino."
+  },
+  "inco.CIF": {
+   "fr": "Nous payons le fret et l’assurance jusqu’à votre port.",
+   "en": "We pay freight and insurance to your port.",
+   "ar": "ندفع الشحن والتأمين حتى مينائكم.",
+   "es": "Pagamos el flete y el seguro hasta su puerto."
+  },
+  "inco.DAP": {
+   "fr": "Nous livrons jusqu’à votre entrepôt, hors droits de douane.",
+   "en": "We deliver to your warehouse, duties excluded.",
+   "ar": "نسلّم حتى مستودعكم دون الرسوم الجمركية.",
+   "es": "Entregamos en su almacén, sin aranceles."
   }
  },
  "sectors": [
@@ -1654,7 +1780,7 @@
    ]
   },
   {
-   "image": "https://images.pexels.com/photos/3737656/pexels-photo-3737656.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Olive_oil_from_Oneglia.jpg?width=1600",
    "visible": true,
    "featured": true,
    "id": "huile-olive-kabylie",
@@ -1805,7 +1931,7 @@
    ]
   },
   {
-   "image": "https://images.pexels.com/photos/9762169/pexels-photo-9762169.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Dried_figs.jpg?width=1600",
    "visible": true,
    "featured": true,
    "id": "figues-beni-maouche",
@@ -4057,7 +4183,7 @@
     "ar": "تين بني معوش المجفف تحت الشمس.",
     "es": "Los higos de Beni Maouche, secados al sol."
    },
-   "video": "https://www.pexels.com/download/video/3573958/",
+   "video": "https://www.pexels.com/download/video/9834170/",
    "photo": "https://images.pexels.com/photos/33086104/pexels-photo-33086104.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "realVideo": false,
    "visible": true
@@ -4206,6 +4332,12 @@
    "video": "https://www.pexels.com/download/video/19255120/",
    "photo": "https://images.pexels.com/photos/8798170/pexels-photo-8798170.jpeg?auto=compress&cs=tinysrgb&w=1600"
   },
+  "heroes": {
+   "about": "https://images.pexels.com/photos/8798170/pexels-photo-8798170.jpeg?auto=compress&cs=tinysrgb&w=2000",
+   "regions": "https://images.pexels.com/photos/14912071/pexels-photo-14912071.jpeg?auto=compress&cs=tinysrgb&w=2000",
+   "markets": "https://images.pexels.com/photos/34168857/pexels-photo-34168857.jpeg?auto=compress&cs=tinysrgb&w=2000",
+   "services": "https://images.pexels.com/photos/6595777/pexels-photo-6595777.jpeg?auto=compress&cs=tinysrgb&w=2000"
+  },
   "chelia": "https://commons.wikimedia.org/wiki/Special:FilePath/La_montagne_de_Chelia_en_Alg%C3%A9rie.webm",
   "pillars": [
    "https://images.pexels.com/photos/8798170/pexels-photo-8798170.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -4225,13 +4357,13 @@
    "https://images.pexels.com/photos/30147124/pexels-photo-30147124.jpeg?auto=compress&cs=tinysrgb&w=900"
   ],
   "values": [
-   "https://images.pexels.com/photos/33783/pexels-photo-33783.jpeg?auto=compress&cs=tinysrgb&w=1000",
+   "https://images.pexels.com/photos/1022385/pexels-photo-1022385.jpeg?auto=compress&cs=tinysrgb&w=1000",
    "https://images.pexels.com/photos/8066099/pexels-photo-8066099.jpeg?auto=compress&cs=tinysrgb&w=1000",
    "https://images.pexels.com/photos/264105/pexels-photo-264105.jpeg?auto=compress&cs=tinysrgb&w=1000",
    "https://images.pexels.com/photos/6595777/pexels-photo-6595777.jpeg?auto=compress&cs=tinysrgb&w=1000"
   ],
   "stamps": [
-   "https://images.pexels.com/photos/33783/pexels-photo-33783.jpeg?auto=compress&cs=tinysrgb&w=1400",
+   "https://commons.wikimedia.org/wiki/Special:FilePath/Olive_oil_from_Oneglia.jpg?width=1400",
    "https://images.pexels.com/photos/17923889/pexels-photo-17923889.jpeg?auto=compress&cs=tinysrgb&w=1400",
    "https://images.pexels.com/photos/14973967/pexels-photo-14973967.jpeg?auto=compress&cs=tinysrgb&w=1400",
    "https://images.pexels.com/photos/29519165/pexels-photo-29519165.jpeg?auto=compress&cs=tinysrgb&w=1400",
@@ -4656,6 +4788,62 @@
   }
  },
  "seo": {
+  "about": {
+   "title": {
+    "fr": "La maison — Algerian Product",
+    "en": "About us — Algerian Product",
+    "ar": "من نحن — Algerian Product",
+    "es": "Quiénes somos — Algerian Product"
+   },
+   "description": {
+    "fr": "Vision, mission, valeurs et identité d’Algerian Product, la marque des produits algériens à l’international.",
+    "en": "Vision, mission, values and identity of Algerian Product, the brand for Algerian products abroad.",
+    "ar": "رؤية ورسالة وقيم وهوية Algerian Product، علامة المنتجات الجزائرية في العالم.",
+    "es": "Visión, misión, valores e identidad de Algerian Product, la marca de los productos argelinos en el mundo."
+   }
+  },
+  "regions": {
+   "title": {
+    "fr": "Les régions et leurs savoir-faire — Algerian Product",
+    "en": "Regions and their crafts — Algerian Product",
+    "ar": "المناطق وحِرفها — Algerian Product",
+    "es": "Las regiones y sus oficios — Algerian Product"
+   },
+   "description": {
+    "fr": "De Tlemcen à Tamanrasset, dix régions d’Algérie et le produit qui les fait connaître.",
+    "en": "From Tlemcen to Tamanrasset, ten Algerian regions and the product they are known for.",
+    "ar": "من تلمسان إلى تمنراست، عشر مناطق جزائرية والمنتج الذي تشتهر به.",
+    "es": "De Tremecén a Tamanrasset, diez regiones de Argelia y el producto que las da a conocer."
+   }
+  },
+  "markets": {
+   "title": {
+    "fr": "Marchés visés — Algerian Product",
+    "en": "Target markets — Algerian Product",
+    "ar": "الأسواق المستهدفة — Algerian Product",
+    "es": "Mercados objetivo — Algerian Product"
+   },
+   "description": {
+    "fr": "Canada, France, Golfe, Europe, Afrique : les marchés où Algerian Product présente les produits algériens.",
+    "en": "Canada, France, the Gulf, Europe, Africa: where Algerian Product presents Algerian products.",
+    "ar": "كندا، فرنسا، الخليج، أوروبا، إفريقيا: الأسواق التي تقدم فيها Algerian Product المنتجات الجزائرية.",
+    "es": "Canadá, Francia, el Golfo, Europa, África: donde Algerian Product presenta los productos argelinos."
+   }
+  },
+  "services": {
+   "title": {
+    "fr": "Export & services — Algerian Product",
+    "en": "Export & services — Algerian Product",
+    "ar": "التصدير والخدمات — Algerian Product",
+    "es": "Exportación y servicios — Algerian Product"
+   },
+   "description": {
+    "fr": "Sourcing, qualité, emballage, logistique et suivi : l’export de produits algériens avec un seul interlocuteur.",
+    "en": "Sourcing, quality, packaging, logistics and follow-up: exporting Algerian products with a single contact.",
+    "ar": "التوريد، الجودة، التغليف، اللوجستيك والمتابعة: تصدير المنتجات الجزائرية مع محاور واحد.",
+    "es": "Abastecimiento, calidad, embalaje, logística y seguimiento: exportar productos argelinos con un solo interlocutor."
+   }
+  },
   "home": {
    "title": {
     "fr": "Algerian Product — le meilleur de l’Algérie, présenté au monde",
@@ -4708,14 +4896,14 @@
   },
   {
    "kind": "photo",
-   "src": "Pexels",
-   "page": "https://www.pexels.com/photo/3737656/",
-   "what": "Huile d’olive"
+   "src": "Wikimedia Commons",
+   "page": "https://commons.wikimedia.org/wiki/File:Olive_oil_from_Oneglia.jpg",
+   "what": "Flacon d’huile d’olive"
   },
   {
    "kind": "photo",
-   "src": "Pexels",
-   "page": "https://www.pexels.com/photo/9762169/",
+   "src": "Wikimedia Commons",
+   "page": "https://commons.wikimedia.org/wiki/File:Dried_figs.jpg",
    "what": "Figues sèches"
   },
   {
@@ -4865,8 +5053,8 @@
   {
    "kind": "video",
    "src": "Pexels",
-   "page": "https://www.pexels.com/video/3573958/",
-   "what": "Mer et montagne vues du ciel (illustration)"
+   "page": "https://www.pexels.com/video/9834170/",
+   "what": "Côte verte à falaises vue du ciel (illustration)"
   },
   {
    "kind": "photo",
@@ -4965,16 +5153,22 @@
    "what": "Mémorial du Martyr, Alger"
   },
   {
-   "kind": "video",
-   "src": "Wikimedia Commons",
-   "page": "https://commons.wikimedia.org/wiki/File:La_montagne_de_Chelia_en_Alg%C3%A9rie.webm",
-   "what": "Djebel Chélia, Aurès"
-  },
-  {
    "kind": "photo",
    "src": "Pexels",
    "page": "https://www.pexels.com/photo/34168857/",
    "what": "Port à conteneurs"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/6595777/",
+   "what": "Cargo"
+  },
+  {
+   "kind": "video",
+   "src": "Wikimedia Commons",
+   "page": "https://commons.wikimedia.org/wiki/File:La_montagne_de_Chelia_en_Alg%C3%A9rie.webm",
+   "what": "Djebel Chélia, Aurès"
   },
   {
    "kind": "photo",
@@ -5009,20 +5203,14 @@
   {
    "kind": "photo",
    "src": "Pexels",
-   "page": "https://www.pexels.com/photo/33783/",
-   "what": "Huile d’olive"
+   "page": "https://www.pexels.com/photo/1022385/",
+   "what": "Olives et huile d’olive"
   },
   {
    "kind": "photo",
    "src": "Pexels",
    "page": "https://www.pexels.com/photo/264105/",
    "what": "Dattes"
-  },
-  {
-   "kind": "photo",
-   "src": "Pexels",
-   "page": "https://www.pexels.com/photo/6595777/",
-   "what": "Cargo"
   },
   {
    "kind": "photo",
