@@ -17,6 +17,7 @@ export default function sectors(el) {
             ${ml(`sectors.${i}.desc`, 'Description', { textarea: true, wide: true })}
             <label class="f f--color"><span>Couleur</span><input type="color" data-path="sectors.${i}.color" value="${esc(s.color)}"></label>
             ${field(`sectors.${i}.pattern`, 'Motif', { options: Object.keys(PATTERNS).map((k) => [k, { palm: 'Palmes', star: 'Étoiles', weave: 'Losanges', tile: 'Carreaux', grid: 'Trame', arch: 'Arcs' }[k]]) })}
+            ${field(`sectors.${i}.photo`, 'Photo de fond (URL)', { type: 'url', wide: true })}
             ${field(`sectors.${i}.visible`, 'Visible sur le site', { type: 'checkbox' })}
             <p class="muted">${D.products.filter((p) => p.sector === s.id).length} produit(s)</p>
           </div></section>`

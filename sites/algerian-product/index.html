@@ -93,27 +93,46 @@
     <div class="wrap">
       <p class="kicker" data-t="about.kicker">La maison</p>
       <p class="manifesto" id="manifesto" data-t="about.manifesto">Algerian Product fait connaître ce que l’Algérie produit de meilleur — dans ses champs, ses ateliers et ses usines — et le relie aux marchés du monde.</p>
+    </div>
+    <div class="strip" id="strip" aria-label="Paysages d’Algérie">
+      <p class="strip__title wrap"><span data-t="about.strip">Une seule terre, mille paysages</span></p>
+      <div class="strip__row" data-dir="1"></div>
+      <div class="strip__row strip__row--sm" data-dir="-1"></div>
+    </div>
+    <div class="wrap">
       <div class="pillars">
-        <article class="pillar" data-reveal>
+        <article class="pillar">
+          <figure class="pillar__img" data-img-reveal><img data-media="pillars.0" alt=""></figure>
           <span class="pillar__n">01</span>
           <h3 data-t="about.vision.title">Vision</h3>
           <p data-t="about.vision.text"></p>
         </article>
-        <article class="pillar" data-reveal>
+        <article class="pillar">
+          <figure class="pillar__img" data-img-reveal><img data-media="pillars.1" alt=""></figure>
           <span class="pillar__n">02</span>
           <h3 data-t="about.mission.title">Mission</h3>
           <p data-t="about.mission.text"></p>
         </article>
-        <article class="pillar" data-reveal>
+        <article class="pillar">
+          <figure class="pillar__img" data-img-reveal><img data-media="pillars.2" alt=""></figure>
           <span class="pillar__n">03</span>
           <h3 data-t="about.strategy.title">Stratégie internationale</h3>
           <p data-t="about.strategy.text"></p>
         </article>
       </div>
-      <div class="values">
-        <h3 class="values__title" data-t="about.valuesTitle">Nos valeurs</h3>
-        <ul class="values__list" id="values"></ul>
+    </div>
+  </section>
+
+  <!-- ============ VALEURS ============ -->
+  <section class="sec sec--ink values" id="valeurs">
+    <div class="wrap">
+      <div class="sec__head">
+        <div>
+          <p class="kicker" data-t="values.kicker">Ce qui nous engage</p>
+          <h2 class="h2" data-t="about.valuesTitle" data-split>Nos valeurs</h2>
+        </div>
       </div>
+      <ul class="vcards" id="values"></ul>
     </div>
   </section>
 
@@ -132,15 +151,21 @@
 
   <!-- ============ IDENTITÉ ============ -->
   <section class="sec sec--paper identity" id="identite">
-    <div class="wrap identity__grid">
-      <div class="identity__text">
-        <p class="kicker" data-t="seal.kicker">L’identité</p>
-        <h2 class="h2" data-t-rich="seal.title" data-split>Une signature, <em>de la caisse de dattes au conteneur</em>.</h2>
-        <p class="lead" data-t="seal.lead" data-reveal></p>
-      </div>
-      <div class="identity__stage" id="identity-stage">
-        <div class="identity__seal" id="identity-seal"></div>
-        <ul class="mockups" id="mockups"></ul>
+    <div class="identity__pin" id="identity-pin">
+      <div class="wrap identity__grid">
+        <div class="identity__text">
+          <p class="kicker" data-t="seal.kicker">L’identité</p>
+          <h2 class="h2" data-t-rich="seal.title">Une signature, <em>de la caisse de dattes au conteneur</em>.</h2>
+          <p class="lead" data-t="seal.lead"></p>
+          <ol class="supports" id="supports"></ol>
+        </div>
+        <div class="stamp" id="stamp">
+          <div class="stamp__frames" id="stamp-frames"></div>
+          <div class="stamp__seal" id="stamp-seal"></div>
+          <span class="stamp__ring" id="stamp-ring"></span>
+          <p class="stamp__tag" id="stamp-tag"></p>
+          <p class="stamp__count" id="stamp-count" dir="ltr"></p>
+        </div>
       </div>
     </div>
   </section>

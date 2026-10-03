@@ -96,20 +96,82 @@ function chapterHtml(r, i) {
     ${p ? `<a class="ch__link" href="${productUrl(p)}">${esc(i18n.ui('film.seeProduct'))}${icon('arrow')}</a>` : ''}
   </div>`;
 }
-function finderHtml(r) {
-  const p = r.product;
-  const s = p && sectorOf(C, p.sector);
-  const media = r.video
-    ? `<video src="${esc(r.video)}" muted loop playsinline autoplay preload="metadata"></video>`
-    : p
-      ? productVisual(p, s, { cls: 'finder__pv' })
-      : '';
-  return `<div class="finder">
-    <span class="finder__corner finder__corner--tl"></span><span class="finder__corner finder__corner--tr"></span>
-    <span class="finder__corner finder__corner--bl"></span><span class="finder__corner finder__corner--br"></span>
-    <p class="finder__label"><span class="hud__dot"></span>${esc(i18n.ui(r.video ? 'film.aerial' : 'product.illustration'))} · ${esc(i18n.t(r.name))}</p>
-    <div class="finder__media">${media}</div>
+// Vidéos aériennes : un élément <video> par région, gardé en mémoire ; la suivante se charge à l'avance
+const saveData = !!navigator.connection?.saveData;
+const pool = new Map();
+function videoFor(key, src) {
+  if (!src || reduced || saveData) return null;
+  let v = pool.get(key);
+  if (!v) {
+    v = document.createElement('video');
+    v.muted = true;
+    v.loop = true;
+    v.playsInline = true;
+    v.setAttribute('playsinline', '');
+    v.setAttribute('aria-hidden', 'true');
+    v.preload = 'auto';
+    v.className = 'fm__video';
+    v.src = src;
+    v.addEventListener('playing', () => v.classList.add('is-on'));
+    pool.set(key, v);
+  }
+  return v;
+}
+const preload = (i) => regions[i] && videoFor(regions[i].id, regions[i].video);
+
+function mediaHtml({ name, lat, lon, photo, real, label, product }) {
+  const s = product && sectorOf(C, product.sector);
+  return `<div class="fm">
+    <div class="fm__screen">
+      ${photo ? `<img class="fm__poster" src="${esc(photo)}" alt="" decoding="async">` : ''}
+      <span class="fm__corner fm__corner--tl"></span><span class="fm__corner fm__corner--tr"></span>
+      <span class="fm__corner fm__corner--bl"></span><span class="fm__corner fm__corner--br"></span>
+      <p class="fm__label"><span class="hud__dot"></span>REC · ${esc(label)}</p>
+      <p class="fm__tc" dir="ltr">00:00:00:00</p>
+      <p class="fm__place">${esc(name)}${lat != null ? ` · <span dir="ltr">${dms(lat, 'N', 'S')} ${dms(lon, 'E', 'W')}</span>` : ''}</p>
+      <span class="fm__scan" aria-hidden="true"></span>
+    </div>
+    ${product ? `<a class="fm__product" href="${productUrl(product)}">
+      <span class="fm__pimg">${productVisual(product, s, { cls: 'fm__pv' })}</span>
+      <span class="fm__ptext"><small>${esc(i18n.ui('film.flagship'))}</small><b>${esc(i18n.t(product.name))}</b><em>${esc(i18n.ui('film.seeProduct'))}${icon('arrow')}</em></span></a>` : ''}
   </div>`;
+}
+let tcTimer = null;
+function mountMedia(key, src, data) {
+  finder.innerHTML = mediaHtml(data);
+  const screen = finder.querySelector('.fm__screen');
+  const v = videoFor(key, src);
+  pool.forEach((x) => x !== v && x.pause());
+  if (v) {
+    screen.insertBefore(v, screen.querySelector('.fm__corner'));
+    v.currentTime = 0;
+    v.play().catch(() => {});
+  }
+  finder.classList.add('is-on');
+  const tc = finder.querySelector('.fm__tc');
+  const t0 = performance.now();
+  clearInterval(tcTimer);
+  tcTimer = setInterval(() => {
+    const t = (performance.now() - t0) / 1000;
+    const f = Math.floor((t % 1) * 25);
+    tc.textContent = `00:00:${String(Math.floor(t)).padStart(2, '0')}:${String(f).padStart(2, '0')}`;
+  }, 80);
+  if (gsap && !reduced) {
+    gsap.fromTo(screen, { clipPath: 'inset(48% 0% 48% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, ease: 'expo.inOut' });
+    gsap.fromTo(finder.querySelector('.fm__poster'), { scale: 1.25 }, { scale: 1.06, duration: 9, ease: 'none' });
+    gsap.from(finder.querySelector('.fm__product'), { x: 60, y: 30, rotate: 6, autoAlpha: 0, duration: 1.1, ease: 'expo.out', delay: 0.45 });
+    gsap.from(finder.querySelectorAll('.fm__label, .fm__tc, .fm__place'), { autoAlpha: 0, y: 8, duration: 0.6, stagger: 0.08, delay: 0.7 });
+  }
+}
+function finderFor(r) {
+  mountMedia(r.id, r.video, {
+    name: i18n.t(r.name),
+    lat: r.lat,
+    lon: r.lon,
+    photo: r.photo,
+    label: i18n.ui(r.realVideo ? 'film.realAerial' : 'film.illusAerial'),
+    product: r.product,
+  });
 }
 function finaleHtml() {
   return `<div class="ch ch--finale">
@@ -131,13 +193,17 @@ function show(el, html) {
 }
 function hide(el) {
   el.classList.remove('is-on');
+  if (el === finder) {
+    clearInterval(tcTimer);
+    pool.forEach((v) => v.pause());
+  }
 }
 
 let token = 0;
 let playing = !reduced;
 let timer = null;
 let visible = true;
-const DWELL = 5600;
+const DWELL = 8200;
 const playBtn = $('#film-play');
 const setPlayBtn = () => {
   playBtn.innerHTML = icon(playing ? 'pause' : 'play');
@@ -179,6 +245,7 @@ async function go(target, { instant = false } = {}) {
     setPins();
     filmEl.dataset.mode = 'opening';
     intro.classList.remove('is-hidden');
+    preload(0);
     await film.show('opening', null, { instant });
     if (my !== token) return;
     schedule(7200);
@@ -194,7 +261,9 @@ async function go(target, { instant = false } = {}) {
     await film.show('overview', null, { instant });
     if (my !== token) return;
     show(chapter, finaleHtml());
-    schedule(7000);
+    const fm = C.media?.finale;
+    if (fm) mountMedia('finale', fm.video, { name: i18n.ui('markets.hub'), lat: 36.75, lon: 3.06, photo: fm.photo, label: i18n.ui('film.realAerial') });
+    schedule(9000);
     return;
   }
   mode = 'region';
@@ -209,7 +278,8 @@ async function go(target, { instant = false } = {}) {
   await film.show('region', r, { instant });
   if (my !== token) return;
   show(chapter, chapterHtml(r, idx));
-  show(finder, finderHtml(r));
+  finderFor(r);
+  preload(idx + 1);
   schedule(DWELL);
 }
 
@@ -255,31 +325,96 @@ if (gsap && ST && !reduced) {
 }
 
 /* ============================================================== */
-/* La maison : manifeste mot à mot, valeurs                        */
+/* La maison : manifeste mot à mot, bandeau de paysages, piliers    */
 /* ============================================================== */
-$('#values').innerHTML = (C.values || [])
-  .map((v) => `<li data-reveal><svg viewBox="0 0 40 40" aria-hidden="true"><path d="${starPath(20, 20, 15)}" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><h4>${esc(i18n.t(v.title))}</h4><p>${esc(i18n.t(v.text))}</p></li>`)
-  .join('');
+const M = C.media || {};
+const mediaAt = (path) => path.split('.').reduce((o, k) => o?.[k], M);
+document.querySelectorAll('img[data-media]').forEach((img) => {
+  const src = mediaAt(img.dataset.media);
+  if (src) {
+    img.src = src;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+  } else img.closest('figure')?.remove();
+});
 const manifesto = $('#manifesto');
 if (gsap && ST && !reduced) {
   const words = manifesto.textContent.trim().split(/\s+/);
   manifesto.innerHTML = words.map((w) => `<span class="w">${esc(w)}</span>`).join(' ');
-  gsap.fromTo(manifesto.querySelectorAll('.w'), { opacity: 0.14 }, { opacity: 1, stagger: 0.05, ease: 'none', scrollTrigger: { trigger: manifesto, start: 'top 80%', end: 'bottom 45%', scrub: true } });
+  gsap.fromTo(manifesto.querySelectorAll('.w'), { opacity: 0.12, y: 6 }, { opacity: 1, y: 0, stagger: 0.05, ease: 'none', scrollTrigger: { trigger: manifesto, start: 'top 80%', end: 'bottom 45%', scrub: true } });
+}
+{
+  const strip = M.strip || [];
+  const names = ['Biskra', 'Constantine', 'Béjaïa', 'Kabylie', 'Ghardaïa', 'Tlemcen', 'Sahara', 'Atlas', 'Chetma', 'Aurès'];
+  const tile = (src, i, big) => `<figure class="strip__tile${big ? '' : ' strip__tile--sm'}"><img src="${esc(src)}" alt="" loading="lazy" decoding="async"><figcaption>${esc(names[i] || '')}</figcaption></figure>`;
+  const rows = document.querySelectorAll('.strip__row');
+  rows[0].innerHTML = [...strip, ...strip].map((s, i) => tile(s, i % strip.length, true)).join('');
+  const rev = [...strip].reverse();
+  rows[1].innerHTML = [...rev, ...rev].map((s, i) => tile(s, strip.length - 1 - (i % strip.length), false)).join('');
+  if (gsap && ST && !reduced) {
+    rows.forEach((row) => {
+      const dir = Number(row.dataset.dir) * (rtl ? -1 : 1);
+      gsap.fromTo(row, { xPercent: dir > 0 ? 0 : -30 }, { xPercent: dir > 0 ? -30 : 0, ease: 'none', scrollTrigger: { trigger: '#strip', start: 'top bottom', end: 'bottom top', scrub: 0.4 } });
+    });
+    // inclinaison selon la vitesse de défilement
+    const skew = gsap.quickTo('.strip__row', 'skewX', { duration: 0.5, ease: 'power3' });
+    ST.create({ trigger: '#strip', start: 'top bottom', end: 'bottom top', onUpdate: (self) => skew(Math.max(-6, Math.min(6, self.getVelocity() / -400))) });
+  }
+}
+if (gsap && ST && !reduced) {
+  document.querySelectorAll('[data-img-reveal]').forEach((fig) => {
+    const img = fig.querySelector('img');
+    gsap.fromTo(fig, { clipPath: 'inset(100% 0% 0% 0% round 18px)' }, { clipPath: 'inset(0% 0% 0% 0% round 18px)', duration: 1.4, ease: 'expo.inOut', scrollTrigger: { trigger: fig, start: 'top 85%' } });
+    gsap.fromTo(img, { scale: 1.35 }, { scale: 1, duration: 1.8, ease: 'expo.out', scrollTrigger: { trigger: fig, start: 'top 85%' } });
+    gsap.fromTo(img, { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: fig, start: 'top bottom', end: 'bottom top', scrub: true } });
+  });
+  gsap.from('.pillar > :not(figure)', { y: 30, autoAlpha: 0, duration: 1, ease: 'expo.out', stagger: 0.05, scrollTrigger: { trigger: '.pillars', start: 'top 70%' } });
 }
 
 /* ============================================================== */
-/* Filières : défilement horizontal                                 */
+/* Valeurs : cartes photo qui s'ouvrent au survol                  */
+/* ============================================================== */
+{
+  const vals = C.values || [];
+  const imgs = M.values || [];
+  $('#values').innerHTML = vals
+    .map(
+      (v, i) => `<li class="vcard${i === 0 ? ' is-open' : ''}" tabindex="0">
+      ${imgs[i] ? `<img class="vcard__img" src="${esc(imgs[i])}" alt="" loading="lazy" decoding="async">` : ''}
+      <span class="vcard__n">${String(i + 1).padStart(2, '0')}</span>
+      <svg class="vcard__star" viewBox="0 0 40 40" aria-hidden="true"><path d="${starPath(20, 20, 15)}"/></svg>
+      <div class="vcard__body"><h3>${esc(i18n.t(v.title))}</h3><p>${esc(i18n.t(v.text))}</p></div>
+    </li>`
+    )
+    .join('');
+  const cards = [...document.querySelectorAll('.vcard')];
+  const open = (c) => cards.forEach((x) => x.classList.toggle('is-open', x === c));
+  cards.forEach((c) => {
+    c.addEventListener('mouseenter', () => open(c));
+    c.addEventListener('focus', () => open(c));
+    c.addEventListener('click', () => open(c));
+  });
+  if (gsap && ST && !reduced) {
+    gsap.from(cards, { y: 120, autoAlpha: 0, rotate: (i) => [-3, 2, -2, 3][i % 4], duration: 1.3, ease: 'expo.out', stagger: 0.1, scrollTrigger: { trigger: '#values', start: 'top 80%' } });
+    // les cartes s'ouvrent l'une après l'autre au défilement (téléphone)
+    if (!desktop.matches) cards.forEach((c) => ST.create({ trigger: c, start: 'top 60%', end: 'bottom 40%', onToggle: (s) => s.isActive && open(c) }));
+  }
+}
+
+/* ============================================================== */
+/* Filières : panneaux photo en défilement horizontal              */
 /* ============================================================== */
 const products = visibleProducts(C);
 const sectors = C.sectors.filter((s) => s.visible !== false).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 $('#sectors-track').innerHTML = sectors
   .map((s, i) => {
     const list = products.filter((p) => p.sector === s.id);
-    const arts = list.slice(0, 3);
+    const thumbs = list.filter((p) => p.image).slice(0, 3);
     return `<article class="sector" style="--sc:${esc(s.color)}">
+      <div class="sector__bg">${s.photo ? `<img src="${esc(s.photo)}" alt="" loading="lazy" decoding="async">` : ''}</div>
       ${patternSvg(s.pattern, 'sector__pattern')}
-      <span class="sector__num">${String(i + 1).padStart(2, '0')}</span>
-      <div class="sector__art">${arts.map((p, k) => `<span class="sector__ill sector__ill--${k}">${illustration(p.art)}</span>`).join('')}</div>
+      <span class="sector__num"><b>${String(i + 1).padStart(2, '0')}</b><i>/ ${String(sectors.length).padStart(2, '0')}</i></span>
+      <div class="sector__thumbs">${thumbs.map((p, k) => `<a class="sector__thumb sector__thumb--${k}" href="${productUrl(p)}"><img src="${esc(p.image)}" alt="${esc(i18n.t(p.name))}" loading="lazy" decoding="async"><span>${esc(i18n.t(p.name))}</span></a>`).join('')}</div>
       <div class="sector__body">
         <p class="sector__count">${esc(i18n.ui('sectors.count', { n: i18n.num(list.length) }))}</p>
         <h3 class="sector__name">${esc(i18n.t(s.name))}</h3>
@@ -310,43 +445,72 @@ if (gsap && ST && !reduced) {
       },
     });
     track.querySelectorAll('.sector').forEach((el) => {
-      gsap.from(el.querySelectorAll('.sector__ill'), {
-        y: 80,
-        rotate: (k) => [-8, 6, -4][k],
-        ease: 'none',
-        scrollTrigger: { trigger: el, containerAnimation: tw, start: rtl ? 'right 100%' : 'left 100%', end: rtl ? 'right 30%' : 'left 30%', scrub: true },
-      });
+      const ca = { trigger: el, containerAnimation: tw, scrub: true };
+      const enter = rtl ? { start: 'right 100%', end: 'left 0%' } : { start: 'left 100%', end: 'right 0%' };
+      gsap.fromTo(el.querySelector('.sector__bg img'), { scale: 1.3, xPercent: rtl ? 8 : -8 }, { scale: 1.05, xPercent: rtl ? -8 : 8, ease: 'none', scrollTrigger: { ...ca, ...enter } });
+      el.querySelectorAll('.sector__thumb').forEach((t, k) => gsap.fromTo(t, { y: 140 + k * 60, rotate: [-10, 8, -5][k] }, { y: -40 - k * 30, rotate: [-3, 4, -2][k], ease: 'none', scrollTrigger: { ...ca, ...enter } }));
+      gsap.from(el.querySelectorAll('.sector__body > *'), { x: rtl ? -60 : 60, autoAlpha: 0, stagger: 0.06, ease: 'none', scrollTrigger: { ...ca, start: rtl ? 'right 90%' : 'left 90%', end: rtl ? 'right 45%' : 'left 45%' } });
     });
+  });
+  mm.add('(max-width: 899px)', () => {
+    document.querySelectorAll('.sector__bg img').forEach((img) => gsap.fromTo(img, { yPercent: -8, scale: 1.2 }, { yPercent: 8, scale: 1.05, ease: 'none', scrollTrigger: { trigger: img.closest('.sector'), start: 'top bottom', end: 'bottom top', scrub: true } }));
   });
 }
 
 /* ============================================================== */
-/* Identité : le sceau sur six supports                            */
+/* Identité : le sceau se pose sur de vrais produits               */
 /* ============================================================== */
-const mk = {
-  bottle: () => `<svg viewBox="0 0 120 160"><path d="M50 10 h20 v16 c0 6 18 12 18 30 v86 c0 6 -4 9 -10 9 h-36 c-6 0 -10 -3 -10 -9 v-86 c0 -18 18 -24 18 -30z" class="mk__fill"/><rect x="40" y="76" width="40" height="48" rx="2" class="mk__label"/><g transform="translate(46 82) scale(.28)" class="mk__seal">${emblemInner()}</g><rect x="48" y="2" width="24" height="10" rx="2" class="mk__fill"/></svg>`,
-  box: () => `<svg viewBox="0 0 160 120"><path d="M14 36 L80 18 L146 36 L80 54Z" class="mk__label"/><path d="M14 36 v58 L80 112 v-58Z" class="mk__fill"/><path d="M146 36 v58 L80 112 v-58Z" class="mk__fill mk__fill--2"/><g transform="translate(66 22) scale(.28) skewY(-14)" class="mk__seal">${emblemInner()}</g></svg>`,
-  tag: () => `<svg viewBox="0 0 120 160"><path d="M60 6 C 40 6 40 28 54 34" class="mk__line"/><path d="M34 40 h52 l10 14 v92 h-72 v-92z" class="mk__label"/><circle cx="60" cy="52" r="4" class="mk__hole"/><g transform="translate(42 70) scale(.36)" class="mk__seal">${emblemInner()}</g><path d="M40 118 h40 M44 128 h32" class="mk__line"/></svg>`,
-  bag: () => `<svg viewBox="0 0 140 160"><path d="M26 22 h88 c4 0 6 3 6 6 l6 116 c0 6 -4 10 -10 10 h-92 c-6 0 -10 -4 -10 -10 l6 -116 c0 -3 2 -6 6 -6z" class="mk__fill"/><path d="M28 30 h84" class="mk__line mk__line--dash"/><g transform="translate(48 56) scale(.44)" class="mk__seal">${emblemInner()}</g><text x="70" y="136" class="mk__txt">50 KG</text></svg>`,
-  container: () => `<svg viewBox="0 0 220 110"><rect x="6" y="16" width="208" height="80" class="mk__fill"/>${Array.from({ length: 25 }, (_, k) => `<path d="M${16 + k * 8} 22 v68" class="mk__rib"/>`).join('')}<rect x="150" y="34" width="50" height="44" class="mk__label"/><g transform="translate(160 41) scale(.3)" class="mk__seal">${emblemInner()}</g><text x="18" y="52" class="mk__txt mk__txt--l">ALGERIAN</text><text x="18" y="68" class="mk__txt mk__txt--l">PRODUCT</text></svg>`,
-  label: () => `<svg viewBox="0 0 160 110"><path d="M10 30 L22 40 L10 50 V30Z M150 30 L138 40 L150 50 V30Z" class="mk__fill mk__fill--2"/><rect x="22" y="22" width="116" height="66" class="mk__label"/><g transform="translate(34 33) scale(.44)" class="mk__seal">${emblemInner()}</g><text x="114" y="52" class="mk__txt">MADE IN</text><text x="114" y="66" class="mk__txt">ALGERIA</text></svg>`,
-};
-function emblemInner() {
-  return `<circle cx="50" cy="50" r="46.5" fill="none" stroke="currentColor" stroke-width="3"/><path d="${starPath(50, 50, 34)}" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linejoin="round"/><circle cx="50" cy="50" r="7" fill="currentColor"/>`;
-}
-const mockList = [
-  ['bottle', 'seal.bottle'],
-  ['box', 'seal.box'],
-  ['tag', 'seal.tag'],
-  ['bag', 'seal.bag'],
-  ['container', 'seal.container'],
-  ['label', 'seal.label'],
-];
-$('#identity-seal').innerHTML = seal('identity__sealsvg');
-$('#mockups').innerHTML = mockList.map(([k, t]) => `<li class="mockup mockup--${k}"><div class="mockup__art">${mk[k]()}</div><p>${esc(i18n.ui(t))}</p></li>`).join('');
-if (gsap && ST && !reduced) {
-  gsap.to('#identity-seal svg', { rotate: 120, ease: 'none', scrollTrigger: { trigger: '#identite', start: 'top bottom', end: 'bottom top', scrub: true } });
-  gsap.from('.mockup', { y: 60, autoAlpha: 0, duration: 1, ease: 'expo.out', stagger: 0.08, scrollTrigger: { trigger: '#mockups', start: 'top 80%' } });
+const mockList = ['seal.bottle', 'seal.box', 'seal.tag', 'seal.bag', 'seal.container', 'seal.label'];
+{
+  const photos = M.stamps || [];
+  const steps = mockList.slice(0, photos.length);
+  $('#supports').innerHTML = steps.map((k, i) => `<li data-i="${i}"><span>${String(i + 1).padStart(2, '0')}</span>${esc(i18n.ui(k))}</li>`).join('');
+  $('#stamp-frames').innerHTML = photos.map((src, i) => `<figure class="stamp__frame" data-i="${i}"><img src="${esc(src)}" alt="" loading="lazy" decoding="async"></figure>`).join('');
+  $('#stamp-seal').innerHTML = seal('stamp__svg');
+  const frames = [...document.querySelectorAll('.stamp__frame')];
+  const items = [...document.querySelectorAll('#supports li')];
+  const tag = $('#stamp-tag');
+  const count = $('#stamp-count');
+  let cur = -1;
+  function setStep(i, animate = true) {
+    if (i === cur) return;
+    const prev = cur;
+    cur = i;
+    items.forEach((li, k) => li.classList.toggle('is-on', k === i));
+    tag.innerHTML = `<span>${esc(i18n.ui('seal.stamp'))}</span> ${esc(i18n.ui(steps[i]))}`;
+    count.textContent = `${String(i + 1).padStart(2, '0')} / ${String(steps.length).padStart(2, '0')}`;
+    frames.forEach((f, k) => f.classList.toggle('is-on', k === i));
+    if (!gsap || reduced || !animate) return;
+    const f = frames[i];
+    gsap.fromTo(f, { clipPath: i > prev ? 'inset(100% 0% 0% 0%)' : 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1, ease: 'expo.inOut' });
+    gsap.fromTo(f.querySelector('img'), { scale: 1.3 }, { scale: 1.05, duration: 1.6, ease: 'expo.out' });
+    const tl = gsap.timeline();
+    tl.fromTo('#stamp-seal', { scale: 2.8, rotate: -40, autoAlpha: 0 }, { scale: 1, rotate: 0, autoAlpha: 1, duration: 0.55, ease: 'power4.in', delay: 0.35 })
+      .fromTo('#stamp', { x: 0, y: 0 }, { x: 4, y: -3, duration: 0.05, repeat: 3, yoyo: true, ease: 'none' })
+      .fromTo('#stamp-ring', { scale: 0.4, autoAlpha: 0.9 }, { scale: 1.8, autoAlpha: 0, duration: 0.9, ease: 'expo.out' }, '<')
+      .from(tag, { y: 16, autoAlpha: 0, duration: 0.5, ease: 'expo.out' }, '<');
+  }
+  setStep(0, false);
+  if (gsap && ST && !reduced) {
+    const mm = gsap.matchMedia();
+    mm.add('(min-width: 900px)', () => {
+      ST.create({
+        trigger: '#identity-pin',
+        start: 'top top',
+        end: () => `+=${innerHeight * steps.length * 0.6}`,
+        pin: true,
+        onUpdate: (self) => setStep(Math.min(steps.length - 1, Math.floor(self.progress * steps.length))),
+      });
+    });
+    mm.add('(max-width: 899px)', () => {
+      ST.create({ trigger: '#stamp', start: 'top 70%', end: () => `+=${innerHeight * 2.2}`, onUpdate: (self) => setStep(Math.min(steps.length - 1, Math.floor(self.progress * steps.length))) });
+    });
+    gsap.to('#stamp-seal svg', { rotate: 360, duration: 40, repeat: -1, ease: 'none' });
+  } else {
+    let k = 0;
+    if (!reduced) setInterval(() => setStep((k = (k + 1) % steps.length)), 2600);
+  }
+  items.forEach((li) => li.addEventListener('click', () => setStep(Number(li.dataset.i))));
 }
 
 /* ============================================================== */
@@ -387,7 +551,20 @@ if (gsap && ST && !reduced) {
       (r, i) => `<li><button type="button" data-i="${i}"><span class="atlas__n">${String(i + 1).padStart(2, '0')}</span><span class="atlas__name">${esc(i18n.t(r.name))}</span><span class="atlas__prod">${esc(i18n.t(r.product?.name))}</span></button></li>`
     )
     .join('');
-  const hl = (i) => document.querySelectorAll('.atlas__pin, #atlas-list button').forEach((el) => el.classList.toggle('is-hl', Number(el.dataset.i) === i));
+  const peek = document.createElement('div');
+  peek.className = 'atlas__peek';
+  peek.innerHTML = '<img alt="">';
+  document.body.appendChild(peek);
+  const hl = (i) => {
+    document.querySelectorAll('.atlas__pin, #atlas-list button').forEach((el) => el.classList.toggle('is-hl', Number(el.dataset.i) === i));
+    const r = regions[i];
+    if (r?.photo && matchMedia('(pointer: fine)').matches) {
+      const img = peek.firstChild;
+      if (img.getAttribute('src') !== r.photo) img.src = r.photo;
+      peek.classList.add('is-on');
+    } else peek.classList.remove('is-on');
+  };
+  addEventListener('pointermove', (e) => (peek.style.left = `${e.clientX}px`, peek.style.top = `${e.clientY}px`), { passive: true });
   document.querySelectorAll('#atlas-list button, .atlas__pin').forEach((el) => {
     el.addEventListener('mouseenter', () => hl(Number(el.dataset.i)));
     el.addEventListener('focus', () => hl(Number(el.dataset.i)));

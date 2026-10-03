@@ -35,13 +35,17 @@ export async function loadDefault(base = './') {
   return r.json();
 }
 // { content, source } — 'draft' (aperçu depuis l'admin), 'local' (publié dans ce navigateur) ou 'default'
+// Un contenu enregistré avec une version plus ancienne que content.json est ignoré (nouvelle maquette)
 export async function loadContent({ base = './', preview = false } = {}) {
+  const def = await loadDefault(base);
+  const fresh = (c) => c && (c.version || 1) >= (def.version || 1);
   const draft = preview ? read(DRAFT) : null;
-  if (draft) return { content: draft, source: 'draft' };
+  if (fresh(draft)) return { content: draft, source: 'draft' };
   const local = read(KEY);
-  if (local) return { content: local, source: 'local' };
-  return { content: await loadDefault(base), source: 'default' };
+  if (fresh(local)) return { content: local, source: 'local' };
+  return { content: def, source: 'default' };
 }
+export const isFresh = (c, def) => c && (c.version || 1) >= (def.version || 1);
 export const readPublished = () => read(KEY);
 export const readDraft = () => read(DRAFT);
 export const saveDraft = (c) => write(DRAFT, c);

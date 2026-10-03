@@ -37,6 +37,8 @@ export default function film(el) {
             ${field(`film.${i}.lon`, 'Longitude', { type: 'number', attrs: 'step="0.01"' })}
             ${field(`film.${i}.heading`, 'Cap de la caméra (°)', { type: 'number', attrs: 'step="1" min="-180" max="180"', help: '0 = regard vers le nord' })}
             ${field(`film.${i}.video`, 'Vidéo aérienne (URL .mp4)', { type: 'url', attrs: 'placeholder="https://…/biskra-drone.mp4"' })}
+            ${field(`film.${i}.photo`, 'Photo du lieu (URL, affichée pendant le chargement)', { type: 'url' })}
+            ${field(`film.${i}.realVideo`, 'Vidéo tournée dans cette région', { type: 'checkbox' })}
             ${field(`film.${i}.visible`, 'Chapitre affiché', { type: 'checkbox' })}
             <div class="f"><button type="button" class="b b--danger b--sm" data-act="del">Retirer ce chapitre</button></div>
           </div></details>`;

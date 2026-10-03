@@ -107,7 +107,8 @@ if (!p) {
 
   if (gsap && !reduced) {
     gsap.from('.prod__visual', { clipPath: 'inset(12% 12% 12% 12% round 24px)', duration: 1.4, ease: 'expo.out' });
-    gsap.from('.prod__visual .pv__illus', { scale: 0.8, rotate: -6, duration: 1.6, ease: 'expo.out' });
+    const art = document.querySelector('.prod__visual .pv__illus, .prod__visual img');
+    if (art) gsap.from(art, { scale: 1.25, duration: 1.8, ease: 'expo.out' });
     gsap.from('.prod__info > *', { y: 30, autoAlpha: 0, duration: 1, ease: 'expo.out', stagger: 0.07, delay: 0.1 });
   }
 }

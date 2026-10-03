@@ -1,5 +1,5 @@
 {
- "version": 1,
+ "version": 2,
  "updatedAt": null,
  "brand": {
   "name": "Algerian Product"
@@ -1322,6 +1322,60 @@
    "en": "Offices",
    "ar": "المكاتب",
    "es": "Oficinas"
+  },
+  "film.realAerial": {
+   "fr": "Vue aérienne — Algérie",
+   "en": "Aerial view — Algeria",
+   "ar": "منظر جوي — الجزائر",
+   "es": "Vista aérea — Argelia"
+  },
+  "film.illusAerial": {
+   "fr": "Plan aérien d’illustration",
+   "en": "Illustrative aerial shot",
+   "ar": "لقطة جوية توضيحية",
+   "es": "Plano aéreo ilustrativo"
+  },
+  "film.flagship": {
+   "fr": "Produit phare",
+   "en": "Flagship product",
+   "ar": "المنتج الرائد",
+   "es": "Producto estrella"
+  },
+  "film.place": {
+   "fr": "Sur place",
+   "en": "On location",
+   "ar": "في عين المكان",
+   "es": "En el lugar"
+  },
+  "credits.title": {
+   "fr": "Crédits photos & vidéos",
+   "en": "Photo & video credits",
+   "ar": "حقوق الصور والفيديوهات",
+   "es": "Créditos de fotos y vídeos"
+  },
+  "credits.text": {
+   "fr": "Photos et vidéos libres de droits (Pexels, Wikimedia Commons). Les plans marqués « illustration » ne sont pas tournés dans la région citée : ils seront remplacés par des prises de vue réelles.",
+   "en": "Royalty-free photos and videos (Pexels, Wikimedia Commons). Shots marked “illustrative” were not filmed in the region named; they will be replaced with real footage.",
+   "ar": "صور وفيديوهات حرة الحقوق (Pexels وWikimedia Commons). اللقطات الموسومة «توضيحية» لم تُصوَّر في المنطقة المذكورة، وستُستبدل بلقطات حقيقية.",
+   "es": "Fotos y vídeos libres de derechos (Pexels, Wikimedia Commons). Los planos marcados como «ilustrativos» no se rodaron en la región citada; se sustituirán por imágenes reales."
+  },
+  "about.strip": {
+   "fr": "Une seule terre, mille paysages",
+   "en": "One land, a thousand landscapes",
+   "ar": "أرض واحدة وألف منظر",
+   "es": "Una tierra, mil paisajes"
+  },
+  "values.kicker": {
+   "fr": "Ce qui nous engage",
+   "en": "What we stand for",
+   "ar": "ما نلتزم به",
+   "es": "Nuestro compromiso"
+  },
+  "seal.stamp": {
+   "fr": "Apposé sur",
+   "en": "Applied to",
+   "ar": "يوضع على",
+   "es": "Aplicado en"
   }
  },
  "sectors": [
@@ -1341,6 +1395,7 @@
     "ar": "تمور، زيت زيتون، تين، حمضيات، قمح صلب، عسل: خيرات أرض تمتد من المتوسط إلى الصحراء.",
     "es": "Dátiles, aceite de oliva, higos, cítricos, trigo duro, miel: los frutos de una tierra que va del Mediterráneo al Sáhara."
    },
+   "photo": "https://images.pexels.com/photos/17877729/pexels-photo-17877729.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "order": 0
   },
@@ -1360,6 +1415,7 @@
     "ar": "زرابي ميزاب، نحاس قسنطينة، فخار القبائل، فضة الطوارق: مهارات متوارثة جيلًا بعد جيل.",
     "es": "Alfombras del M’zab, cobre de Constantina, cerámica cabileña, plata tuareg: oficios transmitidos de generación en generación."
    },
+   "photo": "https://images.pexels.com/photos/6118896/pexels-photo-6118896.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "order": 1
   },
@@ -1379,6 +1435,7 @@
     "ar": "تطريز تلمسان، النسيج، الدنيم والخياطة: من الخيط إلى القطعة الجاهزة، للعلامات والموزعين.",
     "es": "Bordado de Tlemcen, tejido, denim y confección: del hilo a la prenda terminada, para marcas y distribuidores."
    },
+   "photo": "https://images.pexels.com/photos/9850825/pexels-photo-9850825.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "order": 2
   },
@@ -1398,6 +1455,7 @@
     "ar": "بلاط، خزف، إسمنت، زجاج: مواد تُنتج على نطاق واسع وجاهزة لورشات البناء في الخارج.",
     "es": "Baldosas, loza, cemento, vidrio: materiales producidos a gran escala, listos para obras en el extranjero."
    },
+   "photo": "https://images.pexels.com/photos/7794427/pexels-photo-7794427.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "order": 3
   },
@@ -1417,6 +1475,7 @@
     "ar": "أجهزة كهرومنزلية، إلكترونيات، تغليف: مصانع جزائرية تنتج للسوق المحلية وتتجه أكثر فأكثر نحو التصدير.",
     "es": "Electrodomésticos, electrónica, envases: fábricas argelinas que producen para el mercado local y, cada vez más, para la exportación."
    },
+   "photo": "https://images.pexels.com/photos/5554948/pexels-photo-5554948.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "order": 4
   },
@@ -1436,13 +1495,14 @@
     "ar": "زيت بذور التين الشوكي، صابون زيت الزيتون، ماء الزهر: منتجات عناية طبيعية من موارد البلاد.",
     "es": "Aceite de higo chumbo, jabón de aceite de oliva, aguas florales: cuidados naturales elaborados con los recursos del país."
    },
+   "photo": "https://images.pexels.com/photos/27863688/pexels-photo-27863688.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "order": 5
   }
  ],
  "products": [
   {
-   "image": "",
+   "image": "https://images.pexels.com/photos/17923889/pexels-photo-17923889.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "featured": true,
    "id": "dattes-deglet-nour",
@@ -1594,7 +1654,7 @@
    ]
   },
   {
-   "image": "",
+   "image": "https://images.pexels.com/photos/3737656/pexels-photo-3737656.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "featured": true,
    "id": "huile-olive-kabylie",
@@ -1745,7 +1805,7 @@
    ]
   },
   {
-   "image": "",
+   "image": "https://images.pexels.com/photos/9762169/pexels-photo-9762169.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "featured": true,
    "id": "figues-beni-maouche",
@@ -1873,7 +1933,7 @@
    ]
   },
   {
-   "image": "",
+   "image": "https://images.pexels.com/photos/5751387/pexels-photo-5751387.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "featured": false,
    "id": "oranges-mitidja",
@@ -2001,7 +2061,7 @@
    ]
   },
   {
-   "image": "",
+   "image": "https://images.pexels.com/photos/21531611/pexels-photo-21531611.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "featured": true,
    "id": "couscous-ble-dur",
@@ -2130,7 +2190,7 @@
    ]
   },
   {
-   "image": "",
+   "image": "https://images.pexels.com/photos/11032901/pexels-photo-11032901.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "featured": false,
    "id": "miel-jujubier",
@@ -2236,7 +2296,7 @@
    ]
   },
   {
-   "image": "",
+   "image": "https://images.pexels.com/photos/2255801/pexels-photo-2255801.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "featured": false,
    "id": "concentre-tomate",
@@ -2351,7 +2411,7 @@
    ]
   },
   {
-   "image": "",
+   "image": "https://images.pexels.com/photos/6118896/pexels-photo-6118896.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "featured": true,
    "id": "tapis-mzab",
@@ -2479,7 +2539,7 @@
    ]
   },
   {
-   "image": "",
+   "image": "https://images.pexels.com/photos/18930832/pexels-photo-18930832.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "featured": true,
    "id": "cuivre-constantine",
@@ -2593,7 +2653,7 @@
    ]
   },
   {
-   "image": "",
+   "image": "https://images.pexels.com/photos/8066099/pexels-photo-8066099.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "featured": false,
    "id": "poterie-kabyle",
@@ -2699,7 +2759,7 @@
    ]
   },
   {
-   "image": "",
+   "image": "https://images.pexels.com/photos/7267077/pexels-photo-7267077.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "featured": false,
    "id": "argent-touareg",
@@ -2805,7 +2865,7 @@
    ]
   },
   {
-   "image": "",
+   "image": "https://images.pexels.com/photos/9850825/pexels-photo-9850825.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "featured": true,
    "id": "broderie-tlemcen",
@@ -2919,7 +2979,7 @@
    ]
   },
   {
-   "image": "",
+   "image": "https://images.pexels.com/photos/4109797/pexels-photo-4109797.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "featured": false,
    "id": "denim-confection",
@@ -3025,7 +3085,7 @@
    ]
   },
   {
-   "image": "",
+   "image": "https://images.pexels.com/photos/32021732/pexels-photo-32021732.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "featured": true,
    "id": "carreaux-ceramique",
@@ -3131,7 +3191,7 @@
    ]
   },
   {
-   "image": "",
+   "image": "https://images.pexels.com/photos/29519165/pexels-photo-29519165.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "featured": false,
    "id": "ciment",
@@ -3245,7 +3305,7 @@
    ]
   },
   {
-   "image": "",
+   "image": "https://images.pexels.com/photos/36423805/pexels-photo-36423805.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "featured": false,
    "id": "verre",
@@ -3337,7 +3397,7 @@
    ]
   },
   {
-   "image": "",
+   "image": "https://images.pexels.com/photos/5554948/pexels-photo-5554948.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "featured": true,
    "id": "electromenager",
@@ -3443,7 +3503,7 @@
    ]
   },
   {
-   "image": "",
+   "image": "https://images.pexels.com/photos/27863688/pexels-photo-27863688.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "featured": true,
    "id": "huile-figue-barbarie",
@@ -3549,7 +3609,7 @@
    ]
   },
   {
-   "image": "",
+   "image": "https://images.pexels.com/photos/16244099/pexels-photo-16244099.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "featured": false,
    "id": "savon-olive",
@@ -3640,7 +3700,7 @@
    ]
   },
   {
-   "image": "",
+   "image": "https://images.pexels.com/photos/18267830/pexels-photo-18267830.jpeg?auto=compress&cs=tinysrgb&w=1600",
    "visible": true,
    "featured": false,
    "id": "eau-de-rose",
@@ -3928,7 +3988,9 @@
     "ar": "خيط الذهب وحرير الشدّة.",
     "es": "El hilo de oro y la seda de la chedda."
    },
-   "video": "",
+   "video": "https://www.pexels.com/download/video/30149192/",
+   "photo": "https://images.pexels.com/photos/20077669/pexels-photo-20077669.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "realVideo": true,
    "visible": true
   },
   {
@@ -3949,7 +4011,9 @@
     "ar": "بستان الحمضيات الكبير بين الأطلس والبحر.",
     "es": "El gran huerto de cítricos, entre el Atlas y el mar."
    },
-   "video": "",
+   "video": "https://www.pexels.com/download/video/32586951/",
+   "photo": "https://images.pexels.com/photos/2171374/pexels-photo-2171374.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "realVideo": false,
    "visible": true
   },
   {
@@ -3970,7 +4034,9 @@
     "ar": "زيتون الجبال عند سفح جرجرة.",
     "es": "Olivares de montaña al pie del Djurdjura."
    },
-   "video": "",
+   "video": "https://www.pexels.com/download/video/26964399/",
+   "photo": "https://commons.wikimedia.org/wiki/Special:FilePath/Village_Kabyle_en_Kabylie_(Alg%C3%A9rie).jpg?width=1600",
+   "realVideo": false,
    "visible": true
   },
   {
@@ -3991,7 +4057,9 @@
     "ar": "تين بني معوش المجفف تحت الشمس.",
     "es": "Los higos de Beni Maouche, secados al sol."
    },
-   "video": "",
+   "video": "https://www.pexels.com/download/video/3573958/",
+   "photo": "https://images.pexels.com/photos/33086104/pexels-photo-33086104.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "realVideo": false,
    "visible": true
   },
   {
@@ -4012,7 +4080,9 @@
     "ar": "عاصمة الإلكترونيات الجزائرية.",
     "es": "La capital de la electrónica argelina."
    },
-   "video": "",
+   "video": "https://www.pexels.com/download/video/30899654/",
+   "photo": "https://images.pexels.com/photos/13974251/pexels-photo-13974251.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "realVideo": false,
    "visible": true
   },
   {
@@ -4033,7 +4103,9 @@
     "ar": "أرض القمح، من الحقل إلى الحبة المفتولة.",
     "es": "Tierra de trigo, del campo al grano enrollado."
    },
-   "video": "",
+   "video": "https://www.pexels.com/download/video/31914142/",
+   "photo": "https://images.pexels.com/photos/19449759/pexels-photo-19449759.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "realVideo": false,
    "visible": true
   },
   {
@@ -4054,7 +4126,9 @@
     "ar": "النحاس المنقوش في المدينة القديمة.",
     "es": "El cobre cincelado del casco antiguo."
    },
-   "video": "",
+   "video": "https://www.pexels.com/download/video/8970314/",
+   "photo": "https://images.pexels.com/photos/18314356/pexels-photo-18314356.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "realVideo": false,
    "visible": true
   },
   {
@@ -4075,7 +4149,9 @@
     "ar": "دقلة نور، «تمرة النور» في الواحات.",
     "es": "El Deglet Nour, el «dátil de luz» de los oasis."
    },
-   "video": "",
+   "video": "https://www.pexels.com/download/video/17629832/",
+   "photo": "https://images.pexels.com/photos/14912071/pexels-photo-14912071.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "realVideo": false,
    "visible": true
   },
   {
@@ -4096,7 +4172,9 @@
     "ar": "زرابي مدن ميزاب الخمس.",
     "es": "Las alfombras tejidas de la pentápolis del M’zab."
    },
-   "video": "",
+   "video": "https://www.pexels.com/download/video/19598425/",
+   "photo": "https://commons.wikimedia.org/wiki/Special:FilePath/Panorama_de_Ghardaia%2C_Alg%C3%A9rie.jpg?width=1600",
+   "realVideo": false,
    "visible": true
   },
   {
@@ -4117,10 +4195,50 @@
     "ar": "فضة الطوارق المصوغة عند سفح الجبال.",
     "es": "La plata tuareg, forjada al pie de las montañas."
    },
-   "video": "",
+   "video": "https://www.pexels.com/download/video/3059062/",
+   "photo": "https://images.pexels.com/photos/11944566/pexels-photo-11944566.jpeg?auto=compress&cs=tinysrgb&w=1600",
+   "realVideo": false,
    "visible": true
   }
  ],
+ "media": {
+  "finale": {
+   "video": "https://www.pexels.com/download/video/19255120/",
+   "photo": "https://images.pexels.com/photos/8798170/pexels-photo-8798170.jpeg?auto=compress&cs=tinysrgb&w=1600"
+  },
+  "chelia": "https://commons.wikimedia.org/wiki/Special:FilePath/La_montagne_de_Chelia_en_Alg%C3%A9rie.webm",
+  "pillars": [
+   "https://images.pexels.com/photos/8798170/pexels-photo-8798170.jpeg?auto=compress&cs=tinysrgb&w=1200",
+   "https://images.pexels.com/photos/17877729/pexels-photo-17877729.jpeg?auto=compress&cs=tinysrgb&w=1200",
+   "https://images.pexels.com/photos/34168857/pexels-photo-34168857.jpeg?auto=compress&cs=tinysrgb&w=1200"
+  ],
+  "strip": [
+   "https://images.pexels.com/photos/14912071/pexels-photo-14912071.jpeg?auto=compress&cs=tinysrgb&w=900",
+   "https://images.pexels.com/photos/18314359/pexels-photo-18314359.jpeg?auto=compress&cs=tinysrgb&w=900",
+   "https://images.pexels.com/photos/33086104/pexels-photo-33086104.jpeg?auto=compress&cs=tinysrgb&w=900",
+   "https://images.pexels.com/photos/540518/pexels-photo-540518.jpeg?auto=compress&cs=tinysrgb&w=900",
+   "https://commons.wikimedia.org/wiki/Special:FilePath/Panorama_de_Ghardaia%2C_Alg%C3%A9rie.jpg?width=900",
+   "https://images.pexels.com/photos/20077669/pexels-photo-20077669.jpeg?auto=compress&cs=tinysrgb&w=900",
+   "https://images.pexels.com/photos/11944566/pexels-photo-11944566.jpeg?auto=compress&cs=tinysrgb&w=900",
+   "https://images.pexels.com/photos/2458396/pexels-photo-2458396.jpeg?auto=compress&cs=tinysrgb&w=900",
+   "https://commons.wikimedia.org/wiki/Special:FilePath/Chetma_Biskra.jpg?width=900",
+   "https://images.pexels.com/photos/30147124/pexels-photo-30147124.jpeg?auto=compress&cs=tinysrgb&w=900"
+  ],
+  "values": [
+   "https://images.pexels.com/photos/33783/pexels-photo-33783.jpeg?auto=compress&cs=tinysrgb&w=1000",
+   "https://images.pexels.com/photos/8066099/pexels-photo-8066099.jpeg?auto=compress&cs=tinysrgb&w=1000",
+   "https://images.pexels.com/photos/264105/pexels-photo-264105.jpeg?auto=compress&cs=tinysrgb&w=1000",
+   "https://images.pexels.com/photos/6595777/pexels-photo-6595777.jpeg?auto=compress&cs=tinysrgb&w=1000"
+  ],
+  "stamps": [
+   "https://images.pexels.com/photos/33783/pexels-photo-33783.jpeg?auto=compress&cs=tinysrgb&w=1400",
+   "https://images.pexels.com/photos/17923889/pexels-photo-17923889.jpeg?auto=compress&cs=tinysrgb&w=1400",
+   "https://images.pexels.com/photos/14973967/pexels-photo-14973967.jpeg?auto=compress&cs=tinysrgb&w=1400",
+   "https://images.pexels.com/photos/29519165/pexels-photo-29519165.jpeg?auto=compress&cs=tinysrgb&w=1400",
+   "https://images.pexels.com/photos/34168857/pexels-photo-34168857.jpeg?auto=compress&cs=tinysrgb&w=1400",
+   "https://images.pexels.com/photos/2129970/pexels-photo-2129970.jpeg?auto=compress&cs=tinysrgb&w=1400"
+  ]
+ },
  "markets": [
   {
    "id": "ca",
@@ -4580,5 +4698,343 @@
     "es": "Productos, cantidades, país de destino: envíe su solicitud, la dirección responde en 48 horas laborables."
    }
   }
- }
+ },
+ "credits": [
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/17923889/",
+   "what": "Dattes"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/3737656/",
+   "what": "Huile d’olive"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/9762169/",
+   "what": "Figues sèches"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/5751387/",
+   "what": "Oranges"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/21531611/",
+   "what": "Couscous"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/11032901/",
+   "what": "Miel"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/2255801/",
+   "what": "Récolte de tomates"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/6118896/",
+   "what": "Tapis"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/18930832/",
+   "what": "Cuivre ciselé"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/8066099/",
+   "what": "Poterie peinte"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/7267077/",
+   "what": "Pendentif en argent"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/9850825/",
+   "what": "Broderie au fil d’or"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/4109797/",
+   "what": "Denim"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/32021732/",
+   "what": "Carreaux de céramique"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/29519165/",
+   "what": "Sacs de ciment"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/36423805/",
+   "what": "Ligne de bouteilles en verre"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/5554948/",
+   "what": "Production électronique"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/27863688/",
+   "what": "Figuiers de Barbarie"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/16244099/",
+   "what": "Savons"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/18267830/",
+   "what": "Roses"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/20077669/",
+   "what": "Palais El Mechouar, Tlemcen"
+  },
+  {
+   "kind": "video",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/video/30149192/",
+   "what": "Cascade en Algérie"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/2171374/",
+   "what": "Oranger"
+  },
+  {
+   "kind": "video",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/video/32586951/",
+   "what": "Verger vu du ciel (illustration)"
+  },
+  {
+   "kind": "photo",
+   "src": "Wikimedia Commons",
+   "page": "https://commons.wikimedia.org/wiki/File:Village_Kabyle_en_Kabylie_(Alg%C3%A9rie).jpg",
+   "what": "Village de Kabylie"
+  },
+  {
+   "kind": "video",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/video/26964399/",
+   "what": "Oliveraie vue du ciel (illustration)"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/33086104/",
+   "what": "Port de Béjaïa vu du ciel"
+  },
+  {
+   "kind": "video",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/video/3573958/",
+   "what": "Mer et montagne vues du ciel (illustration)"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/13974251/",
+   "what": "Ligne de production"
+  },
+  {
+   "kind": "video",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/video/30899654/",
+   "what": "Zone industrielle vue du ciel (illustration)"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/19449759/",
+   "what": "Épis de blé"
+  },
+  {
+   "kind": "video",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/video/31914142/",
+   "what": "Moisson vue du ciel (illustration)"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/18314356/",
+   "what": "Constantine, maisons au bord des falaises"
+  },
+  {
+   "kind": "video",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/video/8970314/",
+   "what": "Canyon vu du ciel (illustration)"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/14912071/",
+   "what": "Palmiers à Biskra"
+  },
+  {
+   "kind": "video",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/video/17629832/",
+   "what": "Oasis de palmiers dattiers vue du ciel"
+  },
+  {
+   "kind": "photo",
+   "src": "Wikimedia Commons",
+   "page": "https://commons.wikimedia.org/wiki/File:Panorama_de_Ghardaia%2C_Alg%C3%A9rie.jpg",
+   "what": "Panorama de Ghardaïa"
+  },
+  {
+   "kind": "video",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/video/19598425/",
+   "what": "Désert au coucher du soleil (illustration)"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/11944566/",
+   "what": "Rochers du désert algérien"
+  },
+  {
+   "kind": "video",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/video/3059062/",
+   "what": "Montagnes du désert vues du ciel (illustration)"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/17877729/",
+   "what": "Récolte des dattes à Biskra"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/7794427/",
+   "what": "Carreaux de céramique"
+  },
+  {
+   "kind": "video",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/video/19255120/",
+   "what": "Alger de nuit vue du ciel"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/8798170/",
+   "what": "Mémorial du Martyr, Alger"
+  },
+  {
+   "kind": "video",
+   "src": "Wikimedia Commons",
+   "page": "https://commons.wikimedia.org/wiki/File:La_montagne_de_Chelia_en_Alg%C3%A9rie.webm",
+   "what": "Djebel Chélia, Aurès"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/34168857/",
+   "what": "Port à conteneurs"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/18314359/",
+   "what": "Constantine"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/540518/",
+   "what": "Montagne de Kabylie"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/2458396/",
+   "what": "Montagnes d’Algérie"
+  },
+  {
+   "kind": "photo",
+   "src": "Wikimedia Commons",
+   "page": "https://commons.wikimedia.org/wiki/File:Chetma_Biskra.jpg",
+   "what": "Oasis de Chetma"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/30147124/",
+   "what": "Paysage de montagne en Algérie"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/33783/",
+   "what": "Huile d’olive"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/264105/",
+   "what": "Dattes"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/6595777/",
+   "what": "Cargo"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/14973967/",
+   "what": "Tapis"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
+   "page": "https://www.pexels.com/photo/2129970/",
+   "what": "Denim"
+  }
+ ]
 }

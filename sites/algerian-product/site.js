@@ -150,7 +150,8 @@ function renderFooter(c, i18n) {
     </div>
   </div>
   <div class="wrap ftr__bottom">
-    <p>${esc(i18n.ui('footer.demo'))}</p>
+    <div><p>${esc(i18n.ui('footer.demo'))}</p>
+    ${(c.credits || []).length ? `<details class="credits"><summary>${esc(i18n.ui('credits.title'))}</summary><p>${esc(i18n.ui('credits.text'))}</p><ul>${c.credits.map((x) => `<li><a href="${esc(x.page)}" target="_blank" rel="noopener">${esc(x.what)}</a> — ${esc(x.kind === 'video' ? 'vidéo' : 'photo')}, ${esc(x.src)}</li>`).join('')}</ul></details>` : ''}</div>
     <p><span>© ${new Date().getFullYear()} Algerian Product</span> · <a href="admin/">${esc(i18n.ui('footer.admin'))}</a></p>
   </div>`;
   f.querySelectorAll('[data-lang]').forEach((b) => b.addEventListener('click', () => b.dataset.lang !== i18n.lang && switchLang(b.dataset.lang)));
@@ -255,7 +256,43 @@ export async function boot(page) {
   return { content, i18n, lang, gsap, ST, lenis, page, fillIcons, href };
 }
 
+// Curseur : un point qui grossit sur les liens et les images (souris uniquement)
+function cursor() {
+  if (reduced || !matchMedia('(pointer: fine)').matches) return;
+  const c = document.createElement('div');
+  c.className = 'cursor is-hide';
+  c.innerHTML = '<span></span>';
+  document.body.appendChild(c);
+  const label = c.firstChild;
+  let x = innerWidth / 2, y = innerHeight / 2, cx = x, cy = y;
+  addEventListener('pointermove', (e) => {
+    x = e.clientX;
+    y = e.clientY;
+    c.classList.remove('is-hide');
+    const t = e.target.closest?.('a, button, [data-cursor]');
+    const big = t?.matches('.card__link, .sector__thumb, .fm__product, .strip__tile, [data-cursor]');
+    c.classList.toggle('is-big', !!big);
+    label.textContent = big ? t.dataset.cursor || (document.documentElement.lang === 'ar' ? 'عرض' : document.documentElement.lang === 'en' ? 'View' : document.documentElement.lang === 'es' ? 'Ver' : 'Voir') : '';
+  });
+  document.addEventListener('pointerleave', () => c.classList.add('is-hide'));
+  (function loop() {
+    cx += (x - cx) * 0.22;
+    cy += (y - cy) * 0.22;
+    c.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
+    requestAnimationFrame(loop);
+  })();
+  // Boutons aimantés
+  document.querySelectorAll('.btn').forEach((b) => {
+    b.addEventListener('pointermove', (e) => {
+      const r = b.getBoundingClientRect();
+      b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * 0.18}px, ${(e.clientY - r.top - r.height / 2) * 0.25}px)`;
+    });
+    b.addEventListener('pointerleave', () => (b.style.transform = ''));
+  });
+}
+
 export function ready(ctx) {
+  cursor();
   document.documentElement.classList.add('booted');
   document.body.classList.remove('is-loading');
   if (ctx.gsap && ctx.ST) {

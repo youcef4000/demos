@@ -41,7 +41,9 @@ const password = () => {
 };
 
 async function start() {
-  S.draft = readDraft() || readPublished() || (await loadDefault('../'));
+  const def = await loadDefault('../');
+  const keep = (c) => c && (c.version || 1) >= (def.version || 1) ? c : null;
+  S.draft = keep(readDraft()) || keep(readPublished()) || def;
   seedInbox();
   S.lang = S.draft.defaultLang || 'fr';
   let timer;
