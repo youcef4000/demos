@@ -1,6 +1,6 @@
 // Accueil : le film d'introduction (vidéos aériennes région par région), puis les sections animées.
 import { boot, ready, reduced, href, esc, fillIcons } from './site.js';
-import { track } from './store.js';
+import { track, mediaUrl, pexelsVideoId } from './store.js';
 import { emblem, seal, patternSvg, illustration, productVisual, icon, starPath } from './art.js';
 import { productCard, bindAddButtons, sectorOf, regionOf, visibleProducts, productUrl, dms } from './ui.js';
 import { BOX, LAND, ALGERIA, WORLD } from './geo.js';
@@ -17,6 +17,19 @@ const mediaAt = (path) => path.split('.').reduce((o, k) => o?.[k], M);
 const products = visibleProducts(C);
 const sectors = C.sectors.filter((s) => s.visible !== false).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 let replayFilm = null;
+// Vidéos : versions réencodées servies par le site (video/manifest.json), sinon le lien d'origine
+let clips = {};
+try {
+  clips = (await (await fetch('./video/manifest.json', { cache: 'no-cache' })).json()) || {};
+} catch {}
+const clipIndex = new Map(Object.entries(clips).map(([k, m]) => [pexelsVideoId(k) || k, m]));
+const wantHD = innerWidth * Math.min(devicePixelRatio || 1, 2) > 1400 && !navigator.connection?.saveData;
+function clip(url) {
+  const raw = mediaUrl(url, 'video');
+  if (!raw) return null;
+  const m = clips[raw] || clipIndex.get(pexelsVideoId(raw) || raw);
+  return m ? { src: `./video/${wantHD ? m.hd : m.sd}`, poster: `./video/${m.poster}` } : { src: raw, poster: '' };
+}
 document.querySelectorAll('img[data-media]').forEach((img) => {
   const src = mediaAt(img.dataset.media);
   if (src) {
@@ -50,45 +63,70 @@ steps.innerHTML = regions
 const stage = $('#film-stage');
 const filmEl = $('#film');
 
-// Le film : des plans plein écran (photo du lieu, puis la vidéo aérienne quand elle est prête) en fondu enchaîné
+// Le film : des plans vidéo plein écran en fondu enchaîné. Chaque plan attend que sa vidéo puisse
+// jouer sans à-coup ; la vidéo suivante se charge pendant que la précédente est à l'écran.
 const saveData = !!navigator.connection?.saveData;
 const pool = new Map();
-function videoFor(key, src) {
-  if (!src || reduced || saveData) return null;
+function videoFor(key, url) {
+  if (reduced || saveData) return null;
   let v = pool.get(key);
-  if (!v) {
-    v = document.createElement('video');
-    v.muted = true;
-    v.loop = true;
-    v.playsInline = true;
-    v.setAttribute('playsinline', '');
-    v.setAttribute('aria-hidden', 'true');
-    v.preload = 'auto';
-    v.className = 'cine__video';
-    v.src = src;
-    v.addEventListener('playing', () => v.classList.add('is-on'));
-    pool.set(key, v);
-  }
+  if (v) return v;
+  const c = clip(url);
+  if (!c) return null;
+  v = document.createElement('video');
+  v.muted = true;
+  v.loop = true;
+  v.playsInline = true;
+  v.setAttribute('playsinline', '');
+  v.setAttribute('aria-hidden', 'true');
+  v.preload = 'auto';
+  v.className = 'cine__video';
+  if (c.poster) v.poster = c.poster; // première image de la même vidéo : aucun changement visible
+  v.src = c.src;
+  v.addEventListener('playing', () => v.classList.add('is-on'));
+  v.addEventListener('error', () => v.classList.add('is-broken'));
+  pool.set(key, v);
   return v;
 }
+// Prête à jouer sans coupure (ou délai dépassé : on montre ce qu'on a)
+const canPlay = (v, ms) =>
+  new Promise((resolve) => {
+    if (v.readyState >= 4) return resolve(true);
+    if (v.error || v.classList.contains('is-broken')) return resolve(false);
+    const done = (ok) => (clearTimeout(t), v.removeEventListener('canplaythrough', yes), v.removeEventListener('error', no), resolve(ok));
+    const yes = () => done(true);
+    const no = () => done(false);
+    const t = setTimeout(() => done(v.readyState >= 3), ms);
+    v.addEventListener('canplaythrough', yes);
+    v.addEventListener('error', no);
+  });
 const preload = (i) => regions[i] && videoFor(regions[i].id, regions[i].video);
 const hudLat = $('#hud-lat');
 const hudLon = $('#hud-lon');
 const hudAlt = $('#hud-alt');
 let tcTimer = null;
-function shot(key, photo, video, lat, lon) {
+let current = null; // vidéo à l'écran
+let firstShot = true;
+async function shot(key, photo, video, lat, lon, stale) {
+  const v = videoFor(key, video);
+  if (v && v.readyState < 4 && !(firstShot && v.poster)) await canPlay(v, firstShot ? 6000 : 4500);
+  if (stale()) return;
+  firstShot = false;
   const layer = document.createElement('div');
   layer.className = 'cine__layer';
-  if (photo) layer.innerHTML = `<img class="cine__poster" src="${esc(photo)}" alt="" decoding="async">`;
-  const v = videoFor(key, video);
-  pool.forEach((x) => x !== v && x.pause());
+  // La photo ne sert que de secours (pas de vidéo, ou vidéo en erreur / trop lente)
+  if (photo && (!v || v.classList.contains('is-broken') || (v.readyState < 2 && !v.poster))) layer.innerHTML = `<img class="cine__poster" src="${esc(photo)}" alt="" decoding="async">`;
   if (v) {
     layer.appendChild(v);
-    try {
-      v.currentTime = 0;
-    } catch {}
+    if (v.readyState >= 2 || v.poster) v.classList.add('is-on');
+    if (v.currentTime > 0.1) {
+      try {
+        v.currentTime = 0;
+      } catch {}
+    }
     v.play().catch(() => {});
   }
+  current = v;
   const old = [...stage.querySelectorAll('.cine__layer')];
   stage.appendChild(layer);
   if (lat != null) {
@@ -98,24 +136,30 @@ function shot(key, photo, video, lat, lon) {
   const t0 = performance.now();
   clearInterval(tcTimer);
   tcTimer = setInterval(() => {
-    const t = (performance.now() - t0) / 1000;
+    const t = v && !v.paused ? v.currentTime : (performance.now() - t0) / 1000;
     hudAlt.textContent = `00:${String(Math.floor(t)).padStart(2, '0')}:${String(Math.floor((t % 1) * 25)).padStart(2, '0')}`;
   }, 80);
+  // L'ancien plan continue de jouer pendant le fondu, puis s'arrête
+  const finish = () => {
+    old.forEach((o) => {
+      o.querySelectorAll('video').forEach((x) => x !== v && x.pause());
+      o.remove();
+    });
+  };
   return new Promise((resolve) => {
     if (gsap && !reduced) {
-      gsap.fromTo(layer, { autoAlpha: 0, clipPath: 'inset(8% 8% 8% 8%)' }, { autoAlpha: 1, clipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'expo.inOut', onComplete: () => (old.forEach((o) => o.remove()), resolve()) });
-      gsap.fromTo(layer.querySelectorAll('img, video'), { scale: 1.22 }, { scale: 1.04, duration: 12, ease: 'none' });
+      gsap.fromTo(layer, { autoAlpha: 0, clipPath: 'inset(8% 8% 8% 8%)' }, { autoAlpha: 1, clipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'expo.inOut', onComplete: () => (finish(), resolve()) });
+      gsap.fromTo(layer.querySelectorAll('img, video'), { scale: 1.12 }, { scale: 1, duration: 14, ease: 'none' });
     } else {
-      old.forEach((o) => o.remove());
+      finish();
       resolve();
     }
   });
 }
 const film = {
-  show(kind, r) {
-    const M = C.media || {};
-    if (kind === 'region') return shot(r.id, r.photo, r.video, r.lat, r.lon);
-    return shot('finale', M.finale?.photo, M.finale?.video, 36.75, 3.06);
+  show(kind, r, stale) {
+    if (kind === 'region') return shot(r.id, r.photo ? mediaUrl(r.photo) : '', r.video, r.lat, r.lon, stale);
+    return shot('finale', M.finale?.photo, M.finale?.video, 36.75, 3.06, stale);
   },
   setRunning(on) {
     pool.forEach((v) => (on && v.isConnected ? v.play().catch(() => {}) : v.pause()));
@@ -187,7 +231,7 @@ function hide(el) {
 
 let token = 0;
 let playing = !reduced;
-let timer = null;
+let clock = 0;
 let visible = true;
 const DWELL = 8200;
 const playBtn = $('#film-play');
@@ -197,18 +241,27 @@ const setPlayBtn = () => {
   filmEl.classList.toggle('is-paused', !playing);
 };
 
+// Durée d'un plan : le compteur avance seulement quand la vidéo joue vraiment (pas pendant un chargement)
+const stopClock = () => (cancelAnimationFrame(clock), (clock = 0));
 function schedule(ms) {
-  clearTimeout(timer);
+  stopClock();
   if (!playing || !visible) return;
   const bar = idx >= 0 && mode === 'region' ? steps.querySelector(`button[data-i="${idx}"] .st__bar i`) : null;
-  if (bar) {
-    bar.style.transition = 'none';
-    bar.style.transform = 'scaleX(0)';
-    void bar.offsetWidth;
-    bar.style.transition = `transform ${ms}ms linear`;
-    bar.style.transform = 'scaleX(1)';
-  }
-  timer = setTimeout(next, ms);
+  if (bar) bar.style.transition = 'none';
+  let left = ms;
+  let last = performance.now();
+  const tick = (now) => {
+    const dt = Math.min(now - last, 100);
+    last = now;
+    const stalled = current && current.isConnected && !current.classList.contains('is-broken') && (current.paused || current.readyState < 3);
+    if (!stalled) left -= dt;
+    if (bar) bar.style.transform = `scaleX(${Math.min(1, 1 - left / ms)})`;
+    if (left <= 0) {
+      clock = 0;
+      next();
+    } else clock = requestAnimationFrame(tick);
+  };
+  clock = requestAnimationFrame(tick);
 }
 function next() {
   if (mode === 'opening') go(0);
@@ -218,7 +271,7 @@ function next() {
 
 async function go(target, { instant = false } = {}) {
   const my = ++token;
-  clearTimeout(timer);
+  stopClock();
   steps.querySelectorAll('.st__bar i').forEach((b) => {
     b.style.transition = 'none';
     b.style.transform = '';
@@ -232,7 +285,8 @@ async function go(target, { instant = false } = {}) {
     filmEl.dataset.mode = 'opening';
     intro.classList.remove('is-hidden');
     preload(0);
-    await film.show('opening', null, { instant });
+    preload(1);
+    await film.show('opening', null, () => my !== token);
     if (my !== token) return;
     schedule(7200);
     return;
@@ -244,7 +298,7 @@ async function go(target, { instant = false } = {}) {
     hide(finder);
     filmEl.dataset.mode = 'finale';
     setPins();
-    await film.show('overview', null, { instant });
+    await film.show('overview', null, () => my !== token);
     if (my !== token) return;
     show(chapter, finaleHtml());
     schedule(9000);
@@ -259,11 +313,12 @@ async function go(target, { instant = false } = {}) {
   filmEl.dataset.mode = 'region';
   setPins();
   track('film', { chapter: r.id });
-  await film.show('region', r, { instant });
+  preload(idx + 1);
+  await film.show('region', r, () => my !== token);
   if (my !== token) return;
   show(chapter, chapterHtml(r, idx));
   finderFor(r);
-  preload(idx + 1);
+  preload(idx + 2);
   schedule(DWELL);
 }
 
@@ -275,14 +330,7 @@ playBtn.addEventListener('click', () => {
   playing = !playing;
   setPlayBtn();
   if (playing) next();
-  else {
-    clearTimeout(timer);
-    steps.querySelectorAll('.st__bar i').forEach((b) => {
-      const m = getComputedStyle(b).transform;
-      b.style.transition = 'none';
-      b.style.transform = m === 'none' ? '' : m;
-    });
-  }
+  else stopClock();
 });
 setPlayBtn();
 
@@ -291,7 +339,7 @@ new IntersectionObserver(
   ([e]) => {
     visible = e.isIntersecting;
     film.setRunning(visible);
-    if (!visible) clearTimeout(timer);
+    if (!visible) stopClock();
     else if (playing) schedule(mode === 'opening' ? 4000 : 2500);
   },
   { threshold: 0.15 }
@@ -328,21 +376,23 @@ const motion = !!(gsap && ST && !reduced);
 const A = M.about || {};
 const flip = rtl ? -1 : 1;
 
-// Fenêtre : photo, puis la vidéo du lieu quand elle peut jouer
+// Fenêtre : la vidéo du lieu (sa première image s'affiche en attendant) ; la photo ne sert que de secours
 const win = $('#ab-window');
 if (win) {
   $('#ab-place').textContent = A.place || '';
   $('#ab-coords').textContent = A.coords || '';
   const v = win.querySelector('video');
-  if (A.video && !reduced && !navigator.connection?.saveData && 'IntersectionObserver' in window) {
-    v.poster = A.photo || '';
+  const c = clip(A.video);
+  if (c && !reduced && !navigator.connection?.saveData && 'IntersectionObserver' in window) {
+    if (c.poster) ((v.poster = c.poster), (win.querySelector('.ab-open__img').src = c.poster));
+    v.preload = 'auto';
     let loaded = false;
     new IntersectionObserver(([e]) => {
       if (e.isIntersecting) {
-        if (!loaded) ((loaded = true), (v.src = A.video), v.addEventListener('playing', () => v.classList.add('is-on'), { once: true }));
+        if (!loaded) ((loaded = true), (v.src = c.src), v.addEventListener('playing', () => v.classList.add('is-on'), { once: true }));
         v.play().catch(() => {});
       } else v.pause();
-    }, { rootMargin: '200px' }).observe(win);
+    }, { rootMargin: '900px 0px' }).observe(win);
   } else v.remove();
 }
 

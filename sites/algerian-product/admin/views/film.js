@@ -21,7 +21,7 @@ export default function film(el) {
   function render() {
     el.innerHTML = `<div class="filmv">
       <aside class="card filmv__map"><header><h3>Le survol, dans l’ordre</h3><p>La caméra vole d’une région à l’autre dans cet ordre.</p></header><div id="fmap">${map()}</div>
-        <p class="hint">Chaque chapitre accepte une <b>vidéo aérienne</b> (lien MP4, drone ou banque d’images) : elle remplace l’illustration dans le viseur du film. Sans vidéo, le relief 3D reste le décor.</p></aside>
+        <p class="hint">Chaque chapitre joue sa <b>vidéo aérienne</b> en plein écran. Collez le lien de la page Pexels (ou Wikimedia Commons) : il est converti en lien direct. Les vidéos du film sont réencodées en 1080p et servies par le site pour une lecture fluide ; une nouvelle vidéo est lue depuis sa source tant qu’elle n’a pas été ajoutée à cet encodage.</p></aside>
       <div class="filmv__list">${D.film
         .map((f, i) => {
           const name = t(D.regions.find((r) => r.id === f.id)?.name) || f.id;
@@ -36,8 +36,8 @@ export default function film(el) {
             ${field(`film.${i}.lat`, 'Latitude', { type: 'number', attrs: 'step="0.01"' })}
             ${field(`film.${i}.lon`, 'Longitude', { type: 'number', attrs: 'step="0.01"' })}
             ${field(`film.${i}.heading`, 'Cap de la caméra (°)', { type: 'number', attrs: 'step="1" min="-180" max="180"', help: '0 = regard vers le nord' })}
-            ${field(`film.${i}.video`, 'Vidéo aérienne (URL .mp4)', { type: 'url', attrs: 'placeholder="https://…/biskra-drone.mp4"' })}
-            ${field(`film.${i}.photo`, 'Photo du lieu (URL, affichée pendant le chargement)', { type: 'url' })}
+            ${field(`film.${i}.video`, 'Vidéo aérienne (lien Pexels, Commons ou .mp4)', { type: 'url', attrs: 'placeholder="https://www.pexels.com/fr-fr/video/…"' })}
+            ${field(`film.${i}.photo`, 'Photo du lieu (secours si la vidéo ne charge pas)', { type: 'url' })}
             ${field(`film.${i}.realVideo`, 'Vidéo tournée dans cette région', { type: 'checkbox' })}
             ${field(`film.${i}.visible`, 'Chapitre affiché', { type: 'checkbox' })}
             <div class="f"><button type="button" class="b b--danger b--sm" data-act="del">Retirer ce chapitre</button></div>

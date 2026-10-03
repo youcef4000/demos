@@ -192,3 +192,22 @@ export const rich = (text) =>
     .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
     .replace(/\n/g, '<br>');
 export const plain = (text) => String(text ?? '').replace(/\*/g, '');
+
+// Liens collés depuis une page Pexels ou Wikimedia Commons → lien direct vers le fichier.
+// « pexels.com/fr-fr/video/vue-aerienne-…-26964399/ » → « pexels.com/download/video/26964399/ »
+export function mediaUrl(url, kind = 'image') {
+  const u = String(url ?? '').trim();
+  if (!u) return '';
+  const px = u.match(/^https?:\/\/(?:www\.)?pexels\.com\/(?:[a-z]{2}-[a-z]{2}\/)?(video|photo)\/(?:[^/?#]*-)?(\d+)\/?(?:[?#].*)?$/i);
+  if (px) {
+    const id = px[2];
+    return px[1].toLowerCase() === 'video' || kind === 'video'
+      ? `https://www.pexels.com/download/video/${id}/`
+      : `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=1920`;
+  }
+  const cm = u.match(/^https?:\/\/commons\.wikimedia\.org\/wiki\/File:([^?#]+)/i);
+  if (cm) return `https://commons.wikimedia.org/wiki/Special:FilePath/${cm[1].replace(/ /g, '_')}${kind === 'image' ? '?width=1920' : ''}`;
+  return u;
+}
+// Identifiant Pexels d'un lien vidéo, quelle que soit sa forme
+export const pexelsVideoId = (url) => String(url ?? '').match(/pexels\.com\/(?:[a-z]{2}-[a-z]{2}\/)?(?:download\/)?video\/(?:[^/?#]*-)?(\d+)/i)?.[1] || null;

@@ -1,5 +1,5 @@
 // Outils de l'espace admin : état partagé, champs liés au brouillon, tiroir, notifications.
-import { esc } from '../store.js';
+import { esc, mediaUrl } from '../store.js';
 
 export { esc };
 export const S = {
@@ -60,6 +60,8 @@ export function bind(root, after = () => {}) {
     let v;
     if (el.type === 'checkbox') v = el.checked;
     else if (el.type === 'number' || el.dataset.num) v = el.value === '' ? null : Number(el.value);
+    // Lien de page Pexels / Commons collé → lien direct vers le fichier
+    else if (el.type === 'url') v = mediaUrl(el.value, /video/i.test(el.dataset.path) ? 'video' : 'image');
     else v = el.value;
     setPath(S.draft, el.dataset.path, v);
     counter(el);
@@ -69,6 +71,10 @@ export function bind(root, after = () => {}) {
   root.addEventListener('input', handler);
   root.addEventListener('change', (e) => {
     if (e.target.type === 'checkbox' || e.target.tagName === 'SELECT') handler(e);
+    if (e.target.type === 'url' && e.target.dataset.path) {
+      const v = getPath(S.draft, e.target.dataset.path);
+      if (v && v !== e.target.value) (e.target.value = v), toast('Lien converti en lien direct vers le fichier.', 'ok');
+    }
   });
   root.querySelectorAll('[data-max]').forEach(counter);
 }
