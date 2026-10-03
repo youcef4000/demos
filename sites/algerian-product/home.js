@@ -23,7 +23,8 @@ try {
   clips = (await (await fetch('./video/manifest.json', { cache: 'no-cache' })).json()) || {};
 } catch {}
 const clipIndex = new Map(Object.entries(clips).map(([k, m]) => [pexelsVideoId(k) || k, m]));
-const wantHD = innerWidth * Math.min(devicePixelRatio || 1, 2) > 1400 && !navigator.connection?.saveData;
+// Écran paysage (ordinateur, tablette couchée) : 1080p ; téléphone en portrait : 720p
+const wantHD = innerWidth >= innerHeight && innerWidth * Math.min(devicePixelRatio || 1, 2) > 1000 && !navigator.connection?.saveData;
 function clip(url) {
   const raw = mediaUrl(url, 'video');
   if (!raw) return null;
