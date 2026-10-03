@@ -1,0 +1,64 @@
+{
+  "clips": [
+    {
+      "key": "tlemcen",
+      "src": "https://www.pexels.com/download/video/30149192/",
+      "t": 12
+    },
+    {
+      "key": "blida",
+      "src": "https://www.pexels.com/download/video/32586951/",
+      "t": 12
+    },
+    {
+      "key": "tizi",
+      "src": "https://www.pexels.com/download/video/26964399/",
+      "t": 12
+    },
+    {
+      "key": "bejaia",
+      "src": "https://www.pexels.com/download/video/9834170/",
+      "t": 12
+    },
+    {
+      "key": "bba",
+      "src": "https://www.pexels.com/download/video/30899654/",
+      "t": 12
+    },
+    {
+      "key": "setif",
+      "src": "https://www.pexels.com/download/video/31914142/",
+      "t": 12
+    },
+    {
+      "key": "constantine",
+      "src": "https://www.pexels.com/download/video/8970314/",
+      "t": 12
+    },
+    {
+      "key": "biskra",
+      "src": "https://www.pexels.com/download/video/17629832/",
+      "t": 12
+    },
+    {
+      "key": "ghardaia",
+      "src": "https://www.pexels.com/download/video/19598425/",
+      "t": 12
+    },
+    {
+      "key": "tamanrasset",
+      "src": "https://www.pexels.com/download/video/3059062/",
+      "t": 12
+    },
+    {
+      "key": "finale",
+      "src": "https://www.pexels.com/download/video/19255120/",
+      "t": 14
+    },
+    {
+      "key": "about",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/La_montagne_de_Chelia_en_Alg%C3%A9rie.webm",
+      "t": 15
+    }
+  ]
+}

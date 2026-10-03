@@ -1,0 +1,57 @@
+# Vidéos du film « Algerian Product » : téléchargées une fois depuis Pexels / Wikimedia Commons,
+# réencodées en H.264 (1080p et 720p, démarrage rapide) puis servies par le site lui-même.
+# Se relance quand sites/algerian-product/video/sources.json change.
+name: Vidéos algerian-product
+
+on:
+  push:
+    branches: [main]
+    paths: ['sites/algerian-product/video/sources.json', '.github/workflows/videos-algerian-product.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: videos-algerian-product
+  cancel-in-progress: false
+
+jobs:
+  encode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg jq
+      - name: Télécharger et réencoder
+        working-directory: sites/algerian-product/video
+        run: |
+          set -euo pipefail
+          UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36'
+          echo '{}' > manifest.next.json
+          for row in $(jq -c '.clips[]' sources.json); do
+            key=$(jq -r .key <<<"$row"); src=$(jq -r .src <<<"$row"); t=$(jq -r '.t // 12' <<<"$row")
+            echo "::group::$key  $src"
+            if ! curl -sSfL --retry 3 -A "$UA" -o "/tmp/$key.src" "$src"; then echo "::warning::$key : téléchargement impossible"; echo "::endgroup::"; continue; fi
+            ffprobe -v error -select_streams v:0 -show_entries stream=width,height,r_frame_rate,duration -of csv=p=0 "/tmp/$key.src" || true
+            # Paysage : 1080 de haut ; portrait : 1080 de large. Jamais d'agrandissement.
+            S1="scale='if(gte(iw,ih),-2,min(1080,iw))':'if(gte(iw,ih),min(1080,ih),-2)':flags=lanczos"
+            S2="scale='if(gte(iw,ih),-2,min(720,iw))':'if(gte(iw,ih),min(720,ih),-2)':flags=lanczos"
+            ffmpeg -nostdin -y -v error -i "/tmp/$key.src" -t "$t" -vf "$S1,fps=30,format=yuv420p" -c:v libx264 -preset slow -crf 20 -maxrate 9M -bufsize 18M -g 60 -profile:v high -movflags +faststart -an "$key-1080.mp4"
+            ffmpeg -nostdin -y -v error -i "/tmp/$key.src" -t "$t" -vf "$S2,fps=30,format=yuv420p" -c:v libx264 -preset slow -crf 23 -maxrate 3.5M -bufsize 7M -g 60 -profile:v high -movflags +faststart -an "$key-720.mp4"
+            ffmpeg -nostdin -y -v error -i "$key-1080.mp4" -frames:v 1 -vf "scale=-2:720" -q:v 3 "$key.jpg"
+            ls -lh "$key"-*.mp4 "$key.jpg"
+            jq --arg src "$src" --arg key "$key" '.[$src] = {hd: ($key + "-1080.mp4"), sd: ($key + "-720.mp4"), poster: ($key + ".jpg")}' manifest.next.json > m.tmp && mv m.tmp manifest.next.json
+            rm -f "/tmp/$key.src"
+            echo "::endgroup::"
+          done
+          mv manifest.next.json manifest.json
+          cat manifest.json
+      - name: Publier les fichiers
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898283+github-actions[bot]@users.noreply.github.com'
+          git add sites/algerian-product/video
+          git diff --cached --quiet && exit 0
+          git commit -m "Démo algerian-product : vidéos du film réencodées (1080p / 720p)"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
