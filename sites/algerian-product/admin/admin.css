@@ -335,3 +335,7 @@ hr { border: 0; border-top: 1px dashed var(--line-2); margin: 18px 0; }
 .toast--err { background: var(--vermilion); }
 .toast.is-out { opacity: 0; transform: translateY(10px); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+.sector-card__head .ib--del:hover { background: var(--vermilion); border-color: var(--vermilion); }
+.sector-del { margin: 0 18px; padding: 16px; border: 1px solid #e7c2bb; border-radius: 12px; background: #fbeeeb; display: grid; gap: 12px; margin-top: 18px; }
+.sector-del p { margin: 0; }
+.sector-del__a { display: flex; flex-wrap: wrap; gap: 8px; }

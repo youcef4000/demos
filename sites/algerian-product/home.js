@@ -319,15 +319,160 @@ if (gsap && ST && !reduced) {
 }
 
 /* ============================================================== */
-/* La maison : manifeste mot à mot, bandeau de paysages, piliers    */
+/* La maison : une fenêtre sur l'Algérie qui s'ouvre au défilement, */
+/* repères chiffrés, puis vision / mission / stratégie empilées     */
 /* ============================================================== */
-if ($('#manifesto') || $('[data-img-reveal]')) {
-const manifesto = $('#manifesto');
-if (manifesto && gsap && ST && !reduced) {
-  const words = manifesto.textContent.trim().split(/\s+/);
-  manifesto.innerHTML = words.map((w) => `<span class="w">${esc(w)}</span>`).join(' ');
-  gsap.fromTo(manifesto.querySelectorAll('.w'), { opacity: 0.12, y: 6 }, { opacity: 1, y: 0, stagger: 0.05, ease: 'none', scrollTrigger: { trigger: manifesto, start: 'top 80%', end: 'bottom 45%', scrub: true } });
+if ($('#maison')) {
+const ab = $('#maison');
+const motion = !!(gsap && ST && !reduced);
+const A = M.about || {};
+const flip = rtl ? -1 : 1;
+
+// Fenêtre : photo, puis la vidéo du lieu quand elle peut jouer
+const win = $('#ab-window');
+if (win) {
+  $('#ab-place').textContent = A.place || '';
+  $('#ab-coords').textContent = A.coords || '';
+  const v = win.querySelector('video');
+  if (A.video && !reduced && !navigator.connection?.saveData && 'IntersectionObserver' in window) {
+    v.poster = A.photo || '';
+    let loaded = false;
+    new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) {
+        if (!loaded) ((loaded = true), (v.src = A.video), v.addEventListener('playing', () => v.classList.add('is-on'), { once: true }));
+        v.play().catch(() => {});
+      } else v.pause();
+    }, { rootMargin: '200px' }).observe(win);
+  } else v.remove();
 }
+
+// Manifeste mot à mot ; les mots « Algérie » et « monde » prennent l'accent
+const manifesto = $('#manifesto');
+if (manifesto) {
+  const accent = /^(l[’']alg[ée]rie|alg[ée]rie|algeria|argelia|الجزائر|monde|world|mundo|العالم)(?![a-z])/i;
+  // En arabe, les mots latins consécutifs (« Algerian Product ») restent groupés pour garder leur ordre
+  const words = manifesto.textContent.trim().split(/\s+/).reduce((acc, w) => {
+    if (rtl && /^[A-Za-z]/.test(w) && /[A-Za-z]$/.test(acc.at(-1) || '')) acc[acc.length - 1] += `\u00a0${w}`;
+    else acc.push(w);
+    return acc;
+  }, []);
+  manifesto.innerHTML = words
+    .map((w) => `<span class="w${accent.test(w.replace(/^[«“"(—-]+/, '')) ? ' is-accent' : ''}">${esc(w)}</span>`)
+    .join(' ');
+}
+
+// Galerie flottante : un produit par filière d'abord, pour montrer l'étendue de l'offre
+const gal = $('#ab-gallery');
+if (gal && motion) {
+  const withImg = products.filter((p) => p.image);
+  const picks = [];
+  for (const s of sectors) {
+    const p = withImg.find((x) => x.sector === s.id && !picks.includes(x));
+    if (p) picks.push(p);
+  }
+  for (const p of withImg) if (picks.length < 8 && !picks.includes(p)) picks.push(p);
+  gal.innerHTML = picks
+    .slice(0, 8)
+    .map((p, i) => `<figure class="ab-g ab-g--${i}"><div class="ab-g__in"><img src="${esc(p.image)}" alt="" loading="lazy" decoding="async"><figcaption>${esc(i18n.t(p.name))}</figcaption></div></figure>`)
+    .join('');
+}
+
+if (motion) {
+  ab.classList.add('ab--anim');
+  const stage = $('.ab-open__stage');
+  const small = matchMedia('(max-width: 699px)');
+  const startClip = () => (small.matches ? 'inset(31% 17% 31% 17% round 22px)' : 'inset(27% 35% 27% 35% round 28px)');
+  const figs = [...gal.querySelectorAll('.ab-g')];
+  // Chaque vignette s'éloigne du centre, comme si la caméra traversait la galerie
+  const away = (fig, k) => () =>
+    (k === 'x' ? fig.offsetLeft + fig.offsetWidth / 2 - stage.offsetWidth / 2 : fig.offsetTop + fig.offsetHeight / 2 - stage.offsetHeight / 2) * 1.5;
+  const tl = gsap.timeline({
+    defaults: { ease: 'none' },
+    scrollTrigger: { trigger: '#ab-open', start: 'top top', end: () => `+=${innerHeight * (small.matches ? 2.2 : 2.6)}`, pin: true, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true },
+  });
+  tl.fromTo(win, { clipPath: startClip }, { clipPath: 'inset(0% 0% 0% 0% round 0px)', ease: 'power2.inOut', duration: 1.4 }, 0)
+    .fromTo('.ab-open__img, .ab-open__video', { scale: 1.45 }, { scale: 1, ease: 'power2.inOut', duration: 1.4 }, 0)
+    .fromTo('.ab-open__shade', { opacity: 0 }, { opacity: 1, duration: 0.6 }, 1)
+    .fromTo('.ab-open__hud', { autoAlpha: 0, y: -10 }, { autoAlpha: 1, y: 0, duration: 0.4 }, 1.25)
+    .to('.ab-open__hint', { autoAlpha: 0, duration: 0.2 }, 0)
+    .fromTo('.ab-open__line--a', { x: 0, autoAlpha: 1 }, { x: () => -innerWidth * 0.75 * flip, autoAlpha: 0, ease: 'power2.in', duration: 1.2 }, 0.05)
+    .fromTo('.ab-open__line--b', { x: 0, autoAlpha: 1 }, { x: () => innerWidth * 0.75 * flip, autoAlpha: 0, ease: 'power2.in', duration: 1.2 }, 0.05);
+  figs.forEach((fig, i) => tl.fromTo(fig, { x: 0, y: 0, scale: 1, autoAlpha: 1 }, { x: away(fig, 'x'), y: away(fig, 'y'), scale: 1.7 + (i % 3) * 0.3, autoAlpha: 0, ease: 'power2.in', duration: 1.1 }, 0.02 * i));
+  tl.fromTo('.ab-open__copy .kicker', { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.3 }, 1.45)
+    .fromTo('#manifesto .w', { opacity: 0.12, y: 24, filter: 'blur(6px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', stagger: 0.04, duration: 0.3 }, 1.55)
+    .to({}, { duration: 0.5 });
+
+  // Entrée de la galerie quand la section arrive, puis légère profondeur au pointeur
+  gsap.from(gal.querySelectorAll('.ab-g__in'), { yPercent: 60, scale: 0.6, autoAlpha: 0, duration: 1.4, ease: 'expo.out', stagger: 0.06, scrollTrigger: { trigger: '#ab-open', start: 'top 75%' } });
+  gsap.from('.ab-open__big', { y: 120, autoAlpha: 0, duration: 1.6, ease: 'expo.out', scrollTrigger: { trigger: '#ab-open', start: 'top 70%' } });
+  if (matchMedia('(pointer: fine)').matches) {
+    const movers = figs.map((f, i) => {
+      const el = f.firstElementChild;
+      const d = 14 + (i % 4) * 10;
+      return { x: gsap.quickTo(el, 'x', { duration: 1.1, ease: 'power3' }), y: gsap.quickTo(el, 'y', { duration: 1.1, ease: 'power3' }), d };
+    });
+    stage.addEventListener('pointermove', (e) => {
+      const nx = e.clientX / innerWidth - 0.5;
+      const ny = e.clientY / innerHeight - 0.5;
+      movers.forEach((m) => (m.x(-nx * m.d * 2), m.y(-ny * m.d * 2)));
+    });
+  }
+}
+
+// Repères : bandeau des filières (accéléré par le défilement) et compteurs
+const mq = $('#ab-marquee .ab-marquee__inner');
+if (mq) {
+  const star = `<svg viewBox="0 0 40 40" aria-hidden="true"><path d="${starPath(20, 20, 14)}"/></svg>`;
+  const row = sectors.map((s) => `<span>${esc(i18n.t(s.name))}</span>${star}`).join('');
+  mq.innerHTML = row + row;
+  if (motion) {
+    const loop = gsap.to(mq, { xPercent: -50, duration: 38, ease: 'none', repeat: -1 });
+    let dir = 1;
+    ST.create({
+      trigger: '.ab-facts',
+      start: 'top bottom',
+      end: 'bottom top',
+      onToggle: (self) => (self.isActive ? loop.play() : loop.pause()),
+      onUpdate: (self) => {
+        const v = self.getVelocity();
+        if (Math.abs(v) > 40) dir = v > 0 ? 1 : -1;
+        gsap.to(loop, { timeScale: dir * (1 + Math.min(Math.abs(v) / 300, 6)), duration: 0.2, overwrite: true });
+        gsap.to(loop, { timeScale: dir, duration: 1.2, delay: 0.2, ease: 'power2.out' });
+      },
+    });
+    gsap.fromTo(mq, { skewX: 0 }, { skewX: -4, ease: 'none', scrollTrigger: { trigger: '.ab-facts', start: 'top bottom', end: 'bottom top', scrub: true } });
+  }
+}
+const facts = $('#ab-facts');
+if (facts) {
+  const fmt = (n) => i18n.num(n).replace(/\u202f/g, '\u00a0');
+  const list = [
+    { n: 2381741, key: 'about.fact.area', wide: true },
+    { n: sectors.length, key: 'about.fact.sectors' },
+    { n: regions.length, key: 'about.fact.regions' },
+    { n: products.length, key: 'about.fact.products' },
+  ];
+  facts.innerHTML = list
+    .map((f) => {
+      // « unité — libellé » : l'unité s'affiche à côté du chiffre
+      const [a, b] = i18n.ui(f.key).split(/\s+—\s+/);
+      const unit = b ? a : '';
+      return `<div class="ab-fact${f.wide ? ' ab-fact--wide' : ''}"><dt><b data-n="${f.n}">${esc(fmt(f.n))}</b>${unit ? `<small>${esc(unit)}</small>` : ''}</dt><dd>${esc(b || a)}</dd></div>`;
+    })
+    .join('');
+  if (motion) {
+    facts.querySelectorAll('.ab-fact').forEach((el, i) => {
+      const b = el.querySelector('b');
+      const o = { v: 0 };
+      const tw = { trigger: facts, start: 'top 82%' };
+      gsap.fromTo(el, { '--p': 0 }, { '--p': 1, duration: 1.4, ease: 'expo.inOut', delay: i * 0.1, scrollTrigger: tw });
+      gsap.from(el.children, { y: 40, autoAlpha: 0, duration: 1.1, ease: 'expo.out', delay: 0.15 + i * 0.1, stagger: 0.08, scrollTrigger: tw });
+      gsap.to(o, { v: Number(b.dataset.n), duration: 2.2, ease: 'expo.out', delay: 0.15 + i * 0.1, scrollTrigger: tw, onUpdate: () => (b.textContent = fmt(Math.round(o.v))) });
+    });
+  }
+}
+
+// Paysages (page « La maison ») : deux rangées qui glissent en sens inverse
 {
   const strip = M.strip || [];
   const names = ['Biskra', 'Constantine', 'Béjaïa', 'Kabylie', 'Ghardaïa', 'Tlemcen', 'Sahara', 'Atlas', 'Chetma', 'Aurès'];
@@ -336,24 +481,26 @@ if (manifesto && gsap && ST && !reduced) {
   if (rows.length) rows[0].innerHTML = [...strip, ...strip].map((s, i) => tile(s, i % strip.length, true)).join('');
   const rev = [...strip].reverse();
   if (rows.length) rows[1].innerHTML = [...rev, ...rev].map((s, i) => tile(s, strip.length - 1 - (i % strip.length), false)).join('');
-  if (rows.length && gsap && ST && !reduced) {
+  if (rows.length && motion) {
     rows.forEach((row) => {
-      const dir = Number(row.dataset.dir) * (rtl ? -1 : 1);
+      const dir = Number(row.dataset.dir) * flip;
       gsap.fromTo(row, { xPercent: dir > 0 ? 0 : -30 }, { xPercent: dir > 0 ? -30 : 0, ease: 'none', scrollTrigger: { trigger: '#strip', start: 'top bottom', end: 'bottom top', scrub: 0.4 } });
     });
-    // inclinaison selon la vitesse de défilement
     const skew = gsap.quickTo('.strip__row', 'skewX', { duration: 0.5, ease: 'power3' });
     ST.create({ trigger: '#strip', start: 'top bottom', end: 'bottom top', onUpdate: (self) => skew(Math.max(-6, Math.min(6, self.getVelocity() / -400))) });
   }
 }
-if (gsap && ST && !reduced) {
-  document.querySelectorAll('[data-img-reveal]').forEach((fig) => {
-    const img = fig.querySelector('img');
-    gsap.fromTo(fig, { clipPath: 'inset(100% 0% 0% 0% round 18px)' }, { clipPath: 'inset(0% 0% 0% 0% round 18px)', duration: 1.4, ease: 'expo.inOut', scrollTrigger: { trigger: fig, start: 'top 85%' } });
-    gsap.fromTo(img, { scale: 1.35 }, { scale: 1, duration: 1.8, ease: 'expo.out', scrollTrigger: { trigger: fig, start: 'top 85%' } });
-    gsap.fromTo(img, { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: fig, start: 'top bottom', end: 'bottom top', scrub: true } });
+
+// Cartes empilées : la carte recouverte recule et s'assombrit, l'image respire
+if (motion) {
+  const cards = [...ab.querySelectorAll('.ab-card')];
+  cards.forEach((card, i) => {
+    const img = card.querySelector('img');
+    if (img) gsap.fromTo(img, { scale: 1.3 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: card, start: 'top bottom', end: 'top top', scrub: true } });
+    gsap.from(card.querySelectorAll('.ab-card__body > *'), { y: 50, autoAlpha: 0, duration: 1.1, ease: 'expo.out', stagger: 0.08, scrollTrigger: { trigger: card, start: 'top 65%' } });
+    const next = cards[i + 1];
+    if (next) gsap.fromTo(card, { scale: 1, filter: 'brightness(1)' }, { scale: 0.9 - (cards.length - 2 - i) * 0.03, filter: 'brightness(0.55)', ease: 'none', scrollTrigger: { trigger: next, start: 'top bottom', end: 'top 20%', scrub: true } });
   });
-  gsap.from('.pillar > :not(figure)', { y: 30, autoAlpha: 0, duration: 1, ease: 'expo.out', stagger: 0.05, scrollTrigger: { trigger: '.pillars', start: 'top 70%' } });
 }
 }
 

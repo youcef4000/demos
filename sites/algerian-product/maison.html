@@ -54,36 +54,74 @@
     </div>
   </header>
   <!-- ============ LA MAISON ============ -->
-  <section class="sec sec--paper maison" id="maison">
-    <div class="wrap">
-      <p class="kicker" data-t="about.kicker">La maison</p>
-      <p class="manifesto" id="manifesto" data-t="about.manifesto">Algerian Product fait connaître ce que l’Algérie produit de meilleur — dans ses champs, ses ateliers et ses usines — et le relie aux marchés du monde.</p>
+  <section class="ab" id="maison" aria-labelledby="ab-kicker">
+    <!-- Ouverture : une fenêtre sur l'Algérie qui s'ouvre jusqu'au plein écran -->
+    <div class="ab-open" id="ab-open">
+      <div class="ab-open__stage">
+        <div class="ab-open__window" id="ab-window">
+          <img class="ab-open__img" data-media="about.photo" alt="">
+          <video class="ab-open__video" muted playsinline loop preload="none" aria-hidden="true"></video>
+          <div class="ab-open__shade"></div>
+          <p class="ab-open__hud" aria-hidden="true"><span class="hud__dot"></span><span id="ab-place"></span><span id="ab-coords"></span></p>
+        </div>
+        <div class="ab-open__gallery" id="ab-gallery" aria-hidden="true"></div>
+        <p class="ab-open__big" aria-hidden="true">
+          <span class="ab-open__line ab-open__line--a" data-t="about.big1">L’Algérie</span>
+          <span class="ab-open__line ab-open__line--b" data-t="about.big2">au monde</span>
+        </p>
+        <div class="ab-open__copy wrap">
+          <h2 class="kicker" id="ab-kicker" data-t="about.kicker">La maison</h2>
+          <p class="ab-open__manifesto" id="manifesto" data-t="about.manifesto"></p>
+        </div>
+        <p class="ab-open__hint" aria-hidden="true"><span data-t="home.scroll">Défiler</span><i></i></p>
+      </div>
     </div>
-    <div class="strip" id="strip" aria-label="Paysages d’Algérie">
+    <!-- Repères : bandeau des filières, compteurs -->
+    <div class="ab-facts">
+      <div class="ab-marquee" id="ab-marquee" aria-hidden="true"><div class="ab-marquee__inner"></div></div>
+      <div class="wrap">
+        <p class="kicker" data-t="about.factsKicker">Repères</p>
+        <dl class="ab-facts__grid" id="ab-facts"></dl>
+      </div>
+    </div>
+    <div class="strip sec--paper" id="strip" aria-label="Paysages d’Algérie">
       <p class="strip__title wrap"><span data-t="about.strip">Une seule terre, mille paysages</span></p>
       <div class="strip__row" data-dir="1"></div>
       <div class="strip__row strip__row--sm" data-dir="-1"></div>
     </div>
-    <div class="wrap">
-      <div class="pillars">
-        <article class="pillar">
-          <figure class="pillar__img" data-img-reveal><img data-media="pillars.0" alt=""></figure>
-          <span class="pillar__n">01</span>
-          <h3 data-t="about.vision.title">Vision</h3>
-          <p data-t="about.vision.text"></p>
+    <!-- Vision, mission, stratégie : des cartes qui s'empilent -->
+    <div class="ab-pillars sec--paper">
+      <div class="wrap">
+        <header class="ab-pillars__head">
+          <p class="kicker" data-t="about.pillarsKicker">Ce qui nous guide</p>
+          <h3 class="h2" data-t-rich="about.pillarsTitle" data-split></h3>
+        </header>
+        <div class="ab-stack">
+        <article class="ab-card" style="--i:0">
+          <figure class="ab-card__img"><img data-media="pillars.0" alt=""></figure>
+          <div class="ab-card__body">
+            <span class="ab-card__n">01</span>
+            <h3 class="ab-card__title" data-t="about.vision.title"></h3>
+            <p class="ab-card__text" data-t="about.vision.text"></p>
+          </div>
         </article>
-        <article class="pillar">
-          <figure class="pillar__img" data-img-reveal><img data-media="pillars.1" alt=""></figure>
-          <span class="pillar__n">02</span>
-          <h3 data-t="about.mission.title">Mission</h3>
-          <p data-t="about.mission.text"></p>
+        <article class="ab-card" style="--i:1">
+          <figure class="ab-card__img"><img data-media="pillars.1" alt=""></figure>
+          <div class="ab-card__body">
+            <span class="ab-card__n">02</span>
+            <h3 class="ab-card__title" data-t="about.mission.title"></h3>
+            <p class="ab-card__text" data-t="about.mission.text"></p>
+          </div>
         </article>
-        <article class="pillar">
-          <figure class="pillar__img" data-img-reveal><img data-media="pillars.2" alt=""></figure>
-          <span class="pillar__n">03</span>
-          <h3 data-t="about.strategy.title">Stratégie internationale</h3>
-          <p data-t="about.strategy.text"></p>
+        <article class="ab-card" style="--i:2">
+          <figure class="ab-card__img"><img data-media="pillars.2" alt=""></figure>
+          <div class="ab-card__body">
+            <span class="ab-card__n">03</span>
+            <h3 class="ab-card__title" data-t="about.strategy.title"></h3>
+            <p class="ab-card__text" data-t="about.strategy.text"></p>
+          </div>
         </article>
+        </div>
       </div>
     </div>
   </section>

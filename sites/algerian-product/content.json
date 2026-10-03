@@ -1,5 +1,5 @@
 {
- "version": 3,
+ "version": 4,
  "updatedAt": null,
  "brand": {
   "name": "Algerian Product"
@@ -296,6 +296,60 @@
    "en": "Start where demand already exists — the diaspora, French-speaking Europe, the Gulf — then open new markets sector by sector, with local partners.",
    "ar": "البدء حيث يوجد الطلب أصلًا — الجالية، أوروبا الناطقة بالفرنسية، دول الخليج — ثم فتح أسواق جديدة قطاعًا بعد قطاع مع شركاء محليين.",
    "es": "Empezar donde la demanda ya existe —la diáspora, la Europa francófona, los países del Golfo— y abrir después nuevos mercados, sector por sector, con socios locales."
+  },
+  "about.big1": {
+   "fr": "L’Algérie",
+   "en": "Algeria",
+   "ar": "من الجزائر",
+   "es": "Argelia"
+  },
+  "about.big2": {
+   "fr": "au monde",
+   "en": "to the world",
+   "ar": "إلى العالم",
+   "es": "al mundo"
+  },
+  "about.factsKicker": {
+   "fr": "Repères",
+   "en": "At a glance",
+   "ar": "لمحة",
+   "es": "En cifras"
+  },
+  "about.fact.area": {
+   "fr": "km² — le plus grand pays d’Afrique",
+   "en": "km² — the largest country in Africa",
+   "ar": "كم² — أكبر بلد في إفريقيا",
+   "es": "km² — el país más grande de África"
+  },
+  "about.fact.sectors": {
+   "fr": "filières, du champ à l’usine",
+   "en": "sectors, from field to factory",
+   "ar": "قطاعات، من الحقل إلى المصنع",
+   "es": "sectores, del campo a la fábrica"
+  },
+  "about.fact.regions": {
+   "fr": "régions mises à l’honneur",
+   "en": "regions in the spotlight",
+   "ar": "منطقة في الواجهة",
+   "es": "regiones destacadas"
+  },
+  "about.fact.products": {
+   "fr": "produits au catalogue",
+   "en": "products in the catalogue",
+   "ar": "منتجًا في الكتالوج",
+   "es": "productos en el catálogo"
+  },
+  "about.pillarsKicker": {
+   "fr": "Ce qui nous guide",
+   "en": "What guides us",
+   "ar": "ما يوجّهنا",
+   "es": "Lo que nos guía"
+  },
+  "about.pillarsTitle": {
+   "fr": "Une marque, *trois engagements*.",
+   "en": "One brand, *three commitments*.",
+   "ar": "علامة واحدة و*ثلاثة التزامات*.",
+   "es": "Una marca, *tres compromisos*."
   },
   "about.valuesTitle": {
    "fr": "Nos valeurs",
@@ -4338,6 +4392,12 @@
    "markets": "https://images.pexels.com/photos/34168857/pexels-photo-34168857.jpeg?auto=compress&cs=tinysrgb&w=2000",
    "services": "https://images.pexels.com/photos/6595777/pexels-photo-6595777.jpeg?auto=compress&cs=tinysrgb&w=2000"
   },
+  "about": {
+   "video": "https://commons.wikimedia.org/wiki/Special:FilePath/La_montagne_de_Chelia_en_Alg%C3%A9rie.webm",
+   "photo": "https://images.pexels.com/photos/30147124/pexels-photo-30147124.jpeg?auto=compress&cs=tinysrgb&w=1800",
+   "place": "Djebel Chélia · Aurès",
+   "coords": "35°19′N 6°38′E"
+  },
   "chelia": "https://commons.wikimedia.org/wiki/Special:FilePath/La_montagne_de_Chelia_en_Alg%C3%A9rie.webm",
   "pillars": [
    "https://images.pexels.com/photos/8798170/pexels-photo-8798170.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -5173,6 +5233,12 @@
   {
    "kind": "photo",
    "src": "Pexels",
+   "page": "https://www.pexels.com/photo/30147124/",
+   "what": "Paysage de montagne en Algérie"
+  },
+  {
+   "kind": "photo",
+   "src": "Pexels",
    "page": "https://www.pexels.com/photo/18314359/",
    "what": "Constantine"
   },
@@ -5193,12 +5259,6 @@
    "src": "Wikimedia Commons",
    "page": "https://commons.wikimedia.org/wiki/File:Chetma_Biskra.jpg",
    "what": "Oasis de Chetma"
-  },
-  {
-   "kind": "photo",
-   "src": "Pexels",
-   "page": "https://www.pexels.com/photo/30147124/",
-   "what": "Paysage de montagne en Algérie"
   },
   {
    "kind": "photo",
