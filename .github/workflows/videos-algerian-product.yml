@@ -36,7 +36,7 @@ jobs:
             ffprobe -v error -select_streams v:0 -show_entries stream=width,height,r_frame_rate,duration -of csv=p=0 "/tmp/$key.src" || true
             # Paysage : 1920×1080 (ordinateur) et 1280×720 (téléphone).
             # Portrait : recadrage 16:9 net pour l'ordinateur, vertical 720×1280 pour le téléphone.
-            read -r W H < <(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0:s=' ' "/tmp/$key.src")
+            IFS=x read -r W H < <(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0:s=x "/tmp/$key.src")
             ROT=$(ffprobe -v error -select_streams v:0 -show_entries stream_side_data=rotation -of csv=p=0 "/tmp/$key.src" | head -1 | tr -d '-' || true)
             if [ "${ROT:-0}" = "90" ] || [ "${ROT:-0}" = "270" ]; then t0=$W; W=$H; H=$t0; fi
             if [ "$H" -gt "$W" ]; then
