@@ -2,61 +2,73 @@
   "https://www.pexels.com/download/video/30149192/": {
     "hd": "tlemcen-1080.mp4",
     "sd": "tlemcen-720.mp4",
-    "poster": "tlemcen.jpg"
+    "poster": "tlemcen.jpg",
+    "t": 6
   },
   "https://www.pexels.com/download/video/32586951/": {
     "hd": "blida-1080.mp4",
     "sd": "blida-720.mp4",
-    "poster": "blida.jpg"
+    "poster": "blida.jpg",
+    "t": 6
   },
   "https://www.pexels.com/download/video/26964399/": {
     "hd": "tizi-1080.mp4",
     "sd": "tizi-720.mp4",
-    "poster": "tizi.jpg"
+    "poster": "tizi.jpg",
+    "t": 6
   },
   "https://www.pexels.com/download/video/9834170/": {
     "hd": "bejaia-1080.mp4",
     "sd": "bejaia-720.mp4",
-    "poster": "bejaia.jpg"
+    "poster": "bejaia.jpg",
+    "t": 6
   },
   "https://www.pexels.com/download/video/30899654/": {
     "hd": "bba-1080.mp4",
     "sd": "bba-720.mp4",
-    "poster": "bba.jpg"
+    "poster": "bba.jpg",
+    "t": 6
   },
   "https://www.pexels.com/download/video/31914142/": {
     "hd": "setif-1080.mp4",
     "sd": "setif-720.mp4",
-    "poster": "setif.jpg"
+    "poster": "setif.jpg",
+    "t": 6
   },
   "https://www.pexels.com/download/video/8970314/": {
     "hd": "constantine-1080.mp4",
     "sd": "constantine-720.mp4",
-    "poster": "constantine.jpg"
+    "poster": "constantine.jpg",
+    "t": 6
   },
   "https://www.pexels.com/download/video/17629832/": {
     "hd": "biskra-1080.mp4",
     "sd": "biskra-720.mp4",
-    "poster": "biskra.jpg"
+    "poster": "biskra.jpg",
+    "t": 6
   },
   "https://www.pexels.com/download/video/19598425/": {
     "hd": "ghardaia-1080.mp4",
     "sd": "ghardaia-720.mp4",
-    "poster": "ghardaia.jpg"
+    "poster": "ghardaia.jpg",
+    "t": 6
   },
   "https://www.pexels.com/download/video/3059062/": {
     "hd": "tamanrasset-1080.mp4",
     "sd": "tamanrasset-720.mp4",
-    "poster": "tamanrasset.jpg"
+    "poster": "tamanrasset.jpg",
+    "t": 6
   },
   "https://www.pexels.com/download/video/19255120/": {
     "hd": "finale-1080.mp4",
     "sd": "finale-720.mp4",
-    "poster": "finale.jpg"
+    "poster": "finale.jpg",
+    "t": 6
   },
   "https://commons.wikimedia.org/wiki/Special:FilePath/La_montagne_de_Chelia_en_Alg%C3%A9rie.webm": {
     "hd": "about-1080.mp4",
     "sd": "about-720.mp4",
-    "poster": "about.jpg"
+    "poster": "about.jpg",
+    "t": 15
   }
 }
