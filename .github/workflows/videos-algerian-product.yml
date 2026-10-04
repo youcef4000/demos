@@ -39,9 +39,9 @@ jobs:
           for row in $(jq -c '.clips[]' sources.json); do
             key=$(jq -r .key <<<"$row"); src=$(jq -r .src <<<"$row"); t=$(jq -r '.t // 12' <<<"$row")
             echo "::group::$key  $src"
-            # Déjà encodée depuis la même source : on garde les fichiers (sauf relance manuelle avec « force »)
-            if [ "${FORCE}" != "true" ] && [ -f "$key-1080.mp4" ] && [ -f manifest.json ] && jq -e --arg s "$src" --arg k "$key" '.[$s].hd == ($k + "-1080.mp4")' manifest.json >/dev/null; then
-              jq --arg src "$src" --arg key "$key" '.[$src] = {hd: ($key + "-1080.mp4"), sd: ($key + "-720.mp4"), poster: ($key + ".jpg")}' manifest.next.json > m.tmp && mv m.tmp manifest.next.json
+            # Déjà encodée depuis la même source et à la même durée : on garde les fichiers (sauf relance manuelle avec « force »)
+            if [ "${FORCE}" != "true" ] && [ -f "$key-1080.mp4" ] && [ -f manifest.json ] && jq -e --arg s "$src" --arg k "$key" --argjson t "$t" '.[$s].hd == ($k + "-1080.mp4") and (.[$s].t // 0) == $t' manifest.json >/dev/null; then
+              jq --arg src "$src" --arg key "$key" --argjson t "$t" '.[$src] = {hd: ($key + "-1080.mp4"), sd: ($key + "-720.mp4"), poster: ($key + ".jpg"), t: $t}' manifest.next.json > m.tmp && mv m.tmp manifest.next.json
               echo "déjà encodée"; echo "::endgroup::"; continue
             fi
             if ! curl -sSfL --retry 3 -A "$UA" -o "/tmp/$key.src" "$src"; then echo "::warning::$key : téléchargement impossible"; echo "::endgroup::"; continue; fi
@@ -64,7 +64,7 @@ jobs:
             if [ "$H" -gt "$W" ]; then P="$key-720.mp4"; else P="$key-1080.mp4"; fi
             ffmpeg -nostdin -y -v error -i "$P" -frames:v 1 -vf "scale=-2:720" -q:v 3 "$key.jpg"
             ls -lh "$key"-*.mp4 "$key.jpg"
-            jq --arg src "$src" --arg key "$key" '.[$src] = {hd: ($key + "-1080.mp4"), sd: ($key + "-720.mp4"), poster: ($key + ".jpg")}' manifest.next.json > m.tmp && mv m.tmp manifest.next.json
+            jq --arg src "$src" --arg key "$key" --argjson t "$t" '.[$src] = {hd: ($key + "-1080.mp4"), sd: ($key + "-720.mp4"), poster: ($key + ".jpg"), t: $t}' manifest.next.json > m.tmp && mv m.tmp manifest.next.json
             rm -f "/tmp/$key.src"
             echo "::endgroup::"
           done

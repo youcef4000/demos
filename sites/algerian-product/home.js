@@ -150,7 +150,7 @@ async function shot(key, photo, video, lat, lon, stale) {
   return new Promise((resolve) => {
     if (gsap && !reduced) {
       gsap.fromTo(layer, { autoAlpha: 0, clipPath: 'inset(8% 8% 8% 8%)' }, { autoAlpha: 1, clipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'expo.inOut', onComplete: () => (finish(), resolve()) });
-      gsap.fromTo(layer.querySelectorAll('img, video'), { scale: 1.12 }, { scale: 1, duration: 14, ease: 'none' });
+      gsap.fromTo(layer.querySelectorAll('img, video'), { scale: 1.1 }, { scale: 1, duration: 6.5, ease: 'none' });
     } else {
       finish();
       resolve();
@@ -234,7 +234,7 @@ let token = 0;
 let playing = !reduced;
 let clock = 0;
 let visible = true;
-const DWELL = 8200;
+const DWELL = 4200; // ~4 s par région (fondu compris : 5 s à l'écran)
 const playBtn = $('#film-play');
 const setPlayBtn = () => {
   playBtn.innerHTML = icon(playing ? 'pause' : 'play');
@@ -289,7 +289,7 @@ async function go(target, { instant = false } = {}) {
     preload(1);
     await film.show('opening', null, () => my !== token);
     if (my !== token) return;
-    schedule(7200);
+    schedule(5000);
     return;
   }
   if (target === 'finale') {
@@ -302,7 +302,7 @@ async function go(target, { instant = false } = {}) {
     await film.show('overview', null, () => my !== token);
     if (my !== token) return;
     show(chapter, finaleHtml());
-    schedule(9000);
+    schedule(5000);
     return;
   }
   mode = 'region';
