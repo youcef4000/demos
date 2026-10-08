@@ -6,6 +6,14 @@
   },
   "demos": [
     {
+      "slug": "insag-business-school",
+      "title": "INSAG Business School — gagnez en hauteur de vue",
+      "sector": "Enseignement supérieur · MBA",
+      "city": "Alger · Constantine",
+      "color": "#3d6ef5",
+      "public": false
+    },
+    {
       "slug": "algerian-product",
       "title": "Algerian Product — l’Algérie vue du ciel, ses produits pour le monde",
       "sector": "Export & marque pays",
