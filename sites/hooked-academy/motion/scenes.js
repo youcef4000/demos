@@ -279,7 +279,9 @@ export function compare(root, sc, d) {
 
 export function formula(root, sc, d) {
   const parts = sc.parts || [];
+  const chips = sc.chips || [];
   root.innerHTML = `${head(sc)}
+    ${chips.length ? `<div class="fx-chips">${chips.map((c) => `<span class="fx-chip" style="--c:${col(c.c)}">${icon(c.icon || 'spark', { size: 34 })}${esc(c.label)}</span>`).join('')}</div>` : ''}
     <div class="fx">
       ${parts
         .map((p, i) => {
@@ -308,6 +310,7 @@ export function formula(root, sc, d) {
     tl.fromTo(r, { autoAlpha: 0, scale: 1.8, filter: 'blur(14px)' }, { autoAlpha: 1, scale: 1, filter: 'blur(0px)', duration: 0.7, ease: 'expo.out' }, tr);
     tl.fromTo(r, { '--glow': 1 }, { '--glow': 0.35, duration: 1.4 }, tr + 0.3);
   }
+  $$(root, '.fx-chip').forEach((c, i) => tl.fromTo(c, { autoAlpha: 0, y: 40, scale: 0.8 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.6, ease: 'back.out(2)' }, chips[i].at ?? base + 0.4 + i * 0.3));
   const n = $(root, '.fx-note');
   if (n) tl.fromTo(n, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.6 }, sc.noteAt ?? d - 2.2);
   return tl;
@@ -1045,12 +1048,153 @@ export function phone(root, sc, d) {
     const track = $(root, '.ph-ftrack');
     const hk = sc.hookIndex ?? 6;
     const posts = $$(root, '.ph-post');
-    tl.fromTo(track, { yPercent: 0, filter: 'blur(0px)' }, { yPercent: (-100 * hk) / posts.length, duration: sc.scrollDur ?? 2.6, ease: 'expo.inOut' }, 0.5);
-    tl.fromTo(track, { filter: 'blur(0px)' }, { filter: 'blur(6px)', duration: 0.6, yoyo: true, repeat: 1, ease: 'power1.inOut' }, 0.9);
+    const s0 = sc.scrollAt ?? 0.5;
+    const sd = sc.scrollDur ?? 2.6;
+    if (sc.flick) {
+      // Défilement « au pouce » : un post après l'autre, comme dans le vrai fil
+      const per = sd / hk;
+      tl.set(track, { yPercent: 0 }, 0);
+      for (let i = 1; i <= hk; i++) {
+        const t = s0 + i * per - 0.5;
+        tl.to(track, { yPercent: (-100 * i) / posts.length, duration: 0.5, ease: 'expo.inOut' }, t);
+        tl.fromTo(track, { filter: 'blur(0px)' }, { filter: 'blur(5px)', duration: 0.25, yoyo: true, repeat: 1, ease: 'power1.inOut', immediateRender: false }, t);
+      }
+    } else {
+      tl.fromTo(track, { yPercent: 0, filter: 'blur(0px)' }, { yPercent: (-100 * hk) / posts.length, duration: sd, ease: 'expo.inOut' }, s0);
+      tl.fromTo(track, { filter: 'blur(0px)' }, { filter: 'blur(6px)', duration: 0.6, yoyo: true, repeat: 1, ease: 'power1.inOut' }, s0 + 0.4);
+    }
     const hp = posts[hk];
-    tl.fromTo(hp, { '--glow': 0 }, { '--glow': 1, duration: 0.5 }, (sc.scrollDur ?? 2.6) + 0.5);
-    tl.fromTo($(hp, '.ph-hl'), { autoAlpha: 0, scale: 1.6 }, { autoAlpha: 1, scale: 1, duration: 0.5, ease: 'back.out(2)' }, (sc.scrollDur ?? 2.6) + 0.3);
+    tl.fromTo(hp, { '--glow': 0 }, { '--glow': 1, duration: 0.5 }, s0 + sd);
+    tl.fromTo($(hp, '.ph-hl'), { autoAlpha: 0, scale: 1.6 }, { autoAlpha: 1, scale: 1, duration: 0.5, ease: 'back.out(2)' }, s0 + sd - 0.2);
   }
+  return tl;
+}
+
+/* ------------------------------------------------------------------ */
+/* Anatomie : la vidéo d'exemple et sa barre Hook · Body · CTA         */
+/* ------------------------------------------------------------------ */
+
+const AN_ICON = { hook: 'hook', body: 'eye', cta: 'cart' };
+
+export function anatomy(root, sc, d) {
+  const parts = sc.parts || [];
+  const total = sc.total || parts.reduce((m, p) => Math.max(m, p.to || 0), 0) || 15;
+  const art = sc.art || 'parfum';
+  const screens = {
+    hook: `<div class="an-scr" data-k="hook" style="background:${BG[sc.hookBg || 'nuit']}"><p class="ph-hl an-hl">${rich(sc.headline || '*Stop.* Ton parfum disparaît avant midi ?')}</p><div class="ph-art">${product(art)}</div></div>`,
+    body: `<div class="an-scr" data-k="body" style="background:${BG[sc.bodyBg || 'teal']}"><div class="ph-art">${product(art)}</div><div class="ph-subs an-subs"></div></div>`,
+    cta: `<div class="an-scr" data-k="cta" style="background:${BG[sc.ctaBg || 'or']}"><div class="ph-art an-art-s">${product(art)}</div><span class="ph-badge an-badge">${rich(sc.badge || 'Paiement à la livraison')}</span><div class="an-btn">${rich(sc.btn || 'Commander')}<i>›</i></div></div>`,
+  };
+  const ticks = [];
+  for (let s = 0; s <= total; s += total > 20 ? 5 : 3) ticks.push(s);
+  root.innerHTML = `
+    <div class="an">
+      <div class="ph an-ph"><div class="ph-screen">
+        <div class="an-scr an-idle" style="background:${BG.nuit}"><span class="ph-play">${icon('play', { size: 28 })}</span></div>
+        ${parts.map((p) => screens[p.k] || '').join('')}
+        <div class="an-pbar"><i></i></div>
+      </div><i class="ph-notch"></i></div>
+      <div class="an-side">
+        ${kicker(sc.kicker)}
+        ${sc.title ? `<h2 class="s-title">${words(sc.title)}</h2>` : ''}
+        ${arP(sc.ar, 's-ar')}
+        <div class="an-bar">
+          <div class="an-segs">${parts
+            .map(
+              (p) =>
+                `<div class="an-seg ${typeof p.at === 'number' ? '' : 'is-off'}" data-k="${p.k}" style="left:${((p.from / total) * 100).toFixed(3)}%;width:${(((p.to - p.from) / total) * 100).toFixed(3)}%;--c:${col(p.c || p.k)}"><b>${esc(p.label || p.k.toUpperCase())}</b></div>`,
+            )
+            .join('')}<i class="an-head"></i></div>
+          <div class="an-ruler">${ticks.map((s) => `<span style="left:${((s / total) * 100).toFixed(3)}%">${s} s</span>`).join('')}</div>
+        </div>
+        <div class="an-panels">${parts
+          .filter((p) => typeof p.at === 'number')
+          .map(
+            (p) => `<div class="an-panel" data-k="${p.k}" style="--c:${col(p.c || p.k)}">
+              <h3><span>${icon(p.icon || AN_ICON[p.k] || 'spark', { size: 40 })}</span>${esc(p.label || p.k.toUpperCase())}${p.when ? `<em>${rich(p.when)}</em>` : ''}</h3>
+              ${p.fr ? `<p class="an-fr">${rich(p.fr)}</p>` : ''}
+              ${p.ar ? `<p class="an-ar" lang="ar" dir="rtl">${esc(p.ar)}</p>` : ''}
+              ${p.items ? `<ol class="an-items">${p.items.map((it, i) => `<li><i>${i + 1}</i><div><b>${rich(it.label)}</b>${it.sub ? `<span>${rich(it.sub)}</span>` : ''}</div></li>`).join('')}</ol>` : ''}
+            </div>`,
+          )
+          .join('')}</div>
+      </div>
+    </div>`;
+  const tl = G().timeline();
+  const ph = $(root, '.an-ph');
+  tl.fromTo(ph, { autoAlpha: 0, y: 220, rotateY: -28, rotateZ: -4 }, { autoAlpha: 1, y: 0, rotateY: 10, rotateZ: 0, duration: 1.1, ease: 'expo.out' }, 0);
+  tl.to(ph, { rotateY: 0, y: -14, duration: Math.max(1, d - 1.1), ease: 'sine.inOut' }, 1.1);
+  const k = $(root, '.an-side .kick');
+  if (k) tl.fromTo(k, { autoAlpha: 0, x: 30 }, { autoAlpha: 1, x: 0, duration: 0.5 }, 0.2);
+  const h2 = $(root, '.an-side .s-title');
+  if (h2) riseWords(tl, h2, 0.3, { stagger: 0.05 });
+  const ar = $(root, '.an-side .s-ar');
+  if (ar) tl.fromTo(ar, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.7 }, 0.7);
+  const segs = $$(root, '.an-seg');
+  tl.fromTo(segs, { scaleX: 0, autoAlpha: 0 }, { scaleX: 1, autoAlpha: 1, duration: 0.7, ease: 'expo.out', stagger: 0.12 }, sc.barAt ?? 0.6);
+  tl.fromTo($$(root, '.an-ruler span'), { autoAlpha: 0, y: -10 }, { autoAlpha: 1, y: 0, duration: 0.4, stagger: 0.03 }, (sc.barAt ?? 0.6) + 0.3);
+
+  // Parties actives, dans l'ordre de leur apparition
+  const live = parts.filter((p) => typeof p.at === 'number').sort((a, b) => a.at - b.at);
+  const panels = Object.fromEntries($$(root, '.an-panel').map((el) => [el.dataset.k, el]));
+  live.forEach((p, i) => {
+    const el = panels[p.k];
+    const nx = live[i + 1];
+    tl.fromTo(el, { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: 'expo.out' }, p.at);
+    tl.fromTo($(el, 'h3'), { scale: 1.25, transformOrigin: '0 50%' }, { scale: 1, duration: 0.6, ease: 'back.out(2)' }, p.at);
+    const fr = $(el, '.an-fr');
+    if (fr) tl.fromTo(fr, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.5 }, p.at + (p.frAt ?? 0.3));
+    const arl = $(el, '.an-ar');
+    if (arl) tl.fromTo(arl, { autoAlpha: 0, clipPath: 'inset(0 0 0 100%)' }, { autoAlpha: 1, clipPath: 'inset(0 0 0 0%)', duration: 0.8, ease: 'power3.out' }, p.at + (p.arAt ?? 0.7));
+    $$(el, '.an-items li').forEach((li, j) => tl.fromTo(li, { autoAlpha: 0, x: 40 }, { autoAlpha: 1, x: 0, duration: 0.5, ease: 'expo.out' }, p.items[j].at ?? p.at + 1 + j * 1.2));
+    if (nx) tl.to(el, { autoAlpha: 0, y: -40, duration: 0.35, ease: 'power2.in' }, nx.at - 0.3);
+  });
+
+  // La vidéo d'exemple : écran, tête de lecture et sous-titres suivent la partie active
+  const scr = $$(root, '.an-scr');
+  const playhead = $(root, '.an-head');
+  const pbar = $(root, '.an-pbar i');
+  const subs = $(root, '.an-subs');
+  const hl = $(root, '.an-hl');
+  const btn = $(root, '.an-btn');
+  const caps = parts.find((p) => p.k === 'body')?.captions || ['C’est quoi ?', 'Comment l’utiliser', 'Ses points forts'];
+  track(tl, d, (t) => {
+    let cur = null;
+    live.forEach((p) => {
+      if (t >= p.at) cur = p;
+    });
+    const key = cur ? cur.k : 'idle';
+    scr.forEach((el) => {
+      const on = el.dataset.k === key || (key === 'idle' && el.classList.contains('an-idle'));
+      el.style.opacity = on ? 1 : 0;
+    });
+    segs.forEach((el) => el.classList.toggle('is-on', el.dataset.k === key));
+    let vt = 0;
+    if (cur) {
+      const span = Math.max(0.5, cur.to - cur.from);
+      const speed = cur.speed ?? 1;
+      vt = cur.from + (((t - cur.at) * speed) % span);
+      const since = t - cur.at;
+      if (cur.k === 'hook' && hl) hl.style.transform = `scale(${(since < 0.35 ? 1.5 - (since / 0.35) * 0.5 : 1).toFixed(3)})`;
+      if (cur.k === 'body' && subs) {
+        let txt;
+        if (cur.items && cur.items.every((it) => typeof it.at === 'number')) {
+          // Les sous-titres suivent la voix : la dernière section annoncée
+          const it = cur.items.filter((x) => t >= x.at).pop();
+          txt = it ? it.cap || it.label.replace(/[*~^_]/g, '') : caps[0];
+        } else {
+          const n = Math.floor(((vt - cur.from) / span) * caps.length);
+          txt = caps[Math.min(caps.length - 1, n)] || '';
+        }
+        if (subs.textContent !== txt) subs.textContent = txt;
+        subs.style.opacity = 1;
+      }
+      if (cur.k === 'cta' && btn) btn.style.transform = `scale(${(1 + 0.05 * Math.max(0, Math.sin(since * 5))).toFixed(3)})`;
+    }
+    playhead.style.left = `${((vt / total) * 100).toFixed(3)}%`;
+    playhead.style.opacity = cur ? 1 : 0;
+    if (pbar) pbar.style.transform = `scaleX(${(vt / total).toFixed(4)})`;
+  });
   return tl;
 }
 

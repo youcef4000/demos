@@ -8,5 +8,10 @@
     "video": "video/m1-l2.mp4",
     "poster": "video/m1-l2.jpg",
     "voice": true
+  },
+  "m2-l1": {
+    "video": "video/m2-l1.mp4",
+    "poster": "video/m2-l1.jpg",
+    "voice": true
   }
 }

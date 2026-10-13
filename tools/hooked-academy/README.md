@@ -39,8 +39,16 @@ module UGC, et un **projet final** avec certificat.
 Chaque leçon est une composition animée (`motion/`) : la plateforme la lit directement, et le même
 code la rend en MP4 image par image.
 
-- **Leçons 1 et 2** : montées sur la voix off réelle (reprises et faux départs coupés, son nettoyé et
-  normalisé). Rushes utilisés : prise du 25/06 20:01 (à partir du redémarrage) et prise du 25/06 20:04.
+- **Montées sur la voix off réelle** (reprises et faux départs coupés, pauses resserrées, son nettoyé et
+  normalisé à −16 LUFS) :
+
+  | Leçon | Rush utilisé | Durée |
+  |---|---|---|
+  | M01 · L01 — Qu’est-ce qu’une créative ? | 25/06 20:29, prise unique | 0:52 |
+  | M01 · L02 — Les outils nécessaires | 25/06 20:35, dernière prise (à partir de 3:11) | 0:58 |
+  | M02 · L01 — Hook · Body · CTA (la structure) | 25/06 20:41, dernière prise (à partir de 2:32) | 1:49 |
+
+  Les premières prises (25/06 20:01 et 20:04) restent dans l’historique Git.
 - **Les autres leçons** : animation complète, voix off à enregistrer.
 
 ### Enregistrer une voix off (sans montage)
