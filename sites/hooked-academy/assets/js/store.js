@@ -1,0 +1,309 @@
+// Hooked Academy — données de la plateforme : inscriptions, étudiants, progression.
+// Démo sans serveur : tout est enregistré dans ce navigateur (localStorage). La landing dépose les
+// inscriptions, l'équipe les traite dans l'admin (contact WhatsApp, paiement, validation) et la
+// validation crée l'accès étudiant (e-mail + code). En production, ces fonctions appelleraient une
+// API (Worker Cloudflare + D1, ou la base de Hooked Lab) avec exactement les mêmes entrées/sorties.
+
+const KEY = 'hooked-academy:data:v1';
+const SESSION = 'hooked-academy:session:v1';
+const ADMIN = 'hooked-academy:admin:v1';
+export const VERSION = 1;
+export const TEAM_CODE = 'HOOKED-TEAM';
+export const DEMO_STUDENT = { email: 'demo@hooked.academy', code: 'DEMO-2026' };
+
+export const STATUS = {
+  nouvelle: { label: 'Nouvelle', c: '#e0be55' },
+  contactee: { label: 'Contactée', c: '#8fb8e8' },
+  paiement: { label: 'Paiement en attente', c: '#ec7a45' },
+  validee: { label: 'Validée', c: '#55b894' },
+  refusee: { label: 'Refusée', c: '#8b8494' },
+};
+export const PROFILS = {
+  debutant: 'Je débute',
+  ecommercant: 'E-commerçant·e',
+  freelance: 'Freelance / community manager',
+  createur: 'Créateur·rice de contenu',
+  agence: 'Agence / équipe marketing',
+};
+
+const read = (k) => {
+  try {
+    const raw = localStorage.getItem(k);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+};
+const write = (k, v) => {
+  try {
+    localStorage.setItem(k, JSON.stringify(v));
+    return true;
+  } catch (err) {
+    console.warn('Enregistrement impossible', err);
+    return false;
+  }
+};
+
+export const uid = (p = 'x') => `${p}${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`;
+const pad = (n) => String(n).padStart(2, '0');
+export const iso = (d = new Date()) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+const daysAgo = (n, h = 10, m = 0) => {
+  const d = new Date();
+  d.setDate(d.getDate() - n);
+  d.setHours(h, m, 0, 0);
+  return d.toISOString();
+};
+
+function accessCode() {
+  const A = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  const part = () => Array.from({ length: 4 }, () => A[Math.floor(Math.random() * A.length)]).join('');
+  return `HA-${part()}-${part()}`;
+}
+
+/* ------------------------------------------------------------------ */
+/* Données d'exemple : clairement marquées, remplacées par les vraies   */
+/* ------------------------------------------------------------------ */
+
+function seed() {
+  const ex = (o) => ({ exemple: true, notes: [], history: [{ at: o.createdAt, status: 'nouvelle', by: 'Formulaire' }], ...o });
+  const applications = [
+    ex({ id: 'ex-a1', createdAt: daysAgo(0, 9, 14), name: 'Exemple — Amina B.', phone: '0550 00 00 01', email: 'amina.exemple@mail.dz', city: 'Alger', profil: 'ecommercant', niveau: 'Je vends déjà, mes pubs ne marchent pas', objectif: 'Faire mes propres vidéos pour ma boutique de cosmétiques', status: 'nouvelle' }),
+    ex({ id: 'ex-a2', createdAt: daysAgo(0, 11, 2), name: 'Exemple — Yacine K.', phone: '0661 00 00 02', email: 'yacine.exemple@mail.dz', city: 'Oran', profil: 'freelance', niveau: 'Je fais déjà du montage', objectif: 'Proposer des créatives IA à mes clients', status: 'nouvelle' }),
+    ex({ id: 'ex-a3', createdAt: daysAgo(1, 16, 40), name: 'Exemple — Sara M.', phone: '0770 00 00 03', email: 'sara.exemple@mail.dz', city: 'Constantine', profil: 'debutant', niveau: 'Débutante complète', objectif: 'Apprendre un métier et trouver mes premiers clients', status: 'contactee', notes: [{ at: daysAgo(1, 17), by: 'Équipe', text: 'Appel fait, intéressée par la session du mois prochain.' }] }),
+    ex({ id: 'ex-a4', createdAt: daysAgo(2, 10, 5), name: 'Exemple — Walid H.', phone: '0555 00 00 04', email: 'walid.exemple@mail.dz', city: 'Sétif', profil: 'ecommercant', niveau: 'Je vends déjà', objectif: 'Scaler mes pubs avec l’UGC IA', status: 'paiement', notes: [{ at: daysAgo(2, 12), by: 'Équipe', text: 'Paiement BaridiMob annoncé, en attente de reçu.' }] }),
+    ex({ id: 'ex-a5', createdAt: daysAgo(4, 14, 30), name: 'Exemple — Nour E.', phone: '0698 00 00 05', email: 'nour.exemple@mail.dz', city: 'Blida', profil: 'createur', niveau: 'Je crée déjà du contenu', objectif: 'Passer à la vidéo cinématique', status: 'validee' }),
+    ex({ id: 'ex-a6', createdAt: daysAgo(6, 19, 12), name: 'Exemple — Karim D.', phone: '0540 00 00 06', email: 'karim.exemple@mail.dz', city: 'Tizi Ouzou', profil: 'agence', niveau: 'Équipe de 3 personnes', objectif: 'Former l’équipe au prompting', status: 'refusee', notes: [{ at: daysAgo(5, 10), by: 'Équipe', text: 'Préfère une formation en présentiel : orienté vers la prochaine masterclass.' }] }),
+  ];
+
+  // Compte démo : un peu de progression pour que l'espace étudiant soit vivant
+  const done = ['m1-l1', 'm1-l2', 'm1-l3', 'm1-l4', 'm2-l1', 'm2-l2'];
+  const lessons = {};
+  done.forEach((id, i) => {
+    lessons[id] = { done: true, at: daysAgo(done.length - i, 20, 10), quiz: i % 3 === 2 ? 0.67 : 1 };
+  });
+  lessons['m2-l3'] = { done: false, watched: 18 };
+  const days = [6, 5, 4, 2, 1, 0].map((n) => iso(new Date(Date.now() - n * 864e5)));
+  const demo = {
+    id: 'st-demo',
+    appId: 'ex-a5',
+    exemple: true,
+    name: 'Compte démo',
+    firstName: 'Créateur',
+    email: DEMO_STUDENT.email,
+    phone: '',
+    code: DEMO_STUDENT.code,
+    createdAt: daysAgo(7),
+    active: true,
+    cohort: 'Session découverte',
+    progress: { lessons, last: 'm2-l3', days, xp: done.length * 120 + 40, badges: ['premier-pas', 'fondations'] },
+  };
+  return { version: VERSION, applications, students: [demo], settings: { whatsapp: '213558678038', cohort: 'Prochaine session' } };
+}
+
+/* ------------------------------------------------------------------ */
+
+export function load() {
+  const d = read(KEY);
+  if (d && d.version === VERSION) return d;
+  const s = seed();
+  write(KEY, s);
+  return s;
+}
+export const save = (d) => write(KEY, d);
+export function reset() {
+  try {
+    localStorage.removeItem(KEY);
+    localStorage.removeItem(SESSION);
+    localStorage.removeItem(ADMIN);
+  } catch {}
+}
+
+/** Inscription envoyée depuis la landing. */
+export function addApplication(form) {
+  const d = load();
+  const app = {
+    id: uid('ins-'),
+    createdAt: new Date().toISOString(),
+    name: String(form.name || '').trim(),
+    phone: String(form.phone || '').trim(),
+    email: String(form.email || '').trim().toLowerCase(),
+    city: String(form.city || '').trim(),
+    profil: form.profil || 'debutant',
+    niveau: String(form.niveau || '').trim(),
+    objectif: String(form.objectif || '').trim(),
+    source: form.source || 'Landing',
+    status: 'nouvelle',
+    notes: [],
+    history: [{ at: new Date().toISOString(), status: 'nouvelle', by: 'Formulaire' }],
+  };
+  d.applications.unshift(app);
+  save(d);
+  return app;
+}
+
+export function updateApplication(id, patch, by = 'Équipe') {
+  const d = load();
+  const a = d.applications.find((x) => x.id === id);
+  if (!a) return null;
+  if (patch.status && patch.status !== a.status) a.history.push({ at: new Date().toISOString(), status: patch.status, by });
+  if (patch.note) a.notes.push({ at: new Date().toISOString(), by, text: patch.note });
+  const { note, ...rest } = patch;
+  Object.assign(a, rest);
+  save(d);
+  return a;
+}
+
+/** Valide une inscription : crée (ou réactive) l'accès étudiant et renvoie le message à envoyer. */
+export function validateApplication(id, by = 'Équipe') {
+  const d = load();
+  const a = d.applications.find((x) => x.id === id);
+  if (!a) return null;
+  let st = d.students.find((s) => s.appId === a.id || (a.email && s.email === a.email));
+  if (!st) {
+    st = {
+      id: uid('st-'),
+      appId: a.id,
+      exemple: !!a.exemple,
+      name: a.name,
+      firstName: a.name.replace(/^Exemple — /, '').split(/\s+/)[0] || 'Créateur',
+      email: a.email,
+      phone: a.phone,
+      code: accessCode(),
+      createdAt: new Date().toISOString(),
+      active: true,
+      cohort: d.settings.cohort,
+      progress: { lessons: {}, last: null, days: [], xp: 0, badges: [] },
+    };
+    d.students.push(st);
+  } else st.active = true;
+  if (a.status !== 'validee') a.history.push({ at: new Date().toISOString(), status: 'validee', by });
+  a.status = 'validee';
+  a.studentId = st.id;
+  save(d);
+  return { app: a, student: st, message: welcomeMessage(st) };
+}
+
+export function welcomeMessage(st) {
+  const url = new URL('app/', location.href.replace(/(admin|app)\/.*$/, '')).href;
+  return `Salam ${st.firstName} ! Ton inscription à Hooked Academy est validée 🎉\n\nTon espace étudiant : ${url}\nIdentifiant : ${st.email || st.phone}\nCode d'accès : ${st.code}\n\nCommence par le module 1 — 2 minutes par leçon. Bonne formation !`;
+}
+
+export function setStudentActive(id, active) {
+  const d = load();
+  const st = d.students.find((s) => s.id === id);
+  if (!st) return null;
+  st.active = active;
+  save(d);
+  return st;
+}
+
+/** Connexion étudiant : e-mail ou téléphone + code. */
+export function loginStudent(ident, code) {
+  const d = load();
+  const id = String(ident || '').trim().toLowerCase().replace(/\s+/g, '');
+  const c = String(code || '').trim().toUpperCase();
+  const st = d.students.find((s) => (s.email === id || s.phone.replace(/\s+/g, '') === id) && s.code === c);
+  if (!st) return { error: 'Identifiant ou code incorrect.' };
+  if (!st.active) return { error: 'Ton accès est suspendu. Contacte l’équipe.' };
+  write(SESSION, { role: 'student', id: st.id, at: Date.now() });
+  return { student: st };
+}
+
+export function loginAdmin(code) {
+  if (String(code || '').trim().toUpperCase() !== TEAM_CODE) return false;
+  write(ADMIN, { role: 'admin', at: Date.now() });
+  return true;
+}
+export const adminSession = () => read(ADMIN);
+export function logoutAdmin() {
+  try {
+    localStorage.removeItem(ADMIN);
+  } catch {}
+}
+
+export const session = () => read(SESSION);
+export function logout() {
+  try {
+    localStorage.removeItem(SESSION);
+  } catch {}
+}
+
+export function currentStudent() {
+  const s = session();
+  if (!s || s.role !== 'student') return null;
+  return load().students.find((x) => x.id === s.id) || null;
+}
+
+/** Met à jour la progression d'une leçon et l'XP. */
+export function recordLesson(studentId, lessonId, patch) {
+  const d = load();
+  const st = d.students.find((s) => s.id === studentId);
+  if (!st) return null;
+  const P = st.progress;
+  const prev = P.lessons[lessonId] || {};
+  const next = { ...prev, ...patch };
+  let gained = 0;
+  if (patch.done && !prev.done) {
+    next.at = new Date().toISOString();
+    gained += 100;
+  }
+  if (typeof patch.quiz === 'number' && (prev.quiz ?? -1) < patch.quiz) gained += Math.round(patch.quiz * 50) - Math.round(Math.max(0, prev.quiz || 0) * 50);
+  P.lessons[lessonId] = next;
+  P.last = lessonId;
+  P.xp = (P.xp || 0) + Math.max(0, gained);
+  const today = iso();
+  if (!P.days.includes(today)) P.days.push(today);
+  save(d);
+  return { student: st, gained };
+}
+
+export function awardBadge(studentId, badge) {
+  const d = load();
+  const st = d.students.find((s) => s.id === studentId);
+  if (!st || st.progress.badges.includes(badge)) return false;
+  st.progress.badges.push(badge);
+  save(d);
+  return true;
+}
+
+/** Série de jours consécutifs d'apprentissage. */
+export function streak(days = []) {
+  const set = new Set(days);
+  let n = 0;
+  const d = new Date();
+  if (!set.has(iso(d))) d.setDate(d.getDate() - 1);
+  while (set.has(iso(d))) {
+    n++;
+    d.setDate(d.getDate() - 1);
+  }
+  return n;
+}
+
+export const LEVELS = [
+  { xp: 0, name: 'Scrolleur', ar: 'متصفح' },
+  { xp: 400, name: 'Accrocheur', ar: 'صاحب الهوك' },
+  { xp: 1200, name: 'Créateur', ar: 'مبدع' },
+  { xp: 2600, name: 'Directeur créatif', ar: 'مدير إبداعي' },
+  { xp: 4600, name: 'Hooked Pro', ar: 'محترف' },
+];
+export function level(xp = 0) {
+  let i = 0;
+  LEVELS.forEach((l, k) => {
+    if (xp >= l.xp) i = k;
+  });
+  const cur = LEVELS[i];
+  const nxt = LEVELS[i + 1];
+  return { ...cur, i, next: nxt, pct: nxt ? (xp - cur.xp) / (nxt.xp - cur.xp) : 1 };
+}
+
+export const BADGES = {
+  'premier-pas': { name: 'Premier pas', desc: 'Première leçon terminée', icon: 'play' },
+  fondations: { name: 'Fondations', desc: 'Module 1 terminé', icon: 'spark' },
+  structure: { name: 'Architecte', desc: 'Module 2 terminé : Hook, Body, CTA', icon: 'layers' },
+  'sans-faute': { name: 'Sans faute', desc: 'Un quiz à 100 %', icon: 'check' },
+  prompteur: { name: 'Prompteur', desc: 'Module Prompting terminé', icon: 'chat' },
+  serie: { name: 'En feu', desc: '5 jours d’affilée', icon: 'fire' },
+  ia: { name: 'Créateur IA', desc: 'Images et vidéos IA terminées', icon: 'sparkles' },
+  closer: { name: 'Closer', desc: 'Module Acquisition terminé', icon: 'handshake' },
+  diplome: { name: 'Diplômé', desc: 'Toute la formation terminée', icon: 'trophy' },
+};

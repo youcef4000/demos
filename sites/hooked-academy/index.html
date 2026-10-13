@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hooked Academy — la formation créatives & IA de Hooked Lab</title>
+<meta name="description" content="Apprends à créer des publicités qui arrêtent le scroll : vidéo, image, carrousel, prompting, images et vidéos IA, UGC, cinématique et acquisition de clients. 57 leçons de 2 minutes, en darija. Site de démonstration.">
+<meta name="theme-color" content="#07060a">
+<link rel="canonical" href="https://demos.bornzstudio.com/hooked-academy/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Hooked Academy">
+<meta property="og:url" content="https://demos.bornzstudio.com/hooked-academy/">
+<meta property="og:title" content="Hooked Academy — arrête le scroll">
+<meta property="og:description" content="La formation créatives & IA de Hooked Lab : vidéo, image, carrousel, UGC, cinématique et clients. 57 leçons de 2 minutes, en darija.">
+<meta property="og:image" content="https://demos.bornzstudio.com/hooked-academy/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Hooked Academy — Arrête le scroll">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hooked Academy — arrête le scroll">
+<meta name="twitter:description" content="La formation créatives & IA de Hooked Lab. 57 leçons de 2 minutes, en darija.">
+<meta name="twitter:image" content="https://demos.bornzstudio.com/hooked-academy/assets/img/og.jpg">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Figtree:wght@400..800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=JetBrains+Mono:wght@400..700&display=swap">
+<link rel="stylesheet" href="assets/css/brand.css">
+<link rel="stylesheet" href="assets/css/landing.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/" } }</script>
+<script type="module" src="assets/js/landing.js"></script>
+</head>
+<body class="is-loading">
+<a class="skip" href="#inscription">Aller à l’inscription</a>
+
+<!-- Ouverture : le compte à rebours du hook -->
+<div class="pre" id="pre" aria-hidden="true">
+  <div class="pre-ring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="54"/></svg><b id="pre-n">3</b></div>
+  <p class="pre-t">Tu as <em>3 secondes</em> pour accrocher.</p>
+  <div class="pre-bars"><i></i><i></i><i></i><i></i></div>
+</div>
+
+<div class="cursor" id="cursor" aria-hidden="true"><i></i><span></span></div>
+
+<!-- Cette page est une créative : Hook, Body, CTA -->
+<aside class="hbc" id="hbc" aria-label="Structure de la page">
+  <span class="hbc-k">Cette page est une créative</span>
+  <ol>
+    <li data-part="hook"><i><b></b></i><span>Hook</span></li>
+    <li data-part="body"><i><b></b></i><span>Body</span></li>
+    <li data-part="cta"><i><b></b></i><span>CTA</span></li>
+  </ol>
+</aside>
+
+<header class="nav" id="nav">
+  <a class="ha-logo nav-logo" href="#top" aria-label="Hooked Academy, retour en haut" id="nav-logo"></a>
+  <nav class="nav-links" aria-label="Sections">
+    <a href="#hook">La méthode</a>
+    <a href="#programme">Programme</a>
+    <a href="#ia">IA</a>
+    <a href="#hooked-lab">Hooked Lab</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <span class="demo-tag" title="Maquette de démonstration">Démo</span>
+  <a class="nav-space" href="app/">Espace étudiant</a>
+  <a class="btn btn--or btn--s" href="#inscription" data-cursor="Go">Réserver</a>
+  <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
+</header>
+<div class="menu" id="menu" hidden>
+  <a href="#hook">La méthode</a>
+  <a href="#programme">Programme</a>
+  <a href="#ia">L’IA créative</a>
+  <a href="#hooked-lab">Hooked Lab</a>
+  <a href="#format">La formation</a>
+  <a href="#faq">FAQ</a>
+  <a href="app/">Espace étudiant</a>
+  <a class="btn btn--or" href="#inscription">Réserver ma place</a>
+</div>
+
+<main id="top">
+  <!-- HOOK ============================================================ -->
+  <section class="hero" id="hero" data-part="hook">
+    <div class="hero-feed" id="feed" aria-hidden="true"></div>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <svg class="hero-hook" id="hero-hook" viewBox="0 0 60 400" aria-hidden="true">
+      <line x1="30" y1="0" x2="30" y2="330"/>
+      <path d="M38 320v42a16 16 0 1 1-32 0v-8l9 9"/>
+    </svg>
+    <div class="hero-pick" id="hero-pick" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="eyebrow-dot"></span>La formation créatives &amp; IA de Hooked Lab</p>
+      <h1 class="hero-title" id="hero-title" aria-label="Arrête le scroll.">
+        <span class="ht-l" aria-hidden="true">Arrête</span>
+        <span class="ht-l" aria-hidden="true"><span class="ht-w">le </span><span class="ht-w">scroll<span class="ht-dot">.</span></span></span>
+      </h1>
+      <p class="hero-ar" lang="ar" dir="rtl">وقّف السكرول</p>
+      <p class="hero-sub">Vidéo, image, carrousel, UGC, cinématique : apprends à créer des publicités qui accrochent — avec et sans IA. En darija, en leçons de <b>2&nbsp;minutes</b>.</p>
+      <div class="hero-cta">
+        <a class="btn btn--or" href="#inscription" data-cursor="Go">Réserver ma place</a>
+        <a class="btn btn--ghost" href="#programme">Voir le programme</a>
+      </div>
+      <ul class="hero-facts" id="hero-facts">
+        <li><b data-count="lessons">57</b><span>leçons animées</span></li>
+        <li><b data-count="modules">13</b><span>modules</span></li>
+        <li><b>2</b><span>min max par leçon</span></li>
+      </ul>
+    </div>
+    <p class="hero-scroll" aria-hidden="true"><i></i>Scrolle&nbsp;: on va t’accrocher</p>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div class="marquee-t" id="marquee"></div></div>
+
+  <!-- Anatomie : 3 secondes, puis Body, puis CTA -->
+  <section class="anat" id="hook" data-part="hook">
+    <div class="anat-pin">
+      <header class="anat-head">
+        <p class="kicker"><i></i>La méthode</p>
+        <h2 class="h2">Une créative qui vend a <em>trois parties</em>.</h2>
+      </header>
+      <div class="anat-grid">
+        <div class="anat-phone">
+          <div class="aph">
+            <div class="aph-screen">
+              <div class="aph-bg"></div>
+              <div class="aph-prod" id="aph-prod"></div>
+              <p class="aph-hook" id="aph-hook">Ton parfum disparaît <em>avant midi</em>&nbsp;?</p>
+              <ul class="aph-body" id="aph-body"><li>Formule concentrée</li><li>2 pulvérisations suffisent</li><li>Tient jusqu’au soir</li></ul>
+              <div class="aph-cta" id="aph-cta">Commander — paiement à la livraison</div>
+              <div class="aph-prog"><i id="aph-prog"></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="anat-side">
+          <div class="anat-timer">
+            <svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="88" class="t-bg"/><circle cx="100" cy="100" r="88" class="t-fg" id="t-fg"/></svg>
+            <b id="t-n">3</b><span>secondes</span>
+          </div>
+          <ol class="anat-steps" id="anat-steps">
+            <li data-k="hook"><b>Hook</b><span>0–3 s · arrêter le pouce</span></li>
+            <li data-k="body"><b>Body</b><span>montrer, prouver, rassurer</span></li>
+            <li data-k="cta"><b>CTA</b><span>dire exactement quoi faire</span></li>
+          </ol>
+        </div>
+      </div>
+      <div class="anat-track" aria-hidden="true">
+        <div class="anat-bar"><i data-k="hook"></i><i data-k="body"></i><i data-k="cta"></i><b id="anat-head"></b></div>
+        <svg class="anat-curve" viewBox="0 0 1000 160" preserveAspectRatio="none"><path id="anat-curve" d="M0 8 C 60 70, 120 84, 200 92 S 420 104, 600 110 S 860 120, 1000 124"/></svg>
+        <p class="anat-note">Courbe de rétention d’exemple : un hook fort garde les gens jusqu’au CTA.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BODY ============================================================ -->
+  <section class="mani" data-part="body">
+    <p class="mani-t" id="mani">Une créative, ce n’est pas une jolie vidéo. C’est une machine à *arrêter le pouce*, à *convaincre* et à *faire agir*. Hooked Academy t’apprend à la construire, plan par plan, prompt par prompt — avec ton téléphone, CapCut, Canva et l’IA.</p>
+    <p class="mani-ar" lang="ar" dir="rtl">الكرياتيف ماشي فيديو شابة برك، هي ماكينة باش توقّف السكرول و تبيع</p>
+  </section>
+
+  <section class="prog" id="programme" data-part="body">
+    <div class="prog-pin">
+      <header class="prog-head">
+        <p class="kicker"><i></i>Le programme</p>
+        <h2 class="h2"><span id="prog-count">13</span> modules. Des bases jusqu’aux <em>clients</em>.</h2>
+        <div class="prog-meter"><span id="prog-cur">01</span><i><b id="prog-bar"></b></i><span id="prog-tot">13</span></div>
+      </header>
+      <div class="prog-rail"><div class="prog-track" id="prog-track"></div></div>
+    </div>
+  </section>
+
+  <section class="lab" id="ia" data-part="body">
+    <div class="lab-pin">
+      <div class="lab-copy">
+        <p class="kicker"><i></i>L’IA créative</p>
+        <h2 class="h2">Un prompt précis, <em>une image précise</em>.</h2>
+        <p class="lab-lead">Scrolle : chaque mot du prompt change la scène. C’est exactement ce que tu apprendras au module Prompting.</p>
+        <div class="lab-prompt" aria-live="polite">
+          <div class="lab-bar"><i></i><i></i><i></i><span>Prompt image</span></div>
+          <p id="lab-txt"></p>
+          <div class="lab-tags" id="lab-tags"></div>
+        </div>
+      </div>
+      <div class="lab-stage" id="lab-stage">
+        <canvas id="lab-canvas" aria-label="Rendu 3D d’un flacon de parfum qui évolue avec le prompt" role="img"></canvas>
+        <div class="lab-frame" id="lab-frame"><span>4:5</span></div>
+        <div class="lab-fallback" id="lab-fallback" hidden></div>
+        <p class="lab-badge" id="lab-badge">Rendu 3D en direct</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="fmt" data-part="body">
+    <div class="fmt-pin">
+      <header class="fmt-head">
+        <p class="kicker"><i></i>Trois formats</p>
+        <h2 class="h2">Vidéo, image, carrousel : <em>tu sauras tout faire</em>.</h2>
+      </header>
+      <div class="fmt-stage" id="fmt-stage"></div>
+    </div>
+  </section>
+
+  <section class="hl" id="hooked-lab" data-part="body">
+    <div class="hl-pin">
+      <div class="hl-mark" id="hl-mark"></div>
+      <div class="hl-copy">
+        <p class="kicker"><i></i>Une formation liée à Hooked Lab</p>
+        <h2 class="h2 hl-swap"><span class="hl-a">Hooked Lab <em>analyse</em> les créatives qui marchent.</span><span class="hl-b">Hooked Academy t’apprend à <em>les créer</em>.</span></h2>
+        <p class="hl-lead">Hooked Lab décortique une publicité en quelques minutes : script, séquences, hook noté, angles marketing, pack de lancement. Dans l’Academy, tu t’en sers pour analyser, comprendre, puis produire tes propres créatives.</p>
+        <ul class="hl-chips" id="hl-chips">
+          <li>Script reconstitué</li><li>Séquences clés</li><li>Hook noté</li><li>Angles marketing</li><li>Mots-clés</li><li>Pack de lancement</li>
+        </ul>
+        <a class="btn btn--ghost" href="https://hooked-lab.com" target="_blank" rel="noopener">Découvrir Hooked Lab ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bento" id="format" data-part="body">
+    <header class="sec-head">
+      <p class="kicker"><i></i>La formation</p>
+      <h2 class="h2">Pensée pour être <em>finie</em>, pas abandonnée.</h2>
+    </header>
+    <div class="bento-grid">
+      <article class="bt bt-video">
+        <video src="video/m1-l1.mp4" poster="video/m1-l1.jpg" muted loop playsinline preload="none" id="bt-video" aria-label="Extrait de la leçon 1, sans le son"></video>
+        <div class="bt-cap"><b>Extrait · leçon 1</b><span>Chaque leçon est une vidéo animée, montée sur la voix off.</span></div>
+      </article>
+      <article class="bt bt-time">
+        <div class="bt-ring"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="44" class="fg"/></svg><b>2:00</b></div>
+        <h3>2 minutes max</h3>
+        <p>Une idée par leçon. Tu avances dans le bus, à la pause, avant de dormir.</p>
+      </article>
+      <article class="bt bt-dz">
+        <p class="bt-ar" lang="ar" dir="rtl">بالدارجة</p>
+        <div class="bt-wave" aria-hidden="true"></div>
+        <h3>En darija</h3>
+        <p>Expliqué comme on parle, avec les termes du métier en français.</p>
+      </article>
+      <article class="bt bt-quiz">
+        <h3>Quiz, schémas, exercices</h3>
+        <div class="bt-q" aria-hidden="true">
+          <p>Que veut dire CTA ?</p>
+          <span>Content To Advertise</span><span class="ok">Call To Action</span><span>Clic Total Annonce</span>
+        </div>
+        <p>Chaque leçon se termine par un quiz et un exercice interactif.</p>
+      </article>
+      <article class="bt bt-team">
+        <h3>Une vraie équipe derrière</h3>
+        <p>Ton inscription est traitée par l’équipe, ton projet final est relu et validé.</p>
+        <div class="bt-avatars" aria-hidden="true"><i></i><i></i><i></i><span>+ toi</span></div>
+      </article>
+      <article class="bt bt-count">
+        <b class="bt-big" data-count="lessons">57</b>
+        <h3>leçons, 13 modules, 1 projet final</h3>
+        <p>Des bases de la créative jusqu’à la signature de tes premiers clients.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="space" data-part="body">
+    <div class="space-copy">
+      <p class="kicker"><i></i>L’espace étudiant</p>
+      <h2 class="h2">Ta progression, <em>visible</em> chaque jour.</h2>
+      <p>Parcours en carte, série de jours, niveaux, badges, prochain module : tout est fait pour que tu reviennes demain.</p>
+      <a class="btn btn--ghost" href="app/?demo=1">Essayer le compte démo</a>
+    </div>
+    <div class="space-mock" id="space-mock" aria-hidden="true">
+      <div class="sm-win">
+        <div class="sm-top"><span class="sm-logo"></span><span class="sm-hi">Salam, Créateur 👋</span><span class="sm-xp">⚡ 760 XP</span></div>
+        <div class="sm-grid">
+          <div class="sm-card sm-ring"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40"/><circle cx="50" cy="50" r="40" class="fg"/></svg><b>11 %</b><span>de la formation</span></div>
+          <div class="sm-card sm-streak"><b>🔥 4</b><span>jours d’affilée</span><div class="sm-days"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div></div>
+          <div class="sm-card sm-next"><span>Continuer</span><b>Exemples de hooks</b><i><b></b></i></div>
+          <div class="sm-card sm-path"><svg viewBox="0 0 300 120"><path d="M10 100 C 60 20, 100 20, 140 60 S 230 110, 290 20"/></svg><i style="left:3%;top:78%" class="on"></i><i style="left:30%;top:28%" class="on"></i><i style="left:47%;top:50%" class="cur"></i><i style="left:72%;top:78%"></i><i style="left:95%;top:12%"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="path" data-part="body">
+    <header class="sec-head">
+      <p class="kicker"><i></i>Ton parcours</p>
+      <h2 class="h2">De zéro à <em>tes premiers clients</em>.</h2>
+    </header>
+    <div class="path-wrap">
+      <svg class="path-svg" viewBox="0 0 1000 900" preserveAspectRatio="none" aria-hidden="true"><path id="path-line" d="M120 40 C 120 200, 880 160, 880 330 S 120 470, 120 620 S 880 760, 880 880"/></svg>
+      <ol class="path-steps">
+        <li><span>Partie 1</span><b>Les fondamentaux</b><p>Créative, formats, outils, Hook · Body · CTA, AIDA, PAS, production dans CapCut et Canva.</p></li>
+        <li><span>Partie 2</span><b>L’IA créative</b><p>Prompting, images et vidéos IA, voix et sous-titres, UGC, cinématique.</p></li>
+        <li><span>Partie 3</span><b>Vendre ton savoir-faire</b><p>Mesurer avec Hooked Lab, itérer, choisir ta niche, prospecter, signer.</p></li>
+        <li><span>Final</span><b>Projet &amp; certificat</b><p>Une campagne complète, relue et validée par l’équipe.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="who" data-part="body">
+    <header class="sec-head">
+      <p class="kicker"><i></i>Pour qui</p>
+      <h2 class="h2">Tu te reconnais&nbsp;?</h2>
+    </header>
+    <div class="who-grid">
+      <article class="who-c"><span class="who-i" data-icon="cart"></span><h3>E-commerçant·e</h3><p>Tu vends déjà et tes pubs coûtent cher : tu veux produire des créatives qui convertissent, toi-même.</p></article>
+      <article class="who-c"><span class="who-i" data-icon="users"></span><h3>Freelance, CM</h3><p>Tu veux ajouter les créatives IA à ton offre et facturer plus cher.</p></article>
+      <article class="who-c"><span class="who-i" data-icon="spark"></span><h3>Débutant·e</h3><p>Tu pars de zéro : on commence par « c’est quoi une créative ? ».</p></article>
+      <article class="who-c"><span class="who-i" data-icon="camera"></span><h3>Créateur·rice</h3><p>Tu fais déjà du contenu et tu veux passer à l’UGC et au cinématique.</p></article>
+    </div>
+  </section>
+
+  <!-- CTA ============================================================= -->
+  <section class="join" id="inscription" data-part="cta">
+    <div class="join-copy">
+      <p class="kicker"><i></i>Inscription</p>
+      <h2 class="h2">Réserve ta place. <em>L’équipe te rappelle.</em></h2>
+      <ol class="join-steps">
+        <li><b>1</b><div><strong>Tu remplis le formulaire</strong><span>1 minute, sans paiement en ligne.</span></div></li>
+        <li><b>2</b><div><strong>L’équipe te contacte sur WhatsApp</strong><span>Session, tarif, paiement (CCP, BaridiMob ou espèces).</span></div></li>
+        <li><b>3</b><div><strong>Tu reçois ton accès</strong><span>Ton espace étudiant s’ouvre : module 1, leçon 1.</span></div></li>
+      </ol>
+    </div>
+    <form class="form" id="form" novalidate>
+      <div class="form-prog" aria-hidden="true"><i id="form-bar"></i></div>
+      <fieldset class="fs is-on" data-step="0">
+        <legend>Qui es-tu&nbsp;?</legend>
+        <label class="fld"><span>Nom et prénom</span><input name="name" autocomplete="name" required minlength="2" placeholder="Ex. : Amina Benali"></label>
+        <label class="fld"><span>WhatsApp</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="05 50 00 00 00" pattern="[\d\s+\(\)\.\-]{8,}"></label>
+        <label class="fld"><span>E-mail <em>(pour ton accès)</em></span><input name="email" type="email" autocomplete="email" required placeholder="toi@mail.com"></label>
+        <label class="fld"><span>Ville / wilaya</span><input name="city" autocomplete="address-level2" placeholder="Alger"></label>
+      </fieldset>
+      <fieldset class="fs" data-step="1">
+        <legend>Ton profil</legend>
+        <div class="chips" role="radiogroup" aria-label="Profil">
+          <label><input type="radio" name="profil" value="debutant" checked><span>Je débute</span></label>
+          <label><input type="radio" name="profil" value="ecommercant"><span>E-commerçant·e</span></label>
+          <label><input type="radio" name="profil" value="freelance"><span>Freelance / CM</span></label>
+          <label><input type="radio" name="profil" value="createur"><span>Créateur·rice</span></label>
+          <label><input type="radio" name="profil" value="agence"><span>Agence / équipe</span></label>
+        </div>
+        <label class="fld"><span>Ton niveau aujourd’hui</span>
+          <select name="niveau">
+            <option>Débutant complet</option>
+            <option>Je fais déjà un peu de montage</option>
+            <option>Je vends déjà, mes pubs ne marchent pas assez</option>
+            <option>Je crée déjà du contenu régulièrement</option>
+          </select>
+        </label>
+      </fieldset>
+      <fieldset class="fs" data-step="2">
+        <legend>Ton objectif</legend>
+        <label class="fld"><span>Qu’est-ce que tu veux réussir grâce à la formation&nbsp;?</span><textarea name="objectif" rows="4" maxlength="500" placeholder="Ex. : faire mes propres vidéos pour ma boutique, proposer des créatives IA à des clients…"></textarea></label>
+        <label class="check"><input type="checkbox" name="ok" required><span>J’accepte d’être contacté·e par l’équipe Hooked Academy sur WhatsApp.</span></label>
+      </fieldset>
+      <div class="form-nav">
+        <button type="button" class="btn btn--ghost btn--s" id="form-prev" hidden>Retour</button>
+        <button type="button" class="btn btn--or" id="form-next" data-cursor="Go">Continuer</button>
+      </div>
+      <p class="form-err" id="form-err" role="alert"></p>
+      <div class="form-done" id="form-done" hidden tabindex="-1">
+        <div class="done-mark" id="done-mark"></div>
+        <h3>C’est noté, <span id="done-name"></span>&nbsp;!</h3>
+        <p>Ton inscription est arrivée chez l’équipe. On te contacte sur WhatsApp pour la session, le tarif et le paiement. Ensuite, tu reçois ton code d’accès.</p>
+        <p class="done-demo">Démo&nbsp;: ouvre <a href="admin/">l’espace équipe</a> pour voir ton inscription arriver.</p>
+      </div>
+    </form>
+  </section>
+
+  <section class="faq" id="faq" data-part="cta">
+    <header class="sec-head">
+      <p class="kicker"><i></i>Questions</p>
+      <h2 class="h2">Avant de te lancer.</h2>
+    </header>
+    <div class="faq-list">
+      <details><summary>Faut-il un ordinateur&nbsp;?</summary><p>Non. Les leçons se suivent sur téléphone et les trois outils de base (CapCut, Canva, ChatGPT) existent sur mobile, en version gratuite. Un ordinateur est plus confortable pour le montage avancé et la cinématique.</p></details>
+      <details><summary>Je n’y connais rien, c’est pour moi&nbsp;?</summary><p>Oui. Le module 1 commence par « c’est quoi une créative&nbsp;? ». Chaque leçon dure 2 minutes au maximum et ne traite qu’une idée.</p></details>
+      <details><summary>Les outils IA sont-ils payants&nbsp;?</summary><p>Plusieurs outils ont une version gratuite suffisante pour apprendre. Pour produire en volume, certains abonnements deviennent utiles : la formation t’explique lesquels choisir selon ton usage et ton budget.</p></details>
+      <details><summary>Quel est le lien avec Hooked Lab&nbsp;?</summary><p>Hooked Lab est l’application d’analyse de créatives de la même équipe. Dans la formation, tu l’utilises pour décortiquer les publicités qui marchent avant de produire les tiennes.</p></details>
+      <details><summary>Comment se passe le paiement&nbsp;?</summary><p>Aucun paiement sur le site. Après ton inscription, l’équipe te contacte sur WhatsApp pour t’indiquer le tarif de la session et les moyens de paiement (CCP, BaridiMob ou espèces). Ton accès est activé dès la validation.</p></details>
+      <details><summary>Est-ce qu’il y a un certificat&nbsp;?</summary><p>Oui, quand toutes les leçons sont terminées, les quiz réussis et ton projet final validé par l’équipe.</p></details>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" data-part="cta">
+  <div class="foot-big" aria-hidden="true"><span>HOOKED</span><span>ACADEMY</span></div>
+  <div class="foot-row">
+    <a class="ha-logo" href="#top" id="foot-logo" aria-label="Hooked Academy"></a>
+    <nav aria-label="Liens">
+      <a href="app/">Espace étudiant</a>
+      <a href="admin/">Espace équipe</a>
+      <a href="https://hooked-lab.com" target="_blank" rel="noopener">Hooked Lab ↗</a>
+      <a href="#inscription">Inscription</a>
+    </nav>
+    <p class="foot-note">Site de démonstration. Les exemples de publicités, de produits et de comptes sont fictifs et présentés comme tels.</p>
+  </div>
+</footer>
+</body>
+</html>

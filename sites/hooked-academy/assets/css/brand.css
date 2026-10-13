@@ -104,6 +104,10 @@ a {
   unicode-bidi: isolate;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 .sr-only {
   position: absolute !important;
   width: 1px;

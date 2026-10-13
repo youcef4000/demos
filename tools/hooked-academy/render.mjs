@@ -2,17 +2,19 @@
 //
 //   node tools/hooked-academy/render.mjs m1-l1 m1-l2        leçons choisies
 //   node tools/hooked-academy/render.mjs --all              toutes les leçons
-//   node tools/hooked-academy/render.mjs --voix             seulement celles qui ont une voix off montée
+//   node tools/hooked-academy/render.mjs --voix             toutes les leçons qui ont une voix off
 //   options : --out <dossier> (défaut : sites/hooked-academy/video) --fps 30 --hauteur 1080
 //
-// La voix off d'une leçon (champ `audio`, ex. video/voix/m1-l1.m4a) est ajoutée au MP4.
+// Voix off : champ `audio` de la leçon, sinon un fichier video/voix/<id>.(m4a|mp3|wav|webm|ogg)
+// enregistré dans le studio de l'admin (calé sur l'animation). Elle est nettoyée, normalisée et
+// ajoutée au MP4 ; video/manifest.json est mis à jour pour que la plateforme lise ce MP4.
 // Sans voix, la vidéo est muette : prête à recevoir la voix off en darija dans CapCut.
 // Prérequis : Node 20+, ffmpeg, `npm i playwright` puis `npx playwright install chromium`
 // (ou CHROMIUM=/chemin/vers/chrome). HA_CDN_LOCAL=<node_modules> sert gsap sans réseau.
 
 import { chromium } from 'playwright';
 import { createServer } from 'node:http';
-import { readFile, mkdir, stat } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, stat, readdir } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -67,12 +69,24 @@ const lessons = await page0.evaluate(async () => {
   return m.allLessons().map((l) => ({ id: l.id, audio: l.audio || null, posterAt: l.posterAt ?? null, title: l.title }));
 });
 await page0.close();
+// Voix déposées dans video/voix/ par l'équipe (studio de l'admin)
+const VOIX = path.join(ROOT, 'hooked-academy/video/voix');
+const voiceFiles = await readdir(VOIX).catch(() => []);
+for (const l of lessons) {
+  if (l.audio) continue;
+  const f = ['m4a', 'mp3', 'wav', 'webm', 'ogg'].map((e) => `${l.id}.${e}`).find((n) => voiceFiles.includes(n)) || voiceFiles.find((n) => n.startsWith(`${l.id}-voix`));
+  if (f) {
+    l.audio = `video/voix/${f}`;
+    l.raw = true; // prise brute du studio : on la nettoie au rendu
+  }
+}
 const todo = args.includes('--all') ? lessons : args.includes('--voix') ? lessons.filter((l) => l.audio) : lessons.filter((l) => ids.includes(l.id));
 if (!todo.length) {
   console.error('Aucune leçon à rendre. Exemple : node tools/hooked-academy/render.mjs m1-l1');
   process.exit(1);
 }
 await mkdir(OUT, { recursive: true });
+const voiced = [];
 
 for (const L of todo) {
   const t0 = Date.now();
@@ -94,7 +108,8 @@ for (const L of todo) {
       '-v', 'error', '-y',
       '-f', 'image2pipe', '-framerate', String(FPS), '-c:v', 'mjpeg', '-i', '-',
       ...(audio ? ['-i', audio] : []),
-      '-map', '0:v', ...(audio ? ['-map', '1:a', '-c:a', 'aac', '-b:a', '160k', '-af', 'apad'] : []),
+      '-map', '0:v',
+      ...(audio ? ['-map', '1:a', '-c:a', 'aac', '-b:a', '160k', '-ar', '48000', '-af', !L.raw ? 'apad' : 'highpass=f=75,afftdn=nf=-30,acompressor=threshold=-24dB:ratio=3:attack=8:release=120:makeup=3,loudnorm=I=-16:TP=-1.5:LRA=9,apad'] : []),
       '-t', dur.toFixed(3),
       '-c:v', 'libx264', '-preset', 'slow', '-crf', '21', '-tune', 'animation', '-pix_fmt', 'yuv420p',
       '-profile:v', 'high', '-g', String(FPS * 2), '-movflags', '+faststart',
@@ -117,6 +132,16 @@ for (const L of todo) {
   await page.screenshot({ path: path.join(OUT, `${L.id}.jpg`), type: 'jpeg', quality: 82, scale: 'css', clip: { x: 0, y: 0, width: 1920, height: 1080 } });
   await page.close();
   console.log(`✓ ${L.id} — ${dur.toFixed(1)} s, ${frames} images${audio ? ', voix off' : ', muette'} (${Math.round((Date.now() - t0) / 1000)} s)`);
+  if (audio) voiced.push(L.id);
+}
+
+// Manifeste lu par la plateforme : leçons dont le MP4 avec voix off est publié
+if (voiced.length) {
+  const mf = path.join(OUT, 'manifest.json');
+  const cur = JSON.parse(await readFile(mf, 'utf8').catch(() => '{}'));
+  for (const id of voiced) cur[id] = { video: `video/${id}.mp4`, poster: `video/${id}.jpg`, voice: true };
+  await writeFile(mf, `${JSON.stringify(cur, null, 2)}\n`);
+  console.log('manifest.json mis à jour :', voiced.join(', '));
 }
 
 await browser.close();

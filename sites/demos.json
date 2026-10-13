@@ -6,6 +6,14 @@
   },
   "demos": [
     {
+      "slug": "hooked-academy",
+      "title": "Hooked Academy — arrête le scroll",
+      "sector": "Formation créatives & IA",
+      "city": "Algérie",
+      "color": "#c9a227",
+      "public": false
+    },
+    {
       "slug": "insag-business-school",
       "title": "INSAG Business School — gagnez en hauteur de vue",
       "sector": "Enseignement supérieur · MBA",

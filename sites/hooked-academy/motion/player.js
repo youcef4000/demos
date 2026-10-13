@@ -111,7 +111,7 @@ async function boot() {
       return;
     }
     render();
-    if (now - lastPost > 500) {
+    if (now - lastPost > 250) {
       post('time', { t, duration });
       lastPost = now;
     }
@@ -146,6 +146,7 @@ async function boot() {
     t = (Number(seek.value) / 1000) * duration;
     if (audio) audio.currentTime = t;
     render();
+    post('time', { t, duration });
   });
   const speeds = [1, 1.25, 1.5, 0.75];
   $('speed').addEventListener('click', () => {
@@ -181,6 +182,7 @@ async function boot() {
       t = Math.min(duration, Math.max(0, +m.t || 0));
       if (audio) audio.currentTime = t;
       render();
+      post('time', { t, duration });
     }
   });
 

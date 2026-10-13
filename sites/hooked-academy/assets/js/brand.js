@@ -16,10 +16,13 @@ export function markSVG({ cls = '', lab = false, solid = '' } = {}) {
   }<g fill="${fill}"><rect class="ha-pilier" x="8.5" y="9" width="5.5" height="30" rx="2.75"/><rect class="ha-pilier" x="34" y="9" width="5.5" height="30" rx="2.75"/></g><g fill="none" stroke="${fill}" stroke-width="5.5" stroke-linecap="round">${legs}</g></svg>`;
 }
 
-/** Logo complet : pastille + HOOKED / ACADEMY. */
+/** Contenu du logo (pastille + HOOKED / ACADEMY), à placer dans un élément .ha-logo. */
+export const logoInner = () => `<span class="ha-logo__pastille">${markSVG()}</span><span class="ha-logo__nom"><b>HOOKED</b><span>ACADEMY</span></span>`;
+
+/** Logo complet. */
 export function logoHTML({ href = '', label = 'Hooked Academy', cls = '' } = {}) {
   const tag = href ? 'a' : 'span';
-  return `<${tag} class="ha-logo ${cls}"${href ? ` href="${href}"` : ''} aria-label="${label}"><span class="ha-logo__pastille">${markSVG()}</span><span class="ha-logo__nom"><b>HOOKED</b><span>ACADEMY</span></span></${tag}>`;
+  return `<${tag} class="ha-logo ${cls}"${href ? ` href="${href}"` : ''} aria-label="${label}">${logoInner()}</${tag}>`;
 }
 
 /** Points des deux barres du milieu, de l'état Lab (droites) à l'état Academy (chevron). */

@@ -1,0 +1,91 @@
+# Vidéos Hooked Academy : rendu MP4 des leçons animées (Playwright + ffmpeg), image par image.
+# - Une voix off déposée dans sites/hooked-academy/video/voix/<id>.webm|m4a|mp3 (enregistrée dans le
+#   studio de l'admin, donc calée sur l'animation) déclenche le rendu de la leçon avec cette voix :
+#   le MP4 est publié sur le site et la plateforme le lit à la place de l'animation.
+# - Lancement manuel (Actions → Vidéos hooked-academy → Run workflow) : choisir les leçons
+#   (« m2-l1 m2-l2 », « voix » ou « toutes »). Tous les MP4 rendus, muets compris, sont aussi
+#   fournis en artefact téléchargeable pour poser la voix dans CapCut si besoin.
+name: Vidéos hooked-academy
+
+on:
+  push:
+    branches: [main]
+    paths: ['sites/hooked-academy/video/voix/**']
+  workflow_dispatch:
+    inputs:
+      lecons:
+        description: 'Leçons : identifiants séparés par des espaces (ex. m2-l1 m2-l2), « voix » ou « toutes »'
+        default: 'voix'
+      publier:
+        description: 'Publier sur le site les MP4 qui ont une voix off'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: videos-hooked-academy
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg jq
+      - name: Installer Playwright
+        working-directory: tools/hooked-academy
+        run: |
+          npm init -y >/dev/null
+          npm i --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Leçons à rendre
+        id: quoi
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            ids=$(git diff --name-only HEAD~1 HEAD -- sites/hooked-academy/video/voix | sed -E 's#.*/(m[0-9]+-l[0-9]+).*#\1#' | grep -E '^m[0-9]+-l[0-9]+$' | sort -u | tr '\n' ' ')
+          else
+            ids="${{ inputs.lecons }}"
+          fi
+          case "$ids" in
+            toutes) ids="--all" ;;
+            voix) ids="--voix" ;;
+          esac
+          echo "Leçons : $ids"
+          echo "ids=$ids" >> "$GITHUB_OUTPUT"
+      - name: Rendu
+        if: steps.quoi.outputs.ids != ''
+        run: node tools/hooked-academy/render.mjs ${{ steps.quoi.outputs.ids }} --out out
+      - uses: actions/upload-artifact@v4
+        if: steps.quoi.outputs.ids != ''
+        with:
+          name: videos-hooked-academy
+          path: out
+          retention-days: 30
+      - name: Publier les MP4 avec voix off
+        if: steps.quoi.outputs.ids != '' && (github.event_name == 'push' || inputs.publier)
+        run: |
+          set -euo pipefail
+          [ -f out/manifest.json ] || { echo "Aucune vidéo avec voix off à publier"; exit 0; }
+          V=sites/hooked-academy/video
+          for id in $(jq -r 'keys[]' out/manifest.json); do cp "out/$id.mp4" "out/$id.jpg" "$V/"; done
+          jq -s '.[0] * .[1]' "$V/manifest.json" out/manifest.json > m.tmp && mv m.tmp "$V/manifest.json"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898283+github-actions[bot]@users.noreply.github.com'
+          git add "$V"
+          git diff --cached --quiet && exit 0
+          git commit -m "Hooked Academy : vidéos avec voix off ($(jq -r 'keys | join(", ")' out/manifest.json))"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+          # Un commit du bot ne relance pas les déploiements : on relance le miroir GitHub Pages
+          gh workflow run static.yml --ref "${GITHUB_REF_NAME}" || true
+        env:
+          GH_TOKEN: ${{ github.token }}
