@@ -37,16 +37,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg jq
-      - name: Installer Playwright
-        working-directory: tools/hooked-academy
-        run: |
-          npm init -y >/dev/null
-          npm i --no-save playwright@1.56.1
-          npx playwright install --with-deps chromium
       - name: Leçons à rendre
         id: quoi
         run: |
@@ -61,6 +51,19 @@ jobs:
           esac
           echo "Leçons : $ids"
           echo "ids=$ids" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-node@v4
+        if: steps.quoi.outputs.ids != ''
+        with:
+          node-version: 22
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg jq
+        if: steps.quoi.outputs.ids != ''
+      - name: Installer Playwright
+        if: steps.quoi.outputs.ids != ''
+        working-directory: tools/hooked-academy
+        run: |
+          npm init -y >/dev/null
+          npm i --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
       - name: Rendu
         if: steps.quoi.outputs.ids != ''
         run: node tools/hooked-academy/render.mjs ${{ steps.quoi.outputs.ids }} --out out
