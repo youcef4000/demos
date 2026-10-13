@@ -1,0 +1,570 @@
+// Programme Hooked Academy — modules, leçons, scènes animées, quiz et exercices.
+// Les leçons « voix enregistrée » ont des scènes calées au dixième de seconde sur la voix off montée.
+// Les autres ont leur texte « à dire » (say) : le studio de l'équipe l'affiche en prompteur pendant
+// que l'animation tourne, pour enregistrer la voix off en darija parfaitement synchronisée.
+
+import { MODULES_2 } from './programme-ia.js';
+
+export const PARTS = [
+  { id: 'p1', n: 1, title: 'Les fondamentaux', ar: 'الأساسيات', pitch: 'Comprendre ce qui fait vendre une créative, et la produire sans IA.' },
+  { id: 'p2', n: 2, title: 'L’IA créative', ar: 'الذكاء الاصطناعي الإبداعي', pitch: 'Prompting, images, vidéos, voix, UGC et cinématique.' },
+  { id: 'p3', n: 3, title: 'Vendre son savoir-faire', ar: 'بيع خدماتك', pitch: 'Analyser, itérer et signer ses premiers clients.' },
+];
+
+const MODULES_1 = [
+  {
+    id: 'm1',
+    n: 1,
+    part: 'p1',
+    title: 'Les bases de la créative',
+    ar: 'أساسيات الكرياتيف',
+    color: '#e0be55',
+    icon: 'spark',
+    pitch: 'Ce qu’est une créative, ses trois formats et les outils pour la produire.',
+    lessons: [
+      {
+        id: 'm1-l1',
+        n: 1,
+        title: 'Qu’est-ce qu’une créative ?',
+        ar: 'وشنو هي لا كرياتيف',
+        voice: true,
+        video: 'video/m1-l1.mp4',
+        audio: 'video/voix/m1-l1.m4a',
+        poster: 'video/m1-l1.jpg',
+        scenes: [
+          { type: 'title', d: 3.05, kicker: 'Module 01 · Leçon 01', sub: 'Définition et types de créatives' },
+          { type: 'big', d: 4.55, kicker: 'Définition', text: 'La créative, c’est le *contenu visuel* de ta *publicité*.', ar: 'الكرياتيف هي المحتوى البصري للإعلان' },
+          {
+            type: 'cards',
+            d: 4.8,
+            items: [
+              { icon: 'video', label: 'Vidéo', at: 0.3, c: 'hook' },
+              { icon: 'image', label: 'Image', at: 1.7, c: 'body' },
+              { icon: 'carousel', label: 'Carrousel', at: 3.0, c: 'cta' },
+            ],
+          },
+          {
+            type: 'flow',
+            d: 5.2,
+            title: 'Elle fait la promotion d’un produit',
+            nodes: [
+              { icon: 'box', label: 'Ton produit', at: 0.5 },
+              { icon: 'sparkles', label: 'La créative', at: 1.9 },
+              { icon: 'globe', label: 'Les plateformes', sub: 'Facebook · Instagram · TikTok', at: 3.3 },
+            ],
+          },
+          {
+            type: 'phone',
+            d: 13.8,
+            mode: 'video',
+            kicker: 'Type 01',
+            title: 'La vidéo',
+            ar: 'الفيديو',
+            bg: 'teal',
+            caption: 'Le parfum qui tient toute la journée ✨',
+            captions: [
+              { t: 'NOUVEAU', at: 1.2 },
+              { t: 'Tenue 24 h ?', at: 4.2 },
+              { t: 'On te montre', at: 7.2 },
+              { t: 'Livraison 58 wilayas', at: 10.4 },
+            ],
+            side: [
+              { icon: 'play', label: 'Une vidéo promotionnelle', sub: 'Le format roi des réseaux', at: 2.2 },
+              { icon: 'eye', label: 'On montre le produit', sub: 'En action, sous tous les angles', at: 6.2 },
+              { icon: 'star', label: 'On parle de ses atouts', sub: 'Ses caractéristiques, ses bénéfices', at: 9.4 },
+            ],
+          },
+          {
+            type: 'phone',
+            d: 6.8,
+            mode: 'image',
+            kicker: 'Type 02',
+            title: 'L’image',
+            ar: 'الصورة',
+            align: 'right',
+            bg: 'sable',
+            headline: 'Un parfum qui *reste* toute la journée',
+            caption: 'Découvre NOOR, notre parfum signature.',
+            side: [
+              { icon: 'image', label: 'Une seule image', sub: 'Lisible en une seconde', at: 0.9, c: 'body' },
+              { icon: 'target', label: 'Produit + message', sub: 'Une idée, pas dix', at: 2.6, c: 'body' },
+              { icon: 'cart', label: 'Un bouton d’action', sub: 'Commander, découvrir…', at: 4.2, c: 'cta' },
+            ],
+          },
+          {
+            type: 'phone',
+            d: 11.4,
+            mode: 'carousel',
+            kicker: 'Type 03',
+            title: 'Le carrousel',
+            ar: 'الكاروسيل',
+            bg: 'teal',
+            swipeAt: 3.2,
+            swipe: 1.5,
+            caption: 'Glisse pour tout savoir →',
+            side: [
+              { icon: 'carousel', label: 'Une suite d’images', sub: 'Que l’on fait défiler', at: 0.6, c: 'cta' },
+              { icon: 'arrow', label: 'Une image après l’autre', sub: 'Chaque slide apporte une info', at: 3.8, c: 'cta' },
+              { icon: 'cart', label: 'Jusqu’à la commande', sub: 'La dernière slide pousse à l’action', at: 7.7, c: 'cta' },
+            ],
+          },
+          { type: 'outro', d: 3, text: 'Vidéo, image, carrousel : trois formats, un seul but — *vendre*.' },
+        ],
+        key: [
+          'Une créative est le contenu visuel d’une publicité : c’est elle qui fait la promotion du produit sur les plateformes.',
+          'Il existe trois formats : la vidéo, l’image et le carrousel.',
+          'Chaque format a son rôle : la vidéo montre, l’image résume, le carrousel raconte slide après slide.',
+        ],
+        quiz: [
+          { q: 'Une créative, c’est…', a: ['Le budget de la campagne', 'Le contenu visuel de la publicité', 'Le ciblage de l’audience'], ok: 1, why: 'La créative est ce que le client voit : la vidéo, l’image ou le carrousel.' },
+          { q: 'Quel format montre plusieurs images que l’on fait défiler ?', a: ['La vidéo', 'L’image', 'Le carrousel'], ok: 2, why: 'Le carrousel est une suite d’images : chaque slide apporte une information.' },
+          { q: 'Une bonne image publicitaire contient…', a: ['Un seul message clair et un bouton d’action', 'Le plus d’informations possible', 'Uniquement le logo'], ok: 0, why: 'Une image se lit en une seconde : un produit, un message, une action.' },
+        ],
+        widget: 'formats',
+      },
+      {
+        id: 'm1-l2',
+        n: 2,
+        title: 'Les outils nécessaires',
+        ar: 'الأدوات اللازمة',
+        voice: true,
+        video: 'video/m1-l2.mp4',
+        audio: 'video/voix/m1-l2.m4a',
+        poster: 'video/m1-l2.jpg',
+        scenes: [
+          { type: 'title', d: 2.88, kicker: 'Module 01 · Leçon 02', sub: 'CapCut · Canva · ChatGPT' },
+          { type: 'stat', d: 5.12, value: '3', label: 'outils pour suivre *toute la formation*', ar: 'ثلاث أدوات', ring: true, ringDur: 3 },
+          {
+            type: 'cards',
+            d: 12.86,
+            title: 'Ta boîte à outils de créateur',
+            items: [
+              { icon: 'scissors', label: 'CapCut', sub: 'Le montage vidéo', c: 'hook', at: 0.6 },
+              { icon: 'layout', label: 'Canva', sub: 'Images et carrousels', c: 'body', at: 1.0 },
+              { icon: 'chat', label: 'ChatGPT', sub: 'Idées, scripts, prompts', c: 'cta', at: 1.4 },
+            ],
+          },
+          {
+            type: 'timeline',
+            d: 15.3,
+            kicker: 'Outil 01 · CapCut',
+            title: 'On assemble les vidéos',
+            app: 'CapCut',
+            clipsAt: 5.4,
+            clipStep: 0.55,
+            playEnd: 15,
+            clips: [
+              { label: 'Hook', c: 'hook', w: 2 },
+              { label: 'Produit', c: 'body', w: 3 },
+              { label: 'Démo', c: 'body', w: 3 },
+              { label: 'Détails', c: 'body', w: 2 },
+              { label: 'CTA', c: 'cta', w: 2 },
+            ],
+            tracks: [
+              { label: 'Sous-titres', c: 'gold', icon: 'captions', from: 0.02, to: 0.96, at: 10.6 },
+              { label: 'Musique', c: 'ia', icon: 'music', from: 0, to: 1, at: 11.2 },
+            ],
+            cuts: [
+              { x: 0.17, at: 12 },
+              { x: 0.58, at: 12.5 },
+            ],
+            steps: [
+              { icon: 'download', label: 'Importer les rushes', at: 3.8 },
+              { icon: 'scissors', label: 'Couper, monter', at: 7.0 },
+              { icon: 'layers', label: 'Ordonner chaque plan', at: 9.9 },
+              { icon: 'captions', label: 'Sous-titres, musique', at: 11.6 },
+            ],
+          },
+          {
+            type: 'layers',
+            d: 6.6,
+            kicker: 'Outil 02 · Canva',
+            title: 'Les images et les carrousels',
+            explode: false,
+            bg: 'teal',
+            layers: [
+              { label: 'Un modèle de départ', kind: 'bg' },
+              { label: 'La photo produit', kind: 'product' },
+              { label: 'Le titre', kind: 'title' },
+              { label: 'Le bouton', kind: 'cta' },
+            ],
+          },
+          {
+            type: 'prompt',
+            d: 8,
+            kicker: 'Outil 03 · ChatGPT',
+            app: 'ChatGPT',
+            cps: 46,
+            segments: [{ text: 'Écris 3 hooks pour une vidéo de parfum, en darija, ton direct.' }],
+            result: { kind: 'text', cps: 70, lines: ['1. « Ton parfum disparaît avant midi ? »', '2. « 3 secondes pour sentir la différence »', '3. « Ce que personne ne te dit sur les parfums »'] },
+            side: [{ label: 'Prompt engineering', sub: 'L’art de bien parler à l’IA : on y revient au module 5', at: 6.1, c: 'ia' }],
+          },
+          {
+            type: 'cards',
+            d: 9.25,
+            title: 'Ces 3 outils suffisent pour un travail pro',
+            items: [
+              { icon: 'scissors', label: 'CapCut', c: 'hook', at: 0.5 },
+              { icon: 'layout', label: 'Canva', c: 'body', at: 0.8 },
+              { icon: 'chat', label: 'ChatGPT', c: 'cta', at: 1.1 },
+            ],
+            stamp: '100% GRATUIT',
+            stampAt: 7,
+          },
+          { type: 'outro', d: 3, text: 'Installe les trois avant la prochaine leçon.' },
+        ],
+        key: [
+          'Trois outils suffisent pour suivre la formation : CapCut (vidéo), Canva (images, carrousels) et ChatGPT (idées, scripts, prompts).',
+          'CapCut sert à assembler les plans : couper, ordonner, ajouter sous-titres et musique.',
+          'Les trois existent en version gratuite : tu peux commencer dès aujourd’hui.',
+        ],
+        quiz: [
+          { q: 'Quel outil sert au montage vidéo ?', a: ['Canva', 'CapCut', 'ChatGPT'], ok: 1, why: 'CapCut : couper, ordonner, sous-titrer, exporter.' },
+          { q: 'Pour écrire des hooks et des scripts, on utilise…', a: ['ChatGPT', 'CapCut', 'Aucun outil'], ok: 0, why: 'ChatGPT t’aide à trouver des idées, à écrire des scripts et des prompts.' },
+        ],
+        widget: 'outils',
+        res: [
+          { title: 'Prompt de départ — hooks', text: 'Tu es un créateur de publicités pour les réseaux sociaux en Algérie. Écris 10 hooks (phrases d’accroche de moins de 8 mots) pour une vidéo qui présente [produit] à [cible]. Mélange questions, chiffres et contrastes. Ton direct, en darija écrite en lettres latines.' },
+        ],
+      },
+      {
+        id: 'm1-l3',
+        n: 3,
+        title: 'Formats et ratios par plateforme',
+        ar: 'المقاسات حسب المنصة',
+        scenes: [
+          { type: 'title', sub: '9:16 · 4:5 · 1:1 · 16:9', say: 'Dans cette leçon, on voit les bons formats d’image pour chaque plateforme.' },
+          { type: 'big', text: 'Le bon format, c’est *plus d’écran* pour ta pub.', sub: 'Une créative mal cadrée se fait couper… ou ignorer.', say: 'Le format, c’est la forme de ta vidéo. Le bon format te donne plus de place sur l’écran du téléphone, donc plus d’attention.' },
+          { type: 'ratio', safe: true, title: 'Les 4 formats à connaître', say: 'Le 9:16, vertical plein écran, pour les Reels, TikTok et les Stories. Le 4:5 pour le fil Instagram et Facebook. Le 1:1, carré, pour les carrousels. Et le 16:9 pour YouTube. Attention aux zones de sécurité : en haut et en bas, l’interface de la plateforme cache ton contenu.' },
+          { type: 'checklist', title: 'La règle simple', items: ['Tourne et monte en *9:16*', 'Garde le texte au centre de l’écran', 'Décline en *4:5* pour le fil', 'Vérifie sur ton propre téléphone avant de publier'], say: 'La règle simple : tourne en vertical, garde ton texte au centre, décline en 4:5 pour le fil, et vérifie toujours sur ton téléphone avant de publier.' },
+          { type: 'outro', text: 'Crée en vertical, pense mobile.', say: 'Retiens : on crée en vertical, on pense mobile.' },
+        ],
+        key: ['9:16 pour Reels, TikTok et Stories ; 4:5 pour le fil ; 1:1 pour les carrousels ; 16:9 pour YouTube.', 'Les zones de sécurité : le haut et le bas de l’écran sont cachés par l’interface.', 'Produis en 9:16, puis décline les autres formats.'],
+        quiz: [
+          { q: 'Quel format pour une vidéo TikTok ou Reels ?', a: ['16:9', '9:16', '1:1'], ok: 1, why: 'Vertical plein écran : 9:16.' },
+          { q: 'Où éviter de placer ton texte en 9:16 ?', a: ['Au centre', 'Tout en haut et tout en bas', 'Nulle part'], ok: 1, why: 'Le haut et le bas sont recouverts par les boutons, la légende et le CTA de la plateforme.' },
+        ],
+        widget: 'ratio',
+      },
+      {
+        id: 'm1-l4',
+        n: 4,
+        title: 'L’objectif d’une créative',
+        ar: 'هدف الكرياتيف',
+        scenes: [
+          { type: 'title', sub: 'Une créative = un objectif', say: 'Avant de créer quoi que ce soit, il faut savoir à quoi va servir ta créative.' },
+          {
+            type: 'funnel',
+            title: 'Le parcours du client',
+            levels: [
+              { label: 'Notoriété', sub: 'On te découvre', c: 'gold' },
+              { label: 'Considération', sub: 'On s’intéresse, on compare', c: 'hook' },
+              { label: 'Conversion', sub: 'On commande', c: 'cta' },
+              { label: 'Fidélisation', sub: 'On revient, on recommande', c: 'body' },
+            ],
+            say: 'Un client passe par quatre étapes. Il te découvre, il s’intéresse et compare, il commande, puis il revient et te recommande. Chaque étape a besoin d’une créative différente.',
+          },
+          {
+            type: 'cards',
+            title: 'Un objectif, un type de créative',
+            cols: 3,
+            items: [
+              { icon: 'eye', label: 'Faire connaître', sub: 'Vidéo courte, hook fort, marque visible', c: 'hook' },
+              { icon: 'search', label: 'Convaincre', sub: 'Démonstration, comparaison, preuves', c: 'body' },
+              { icon: 'cart', label: 'Faire acheter', sub: 'Offre claire, urgence honnête, CTA', c: 'cta' },
+            ],
+            say: 'Pour faire connaître, une vidéo courte avec un hook fort. Pour convaincre, une démonstration et des preuves. Pour faire acheter, une offre claire et un appel à l’action.',
+          },
+          { type: 'quote', text: 'Une créative qui veut tout faire *ne fait rien*.', say: 'Retiens ça : une créative qui veut tout faire ne fait rien. Un objectif à la fois.' },
+          { type: 'outro', say: 'Dans le prochain module, on attaque la structure d’une créative qui vend.' },
+        ],
+        key: ['Le client passe par la notoriété, la considération, la conversion puis la fidélisation.', 'Chaque étape demande une créative différente.', 'Une créative = un objectif : sinon elle ne fait rien.'],
+        quiz: [
+          { q: 'Pour faire acheter, ta créative doit surtout contenir…', a: ['Une offre claire et un CTA', 'Une musique tendance', 'Le plus d’effets possible'], ok: 0, why: 'La conversion se joue sur l’offre et l’appel à l’action.' },
+          { q: 'Une créative doit viser…', a: ['Tous les objectifs à la fois', 'Un seul objectif', 'Aucun objectif précis'], ok: 1, why: 'Un objectif clair donne un message clair.' },
+        ],
+      },
+    ],
+  },
+
+  {
+    id: 'm2',
+    n: 2,
+    part: 'p1',
+    title: 'La structure d’une créative qui vend',
+    ar: 'هيكل الكرياتيف',
+    color: '#ec7a45',
+    icon: 'layers',
+    pitch: 'Hook, Body, CTA : la colonne vertébrale de toutes les publicités qui convertissent.',
+    lessons: [
+      {
+        id: 'm2-l1',
+        n: 1,
+        title: 'Hook · Body · CTA',
+        ar: 'هيكل الكرياتيف',
+        scenes: [
+          { type: 'title', sub: 'La structure d’une créative', say: 'Toutes les créatives qui vendent ont la même colonne vertébrale. Trois parties.' },
+          { type: 'formula', parts: [{ t: 'Hook', sub: 'Accrocher · 0 à 3 s', c: 'hook' }, { t: 'Body', sub: 'Convaincre', c: 'body' }, { t: 'CTA', sub: 'Faire agir', c: 'cta' }], result: { t: 'Vente', sub: 'ou un clic, un message…' }, say: 'Le hook, c’est l’accroche : les trois premières secondes. Le body, c’est le corps : on présente et on convainc. Le CTA, c’est l’appel à l’action : on dit quoi faire. Les trois ensemble donnent la vente.' },
+          { type: 'timeline', title: 'Dans une vidéo de 15 secondes', app: 'Ta créative', clips: [{ label: 'Hook', c: 'hook', w: 2 }, { label: 'Problème', c: 'body', w: 2.5 }, { label: 'Produit', c: 'body', w: 3 }, { label: 'Preuve', c: 'body', w: 2.5 }, { label: 'CTA', c: 'cta', w: 2 }], steps: [{ icon: 'hook', label: '0–3 s : on arrête le pouce' }, { icon: 'eye', label: '3–12 s : on montre, on prouve' }, { icon: 'cart', label: '12–15 s : on dit quoi faire' }], say: 'Dans une vidéo de quinze secondes : de zéro à trois secondes, le hook arrête le pouce. Ensuite le body présente le problème, le produit et une preuve. Les dernières secondes, le CTA dit clairement quoi faire.' },
+          { type: 'curve', title: 'Pourquoi le hook décide de tout', curves: [{ label: 'Hook faible', c: 'mist', dim: true, pts: [100, 38, 26, 21, 18, 16, 15, 14, 13, 12, 12] }, { label: 'Hook fort', c: 'gold', pts: [100, 72, 61, 55, 51, 48, 46, 44, 42, 41, 40], at: 2.6 }], marks: [{ x: 0.2, label: '3 s', c: 'hook', at: 1.6 }], say: 'Regarde cette courbe : c’est le nombre de personnes qui regardent encore ta vidéo. Avec un hook faible, la plupart partent dans les trois premières secondes. Avec un hook fort, tu gardes beaucoup plus de monde jusqu’à la fin.' },
+          { type: 'quote', text: 'Pas de hook, pas de body. Pas de body, pas de vente.', say: 'Retiens : si personne ne s’arrête, personne n’entend ton message.' },
+          { type: 'outro', say: 'Leçon suivante : on décortique le hook.' },
+        ],
+        key: ['Une créative qui vend suit trois parties : Hook (accrocher), Body (convaincre), CTA (faire agir).', 'Le hook occupe les 3 premières secondes : c’est là que se décide si on regarde ou si on scrolle.', 'Le CTA dit exactement quoi faire : commander, envoyer un message, cliquer.'],
+        quiz: [
+          { q: 'Que veut dire CTA ?', a: ['Call To Action — appel à l’action', 'Content To Advertise', 'Clic Total Annonce'], ok: 0, why: 'Le CTA dit au client quoi faire maintenant.' },
+          { q: 'Combien de temps dure le hook, en général ?', a: ['Les 3 premières secondes', 'Les 30 premières secondes', 'Toute la vidéo'], ok: 0, why: 'C’est dans les toutes premières secondes que l’on décide de rester ou de scroller.' },
+          { q: 'Le body sert à…', a: ['Présenter et convaincre', 'Dire au revoir', 'Mettre le logo'], ok: 0, why: 'Problème, produit, preuve : le body construit l’envie.' },
+        ],
+        widget: 'anatomie',
+      },
+      {
+        id: 'm2-l2',
+        n: 2,
+        title: 'Le Hook : arrêter le scroll',
+        ar: 'الهوك',
+        scenes: [
+          { type: 'title', sub: 'Les 3 secondes qui décident', say: 'Le hook, c’est la partie la plus importante de ta créative.' },
+          { type: 'phone', mode: 'feed', kicker: 'Le fil d’actualité', title: 'Tout le monde scrolle', bg: 'teal', headline: '*Stop.* Ton parfum tient combien de temps ?', side: [{ icon: 'move', label: 'Le pouce va vite', sub: 'Des dizaines de vidéos par minute', at: 0.8 }, { icon: 'hook', label: 'Un hook l’arrête', sub: 'Une image, une phrase, un son', at: 3.4, c: 'hook' }], say: 'Sur les réseaux, le pouce va très vite. Ta créative a une seule mission au début : arrêter ce pouce.' },
+          { type: 'stat', value: '3', suffix: 's', label: 'pour donner envie de rester', ring: true, ringDur: 3, say: 'Tu as environ trois secondes. Pas plus.' },
+          { type: 'grid', title: '5 leviers pour accrocher', cols: 3, items: [{ icon: 'search', label: 'Une question', sub: '« Ton parfum disparaît avant midi ? »', c: 'hook' }, { icon: 'bolt', label: 'Une promesse', sub: '« Une peau nette en 7 jours »', c: 'hook' }, { icon: 'x', label: 'Une erreur', sub: '« Arrête de faire ça avec ta crème »', c: 'hook' }, { icon: 'repeat', label: 'Un avant / après', sub: 'Le contraste se voit tout de suite', c: 'hook' }, { icon: 'eye', label: 'Une image surprenante', sub: 'Un geste, un objet inattendu', c: 'hook' }, { icon: 'chart', label: 'Un chiffre', sub: 'Vrai, vérifiable, concret', c: 'hook' }], say: 'Il y a plusieurs façons d’accrocher : poser une question, faire une promesse, pointer une erreur, montrer un avant après, une image surprenante, ou un chiffre vrai et concret.' },
+          { type: 'checklist', title: 'Un bon hook…', items: ['Parle à *une* personne précise', 'Se comprend *sans le son*', 'Montre le produit ou le problème *tout de suite*', { t: 'Promet ce que le produit ne fait pas', bad: true }], say: 'Un bon hook parle à une personne précise, se comprend même sans le son, et montre tout de suite le produit ou le problème. Et surtout : il ne ment pas.' },
+          { type: 'outro', say: 'Leçon suivante : des exemples concrets de hooks.' },
+        ],
+        key: ['Le hook doit arrêter le pouce dans les 3 premières secondes.', 'Leviers : question, promesse, erreur, avant/après, image surprenante, chiffre vrai.', 'Un bon hook se comprend sans le son et ne promet jamais ce que le produit ne fait pas.'],
+        quiz: [
+          { q: 'Un hook doit se comprendre…', a: ['Uniquement avec le son', 'Même sans le son', 'Seulement après 10 secondes'], ok: 1, why: 'Beaucoup regardent sans le son : texte à l’écran et image doivent suffire.' },
+          { q: 'Lequel est un hook « erreur » ?', a: ['« Arrête de faire ça avec ta crème »', '« Nouvelle collection »', '« Merci de votre visite »'], ok: 0, why: 'Pointer une erreur courante crée la curiosité.' },
+        ],
+      },
+      {
+        id: 'm2-l3',
+        n: 3,
+        title: 'Exemples de hooks : positifs, négatifs, chiffres',
+        ar: 'أمثلة على الهوك',
+        scenes: [
+          { type: 'title', sub: 'Positifs · Négatifs · Statistiques', say: 'Voyons trois familles de hooks, avec des exemples.' },
+          { type: 'cards', title: 'Trois familles de hooks', items: [{ icon: 'smile', label: 'Positif', sub: 'On montre le résultat désiré : « Voici comment avoir des cheveux brillants en 1 semaine »', c: 'body' }, { icon: 'x', label: 'Négatif', sub: 'On pointe le problème ou l’erreur : « Tu abîmes tes cheveux sans le savoir »', c: 'danger' }, { icon: 'chart', label: 'Statistique', sub: 'On donne un chiffre vrai et sourcé : « [chiffre] clientes l’ont déjà recommandé »', c: 'hook' }], say: 'Le hook positif montre le résultat que la personne veut. Le négatif pointe un problème ou une erreur. Le statistique utilise un chiffre, mais un vrai chiffre, que tu peux prouver.' },
+          { type: 'compare', title: 'Le même produit, deux hooks', left: { title: 'Hook plat', tone: 'bad', text: '« Découvrez notre nouveau sérum. »', items: ['Parle de la marque, pas du client', 'Aucune curiosité'] }, right: { title: 'Hook qui accroche', tone: 'good', text: '« 3 erreurs qui donnent des boutons — la 2ᵉ, tout le monde la fait. »', items: ['Parle du problème du client', 'Donne envie de connaître la suite'] }, say: 'Compare : « Découvrez notre nouveau sérum », ça parle de la marque. « Trois erreurs qui donnent des boutons, la deuxième tout le monde la fait », ça parle du client et ça donne envie de rester.' },
+          { type: 'steps', title: 'La recette rapide', items: [{ k: '1', label: 'Écris 10 hooks', sub: 'Avec ChatGPT, en mélangeant les trois familles', c: 'hook' }, { k: '2', label: 'Garde les 3 meilleurs', sub: 'Les plus courts, les plus précis', c: 'hook' }, { k: '3', label: 'Teste-les', sub: 'Même body, hook différent : les chiffres décident', c: 'hook' }], say: 'La recette : écris dix hooks, garde les trois meilleurs, et teste-les avec le même body. Ce sont les résultats qui décident, pas ton intuition.' },
+          { type: 'outro', say: 'Leçon suivante : le body.' },
+        ],
+        key: ['Positif : montrer le résultat désiré. Négatif : pointer le problème ou l’erreur. Statistique : un chiffre vrai et vérifiable.', 'Un hook parle du client, pas de la marque.', 'Écris-en 10, garde-en 3, teste-les avec le même body.'],
+        quiz: [
+          { q: '« Tu abîmes tes cheveux sans le savoir » est un hook…', a: ['Positif', 'Négatif', 'Statistique'], ok: 1, why: 'Il pointe un problème : c’est un hook négatif.' },
+          { q: 'Un hook statistique doit utiliser…', a: ['Un chiffre inventé qui impressionne', 'Un chiffre vrai que tu peux prouver', 'Le plus grand chiffre possible'], ok: 1, why: 'Un faux chiffre détruit la confiance — et peut faire refuser la publicité.' },
+        ],
+        widget: 'hooks',
+        res: [{ title: 'Prompt — 10 hooks en 3 familles', text: 'Agis comme un copywriter publicitaire. Produit : [produit]. Cible : [cible]. Problème principal : [problème]. Écris 10 hooks de moins de 10 mots : 4 positifs (résultat désiré), 4 négatifs (problème ou erreur), 2 avec un emplacement [chiffre] que je remplirai avec une donnée vraie. Classe-les du plus fort au plus faible.' }],
+      },
+      {
+        id: 'm2-l4',
+        n: 4,
+        title: 'Le Body : présenter, démontrer, rassurer',
+        ar: 'البودي',
+        scenes: [
+          { type: 'title', sub: 'Le corps de la créative', say: 'Une fois que la personne est accrochée, le body doit la convaincre.' },
+          { type: 'steps', title: 'Les 3 sections du body', items: [{ k: '1', label: 'Définir le produit', sub: 'Qu’est-ce que c’est, pour qui', c: 'body' }, { k: '2', label: 'Comment l’utiliser', sub: 'On le montre en action', c: 'body' }, { k: '3', label: 'Ses points forts', sub: 'Bénéfices, preuves, garanties', c: 'body' }], say: 'Le body a trois sections : d’abord on définit le produit, ce que c’est et pour qui. Ensuite on montre comment l’utiliser. Enfin, ses points forts : les bénéfices, les preuves, les garanties.' },
+          { type: 'phone', mode: 'video', kicker: 'Montrer plutôt que dire', title: 'La démonstration', bg: 'cuisine', art: 'creme', caption: 'Texture légère, absorbée en 10 secondes', captions: [{ t: 'Texture légère', at: 1.2 }, { t: 'On applique', at: 3.2 }, { t: 'Résultat', at: 5.4 }], side: [{ icon: 'eye', label: 'On voit le produit', sub: 'Gros plan, en main', at: 1, c: 'body' }, { icon: 'clock', label: 'On voit le résultat', sub: 'Concret et honnête', at: 3.4, c: 'body' }], say: 'Une démonstration vaut mieux qu’une longue explication. Montre le produit en main, en gros plan, et montre le résultat de façon honnête.' },
+          { type: 'compare', title: 'Caractéristique ou bénéfice ?', left: { title: 'Caractéristique', tone: 'bad', items: ['« Contient de l’acide hyaluronique »'] }, right: { title: 'Bénéfice', tone: 'good', items: ['« Ta peau reste hydratée toute la journée »'] }, say: 'Attention : une caractéristique, c’est ce que le produit a. Un bénéfice, c’est ce que le client gagne. Le client achète des bénéfices.' },
+          { type: 'quote', text: 'Le client n’achète pas un produit. Il achète *ce que le produit change pour lui*.', say: 'Retiens : le client achète ce que le produit change dans sa vie.' },
+          { type: 'outro', say: 'Leçon suivante : le CTA.' },
+        ],
+        key: ['Le body suit trois sections : définir le produit, montrer comment l’utiliser, présenter ses points forts.', 'Montrer vaut mieux que dire : démonstration en main, gros plans, résultat honnête.', 'Transforme chaque caractéristique en bénéfice pour le client.'],
+        quiz: [
+          { q: 'Lequel est un bénéfice ?', a: ['« Flacon de 50 ml »', '« Tu sens bon jusqu’au soir »', '« Fabriqué en 2026 »'], ok: 1, why: 'Le bénéfice décrit ce que gagne le client.' },
+          { q: 'Dans le body, on montre…', a: ['Le produit en action', 'Uniquement le logo', 'Le prix seulement'], ok: 0, why: 'La démonstration rend le produit concret.' },
+        ],
+      },
+      {
+        id: 'm2-l5',
+        n: 5,
+        title: 'Le CTA : un CTA clair = une vente',
+        ar: 'CTA واضح = عملية بيع',
+        scenes: [
+          { type: 'title', sub: 'Call to action', say: 'Dernière partie de la structure : le CTA, l’appel à l’action.' },
+          { type: 'big', text: 'Un CTA clair = ^une vente^.', ar: 'CTA واضح = عملية بيع', sub: 'Une publicité sans CTA laisse le client se demander quoi faire.', say: 'Une publicité sans appel à l’action clair, c’est un client qui ne sait pas quoi faire. Et un client qui ne sait pas quoi faire… ne fait rien.' },
+          { type: 'compare', title: 'Flou ou clair ?', left: { title: 'CTA flou', tone: 'bad', items: ['« Plus d’infos »', '« Contactez-nous »'] }, right: { title: 'CTA clair', tone: 'good', items: ['« Commande maintenant — paiement à la livraison »', '« Écris “NOOR” en message pour recevoir ton échantillon »'] }, say: 'Compare : « Plus d’infos », c’est flou. « Commande maintenant, paiement à la livraison », c’est clair : on sait quoi faire et ce qu’on y gagne.' },
+          { type: 'checklist', title: 'Les 4 ingrédients d’un bon CTA', items: ['Un *verbe d’action* : commande, écris, réserve', 'Un *bénéfice* : livraison, échantillon, cadeau', 'Une *facilité* : paiement à la livraison, 58 wilayas', 'Une *urgence honnête* : stock ou date réels'], say: 'Un bon CTA a quatre ingrédients : un verbe d’action, un bénéfice, une facilité — par exemple le paiement à la livraison — et une urgence, mais une urgence vraie.' },
+          { type: 'phone', mode: 'image', kicker: 'Exemple', title: 'Le CTA en action', bg: 'or', headline: 'Ton parfum *toute la journée*', btn: 'Commander — paiement à la livraison', side: [{ icon: 'cart', label: 'Le bouton dit quoi faire', c: 'cta', at: 1 }, { icon: 'truck', label: 'Il lève un frein', sub: 'Payer à la réception', c: 'cta', at: 2.6 }], say: 'Dans cet exemple, le bouton dit quoi faire et lève un frein important : on paie à la réception.' },
+          { type: 'outro', say: 'Module suivant : les formules magiques de la vente.' },
+        ],
+        key: ['Un CTA clair dit exactement quoi faire et ce que l’on y gagne.', 'Quatre ingrédients : verbe d’action, bénéfice, facilité, urgence honnête.', 'En Algérie, le paiement à la livraison et la livraison 58 wilayas lèvent les principaux freins.'],
+        quiz: [
+          { q: 'Lequel est le CTA le plus clair ?', a: ['« En savoir plus »', '« Commande maintenant, paiement à la livraison »', '« Bienvenue »'], ok: 1, why: 'Verbe d’action + facilité : le client sait quoi faire.' },
+          { q: 'Une urgence dans un CTA doit être…', a: ['Toujours inventée', 'Vraie : stock ou date réels', 'Interdite'], ok: 1, why: 'Une fausse urgence détruit la confiance quand le client s’en rend compte.' },
+        ],
+        widget: 'cta',
+      },
+    ],
+  },
+  {
+    id: 'm3',
+    n: 3,
+    part: 'p1',
+    title: 'Les formules magiques de la vente',
+    ar: 'الوصفات السحرية للبيع',
+    color: '#55b894',
+    icon: 'wand',
+    pitch: 'AIDA, PAS, BAB, SONCAS : des structures éprouvées pour ne jamais partir d’une page blanche.',
+    lessons: [
+      {
+        id: 'm3-l1',
+        n: 1,
+        title: 'AIDA',
+        ar: 'AIDA',
+        scenes: [
+          { type: 'title', sub: 'Attention · Intérêt · Désir · Action', say: 'Première formule magique de la vente : AIDA.' },
+          { type: 'steps', title: 'Les 4 étapes d’AIDA', items: [{ k: 'A', label: 'Attention', sub: 'Le hook : on arrête le scroll', c: 'hook' }, { k: 'I', label: 'Intérêt', sub: 'On parle du problème du client', c: 'body' }, { k: 'D', label: 'Désir', sub: 'On montre la vie avec le produit', c: 'body' }, { k: 'A', label: 'Action', sub: 'Le CTA : on dit quoi faire', c: 'cta' }], say: 'A comme Attention : le hook. I comme Intérêt : on parle du problème du client. D comme Désir : on montre la vie avec le produit. A comme Action : le CTA.' },
+          { type: 'phone', mode: 'carousel', kicker: 'AIDA en carrousel', title: 'Une slide par étape', bg: 'nuit', slides: [{ t: 'Attention', s: 'Ton parfum disparaît avant midi ?', bg: 'nuit' }, { t: 'Intérêt', s: 'La plupart des parfums s’évaporent en 3 heures', bg: 'teal' }, { t: 'Désir', s: 'Imagine sentir bon jusqu’au soir', bg: 'sable' }, { t: 'Preuve', s: 'Teste-le : échantillon offert', bg: 'rose' }, { t: 'Action', s: 'Commande — paiement à la livraison', bg: 'or' }], side: [{ icon: 'carousel', label: 'Le carrousel suit AIDA', sub: 'Chaque slide = une étape', at: 1 }], say: 'AIDA marche très bien en carrousel : chaque slide correspond à une étape, jusqu’à l’action sur la dernière.' },
+          { type: 'quote', text: 'AIDA, c’est l’ordre naturel dans lequel on décide d’acheter.', say: 'AIDA, c’est simplement l’ordre naturel de la décision d’achat.' },
+          { type: 'outro', say: 'Leçon suivante : la formule PAS.' },
+        ],
+        key: ['AIDA : Attention, Intérêt, Désir, Action.', 'Attention = hook ; Intérêt et Désir = body ; Action = CTA.', 'Idéale pour un carrousel : une slide par étape.'],
+        quiz: [
+          { q: 'Que veut dire le D de AIDA ?', a: ['Démonstration', 'Désir', 'Délai'], ok: 1, why: 'Attention, Intérêt, Désir, Action.' },
+          { q: 'Quelle étape correspond au CTA ?', a: ['Attention', 'Intérêt', 'Action'], ok: 2, why: 'L’action est l’appel à agir.' },
+        ],
+        widget: 'aida',
+      },
+      {
+        id: 'm3-l2',
+        n: 2,
+        title: 'PAS : Problème, Agitation, Solution',
+        ar: 'PAS',
+        scenes: [
+          { type: 'title', sub: 'Problème · Agitation · Solution', say: 'Deuxième formule : PAS. Très efficace en vidéo courte.' },
+          { type: 'steps', dir: 'h', title: 'PAS en 3 temps', items: [{ k: 'P', label: 'Problème', sub: 'On nomme la douleur du client', c: 'danger' }, { k: 'A', label: 'Agitation', sub: 'On montre ce qu’elle coûte', c: 'cta' }, { k: 'S', label: 'Solution', sub: 'Le produit arrive', c: 'body' }], say: 'P comme Problème : on nomme la douleur du client. A comme Agitation : on montre ce que ce problème lui coûte au quotidien. S comme Solution : le produit arrive et règle le problème.' },
+          { type: 'chat', title: 'Exemple de script PAS', with: 'Script vidéo · 15 s', channel: 'Voix off', msgs: [{ from: 'them', text: '« Tes cheveux frisent dès qu’il fait humide ? »', note: 'Problème' }, { from: 'them', text: '« Tu passes 30 minutes à les lisser… et tout est à refaire à midi. »', note: 'Agitation' }, { from: 'me', text: '« Ce sérum protège tes cheveux de l’humidité toute la journée. Commande, paiement à la livraison. »', note: 'Solution + CTA' }], say: 'Exemple : « Tes cheveux frisent dès qu’il fait humide ? » C’est le problème. « Tu passes trente minutes à les lisser et tout est à refaire à midi » : c’est l’agitation. Puis la solution, et le CTA.' },
+          { type: 'quote', text: 'Agiter, ce n’est pas faire peur : c’est *rendre le problème concret*.', say: 'Attention : agiter, ce n’est pas faire peur ni exagérer. C’est rendre le problème concret.' },
+          { type: 'outro', say: 'Leçon suivante : la formule avant, après, pont.' },
+        ],
+        key: ['PAS : Problème, Agitation, Solution.', 'L’agitation rend le problème concret, sans exagérer ni faire peur.', 'Format idéal pour les vidéos courtes et les produits qui règlent un problème précis.'],
+        quiz: [{ q: 'Dans PAS, l’agitation sert à…', a: ['Rendre le problème concret', 'Inventer un problème', 'Donner le prix'], ok: 0, why: 'On montre ce que le problème coûte au client, honnêtement.' }],
+      },
+      {
+        id: 'm3-l3',
+        n: 3,
+        title: 'BAB : Avant, Après, Pont',
+        ar: 'قبل · بعد · الجسر',
+        scenes: [
+          { type: 'title', sub: 'Before · After · Bridge', say: 'Troisième formule : BAB, avant, après, et le pont entre les deux.' },
+          { type: 'flow', title: 'Avant → Pont → Après', nodes: [{ icon: 'x', label: 'Avant', sub: 'La situation actuelle', c: 'danger' }, { icon: 'link', label: 'Le pont', sub: 'Ton produit', c: 'gold' }, { icon: 'smile', label: 'Après', sub: 'La situation rêvée', c: 'body' }], say: 'On montre la situation actuelle du client, l’avant. Puis la situation rêvée, l’après. Et ton produit, c’est le pont qui permet de passer de l’un à l’autre.' },
+          { type: 'compare', title: 'Le visuel avant / après', left: { title: 'Avant', tone: 'bad', items: ['Cuisine en désordre', 'Stress, perte de temps'] }, right: { title: 'Après', tone: 'good', items: ['Tout est rangé en 5 minutes', 'Grâce à l’organiseur'] }, say: 'Le visuel avant après est l’un des plus puissants : on comprend la transformation en une seconde.' },
+          { type: 'checklist', title: 'Attention', items: ['Résultats *réels*, mêmes conditions de lumière', 'Pas de retouche qui trompe', 'Respecte les règles des plateformes (santé, minceur…)'], say: 'Attention : l’avant après doit être réel, dans les mêmes conditions, sans retouche trompeuse. Et certaines catégories, comme la santé ou la minceur, ont des règles strictes sur les plateformes.' },
+          { type: 'outro', say: 'Leçon suivante : émotion ou raison, la méthode SONCAS.' },
+        ],
+        key: ['BAB : on montre l’avant, l’après, et le produit comme pont entre les deux.', 'Le visuel avant/après fait comprendre la transformation en une seconde.', 'Toujours vrai, sans retouche trompeuse, et conforme aux règles des plateformes.'],
+        quiz: [{ q: 'Dans BAB, le produit est…', a: ['L’avant', 'Le pont', 'L’après'], ok: 1, why: 'Le produit permet de passer de l’avant à l’après.' }],
+      },
+      {
+        id: 'm3-l4',
+        n: 4,
+        title: 'Émotion ou raison ? La méthode SONCAS',
+        ar: 'العاطفة أو العقل',
+        scenes: [
+          { type: 'title', sub: 'Les 6 motivations d’achat', say: 'Pourquoi les gens achètent ? La méthode SONCAS donne six grandes motivations.' },
+          { type: 'grid', title: 'SONCAS', cols: 3, items: [{ icon: 'shield', label: 'Sécurité', sub: 'Garantie, paiement à la livraison', c: 'body' }, { icon: 'trophy', label: 'Orgueil', sub: 'Se sentir unique, admiré', c: 'hook' }, { icon: 'sparkles', label: 'Nouveauté', sub: 'Le dernier, l’inédit', c: 'ia' }, { icon: 'home', label: 'Confort', sub: 'Plus simple, plus rapide', c: 'body' }, { icon: 'money', label: 'Argent', sub: 'Économiser, rentabiliser', c: 'gold' }, { icon: 'heart', label: 'Sympathie', sub: 'La marque qu’on aime', c: 'cta' }], say: 'Sécurité, Orgueil, Nouveauté, Confort, Argent, Sympathie. Chaque client est sensible à une ou deux de ces motivations.' },
+          { type: 'cards', title: 'Une motivation = un angle de créative', items: [{ icon: 'shield', label: 'Sécurité', sub: '« Tu paies seulement à la réception »', c: 'body' }, { icon: 'money', label: 'Argent', sub: '« Un flacon qui dure 3 mois »', c: 'gold' }, { icon: 'trophy', label: 'Orgueil', sub: '« Le parfum qu’on te demandera »', c: 'hook' }], say: 'Chaque motivation devient un angle de créative. Sécurité : tu paies à la réception. Argent : il dure trois mois. Orgueil : c’est le parfum qu’on te demandera.' },
+          { type: 'quote', text: 'On achète avec l’*émotion*, on justifie avec la *raison*.', say: 'Retiens : on achète avec l’émotion, et on se justifie avec la raison. Une bonne créative donne les deux.' },
+          { type: 'outro', say: 'Module suivant : produire tes créatives sans IA.' },
+        ],
+        key: ['SONCAS : Sécurité, Orgueil, Nouveauté, Confort, Argent, Sympathie.', 'Chaque motivation donne un angle de créative différent à tester.', 'On achète avec l’émotion, on justifie avec la raison : donne les deux.'],
+        quiz: [{ q: '« Paiement à la livraison » joue sur quelle motivation ?', a: ['Sécurité', 'Orgueil', 'Nouveauté'], ok: 0, why: 'Le client ne prend aucun risque : c’est la sécurité.' }],
+      },
+    ],
+  },
+  {
+    id: 'm4',
+    n: 4,
+    part: 'p1',
+    title: 'Produire sans IA : vidéo, image, carrousel',
+    ar: 'الإنتاج بدون ذكاء اصطناعي',
+    color: '#d4af37',
+    icon: 'film',
+    pitch: 'Les gestes de base dans CapCut et Canva, avant d’ajouter l’IA.',
+    lessons: [
+      {
+        id: 'm4-l1',
+        n: 1,
+        title: 'Monter une pub vidéo dans CapCut',
+        ar: 'المونتاج في CapCut',
+        scenes: [
+          { type: 'title', sub: 'Rythme · sous-titres · musique', say: 'On passe à la pratique : monter une publicité vidéo dans CapCut.' },
+          { type: 'timeline', title: 'Le workflow en 5 étapes', app: 'CapCut', clips: [{ label: 'Hook', c: 'hook', w: 2 }, { label: 'Problème', c: 'body', w: 2 }, { label: 'Produit', c: 'body', w: 3 }, { label: 'Preuve', c: 'body', w: 2 }, { label: 'CTA', c: 'cta', w: 2 }], tracks: [{ label: 'Sous-titres', c: 'gold', icon: 'captions', from: 0, to: 0.97 }, { label: 'Musique', c: 'ia', icon: 'music', from: 0, to: 1 }], cuts: [{ x: 0.2 }, { x: 0.38 }, { x: 0.65 }], steps: [{ icon: 'download', label: 'Importer les rushes' }, { icon: 'scissors', label: 'Couper les temps morts' }, { icon: 'layers', label: 'Ordonner Hook → CTA' }, { icon: 'captions', label: 'Sous-titres auto' }, { icon: 'music', label: 'Musique à −20 dB' }], say: 'Le workflow : importe tes rushes, coupe tous les temps morts, ordonne les plans du hook jusqu’au CTA, ajoute les sous-titres automatiques, puis une musique assez basse pour qu’on entende la voix.' },
+          { type: 'stat', value: '2', suffix: 's', label: 'un nouveau plan toutes les 2 à 3 secondes', say: 'La règle du rythme : un nouveau plan, ou un changement à l’écran, toutes les deux à trois secondes.' },
+          { type: 'checklist', title: 'Avant d’exporter', items: ['Le hook est visible *dès la 1ʳᵉ image*', 'Sous-titres lisibles, au centre', 'Le produit apparaît avant 5 secondes', 'Le CTA est écrit *et* dit'], say: 'Avant d’exporter, vérifie : le hook est visible dès la première image, les sous-titres sont lisibles, le produit apparaît vite, et le CTA est à la fois écrit et dit.' },
+          { type: 'outro', say: 'Leçon suivante : une image qui convertit dans Canva.' },
+        ],
+        key: ['Importer, couper les temps morts, ordonner du Hook au CTA, sous-titrer, ajouter la musique.', 'Un changement à l’écran toutes les 2 à 3 secondes.', 'Le CTA doit être écrit à l’écran et dit en voix off.'],
+        quiz: [{ q: 'À quel rythme change-t-on de plan ?', a: ['Toutes les 2 à 3 secondes', 'Toutes les 15 secondes', 'Jamais'], ok: 0, why: 'Un rythme rapide garde l’attention.' }],
+      },
+      {
+        id: 'm4-l2',
+        n: 2,
+        title: 'Une image qui convertit dans Canva',
+        ar: 'صورة تبيع في Canva',
+        scenes: [
+          { type: 'title', sub: 'Hiérarchie · contraste · un seul message', say: 'Maintenant, une image publicitaire qui convertit, dans Canva.' },
+          { type: 'layers', title: 'Une image = 5 calques', bg: 'teal', layers: [{ label: 'Le fond', sub: 'Uni ou décor simple', kind: 'bg' }, { label: 'Le produit', sub: 'Net, bien éclairé', kind: 'product' }, { label: 'Le titre', sub: '6 mots maximum', kind: 'title' }, { label: 'La preuve', sub: 'Livraison, garantie…', kind: 'badge' }, { label: 'Le CTA', sub: 'Un bouton visible', kind: 'cta' }], say: 'Une image publicitaire, c’est cinq calques : le fond, le produit bien éclairé, un titre de six mots maximum, une preuve comme la livraison ou une garantie, et le bouton d’action.' },
+          { type: 'compare', title: 'Trop d’infos tue l’info', left: { title: 'Surchargée', tone: 'bad', items: ['5 couleurs, 4 polices', '3 messages en même temps'] }, right: { title: 'Lisible', tone: 'good', items: ['2 couleurs, 1 police', 'Un seul message'] }, say: 'Le piège classique : trop de couleurs, trop de polices, trop de messages. Deux couleurs, une police, un message.' },
+          { type: 'quote', text: 'Si on ne comprend pas ton image en *1 seconde*, elle est trop chargée.', say: 'Le test : si on ne comprend pas ton image en une seconde, elle est trop chargée.' },
+          { type: 'outro', say: 'Leçon suivante : construire un carrousel.' },
+        ],
+        key: ['Cinq calques : fond, produit, titre, preuve, CTA.', 'Deux couleurs, une police, un seul message.', 'Le test de la seconde : on doit comprendre l’image immédiatement.'],
+        quiz: [{ q: 'Combien de messages dans une image publicitaire ?', a: ['Un seul', 'Trois', 'Le plus possible'], ok: 0, why: 'Un message clair se lit en une seconde.' }],
+      },
+      {
+        id: 'm4-l3',
+        n: 3,
+        title: 'Construire un carrousel slide par slide',
+        ar: 'بناء الكاروسيل',
+        scenes: [
+          { type: 'title', sub: 'Une histoire en 5 slides', say: 'Le carrousel, c’est une histoire racontée slide par slide.' },
+          { type: 'storyboard', title: 'La structure en 5 slides', frames: [{ label: 'Hook', sub: 'La promesse ou la question', shot: 'gros', bg: 'nuit', dur: 'slide 1' }, { label: 'Problème', sub: 'Ce que vit le client', shot: 'moyen', bg: 'rose', dur: 'slide 2' }, { label: 'Solution', sub: 'Le produit', shot: 'detail', bg: 'teal', dur: 'slide 3' }, { label: 'Preuve', sub: 'Démo, garantie', shot: 'detail', art: 'creme', bg: 'sable', dur: 'slide 4' }, { label: 'CTA', sub: 'Ce qu’il faut faire', shot: 'detail', bg: 'or', dur: 'slide 5' }], say: 'Slide un : le hook. Slide deux : le problème. Slide trois : la solution, ton produit. Slide quatre : la preuve. Slide cinq : l’appel à l’action.' },
+          { type: 'checklist', title: 'Les règles du carrousel', items: ['La slide 1 doit donner envie de *glisser*', 'Une idée par slide', 'Le même style sur toutes les slides', 'Le CTA sur la *dernière*'], say: 'Les règles : la première slide doit donner envie de glisser, une idée par slide, le même style partout, et le CTA sur la dernière.' },
+          { type: 'outro', say: 'Leçon suivante : exporter sans perdre la qualité.' },
+        ],
+        key: ['Cinq slides : hook, problème, solution, preuve, CTA.', 'La slide 1 doit donner envie de glisser.', 'Une idée par slide, un style cohérent, le CTA à la fin.'],
+        quiz: [{ q: 'Où placer le CTA dans un carrousel ?', a: ['Sur la première slide', 'Sur la dernière slide', 'Nulle part'], ok: 1, why: 'La dernière slide conclut et pousse à l’action.' }],
+        widget: 'carrousel',
+      },
+      {
+        id: 'm4-l4',
+        n: 4,
+        title: 'Exporter sans perdre la qualité',
+        ar: 'التصدير بجودة عالية',
+        scenes: [
+          { type: 'title', sub: 'Les bons réglages', say: 'Dernière étape avant de publier : l’export.' },
+          { type: 'cards', title: 'Les réglages à retenir', items: [{ icon: 'frame', label: '1080 × 1920', sub: 'Vertical, en haute définition', c: 'gold' }, { icon: 'film', label: '30 images/s', sub: 'Fluide et léger', c: 'gold' }, { icon: 'download', label: 'MP4 · H.264', sub: 'Accepté partout', c: 'gold' }], say: 'Retiens trois réglages : 1080 par 1920 en vertical, trente images par seconde, et le format MP4.' },
+          { type: 'ratio', safe: true, items: [{ r: '9:16', use: '1080 × 1920 px' }, { r: '4:5', use: '1080 × 1350 px' }, { r: '1:1', use: '1080 × 1080 px' }], say: 'Pour les images : 1080 par 1920 en vertical, 1080 par 1350 en 4:5 et 1080 par 1080 en carré. Et garde tes textes hors des zones cachées par l’interface.' },
+          { type: 'checklist', title: 'Check final', items: ['Regarder la vidéo *en entier* sur son téléphone', 'Tester *sans le son*', 'Vérifier l’orthographe des textes', 'Nommer le fichier : produit-hook-version'], say: 'Le check final : regarde la vidéo en entier sur ton téléphone, teste sans le son, vérifie l’orthographe, et nomme bien tes fichiers pour t’y retrouver quand tu testeras plusieurs versions.' },
+          { type: 'outro', say: 'Fin de la première partie. Place à l’IA créative !' },
+        ],
+        key: ['Vidéo : 1080 × 1920, 30 images/s, MP4 (H.264).', 'Images : 1080 × 1920, 1080 × 1350 ou 1080 × 1080 selon le format.', 'Toujours vérifier sur téléphone, sans le son, et nommer ses versions.'],
+        quiz: [{ q: 'Quelle résolution pour une vidéo verticale ?', a: ['1080 × 1920', '640 × 480', '1920 × 1080'], ok: 0, why: '1080 de large, 1920 de haut : vertical HD.' }],
+      },
+    ],
+  },
+];
+
+export const MODULES = [...MODULES_1, ...MODULES_2];
+
+/* ------------------------------------------------------------------ */
+
+let _all;
+export function allLessons() {
+  if (_all) return _all;
+  _all = [];
+  MODULES.forEach((m) => m.lessons.forEach((l) => _all.push({ ...l, module: m })));
+  return _all;
+}
+
+export function findLesson(id) {
+  const list = allLessons();
+  const i = list.findIndex((l) => l.id === id);
+  if (i < 0) return null;
+  return { lesson: list[i], module: list[i].module, prev: list[i - 1] || null, next: list[i + 1] || null, index: i };
+}
+
+export const totalLessons = () => allLessons().length;

@@ -1,0 +1,177 @@
+/* ==========================================================================
+   Hooked Academy — jetons de marque partagés (landing, espace étudiant,
+   admin et vidéos). Même registre « or sur noir » que Hooked Lab : on
+   reconnaît la famille, l'Academy ajoute ses trois couleurs de structure
+   (Hook, Body, CTA) qui servent dans tous les schémas de la formation.
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+
+  /* Surfaces : noirs légèrement chauds, comme Hooked Lab */
+  --ink-950: #07060a;
+  --ink-900: #0d0c10;
+  --ink-850: #141218;
+  --ink-800: #1d1a20;
+  --ink-700: #2a2530;
+  --ink-600: #3a3340;
+
+  /* Texte : crème, jamais blanc pur */
+  --mist-500: #6f6878;
+  --mist-400: #8b8494;
+  --mist-300: #b6afbd;
+  --mist-200: #ddd7dd;
+  --mist-100: #f6f2ea;
+
+  /* Or : l'accent de la famille Hooked */
+  --gold-600: #a8801d;
+  --gold-500: #c9a227;
+  --gold-400: #e0be55;
+  --gold-300: #f2dfa0;
+  --gold-grad: linear-gradient(180deg, #f2dfa0 0%, #c9a227 100%);
+  --gold-metal: linear-gradient(100deg, #8c6b3f 0%, #f2dfa0 28%, #fffaf0 42%, #d4af37 58%, #8c6b3f 100%);
+
+  /* Structure d'une créative : une couleur par partie, partout dans la formation */
+  --hook: #e0be55;  /* Hook  — or     */
+  --body: #55b894;  /* Body  — jade   */
+  --cta: #ec7a45;   /* CTA   — cuivre */
+  --ia: #c8b6ff;    /* touches IA, très discrètes */
+  --danger: #e2604a;
+  --ok: #55b894;
+
+  --font-display: 'Archivo', 'Arial Black', system-ui, sans-serif;
+  --font-sans: 'Figtree', 'IBM Plex Sans Arabic', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-ar: 'IBM Plex Sans Arabic', 'Figtree', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+
+  --ombre-pose: 0 1px 0 rgb(242 223 160 / 0.05) inset, 0 12px 32px -16px rgb(0 0 0 / 0.9);
+  --ombre-levee: 0 1px 0 rgb(242 223 160 / 0.08) inset, 0 24px 56px -24px rgb(0 0 0 / 0.95), 0 0 40px -18px rgb(201 162 39 / 0.45);
+
+  --courbe: cubic-bezier(0.22, 0.9, 0.3, 1);
+  --t-court: 180ms;
+  --t-moyen: 320ms;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ink-950);
+  color: var(--mist-100);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+[lang='ar'],
+.ar {
+  font-family: var(--font-ar);
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Texte or métallique : une succession de bandes claires et sombres, pas un aplat */
+.or {
+  background: var(--gold-metal);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Logo : monogramme + nom */
+.ha-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  text-decoration: none;
+  color: var(--mist-100);
+}
+.ha-logo__pastille {
+  display: grid;
+  place-items: center;
+  width: 2.2em;
+  height: 2.2em;
+  border-radius: 0.6em;
+  background: rgb(201 162 39 / 0.14);
+  box-shadow: inset 0 0 0 1px rgb(201 162 39 / 0.35);
+}
+.ha-logo__pastille svg {
+  width: 1.45em;
+  height: 1.45em;
+}
+.ha-logo__nom {
+  display: grid;
+  line-height: 0.95;
+}
+.ha-logo__nom b {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 112%;
+  letter-spacing: -0.01em;
+  font-size: 1em;
+}
+.ha-logo__nom span {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-stretch: 125%;
+  letter-spacing: 0.32em;
+  font-size: 0.52em;
+  color: var(--gold-300);
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold-400);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: rgb(201 162 39 / 0.35);
+  color: var(--mist-100);
+}
