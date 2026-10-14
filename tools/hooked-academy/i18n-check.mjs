@@ -13,7 +13,9 @@ globalThis.localStorage = { getItem: () => null, setItem: () => {} }; // le fran
 const { MODULES } = await import(pathToFileURL(path.join(ROOT, 'data/programme.js')).href);
 
 /** Clés jamais traduites (structure, temps, prompteur du formateur, ligne arabe secondaire, médias). */
-export const SKIP = new Set(['id', 'n', 'type', 'd', 'at', 'say', 'ar', 'c', 'icon', 'bg', 'art', 'mode', 'align', 'tone', 'kind', 'widget', 'voice', 'video', 'audio', 'poster', 'ok', 'color', 'handle', 'app', 'k', 'w', 'x', 'y', 'from', 'to', 'cps', 'part', 'track', 'dim', 'safe', 'explode', 'hookBg', 'bodyBg', 'ctaBg', 'hookIndex', 'flick', 'scrollAt', 'scrollDur', 'swipeAt', 'swipe', 'stampAt', 'noteAt', 'barAt', 'frAt', 'arAt', 'resultAt', 'ringDur', 'countDur', 'ring', 'clipsAt', 'clipStep', 'playEnd', 'step', 'cols', 'pick', 'pickAt', 'posterAt', 'pts', 'value', 'decimals', 'suffix', 'from', 'speed', 'total', 'lang', 'dir', 'ringReverse', 'count']);
+export const SKIP = new Set(['id', 'n', 'type', 'd', 'at', 'say', 'ar', 'c', 'icon', 'bg', 'art', 'mode', 'align', 'tone', 'kind', 'widget', 'voice', 'video', 'audio', 'poster', 'ok', 'color', 'handle', 'app', 'k', 'w', 'x', 'y', 'from', 'to', 'cps', 'part', 'track', 'dim', 'safe', 'explode', 'hookBg', 'bodyBg', 'ctaBg', 'hookIndex', 'flick', 'scrollAt', 'scrollDur', 'swipeAt', 'swipe', 'stampAt', 'noteAt', 'barAt', 'frAt', 'arAt', 'resultAt', 'ringDur', 'countDur', 'ring', 'clipsAt', 'clipStep', 'playEnd', 'step', 'cols', 'pick', 'pickAt', 'posterAt', 'pts', 'value', 'decimals', 'suffix', 'from', 'speed', 'total', 'lang', 'dir', 'ringReverse', 'count', 'shot', 'r']);
+/** `cols` : nombre de colonnes (grille, à ignorer) ou en-têtes d'un tableau (texte, à traduire). */
+export const skipKey = (k, v) => SKIP.has(k) && !(k === 'cols' && Array.isArray(v));
 
 const isObj = (v) => v && typeof v === 'object' && !Array.isArray(v);
 const MARK = /(\*[^*]+\*|~[^~]+~|\^[^^]+\^|_[^_]+_)/g;
@@ -30,7 +32,7 @@ function walk(base, ov, at, out) {
   if (isObj(base)) {
     if (!isObj(ov)) return out.err.push(`${at} : objet attendu`);
     for (const k of Object.keys(ov)) {
-      if (SKIP.has(k)) {
+      if (skipKey(k, base[k])) {
         out.err.push(`${at}.${k} : clé technique, ne pas traduire`);
         continue;
       }
@@ -53,7 +55,7 @@ function walk(base, ov, at, out) {
 }
 
 function countStrings(v, key = '') {
-  if (SKIP.has(key)) return 0;
+  if (skipKey(key, v)) return 0;
   if (typeof v === 'string') return v.trim() ? 1 : 0;
   if (Array.isArray(v)) return v.reduce((s, x) => s + countStrings(x), 0);
   if (isObj(v)) return Object.entries(v).reduce((s, [k, x]) => s + countStrings(x, k), 0);
