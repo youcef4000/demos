@@ -4,7 +4,7 @@
 // la validation crée l'accès étudiant (e-mail + code) et prépare le message de bienvenue, dans la langue choisie.
 // Ressources : ressources/manifest.json (généré par une action GitHub) liste les fichiers déposés par leçon.
 
-import { lang, isRTL, locale, t, tIn, fmtNum, fmtDate, switcher, bindSwitchers } from './i18n.js';
+import { LANGS, lang, isRTL, locale, t, tIn, fmtNum, fmtDate, switcher, bindSwitchers } from './i18n.js';
 import './i18n/common.js';
 import { plural, exText } from './i18n/admin.js';
 import { logoInner } from './brand.js';
@@ -57,6 +57,12 @@ const srcLabel = (s) => (!s || s === 'Landing' ? t('ad.src.landing') : s);
 const stuName = (s) => (S.isDemo(s) ? t('ad.st.demo') : exText(s.name));
 const lvName = (xp) => t(`level.${S.level(xp).i}`);
 const exTag = () => `<span class="ex-tag">${t('ad.ex.tag')}</span>`;
+// Formation et langue choisies sur la landing (absentes des fiches plus anciennes)
+const fmOf = (a) => (['creative', 'ia', 'both'].includes(a?.formation) ? a.formation : null);
+const lgOf = (a) => (LANGS.some((x) => x.code === a?.lang) ? a.lang : null);
+const fmLabel = (f, long = false) => (!f ? '' : f === 'both' ? t(long ? 'ad.fm.bothL' : 'ad.fm.both') : long ? t(`track.${f}`) : t(`ad.fm.${f}`));
+const fmChip = (f, long = false) => (f ? `<span class="fm" data-fm="${f}">${esc(fmLabel(f, long))}</span>` : '');
+const lgName = (l) => LANGS.find((x) => x.code === l)?.label || '';
 
 function toast(html, ms = 2600) {
   const el = document.createElement('div');
@@ -122,21 +128,30 @@ function welcomeText(st, l) {
 }
 const contactText = (a, l) => tIn(l, 'ad.msg.contact', { name: firstOf(a.name) });
 
-const mlSwitch = () =>
+/** Sélecteur de langue des messages. `pref` : langue choisie par l'inscrit sur la landing (pastille). */
+const mlSwitch = (pref = null) =>
   `<div class="ml"><span class="ml-l">${icon('globe', { size: 15 })}${t('ad.dw.msgLang')}</span><div class="ml-b" role="group" aria-label="${esc(t('ad.dw.msgLang'))}">${ML.map(
-    ([c, l]) => `<button type="button" data-ml="${c}" lang="${c}" aria-pressed="${c === msgLang}">${l}</button>`,
-  ).join('')}</div></div>`;
+    ([c, l]) => `<button type="button" data-ml="${c}" lang="${c}" aria-pressed="false"${c === pref ? ` data-pref title="${esc(t('ad.dw.prefLang'))}"` : ''}>${l}</button>`,
+  ).join('')}</div>${pref ? `<p class="ml-p"><span>${t('ad.dw.prefLang')}</span><b lang="${pref}">${esc(lgName(pref))}</b></p>` : ''}</div>`;
 
-/** Remplit les messages d'un tiroir ([data-msg], [data-wa], [data-copy]) et suit le choix de langue. */
-function bindMsgs(box, phone, gens) {
+// Langue choisie à la main pour une fiche précise (le temps de la session)
+const mlPicked = new Map();
+
+/**
+ * Remplit les messages d'un tiroir ([data-msg], [data-wa], [data-copy]) et suit le choix de langue.
+ * Avec `pref` (langue de l'inscription), le message part dans cette langue ; un autre choix ne vaut
+ * que pour cette fiche (`key`). Sans `pref`, le choix devient la langue par défaut de l'équipe.
+ */
+function bindMsgs(box, phone, gens, { pref = null, key = '' } = {}) {
+  let cur = (key && mlPicked.get(key)) || pref || msgLang;
   const paint = () => {
-    $$('[data-ml]', box).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.ml === msgLang)));
+    $$('[data-ml]', box).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.ml === cur)));
     for (const [k, gen] of Object.entries(gens)) {
-      const txt = gen(msgLang);
+      const txt = gen(cur);
       $$(`[data-msg="${k}"]`, box).forEach((el) => {
         el.textContent = txt;
-        el.lang = msgLang;
-        el.dir = msgLang === 'ar' ? 'rtl' : 'ltr';
+        el.lang = cur;
+        el.dir = cur === 'ar' ? 'rtl' : 'ltr';
       });
       $$(`[data-wa="${k}"]`, box).forEach((el) => (el.href = wa(phone, txt)));
     }
@@ -144,12 +159,17 @@ function bindMsgs(box, phone, gens) {
   box.addEventListener('click', (e) => {
     const b = e.target.closest('[data-ml]');
     if (b) {
-      msgLang = b.dataset.ml;
-      ls.set(ML_KEY, msgLang);
+      cur = b.dataset.ml;
+      if (pref) {
+        if (key) mlPicked.set(key, cur);
+      } else {
+        msgLang = cur;
+        ls.set(ML_KEY, msgLang);
+      }
       paint();
     }
     const c = e.target.closest('[data-copy]');
-    if (c && gens[c.dataset.copy]) copy(gens[c.dataset.copy](msgLang));
+    if (c && gens[c.dataset.copy]) copy(gens[c.dataset.copy](cur));
   });
   paint();
 }
@@ -350,7 +370,7 @@ function viewOverview() {
   });
   gsap()?.from('.bars i', { scaleY: 0, duration: 0.9, ease: 'expo.out', stagger: 0.03 });
   gsap()?.from('.funnel-ad em i', { scaleX: 0, duration: 1, ease: 'expo.out', stagger: 0.06 });
-  gsap()?.from('.main .card', { y: 24, autoAlpha: 0, duration: 0.6, stagger: 0.04, ease: 'expo.out', clearProps: 'all' });
+  gsap()?.from('.main .card', { y: 24, autoAlpha: 0, duration: 0.6, stagger: 0.04, ease: 'expo.out', clearProps: 'transform,opacity,visibility' });
 }
 
 /* ------------------------------------------------------------------ */
@@ -361,7 +381,9 @@ let filter = '';
 function viewApps() {
   const d = S.load();
   const q = fold(filter);
-  const list = d.applications.filter((a) => !q || fold(`${a.name} ${exText(a.name)} ${a.email} ${a.phone} ${a.city} ${exText(a.city)} ${a.objectif} ${exText(a.objectif)}`).includes(q));
+  const list = d.applications.filter(
+    (a) => !q || fold(`${a.name} ${exText(a.name)} ${a.email} ${a.phone} ${a.city} ${exText(a.city)} ${a.objectif} ${exText(a.objectif)} ${fmLabel(fmOf(a), true)} ${lgName(lgOf(a))}`).includes(q),
+  );
   shell(
     '#/inscriptions',
     `<div class="ph-h"><div><h1>${t('ad.nav.apps')}</h1><p>${t('ad.apps.lead')}</p></div><button class="b b--s" id="csv" type="button">${icon('download', { size: 16 })} ${t('ad.apps.csv')}</button></div>
@@ -373,7 +395,7 @@ function viewApps() {
         ${list
           .filter((a) => a.status === k)
           .map(
-            (a) => `<button class="kb-card" draggable="true" data-id="${esc(a.id)}" type="button" style="--c:${s.c}"><b>${esc(exText(a.name))}</b><small>${esc(exText(a.objectif) || '—')}</small><div class="kb-meta">${a.exemple ? exTag() : ''}${Date.now() - new Date(a.createdAt) < 864e5 && a.status === 'nouvelle' ? `<span class="kb-new">${t('ad.apps.new')}</span>` : ''}<span>${esc(prLabel(a.profil))}</span>·<span>${esc(exText(a.city) || '—')}</span>·<span>${esc(ago(a.createdAt))}</span></div></button>`,
+            (a) => `<button class="kb-card" draggable="true" data-id="${esc(a.id)}" type="button" style="--c:${s.c}"><b>${esc(exText(a.name))}</b><small>${esc(exText(a.objectif) || '—')}</small><div class="kb-meta">${a.exemple ? exTag() : ''}${Date.now() - new Date(a.createdAt) < 864e5 && a.status === 'nouvelle' ? `<span class="kb-new">${t('ad.apps.new')}</span>` : ''}${fmChip(fmOf(a))}${lgOf(a) ? `<span class="kb-lg" title="${esc(`${t('ad.f.lang')} · ${lgName(lgOf(a))}`)}">${lgOf(a).toUpperCase()}</span>` : ''}<span>${esc(prLabel(a.profil))}</span>·<span>${esc(exText(a.city) || '—')}</span>·<span>${esc(ago(a.createdAt))}</span></div></button>`,
           )
           .join('')}</section>`,
       )
@@ -410,13 +432,26 @@ function viewApps() {
     });
   });
   $('#csv').addEventListener('click', () => {
-    const H = ['date', 'name', 'wa', 'email', 'city', 'profil', 'level', 'goal', 'status', 'ex'].map((k) => t(`ad.csv.${k}`));
+    const H = ['date', 'name', 'wa', 'email', 'city', 'profil', 'formation', 'lang', 'level', 'goal', 'status', 'ex'].map((k) => t(`ad.csv.${k}`));
     const rows = [H].concat(
-      d.applications.map((a) => [fmtDT(a.createdAt), exText(a.name), a.phone, a.email, exText(a.city), prLabel(a.profil), exText(a.niveau), exText(a.objectif), stLabel(a.status), a.exemple ? t('ad.csv.yes') : '']),
+      d.applications.map((a) => [
+        fmtDT(a.createdAt),
+        exText(a.name),
+        a.phone,
+        a.email,
+        exText(a.city),
+        prLabel(a.profil),
+        fmLabel(fmOf(a), true),
+        lgName(lgOf(a)),
+        exText(a.niveau),
+        exText(a.objectif),
+        stLabel(a.status),
+        a.exemple ? t('ad.csv.yes') : '',
+      ]),
     );
     download(`${t('ad.csv.file')}-hooked-academy-${S.iso()}.csv`, '﻿' + rows.map((r) => r.map((x) => `"${String(x ?? '').replace(/"/g, '""')}"`).join(';')).join('\n'), 'text/csv');
   });
-  gsap()?.from('.kb-card', { y: 20, autoAlpha: 0, duration: 0.5, stagger: 0.03, ease: 'expo.out', clearProps: 'all' });
+  gsap()?.from('.kb-card', { y: 20, autoAlpha: 0, duration: 0.5, stagger: 0.03, ease: 'expo.out', clearProps: 'transform,opacity,visibility' });
 }
 
 function setStatus(id, st) {
@@ -439,7 +474,7 @@ function openApp(id, validation = null) {
   const { dw, dispose } = drawer(
     t('ad.dw.label', { name: exText(a.name) }),
     `${drawerHead(`${esc(stLabel(a.status))}${a.exemple ? ` · ${t('ad.ex.tag')}` : ''}`, exText(a.name), S0.c)}
-    ${mlSwitch()}
+    ${mlSwitch(lgOf(a))}
     ${
       access
         ? `<section class="card acc-card"><p class="card-k" style="color:var(--body)">${icon('check', { size: 14 })} ${t(validation ? 'ad.dw.created' : 'ad.dw.active')}</p><p class="acc-code"><span>${t('ad.dw.code')}</span><span class="code-big" dir="ltr">${esc(st.code)}</span></p><div class="msg" data-msg="welcome"></div><div class="acts" style="margin-top:10px"><a class="b b--or b--s" data-wa="welcome" href="#" target="_blank" rel="noopener">${icon('whatsapp', { size: 16 })} ${t('ad.dw.sendWa')}</a><button class="b b--s" type="button" data-copy="welcome">${icon('copy', { size: 16 })} ${t('ad.copy')}</button></div></section>`
@@ -450,6 +485,8 @@ function openApp(id, validation = null) {
       <dt>${t('ad.f.email')}</dt><dd dir="ltr">${esc(a.email || '—')}</dd>
       <dt>${t('ad.f.city')}</dt><dd>${esc(exText(a.city) || '—')}</dd>
       <dt>${t('ad.f.profil')}</dt><dd>${esc(prLabel(a.profil))}</dd>
+      <dt>${t('ad.f.formation')}</dt><dd>${fmChip(fmOf(a), true) || '—'}</dd>
+      <dt>${t('ad.f.lang')}</dt><dd>${lgOf(a) ? `<span lang="${lgOf(a)}">${esc(lgName(lgOf(a)))}</span>` : '—'}</dd>
       <dt>${t('ad.f.level')}</dt><dd>${esc(exText(a.niveau) || '—')}</dd>
       <dt>${t('ad.f.goal')}</dt><dd>${esc(exText(a.objectif) || '—')}</dd>
       <dt>${t('ad.f.received')}</dt><dd>${esc(fmtDT(a.createdAt))} · ${esc(srcLabel(a.source))}</dd>
@@ -466,7 +503,7 @@ function openApp(id, validation = null) {
     <section><p class="card-k">${t('ad.dw.history')}</p><div class="hist">${a.history.map((h) => `<span>${esc(fmtDT(h.at))} — ${esc(stLabel(h.status))} <span class="muted">(${esc(byLabel(h.by))})</span></span>`).join('')}</div></section>`,
     route,
   );
-  bindMsgs(dw, a.phone, { contact: (l) => contactText(a, l), ...(access ? { welcome: (l) => welcomeText(st, l) } : {}) });
+  bindMsgs(dw, a.phone, { contact: (l) => contactText(a, l), ...(access ? { welcome: (l) => welcomeText(st, l) } : {}) }, { pref: lgOf(a), key: a.id });
   $('[data-contact]', dw).addEventListener('click', () => {
     if (a.status === 'nouvelle') S.updateApplication(a.id, { status: 'contactee' }, 'Équipe (WhatsApp)');
   });
@@ -492,17 +529,20 @@ function openApp(id, validation = null) {
 /* ------------------------------------------------------------------ */
 
 function openAccess(s) {
+  // La langue choisie à l'inscription (si l'accès vient d'une inscription de la landing)
+  const app = S.load().applications.find((a) => a.id === s.appId || (s.email && a.email === s.email));
+  const pref = lgOf(app);
   const { dw } = drawer(
     t('ad.acc.title'),
     `${drawerHead(t('ad.acc.title'), stuName(s))}
     <p class="muted" style="margin:0">${t('ad.acc.lead')}</p>
-    ${mlSwitch()}
+    ${mlSwitch(pref)}
     <p class="acc-code"><span>${t('ad.dw.code')}</span><span class="code-big" dir="ltr">${esc(s.code)}</span></p>
     <div class="msg" data-msg="welcome"></div>
     ${s.phone ? '' : `<p class="muted" style="margin:0;font-size:13px">${t('ad.acc.noPhone')}</p>`}
     <div class="acts"><a class="b b--or b--s" data-wa="welcome" href="#" target="_blank" rel="noopener">${icon('whatsapp', { size: 16 })} ${t('ad.dw.sendWa')}</a><button class="b b--s" type="button" data-copy="welcome">${icon('copy', { size: 16 })} ${t('ad.copy')}</button></div>`,
   );
-  bindMsgs(dw, s.phone, { welcome: (l) => welcomeText(s, l) });
+  bindMsgs(dw, s.phone, { welcome: (l) => welcomeText(s, l) }, { pref, key: app?.id || s.id });
 }
 
 function viewStudents() {
@@ -561,7 +601,7 @@ function viewStudents() {
 function trackHead(id, stats) {
   const tr = trackOf(id);
   const mods = modulesOf(id);
-  return `<header class="trh" style="--t:${tr.color}">
+  return `<header class="trh" data-track="${id}" style="--t:${tr.color}">
     <span class="trh-i">${icon(tr.icon, { size: 26 })}</span>
     <div class="trh-t"><p class="trh-k" dir="ltr">${modCode(mods[0])} – ${modCode(mods[mods.length - 1])}</p><h2>${t(`track.${id}`)}</h2>${arLine(tr.ar)}<p class="trh-p">${esc(tr.pitch)}</p></div>
     <dl class="trh-s">${stats.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
@@ -802,7 +842,7 @@ function viewRes() {
     b.setAttribute('aria-expanded', String(show));
     $('span', b).textContent = t(show ? 'ad.rs.hide' : 'ad.rs.preview');
   });
-  gsap()?.from('.rs-kpi, .rs-help, .trh, .rs-mod', { y: 22, autoAlpha: 0, duration: 0.6, stagger: 0.035, ease: 'expo.out', clearProps: 'all' });
+  gsap()?.from('.rs-kpi, .rs-help, .trh, .rs-mod', { y: 22, autoAlpha: 0, duration: 0.6, stagger: 0.035, ease: 'expo.out', clearProps: 'transform,opacity,visibility' });
 }
 
 /* ------------------------------------------------------------------ */
@@ -975,7 +1015,7 @@ function viewProgramme() {
             (m) => `<section class="card pg-mod" style="--m:${m.color || trackOf(id).color}"><header class="pg-mh"><span class="rs-code" dir="ltr">${modCode(m)}</span><div class="rs-mt"><h3>${esc(m.title)}</h3>${arLine(m.ar)}</div><span class="rs-mc">${plural('lesson', m.lessons.length)}</span></header><div class="scroll-x"><table class="tbl prog-tbl"><thead><tr><th>${t('ad.pg.th.lesson')}</th><th>${t('ad.pg.th.duration')}</th><th>${t('ad.pg.th.scenes')}</th><th>${t('ad.pg.th.voice')}</th><th>${t('ad.pg.th.exercise')}</th><th><span class="sr">${t('ad.st.th.actions')}</span></th></tr></thead><tbody>${ls_
               .filter((l) => l.module === m)
               .map(
-                (l) => `<tr><td><span class="pg-n">${fmtNum(l.n)}</span>${esc(l.title)}</td><td dir="ltr" class="pg-num">${fmtMin(lessonDuration(l))}</td><td class="pg-num">${fmtNum(l.scenes.length)}</td><td>${voice(l)}</td><td>${esc(widgetLabel(l.widget))}</td><td><div class="acts"><a class="b b--s b--i" href="../motion/player.html?id=${encodeURIComponent(l.id)}" target="_blank" rel="noopener" aria-label="${esc(t('ad.pg.watch'))}" title="${esc(t('ad.pg.watch'))}">${icon('play', { size: 14 })}</a><a class="b b--s b--i" href="#/studio/${esc(l.id)}" aria-label="${esc(t('ad.pg.toStudio'))}" title="${esc(t('ad.pg.toStudio'))}">${icon('mic', { size: 14 })}</a></div></td></tr>`,
+                (l) => `<tr><td><span class="pg-n">${fmtNum(l.n)}</span>${esc(l.title)}</td><td class="pg-num" data-th="${esc(t('ad.pg.th.duration'))}"><span dir="ltr">${fmtMin(lessonDuration(l))}</span></td><td class="pg-num" data-th="${esc(t('ad.pg.th.scenes'))}">${fmtNum(l.scenes.length)}</td><td>${voice(l)}</td><td data-th="${esc(t('ad.pg.th.exercise'))}">${esc(widgetLabel(l.widget))}</td><td><div class="acts"><a class="b b--s b--i" href="../motion/player.html?id=${encodeURIComponent(l.id)}" target="_blank" rel="noopener" aria-label="${esc(t('ad.pg.watch'))}" title="${esc(t('ad.pg.watch'))}">${icon('play', { size: 14 })}</a><a class="b b--s b--i" href="#/studio/${esc(l.id)}" aria-label="${esc(t('ad.pg.toStudio'))}" title="${esc(t('ad.pg.toStudio'))}">${icon('mic', { size: 14 })}</a></div></td></tr>`,
               )
               .join('')}</tbody></table></div></section>`,
           )
@@ -983,7 +1023,7 @@ function viewProgramme() {
       })
       .join('')}</div>`,
   );
-  gsap()?.from('.trh, .pg-mod', { y: 22, autoAlpha: 0, duration: 0.6, stagger: 0.04, ease: 'expo.out', clearProps: 'all' });
+  gsap()?.from('.trh, .pg-mod', { y: 22, autoAlpha: 0, duration: 0.6, stagger: 0.04, ease: 'expo.out', clearProps: 'transform,opacity,visibility' });
 }
 
 function viewSettings() {

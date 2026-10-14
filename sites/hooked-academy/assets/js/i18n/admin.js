@@ -72,6 +72,8 @@ add({
     'ad.csv.email': 'E-mail',
     'ad.csv.city': 'Ville',
     'ad.csv.profil': 'Profil',
+    'ad.csv.formation': 'Formation',
+    'ad.csv.lang': 'Langue',
     'ad.csv.level': 'Niveau',
     'ad.csv.goal': 'Objectif',
     'ad.csv.status': 'Statut',
@@ -83,6 +85,7 @@ add({
     'ad.dw.active': 'Accès étudiant actif',
     'ad.dw.code': 'Code d’accès',
     'ad.dw.msgLang': 'Langue des messages',
+    'ad.dw.prefLang': 'Langue choisie à l’inscription',
     'ad.dw.sendWa': 'Envoyer sur WhatsApp',
     'ad.dw.contact': 'Contacter',
     'ad.dw.markContacted': 'Marquer contactée',
@@ -100,6 +103,12 @@ add({
     'ad.f.level': 'Niveau',
     'ad.f.goal': 'Objectif',
     'ad.f.received': 'Reçue',
+    'ad.f.formation': 'Formation',
+    'ad.f.lang': 'Langue',
+    'ad.fm.creative': 'Créative',
+    'ad.fm.ia': 'IA',
+    'ad.fm.both': 'Les deux',
+    'ad.fm.bothL': 'Les deux formations',
 
     'ad.acc.title': 'Envoyer l’accès',
     'ad.acc.lead': 'Le message contient le lien de l’espace étudiant, l’identifiant et le code d’accès.',
@@ -244,6 +253,7 @@ add({
     'ad.rs.only.en': 'Anglais seulement',
     'ad.rs.only.ar': 'Arabe seulement',
     'ad.rs.noPreview': 'Pas d’aperçu pour ce type de fichier : ouvre-le ou télécharge-le.',
+    'ad.rs.refresh': 'Actualiser',
 
     // Messages envoyés aux étudiants (tIn)
     'ad.msg.welcome':
@@ -322,6 +332,8 @@ add({
     'ad.csv.email': 'Email',
     'ad.csv.city': 'City',
     'ad.csv.profil': 'Profile',
+    'ad.csv.formation': 'Course',
+    'ad.csv.lang': 'Language',
     'ad.csv.level': 'Level',
     'ad.csv.goal': 'Goal',
     'ad.csv.status': 'Status',
@@ -333,6 +345,7 @@ add({
     'ad.dw.active': 'Student access active',
     'ad.dw.code': 'Access code',
     'ad.dw.msgLang': 'Message language',
+    'ad.dw.prefLang': 'Language chosen at sign-up',
     'ad.dw.sendWa': 'Send on WhatsApp',
     'ad.dw.contact': 'Contact',
     'ad.dw.markContacted': 'Mark as contacted',
@@ -350,6 +363,12 @@ add({
     'ad.f.level': 'Level',
     'ad.f.goal': 'Goal',
     'ad.f.received': 'Received',
+    'ad.f.formation': 'Course',
+    'ad.f.lang': 'Language',
+    'ad.fm.creative': 'Creative',
+    'ad.fm.ia': 'AI',
+    'ad.fm.both': 'Both',
+    'ad.fm.bothL': 'Both courses',
 
     'ad.acc.title': 'Send access',
     'ad.acc.lead': 'The message includes the student space link, the login and the access code.',
@@ -494,6 +513,7 @@ add({
     'ad.rs.only.en': 'English only',
     'ad.rs.only.ar': 'Arabic only',
     'ad.rs.noPreview': 'No preview for this file type: open or download it.',
+    'ad.rs.refresh': 'Refresh',
 
     'ad.msg.welcome':
       'Hi {name}! Your Hooked Academy enrolment is confirmed 🎉\n\nYour student space: {url}\n{id}\nAccess code: {code}\n\nInside, you’ll find the Creative Course (M01 to M05) and the AI Course (IA01 to IA09), with quizzes and downloadable resources. Enjoy the course!',
@@ -571,6 +591,8 @@ add({
     'ad.csv.email': 'البريد الإلكتروني',
     'ad.csv.city': 'المدينة',
     'ad.csv.profil': 'الصفة',
+    'ad.csv.formation': 'التكوين',
+    'ad.csv.lang': 'اللغة',
     'ad.csv.level': 'المستوى',
     'ad.csv.goal': 'الهدف',
     'ad.csv.status': 'الحالة',
@@ -582,6 +604,7 @@ add({
     'ad.dw.active': 'حساب الطالب مفعّل',
     'ad.dw.code': 'رمز الدخول',
     'ad.dw.msgLang': 'لغة الرسائل',
+    'ad.dw.prefLang': 'اللغة المختارة عند التسجيل',
     'ad.dw.sendWa': 'إرسال عبر WhatsApp',
     'ad.dw.contact': 'تواصل',
     'ad.dw.markContacted': 'تم التواصل',
@@ -599,6 +622,12 @@ add({
     'ad.f.level': 'المستوى',
     'ad.f.goal': 'الهدف',
     'ad.f.received': 'تاريخ الاستلام',
+    'ad.f.formation': 'التكوين',
+    'ad.f.lang': 'اللغة',
+    'ad.fm.creative': 'الإبداعي',
+    'ad.fm.ia': 'الذكاء الاصطناعي',
+    'ad.fm.both': 'الاثنان',
+    'ad.fm.bothL': 'التكوينان معًا',
 
     'ad.acc.title': 'إرسال بيانات الدخول',
     'ad.acc.lead': 'تتضمن الرسالة رابط فضاء الطالب ومعرّف الدخول ورمز الدخول.',
@@ -743,6 +772,7 @@ add({
     'ad.rs.only.en': 'بالإنجليزية فقط',
     'ad.rs.only.ar': 'بالعربية فقط',
     'ad.rs.noPreview': 'لا تتوفر معاينة لهذا النوع من الملفات: افتحه أو حمّله.',
+    'ad.rs.refresh': 'تحديث',
 
     'ad.msg.welcome':
       'السلام عليكم {name}! تم تأكيد تسجيلك في Hooked Academy 🎉\n\nفضاء الطالب: {url}\n{id}\nرمز الدخول: {code}\n\nستجد فيه التكوين الإبداعي (من M01 إلى M05) وتكوين الذكاء الاصطناعي (من IA01 إلى IA09)، مع اختبارات وموارد قابلة للتحميل. بالتوفيق في تكوينك!',

@@ -73,3 +73,50 @@ cd tools/hooked-academy && npm i --no-save playwright@1.56.1 && npx playwright i
 node tools/hooked-academy/render.mjs m2-l1            # une leçon
 node tools/hooked-academy/render.mjs --all --out out  # tout, dans out/
 ```
+
+## Les ressources des leçons (PDF, prompts, liens, fichiers)
+
+L'équipe ajoute ses supports leçon par leçon, sans toucher au code : ils s'affichent dans l'espace
+étudiant (atelier des leçons IA, onglet Ressources des leçons créatives, page Ressources) et dans
+**Admin → Ressources**, qui explique la marche à suivre et montre ce qui est en ligne.
+
+1. **Admin → Ressources** → ouvrir la leçon → **Déposer des fichiers** : GitHub s'ouvre sur
+   `sites/hooked-academy/ressources/<leçon>/` (ex. `ressources/ia1-l2/`).
+2. Glisser les fichiers, **Commit changes** sur `main`.
+3. L'action **Ressources hooked-academy** lance `tools/hooked-academy/ressources.mjs`, qui régénère
+   `ressources/manifest.json` (commité seulement s'il change), puis relance le miroir GitHub Pages.
+
+| Fichier | Devient |
+|---|---|
+| `.pdf` | PDF |
+| `.txt`, `.md` | un prompt par fichier (texte copié par l'étudiant ; `# Titre` en première ligne, facultatif) |
+| `liens.txt` | une ligne par lien : `Titre \| https://…` |
+| `.png`, `.jpg`, `.webp`, `.gif`… | image (aperçu) |
+| autre | fichier à télécharger |
+
+Titre tiré du nom du fichier (`01-guide-des-hooks.pdf` → « Guide des hooks », le numéro ne sert qu'à
+ordonner). Une seule langue : `guide.ar.pdf`, `prompt.en.txt`, `liens.fr.txt`. Le script ne lit que les
+dossiers qui portent l'identifiant d'une leçon de `data/programme.js`, ignore fichiers cachés,
+sous-dossiers et liens symboliques, plafonne le texte d'un prompt (20 000 caractères) et écarte les
+fichiers de plus de 25 Mo (limite de Cloudflare) ; chaque écart est signalé dans le résumé de l'action.
+Mode d'emploi pour l'équipe : `sites/hooked-academy/ressources/LISEZMOI.md`.
+
+```bash
+node tools/hooked-academy/ressources.mjs           # régénère le manifeste (s'il a changé)
+node tools/hooked-academy/ressources.mjs --check   # vérifie seulement (code 1 s'il n'est pas à jour)
+```
+
+Forme du manifeste :
+
+```json
+{
+  "generated": "2026-10-14T12:00:00.000Z",
+  "lessons": {
+    "ia1-l2": [
+      { "kind": "pdf", "title": "Guide du prompt", "file": "01-guide-du-prompt.pdf", "path": "ressources/ia1-l2/01-guide-du-prompt.pdf", "size": 48213 },
+      { "kind": "prompt", "title": "Prompt de départ", "file": "prompt.ar.txt", "lang": "ar", "path": "ressources/ia1-l2/prompt.ar.txt", "size": 412, "text": "…" },
+      { "kind": "link", "title": "Documentation", "file": "liens.txt", "url": "https://…" }
+    ]
+  }
+}
+```

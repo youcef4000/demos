@@ -1,0 +1,55 @@
+# Ressources Hooked Academy : liste des fichiers déposés par l'équipe, leçon par leçon.
+# - L'équipe dépose ses fichiers dans sites/hooked-academy/ressources/<leçon>/ (Admin → Ressources →
+#   « Déposer des fichiers » ouvre GitHub dans le bon dossier) : PDF, prompts .txt/.md, liens.txt,
+#   images, autres fichiers. Mode d'emploi : sites/hooked-academy/ressources/LISEZMOI.md.
+# - Cette action relance tools/hooked-academy/ressources.mjs, qui régénère ressources/manifest.json :
+#   l'espace étudiant (atelier et onglets de la leçon, page Ressources) et l'admin le lisent.
+# - Le manifeste n'est commité que s'il a changé ; les avertissements (dossier inconnu, nom de fichier
+#   à éviter, fichier trop lourd…) s'affichent dans le résumé de l'action.
+# - Lancement manuel (Actions → Ressources hooked-academy → Run workflow) : régénère la liste.
+name: Ressources hooked-academy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'sites/hooked-academy/ressources/**'
+      # Le manifeste lui-même ne relance pas l'action (pas de boucle)
+      - '!sites/hooked-academy/ressources/manifest.json'
+      - 'tools/hooked-academy/ressources.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: ressources-hooked-academy
+  cancel-in-progress: false
+
+jobs:
+  manifeste:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Lister les ressources
+        run: node tools/hooked-academy/ressources.mjs
+      - name: Publier le manifeste
+        run: |
+          set -euo pipefail
+          M=sites/hooked-academy/ressources/manifest.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898283+github-actions[bot]@users.noreply.github.com'
+          git add "$M"
+          git diff --cached --quiet && { echo "Manifeste déjà à jour"; exit 0; }
+          git commit -m "Hooked Academy : ressources de l'équipe ($(jq '[.lessons[] | length] | add // 0' "$M") fichiers ou liens, $(jq '.lessons | length' "$M") leçons)"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+          # Un commit du bot ne relance pas les déploiements : on relance le miroir GitHub Pages
+          gh workflow run static.yml --ref "${GITHUB_REF_NAME}" || true
+        env:
+          GH_TOKEN: ${{ github.token }}
