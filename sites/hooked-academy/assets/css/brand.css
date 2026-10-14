@@ -39,10 +39,10 @@
   --danger: #e2604a;
   --ok: #55b894;
 
-  --font-display: 'Archivo', 'Arial Black', system-ui, sans-serif;
+  --font-display: 'Archivo', 'IBM Plex Sans Arabic', 'Arial Black', system-ui, sans-serif;
   --font-sans: 'Figtree', 'IBM Plex Sans Arabic', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-ar: 'IBM Plex Sans Arabic', 'Figtree', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --font-mono: 'JetBrains Mono', 'IBM Plex Sans Arabic', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
   --r-sm: 10px;
   --r-md: 14px;

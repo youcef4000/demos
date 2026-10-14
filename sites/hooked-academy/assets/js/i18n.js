@@ -115,7 +115,24 @@ export const fmtNum = (n, o) => new Intl.NumberFormat(locale, o).format(n);
 export const fmtDate = (d, o = { day: 'numeric', month: 'short' }) => new Intl.DateTimeFormat(locale, o).format(d instanceof Date ? d : new Date(d));
 
 /** Le texte de secours d'une langue : utile pour les e-mails/WhatsApp envoyés par l'équipe. */
-export const tIn = (l, key, vars) => fill(DICT[l]?.[key] ?? DICT.fr[key] ?? key, vars);
+export const tIn = (l, key, vars) => {
+  const v = DICT[l]?.[key] ?? DICT.fr[key] ?? key;
+  return typeof v === 'function' ? v(vars || {}) : fill(v, vars);
+};
+
+/**
+ * Accord en nombre selon les règles de la langue (CLDR : zero, one, two, few, many, other).
+ * pl('ar', { one: 'درس واحد', two: 'درسان', few: '{n} دروس', many: '{n} درسًا', other: '{n} درس' })
+ */
+export function pl(l, forms) {
+  const rules = new Intl.PluralRules(l);
+  const nf = new Intl.NumberFormat(LANGS.find((x) => x.code === l)?.locale || l);
+  return (vars = {}) => {
+    const n = Number(vars.n);
+    const k = Number.isFinite(n) ? rules.select(n) : 'other';
+    return fill(forms[k] ?? forms.other, { ...vars, n: Number.isFinite(n) ? nf.format(n) : vars.n });
+  };
+}
 
 add({
   fr: { 'i18n.choose': 'Choisir la langue' },
