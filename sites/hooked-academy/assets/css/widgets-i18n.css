@@ -1,0 +1,67 @@
+/* ==========================================================================
+   Exercices interactifs (assets/js/widgets.js) — langues de droite à gauche et arabe.
+   Complète la section « Exercices interactifs » de app.css sans la modifier : chargé juste après.
+   En français et en anglais (de gauche à droite), rien ici ne s'applique.
+   ========================================================================== */
+
+/* Jauges (qualité du prompt, ingrédients du CTA, outils installés) : elles se remplissent depuis
+   la droite, le dégradé suit le même sens (cuivre au départ, jade à l'arrivée). */
+[dir='rtl'] .wd .meter i {
+  background: linear-gradient(270deg, var(--cta), var(--gold-400), var(--body));
+}
+
+/* Liste à remettre dans l'ordre (AIDA) : marges intérieures en miroir */
+[dir='rtl'] .sortable .it {
+  padding: 12px 14px 12px 12px;
+}
+
+/* Pastilles posées sur les aperçus : côté début de ligne */
+[dir='rtl'] .wd .cam3d span {
+  left: auto;
+  right: 12px;
+}
+[dir='rtl'] .wd .ipreview .ip-r {
+  left: auto;
+  right: 10px;
+}
+
+/* Prompts, messages et champs : chaque paragraphe prend le sens de sa première lettre.
+   Un prompt d'image en anglais reste lisible de gauche à droite (point final au bon endroit),
+   un texte en arabe s'écrit de droite à gauche. */
+[dir='rtl'] .wd :is(.out, textarea.in, input.in:not([type='number'])) {
+  unicode-bidi: plaintext;
+}
+/* Les nombres saisis restent des nombres (chiffres latins, alignés au début de la ligne) */
+[dir='rtl'] .wd input.in[type='number'] {
+  direction: ltr;
+  text-align: right;
+}
+
+/* Arabe : police arabe pour les titres et les accroches des maquettes, graisse 700 au plus,
+   interlignes plus ouverts (les lettres arabes montent et descendent plus que les latines). */
+html[lang='ar'] .wd :is(.wd-h, .mini-hl, .mini-btn, .kpi b),
+html[lang='ar'] .fc-f b {
+  font-family: var(--font-ar);
+}
+html[lang='ar'] .fc-f b {
+  font-weight: 700;
+  line-height: 1.35;
+}
+html[lang='ar'] .wd .wd-h {
+  font-weight: 700;
+  line-height: 1.35;
+}
+html[lang='ar'] .wd .mini-hl {
+  font-weight: 700;
+  line-height: 1.3;
+}
+html[lang='ar'] .wd .mini-btn {
+  font-weight: 700;
+}
+html[lang='ar'] .wd .kpi b {
+  font-weight: 700;
+  line-height: 1.15;
+}
+html[lang='ar'] .wd .out {
+  line-height: 1.8;
+}

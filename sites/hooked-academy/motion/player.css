@@ -68,6 +68,7 @@ body {
 }
 
 .pl-bar {
+  direction: ltr; /* comme la barre de progression de la vidéo, même en arabe */
   position: absolute;
   left: 0;
   right: 0;
@@ -184,6 +185,11 @@ body {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--gold-300);
+}
+html[lang='ar'] .pl-tele-k {
+  font-family: var(--font-ar);
+  font-size: 13px;
+  letter-spacing: 0;
 }
 .pl-tele p {
   margin: 0;

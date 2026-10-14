@@ -4,11 +4,19 @@
 //   &render=1        mode rendu MP4 : pas d'interface, window.__seek(t) pilote l'image
 //   &tele=1          prompteur « à dire » sous la vidéo (studio voix off)
 //   &audio=1         lit la voix off montée de la leçon, la vidéo suit le son
+//   &lang=fr|en|ar   langue (sinon le dernier choix de la plateforme) ; la composition reste de gauche à droite
 // Communique avec la page parente (postMessage) : prêt, temps, fin ; reçoit play / pause / seek.
 
+import { lang, dir, t, applyDom, fmtNum } from '../assets/js/i18n.js';
+import '../assets/js/i18n/motion.js';
 import { compose } from './engine.js';
 import { findLesson } from '../data/programme.js';
 import { fmt } from './kit.js';
+
+// Langue et sens de la page (i18n.js les pose déjà ; on le dit ici pour qui lit ce fichier), libellés du lecteur
+document.documentElement.lang = lang;
+document.documentElement.dir = dir;
+applyDom();
 
 const q = new URLSearchParams(location.search);
 const id = q.get('id') || 'm1-l1';
@@ -25,7 +33,10 @@ const post = (event, extra = {}) => {
 
 async function boot() {
   if (!found) {
-    stage.innerHTML = `<p class="pl-err">Leçon introuvable : ${id}</p>`;
+    const err = document.createElement('p');
+    err.className = 'pl-err';
+    err.textContent = t('mo.pl.notfound', { id });
+    stage.replaceChildren(err);
     return;
   }
   // Polices chargées avant de mesurer quoi que ce soit (sinon les tracés partent faux)
@@ -121,7 +132,7 @@ async function boot() {
   function setPlaying(v) {
     playing = v;
     pl.classList.toggle('is-playing', v);
-    $('play').setAttribute('aria-label', v ? 'Pause' : 'Lecture');
+    $('play').setAttribute('aria-label', t(v ? 'mo.pl.pause' : 'mo.pl.lecture'));
     if (v) {
       if (t >= duration - 0.05) t = 0;
       last = performance.now();
@@ -151,7 +162,7 @@ async function boot() {
   const speeds = [1, 1.25, 1.5, 0.75];
   $('speed').addEventListener('click', () => {
     speed = speeds[(speeds.indexOf(speed) + 1) % speeds.length];
-    $('speed').textContent = `${String(speed).replace('.', ',')}×`;
+    $('speed').textContent = `${fmtNum(speed)}×`;
     if (audio) audio.playbackRate = speed;
   });
   $('fs').addEventListener('click', async () => {

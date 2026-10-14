@@ -8,6 +8,7 @@
   width: 1920px;
   height: 1080px;
   overflow: hidden;
+  direction: ltr; /* la mise en page reste de gauche à droite, même dans une page en arabe */
   background: var(--ink-950);
   color: var(--mist-100);
   font-family: var(--font-sans);
@@ -3001,4 +3002,88 @@
   color: var(--c);
   background: color-mix(in srgb, var(--c) 12%, transparent);
   box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--c) 40%, transparent);
+}
+
+/* ==========================================================================
+   Traductions (anglais, arabe) — engine.js pose data-lang sur .mx.
+   La mise en page, les tailles et le minutage restent ceux du français. En arabe, engine.js marque
+   chaque bloc de texte arabe (dir="rtl" lang="ar", classe .ar-t) : police arabe, sens de lecture.
+   Les règles ci-dessous ne s'appliquent qu'en anglais ou en arabe : le français ne bouge pas.
+   ========================================================================== */
+
+/* En-tête : un titre traduit trop long se coupe proprement */
+.mx-code .mx-tt {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Arabe : ni interlettrage ni capitales (ils cassent les liaisons) */
+.mx[data-lang='ar'] .ar-t,
+.mx[data-lang='ar'] .ar-t * {
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+/* Titres et accroches : graisse 700 au plus (IBM Plex Sans Arabic), interligne ouvert */
+.mx[data-lang='ar'] :is(.ar-t, .ar-t *):is(.t-fr, .s-title, .b-text, .q-text, .st-label, .cd-t, .gr-i b, .gr-hub b, .sp-b b, .cp-s h3, .fx-t b, .fl-n b, .fn-l b, .tlx-clip b, .sb-f figcaption b, .cm-list b, .ra-list b, .ly-title, .ly-cta, .ly-badge, .pc-t h3, .ph-hl, .ph-slide b, .ph-badge, .ph-btn, .ph-side li b, .ou-t, .ou-next b, .an-panel h3, .an-items b, .an-btn, .an-seg b, .acr-w, .hk-note, .cd-stamp b, .fx-chip, .ch-m p) {
+  font-weight: 700;
+}
+.mx[data-lang='ar'] :is(.ar-t, .ar-t *):is(.t-fr, .s-title, .b-text, .q-text, .st-label, .cd-t, .gr-i b, .sp-b b, .fx-t b, .fl-n b, .ly-title, .pc-t h3, .ph-hl, .ph-slide b, .ph-side li b, .ou-t, .an-items b, .acr-w, .cd-stamp b, .ck-i, .tlx-steps li) {
+  line-height: 1.3;
+}
+/* Masques des mots animés : de la place pour les hampes et les jambages arabes */
+.mx[data-lang='ar'] .ar-t .w {
+  padding: 0.08em 0.06em 0.18em;
+  margin: -0.08em -0.06em -0.18em;
+}
+/* Titres de section alignés sur le bord droit du contenu, comme leur surtitre */
+.mx[data-lang='ar'] .sc:not(.sc-hooks) .s-head > .s-title.ar-t {
+  margin-left: auto;
+}
+.mx[data-lang='ar'] .b-wrap.is-left > .ar-t {
+  text-align: right;
+}
+/* Étapes verticales en arabe : le numéro passe à droite, le trait le suit */
+.mx[data-lang='ar'] .sp.is-v.ar-t .sp-line {
+  left: auto;
+  right: 62px;
+}
+.mx[data-lang='ar'] .sp.is-v.is-many.ar-t .sp-line {
+  right: 51px;
+}
+/* Cartes en arabe : pictogramme à droite, numéro à gauche */
+.mx[data-lang='ar'] .cd.ar-t .cd-n {
+  right: auto;
+  left: 36px;
+}
+/* Mots collés sans espace (mot surligné + ponctuation) : jamais séparés en fin de ligne */
+.mx[data-lang='ar'] .w-nb {
+  white-space: nowrap;
+}
+/* Citation en arabe : les guillemets décoratifs passent à gauche, le surtitre garde la droite */
+.mx[data-lang='ar'] .q-card:has(.q-text.ar-t) .q-mark {
+  right: auto;
+  left: 70px;
+}
+/* Formats : la légende de la zone haute se cale à droite, hors du badge du format (elle passe sur deux lignes) */
+.mx:not([data-lang='fr']) .ra-safe-t {
+  place-items: center end;
+  padding-right: 14px;
+}
+.mx:not([data-lang='fr']) .ra-safe-t em {
+  max-width: calc(100% - 200px);
+  font-size: 19px;
+  line-height: 1.25;
+  text-align: center;
+}
+/* Sous-titres et libellés écrits pendant la lecture (engine.js leur donne dir="auto") */
+.mx[data-lang='ar'] :is(.ph-subs, .an-subs) {
+  font-family: var(--font-ar);
+  font-weight: 700;
+  line-height: 1.3;
+}
+.mx[data-lang='ar'] .tlx-screen::after {
+  font-family: var(--font-ar);
+  font-weight: 700;
+  unicode-bidi: plaintext;
 }

@@ -2,16 +2,20 @@
 // Chaque scène reçoit sa section (1920 × 1080), ses données et sa durée, remplit le DOM et renvoie
 // une timeline GSAP qui démarre à 0. La sortie (fondu) est gérée par le moteur.
 
-import { G, esc, rich, words, kicker, $, $$, riseWords, type, count, draw, track } from './kit.js';
+import { G, esc, rich, words, kicker, $, $$, riseWords, type, count, draw, track, isAr, setAr } from './kit.js';
 import { icon } from '../assets/js/icons.js';
 import { markSVG } from '../assets/js/brand.js';
 import { product, person, BG, rng } from './art.js';
+import { lang, t as tr } from '../assets/js/i18n.js';
+import { PRICE_K } from '../assets/js/i18n/motion.js';
+import { modCode } from '../data/programme.js';
 
 const pad2 = (n) => String(n).padStart(2, '0');
 const C = { hook: 'var(--hook)', body: 'var(--body)', cta: 'var(--cta)', gold: 'var(--gold-400)', ia: 'var(--ia)', danger: 'var(--danger)', mist: 'var(--mist-300)' };
 const col = (c) => C[c] || c || 'var(--gold-400)';
 const at = (item, i, base, step) => (typeof item?.at === 'number' ? item.at : base + i * step);
-const arP = (ar, cls = 'ar-line') => (ar ? `<p class="${cls}" lang="ar" dir="rtl">${esc(ar)}</p>` : '');
+/** Ligne secondaire en arabe sous un texte français. En arabe, le texte principal l'est déjà : on ne la répète pas. */
+const arP = (ar, cls = 'ar-line') => (ar && lang !== 'ar' ? `<p class="${cls}" lang="ar" dir="rtl">${esc(ar)}</p>` : '');
 const head = (sc) =>
   sc.title || sc.kicker ? `<header class="s-head">${kicker(sc.kicker)}${sc.title ? `<h2 class="s-title">${words(sc.title)}</h2>` : ''}${arP(sc.ar, 's-ar')}</header>` : '';
 
@@ -34,7 +38,7 @@ export function title(root, sc, d, ctx) {
   root.innerHTML = `
     <div class="t-num" aria-hidden="true">${pad2(L.n)}</div>
     <div class="t-wrap">
-      ${kicker(sc.kicker || `Module ${pad2(M.n)} · Leçon ${pad2(L.n)}`)}
+      ${kicker(sc.kicker || tr('mo.title.kicker', { mod: modCode(M).replace(/^M(?=\d)/, ''), n: pad2(L.n) }))}
       <h1 class="t-fr">${words(sc.fr || L.title)}</h1>
       ${arP(sc.ar || L.ar, 't-ar')}
       <div class="t-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -79,7 +83,7 @@ export function big(root, sc, d) {
 export function quote(root, sc, d) {
   root.innerHTML = `<div class="q-card">
       <span class="q-mark" aria-hidden="true">“</span>
-      ${kicker(sc.kicker || 'À retenir')}
+      ${kicker(sc.kicker || tr('mo.quote.kicker'))}
       <p class="q-text">${words(sc.text)}</p>
       ${arP(sc.ar, 'q-ar')}
       <i class="q-sweep" aria-hidden="true"></i>
@@ -259,9 +263,9 @@ export function compare(root, sc, d) {
       .join('');
   root.innerHTML = `${head(sc)}
     <div class="cp">
-      <section class="cp-s is-${L.tone || 'bad'}"><h3>${rich(L.title || 'Avant')}</h3>${L.text ? `<p class="cp-txt">${rich(L.text)}</p>` : ''}<ul>${list(L, L.tone || 'bad')}</ul></section>
+      <section class="cp-s is-${L.tone || 'bad'}"><h3>${rich(L.title || tr('mo.cp.before'))}</h3>${L.text ? `<p class="cp-txt">${rich(L.text)}</p>` : ''}<ul>${list(L, L.tone || 'bad')}</ul></section>
       <div class="cp-vs" aria-hidden="true">VS</div>
-      <section class="cp-s is-${R.tone || 'good'}"><h3>${rich(R.title || 'Après')}</h3>${R.text ? `<p class="cp-txt">${rich(R.text)}</p>` : ''}<ul>${list(R, R.tone || 'good')}</ul></section>
+      <section class="cp-s is-${R.tone || 'good'}"><h3>${rich(R.title || tr('mo.cp.after'))}</h3>${R.text ? `<p class="cp-txt">${rich(R.text)}</p>` : ''}<ul>${list(R, R.tone || 'good')}</ul></section>
     </div>`;
   const tl = G().timeline();
   enterHead(tl, root, 0);
@@ -422,11 +426,11 @@ export function curve(root, sc, d) {
         ${marks.map((m) => `<g class="cv-m" style="--c:${col(m.c)}"><line x1="${m.x * W}" x2="${m.x * W}" y1="0" y2="${H}"/><text x="${m.x * W + 14}" y="${(m.y ?? 0.08) * H + 10}">${esc(m.label)}</text></g>`).join('')}
         ${curves.map((c, i) => `<path class="cv-area" d="${toPath(c.pts)} L${W} ${H} L0 ${H}Z" fill="url(#cv-a)" style="opacity:${i ? 0 : 1}"/>`).join('')}
         ${curves.map((c) => `<path class="cv-l ${c.dim ? 'is-dim' : ''}" d="${toPath(c.pts)}" style="--c:${col(c.c)}"/>`).join('')}
-        <text class="cv-x" x="0" y="${H + 60}">${esc(sc.xStart || '0 s')}</text>
-        <text class="cv-x" x="${W}" y="${H + 60}" text-anchor="end">${esc(sc.xEnd || 'fin de la vidéo')}</text>
+        <text class="cv-x" x="0" y="${H + 60}">${esc(sc.xStart || tr('mo.unit.s', { n: 0 }))}</text>
+        <text class="cv-x" x="${W}" y="${H + 60}" text-anchor="end">${esc(sc.xEnd || tr('mo.cv.end'))}</text>
       </svg>
       <div class="cv-leg">${curves.filter((c) => c.label).map((c) => `<span style="--c:${col(c.c)}"><i></i>${esc(c.label)}</span>`).join('')}</div>
-      ${sc.note !== false ? `<p class="cv-note">${esc(sc.note || 'Courbe d’exemple, pour comprendre la forme — pas une donnée réelle.')}</p>` : ''}
+      ${sc.note !== false ? `<p class="cv-note">${esc(sc.note || tr('mo.cv.note'))}</p>` : ''}
     </div>`;
   const tl = G().timeline();
   enterHead(tl, root, 0);
@@ -445,11 +449,11 @@ export function curve(root, sc, d) {
 
 export function timeline(root, sc, d) {
   const clips = sc.clips || [
-    { label: 'Hook', c: 'hook', w: 2 },
-    { label: 'Produit', c: 'body', w: 3 },
-    { label: 'Démo', c: 'body', w: 3 },
-    { label: 'Avis', c: 'body', w: 2 },
-    { label: 'CTA', c: 'cta', w: 2 },
+    { label: tr('mo.part.hook'), c: 'hook', w: 2 },
+    { label: tr('mo.part.product'), c: 'body', w: 3 },
+    { label: tr('mo.part.demo'), c: 'body', w: 3 },
+    { label: tr('mo.part.review'), c: 'body', w: 2 },
+    { label: tr('mo.part.cta'), c: 'cta', w: 2 },
   ];
   const tracks = sc.tracks || [];
   const total = clips.reduce((s, c) => s + (c.w || 2), 0);
@@ -459,11 +463,11 @@ export function timeline(root, sc, d) {
   root.innerHTML = `${head(sc)}
     <div class="tlx">
       <div class="tlx-top">
-        <div class="tlx-mon"><div class="tlx-screen"></div><span class="tlx-rec">● ${esc(sc.app || 'Montage')}</span></div>
+        <div class="tlx-mon"><div class="tlx-screen"></div><span class="tlx-rec">● ${esc(sc.app || tr('mo.tl.app'))}</span></div>
         <ul class="tlx-steps">${steps.map((s) => `<li><span>${icon(s.icon || 'check', { size: 30 })}</span>${rich(s.label)}</li>`).join('')}</ul>
       </div>
       <div class="tlx-tracks">
-        <div class="tlx-ruler">${Array.from({ length: 13 }, (_, i) => `<span>${String(i * 2).padStart(2, '0')}s</span>`).join('')}</div>
+        <div class="tlx-ruler">${Array.from({ length: 13 }, (_, i) => `<span>${esc(tr('mo.unit.s.short', { n: String(i * 2).padStart(2, '0') }))}</span>`).join('')}</div>
         <div class="tlx-row tlx-v">${clips
           .map((c) => {
             const left = (acc / total) * 100;
@@ -510,7 +514,7 @@ export function timeline(root, sc, d) {
   track(tl, d, (t) => {
     if (t < tp) {
       screen.style.setProperty('--c', 'var(--ink-700)');
-      screen.dataset.label = sc.app || 'Montage';
+      screen.dataset.label = sc.app || tr('mo.tl.app');
       cl.forEach((c) => c.classList.remove('is-on'));
       return;
     }
@@ -535,18 +539,23 @@ export function prompt(root, sc, d) {
   root.innerHTML = `${head(sc)}
     <div class="pr ${res.kind === 'image' || res.kind === 'video' ? 'has-media' : ''}">
       <div class="pr-win">
-        <div class="pr-bar"><i></i><i></i><i></i><span>${esc(sc.app || 'Assistant IA')}</span></div>
+        <div class="pr-bar"><i></i><i></i><i></i><span>${esc(sc.app || tr('mo.pr.app'))}</span></div>
         ${tags.length ? `<div class="pr-tags">${tags.map(([t, c]) => `<span class="pr-tag" style="--c:${col(c)}">${esc(t)}</span>`).join('')}</div>` : ''}
         <div class="pr-in"><span class="pr-who">${icon('user', { size: 26 })}</span><p class="pr-txt">${segs.map((s) => `<span class="pr-seg" style="--c:${col(s.c || 'mist')}"></span>`).join('')}</p></div>
         <div class="pr-out">
           <span class="pr-who pr-ai">${icon('sparkles', { size: 26 })}</span>
           ${res.kind === 'text' || !res.kind ? `<div class="pr-lines">${(res.lines || []).map(() => '<p class="pr-l"></p>').join('')}</div>` : ''}
           ${res.kind === 'image' ? `<div class="pr-grid">${tiles.map((t, i) => `<div class="pr-tile" style="background:${BG[t.bg] || BG.studio}"><div class="pr-art">${product(t.art || 'parfum')}</div><i class="pr-noise"></i><span>${i + 1}</span></div>`).join('')}</div>` : ''}
-          ${res.kind === 'video' ? `<div class="pr-film">${[0, 1, 2, 3].map((i) => `<div class="pr-fr" style="background:${BG[(res.bg || ['studio', 'studio', 'or', 'studio'])[i]] || BG.studio}"><div class="pr-art" style="transform:scale(${1 + i * 0.18}) translateY(${i * 4}%)">${product(res.art || 'parfum')}</div><span>0${i + 1}s</span></div>`).join('')}<i class="pr-play"></i></div>` : ''}
+          ${res.kind === 'video' ? `<div class="pr-film">${[0, 1, 2, 3].map((i) => `<div class="pr-fr" style="background:${BG[(res.bg || ['studio', 'studio', 'or', 'studio'])[i]] || BG.studio}"><div class="pr-art" style="transform:scale(${1 + i * 0.18}) translateY(${i * 4}%)">${product(res.art || 'parfum')}</div><span>${esc(tr('mo.unit.s.short', { n: `0${i + 1}` }))}</span></div>`).join('')}<i class="pr-play"></i></div>` : ''}
         </div>
       </div>
       ${sc.side ? `<ul class="pr-side">${sc.side.map((s) => `<li style="--c:${col(s.c)}"><b>${rich(s.label)}</b>${s.sub ? `<span>${rich(s.sub)}</span>` : ''}</li>`).join('')}</ul>` : ''}
     </div>`;
+  // Arabe : le texte tapé pendant la lecture prend son sens dès le départ (il est vide au montage)
+  if (lang === 'ar') {
+    if (segs.some((s) => isAr(s.text))) setAr($(root, '.pr-txt'));
+    $$(root, '.pr-l').forEach((l, i) => isAr(res.lines?.[i]) && setAr(l));
+  }
   const tl = G().timeline();
   enterHead(tl, root, 0);
   const base = sc.title ? 0.5 : 0.2;
@@ -589,7 +598,7 @@ export function chat(root, sc, d) {
   const msgs = sc.msgs || [];
   root.innerHTML = `${head(sc)}
     <div class="ch">
-      <div class="ch-top">${icon('message', { size: 28 })}<b>${esc(sc.with || 'Prospect')}</b><span>${esc(sc.channel || 'Message privé')}</span></div>
+      <div class="ch-top">${icon('message', { size: 28 })}<b>${esc(sc.with || tr('mo.ch.with'))}</b><span>${esc(sc.channel || tr('mo.ch.channel'))}</span></div>
       <div class="ch-list">${msgs
         .map((m) => `<div class="ch-m is-${m.from === 'them' ? 'them' : 'me'}"><p>${rich(m.text)}</p>${m.note ? `<span class="ch-note">${rich(m.note)}</span>` : ''}</div>`)
         .join('')}</div>
@@ -614,7 +623,7 @@ export function chat(root, sc, d) {
 
 export function wave(root, sc, d) {
   const N = 96;
-  const lanes = sc.lanes || [{ label: 'Voix', c: 'gold', icon: 'mic' }];
+  const lanes = sc.lanes || [{ label: tr('mo.wv.voice'), c: 'gold', icon: 'mic' }];
   const r = rng(11);
   const seeds = lanes.map(() => Array.from({ length: N }, () => 0.25 + r() * 0.75));
   root.innerHTML = `${head(sc)}
@@ -704,14 +713,7 @@ export function storyboard(root, sc, d) {
 
 export function camera(root, sc, d) {
   const moves = sc.moves || ['push', 'orbit', 'pan', 'crane'];
-  const names = {
-    push: ['Push-in', 'La caméra avance vers le sujet : tension, focus.'],
-    pull: ['Pull-out', 'La caméra recule : on révèle le décor.'],
-    orbit: ['Orbit', 'La caméra tourne autour du produit : effet premium.'],
-    pan: ['Travelling', 'La caméra glisse sur le côté : mouvement fluide.'],
-    crane: ['Plongée', 'La caméra descend d’en haut : vue d’ensemble.'],
-    static: ['Plan fixe', 'Rien ne bouge : l’action se suffit.'],
-  };
+  const names = Object.fromEntries(['push', 'pull', 'orbit', 'pan', 'crane', 'static'].map((k) => [k, [tr(`mo.cam.${k}`), tr(`mo.cam.${k}.d`)]]));
   root.innerHTML = `${head(sc)}
     <div class="cm">
       <div class="cm-view"><div class="cm-world">
@@ -721,7 +723,7 @@ export function camera(root, sc, d) {
         <div class="cm-prod cm-prod2">${product('creme')}</div>
         <div class="cm-prod cm-prod3">${product('serum')}</div>
       </div><span class="cm-rec">REC ●</span><i class="cm-frame"></i></div>
-      <ul class="cm-list">${moves.map((m) => `<li><b>${names[m][0]}</b><span>${names[m][1]}</span></li>`).join('')}</ul>
+      <ul class="cm-list">${moves.map((m) => `<li><b>${esc(names[m][0])}</b><span>${esc(names[m][1])}</span></li>`).join('')}</ul>
     </div>`;
   const tl = G().timeline();
   enterHead(tl, root, 0);
@@ -757,12 +759,7 @@ export function camera(root, sc, d) {
 }
 
 export function ratio(root, sc, d) {
-  const items = sc.items || [
-    { r: '9:16', use: 'Reels · TikTok · Stories' },
-    { r: '4:5', use: 'Fil Instagram & Facebook' },
-    { r: '1:1', use: 'Carrousel · fil' },
-    { r: '16:9', use: 'YouTube · écran large' },
-  ];
+  const items = sc.items || ['9:16', '4:5', '1:1', '16:9'].map((r) => ({ r, use: tr(`mo.ra.${r}`) }));
   const size = (r) => {
     const [a, b] = r.split(':').map(Number);
     const H = 640;
@@ -772,7 +769,7 @@ export function ratio(root, sc, d) {
   root.innerHTML = `${head(sc)}
     <div class="ra">
       <div class="ra-frame"><div class="ra-in" style="background:${BG.studio}"><div class="ra-art">${product('parfum')}</div></div><b class="ra-r"></b><span class="ra-u"></span>
-        <i class="ra-safe ra-safe-t"><em>Zone masquée par l’interface</em></i><i class="ra-safe ra-safe-b"><em>Légende, boutons, CTA de la plateforme</em></i>
+        <i class="ra-safe ra-safe-t"><em>${esc(tr('mo.ra.safe.t'))}</em></i><i class="ra-safe ra-safe-b"><em>${esc(tr('mo.ra.safe.b'))}</em></i>
       </div>
       <ul class="ra-list">${items.map((it) => `<li><b>${esc(it.r)}</b><span>${esc(it.use)}</span></li>`).join('')}</ul>
     </div>`;
@@ -800,7 +797,7 @@ export function ratio(root, sc, d) {
     });
     const safe = t >= tSafe;
     rEl.textContent = safe ? '9:16' : items[k].r;
-    uEl.textContent = safe ? 'Zones de sécurité' : items[k].use;
+    uEl.textContent = safe ? tr('mo.ra.safe') : items[k].use;
   });
   if (sc.safe) {
     const s = size('9:16');
@@ -812,22 +809,22 @@ export function ratio(root, sc, d) {
 
 export function layers(root, sc, d) {
   const ls = sc.layers || [
-    { label: 'Fond', kind: 'bg' },
-    { label: 'Produit', kind: 'product' },
-    { label: 'Titre', kind: 'title' },
-    { label: 'Preuve / badge', kind: 'badge' },
-    { label: 'Bouton CTA', kind: 'cta' },
+    { label: tr('mo.ly.bg'), kind: 'bg' },
+    { label: tr('mo.ly.product'), kind: 'product' },
+    { label: tr('mo.ly.title'), kind: 'title' },
+    { label: tr('mo.ly.badge'), kind: 'badge' },
+    { label: tr('mo.ly.cta'), kind: 'cta' },
   ];
   const art = sc.art || 'parfum';
   const layerHTML = (l) =>
     ({
       bg: `<div class="ly-bg" style="background:${BG[sc.bg || 'teal']}"></div>`,
       product: `<div class="ly-prod">${product(art)}</div>`,
-      title: `<div class="ly-title">${rich(sc.headline || 'Un parfum qui *reste*')}</div>`,
-      badge: `<div class="ly-badge">${rich(sc.badge || 'Livraison 58 wilayas')}</div>`,
-      cta: `<div class="ly-cta">${rich(sc.cta || 'Commander')}</div>`,
+      title: `<div class="ly-title">${rich(sc.headline || tr('mo.ly.headline'))}</div>`,
+      badge: `<div class="ly-badge">${rich(sc.badge || tr('mo.delivery'))}</div>`,
+      cta: `<div class="ly-cta">${rich(sc.cta || tr('mo.btn'))}</div>`,
       logo: `<div class="ly-logo">${esc(sc.brand || 'NOOR')}</div>`,
-      ai: `<div class="ly-ai"><span>${icon('sparkles', { size: 26 })} Image IA</span></div>`,
+      ai: `<div class="ly-ai"><span>${icon('sparkles', { size: 26 })} ${esc(tr('mo.ly.ai'))}</span></div>`,
     })[l.kind] || '';
   root.innerHTML = `${head(sc)}
     <div class="ly">
@@ -865,22 +862,22 @@ export function layers(root, sc, d) {
 
 export function scan(root, sc, d) {
   const seq = sc.seq || [
-    ['Hook', 'hook'],
-    ['Problème', 'body'],
-    ['Solution', 'body'],
-    ['Preuve', 'body'],
-    ['Offre', 'cta'],
-    ['CTA', 'cta'],
+    [tr('mo.part.hook'), 'hook'],
+    [tr('mo.part.problem'), 'body'],
+    [tr('mo.part.solution'), 'body'],
+    [tr('mo.part.proof'), 'body'],
+    [tr('mo.part.offer'), 'cta'],
+    [tr('mo.part.cta'), 'cta'],
   ];
   root.innerHTML = `${head(sc)}
     <div class="sn">
       <div class="sn-phone"><div class="sn-screen" style="background:${BG.teal}"><div class="sn-art">${product('parfum')}</div><i class="sn-line"></i>${[0, 1, 2, 3, 4, 5].map((i) => `<i class="sn-box" style="--i:${i}"></i>`).join('')}</div></div>
       <div class="sn-panel">
-        <div class="sn-brand">${markSVG({ lab: true })}<b>Hooked Lab</b><span>${esc(sc.badge || 'Analyse d’exemple')}</span></div>
-        <div class="sn-card sn-script"><h4>${icon('doc', { size: 22 })} Script reconstitué</h4><p></p><p></p><p></p></div>
-        <div class="sn-card"><h4>${icon('film', { size: 22 })} Séquences</h4><div class="sn-seq">${seq.map(([t, c]) => `<span style="--c:${col(c)}">${esc(t)}</span>`).join('')}</div></div>
-        <div class="sn-card"><h4>${icon('hook', { size: 22 })} Hook · 3 premières secondes</h4><div class="sn-gauge"><i></i></div><span class="sn-g">Points forts · à améliorer · variantes à tester</span></div>
-        <div class="sn-card"><h4>${icon('target', { size: 22 })} Angles marketing</h4><div class="sn-ang"><span>Gain de temps</span><span>Preuve sociale</span><span>Prix / valeur</span></div></div>
+        <div class="sn-brand">${markSVG({ lab: true })}<b>Hooked Lab</b><span>${esc(sc.badge || tr('mo.sn.badge'))}</span></div>
+        <div class="sn-card sn-script"><h4>${icon('doc', { size: 22 })} ${esc(tr('mo.sn.script'))}</h4><p></p><p></p><p></p></div>
+        <div class="sn-card"><h4>${icon('film', { size: 22 })} ${esc(tr('mo.sn.seq'))}</h4><div class="sn-seq">${seq.map(([t, c]) => `<span style="--c:${col(c)}">${esc(t)}</span>`).join('')}</div></div>
+        <div class="sn-card"><h4>${icon('hook', { size: 22 })} ${esc(tr('mo.sn.hook'))}</h4><div class="sn-gauge"><i></i></div><span class="sn-g">${esc(tr('mo.sn.gauge'))}</span></div>
+        <div class="sn-card"><h4>${icon('target', { size: 22 })} ${esc(tr('mo.sn.angles'))}</h4><div class="sn-ang"><span>${esc(tr('mo.sn.a1'))}</span><span>${esc(tr('mo.sn.a2'))}</span><span>${esc(tr('mo.sn.a3'))}</span></div></div>
       </div>
     </div>`;
   const tl = G().timeline();
@@ -905,7 +902,7 @@ export function price(root, sc, d) {
   root.innerHTML = `${head(sc)}
     <div class="pc">${tiers
       .map(
-        (t) => `<article class="pc-t ${t.hl ? 'is-hl' : ''}"><span class="pc-k">${esc(t.k || '')}</span><h3>${rich(t.name)}</h3><ul>${(t.items || []).map((x) => `<li>${icon('check', { size: 24, stroke: 2.4 })}${rich(x)}</li>`).join('')}</ul><p class="pc-p">${rich(t.price || 'Prix : à toi de le fixer')}</p></article>`,
+        (tier) => `<article class="pc-t ${tier.hl ? 'is-hl' : ''}"><span class="pc-k">${esc(PRICE_K[tier.k] ? tr(PRICE_K[tier.k]) : tier.k || '')}</span><h3>${rich(tier.name)}</h3><ul>${(tier.items || []).map((x) => `<li>${icon('check', { size: 24, stroke: 2.4 })}${rich(x)}</li>`).join('')}</ul><p class="pc-p">${rich(tier.price || tr('mo.pc.price'))}</p></article>`,
       )
       .join('')}</div>`;
   const tl = G().timeline();
@@ -926,22 +923,16 @@ function screenFor(sc) {
   const art = sc.art || 'parfum';
   const bg = BG[sc.bg || 'teal'];
   const ui = `<div class="ph-ui"><span>${icon('heart', { size: 30 })}</span><span>${icon('chat', { size: 30 })}</span><span>${icon('arrow', { size: 30 })}</span></div>
-    <div class="ph-cap"><b>@${esc(sc.handle || 'ta.marque')}</b><span>Sponsorisé</span><p>${rich(sc.caption || '')}</p><div class="ph-btn">${rich(sc.btn || 'Commander')}<i>›</i></div></div>`;
+    <div class="ph-cap"><b>@${esc(sc.handle || tr('mo.ph.handle'))}</b><span>${esc(tr('mo.ph.sponsored'))}</span><p>${rich(sc.caption || '')}</p><div class="ph-btn">${rich(sc.btn || tr('mo.btn'))}<i>›</i></div></div>`;
   switch (sc.mode) {
     case 'image':
       return `<div class="ph-img" style="background:${bg}">
-        <p class="ph-hl">${rich(sc.headline || 'Un parfum qui *reste* toute la journée')}</p>
+        <p class="ph-hl">${rich(sc.headline || tr('mo.ph.headline'))}</p>
         <div class="ph-art">${product(art)}</div>
-        <span class="ph-badge">${rich(sc.badge || 'Livraison 58 wilayas')}</span>
+        <span class="ph-badge">${rich(sc.badge || tr('mo.delivery'))}</span>
       </div>${ui}`;
     case 'carousel': {
-      const slides = sc.slides || [
-        { t: 'Le problème', s: 'Ton parfum disparaît avant midi ?', bg: 'nuit' },
-        { t: 'La solution', s: 'Une formule concentrée', bg: 'teal' },
-        { t: 'Comment l’utiliser', s: '2 pulvérisations suffisent', bg: 'sable' },
-        { t: 'Ce que tu reçois', s: 'Flacon 50 ml + échantillon', bg: 'rose' },
-        { t: 'Commande', s: 'Paiement à la livraison', bg: 'or' },
-      ];
+      const slides = sc.slides || ['nuit', 'teal', 'sable', 'rose', 'or'].map((bg, i) => ({ t: tr(`mo.ph.s${i + 1}.t`), s: tr(`mo.ph.s${i + 1}.s`), bg }));
       return `<div class="ph-car"><div class="ph-track">${slides
         .map(
           (s, i) => `<div class="ph-slide" style="background:${BG[s.bg] || bg}"><span class="ph-sn">${i + 1}/${slides.length}</span><b>${rich(s.t)}</b><p>${rich(s.s)}</p><div class="ph-art ph-art-s">${product(s.art || art)}</div></div>`,
@@ -954,7 +945,7 @@ function screenFor(sc) {
       const bgs = ['nuit', 'sable', 'rose', 'bain', 'cuisine', 'nuit', 'teal', 'sable', 'rose'];
       return `<div class="ph-feed"><div class="ph-ftrack">${Array.from({ length: posts }, (_, i) =>
         i === hk
-          ? `<div class="ph-post is-hook" style="background:${bg}"><p class="ph-hl">${rich(sc.headline || '*Stop.* Regarde ça')}</p><div class="ph-art">${product(art)}</div></div>`
+          ? `<div class="ph-post is-hook" style="background:${bg}"><p class="ph-hl">${rich(sc.headline || tr('mo.ph.feed'))}</p><div class="ph-art">${product(art)}</div></div>`
           : `<div class="ph-post" style="background:${BG[bgs[i]]}"><i class="ph-blob"></i><i class="ph-blob ph-blob2"></i></div>`,
       ).join('')}</div></div>`;
     }
@@ -1081,9 +1072,9 @@ export function anatomy(root, sc, d) {
   const total = sc.total || parts.reduce((m, p) => Math.max(m, p.to || 0), 0) || 15;
   const art = sc.art || 'parfum';
   const screens = {
-    hook: `<div class="an-scr" data-k="hook" style="background:${BG[sc.hookBg || 'nuit']}"><p class="ph-hl an-hl">${rich(sc.headline || '*Stop.* Ton parfum disparaît avant midi ?')}</p><div class="ph-art">${product(art)}</div></div>`,
+    hook: `<div class="an-scr" data-k="hook" style="background:${BG[sc.hookBg || 'nuit']}"><p class="ph-hl an-hl">${rich(sc.headline || tr('mo.an.headline'))}</p><div class="ph-art">${product(art)}</div></div>`,
     body: `<div class="an-scr" data-k="body" style="background:${BG[sc.bodyBg || 'teal']}"><div class="ph-art">${product(art)}</div><div class="ph-subs an-subs"></div></div>`,
-    cta: `<div class="an-scr" data-k="cta" style="background:${BG[sc.ctaBg || 'or']}"><div class="ph-art an-art-s">${product(art)}</div><span class="ph-badge an-badge">${rich(sc.badge || 'Paiement à la livraison')}</span><div class="an-btn">${rich(sc.btn || 'Commander')}<i>›</i></div></div>`,
+    cta: `<div class="an-scr" data-k="cta" style="background:${BG[sc.ctaBg || 'or']}"><div class="ph-art an-art-s">${product(art)}</div><span class="ph-badge an-badge">${rich(sc.badge || tr('mo.cod'))}</span><div class="an-btn">${rich(sc.btn || tr('mo.btn'))}<i>›</i></div></div>`,
   };
   const ticks = [];
   for (let s = 0; s <= total; s += total > 20 ? 5 : 3) ticks.push(s);
@@ -1105,7 +1096,7 @@ export function anatomy(root, sc, d) {
                 `<div class="an-seg ${typeof p.at === 'number' ? '' : 'is-off'}" data-k="${p.k}" style="left:${((p.from / total) * 100).toFixed(3)}%;width:${(((p.to - p.from) / total) * 100).toFixed(3)}%;--c:${col(p.c || p.k)}"><b>${esc(p.label || p.k.toUpperCase())}</b></div>`,
             )
             .join('')}<i class="an-head"></i></div>
-          <div class="an-ruler">${ticks.map((s) => `<span style="left:${((s / total) * 100).toFixed(3)}%">${s} s</span>`).join('')}</div>
+          <div class="an-ruler">${ticks.map((s) => `<span style="left:${((s / total) * 100).toFixed(3)}%">${esc(tr('mo.unit.s', { n: s }))}</span>`).join('')}</div>
         </div>
         <div class="an-panels">${parts
           .filter((p) => typeof p.at === 'number')
@@ -1113,7 +1104,7 @@ export function anatomy(root, sc, d) {
             (p) => `<div class="an-panel" data-k="${p.k}" style="--c:${col(p.c || p.k)}">
               <h3><span>${icon(p.icon || AN_ICON[p.k] || 'spark', { size: 40 })}</span>${esc(p.label || p.k.toUpperCase())}${p.when ? `<em>${rich(p.when)}</em>` : ''}</h3>
               ${p.fr ? `<p class="an-fr">${rich(p.fr)}</p>` : ''}
-              ${p.ar ? `<p class="an-ar" lang="ar" dir="rtl">${esc(p.ar)}</p>` : ''}
+              ${p.ar && lang !== 'ar' ? `<p class="an-ar" lang="ar" dir="rtl">${esc(p.ar)}</p>` : ''}
               ${p.items ? `<ol class="an-items">${p.items.map((it, i) => `<li><i>${i + 1}</i><div><b>${rich(it.label)}</b>${it.sub ? `<span>${rich(it.sub)}</span>` : ''}</div></li>`).join('')}</ol>` : ''}
             </div>`,
           )
@@ -1157,7 +1148,7 @@ export function anatomy(root, sc, d) {
   const subs = $(root, '.an-subs');
   const hl = $(root, '.an-hl');
   const btn = $(root, '.an-btn');
-  const caps = parts.find((p) => p.k === 'body')?.captions || ['C’est quoi ?', 'Comment l’utiliser', 'Ses points forts'];
+  const caps = parts.find((p) => p.k === 'body')?.captions || [tr('mo.an.c1'), tr('mo.an.c2'), tr('mo.an.c3')];
   track(tl, d, (t) => {
     let cur = null;
     live.forEach((p) => {
@@ -1203,11 +1194,11 @@ export function anatomy(root, sc, d) {
 /* ------------------------------------------------------------------ */
 
 export function outro(root, sc, d, ctx) {
-  const next = sc.next ?? ctx.next?.title ?? 'Projet final';
+  const next = sc.next ?? ctx.next?.title ?? tr('mo.ou.final');
   root.innerHTML = `<div class="ou">
       <div class="ou-mark">${markSVG({ lab: true })}</div>
       ${sc.text ? `<p class="ou-t">${words(sc.text)}</p>` : ''}
-      <p class="ou-next"><span>Leçon suivante</span><b>${esc(next)}</b></p>
+      <p class="ou-next"><span>${esc(tr('mo.ou.next'))}</span><b>${esc(next)}</b></p>
     </div>`;
   const tl = G().timeline();
   const mk = $(root, '.ou-mark svg');

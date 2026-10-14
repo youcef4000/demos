@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -19,17 +19,17 @@
 <body>
 <main class="pl" id="pl">
   <div class="pl-stage" id="stage"></div>
-  <button class="pl-big" id="big" type="button" aria-label="Lire la vidéo">
+  <button class="pl-big" id="big" type="button" aria-label="Lire la vidéo" data-i18n-attr="aria-label:mo.pl.play">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7Z"/></svg>
   </button>
-  <div class="pl-tele" id="tele" hidden><span class="pl-tele-k">À dire</span><p id="tele-txt"></p></div>
+  <div class="pl-tele" id="tele" hidden><span class="pl-tele-k" data-i18n="mo.pl.say">À dire</span><p id="tele-txt" dir="auto"></p></div>
   <div class="pl-bar" id="bar">
-    <button class="pl-btn" id="play" type="button" aria-label="Lecture"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5v14l11-7Z"/><path class="i-pause" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button>
+    <button class="pl-btn" id="play" type="button" aria-label="Lecture" data-i18n-attr="aria-label:mo.pl.lecture"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5v14l11-7Z"/><path class="i-pause" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button>
     <span class="pl-time" id="time">00:00</span>
-    <input class="pl-seek" id="seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Position dans la vidéo">
+    <input class="pl-seek" id="seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Position dans la vidéo" data-i18n-attr="aria-label:mo.pl.seek">
     <span class="pl-time" id="dur">00:00</span>
-    <button class="pl-btn pl-speed" id="speed" type="button" aria-label="Vitesse de lecture">1×</button>
-    <button class="pl-btn" id="fs" type="button" aria-label="Plein écran"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <button class="pl-btn pl-speed" id="speed" type="button" aria-label="Vitesse de lecture" data-i18n-attr="aria-label:mo.pl.speed">1×</button>
+    <button class="pl-btn" id="fs" type="button" aria-label="Plein écran" data-i18n-attr="aria-label:mo.pl.fs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
   </div>
 </main>
 </body>

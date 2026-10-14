@@ -2,7 +2,19 @@
 // Toutes les animations passent par des timelines GSAP : la vidéo peut être lue, mise en pause,
 // déplacée ou rendue image par image, avec exactement le même résultat.
 
+import { lang, fmtNum } from '../assets/js/i18n.js';
+
 export const G = () => window.gsap;
+const AR_RE = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/;
+/** Le texte contient-il de l'arabe ? */
+export const isAr = (s) => AR_RE.test(String(s ?? ''));
+/** Bloc de texte arabe : sens de droite à gauche, police arabe (motion.css, .ar-t). */
+export function setAr(el) {
+  if (!el) return;
+  el.setAttribute('dir', 'rtl');
+  el.setAttribute('lang', 'ar');
+  el.classList.add('ar-t');
+}
 
 export const esc = (s) =>
   String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
@@ -35,6 +47,7 @@ export const rich = (text) =>
 
 /** Chaque mot dans un masque : <span class="w"><span class="wi">mot</span></span>. */
 export function words(text) {
+  if (lang === 'ar' && isAr(text)) return wordsAr(text);
   return tokens(text)
     .map((k) =>
       k.t
@@ -43,6 +56,50 @@ export function words(text) {
         .join(''),
     )
     .join('');
+}
+
+/**
+ * Arabe : chaque mot animé est un bloc en ligne, que l'algorithme bidi place comme un signe neutre.
+ * Les mots latins qui se suivent (« Kling AI », « Hook / Body / CTA ») restent donc dans un même
+ * masque, sinon une ligne de droite à gauche inverserait leur ordre.
+ */
+function wordsAr(text) {
+  const items = [];
+  tokens(text).forEach((k) =>
+    k.t.split(/(\s+)/).forEach((w) => {
+      if (/^\s+$/.test(w)) items.push(' ');
+      else if (w) items.push({ w, c: k.c });
+    }),
+  );
+  const out = [];
+  items.forEach((it) => {
+    if (it === ' ') {
+      if (out.length && out[out.length - 1] !== ' ') out.push(' ');
+      return;
+    }
+    const sp = out[out.length - 1] === ' ';
+    const prev = out[out.length - (sp ? 2 : 1)];
+    if (sp && prev && prev !== ' ' && prev.c === it.c && !AR_RE.test(prev.w) && !AR_RE.test(it.w)) {
+      out.pop();
+      prev.w += ` ${it.w}`;
+    } else out.push({ ...it });
+  });
+  // Les mots collés sans espace (« *البيع*. ») ne se séparent pas en fin de ligne
+  const html = [];
+  let cl = [];
+  const flush = () => {
+    if (cl.length > 1) html.push(`<span class="w-nb">${cl.join('')}</span>`);
+    else if (cl.length) html.push(cl[0]);
+    cl = [];
+  };
+  out.forEach((x) => {
+    if (x === ' ') {
+      flush();
+      html.push(' ');
+    } else cl.push(`<span class="w"><span class="wi ${x.c}">${esc(x.w)}</span></span>`);
+  });
+  flush();
+  return html.join('');
 }
 
 export function h(tag, cls = '', html = '') {
@@ -90,7 +147,7 @@ export function type(tl, node, text, at = 0, { cps = 38, caret = true } = {}) {
 export function count(tl, node, to, at = 0, { from = 0, duration = 1.2, decimals = 0, prefix = '', suffix = '' } = {}) {
   const p = { v: from };
   const show = () => {
-    node.textContent = `${prefix}${p.v.toFixed(decimals).replace('.', ',')}${suffix}`;
+    node.textContent = `${prefix}${fmtNum(p.v, { minimumFractionDigits: decimals, maximumFractionDigits: decimals, useGrouping: false })}${suffix}`;
   };
   show();
   tl.fromTo(p, { v: from }, { v: to, duration, ease: 'power3.out', onUpdate: show }, at);
