@@ -1,32 +1,42 @@
-// Hooked Academy — espace équipe.
-// Routes : #/ (vue d'ensemble) · #/inscriptions · #/etudiants · #/studio · #/programme · #/reglages
+// Hooked Academy — espace équipe (français, anglais, arabe).
+// Routes : #/ (vue d'ensemble) · #/inscriptions · #/etudiants · #/ressources · #/studio[/leçon] · #/programme · #/reglages
 // Les inscriptions arrivent de la landing ; l'équipe contacte sur WhatsApp, encaisse, valide :
-// la validation crée l'accès étudiant (e-mail + code) et prépare le message de bienvenue.
+// la validation crée l'accès étudiant (e-mail + code) et prépare le message de bienvenue, dans la langue choisie.
+// Ressources : ressources/manifest.json (généré par une action GitHub) liste les fichiers déposés par leçon.
 
+import { lang, isRTL, locale, t, tIn, fmtNum, fmtDate, switcher, bindSwitchers } from './i18n.js';
+import './i18n/common.js';
+import { plural, exText } from './i18n/admin.js';
 import { logoInner } from './brand.js';
 import { icon } from './icons.js';
 import * as S from './store.js';
-import { MODULES, allLessons, findLesson } from '../../data/programme.js';
+import { MODULES, allLessons, findLesson, modCode, modulesOf, lessonsOf, trackOf } from '../../data/programme.js';
 import { plan, lessonDuration } from '../../motion/engine.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
-const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const gsap = () => (reduce ? null : window.gsap);
 const root = $('#root');
 const LESSONS = allLessons();
 let stop = [];
 
-const fmtDate = (s) => new Date(s).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short' });
-const fmtDT = (s) => new Date(s).toLocaleString('fr-FR', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+document.title = t('ad.meta.title');
+const ARROW = isRTL ? '←' : '→';
+const EXT = isRTL ? '↖' : '↗';
+
+const fmtD = (s) => fmtDate(s, { day: '2-digit', month: 'short' });
+const fmtDT = (s) => fmtDate(s, { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+const RTF = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' });
 const ago = (s) => {
   const m = Math.round((Date.now() - new Date(s)) / 60000);
-  if (m < 60) return `il y a ${Math.max(1, m)} min`;
+  if (m < 60) return RTF.format(-Math.max(1, m), 'minute');
   const h = Math.round(m / 60);
-  if (h < 24) return `il y a ${h} h`;
-  return `il y a ${Math.round(h / 24)} j`;
+  if (h < 24) return RTF.format(-h, 'hour');
+  return RTF.format(-Math.round(h / 24), 'day');
 };
+const pct = (x) => fmtNum(x, { style: 'percent', maximumFractionDigits: 0 });
 const waNum = (p) => {
   let d = String(p || '').replace(/\D/g, '');
   if (d.startsWith('00')) d = d.slice(2);
@@ -35,19 +45,34 @@ const waNum = (p) => {
 };
 const wa = (phone, text) => `https://wa.me/${waNum(phone)}?text=${encodeURIComponent(text)}`;
 const fmtMin = (s) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, '0')}`;
+const arLine = (s) => (lang === 'ar' || !s ? '' : `<p class="ar-line" lang="ar" dir="rtl">${esc(s)}</p>`);
+const fold = (s) => String(s || '').normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '').toLowerCase();
+
+// Libellés partagés (common.js) et données d'exemple traduites
+const stLabel = (k) => (S.STATUS[k] ? t(`status.${k}`) : k || '—');
+const prLabel = (k) => (S.PROFILS[k] ? t(`profil.${k}`) : k || '—');
+const BY = { Formulaire: 'ad.by.form', Équipe: 'ad.by.team', 'Équipe (WhatsApp)': 'ad.by.teamWa' };
+const byLabel = (b) => (BY[b] ? t(BY[b]) : b || '');
+const srcLabel = (s) => (!s || s === 'Landing' ? t('ad.src.landing') : s);
+const stuName = (s) => (S.isDemo(s) ? t('ad.st.demo') : exText(s.name));
+const lvName = (xp) => t(`level.${S.level(xp).i}`);
+const exTag = () => `<span class="ex-tag">${t('ad.ex.tag')}</span>`;
 
 function toast(html, ms = 2600) {
-  const t = document.createElement('div');
-  t.className = 'toast';
-  t.innerHTML = html;
-  $('#toasts').appendChild(t);
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = html;
+  $('#toasts').appendChild(el);
   setTimeout(() => {
-    t.style.opacity = '0';
-    t.style.transition = 'opacity .3s';
-    setTimeout(() => t.remove(), 320);
+    el.style.opacity = '0';
+    el.style.transition = 'opacity .3s';
+    setTimeout(() => el.remove(), 320);
   }, ms);
 }
-const copy = (text) => navigator.clipboard?.writeText(text).then(() => toast(`${icon('copy', { size: 16 })} Copié`));
+const copy = (text) => navigator.clipboard?.writeText(text).then(
+  () => toast(`${icon('copy', { size: 16 })} ${t('ad.copied')}`),
+  () => {},
+);
 function download(name, content, type = 'text/plain') {
   const a = document.createElement('a');
   a.href = URL.createObjectURL(content instanceof Blob ? content : new Blob([content], { type: `${type};charset=utf-8` }));
@@ -56,25 +81,130 @@ function download(name, content, type = 'text/plain') {
   a.click();
   setTimeout(() => (URL.revokeObjectURL(a.href), a.remove()), 500);
 }
+const ls = {
+  get(k) {
+    try {
+      return localStorage.getItem(k);
+    } catch {
+      return null;
+    }
+  },
+  set(k, v) {
+    try {
+      localStorage.setItem(k, v);
+    } catch {}
+  },
+};
 
+/* ------------------------------------------------------------------ */
+/* Messages WhatsApp aux étudiants : langue choisie dans le tiroir      */
+/* ------------------------------------------------------------------ */
+
+const ML_KEY = 'hooked-academy:admin:msg-lang';
+const ML = [
+  ['fr', 'FR'],
+  ['ar', 'العربية'],
+  ['en', 'EN'],
+];
+let msgLang = ML.some(([c]) => c === ls.get(ML_KEY)) ? ls.get(ML_KEY) : lang;
+
+const studentUrl = (l) => {
+  const u = new URL('../app/', location.href);
+  u.search = `?lang=${l}`;
+  u.hash = '';
+  return u.href;
+};
+const firstOf = (name) => String(name || '').replace(/^Exemple — /, '').split(/\s+/)[0];
+function welcomeText(st, l) {
+  const id = st.email ? tIn(l, 'ad.msg.email', { v: st.email }) : tIn(l, 'ad.msg.phone', { v: st.phone || '—' });
+  const name = S.isDemo(st) ? tIn(l, 'ad.msg.demoName') : st.firstName || firstOf(st.name);
+  return tIn(l, 'ad.msg.welcome', { name, url: studentUrl(l), id, code: st.code });
+}
+const contactText = (a, l) => tIn(l, 'ad.msg.contact', { name: firstOf(a.name) });
+
+const mlSwitch = () =>
+  `<div class="ml"><span class="ml-l">${icon('globe', { size: 15 })}${t('ad.dw.msgLang')}</span><div class="ml-b" role="group" aria-label="${esc(t('ad.dw.msgLang'))}">${ML.map(
+    ([c, l]) => `<button type="button" data-ml="${c}" lang="${c}" aria-pressed="${c === msgLang}">${l}</button>`,
+  ).join('')}</div></div>`;
+
+/** Remplit les messages d'un tiroir ([data-msg], [data-wa], [data-copy]) et suit le choix de langue. */
+function bindMsgs(box, phone, gens) {
+  const paint = () => {
+    $$('[data-ml]', box).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.ml === msgLang)));
+    for (const [k, gen] of Object.entries(gens)) {
+      const txt = gen(msgLang);
+      $$(`[data-msg="${k}"]`, box).forEach((el) => {
+        el.textContent = txt;
+        el.lang = msgLang;
+        el.dir = msgLang === 'ar' ? 'rtl' : 'ltr';
+      });
+      $$(`[data-wa="${k}"]`, box).forEach((el) => (el.href = wa(phone, txt)));
+    }
+  };
+  box.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-ml]');
+    if (b) {
+      msgLang = b.dataset.ml;
+      ls.set(ML_KEY, msgLang);
+      paint();
+    }
+    const c = e.target.closest('[data-copy]');
+    if (c && gens[c.dataset.copy]) copy(gens[c.dataset.copy](msgLang));
+  });
+  paint();
+}
+
+/** Tiroir latéral (à droite, à gauche en arabe). close() rafraîchit la vue, dispose() retire sans rien faire. */
+function drawer(label, html, onClose) {
+  const dw = document.createElement('div');
+  dw.className = 'drawer';
+  dw.innerHTML = `<div class="drawer-p" role="dialog" aria-modal="true" aria-label="${esc(label)}">${html}</div>`;
+  document.body.appendChild(dw);
+  document.body.style.overflow = 'hidden';
+  gsap()?.fromTo($('.drawer-p', dw), { x: isRTL ? -80 : 80, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.5, ease: 'expo.out' });
+  const onKey = (e) => {
+    if (e.key === 'Escape') close();
+  };
+  const dispose = () => {
+    removeEventListener('keydown', onKey);
+    dw.remove();
+    document.body.style.overflow = '';
+  };
+  const close = () => {
+    if (!dw.isConnected) return;
+    dispose();
+    onClose?.();
+  };
+  addEventListener('keydown', onKey);
+  dw.addEventListener('click', (e) => {
+    if (e.target === dw || e.target.closest('[data-x]')) close();
+  });
+  setTimeout(() => $('[data-x]', dw)?.focus(), 0);
+  return { dw, close, dispose };
+}
+const drawerHead = (kicker, title, color = '') =>
+  `<div class="drawer-h"><div><p class="card-k"${color ? ` style="color:${color}"` : ''}>${kicker}</p><h2>${esc(title)}</h2></div><button class="b b--i" type="button" data-x aria-label="${esc(t('ad.close'))}">${icon('x', { size: 18 })}</button></div>`;
+
+/* ------------------------------------------------------------------ */
+/* Connexion et structure                                              */
 /* ------------------------------------------------------------------ */
 
 function viewLogin(err = '') {
   root.innerHTML = `<div class="login"><section class="login-box">
-    <a class="ha-logo" href="../">${logoInner()}</a>
-    <h1>Espace <em>équipe</em></h1>
-    <p class="muted">Inscriptions, validation des accès, suivi des étudiants et studio voix off.</p>
+    <div class="login-top"><a class="ha-logo" href="../">${logoInner()}</a>${switcher('ad-lang')}</div>
+    <h1>${t('ad.login.title')}</h1>
+    <p class="muted">${t('ad.login.lead')}</p>
     <form id="af" style="display:grid;gap:12px" novalidate>
-      <label class="lbl">Code équipe<input class="in" name="code" autocomplete="current-password" type="password" required style="font-family:var(--font-mono)"></label>
+      <label class="lbl">${t('ad.login.code')}<input class="in" name="code" autocomplete="current-password" type="password" required dir="ltr" style="font-family:var(--font-mono)"></label>
       <p class="login-err" role="alert">${esc(err)}</p>
-      <button class="b b--or" type="submit">Entrer</button>
+      <button class="b b--or" type="submit">${t('ad.login.enter')}</button>
     </form>
-    <div class="login-demo">Démo : code équipe <code>${S.TEAM_CODE}</code><br><button class="b b--s" type="button" id="ademo" style="margin-top:10px">Entrer avec le code démo</button></div>
+    <div class="login-demo">${t('ad.login.demo')} <code dir="ltr">${S.TEAM_CODE}</code><br><button class="b b--s" type="button" id="ademo" style="margin-top:10px">${t('ad.login.demoBtn')}</button></div>
   </section><aside class="login-art" aria-hidden="true" style="display:grid;place-items:center"><div style="width:min(70%,420px)">${logoInner().replace('ha-logo__pastille', 'ha-logo__pastille" style="width:9em;height:9em;border-radius:2.4em;font-size:16px"')}</div></aside></div>`;
   $('#af').addEventListener('submit', (e) => {
     e.preventDefault();
     if (S.loginAdmin(new FormData(e.target).get('code'))) route();
-    else viewLogin('Code incorrect.');
+    else viewLogin(t('ad.login.bad'));
   });
   $('#ademo').addEventListener('click', () => {
     S.loginAdmin(S.TEAM_CODE);
@@ -83,40 +213,82 @@ function viewLogin(err = '') {
 }
 
 const NAV = [
-  ['#/', 'chart', 'Vue d’ensemble'],
-  ['#/inscriptions', 'users', 'Inscriptions'],
-  ['#/etudiants', 'book', 'Étudiants'],
-  ['#/studio', 'mic', 'Studio voix off'],
-  ['#/programme', 'layers', 'Programme'],
-  ['#/reglages', 'settings', 'Réglages'],
+  { h: '#/', ic: 'chart', k: 'overview' },
+  { h: '#/inscriptions', ic: 'users', k: 'apps' },
+  { h: '#/etudiants', ic: 'book', k: 'students' },
+  { h: '#/ressources', ic: 'box', k: 'res' },
+  { h: '#/studio', ic: 'mic', k: 'studio' },
+  { h: '#/programme', ic: 'layers', k: 'prog' },
+  { h: '#/reglages', ic: 'settings', k: 'settings' },
 ];
+const TABS = ['#/', '#/inscriptions', '#/etudiants', '#/ressources'];
 
 function shell(active, html) {
   const d = S.load();
   const nNew = d.applications.filter((a) => a.status === 'nouvelle').length;
+  const more = !TABS.includes(active);
+  const out = `<a class="nv" href="../app/" target="_blank" rel="noopener">${icon('user', { size: 20 })}${t('ad.nav.studentSpace')} <span class="ext" aria-hidden="true">${EXT}</span></a>`;
   root.innerHTML = `<div class="sh">
     <aside class="side">
       <a class="ha-logo" href="../">${logoInner()}</a>
-      <p class="card-k" style="margin:0 12px 8px">Espace équipe</p>
-      ${NAV.map(([h, ic, t]) => `<a class="nv" href="${h}" ${active === h ? 'aria-current="page"' : ''}>${icon(ic, { size: 20 })}${t}${h === '#/inscriptions' && nNew ? `<span class="cnt">${nNew}</span>` : ''}</a>`).join('')}
-      <div class="side-foot"><a class="nv" href="../app/" target="_blank">${icon('user', { size: 20 })}Espace étudiant ↗</a><button class="b b--s" id="out" type="button">${icon('logout', { size: 16 })} Déconnexion</button></div>
+      <p class="card-k side-k">${t('ad.nav.space')}</p>
+      <nav class="side-nav" aria-label="${esc(t('ad.nav.label'))}">${NAV.map(
+        (n) => `<a class="nv" href="${n.h}" ${active === n.h ? 'aria-current="page"' : ''}>${icon(n.ic, { size: 20 })}${t(`ad.nav.${n.k}`)}${n.h === '#/inscriptions' && nNew ? `<span class="cnt">${fmtNum(nNew)}</span>` : ''}</a>`,
+      ).join('')}</nav>
+      <div class="side-foot">${switcher('ad-lang ad-lang--side')}${out}<button class="b b--s" id="out" type="button">${icon('logout', { size: 16 })} ${t('ad.nav.logout')}</button></div>
     </aside>
-    <div>
-      <header class="top"><a class="ha-logo" href="#/">${logoInner()}</a><span class="chip chip--or">Équipe</span><button class="b b--s b--i" id="out2" type="button" aria-label="Déconnexion">${icon('logout', { size: 16 })}</button></header>
+    <div class="sh-main">
+      <header class="top"><a class="ha-logo" href="#/">${logoInner()}</a><span class="chip chip--or top-chip">${t('ad.nav.team')}</span>${switcher('ad-lang ad-lang--top')}<button class="b b--s b--i" id="out2" type="button" aria-label="${esc(t('ad.nav.logout'))}">${icon('logout', { size: 16 })}</button></header>
       <main class="main" id="main">${html}</main>
     </div>
   </div>
-  <nav class="tabs" aria-label="Navigation">${NAV.slice(0, 5).map(([h, ic, t]) => `<a href="${h}" ${active === h ? 'aria-current="page"' : ''}>${icon(ic, { size: 20 })}${t.split(' ')[0]}</a>`).join('')}</nav>`;
-  const out = () => {
+  <nav class="tabs" aria-label="${esc(t('ad.nav.label'))}">${NAV.filter((n) => TABS.includes(n.h))
+    .map((n) => `<a href="${n.h}" ${active === n.h ? 'aria-current="page"' : ''}>${icon(n.ic, { size: 20 })}<span>${t(`ad.tab.${n.k}`)}</span>${n.h === '#/inscriptions' && nNew ? `<i class="tab-dot" aria-hidden="true"></i>` : ''}</a>`)
+    .join('')}<button type="button" id="more" aria-haspopup="dialog" aria-expanded="false" ${more ? 'data-on' : ''}>${icon('grid', { size: 20 })}<span>${t('ad.nav.more')}</span></button></nav>`;
+  const logout = () => {
     S.logoutAdmin();
     route();
   };
-  $('#out').addEventListener('click', out);
-  $('#out2').addEventListener('click', out);
+  $('#out').addEventListener('click', logout);
+  $('#out2').addEventListener('click', logout);
+  $('#more').addEventListener('click', () => openMore(active, logout));
   window.scrollTo(0, 0);
 }
+
+/** Menu « Plus » (mobile) : pages hors onglets, langue, déconnexion. */
+function openMore(active, logout) {
+  const sh = document.createElement('div');
+  sh.className = 'sheet';
+  sh.innerHTML = `<div class="sheet-p" role="dialog" aria-modal="true" aria-label="${esc(t('ad.nav.more'))}"><span class="sheet-grip" aria-hidden="true"></span>
+    <nav class="sheet-nav">${NAV.filter((n) => !TABS.includes(n.h))
+      .map((n) => `<a class="nv" href="${n.h}" ${active === n.h ? 'aria-current="page"' : ''}>${icon(n.ic, { size: 20 })}${t(`ad.nav.${n.k}`)}</a>`)
+      .join('')}<a class="nv" href="../app/" target="_blank" rel="noopener">${icon('user', { size: 20 })}${t('ad.nav.studentSpace')} <span class="ext" aria-hidden="true">${EXT}</span></a></nav>
+    <div class="sheet-foot">${switcher('ad-lang')}<button class="b b--s" type="button" data-out>${icon('logout', { size: 16 })} ${t('ad.nav.logout')}</button></div>
+    <button class="b b--s sheet-x" type="button" data-x>${t('ad.nav.close')}</button></div>`;
+  document.body.appendChild(sh);
+  const btn = $('#more');
+  btn?.setAttribute('aria-expanded', 'true');
+  gsap()?.fromTo($('.sheet-p', sh), { y: 60, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.45, ease: 'expo.out' });
+  const onKey = (e) => e.key === 'Escape' && close();
+  function close() {
+    removeEventListener('keydown', onKey);
+    sh.remove();
+    btn?.setAttribute('aria-expanded', 'false');
+    btn?.focus();
+  }
+  addEventListener('keydown', onKey);
+  sh.addEventListener('click', (e) => {
+    if (e.target === sh || e.target.closest('[data-x]')) close();
+    else if (e.target.closest('[data-out]')) {
+      close();
+      logout();
+    } else if (e.target.closest('a.nv[href^="#"]')) close();
+  });
+  $('.sheet-nav a', sh)?.focus();
+}
+
 const exBanner = (d) =>
-  d.applications.some((a) => a.exemple) ? `<p class="ex-banner">${icon('sparkles', { size: 16 })} Les fiches marquées <span class="ex-tag">exemple</span> sont fictives : elles montrent le fonctionnement. Les vraies inscriptions de la landing s’ajoutent au-dessus.</p>` : '';
+  d.applications.some((a) => a.exemple) ? `<p class="ex-banner">${icon('sparkles', { size: 16 })}<span>${t('ad.ex.banner', { tag: exTag() })}</span></p>` : '';
 
 /* ------------------------------------------------------------------ */
 /* Vue d'ensemble                                                      */
@@ -140,35 +312,41 @@ function viewOverview() {
   });
   const max = Math.max(1, ...days.map((x) => x.n));
   const events = A.flatMap((a) => [
-    ...a.history.map((h) => ({ at: h.at, c: S.STATUS[h.status]?.c, t: `${esc(a.name)} → <b>${S.STATUS[h.status]?.label}</b>`, by: h.by })),
-    ...a.notes.map((n) => ({ at: n.at, c: 'var(--mist-400)', t: `Note sur ${esc(a.name)} : ${esc(n.text)}`, by: n.by })),
+    ...a.history.map((h) => ({ at: h.at, c: S.STATUS[h.status]?.c, t: `${esc(exText(a.name))} ${ARROW} <b>${esc(stLabel(h.status))}</b>`, by: byLabel(h.by) })),
+    ...a.notes.map((n) => ({ at: n.at, c: 'var(--mist-400)', t: esc(t('ad.ov.noteOn', { name: exText(a.name), text: exText(n.text) })), by: byLabel(n.by) })),
   ])
     .sort((x, y) => new Date(y.at) - new Date(x.at))
     .slice(0, 8);
+  const tracks = ['creative', 'ia'].map((id) => {
+    const tr = trackOf(id);
+    const mods = modulesOf(id);
+    return `<a class="ov-tr" href="#/programme" style="--t:${tr.color}"><span class="ov-tr-i">${icon(tr.icon, { size: 20 })}</span><span class="ov-tr-t"><b>${t(`track.${id}`)}</b><small>${plural('module', mods.length)} · ${plural('lesson', lessonsOf(id).length)}</small></span><em dir="ltr">${modCode(mods[0])}–${modCode(mods[mods.length - 1])}</em></a>`;
+  });
   shell(
     '#/',
-    `<div class="ph-h"><div><h1>Vue d’ensemble</h1><p>${new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}</p></div><a class="b b--or b--s" href="#/inscriptions">${icon('users', { size: 16 })} Traiter les inscriptions</a></div>
+    `<div class="ph-h"><div><h1>${t('ad.nav.overview')}</h1><p>${esc(fmtDate(new Date(), { weekday: 'long', day: 'numeric', month: 'long' }))}</p></div><a class="b b--or b--s" href="#/inscriptions">${icon('users', { size: 16 })} ${t('ad.ov.cta')}</a></div>
     ${exBanner(d)}
     <div class="kpi-row">
-      <a class="card kpi-c" href="#/inscriptions" style="--c:var(--hook);text-decoration:none;color:inherit"><i>${icon('bell', { size: 20 })}</i><b data-c="${by('nouvelle')}">0</b><span>nouvelles inscriptions</span></a>
-      <div class="card kpi-c" style="--c:var(--cta)"><i>${icon('money', { size: 20 })}</i><b data-c="${by('paiement')}">0</b><span>paiements en attente</span></div>
-      <div class="card kpi-c" style="--c:var(--body)"><i>${icon('users', { size: 20 })}</i><b data-c="${active.length}">0</b><span>étudiants actifs</span></div>
-      <div class="card kpi-c"><i>${icon('chart', { size: 20 })}</i><b data-c="${Math.round(avg * 100)}" data-suf=" %">0</b><span>progression moyenne</span></div>
+      <a class="card kpi-c" href="#/inscriptions" style="--c:var(--hook);text-decoration:none;color:inherit"><i>${icon('bell', { size: 20 })}</i><b data-c="${by('nouvelle')}">0</b><span>${t('ad.ov.kNew')}</span></a>
+      <div class="card kpi-c" style="--c:var(--cta)"><i>${icon('money', { size: 20 })}</i><b data-c="${by('paiement')}">0</b><span>${t('ad.ov.kPay')}</span></div>
+      <div class="card kpi-c" style="--c:var(--body)"><i>${icon('users', { size: 20 })}</i><b data-c="${active.length}">0</b><span>${t('ad.ov.kActive')}</span></div>
+      <div class="card kpi-c"><i>${icon('chart', { size: 20 })}</i><b data-c="${Math.round(avg * 100)}" data-pct>0</b><span>${t('ad.ov.kAvg')}</span></div>
     </div>
     <div class="ov" style="margin-top:14px">
-      <section class="card"><p class="card-k">Inscriptions · 14 derniers jours</p><div class="bars">${days.map((x) => `<span><b>${x.n || ''}</b><i style="height:${(x.n / max) * 100}%"></i>${x.l}</span>`).join('')}</div></section>
-      <section class="card"><p class="card-k">Pipeline</p><div class="funnel-ad">${Object.entries(S.STATUS)
-        .map(([k, s]) => `<div style="--c:${s.c}"><span>${s.label}</span><em><i style="transform:scaleX(${A.length ? by(k) / A.length : 0})"></i></em><b>${by(k)}</b></div>`)
+      <section class="card"><p class="card-k">${t('ad.ov.chart')}</p><div class="bars">${days.map((x) => `<span><b>${x.n ? fmtNum(x.n) : ''}</b><i style="height:${(x.n / max) * 100}%"></i>${fmtNum(x.l)}</span>`).join('')}</div></section>
+      <section class="card"><p class="card-k">${t('ad.ov.pipeline')}</p><div class="funnel-ad">${Object.entries(S.STATUS)
+        .map(([k, s]) => `<div style="--c:${s.c}"><span>${esc(stLabel(k))}</span><em><i style="transform:scaleX(${A.length ? by(k) / A.length : 0})"></i></em><b>${fmtNum(by(k))}</b></div>`)
         .join('')}</div></section>
-      <section class="card" style="grid-column:1/-1"><p class="card-k">Activité récente</p><ul class="act">${events.map((e) => `<li style="--c:${e.c}"><span class="dot"></span><span>${e.t}<br><small class="muted">${esc(e.by || '')}</small></span><time>${ago(e.at)}</time></li>`).join('') || '<li class="muted">Rien pour l’instant.</li>'}</ul></section>
+      <section class="card"><p class="card-k">${t('ad.ov.activity')}</p><ul class="act">${events.map((e) => `<li style="--c:${e.c}"><span class="dot"></span><span>${e.t}<br><small class="muted">${esc(e.by || '')}</small></span><time datetime="${esc(e.at)}">${esc(ago(e.at))}</time></li>`).join('') || `<li class="muted">${t('ad.ov.none')}</li>`}</ul></section>
+      <section class="card ov-tracks"><p class="card-k">${t('ad.ov.tracks')}</p>${tracks.join('')}<a class="b b--s" href="#/ressources">${icon('box', { size: 16 })} ${t('ad.ov.manageRes')}</a></section>
     </div>`,
   );
   $$('[data-c]').forEach((el) => {
     const n = +el.dataset.c;
-    const suf = el.dataset.suf || '';
-    if (!gsap()) return (el.textContent = `${n}${suf}`);
+    const f = el.hasAttribute('data-pct') ? (v) => pct(v / 100) : (v) => fmtNum(v);
+    if (!gsap()) return (el.textContent = f(n));
     const o = { v: 0 };
-    gsap().to(o, { v: n, duration: 1.1, ease: 'power3.out', onUpdate: () => (el.textContent = `${Math.round(o.v)}${suf}`) });
+    gsap().to(o, { v: n, duration: 1.1, ease: 'power3.out', onUpdate: () => (el.textContent = f(Math.round(o.v))) });
   });
   gsap()?.from('.bars i', { scaleY: 0, duration: 0.9, ease: 'expo.out', stagger: 0.03 });
   gsap()?.from('.funnel-ad em i', { scaleX: 0, duration: 1, ease: 'expo.out', stagger: 0.06 });
@@ -182,20 +360,20 @@ function viewOverview() {
 let filter = '';
 function viewApps() {
   const d = S.load();
-  const q = filter.toLowerCase();
-  const list = d.applications.filter((a) => !q || `${a.name} ${a.email} ${a.phone} ${a.city} ${a.objectif}`.toLowerCase().includes(q));
+  const q = fold(filter);
+  const list = d.applications.filter((a) => !q || fold(`${a.name} ${exText(a.name)} ${a.email} ${a.phone} ${a.city} ${exText(a.city)} ${a.objectif} ${exText(a.objectif)}`).includes(q));
   shell(
     '#/inscriptions',
-    `<div class="ph-h"><div><h1>Inscriptions</h1><p>Glisse une fiche d’une colonne à l’autre, ou ouvre-la pour agir.</p></div><button class="b b--s" id="csv" type="button">${icon('download', { size: 16 })} Export CSV</button></div>
+    `<div class="ph-h"><div><h1>${t('ad.nav.apps')}</h1><p>${t('ad.apps.lead')}</p></div><button class="b b--s" id="csv" type="button">${icon('download', { size: 16 })} ${t('ad.apps.csv')}</button></div>
     ${exBanner(d)}
-    <div class="tools"><input class="in" id="flt" type="search" placeholder="Rechercher : nom, téléphone, ville…" value="${esc(filter)}" aria-label="Rechercher"></div>
+    <div class="tools"><input class="in" id="flt" type="search" placeholder="${esc(t('ad.apps.search'))}" value="${esc(filter)}" aria-label="${esc(t('ad.apps.searchL'))}"></div>
     <div class="kb">${Object.entries(S.STATUS)
       .map(
-        ([k, s]) => `<section class="kb-col" data-st="${k}" style="--c:${s.c}"><div class="kb-h"><i></i>${s.label}<span>${list.filter((a) => a.status === k).length}</span></div>
+        ([k, s]) => `<section class="kb-col" data-st="${k}" style="--c:${s.c}" aria-label="${esc(stLabel(k))}"><div class="kb-h"><i></i>${esc(stLabel(k))}<span>${fmtNum(list.filter((a) => a.status === k).length)}</span></div>
         ${list
           .filter((a) => a.status === k)
           .map(
-            (a) => `<button class="kb-card" draggable="true" data-id="${a.id}" type="button" style="--c:${s.c}"><b>${esc(a.name)}</b><small>${esc(a.objectif || '—')}</small><div class="kb-meta">${a.exemple ? '<span class="ex-tag">exemple</span>' : ''}${Date.now() - new Date(a.createdAt) < 864e5 && a.status === 'nouvelle' ? '<span class="kb-new">NOUVEAU</span>' : ''}<span>${esc(S.PROFILS[a.profil] || '')}</span>·<span>${esc(a.city || '')}</span>·<span>${ago(a.createdAt)}</span></div></button>`,
+            (a) => `<button class="kb-card" draggable="true" data-id="${esc(a.id)}" type="button" style="--c:${s.c}"><b>${esc(exText(a.name))}</b><small>${esc(exText(a.objectif) || '—')}</small><div class="kb-meta">${a.exemple ? exTag() : ''}${Date.now() - new Date(a.createdAt) < 864e5 && a.status === 'nouvelle' ? `<span class="kb-new">${t('ad.apps.new')}</span>` : ''}<span>${esc(prLabel(a.profil))}</span>·<span>${esc(exText(a.city) || '—')}</span>·<span>${esc(ago(a.createdAt))}</span></div></button>`,
           )
           .join('')}</section>`,
       )
@@ -232,23 +410,23 @@ function viewApps() {
     });
   });
   $('#csv').addEventListener('click', () => {
-    const rows = [['Date', 'Nom', 'WhatsApp', 'E-mail', 'Ville', 'Profil', 'Niveau', 'Objectif', 'Statut', 'Exemple']].concat(
-      d.applications.map((a) => [fmtDT(a.createdAt), a.name, a.phone, a.email, a.city, S.PROFILS[a.profil] || a.profil, a.niveau, a.objectif, S.STATUS[a.status].label, a.exemple ? 'oui' : '']),
+    const H = ['date', 'name', 'wa', 'email', 'city', 'profil', 'level', 'goal', 'status', 'ex'].map((k) => t(`ad.csv.${k}`));
+    const rows = [H].concat(
+      d.applications.map((a) => [fmtDT(a.createdAt), exText(a.name), a.phone, a.email, exText(a.city), prLabel(a.profil), exText(a.niveau), exText(a.objectif), stLabel(a.status), a.exemple ? t('ad.csv.yes') : '']),
     );
-    download(`inscriptions-hooked-academy-${S.iso()}.csv`, '﻿' + rows.map((r) => r.map((x) => `"${String(x ?? '').replace(/"/g, '""')}"`).join(';')).join('\n'), 'text/csv');
+    download(`${t('ad.csv.file')}-hooked-academy-${S.iso()}.csv`, '﻿' + rows.map((r) => r.map((x) => `"${String(x ?? '').replace(/"/g, '""')}"`).join(';')).join('\n'), 'text/csv');
   });
   gsap()?.from('.kb-card', { y: 20, autoAlpha: 0, duration: 0.5, stagger: 0.03, ease: 'expo.out', clearProps: 'all' });
 }
 
 function setStatus(id, st) {
+  if (!S.STATUS[st]) return;
   if (st === 'validee') {
     const r = S.validateApplication(id);
     if (r) openApp(id, r);
   } else S.updateApplication(id, { status: st });
-  toast(`Statut : <b>${S.STATUS[st].label}</b>`);
-  if (st !== 'validee') {
-    viewApps();
-  }
+  toast(t('ad.apps.status', { s: esc(stLabel(st)) }));
+  if (st !== 'validee') viewApps();
 }
 
 function openApp(id, validation = null) {
@@ -256,119 +434,375 @@ function openApp(id, validation = null) {
   const a = d.applications.find((x) => x.id === id);
   if (!a) return;
   const st = d.students.find((s) => s.id === a.studentId || (a.email && s.email === a.email));
-  const contact = `Salam ${a.name.replace(/^Exemple — /, '').split(' ')[0]} ! Ici l’équipe Hooked Academy 👋 Merci pour ton inscription. On t’appelle pour te présenter la prochaine session, le tarif et les moyens de paiement (CCP, BaridiMob ou espèces). Quel moment t’arrange ?`;
-  const welcome = st ? S.welcomeMessage(st) : '';
-  const dw = document.createElement('div');
-  dw.className = 'drawer';
-  dw.innerHTML = `<div class="drawer-p" role="dialog" aria-modal="true" aria-label="Inscription de ${esc(a.name)}">
-    <div class="drawer-h"><div><p class="card-k" style="color:${S.STATUS[a.status].c}">${S.STATUS[a.status].label}${a.exemple ? ' · exemple' : ''}</p><h2>${esc(a.name)}</h2></div><button class="b b--i" type="button" data-x aria-label="Fermer">${icon('x', { size: 18 })}</button></div>
+  const access = st && !st.protected && (validation || a.status === 'validee');
+  const S0 = S.STATUS[a.status] || { c: 'var(--mist-400)' };
+  const { dw, dispose } = drawer(
+    t('ad.dw.label', { name: exText(a.name) }),
+    `${drawerHead(`${esc(stLabel(a.status))}${a.exemple ? ` · ${t('ad.ex.tag')}` : ''}`, exText(a.name), S0.c)}
+    ${mlSwitch()}
     ${
-      validation || (a.status === 'validee' && st)
-        ? `<section class="card" style="box-shadow:inset 0 0 0 1px rgb(85 184 148 / .4)"><p class="card-k" style="color:var(--body)">${icon('check', { size: 14 })} Accès étudiant ${validation ? 'créé' : 'actif'}</p><p style="margin:0 0 8px">Code d’accès : <span class="code-big">${esc(st.code)}</span></p><div class="msg">${esc(welcome)}</div><div class="acts" style="margin-top:10px"><a class="b b--or b--s" href="${wa(a.phone, welcome)}" target="_blank" rel="noopener">${icon('whatsapp', { size: 16 })} Envoyer sur WhatsApp</a><button class="b b--s" type="button" data-copy-w>${icon('copy', { size: 16 })} Copier</button></div></section>`
+      access
+        ? `<section class="card acc-card"><p class="card-k" style="color:var(--body)">${icon('check', { size: 14 })} ${t(validation ? 'ad.dw.created' : 'ad.dw.active')}</p><p class="acc-code"><span>${t('ad.dw.code')}</span><span class="code-big" dir="ltr">${esc(st.code)}</span></p><div class="msg" data-msg="welcome"></div><div class="acts" style="margin-top:10px"><a class="b b--or b--s" data-wa="welcome" href="#" target="_blank" rel="noopener">${icon('whatsapp', { size: 16 })} ${t('ad.dw.sendWa')}</a><button class="b b--s" type="button" data-copy="welcome">${icon('copy', { size: 16 })} ${t('ad.copy')}</button></div></section>`
         : ''
     }
     <dl class="dl">
-      <dt>WhatsApp</dt><dd>${esc(a.phone)}</dd>
-      <dt>E-mail</dt><dd>${esc(a.email)}</dd>
-      <dt>Ville</dt><dd>${esc(a.city || '—')}</dd>
-      <dt>Profil</dt><dd>${esc(S.PROFILS[a.profil] || a.profil)}</dd>
-      <dt>Niveau</dt><dd>${esc(a.niveau || '—')}</dd>
-      <dt>Objectif</dt><dd>${esc(a.objectif || '—')}</dd>
-      <dt>Reçue</dt><dd>${fmtDT(a.createdAt)} · ${esc(a.source || 'Landing')}</dd>
+      <dt>${t('ad.f.wa')}</dt><dd dir="ltr">${esc(a.phone || '—')}</dd>
+      <dt>${t('ad.f.email')}</dt><dd dir="ltr">${esc(a.email || '—')}</dd>
+      <dt>${t('ad.f.city')}</dt><dd>${esc(exText(a.city) || '—')}</dd>
+      <dt>${t('ad.f.profil')}</dt><dd>${esc(prLabel(a.profil))}</dd>
+      <dt>${t('ad.f.level')}</dt><dd>${esc(exText(a.niveau) || '—')}</dd>
+      <dt>${t('ad.f.goal')}</dt><dd>${esc(exText(a.objectif) || '—')}</dd>
+      <dt>${t('ad.f.received')}</dt><dd>${esc(fmtDT(a.createdAt))} · ${esc(srcLabel(a.source))}</dd>
     </dl>
     <div class="acts">
-      <a class="b b--s" href="${wa(a.phone, contact)}" target="_blank" rel="noopener" data-contact>${icon('whatsapp', { size: 16 })} Contacter</a>
-      ${a.status !== 'contactee' && a.status !== 'validee' ? `<button class="b b--s" data-st="contactee" type="button">Marquer contactée</button>` : ''}
-      ${a.status !== 'paiement' && a.status !== 'validee' ? `<button class="b b--s" data-st="paiement" type="button">Paiement en attente</button>` : ''}
-      ${a.status !== 'validee' ? `<button class="b b--ok b--s" data-st="validee" type="button">${icon('check', { size: 16 })} Paiement reçu : valider</button>` : ''}
-      ${a.status !== 'refusee' ? `<button class="b b--s b--danger" data-st="refusee" type="button">Refuser</button>` : ''}
+      <a class="b b--s" data-wa="contact" href="#" target="_blank" rel="noopener" data-contact>${icon('whatsapp', { size: 16 })} ${t('ad.dw.contact')}</a>
+      ${a.status !== 'contactee' && a.status !== 'validee' ? `<button class="b b--s" data-st="contactee" type="button">${t('ad.dw.markContacted')}</button>` : ''}
+      ${a.status !== 'paiement' && a.status !== 'validee' ? `<button class="b b--s" data-st="paiement" type="button">${esc(stLabel('paiement'))}</button>` : ''}
+      ${a.status !== 'validee' ? `<button class="b b--ok b--s" data-st="validee" type="button">${icon('check', { size: 16 })} ${t('ad.dw.validate')}</button>` : ''}
+      ${a.status !== 'refusee' ? `<button class="b b--s b--danger" data-st="refusee" type="button">${t('ad.dw.refuse')}</button>` : ''}
     </div>
-    <section style="display:grid;gap:8px"><p class="card-k" style="margin:6px 0 0">Notes de l’équipe</p><div class="notes">${a.notes.map((n) => `<p><small>${fmtDT(n.at)} · ${esc(n.by)}</small>${esc(n.text)}</p>`).join('') || '<p class="muted">Aucune note.</p>'}</div>
-      <form data-note style="display:flex;gap:8px"><input class="in" name="t" placeholder="Ajouter une note (appel, paiement…)" style="min-height:42px"><button class="b b--s" type="submit">Ajouter</button></form></section>
-    <section><p class="card-k">Historique</p><div class="hist">${a.history.map((h) => `<span>${fmtDT(h.at)} — ${S.STATUS[h.status]?.label} <span class="muted">(${esc(h.by)})</span></span>`).join('')}</div></section>
-  </div>`;
-  document.body.appendChild(dw);
-  document.body.style.overflow = 'hidden';
-  gsap()?.fromTo($('.drawer-p', dw), { x: 80, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.5, ease: 'expo.out' });
-  const close = () => {
-    dw.remove();
-    document.body.style.overflow = '';
-    route();
-  };
-  dw.addEventListener('click', (e) => {
-    if (e.target === dw || e.target.closest('[data-x]')) close();
-  });
-  addEventListener(
-    'keydown',
-    function esc(e) {
-      if (e.key === 'Escape') {
-        removeEventListener('keydown', esc);
-        if (dw.isConnected) close();
-      }
-    },
+    <section style="display:grid;gap:8px"><p class="card-k" style="margin:6px 0 0">${t('ad.dw.notes')}</p><div class="notes">${a.notes.map((n) => `<p><small>${esc(fmtDT(n.at))} · ${esc(byLabel(n.by))}</small>${esc(exText(n.text))}</p>`).join('') || `<p class="muted">${t('ad.dw.noNotes')}</p>`}</div>
+      <form data-note style="display:flex;gap:8px"><input class="in" name="t" placeholder="${esc(t('ad.dw.notePh'))}" aria-label="${esc(t('ad.dw.notePh'))}" style="min-height:42px"><button class="b b--s" type="submit">${t('ad.dw.add')}</button></form></section>
+    <section><p class="card-k">${t('ad.dw.history')}</p><div class="hist">${a.history.map((h) => `<span>${esc(fmtDT(h.at))} — ${esc(stLabel(h.status))} <span class="muted">(${esc(byLabel(h.by))})</span></span>`).join('')}</div></section>`,
+    route,
   );
+  bindMsgs(dw, a.phone, { contact: (l) => contactText(a, l), ...(access ? { welcome: (l) => welcomeText(st, l) } : {}) });
   $('[data-contact]', dw).addEventListener('click', () => {
     if (a.status === 'nouvelle') S.updateApplication(a.id, { status: 'contactee' }, 'Équipe (WhatsApp)');
   });
   $$('[data-st]', dw).forEach((b) =>
     b.addEventListener('click', () => {
-      dw.remove();
-      document.body.style.overflow = '';
+      dispose();
       setStatus(a.id, b.dataset.st);
       if (b.dataset.st !== 'validee') openApp(a.id);
     }),
   );
-  $('[data-copy-w]', dw)?.addEventListener('click', () => copy(welcome));
   $('[data-note]', dw).addEventListener('submit', (e) => {
     e.preventDefault();
-    const t = new FormData(e.target).get('t').trim();
-    if (!t) return;
-    S.updateApplication(a.id, { note: t });
-    dw.remove();
+    const txt = String(new FormData(e.target).get('t') || '').trim();
+    if (!txt) return;
+    S.updateApplication(a.id, { note: txt });
+    dispose();
     openApp(a.id);
   });
-  $('[data-x]', dw).focus();
 }
 
 /* ------------------------------------------------------------------ */
 /* Étudiants                                                           */
 /* ------------------------------------------------------------------ */
 
+function openAccess(s) {
+  const { dw } = drawer(
+    t('ad.acc.title'),
+    `${drawerHead(t('ad.acc.title'), stuName(s))}
+    <p class="muted" style="margin:0">${t('ad.acc.lead')}</p>
+    ${mlSwitch()}
+    <p class="acc-code"><span>${t('ad.dw.code')}</span><span class="code-big" dir="ltr">${esc(s.code)}</span></p>
+    <div class="msg" data-msg="welcome"></div>
+    ${s.phone ? '' : `<p class="muted" style="margin:0;font-size:13px">${t('ad.acc.noPhone')}</p>`}
+    <div class="acts"><a class="b b--or b--s" data-wa="welcome" href="#" target="_blank" rel="noopener">${icon('whatsapp', { size: 16 })} ${t('ad.dw.sendWa')}</a><button class="b b--s" type="button" data-copy="welcome">${icon('copy', { size: 16 })} ${t('ad.copy')}</button></div>`,
+  );
+  bindMsgs(dw, s.phone, { welcome: (l) => welcomeText(s, l) });
+}
+
 function viewStudents() {
   const d = S.load();
   const rows = d.students.map((s) => {
-    const pct = studentPct(s);
+    const p = studentPct(s);
     const lastDay = [...s.progress.days].sort().pop();
-    return { s, pct, lastDay, lv: S.level(s.progress.xp), streak: S.streak(s.progress.days) };
+    return { s, p, lastDay, xp: s.progress.xp || 0, streak: S.streak(s.progress.days) };
   });
+  const lock = icon('lock', { size: 13 });
+  const who = (s) =>
+    s.protected
+      ? `<span class="prot" title="${esc(t('ad.st.protectedHint'))}">${lock}${t('ad.st.protected')}</span>`
+      : `<small class="muted" dir="ltr">${esc(s.email || s.phone || '—')}</small>`;
+  const flags = (s) => `${s.exemple ? ` ${exTag()}` : ''}${s.active ? '' : ` <span class="chip chip--off">${t('ad.st.isSuspended')}</span>`}`;
+  const acts = (s, full) =>
+    s.protected
+      ? ''
+      : `<div class="acts"><button class="b b--s" data-send="${esc(s.id)}" type="button" ${full ? '' : `aria-label="${esc(t('ad.st.resend'))}" title="${esc(t('ad.st.resend'))}"`}>${icon('whatsapp', { size: 15 })}${full ? ` ${t('ad.st.resend')}` : ''}</button><button class="b b--s ${s.active ? 'b--danger' : 'b--ok'}" data-act="${esc(s.id)}" type="button">${t(s.active ? 'ad.st.suspend' : 'ad.st.reactivate')}</button></div>`;
+  const code = (s) => (s.protected ? `<span class="muted" title="${esc(t('ad.st.protectedHint'))}">${lock}</span>` : `<code dir="ltr">${esc(s.code || '—')}</code>`);
   shell(
     '#/etudiants',
-    `<div class="ph-h"><div><h1>Étudiants</h1><p>${rows.filter((r) => r.s.active).length} actifs · accès créés à la validation d’une inscription</p></div></div>
-    <div class="card tbl-wrap scroll-x"><table class="tbl"><thead><tr><th>Étudiant</th><th>Progression</th><th>Niveau</th><th>Série</th><th>Dernière activité</th><th>Code</th><th></th></tr></thead><tbody>${rows
+    `<div class="ph-h"><div><h1>${t('ad.nav.students')}</h1><p>${t('ad.st.lead', { n: fmtNum(rows.filter((r) => r.s.active).length) })}</p></div></div>
+    <div class="card tbl-wrap scroll-x"><table class="tbl"><thead><tr><th>${t('ad.st.th.student')}</th><th>${t('ad.st.th.progress')}</th><th>${t('ad.st.th.level')}</th><th>${t('ad.st.th.streak')}</th><th>${t('ad.st.th.last')}</th><th>${t('ad.st.th.code')}</th><th><span class="sr">${t('ad.st.th.actions')}</span></th></tr></thead><tbody>${rows
       .map(
-        ({ s, pct, lastDay, lv, streak }) => `<tr><td><b>${esc(s.name)}</b>${s.exemple ? ' <span class="ex-tag">exemple</span>' : ''}<br><small class="muted">${esc(s.email || s.phone)}</small></td><td><div class="meter"><i style="width:${pct * 100}%"></i></div><small class="muted">${Math.round(pct * 100)} %</small></td><td>${esc(lv.name)}<br><small class="muted">${s.progress.xp} XP</small></td><td>🔥 ${streak}</td><td>${lastDay ? fmtDate(lastDay) : '—'}</td><td><code>${esc(s.code)}</code></td><td><div class="acts"><button class="b b--s" data-send="${s.id}" type="button">${icon('whatsapp', { size: 15 })}</button><button class="b b--s ${s.active ? 'b--danger' : 'b--ok'}" data-act="${s.id}" type="button">${s.active ? 'Suspendre' : 'Réactiver'}</button></div></td></tr>`,
+        ({ s, p, lastDay, xp, streak }) => `<tr${s.protected ? ' class="is-prot"' : ''}><td><b>${esc(stuName(s))}</b>${flags(s)}<br>${who(s)}</td><td><div class="meter"><i style="width:${p * 100}%"></i></div><small class="muted">${pct(p)}</small></td><td>${esc(lvName(xp))}<br><small class="muted">${fmtNum(xp)} XP</small></td><td>🔥 ${fmtNum(streak)}</td><td>${lastDay ? esc(fmtD(lastDay)) : '—'}</td><td>${code(s)}</td><td>${acts(s, false)}</td></tr>`,
       )
       .join('')}</tbody></table></div>
     <div class="stu-cards">${rows
       .map(
-        ({ s, pct, lv, streak }) => `<div class="card" style="display:grid;gap:8px"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(s.name)}</b>${s.exemple ? '<span class="ex-tag">exemple</span>' : ''}</div><div class="meter"><i style="width:${pct * 100}%"></i></div><small class="muted">${Math.round(pct * 100)} % · ${esc(lv.name)} · 🔥 ${streak} · <code style="color:var(--gold-300)">${esc(s.code)}</code></small><div class="acts"><button class="b b--s" data-send="${s.id}" type="button">${icon('whatsapp', { size: 15 })} Renvoyer l’accès</button><button class="b b--s ${s.active ? 'b--danger' : 'b--ok'}" data-act="${s.id}" type="button">${s.active ? 'Suspendre' : 'Réactiver'}</button></div></div>`,
+        ({ s, p, xp, streak }) => `<div class="card stu-card${s.protected ? ' is-prot' : ''}"><div class="stu-h"><b>${esc(stuName(s))}</b><span>${flags(s)}</span></div>${s.protected ? who(s) : ''}<div class="meter"><i style="width:${p * 100}%"></i></div><small class="muted">${pct(p)} · ${esc(lvName(xp))} · 🔥 ${fmtNum(streak)}${s.protected ? '' : ` · <code dir="ltr" style="color:var(--gold-300)">${esc(s.code || '—')}</code>`}</small>${acts(s, true)}</div>`,
       )
       .join('')}</div>`,
   );
   $$('[data-send]').forEach((b) =>
     b.addEventListener('click', () => {
       const s = d.students.find((x) => x.id === b.dataset.send);
-      window.open(wa(s.phone, S.welcomeMessage(s)), '_blank', 'noopener');
+      if (s && !s.protected) openAccess(s);
     }),
   );
   $$('[data-act]').forEach((b) =>
     b.addEventListener('click', () => {
       const s = d.students.find((x) => x.id === b.dataset.act);
+      if (!s || s.protected) return;
       S.setStudentActive(s.id, !s.active);
-      toast(s.active ? 'Accès suspendu' : 'Accès réactivé');
+      toast(t(s.active ? 'ad.st.suspended' : 'ad.st.reactivated'));
       viewStudents();
     }),
   );
+}
+
+/* ------------------------------------------------------------------ */
+/* En-tête d'une formation (Programme, Ressources)                      */
+/* ------------------------------------------------------------------ */
+
+function trackHead(id, stats) {
+  const tr = trackOf(id);
+  const mods = modulesOf(id);
+  return `<header class="trh" style="--t:${tr.color}">
+    <span class="trh-i">${icon(tr.icon, { size: 26 })}</span>
+    <div class="trh-t"><p class="trh-k" dir="ltr">${modCode(mods[0])} – ${modCode(mods[mods.length - 1])}</p><h2>${t(`track.${id}`)}</h2>${arLine(tr.ar)}<p class="trh-p">${esc(tr.pitch)}</p></div>
+    <dl class="trh-s">${stats.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
+  </header>`;
+}
+
+/* ------------------------------------------------------------------ */
+/* Ressources : fichiers de l'équipe (manifeste) + prompts du programme */
+/* ------------------------------------------------------------------ */
+
+const GH = 'https://github.com/youcef4000/demos';
+const RS_DIR = 'sites/hooked-academy/ressources';
+const KIND = {
+  pdf: { ic: 'doc', c: '#ec7a45' },
+  prompt: { ic: 'chat', c: '#c8b6ff' },
+  link: { ic: 'link', c: '#8fb8e8' },
+  image: { ic: 'image', c: '#55b894' },
+  file: { ic: 'box', c: '#b9b1c4' },
+};
+const GROUPS = ['pdf', 'prompt', 'link', 'file'];
+const groupOf = (k) => (k === 'image' ? 'file' : k);
+const RS_ORDER = ['ia', 'creative'];
+const HELP_KEY = 'hooked-academy:admin:rs-help';
+
+let MANI; // undefined : pas encore lu · null : absent ou illisible · objet : manifeste
+let maniP = null;
+function loadManifest(force = false) {
+  if (force) maniP = null;
+  if (!maniP)
+    maniP = fetch('../ressources/manifest.json', { cache: 'no-cache' })
+      .then((r) => (r.ok ? r.json() : null))
+      .catch(() => null)
+      .then((j) => (MANI = j && typeof j === 'object' && j.lessons && typeof j.lessons === 'object' ? j : null));
+  return maniP;
+}
+const safeUrl = (u) => (/^https?:\/\/[^\s]+$/i.test(String(u || '').trim()) ? String(u).trim() : '');
+const relPath = (p) => {
+  const s = String(p || '').trim().replace(/^\.?\//, '');
+  if (!s || /^[a-z][a-z0-9+.-]*:/i.test(s) || s.split('/').includes('..')) return '';
+  return `../${s.split('/').map(encodeURIComponent).join('/')}`;
+};
+function normItem(x) {
+  if (!x || typeof x !== 'object') return null;
+  const kind = KIND[x.kind] ? x.kind : 'file';
+  const href = kind === 'link' ? safeUrl(x.url) : relPath(x.path);
+  const title = String(x.title || x.file || '').trim() || t(`ad.rs.kind.${kind}`);
+  return { kind, title, href, file: String(x.file || ''), size: Number(x.size) || 0, text: typeof x.text === 'string' ? x.text : '', lang: ['fr', 'en', 'ar'].includes(x.lang) ? x.lang : null, builtin: false };
+}
+function itemsOf(l) {
+  const raw = MANI?.lessons?.[l.id];
+  const team = (Array.isArray(raw) ? raw : []).map(normItem).filter(Boolean);
+  const built = (l.res || []).filter((r) => r && r.text).map((r) => ({ kind: 'prompt', title: r.title || t('ad.rs.kind.prompt'), text: r.text, href: '', size: 0, lang: null, builtin: true }));
+  return [...team, ...built];
+}
+const countOf = (items) => items.reduce((c, i) => (c[groupOf(i.kind)]++, c), { pdf: 0, prompt: 0, link: 0, file: 0 });
+const fmtSize = (b) => {
+  if (!b) return '';
+  const [unit, v] = b >= 1e6 ? ['megabyte', b / 1e6] : b >= 1e3 ? ['kilobyte', b / 1e3] : ['byte', b];
+  return fmtNum(v, { style: 'unit', unit, unitDisplay: 'short', maximumFractionDigits: v < 10 ? 1 : 0 });
+};
+
+let rsQ = '';
+let rsOnly = false;
+const rsOpen = new Set();
+let rsItems = new Map();
+
+function itemRow(it, key) {
+  const k = KIND[it.kind];
+  const pv = it.kind === 'prompt' ? !!it.text : (it.kind === 'image' || it.kind === 'pdf') && !!it.href;
+  const meta = [t(`ad.rs.kind.${it.kind}`), fmtSize(it.size)].filter(Boolean).map(esc);
+  if (it.lang) meta.push(`<span class="rs-lg">${t(`ad.rs.only.${it.lang}`)}</span>`);
+  if (it.builtin) meta.push(`<span class="rs-bi">${t('ad.rs.builtin')}</span>`);
+  const open = it.href
+    ? `<a class="b b--s" href="${esc(it.href)}" target="_blank" rel="noopener"${it.kind === 'file' ? ' download' : ''}>${icon(it.kind === 'file' ? 'download' : 'arrow-up', { size: 15 })} ${t(it.kind === 'file' ? 'ad.rs.download' : 'ad.rs.open')}</a>`
+    : '';
+  return `<li class="rs-it" style="--k:${k.c}" data-key="${key}">
+    <span class="rs-ii">${icon(k.ic, { size: 18 })}</span>
+    <div class="rs-im"><b dir="auto">${esc(it.title)}</b><small>${meta.join(' · ')}</small></div>
+    <div class="rs-ia">${pv ? `<button class="b b--s" type="button" data-pv aria-expanded="false">${icon('eye', { size: 15 })} <span>${t('ad.rs.preview')}</span></button>` : ''}${it.kind === 'prompt' && it.text ? `<button class="b b--s" type="button" data-cp>${icon('copy', { size: 15 })} ${t('ad.copy')}</button>` : ''}${open}</div>
+    <div class="rs-pv" hidden></div>
+  </li>`;
+}
+
+function lessonRow(l) {
+  const items = itemsOf(l);
+  const c = countOf(items);
+  const m = l.module;
+  items.forEach((it, i) => rsItems.set(`${l.id}:${i}`, it));
+  const q = fold([l.title, l.id, modCode(m), m.title, ...items.map((i) => i.title)].join(' '));
+  return `<details class="rs-l" data-l="${esc(l.id)}" data-q="${esc(q)}" data-n="${items.length}"${rsOpen.has(l.id) ? ' open' : ''}>
+    <summary>
+      <span class="rs-n">${fmtNum(l.n)}</span>
+      <span class="rs-lt"><b>${esc(l.title)}</b><small dir="ltr">${modCode(m)} · ${esc(l.id)}</small></span>
+      <span class="rs-chips">${GROUPS.map((g) => `<span class="rs-chip${c[g] ? '' : ' is-0'}" style="--k:${KIND[g].c}" title="${esc(t(`ad.rs.k.${g}`))} · ${c[g]}" aria-label="${esc(t(`ad.rs.k.${g}`))} · ${c[g]}">${icon(KIND[g].ic, { size: 14 })}<b>${fmtNum(c[g])}</b></span>`).join('')}</span>
+      <i class="rs-car" aria-hidden="true"></i>
+    </summary>
+    <div class="rs-lb">
+      <div class="rs-acts">
+        <a class="b b--or b--s" href="${GH}/upload/main/${RS_DIR}/${encodeURIComponent(l.id)}" target="_blank" rel="noopener">${icon('plus', { size: 15 })} ${t('ad.rs.upload')} <span aria-hidden="true">${EXT}</span></a>
+        <a class="b b--s" href="${GH}/tree/main/${RS_DIR}/${encodeURIComponent(l.id)}" target="_blank" rel="noopener">${icon('grid', { size: 15 })} ${t('ad.rs.folder')} <span aria-hidden="true">${EXT}</span></a>
+        <span class="rs-path"><span>${t('ad.rs.folderL')}</span><code dir="ltr">ressources/${esc(l.id)}/</code></span>
+      </div>
+      ${items.length ? `<ul class="rs-items">${items.map((it, i) => itemRow(it, `${l.id}:${i}`)).join('')}</ul>` : `<p class="rs-empty">${icon('box', { size: 18 })}<span>${t('ad.rs.empty')}</span></p>`}
+    </div>
+  </details>`;
+}
+
+function viewRes() {
+  if (MANI === undefined) {
+    shell('#/ressources', `<div class="ph-h"><div><h1>${t('ad.nav.res')}</h1><p>${t('ad.rs.lead')}</p></div></div><p class="rs-status">${icon('repeat', { size: 16 })}<span>${t('ad.rs.loading')}</span></p>`);
+    loadManifest().then(() => {
+      if (location.hash.startsWith('#/ressources') && S.adminSession()) viewRes();
+    });
+    return;
+  }
+  rsItems = new Map();
+  const per = (id) => lessonsOf(id).map((l) => itemsOf(l));
+  const tot = { pdf: 0, prompt: 0, link: 0, file: 0 };
+  RS_ORDER.forEach((id) => per(id).forEach((items) => GROUPS.forEach((g) => (tot[g] += countOf(items)[g]))));
+  const help = ls.get(HELP_KEY) !== 'closed';
+  const gen = MANI?.generated && !Number.isNaN(new Date(MANI.generated).getTime()) ? fmtDate(MANI.generated, { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' }) : '';
+  const tracks = RS_ORDER.map((id) => {
+    const mods = modulesOf(id);
+    const ls_ = lessonsOf(id);
+    const n = per(id).reduce((s, items) => s + items.length, 0);
+    return `<section class="rs-track" id="rs-${id}" style="--t:${trackOf(id).color}">
+      ${trackHead(id, [
+        [t('ad.pg.modules'), fmtNum(mods.length)],
+        [t('ad.pg.lessons'), fmtNum(ls_.length)],
+        [t('ad.nav.res'), fmtNum(n)],
+      ])}
+      <div class="rs-mods">${mods
+        .map((m) => {
+          const mls = ls_.filter((l) => l.module === m);
+          const mn = mls.reduce((s, l) => s + itemsOf(l).length, 0);
+          return `<article class="rs-mod" style="--m:${m.color || trackOf(id).color}"><header class="rs-mh"><span class="rs-code" dir="ltr">${modCode(m)}</span><div class="rs-mt"><h3>${esc(m.title)}</h3>${arLine(m.ar)}</div><span class="rs-mc${mn ? '' : ' is-0'}">${plural('res', mn)}</span></header><div class="rs-ls">${mls.map(lessonRow).join('')}</div></article>`;
+        })
+        .join('')}</div>
+    </section>`;
+  }).join('');
+  shell(
+    '#/ressources',
+    `<div class="ph-h"><div><h1>${t('ad.nav.res')}</h1><p>${t('ad.rs.lead')}</p></div><button class="b b--s" id="rsr" type="button">${icon('repeat', { size: 16 })} ${t('ad.rs.refresh')}</button></div>
+    <div class="rs-kpis">${GROUPS.map((g) => `<div class="card rs-kpi" style="--k:${KIND[g].c}"><i>${icon(KIND[g].ic, { size: 20 })}</i><b>${fmtNum(tot[g])}</b><span>${t(`ad.rs.k.${g}`)}</span></div>`).join('')}</div>
+    <p class="rs-status${MANI ? ' is-ok' : ''}">${icon(MANI ? 'check' : 'bell', { size: 16 })}<span>${MANI ? (gen ? t('ad.rs.updated', { date: esc(gen) }) : '') : t('ad.rs.none')}</span></p>
+    <details class="card rs-help"${help ? ' open' : ''}>
+      <summary><span class="rs-hi">${icon('wand', { size: 18 })}</span><b>${t('ad.rs.help.title')}</b><i class="rs-car" aria-hidden="true"></i></summary>
+      <div class="rs-hb">
+        <ol class="rs-steps"><li>${t('ad.rs.help.s1')}</li><li>${t('ad.rs.help.s2')}</li><li>${t('ad.rs.help.s3')}</li></ol>
+        <div class="rs-hcols">
+          <div><p class="card-k">${t('ad.rs.help.formats')}</p><ul class="rs-fmts">
+            <li style="--k:${KIND.pdf.c}">${icon(KIND.pdf.ic, { size: 16 })}<span>${t('ad.rs.help.pdf')}</span></li>
+            <li style="--k:${KIND.prompt.c}">${icon(KIND.prompt.ic, { size: 16 })}<span>${t('ad.rs.help.prompt')}</span></li>
+            <li style="--k:${KIND.link.c}">${icon(KIND.link.ic, { size: 16 })}<span>${t('ad.rs.help.links')}</span></li>
+            <li style="--k:${KIND.image.c}">${icon(KIND.image.ic, { size: 16 })}<span>${t('ad.rs.help.img')}</span></li>
+            <li style="--k:${KIND.file.c}">${icon(KIND.file.ic, { size: 16 })}<span>${t('ad.rs.help.other')}</span></li>
+          </ul></div>
+          <div><p class="card-k">${t('ad.rs.help.langT')}</p><p class="rs-lang">${icon('globe', { size: 16 })}<span>${t('ad.rs.help.lang')}</span></p></div>
+        </div>
+      </div>
+    </details>
+    <div class="rs-bar">
+      <div class="rs-jump" role="group" aria-label="${esc(t('ad.rs.jump'))}">${RS_ORDER.map((id) => `<button type="button" data-jump="${id}" style="--t:${trackOf(id).color}">${icon(trackOf(id).icon, { size: 15 })}${t(`track.${id}`)}</button>`).join('')}</div>
+      <input class="in" id="rsq" type="search" placeholder="${esc(t('ad.rs.search'))}" aria-label="${esc(t('ad.rs.searchL'))}" value="${esc(rsQ)}">
+      <label class="rs-only"><input type="checkbox" id="rso"${rsOnly ? ' checked' : ''}><span>${t('ad.rs.onlyWith')}</span></label>
+    </div>
+    ${tracks}
+    <p class="rs-nomatch" hidden>${t('ad.rs.noMatch')}</p>`,
+  );
+  const main = $('#main');
+  const apply = () => {
+    const q = fold(rsQ.trim());
+    let any = false;
+    $$('.rs-track', main).forEach((tr) => {
+      let tAny = false;
+      $$('.rs-mod', tr).forEach((m) => {
+        let mAny = false;
+        $$('.rs-l', m).forEach((dd) => {
+          const ok = (!q || dd.dataset.q.includes(q)) && (!rsOnly || +dd.dataset.n > 0);
+          dd.hidden = !ok;
+          mAny ||= ok;
+        });
+        m.hidden = !mAny;
+        tAny ||= mAny;
+      });
+      tr.hidden = !tAny;
+      any ||= tAny;
+    });
+    $('.rs-nomatch', main).hidden = any;
+  };
+  apply();
+  $('#rsq').addEventListener('input', (e) => {
+    rsQ = e.target.value;
+    apply();
+  });
+  $('#rso').addEventListener('change', (e) => {
+    rsOnly = e.target.checked;
+    apply();
+  });
+  $('#rsr').addEventListener('click', () => {
+    MANI = undefined;
+    loadManifest(true).then(() => location.hash.startsWith('#/ressources') && viewRes());
+  });
+  $('.rs-help').addEventListener('toggle', (e) => ls.set(HELP_KEY, e.target.open ? 'open' : 'closed'));
+  main.addEventListener(
+    'toggle',
+    (e) => {
+      const dd = e.target;
+      if (!dd.classList?.contains('rs-l')) return;
+      if (dd.open) rsOpen.add(dd.dataset.l);
+      else rsOpen.delete(dd.dataset.l);
+    },
+    true,
+  );
+  main.addEventListener('click', (e) => {
+    const j = e.target.closest('[data-jump]');
+    if (j) {
+      const sec = $(`#rs-${j.dataset.jump}`);
+      if (sec && !sec.hidden) sec.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      return;
+    }
+    const li = e.target.closest('.rs-it');
+    if (!li) return;
+    const it = rsItems.get(li.dataset.key);
+    if (!it) return;
+    if (e.target.closest('[data-cp]')) return copy(it.text);
+    const b = e.target.closest('[data-pv]');
+    if (!b) return;
+    const box = $('.rs-pv', li);
+    const show = box.hidden;
+    if (show && !box.childElementCount) {
+      if (it.kind === 'prompt') box.innerHTML = `<pre class="rs-pre" dir="auto">${esc(it.text)}</pre>`;
+      else if (it.kind === 'image') box.innerHTML = `<img src="${esc(it.href)}" alt="${esc(it.title)}" loading="lazy">`;
+      else if (it.kind === 'pdf') box.innerHTML = `<iframe src="${esc(it.href)}#view=FitH" title="${esc(it.title)}" loading="lazy"></iframe>`;
+      else box.innerHTML = `<p class="muted">${t('ad.rs.noPreview')}</p>`;
+    }
+    box.hidden = !show;
+    b.setAttribute('aria-expanded', String(show));
+    $('span', b).textContent = t(show ? 'ad.rs.hide' : 'ad.rs.preview');
+  });
+  gsap()?.from('.rs-kpi, .rs-help, .trh, .rs-mod', { y: 22, autoAlpha: 0, duration: 0.6, stagger: 0.035, ease: 'expo.out', clearProps: 'all' });
 }
 
 /* ------------------------------------------------------------------ */
@@ -376,62 +810,69 @@ function viewStudents() {
 /* ------------------------------------------------------------------ */
 
 const VKEY = (id) => `hooked-academy:voix:${id}`;
-const voiceLocal = (id) => {
-  try {
-    return localStorage.getItem(VKEY(id));
-  } catch {
-    return null;
-  }
-};
+const voiceLocal = (id) => ls.get(VKEY(id));
 
 function scriptText(l) {
   const steps = plan(l);
-  return `${l.title}\n${'='.repeat(l.title.length)}\nDurée : ${fmtMin(lessonDuration(l))}\n\n${steps.map((s, i) => `[${fmtMin(s.t)} → ${fmtMin(s.t + s.d)}] Scène ${i + 1} (${s.sc.type})\n${s.sc.say || (l.voice ? '(voix déjà enregistrée)' : '—')}`).join('\n\n')}\n`;
+  const head = `${modCode(l.module)} · ${l.title}`;
+  return `${head}\n${'='.repeat(head.length)}\n${t('ad.sd.duration', { d: fmtMin(lessonDuration(l)) })}\n\n${steps
+    .map((s, i) => `[${fmtMin(s.t)} → ${fmtMin(s.t + s.d)}] ${t('ad.sd.scene', { n: i + 1 })} (${s.sc.type})\n${s.sc.say || (l.voice ? t('ad.sd.recorded') : '—')}`)
+    .join('\n\n')}\n`;
 }
 
 function viewStudio(id) {
-  const cur = findLesson(id || 'm1-l3') || findLesson('m1-l3');
+  const cur = findLesson(id || 'm1-l3') || findLesson(LESSONS[0].id);
   const l = cur.lesson;
   const steps = plan(l);
   shell(
     '#/studio',
-    `<div class="ph-h"><div><h1>Studio voix off</h1><p>Le texte à dire défile pendant l’animation : enregistre ta voix en darija, parfaitement calée.</p></div><button class="b b--s" id="allscript" type="button">${icon('doc', { size: 16 })} Tous les textes (.txt)</button></div>
+    `<div class="ph-h"><div><h1>${t('ad.nav.studio')}</h1><p>${t('ad.sd.lead')}</p></div><button class="b b--s" id="allscript" type="button">${icon('doc', { size: 16 })} ${t('ad.sd.all')}</button></div>
     <div class="studio">
-      <section class="card"><div class="st-list">${MODULES.map(
-        (m) => `<h4>Module ${m.n} · ${esc(m.title)}</h4>${m.lessons.map((x) => `<button type="button" data-l="${x.id}" ${x.id === l.id ? 'aria-current="true"' : ''}><i class="${x.voice ? 'ok' : voiceLocal(x.id) ? 'loc' : ''}"></i>${esc(x.title)}</button>`).join('')}`,
-      ).join('')}</div><p class="muted" style="font-size:12px;margin:10px 4px 0"><span style="color:var(--body)">●</span> voix montée · <span style="color:var(--gold-400)">●</span> enregistrée dans ce navigateur · <span>●</span> à enregistrer</p></section>
+      <section class="card"><div class="st-list">${['creative', 'ia']
+        .map(
+          (tid) =>
+            `<p class="st-tr" style="--t:${trackOf(tid).color}">${icon(trackOf(tid).icon, { size: 15 })}${t(`track.${tid}`)}</p>${modulesOf(tid)
+              .map(
+                (m) =>
+                  `<h4><span dir="ltr">${modCode(m)}</span> ${esc(m.title)}</h4>${m.lessons.map((x) => `<button type="button" data-l="${esc(x.id)}" ${x.id === l.id ? 'aria-current="true"' : ''}><i class="${x.voice ? 'ok' : voiceLocal(x.id) ? 'loc' : ''}"></i>${esc(x.title)}</button>`).join('')}`,
+              )
+              .join('')}`,
+        )
+        .join('')}</div><p class="muted st-legend"><span><i class="ok"></i>${t('ad.sd.lgDone')}</span><span><i class="loc"></i>${t('ad.sd.lgLocal')}</span><span><i></i>${t('ad.sd.lgTodo')}</span></p></section>
       <section style="display:grid;gap:14px;min-width:0">
         <div class="card" style="display:grid;gap:12px">
-          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between"><h2 style="font-size:22px">${esc(l.title)}</h2><span class="muted" style="font-family:var(--font-mono);font-size:12px">${steps.length} scènes · ${fmtMin(lessonDuration(l))}</span></div>
-          <div class="st-player"><iframe id="sp" src="../motion/player.html?id=${l.id}${l.audio ? '&audio=1' : ''}" title="Animation de la leçon" allow="autoplay; fullscreen"></iframe><div class="countdown" id="cd" hidden></div></div>
-          <div class="telep" aria-live="polite"><span class="card-k" style="margin:0">À dire maintenant</span><p id="telet">${esc(steps[0]?.sc.say || (l.voice ? 'Voix déjà enregistrée : écoute le rendu.' : '—'))}</p></div>
+          <div class="st-head"><div><p class="card-k" style="color:${cur.module.color || 'var(--gold-300)'};margin:0 0 4px"><span dir="ltr">${modCode(cur.module)}</span> · ${t(`track.${cur.module.track}`)}</p><h2 style="font-size:22px">${esc(l.title)}</h2></div><span class="muted st-dur">${plural('scene', steps.length)} · <span dir="ltr">${fmtMin(lessonDuration(l))}</span></span></div>
+          <div class="st-player"><iframe id="sp" src="../motion/player.html?id=${encodeURIComponent(l.id)}${l.audio ? '&audio=1' : ''}" title="${esc(t('ad.sd.iframe'))}" allow="autoplay; fullscreen"></iframe><div class="countdown" id="cd" hidden></div></div>
+          <div class="telep" aria-live="polite"><span class="card-k" style="margin:0">${t('ad.sd.now')}</span><p id="telet" dir="auto">${esc(steps[0]?.sc.say || (l.voice ? t('ad.sd.voiceDone') : '—'))}</p></div>
           <div class="st-rec">
-            ${l.voice ? `<span class="chip chip--ok">${icon('check', { size: 14 })} Voix off déjà montée</span>` : ''}
-            <button class="b b--or" id="rec" type="button">${icon('mic', { size: 18 })} Enregistrer ma voix</button>
-            <button class="b" id="stp" type="button" hidden><span class="rec-dot"></span> Arrêter</button>
+            ${l.voice ? `<span class="chip chip--ok">${icon('check', { size: 14 })} ${t('ad.sd.mounted')}</span>` : ''}
+            <button class="b b--or" id="rec" type="button">${icon('mic', { size: 18 })} ${t('ad.sd.rec')}</button>
+            <button class="b" id="stp" type="button" hidden><span class="rec-dot"></span> ${t('ad.sd.stop')}</button>
             <span class="muted" id="recs" style="font-size:13px"></span>
           </div>
-          <div id="take" hidden style="display:grid;gap:10px"><audio id="aud" controls style="width:100%"></audio><div class="acts"><button class="b b--s" id="sync" type="button">${icon('play', { size: 15 })} Réécouter avec l’animation</button><a class="b b--s b--or" id="dl">${icon('download', { size: 15 })} Télécharger la voix</a></div><p class="muted" style="font-size:12.5px;margin:0">Dépose ce fichier tel quel dans <code>sites/hooked-academy/video/voix/</code> du dépôt GitHub (Add file → Upload files) : la vidéo finale est générée avec ta voix et publiée automatiquement dans la formation.</p></div>
+          <div id="take" hidden style="display:grid;gap:10px"><audio id="aud" controls style="width:100%"></audio><div class="acts"><button class="b b--s" id="sync" type="button">${icon('play', { size: 15 })} ${t('ad.sd.sync')}</button><a class="b b--s b--or" id="dl">${icon('download', { size: 15 })} ${t('ad.sd.dl')}</a><a class="b b--s" href="${GH}/upload/main/sites/hooked-academy/video/voix" target="_blank" rel="noopener">${icon('arrow-up', { size: 15 })} ${t('ad.sd.upload')} <span aria-hidden="true">${EXT}</span></a></div><p class="muted" style="font-size:12.5px;margin:0">${t('ad.sd.dropHint')}</p></div>
         </div>
-        <section class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px"><p class="card-k" style="margin:0">Texte à dire, scène par scène</p><button class="b b--s" id="one" type="button">${icon('download', { size: 15 })} .txt</button></div>
-          <ol class="say-list" id="say">${steps.map((s) => `<li data-t="${s.t}" data-e="${s.t + s.d}"><small>${fmtMin(s.t)} · ${s.sc.type}</small>${esc(s.sc.say || (l.voice ? 'Voix déjà enregistrée et montée sur cette scène.' : '—'))}</li>`).join('')}</ol></section>
+        <section class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px"><p class="card-k" style="margin:0">${t('ad.sd.scripts')}</p><button class="b b--s" id="one" type="button">${icon('download', { size: 15 })} .txt</button></div>
+          <ol class="say-list" id="say">${steps.map((s) => `<li data-t="${s.t}" data-e="${s.t + s.d}"><small dir="ltr">${fmtMin(s.t)} · ${esc(s.sc.type)}</small><span dir="auto">${esc(s.sc.say || (l.voice ? t('ad.sd.sceneDone') : '—'))}</span></li>`).join('')}</ol></section>
       </section>
     </div>`,
   );
   $$('[data-l]').forEach((b) => b.addEventListener('click', () => (location.hash = `#/studio/${b.dataset.l}`)));
-  $('#one').addEventListener('click', () => download(`${l.id}-texte-voix-off.txt`, scriptText(l)));
-  $('#allscript').addEventListener('click', () => download('hooked-academy-textes-voix-off.txt', LESSONS.map(scriptText).join('\n\n\n')));
+  $('[data-l][aria-current="true"]')?.scrollIntoView({ block: 'nearest' });
+  window.scrollTo(0, 0);
+  $('#one').addEventListener('click', () => download(`${l.id}-${t('ad.sd.file')}.txt`, scriptText(l)));
+  $('#allscript').addEventListener('click', () => download(`${t('ad.sd.fileAll')}.txt`, LESSONS.map(scriptText).join('\n\n\n')));
   const ifr = $('#sp');
-  const cmd = (c, t) => ifr.contentWindow?.postMessage({ type: 'ha-cmd', cmd: c, t }, '*');
+  const cmd = (c, tt) => ifr.contentWindow?.postMessage({ type: 'ha-cmd', cmd: c, t: tt }, '*');
   const sayEls = $$('#say li');
   let rec = null;
   let chunks = [];
   let stream = null;
   let lastBlob = null;
   const telet = $('#telet');
-  const hl = (t) => {
+  const hl = (tt) => {
     sayEls.forEach((li, i) => {
-      const on = t >= +li.dataset.t && t < +li.dataset.e;
+      const on = tt >= +li.dataset.t && tt < +li.dataset.e;
       li.classList.toggle('is-cur', on);
       if (on && steps[i].sc.say && telet.textContent !== steps[i].sc.say) telet.textContent = steps[i].sc.say;
     });
@@ -444,7 +885,7 @@ function viewStudio(id) {
   };
   addEventListener('message', onMsg);
   stop.push(() => removeEventListener('message', onMsg));
-  stop.push(() => stream?.getTracks().forEach((t) => t.stop()));
+  stop.push(() => stream?.getTracks().forEach((tr) => tr.stop()));
 
   const finish = () => {
     if (rec?.state === 'recording') rec.stop();
@@ -455,13 +896,13 @@ function viewStudio(id) {
   $('#stp').addEventListener('click', finish);
   $('#rec').addEventListener('click', async () => {
     if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) {
-      $('#recs').textContent = 'Enregistrement non disponible dans ce navigateur : essaie Chrome ou Edge.';
+      $('#recs').textContent = t('ad.sd.noRec');
       return;
     }
     try {
       stream = stream || (await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } }));
     } catch {
-      $('#recs').textContent = 'Micro refusé : autorise-le dans le navigateur puis réessaie.';
+      $('#recs').textContent = t('ad.sd.mic');
       return;
     }
     cmd('pause');
@@ -475,7 +916,7 @@ function viewStudio(id) {
     }
     cd.hidden = true;
     chunks = [];
-    const type = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4'].find((t) => MediaRecorder.isTypeSupported?.(t)) || '';
+    const type = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4'].find((x) => MediaRecorder.isTypeSupported?.(x)) || '';
     rec = new MediaRecorder(stream, type ? { mimeType: type } : undefined);
     rec.ondataavailable = (e) => e.data.size && chunks.push(e.data);
     rec.onstop = () => {
@@ -486,17 +927,15 @@ function viewStudio(id) {
       $('#dl').href = url;
       $('#dl').download = `${l.id}-voix-off.${ext}`;
       $('#take').hidden = false;
-      $('#recs').textContent = 'Prise enregistrée.';
-      try {
-        localStorage.setItem(VKEY(l.id), new Date().toISOString());
-      } catch {}
-      toast(`${icon('mic', { size: 16 })} Voix enregistrée : <b>${esc(l.title)}</b>`);
+      $('#recs').textContent = t('ad.sd.taken');
+      ls.set(VKEY(l.id), new Date().toISOString());
+      toast(`${icon('mic', { size: 16 })} ${t('ad.sd.toast', { t: esc(l.title) })}`);
     };
     rec.start(250);
     cmd('play');
     $('#rec').hidden = true;
     $('#stp').hidden = false;
-    $('#recs').textContent = 'Enregistrement… lis le texte qui défile sous l’animation.';
+    $('#recs').textContent = t('ad.sd.recording');
   });
   $('#sync').addEventListener('click', () => {
     const a = $('#aud');
@@ -511,35 +950,58 @@ function viewStudio(id) {
 /* Programme et réglages                                               */
 /* ------------------------------------------------------------------ */
 
+const widgetLabel = (w) => t(['formats', 'outils', 'ratio', 'anatomie', 'hooks', 'cta', 'aida', 'carrousel', 'prompt', 'prompt-image', 'camera', 'metrics', 'prix', 'dm'].includes(w) ? `ad.w.${w}` : 'ad.w.default');
+
 function viewProgramme() {
-  const total = LESSONS.reduce((s, l) => s + lessonDuration(l), 0);
+  const voice = (l) =>
+    l.voice ? `<span class="chip chip--ok">${t('ad.pg.vDone')}</span>` : voiceLocal(l.id) ? `<span class="chip chip--or">${t('ad.pg.vLocal')}</span>` : `<span class="chip">${t('ad.pg.vTodo')}</span>`;
   shell(
     '#/programme',
-    `<div class="ph-h"><div><h1>Programme</h1><p>${MODULES.length} modules · ${LESSONS.length} leçons · ${Math.round(total / 60)} minutes de vidéo animée · ${LESSONS.filter((l) => l.voice).length} leçons avec voix off montée</p></div></div>
-    <div style="display:grid;gap:12px">${MODULES.map(
-      (m) => `<section class="card"><p class="card-k" style="color:${m.color}">Module ${m.n} · <span lang="ar" dir="rtl">${esc(m.ar)}</span></p><h2 style="font-size:22px;margin-bottom:10px">${esc(m.title)}</h2><div class="scroll-x"><table class="tbl prog-tbl"><thead><tr><th>Leçon</th><th>Durée</th><th>Scènes</th><th>Voix</th><th>Exercice</th><th></th></tr></thead><tbody>${m.lessons
-        .map(
-          (l) => `<tr><td><b>${l.n}.</b> ${esc(l.title)}</td><td>${fmtMin(lessonDuration(l))}</td><td>${l.scenes.length}</td><td>${l.voice ? '<span class="chip chip--ok">montée</span>' : voiceLocal(l.id) ? '<span class="chip chip--or">enregistrée</span>' : '<span class="chip">à faire</span>'}</td><td>${esc(l.widget || 'Applique')}</td><td><div class="acts"><a class="b b--s" href="../motion/player.html?id=${l.id}" target="_blank">${icon('play', { size: 14 })}</a><a class="b b--s" href="#/studio/${l.id}">${icon('mic', { size: 14 })}</a></div></td></tr>`,
-        )
-        .join('')}</tbody></table></div></section>`,
-    ).join('')}</div>`,
+    `<div class="ph-h"><div><h1>${t('ad.nav.prog')}</h1><p>${t('ad.pg.lead')}</p></div></div>
+    <div class="pg">${['creative', 'ia']
+      .map((id) => {
+        const mods = modulesOf(id);
+        const ls_ = lessonsOf(id);
+        const mins = Math.round(ls_.reduce((s, l) => s + lessonDuration(l), 0) / 60);
+        return `<section class="pg-track" style="--t:${trackOf(id).color}">
+        ${trackHead(id, [
+          [t('ad.pg.modules'), fmtNum(mods.length)],
+          [t('ad.pg.lessons'), fmtNum(ls_.length)],
+          [t('ad.pg.minutes'), fmtNum(mins)],
+          [t('ad.pg.voiced'), fmtNum(ls_.filter((l) => l.voice).length)],
+        ])}
+        <div class="pg-mods">${mods
+          .map(
+            (m) => `<section class="card pg-mod" style="--m:${m.color || trackOf(id).color}"><header class="pg-mh"><span class="rs-code" dir="ltr">${modCode(m)}</span><div class="rs-mt"><h3>${esc(m.title)}</h3>${arLine(m.ar)}</div><span class="rs-mc">${plural('lesson', m.lessons.length)}</span></header><div class="scroll-x"><table class="tbl prog-tbl"><thead><tr><th>${t('ad.pg.th.lesson')}</th><th>${t('ad.pg.th.duration')}</th><th>${t('ad.pg.th.scenes')}</th><th>${t('ad.pg.th.voice')}</th><th>${t('ad.pg.th.exercise')}</th><th><span class="sr">${t('ad.st.th.actions')}</span></th></tr></thead><tbody>${ls_
+              .filter((l) => l.module === m)
+              .map(
+                (l) => `<tr><td><span class="pg-n">${fmtNum(l.n)}</span>${esc(l.title)}</td><td dir="ltr" class="pg-num">${fmtMin(lessonDuration(l))}</td><td class="pg-num">${fmtNum(l.scenes.length)}</td><td>${voice(l)}</td><td>${esc(widgetLabel(l.widget))}</td><td><div class="acts"><a class="b b--s b--i" href="../motion/player.html?id=${encodeURIComponent(l.id)}" target="_blank" rel="noopener" aria-label="${esc(t('ad.pg.watch'))}" title="${esc(t('ad.pg.watch'))}">${icon('play', { size: 14 })}</a><a class="b b--s b--i" href="#/studio/${esc(l.id)}" aria-label="${esc(t('ad.pg.toStudio'))}" title="${esc(t('ad.pg.toStudio'))}">${icon('mic', { size: 14 })}</a></div></td></tr>`,
+              )
+              .join('')}</tbody></table></div></section>`,
+          )
+          .join('')}</div></section>`;
+      })
+      .join('')}</div>`,
   );
+  gsap()?.from('.trh, .pg-mod', { y: 22, autoAlpha: 0, duration: 0.6, stagger: 0.04, ease: 'expo.out', clearProps: 'all' });
 }
 
 function viewSettings() {
   const d = S.load();
+  const code = (s) => `<code dir="ltr" style="color:var(--gold-300)">${esc(s)}</code>`;
   shell(
     '#/reglages',
-    `<div class="ph-h"><div><h1>Réglages</h1><p>Démo : les données restent dans ce navigateur.</p></div></div>
+    `<div class="ph-h"><div><h1>${t('ad.nav.settings')}</h1><p>${t('ad.set.lead')}</p></div></div>
     <div style="display:grid;gap:12px;max-width:640px">
+      <section class="card set-lang"><p class="card-k">${icon('globe', { size: 14 })} ${t('ad.set.lang')}</p>${switcher('ad-lang ad-lang--wide')}<p class="muted" style="margin:10px 0 0;font-size:13.5px">${t('ad.set.langP')}</p></section>
       <form class="card" id="sf" style="display:grid;gap:12px">
-        <label class="lbl">Nom de la prochaine session (donné aux nouveaux étudiants)<input class="in" name="cohort" value="${esc(d.settings.cohort)}"></label>
-        <label class="lbl">Numéro WhatsApp de l’équipe<input class="in" name="whatsapp" value="${esc(d.settings.whatsapp)}" inputmode="tel"></label>
-        <button class="b b--or" type="submit">Enregistrer</button>
+        <label class="lbl">${t('ad.set.cohort')}<input class="in" name="cohort" value="${esc(d.settings.cohort)}"></label>
+        <label class="lbl">${t('ad.set.wa')}<input class="in" name="whatsapp" value="${esc(d.settings.whatsapp)}" inputmode="tel" dir="ltr"></label>
+        <button class="b b--or" type="submit">${t('ad.set.save')}</button>
       </form>
-      <section class="card" style="display:grid;gap:10px"><p class="card-k">Données</p><p class="muted" style="margin:0">En production, ces données vivent sur un serveur (Worker Cloudflare + D1, ou la base de Hooked Lab) et l’équipe les retrouve sur tous ses appareils.</p>
-        <div class="acts"><button class="b b--s" id="exp" type="button">${icon('download', { size: 15 })} Exporter (JSON)</button><button class="b b--s b--danger" id="rst" type="button">Remettre les données d’exemple</button></div></section>
-      <section class="card"><p class="card-k">Accès</p><p class="muted" style="margin:0">Code équipe de la démo : <code style="color:var(--gold-300)">${S.TEAM_CODE}</code>. Compte étudiant démo : <code style="color:var(--gold-300)">${S.DEMO_STUDENT.email}</code> / <code style="color:var(--gold-300)">${S.DEMO_STUDENT.code}</code>.</p></section>
+      <section class="card" style="display:grid;gap:10px"><p class="card-k">${t('ad.set.data')}</p><p class="muted" style="margin:0">${t('ad.set.dataP')}</p>
+        <div class="acts"><button class="b b--s" id="exp" type="button">${icon('download', { size: 15 })} ${t('ad.set.export')}</button><button class="b b--s b--danger" id="rst" type="button">${t('ad.set.reset')}</button></div></section>
+      <section class="card"><p class="card-k">${t('ad.set.access')}</p><p class="muted" style="margin:0">${t('ad.set.accessP', { team: code(S.TEAM_CODE), email: code(S.DEMO_STUDENT.email), code: code(S.DEMO_STUDENT.code) })}</p></section>
     </div>`,
   );
   $('#sf').addEventListener('submit', (e) => {
@@ -548,14 +1010,14 @@ function viewSettings() {
     const dd = S.load();
     Object.assign(dd.settings, f);
     S.save(dd);
-    toast('Réglages enregistrés');
+    toast(t('ad.set.saved'));
   });
-  $('#exp').addEventListener('click', () => download(`hooked-academy-donnees-${S.iso()}.json`, JSON.stringify(S.load(), null, 2), 'application/json'));
+  $('#exp').addEventListener('click', () => download(`${t('ad.set.file')}-${S.iso()}.json`, JSON.stringify(S.load(), null, 2), 'application/json'));
   $('#rst').addEventListener('click', () => {
-    if (!confirm('Remettre les données d’exemple ? Les inscriptions de ce navigateur seront effacées.')) return;
+    if (!confirm(t('ad.set.confirm'))) return;
     S.reset();
     S.loginAdmin(S.TEAM_CODE);
-    toast('Données remises à zéro');
+    toast(t('ad.set.resetDone'));
     viewSettings();
   });
 }
@@ -563,7 +1025,7 @@ function viewSettings() {
 /* ------------------------------------------------------------------ */
 
 function route() {
-  $$('.drawer').forEach((d) => d.remove());
+  $$('.drawer, .sheet').forEach((d) => d.remove());
   document.body.style.overflow = '';
   stop.forEach((f) => {
     try {
@@ -575,14 +1037,16 @@ function route() {
   const h = location.hash || '#/';
   if (h === '#/inscriptions') return viewApps();
   if (h === '#/etudiants') return viewStudents();
-  if (h.startsWith('#/studio')) return viewStudio(h.split('/')[2]);
+  if (h === '#/ressources') return viewRes();
+  if (h.startsWith('#/studio')) return viewStudio(decodeURIComponent(h.split('/')[2] || ''));
   if (h === '#/programme') return viewProgramme();
   if (h === '#/reglages') return viewSettings();
   return viewOverview();
 }
+bindSwitchers(document);
 addEventListener('hashchange', route);
 // Une inscription envoyée depuis la landing (autre onglet) apparaît sans recharger
 addEventListener('storage', (e) => {
-  if (e.key && e.key.startsWith('hooked-academy:data') && !document.querySelector('.drawer')) route();
+  if (e.key && e.key.startsWith('hooked-academy:data') && !document.querySelector('.drawer, .sheet')) route();
 });
 (document.fonts ? document.fonts.ready : Promise.resolve()).then(route);
