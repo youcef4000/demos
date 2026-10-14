@@ -50,7 +50,6 @@ const isInline = (el) => !(el instanceof SVGElement) && /^inline/.test(getComput
  * Textes écrits pendant la lecture (sous-titres, libellés) : dir="auto", d'après leur première lettre.
  */
 export function markRTL(box) {
-  const set = setAr;
   const hasAr = (el) => isAr(el.textContent);
   box.querySelectorAll('svg text').forEach((tx) => {
     if (!hasAr(tx)) return;
@@ -60,13 +59,13 @@ export function markRTL(box) {
   });
   box.querySelectorAll('.ph-subs, .an-subs, .ra-u').forEach((el) => el.setAttribute('dir', 'auto'));
   box.querySelectorAll('ul, ol').forEach((l) => {
-    if (!l.matches('.sp.is-h') && hasAr(l)) set(l);
+    if (!l.matches('.sp.is-h') && hasAr(l)) setAr(l);
   });
-  box.querySelectorAll(ROWS).forEach((el) => hasAr(el) && set(el));
+  box.querySelectorAll(ROWS).forEach((el) => hasAr(el) && setAr(el));
   box.querySelectorAll('*').forEach((el) => {
     if (el.classList.contains('ar-t') || el instanceof SVGElement || el.hasAttribute('lang') || isInline(el)) return;
     const holds = [...el.childNodes].some((n) => (n.nodeType === 3 ? n.nodeValue.trim() !== '' : n.nodeType === 1 && isInline(n)));
-    if (holds && hasAr(el)) set(el);
+    if (holds && hasAr(el)) setAr(el);
   });
 }
 

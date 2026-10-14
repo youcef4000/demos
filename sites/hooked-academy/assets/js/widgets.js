@@ -335,7 +335,7 @@ W.prompt = (el, ctx) => {
     $('#pm', el).style.width = `${score * 100}%`;
     if (score === 1) once(`prompt:${ctx.lesson.id}`, ctx, 30, t('wd.pr.xp'));
   };
-  $$('textarea', el).forEach((t) => t.addEventListener('input', draw));
+  $$('textarea', el).forEach((ta) => ta.addEventListener('input', draw));
   $('#pex', el).addEventListener('click', () => {
     $$('textarea', el).forEach((ta, i) => (ta.value = F[i][1]));
     draw();

@@ -1173,7 +1173,7 @@ function gainXP(n, why) {
   refreshMe();
   const x = $('#xp-v');
   if (x) x.textContent = num(me.progress.xp);
-  toast(`${icon('bolt', { size: 18 })} ${why ? `${esc(why)} : ` : ''}<b>+${num(n)} XP</b>`);
+  toast(`${icon('bolt', { size: 18 })} ${why ? `${esc(why)}${lang === 'fr' ? ' :' : ':'} ` : ''}<b>+${num(n)} XP</b>`);
 }
 
 const QL = { fr: 'ABCD', en: 'ABCD', ar: 'أبجد' };

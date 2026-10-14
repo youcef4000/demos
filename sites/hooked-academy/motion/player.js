@@ -7,7 +7,7 @@
 //   &lang=fr|en|ar   langue (sinon le dernier choix de la plateforme) ; la composition reste de gauche à droite
 // Communique avec la page parente (postMessage) : prêt, temps, fin ; reçoit play / pause / seek.
 
-import { lang, dir, t, applyDom, fmtNum } from '../assets/js/i18n.js';
+import { lang, dir, t as tr, applyDom, fmtNum } from '../assets/js/i18n.js';
 import '../assets/js/i18n/motion.js';
 import { compose } from './engine.js';
 import { findLesson } from '../data/programme.js';
@@ -35,7 +35,7 @@ async function boot() {
   if (!found) {
     const err = document.createElement('p');
     err.className = 'pl-err';
-    err.textContent = t('mo.pl.notfound', { id });
+    err.textContent = tr('mo.pl.notfound', { id });
     stage.replaceChildren(err);
     return;
   }
@@ -132,7 +132,7 @@ async function boot() {
   function setPlaying(v) {
     playing = v;
     pl.classList.toggle('is-playing', v);
-    $('play').setAttribute('aria-label', t(v ? 'mo.pl.pause' : 'mo.pl.lecture'));
+    $('play').setAttribute('aria-label', tr(v ? 'mo.pl.pause' : 'mo.pl.lecture'));
     if (v) {
       if (t >= duration - 0.05) t = 0;
       last = performance.now();
