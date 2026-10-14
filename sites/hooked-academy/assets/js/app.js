@@ -573,7 +573,7 @@ function viewHome() {
       <section class="card hello">
         <div class="hello-deco" aria-hidden="true">${markSVG()}</div>
         <p class="card-k">${icon('sparkles', { size: 14 })} ${esc(cohortOf(me))}</p>
-        <h1>${greet()}${name ? `, ${name}` : ''} <span id="wave" aria-hidden="true">👋</span></h1>
+        <h1>${greet()}${name ? `${AR ? "،" : ","} ${name}` : ''} <span id="wave" aria-hidden="true">👋</span></h1>
         <div class="lvl">
           <div class="lvl-top"><span class="lvl-name">${t(`level.${lv.i}`)}</span><span class="muted">${lv.next ? t('app.level.next', { xp: num(me.progress.xp), need: num(lv.next.xp), name: esc(t(`level.${lv.i + 1}`)) }) : t('app.level.max')}</span></div>
           <div class="lvl-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(lv.pct * 100)}" aria-label="${esc(t(`level.${lv.i}`))}"><i id="lvl-i" style="transform:scaleX(${lv.pct})"></i></div>

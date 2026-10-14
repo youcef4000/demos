@@ -2,6 +2,7 @@
 # - Une voix off déposée dans sites/hooked-academy/video/voix/<id>.webm|m4a|mp3 (enregistrée dans le
 #   studio de l'admin, donc calée sur l'animation) déclenche le rendu de la leçon avec cette voix :
 #   le MP4 est publié sur le site et la plateforme le lit à la place de l'animation.
+# - Une voix poussée en même temps que son MP4 (rendu en local avec render.mjs) n'est pas re-rendue.
 # - Lancement manuel (Actions → Vidéos hooked-academy → Run workflow) : choisir les leçons
 #   (« m2-l1 m2-l2 », « voix » ou « toutes »). Tous les MP4 rendus, muets compris, sont aussi
 #   fournis en artefact téléchargeable pour poser la voix dans CapCut si besoin.
@@ -41,7 +42,9 @@ jobs:
         id: quoi
         run: |
           if [ "${{ github.event_name }}" = "push" ]; then
-            ids=$(git diff --name-only HEAD~1 HEAD -- sites/hooked-academy/video/voix | sed -E 's#.*/((m|ia)[0-9]+-l[0-9]+).*#\1#' | grep -E '^(m|ia)[0-9]+-l[0-9]+$' | sort -u | tr '\n' ' ')
+            # Une voix poussée avec son MP4 (rendu en local) n'est pas re-rendue.
+            rendus=$(git diff --name-only HEAD~1 HEAD -- 'sites/hooked-academy/video/*.mp4' | sed -E 's#.*/((m|ia)[0-9]+-l[0-9]+)\.mp4$#\1#' | sort -u)
+            ids=$(git diff --name-only HEAD~1 HEAD -- sites/hooked-academy/video/voix | sed -E 's#.*/((m|ia)[0-9]+-l[0-9]+).*#\1#' | grep -E '^(m|ia)[0-9]+-l[0-9]+$' | sort -u | grep -vxF -f <(printf '%s\n' $rendus) | tr '\n' ' ' || true)
           else
             ids="${{ inputs.lecons }}"
           fi
