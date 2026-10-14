@@ -114,7 +114,7 @@ export function table(root, sc, d) {
 /* ------------------------------------------------------------------ */
 
 /**
- * { type: 'hooks', kicker, title, family: 'Positif', c: 'body', items: [{ text: 'Choufe m3aya résultat hada !', fr: 'Regarde ce résultat !', at: 1.5, art: 'creme', bg: 'teal' }] }
+ * { type: 'hooks', kicker, title, family: 'Positif', c: 'body', items: [{ text: 'Choufe m3aya résultat hada !', fr: 'Regarde ce résultat !', at: 1.5 }], note, noteAt }
  * Chaque exemple apparaît dans un téléphone (le hook en gros, comme à l'écran), avec sa traduction dessous.
  */
 export function hooks(root, sc, d, ctx) {
@@ -125,7 +125,8 @@ export function hooks(root, sc, d, ctx) {
           <div class="hk-ph"><div class="hk-scr" style="background:${it.bgc || 'var(--ink-800)'}"><span class="hk-tag">${esc(sc.family || '')}</span><p class="hk-t" lang="${isAr(it.text) ? 'ar' : 'fr'}">${esc(it.text)}</p><i class="hk-prog"></i></div></div>
           ${it.fr ? `<figcaption>${rich(it.fr)}</figcaption>` : ''}
         </figure>`).join('')}
-    </div>`;
+    </div>
+    ${sc.note ? `<p class="hk-note">${rich(sc.note)}</p>` : ''}`;
   const tl = G().timeline();
   enterHead(tl, root);
   const F = $$(root, '.hk');
@@ -138,5 +139,7 @@ export function hooks(root, sc, d, ctx) {
     const cap = $(f, 'figcaption');
     if (cap) tl.fromTo(cap, { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.5 }, t + 0.8);
   });
+  const n = $(root, '.hk-note');
+  if (n) tl.fromTo(n, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: 'expo.out' }, sc.noteAt ?? d - 2.4);
   return tl;
 }
