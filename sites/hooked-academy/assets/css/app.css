@@ -1808,7 +1808,7 @@ html[lang='ar'] .card-k {
   text-decoration: none;
   transition: top 0.2s;
 }
-.skip:focus {
+.skip:focus-visible {
   top: 12px;
 }
 
