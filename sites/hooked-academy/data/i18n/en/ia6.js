@@ -1,9 +1,9 @@
-// Traduction (en) du module ia6 — Cinematic.
+// Traduction (en) du module ia6 — Cinematic ads.
 // Générée depuis les textes extraits, relue ; voir tools/hooked-academy/glossaire-i18n.md.
 export default {
   "modules": {
     "ia6": {
-      "title": "Cinematic",
+      "title": "Cinematic ads",
       "pitch": "The next level: film language, storyboarding, visual consistency and sound design."
     }
   },
@@ -19,23 +19,19 @@ export default {
           "frames": [
             {
               "label": "Wide shot",
-              "sub": "The setting, the context",
-              "shot": "large"
+              "sub": "The setting, the context"
             },
             {
               "label": "Medium shot",
-              "sub": "The character, the action",
-              "shot": "moyen"
+              "sub": "The character, the action"
             },
             {
               "label": "Close-up",
-              "sub": "The emotion",
-              "shot": "gros"
+              "sub": "The emotion"
             },
             {
               "label": "Insert",
-              "sub": "The product detail",
-              "shot": "detail"
+              "sub": "The product detail"
             }
           ]
         },
@@ -86,32 +82,27 @@ export default {
           "frames": [
             {
               "label": "Hook",
-              "sub": "Close-up on the eyes",
-              "shot": "gros",
+              "sub": "Close-up, eyes",
               "dur": "0:02"
             },
             {
               "label": "Context",
               "sub": "Wide shot, city at night",
-              "shot": "large",
               "dur": "0:03"
             },
             {
               "label": "Product",
               "sub": "Bottle insert, orbit",
-              "shot": "detail",
               "dur": "0:03"
             },
             {
               "label": "Emotion",
               "sub": "Medium shot, smile",
-              "shot": "moyen",
               "dur": "0:04"
             },
             {
               "label": "CTA",
               "sub": "Packshot + text",
-              "shot": "detail",
               "dur": "0:03"
             }
           ]
@@ -125,7 +116,7 @@ export default {
           "result": {
             "lines": [
               "Shot 1 — Close-up, slow push-in, golden backlight, 2 s",
-              "Shot 2 — Wide shot, tracking, neon lights, 3 s",
+              "Shot 2 — Wide shot, tracking, neon, 3 s",
               "Shot 3 — Insert, orbit, high-contrast light, 3 s…"
             ]
           }
@@ -177,7 +168,7 @@ export default {
           ]
         },
         {
-          "title": "Consistency locks",
+          "title": "What locks the look",
           "items": [
             "The *same character sheet*",
             "The *same style line* in every prompt",
@@ -307,7 +298,7 @@ export default {
       "key": [
         "Script → storyboard → images → animation → sound edit.",
         "To hand in: 9:16 MP4, storyboard, prompts, analysis.",
-        "Analysing your work makes you improve faster than producing more."
+        "You improve faster by analysing than by producing."
       ],
       "quiz": [
         {

@@ -9,7 +9,7 @@ export default {
   },
   "lessons": {
     "ia7-l1": {
-      "title": "The metrics of an ad creative",
+      "title": "Ad creative metrics",
       "scenes": [
         {
           "sub": "Hook rate · Hold rate · CTR · CPA"
@@ -27,7 +27,7 @@ export default {
             },
             {
               "label": "Click-through rate",
-              "sub": "Clicks ÷ impressions: does the CTA make people want it?"
+              "sub": "Clicks ÷ impressions: is the CTA compelling?"
             },
             {
               "label": "Cost per purchase",
@@ -81,7 +81,7 @@ export default {
           "sub": "Breaking down what works"
         },
         {
-          "title": "Drop in a video, get the full breakdown"
+          "title": "Drop in a video, get the breakdown"
         },
         {
           "title": "The Academy habit",

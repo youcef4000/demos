@@ -61,7 +61,7 @@ export default {
       "title": "Music and sound effects",
       "scenes": [
         {
-          "sub": "Pacing is played by ear"
+          "sub": "Set the pace by ear"
         },
         {
           "title": "Three layers of sound",
@@ -121,7 +121,7 @@ export default {
       "title": "Captions that keep people watching",
       "scenes": [
         {
-          "sub": "Lots of people watch with the sound off"
+          "sub": "Many people watch on mute"
         },
         {
           "kicker": "“Karaoke” style",
@@ -172,7 +172,7 @@ export default {
         {}
       ],
       "key": [
-        "Captions are a must: lots of people watch with the sound off.",
+        "Captions are a must: many people watch with the sound off.",
         "Big, centered, high-contrast, 2 to 4 words, keyword in color.",
         "CapCut’s auto captions, then fix them by hand."
       ],

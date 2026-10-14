@@ -34,7 +34,7 @@ export default {
             },
             {
               "label": "Present them",
-              "sub": "As you would to a client"
+              "sub": "As if to a client"
             }
           ]
         },
@@ -47,7 +47,7 @@ export default {
           ]
         },
         {
-          "text": "You don’t walk away with a diploma. You walk away with *a portfolio and a method*."
+          "text": "You don’t leave with a diploma. You leave with *a portfolio and a method*."
         },
         {
           "next": "Welcome to the Hooked creators"

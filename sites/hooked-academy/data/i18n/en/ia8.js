@@ -64,7 +64,7 @@ export default {
             "Everyone",
             "Secret"
           ],
-          "why": "Clients must recognize themselves right away."
+          "why": "Clients must instantly see it’s for them."
         }
       ]
     },
@@ -131,7 +131,7 @@ export default {
               "items": [
                 "3 creatives",
                 "1 format",
-                "1 round of revisions"
+                "1 revision round"
               ]
             },
             {
@@ -260,7 +260,7 @@ export default {
             },
             {
               "label": "Proposal",
-              "sub": "A package that fits"
+              "sub": "A tailored package"
             },
             {
               "label": "Objections",
@@ -298,7 +298,7 @@ export default {
       "title": "Deliver, retain, get referred",
       "scenes": [
         {
-          "sub": "Your next client comes from your current one"
+          "sub": "Your next client comes from this one"
         },
         {
           "loopLabel": "Every happy client brings in another",
@@ -340,7 +340,7 @@ export default {
         {
           "q": "When do you ask for a referral?",
           "a": [
-            "After measurable results",
+            "Once you’ve measured results",
             "Before delivering",
             "Never"
           ],

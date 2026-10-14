@@ -26,14 +26,14 @@ export default {
           "right": {
             "title": "UGC",
             "items": [
-              "Shot on a phone, to camera",
-              "Looks like friends’ posts"
+              "Shot on a phone, talking to camera",
+              "Looks like your friends’ posts"
             ]
           }
         },
         {
           "kicker": "The format",
-          "title": "To camera, natural",
+          "title": "Facing camera, natural",
           "captions": [
             {
               "t": "I tried this"
@@ -61,14 +61,14 @@ export default {
       ],
       "key": [
         "UGC: content that looks like it was made by real users.",
-        "To camera, on a phone, natural tone.",
+        "Facing the camera, on a phone, natural tone.",
         "It gets past the “that’s an ad” filter."
       ],
       "quiz": [
         {
           "q": "Why does UGC work?",
           "a": [
-            "It looks like friends’ posts",
+            "It looks like your friends’ posts",
             "It costs more",
             "It’s longer"
           ],
@@ -90,7 +90,7 @@ export default {
               "sub": "“I was sick of…”"
             },
             {
-              "label": "The real problem",
+              "label": "The real-life problem",
               "sub": "Concrete, everyday"
             },
             {
@@ -117,14 +117,14 @@ export default {
             "lines": [
               "0–3 s · To camera: “I was sick of my perfume fading away…”",
               "3–15 s · Product in hand, applying it, close-up",
-              "15–25 s · “By evening, it still smells great. Link in bio, cash on delivery.”"
+              "15–25 s · “By evening, I can still smell it. Link in bio, cash on delivery.”"
             ]
           }
         },
         {}
       ],
       "key": [
-        "Personal hook, real problem, discovery, result shown, natural CTA.",
+        "Personal hook, real-life problem, discovery, result shown, natural CTA.",
         "Ask AI for the shots to film, not just the text.",
         "20 to 30 seconds."
       ],
@@ -158,11 +158,11 @@ export default {
             },
             {
               "label": "Voice",
-              "sub": "Your voice or an AI voice"
+              "sub": "Your voice or AI voice"
             },
             {
               "label": "Lip-sync",
-              "sub": "The mouth follows the voice"
+              "sub": "Mouth follows the voice"
             },
             {
               "label": "Editing"
@@ -227,8 +227,8 @@ export default {
               "sub": "How to use it"
             },
             {
-              "label": "Myth / truth",
-              "sub": "Busting a common belief"
+              "label": "Myth / fact",
+              "sub": "Busting a misconception"
             }
           ]
         },
@@ -238,7 +238,7 @@ export default {
         {}
       ],
       "key": [
-        "Unboxing, before/after, 3 reasons, reaction, tutorial, myth/truth.",
+        "Unboxing, before/after, 3 reasons, reaction, tutorial, myth/fact.",
         "One product can give you six creatives to test.",
         "The format changes; the Hook/Body/CTA structure stays."
       ],

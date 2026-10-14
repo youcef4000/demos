@@ -76,7 +76,7 @@ export default {
           "left": {
             "title": "Phone photo",
             "items": [
-              "Cluttered background",
+              "Messy background",
               "Yellow light"
             ]
           },
@@ -97,7 +97,7 @@ export default {
             },
             {
               "label": "Cutout",
-              "sub": "Remove the background"
+              "sub": "Remove background"
             },
             {
               "label": "New setting from a prompt",
@@ -211,24 +211,20 @@ export default {
             {
               "label": "Front",
               "sub": "Reference image",
-              "shot": "gros",
               "mood": "smile"
             },
             {
               "label": "Profile",
               "sub": "Same lighting",
-              "shot": "gros",
               "mood": "neutral"
             },
             {
               "label": "Medium shot",
-              "sub": "Reference outfit",
-              "shot": "moyen"
+              "sub": "Reference outfit"
             },
             {
               "label": "In context",
-              "sub": "Reuse the sheet",
-              "shot": "moyen"
+              "sub": "Reuse the sheet"
             }
           ]
         },
@@ -263,10 +259,10 @@ export default {
       ]
     },
     "ia2-l5": {
-      "title": "Retouching: background, details, expanding",
+      "title": "Retouching: background, details, enlarging",
       "scenes": [
         {
-          "sub": "Fix it without regenerating everything"
+          "sub": "Fix it without starting over"
         },
         {
           "title": "Three fixes to know",
@@ -288,15 +284,12 @@ export default {
         {
           "items": [
             {
-              "r": "1:1",
               "use": "Original image"
             },
             {
-              "r": "4:5",
               "use": "Frame expanded for the feed"
             },
             {
-              "r": "9:16",
               "use": "Frame expanded for Reels"
             }
           ]
@@ -324,15 +317,15 @@ export default {
       "title": "From AI visual to finished ad",
       "scenes": [
         {
-          "sub": "Putting it together in Canva"
+          "sub": "Assemble it in Canva"
         },
         {
           "title": "AI image + sales structure",
-          "headline": "Perfume that lasts *till evening*",
+          "headline": "Your perfume, *till evening*",
           "layers": [
             {
               "label": "AI image",
-              "sub": "The generated setting"
+              "sub": "Generated setting"
             },
             {
               "label": "Your real product photo"

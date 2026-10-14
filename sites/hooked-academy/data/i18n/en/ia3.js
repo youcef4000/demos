@@ -27,7 +27,7 @@ export default {
             "title": "Image → video",
             "items": [
               "You approve the image first",
-              "The product stays true"
+              "The product stays accurate"
             ]
           }
         },
@@ -52,7 +52,7 @@ export default {
         {}
       ],
       "key": [
-        "Text → video: quick exploring, little control.",
+        "Text → video: quick to explore, little control.",
         "Image → video: approve the image, then animate it — the way to go for ads.",
         "Work in short shots of a few seconds."
       ],
@@ -169,25 +169,21 @@ export default {
             {
               "label": "0 s",
               "sub": "Starting image",
-              "shot": "detail",
               "dur": "0:00"
             },
             {
               "label": "1–2 s",
               "sub": "Light glides across",
-              "shot": "detail",
               "dur": "0:01"
             },
             {
               "label": "3 s",
               "sub": "A drop, a reflection",
-              "shot": "detail",
               "dur": "0:03"
             },
             {
               "label": "5 s",
               "sub": "Sharp final shot",
-              "shot": "detail",
               "dur": "0:05"
             }
           ]
@@ -195,7 +191,7 @@ export default {
         {
           "segments": [
             {
-              "text": "Keep the bottle exactly identical. A glint of light glides slowly from left to right, subtle push-in, 5 seconds, black background."
+              "text": "Keep the bottle perfectly identical. A glint of light glides slowly from left to right, subtle push-in, 5 seconds, black background."
             }
           ]
         },
