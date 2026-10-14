@@ -973,7 +973,7 @@ function playerHTML(l) {
   if (mp4) return `<video id="vid" src="../${esc(l.video)}" ${l.poster ? `poster="../${esc(l.poster)}"` : ''} controls playsinline preload="metadata" aria-label="${esc(t('app.player.label', { title: l.title }))}"></video>`;
   const q = new URLSearchParams({ id: l.id, lang });
   if (l.audio) q.set('audio', '1');
-  return `<iframe id="ifr" src="../motion/player.html?${q}" title="${esc(t('app.player.label', { title: l.title }))}" allow="fullscreen; autoplay" allowfullscreen loading="lazy"></iframe>`;
+  return `<iframe id="ifr" src="../motion/player.html?${q}" title="${esc(t('app.player.label', { title: l.title }))}" allow="fullscreen; autoplay" loading="lazy"></iframe>`;
 }
 
 function playerNote(l) {
