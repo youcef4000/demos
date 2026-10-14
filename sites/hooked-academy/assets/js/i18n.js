@@ -54,6 +54,9 @@ export function add(dicts) {
 
 const fill = (s, vars) => (vars ? String(s).replace(/\{(\w+)\}/g, (m, k) => (vars[k] ?? m)) : s);
 
+/** La clé existe-t-elle dans la langue donnée (par défaut la langue courante) ? */
+export const has = (key, l = lang) => DICT[l]?.[key] != null;
+
 /** Texte traduit d'une clé (repli : français, puis la clé elle-même). */
 export function t(key, vars) {
   const s = DICT[lang]?.[key] ?? DICT.fr[key];

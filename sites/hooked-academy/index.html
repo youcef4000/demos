@@ -1,397 +1,469 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Hooked Academy — la formation créatives & IA de Hooked Lab</title>
-<meta name="description" content="Apprends à créer des publicités qui arrêtent le scroll : vidéo, image, carrousel, prompting, images et vidéos IA, UGC, cinématique et acquisition de clients. 57 leçons de 2 minutes, en darija. Site de démonstration.">
-<meta name="theme-color" content="#07060a">
+<title>Hooked Academy — une pub qui vend, ça se monte</title>
+<meta name="description" content="Deux formations, Créative et IA, en leçons animées de 2 minutes expliquées en darija : hook, vidéo, image, carrousel, UGC, prompting, images et vidéos IA, jusqu’à tes premiers clients. Site de démonstration.">
+<meta name="theme-color" content="#0f0f0d">
 <link rel="canonical" href="https://demos.bornzstudio.com/hooked-academy/">
+<link rel="alternate" hreflang="fr" href="https://demos.bornzstudio.com/hooked-academy/?lang=fr">
+<link rel="alternate" hreflang="en" href="https://demos.bornzstudio.com/hooked-academy/?lang=en">
+<link rel="alternate" hreflang="ar" href="https://demos.bornzstudio.com/hooked-academy/?lang=ar">
+<link rel="alternate" hreflang="x-default" href="https://demos.bornzstudio.com/hooked-academy/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="ar_DZ">
 <meta property="og:site_name" content="Hooked Academy">
 <meta property="og:url" content="https://demos.bornzstudio.com/hooked-academy/">
-<meta property="og:title" content="Hooked Academy — arrête le scroll">
-<meta property="og:description" content="La formation créatives & IA de Hooked Lab : vidéo, image, carrousel, UGC, cinématique et clients. 57 leçons de 2 minutes, en darija.">
+<meta property="og:title" content="Hooked Academy — une pub qui vend, ça se monte">
+<meta property="og:description" content="Formation Créative et Formation IA : leçons animées de 2 minutes, en darija, de ta première vidéo à tes premiers clients.">
 <meta property="og:image" content="https://demos.bornzstudio.com/hooked-academy/assets/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Hooked Academy — Arrête le scroll">
+<meta property="og:image:alt" content="Hooked Academy — une pub qui vend, ça se monte">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Hooked Academy — arrête le scroll">
-<meta name="twitter:description" content="La formation créatives & IA de Hooked Lab. 57 leçons de 2 minutes, en darija.">
+<meta name="twitter:title" content="Hooked Academy — une pub qui vend, ça se monte">
+<meta name="twitter:description" content="Formation Créative et Formation IA, en leçons animées de 2 minutes, en darija.">
 <meta name="twitter:image" content="https://demos.bornzstudio.com/hooked-academy/assets/img/og.jpg">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Figtree:wght@400..800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=JetBrains+Mono:wght@400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:ital,wght@0,600..900;1,800&family=Sofia+Sans:wght@400..800&family=Doto:wght@700..900&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Alexandria:wght@500..900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="assets/css/brand.css">
 <link rel="stylesheet" href="assets/css/landing.css">
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
-<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/" } }</script>
 <script type="module" src="assets/js/landing.js"></script>
 </head>
-<body class="is-loading">
-<a class="skip" href="#inscription">Aller à l’inscription</a>
+<body class="lp">
+<a class="skip" href="#inscription" data-i18n="skip">Aller à l’inscription</a>
 
-<!-- Ouverture : le compte à rebours du hook -->
-<div class="pre" id="pre" aria-hidden="true">
-  <div class="pre-ring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="54"/></svg><b id="pre-n">3</b></div>
-  <p class="pre-t">Tu as <em>3 secondes</em> pour accrocher.</p>
-  <div class="pre-bars"><i></i><i></i><i></i><i></i></div>
+<!-- Bandeau : la couleur suit le plan affiché dessous (coupe franche) -->
+<header class="nav" id="nav" data-ton="encre">
+  <a class="ha-logo nav-logo" href="#top" id="nav-logo" aria-label="Hooked Academy" data-i18n-attr="aria-label:nav.top"></a>
+  <nav class="nav-links" aria-label="Sections" data-i18n-attr="aria-label:nav.label">
+    <a href="#formations" data-i18n="nav.courses">Formations</a>
+    <a href="#lecon" data-i18n="nav.lesson">La leçon</a>
+    <a href="#parcours" data-i18n="nav.path">Parcours</a>
+    <a href="#hooked-lab">Hooked Lab</a>
+    <a href="#faq" data-i18n="nav.faq">Questions</a>
+  </nav>
+  <div class="nav-end">
+    <div class="lsw" id="lsw" role="group" aria-label="Langue" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-lang="fr" lang="fr" aria-pressed="true" title="Français">FR</button>
+      <button type="button" data-lang="en" lang="en" aria-pressed="false" title="English">EN</button>
+      <button type="button" data-lang="ar" lang="ar" aria-pressed="false" title="العربية">ع</button>
+    </div>
+    <span class="nav-demo" data-i18n="nav.demo" title="Maquette de démonstration" data-i18n-attr="title:nav.demo.title">Démo</span>
+    <a class="nav-space" href="app/" data-i18n="nav.space">Espace étudiant</a>
+    <a class="bt bt--lime bt--s nav-cta" href="#inscription" data-i18n="nav.join">Réserver</a>
+  </div>
+</header>
+
+<!-- Fenêtre « burn-in » : le plan en cours et le timecode de la page (2 minutes, comme une leçon) -->
+<div class="tc" id="tc" aria-hidden="true">
+  <span class="tc-plan"><b id="tc-n">01</b><span id="tc-name">Ouverture</span></span>
+  <span class="tc-time" id="tc-time">00:00:00:00</span>
 </div>
 
-<div class="cursor" id="cursor" aria-hidden="true"><i></i><span></span></div>
-
-<!-- Cette page est une créative : Hook, Body, CTA -->
-<aside class="hbc" id="hbc" aria-label="Structure de la page">
-  <span class="hbc-k">Cette page est une créative</span>
-  <ol>
-    <li data-part="hook"><i><b></b></i><span>Hook</span></li>
-    <li data-part="body"><i><b></b></i><span>Body</span></li>
-    <li data-part="cta"><i><b></b></i><span>CTA</span></li>
-  </ol>
-</aside>
-
-<header class="nav" id="nav">
-  <a class="ha-logo nav-logo" href="#top" aria-label="Hooked Academy, retour en haut" id="nav-logo"></a>
-  <nav class="nav-links" aria-label="Sections">
-    <a href="#hook">La méthode</a>
-    <a href="#programme">Programme</a>
-    <a href="#ia">IA</a>
-    <a href="#hooked-lab">Hooked Lab</a>
-    <a href="#faq">FAQ</a>
-  </nav>
-  <span class="demo-tag" title="Maquette de démonstration">Démo</span>
-  <a class="nav-space" href="app/">Espace étudiant</a>
-  <a class="btn btn--or btn--s" href="#inscription" data-cursor="Go">Réserver</a>
-  <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
-</header>
-<div class="menu" id="menu" hidden>
-  <a href="#hook">La méthode</a>
-  <a href="#programme">Programme</a>
-  <a href="#ia">L’IA créative</a>
-  <a href="#hooked-lab">Hooked Lab</a>
-  <a href="#format">La formation</a>
-  <a href="#faq">FAQ</a>
-  <a href="app/">Espace étudiant</a>
-  <a class="btn btn--or" href="#inscription">Réserver ma place</a>
+<!-- Barre basse (téléphone) -->
+<div class="dock" id="dock">
+  <span class="dock-tc" aria-hidden="true"><b id="dock-n">01</b><span id="dock-time">00:00:00:00</span></span>
+  <a class="dock-space" href="app/" data-i18n="nav.space.short">Espace</a>
+  <a class="bt bt--lime dock-cta" href="#inscription" data-i18n="nav.join">Réserver</a>
 </div>
 
 <main id="top">
-  <!-- HOOK ============================================================ -->
-  <section class="hero" id="hero" data-part="hook">
-    <div class="hero-feed" id="feed" aria-hidden="true"></div>
-    <div class="hero-shade" aria-hidden="true"></div>
-    <svg class="hero-hook" id="hero-hook" viewBox="0 0 60 400" aria-hidden="true">
-      <line x1="30" y1="0" x2="30" y2="330"/>
-      <path d="M38 320v42a16 16 0 1 1-32 0v-8l9 9"/>
-    </svg>
-    <div class="hero-pick" id="hero-pick" aria-hidden="true"></div>
-    <div class="hero-copy">
-      <p class="eyebrow"><span class="eyebrow-dot"></span>La formation créatives &amp; IA de Hooked Lab</p>
-      <h1 class="hero-title" id="hero-title" aria-label="Arrête le scroll.">
-        <span class="ht-l" aria-hidden="true">Arrête</span>
-        <span class="ht-l" aria-hidden="true"><span class="ht-w">le </span><span class="ht-w">scroll<span class="ht-dot">.</span></span></span>
-      </h1>
-      <p class="hero-ar" lang="ar" dir="rtl">وقّف السكرول</p>
-      <p class="hero-sub">Vidéo, image, carrousel, UGC, cinématique : apprends à créer des publicités qui accrochent — avec et sans IA. En darija, en leçons de <b>2&nbsp;minutes</b>.</p>
-      <div class="hero-cta">
-        <a class="btn btn--or" href="#inscription" data-cursor="Go">Réserver ma place</a>
-        <a class="btn btn--ghost" href="#programme">Voir le programme</a>
+
+  <!-- PLAN 01 · Ouverture : le clap ====================================== -->
+  <section class="sh hero" id="hero" data-ton="encre" data-plan="01" data-name="plan.01">
+    <div class="frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <p class="burn burn--tl" aria-hidden="true" id="clip-id">A001_C001</p>
+    <p class="burn burn--tr" aria-hidden="true" data-i18n="hero.fps">DÉMO · 25 I/S</p>
+
+    <div class="hero-in">
+      <div class="slate" id="slate" role="group" aria-labelledby="hero-title">
+        <div class="clapper" id="clapper" aria-hidden="true"><span class="clapper-hinge"></span></div>
+        <div class="clapper-base" aria-hidden="true"></div>
+        <div class="slate-body">
+          <dl class="slate-row slate-row--top">
+            <div><dt data-i18n="slate.prod">Prod.</dt><dd>Hooked Academy</dd></div>
+            <div><dt data-i18n="slate.dir">Réal.</dt><dd data-i18n="slate.you">Toi</dd></div>
+          </dl>
+          <h1 class="hero-title" id="hero-title" data-i18n-html="hero.title">Une pub qui vend, <span class="nb">ça se monte.</span></h1>
+          <dl class="slate-row slate-row--bot">
+            <div><dt data-i18n="slate.scene">Scène</dt><dd>01</dd></div>
+            <div><dt data-i18n="slate.take">Prise</dt><dd id="take">01</dd></div>
+            <div><dt data-i18n="slate.date">Date</dt><dd id="slate-date">—</dd></div>
+            <div><dt data-i18n="slate.sound">Son</dt><dd data-i18n="slate.darija">Darija</dd></div>
+          </dl>
+        </div>
+        <button class="slate-hit" id="slate-hit" type="button" aria-label="Claquer le clap" data-i18n-attr="aria-label:slate.hit"></button>
       </div>
-      <ul class="hero-facts" id="hero-facts">
-        <li><b data-count="lessons">57</b><span>leçons animées</span></li>
-        <li><b data-count="modules">13</b><span>modules</span></li>
-        <li><b>2</b><span>min max par leçon</span></li>
-      </ul>
+
+      <div class="hero-side">
+        <p class="hero-sub" data-i18n-html="hero.sub">Deux formations — <b>Créative</b> et <b>IA</b> — en leçons animées de <b>2&nbsp;minutes</b>, expliquées en darija. De ta première vidéo à tes premiers clients.</p>
+        <div class="hero-cta">
+          <a class="bt bt--lime" href="#inscription" data-i18n="hero.cta">Réserver ma place</a>
+          <a class="bt bt--line" href="#lecon" data-i18n="hero.cta2">Voir une leçon</a>
+        </div>
+        <ul class="hero-legend" id="hero-legend">
+          <li data-track="creative"><i></i><a href="#formations"><b data-i18n="track.creative">Formation Créative</b><span class="js-count" data-track="creative"></span></a></li>
+          <li data-track="ia"><i></i><a href="#formations"><b data-i18n="track.ia">Formation IA</b><span class="js-count" data-track="ia"></span></a></li>
+        </ul>
+        <p class="hero-hint burn" aria-hidden="true" data-i18n="hero.hint">↖ Clique sur le clap</p>
+      </div>
     </div>
-    <p class="hero-scroll" aria-hidden="true"><i></i>Scrolle&nbsp;: on va t’accrocher</p>
   </section>
 
-  <div class="marquee" aria-hidden="true"><div class="marquee-t" id="marquee"></div></div>
-
-  <!-- Anatomie : 3 secondes, puis Body, puis CTA -->
-  <section class="anat" id="hook" data-part="hook">
-    <div class="anat-pin">
-      <header class="anat-head">
-        <p class="kicker"><i></i>La méthode</p>
-        <h2 class="h2">Une créative qui vend a <em>trois parties</em>.</h2>
+  <!-- PLAN 02 · Deux formations : champ / contrechamp ===================== -->
+  <section class="sh duo" id="formations" data-ton="duo" data-plan="02" data-name="plan.02" aria-labelledby="duo-h">
+    <h2 class="sr-only" id="duo-h" data-i18n="duo.h">Deux formations, une méthode</h2>
+    <p class="duo-seam" aria-hidden="true"><span data-i18n="duo.seam">Deux formations · une méthode</span></p>
+    <article class="duo-p" data-track="creative" id="duo-creative">
+      <header class="duo-h">
+        <p class="duo-k"><span data-i18n="duo.k1">Formation 01</span><span class="duo-range" id="duo-range-creative"></span></p>
+        <h3 class="duo-t"><span class="duo-big" aria-hidden="true" data-i18n="duo.big1">Créative</span><span class="duo-name" data-i18n="track.creative">Formation Créative</span></h3>
+        <p class="duo-pitch" id="duo-pitch-creative"></p>
       </header>
-      <div class="anat-grid">
-        <div class="anat-phone">
-          <div class="aph">
-            <div class="aph-screen">
-              <div class="aph-bg"></div>
-              <div class="aph-prod" id="aph-prod"></div>
-              <p class="aph-hook" id="aph-hook">Ton parfum disparaît <em>avant midi</em>&nbsp;?</p>
-              <ul class="aph-body" id="aph-body"><li>Formule concentrée</li><li>2 pulvérisations suffisent</li><li>Tient jusqu’au soir</li></ul>
-              <div class="aph-cta" id="aph-cta">Commander — paiement à la livraison</div>
-              <div class="aph-prog"><i id="aph-prog"></i></div>
+      <ol class="duo-mods" id="duo-mods-creative"></ol>
+      <footer class="duo-f"><span class="duo-n" id="duo-n-creative"></span><a class="duo-go" href="#parcours" data-i18n="duo.go">Voir le parcours</a></footer>
+    </article>
+    <article class="duo-p" data-track="ia" id="duo-ia">
+      <header class="duo-h">
+        <p class="duo-k"><span data-i18n="duo.k2">Formation 02</span><span class="duo-range" id="duo-range-ia"></span></p>
+        <h3 class="duo-t"><span class="duo-big" aria-hidden="true" data-i18n="duo.big2">IA</span><span class="duo-name" data-i18n="track.ia">Formation IA</span></h3>
+        <p class="duo-pitch" id="duo-pitch-ia"></p>
+      </header>
+      <ol class="duo-mods" id="duo-mods-ia"></ol>
+      <footer class="duo-f"><span class="duo-n" id="duo-n-ia"></span><a class="duo-go" href="#parcours" data-i18n="duo.go">Voir le parcours</a></footer>
+    </article>
+  </section>
+
+  <!-- PLAN 03 · La formation : la table de montage d'une vraie leçon ====== -->
+  <section class="sh lecon" id="lecon" data-ton="papier" data-plan="03" data-name="plan.03" aria-labelledby="lecon-h">
+    <header class="sec-h">
+      <p class="lbl" data-i18n="lecon.k">La formation</p>
+      <h2 class="h2 derush" id="lecon-h" data-i18n-html="lecon.h">Pensée pour être <span class="um" aria-hidden="true">euh…</span> finie, pas <span class="um" aria-hidden="true">pas…</span> abandonnée.</h2>
+    </header>
+
+    <div class="edit">
+      <div class="edit-main">
+        <figure class="viewer" id="viewer">
+          <div class="viewer-screen">
+            <video id="lv" src="video/m1-l1.mp4" poster="video/m1-l1.jpg" muted loop playsinline preload="none" aria-label="Extrait de la leçon 1" data-i18n-attr="aria-label:lecon.video"></video>
+            <button class="viewer-play" id="lv-play" type="button" aria-label="Lire l’extrait" data-i18n-attr="aria-label:lecon.play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></button>
+            <button class="viewer-sound" id="lv-sound" type="button" aria-pressed="false"><span class="vs-ic" aria-hidden="true"></span><span id="lv-sound-t" data-i18n="lecon.sound">Son : voix en darija</span></button>
+          </div>
+          <figcaption class="viewer-burn">
+            <span class="burn" id="lv-title">M01 · L01</span>
+            <span class="burn" id="lv-tc" aria-hidden="true">00:00:00:00</span>
+          </figcaption>
+        </figure>
+        <p class="viewer-note" data-i18n="lecon.note">Extrait réel de la leçon 1 : vidéo animée, montée sur la voix du formateur.</p>
+
+        <div class="tl" id="tl" aria-hidden="true">
+          <div class="tl-ruler" id="tl-ruler"></div>
+          <div class="tl-track tl-track--v"><span class="tl-name" data-i18n="lecon.tv">Image</span><div class="tl-clips" id="tl-clips"></div></div>
+          <div class="tl-track tl-track--a"><span class="tl-name" data-i18n="lecon.ta">Voix · darija</span><div class="tl-wave" id="tl-wave"></div></div>
+          <div class="tl-limit"><span data-i18n="lecon.limit">2:00 — limite</span></div>
+          <i class="tl-head" id="tl-head"></i>
+        </div>
+      </div>
+
+      <ol class="notes" id="notes">
+        <li class="note note--time">
+          <span class="note-n">01</span>
+          <h3 data-i18n="lecon.n1.t">2 minutes max</h3>
+          <p data-i18n="lecon.n1.x">Une idée par leçon. Tu avances dans le bus, à la pause, avant de dormir.</p>
+        </li>
+        <li class="note note--dz">
+          <span class="note-n">02</span>
+          <h3><span data-i18n="lecon.n2.t">En darija</span> <span class="note-ar" lang="ar" dir="rtl">بالدارجة</span></h3>
+          <p data-i18n="lecon.n2.x">Expliqué comme on parle, avec les termes du métier en français.</p>
+        </li>
+        <li class="note note--quiz">
+          <span class="note-n">03</span>
+          <h3 data-i18n="lecon.n3.t">Quiz, schémas, exercices</h3>
+          <p data-i18n="lecon.n3.x">Chaque leçon se termine par un quiz et un exercice interactif.</p>
+          <div class="mq" id="mq">
+            <p class="mq-q" data-i18n="lecon.q">Que veut dire CTA ?</p>
+            <div class="mq-a">
+              <button type="button" data-ok="0" data-i18n="lecon.q.a">Content To Advertise</button>
+              <button type="button" data-ok="1">Call To Action</button>
+              <button type="button" data-ok="0" data-i18n="lecon.q.c">Clic Total Annonce</button>
             </div>
           </div>
-        </div>
-        <div class="anat-side">
-          <div class="anat-timer">
-            <svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="88" class="t-bg"/><circle cx="100" cy="100" r="88" class="t-fg" id="t-fg"/></svg>
-            <b id="t-n">3</b><span>secondes</span>
-          </div>
-          <ol class="anat-steps" id="anat-steps">
-            <li data-k="hook"><b>Hook</b><span>0–3 s · arrêter le pouce</span></li>
-            <li data-k="body"><b>Body</b><span>montrer, prouver, rassurer</span></li>
-            <li data-k="cta"><b>CTA</b><span>dire exactement quoi faire</span></li>
-          </ol>
-        </div>
-      </div>
-      <div class="anat-track" aria-hidden="true">
-        <div class="anat-bar"><i data-k="hook"></i><i data-k="body"></i><i data-k="cta"></i><b id="anat-head"></b></div>
-        <svg class="anat-curve" viewBox="0 0 1000 160" preserveAspectRatio="none"><path id="anat-curve" d="M0 8 C 60 70, 120 84, 200 92 S 420 104, 600 110 S 860 120, 1000 124"/></svg>
-        <p class="anat-note">Courbe de rétention d’exemple : un hook fort garde les gens jusqu’au CTA.</p>
-      </div>
+        </li>
+        <li class="note note--team">
+          <span class="note-n">04</span>
+          <h3 data-i18n="lecon.n4.t">Une vraie équipe derrière</h3>
+          <p data-i18n="lecon.n4.x">Ton inscription est traitée par l’équipe, ton projet final est relu et validé.</p>
+        </li>
+        <li class="note note--count">
+          <span class="note-n">05</span>
+          <h3 id="count-t">— leçons, — modules, 1 projet final</h3>
+          <p data-i18n="lecon.n5.x">Des bases de la créative jusqu’à la signature de tes premiers clients.</p>
+        </li>
+      </ol>
     </div>
   </section>
 
-  <!-- BODY ============================================================ -->
-  <section class="mani" data-part="body">
-    <p class="mani-t" id="mani">Une créative, ce n’est pas une jolie vidéo. C’est une machine à *arrêter le pouce*, à *convaincre* et à *faire agir*. Hooked Academy t’apprend à la construire, plan par plan, prompt par prompt — avec ton téléphone, CapCut, Canva et l’IA.</p>
-    <p class="mani-ar" lang="ar" dir="rtl">الكرياتيف ماشي فيديو شابة برك، هي ماكينة باش توقّف السكرول و تبيع</p>
-  </section>
-
-  <section class="prog" id="programme" data-part="body">
-    <div class="prog-pin">
-      <header class="prog-head">
-        <p class="kicker"><i></i>Le programme</p>
-        <h2 class="h2"><span id="prog-count">13</span> modules. Des bases jusqu’aux <em>clients</em>.</h2>
-        <div class="prog-meter"><span id="prog-cur">01</span><i><b id="prog-bar"></b></i><span id="prog-tot">13</span></div>
-      </header>
-      <div class="prog-rail"><div class="prog-track" id="prog-track"></div></div>
-    </div>
-  </section>
-
-  <section class="lab" id="ia" data-part="body">
-    <div class="lab-pin">
-      <div class="lab-copy">
-        <p class="kicker"><i></i>L’IA créative</p>
-        <h2 class="h2">Un prompt précis, <em>une image précise</em>.</h2>
-        <p class="lab-lead">Scrolle : chaque mot du prompt change la scène. C’est exactement ce que tu apprendras au module Prompting.</p>
-        <div class="lab-prompt" aria-live="polite">
-          <div class="lab-bar"><i></i><i></i><i></i><span>Prompt image</span></div>
-          <p id="lab-txt"></p>
-          <div class="lab-tags" id="lab-tags"></div>
-        </div>
-      </div>
-      <div class="lab-stage" id="lab-stage">
-        <canvas id="lab-canvas" aria-label="Rendu 3D d’un flacon de parfum qui évolue avec le prompt" role="img"></canvas>
-        <div class="lab-frame" id="lab-frame"><span>4:5</span></div>
-        <div class="lab-fallback" id="lab-fallback" hidden></div>
-        <p class="lab-badge" id="lab-badge">Rendu 3D en direct</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="fmt" data-part="body">
-    <div class="fmt-pin">
-      <header class="fmt-head">
-        <p class="kicker"><i></i>Trois formats</p>
-        <h2 class="h2">Vidéo, image, carrousel : <em>tu sauras tout faire</em>.</h2>
-      </header>
-      <div class="fmt-stage" id="fmt-stage"></div>
-    </div>
-  </section>
-
-  <section class="hl" id="hooked-lab" data-part="body">
-    <div class="hl-pin">
-      <div class="hl-mark" id="hl-mark"></div>
-      <div class="hl-copy">
-        <p class="kicker"><i></i>Une formation liée à Hooked Lab</p>
-        <h2 class="h2 hl-swap"><span class="hl-a">Hooked Lab <em>analyse</em> les créatives qui marchent.</span><span class="hl-b">Hooked Academy t’apprend à <em>les créer</em>.</span></h2>
-        <p class="hl-lead">Hooked Lab décortique une publicité en quelques minutes : script, séquences, hook noté, angles marketing, pack de lancement. Dans l’Academy, tu t’en sers pour analyser, comprendre, puis produire tes propres créatives.</p>
-        <ul class="hl-chips" id="hl-chips">
-          <li>Script reconstitué</li><li>Séquences clés</li><li>Hook noté</li><li>Angles marketing</li><li>Mots-clés</li><li>Pack de lancement</li>
-        </ul>
-        <a class="btn btn--ghost" href="https://hooked-lab.com" target="_blank" rel="noopener">Découvrir Hooked Lab ↗</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="bento" id="format" data-part="body">
-    <header class="sec-head">
-      <p class="kicker"><i></i>La formation</p>
-      <h2 class="h2">Pensée pour être <em>finie</em>, pas abandonnée.</h2>
-    </header>
-    <div class="bento-grid">
-      <article class="bt bt-video">
-        <video src="video/m1-l1.mp4" poster="video/m1-l1.jpg" muted loop playsinline preload="none" id="bt-video" aria-label="Extrait de la leçon 1, sans le son"></video>
-        <div class="bt-cap"><b>Extrait · leçon 1</b><span>Chaque leçon est une vidéo animée, montée sur la voix off.</span></div>
-      </article>
-      <article class="bt bt-time">
-        <div class="bt-ring"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="44" class="fg"/></svg><b>2:00</b></div>
-        <h3>2 minutes max</h3>
-        <p>Une idée par leçon. Tu avances dans le bus, à la pause, avant de dormir.</p>
-      </article>
-      <article class="bt bt-dz">
-        <p class="bt-ar" lang="ar" dir="rtl">بالدارجة</p>
-        <div class="bt-wave" aria-hidden="true"></div>
-        <h3>En darija</h3>
-        <p>Expliqué comme on parle, avec les termes du métier en français.</p>
-      </article>
-      <article class="bt bt-quiz">
-        <h3>Quiz, schémas, exercices</h3>
-        <div class="bt-q" aria-hidden="true">
-          <p>Que veut dire CTA ?</p>
-          <span>Content To Advertise</span><span class="ok">Call To Action</span><span>Clic Total Annonce</span>
-        </div>
-        <p>Chaque leçon se termine par un quiz et un exercice interactif.</p>
-      </article>
-      <article class="bt bt-team">
-        <h3>Une vraie équipe derrière</h3>
-        <p>Ton inscription est traitée par l’équipe, ton projet final est relu et validé.</p>
-        <div class="bt-avatars" aria-hidden="true"><i></i><i></i><i></i><span>+ toi</span></div>
-      </article>
-      <article class="bt bt-count">
-        <b class="bt-big" data-count="lessons">57</b>
-        <h3>leçons, 13 modules, 1 projet final</h3>
-        <p>Des bases de la créative jusqu’à la signature de tes premiers clients.</p>
-      </article>
-    </div>
-  </section>
-
-  <section class="space" data-part="body">
+  <!-- PLAN 04 · L'espace étudiant : le retour vidéo ======================= -->
+  <section class="sh space" id="espace" data-ton="encre" data-plan="04" data-name="plan.04" aria-labelledby="space-h">
     <div class="space-copy">
-      <p class="kicker"><i></i>L’espace étudiant</p>
-      <h2 class="h2">Ta progression, <em>visible</em> chaque jour.</h2>
-      <p>Parcours en carte, série de jours, niveaux, badges, prochain module : tout est fait pour que tu reviennes demain.</p>
-      <a class="btn btn--ghost" href="app/?demo=1">Essayer le compte démo</a>
+      <p class="lbl" data-i18n="space.k">L’espace étudiant</p>
+      <h2 class="h2" id="space-h" data-i18n-html="space.h">Ta progression, <span class="nb">visible chaque jour.</span></h2>
+      <p class="lead" data-i18n="space.x">Deux parcours séparés, série de jours, niveaux, badges, atelier IA avec quiz, PDF et prompts : tout est fait pour que tu reviennes demain.</p>
+      <div class="space-cta">
+        <a class="bt bt--lime" href="app/?demo=1" data-i18n="space.cta">Essayer le compte démo</a>
+        <span class="small" data-i18n="space.limit">Démo limitée : une leçon par formation.</span>
+      </div>
     </div>
-    <div class="space-mock" id="space-mock" aria-hidden="true">
-      <div class="sm-win">
-        <div class="sm-top"><span class="sm-logo"></span><span class="sm-hi">Salam, Créateur 👋</span><span class="sm-xp">⚡ 760 XP</span></div>
-        <div class="sm-grid">
-          <div class="sm-card sm-ring"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40"/><circle cx="50" cy="50" r="40" class="fg"/></svg><b>11 %</b><span>de la formation</span></div>
-          <div class="sm-card sm-streak"><b>🔥 4</b><span>jours d’affilée</span><div class="sm-days"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div></div>
-          <div class="sm-card sm-next"><span>Continuer</span><b>Exemples de hooks</b><i><b></b></i></div>
-          <div class="sm-card sm-path"><svg viewBox="0 0 300 120"><path d="M10 100 C 60 20, 100 20, 140 60 S 230 110, 290 20"/></svg><i style="left:3%;top:78%" class="on"></i><i style="left:30%;top:28%" class="on"></i><i style="left:47%;top:50%" class="cur"></i><i style="left:72%;top:78%"></i><i style="left:95%;top:12%"></i></div>
+    <figure class="monitor" id="monitor" aria-label="Aperçu de l’espace étudiant (compte d’exemple)" data-i18n-attr="aria-label:space.mock">
+      <div class="monitor-top" aria-hidden="true"><span class="burn" data-i18n="space.burn">Retour · espace étudiant</span><span class="burn rec"><i></i>REC</span></div>
+      <div class="mock" aria-hidden="true">
+        <div class="mk-bar"><span class="mk-logo"></span><span class="mk-hi" data-i18n="space.hi">Salam 👋</span><span class="mk-tag" data-i18n="space.sample">Compte d’exemple</span><span class="mk-xp">⚡ 760 XP</span></div>
+        <div class="mk-grid">
+          <div class="mk-c mk-prod" data-track="creative">
+            <span class="mk-ic"></span>
+            <b data-i18n="track.creative">Formation Créative</b>
+            <span class="mk-ring" style="--p:.35"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16"/><circle cx="20" cy="20" r="16" class="fg"/></svg><em>35 %</em></span>
+            <span class="mk-next"><small data-i18n="space.next">Continuer</small><span>M02 · <span data-i18n="space.lesson1">Exemples de hooks</span></span></span>
+          </div>
+          <div class="mk-c mk-prod" data-track="ia">
+            <span class="mk-ic"></span>
+            <b data-i18n="track.ia">Formation IA</b>
+            <span class="mk-ring" style="--p:.12"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16"/><circle cx="20" cy="20" r="16" class="fg"/></svg><em>12 %</em></span>
+            <span class="mk-next"><small data-i18n="space.next">Continuer</small><span>IA02 · <span data-i18n="space.lesson2">Le prompt image</span></span></span>
+          </div>
+          <div class="mk-c mk-streak"><b>🔥 4</b><span data-i18n="space.streak">jours d’affilée</span><span class="mk-days"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></div>
+          <div class="mk-c mk-atl"><b data-i18n="space.atl">Atelier IA</b><span class="mk-tiles"><i data-i18n="space.t1">Quiz</i><i>PDF</i><i data-i18n="space.t3">Prompts</i><i data-i18n="space.t4">Ressources</i></span></div>
+          <div class="mk-c mk-bdg"><span class="mk-badges"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span data-i18n="space.badges">2 badges sur 9</span></div>
         </div>
+      </div>
+    </figure>
+  </section>
+
+  <!-- PLAN 05 · Ton parcours : le travelling ============================ -->
+  <section class="sh path" id="parcours" data-ton="papier" data-plan="05" data-name="plan.05" aria-labelledby="path-h">
+    <div class="path-pin" id="path-pin">
+      <header class="sec-h path-head">
+        <p class="lbl" data-i18n="path.k">Ton parcours</p>
+        <h2 class="h2" id="path-h" data-i18n-html="path.h">De zéro à <span class="nb">tes premiers clients.</span></h2>
+      </header>
+      <div class="rails" id="rails">
+        <div class="rails-track" aria-hidden="true"><i class="rails-fill" id="rails-fill"></i></div>
+        <span class="dolly" id="dolly" aria-hidden="true"><svg viewBox="0 0 64 40"><rect x="6" y="8" width="40" height="18" rx="3"/><rect x="46" y="12" width="12" height="10" rx="2"/><circle cx="16" cy="32" r="5"/><circle cx="40" cy="32" r="5"/></svg></span>
+        <ol class="stations" id="stations">
+          <li class="st" data-part="p1">
+            <span class="st-k"><span data-i18n="path.part">Partie</span> 1</span>
+            <h3 data-i18n="path.p1.t">Les fondamentaux</h3>
+            <p data-i18n="path.p1.x">Créative, formats, outils, Hook · Body · CTA, AIDA, PAS, UGC, production dans CapCut et Canva.</p>
+            <ul class="chips" data-chips="p1"></ul>
+          </li>
+          <li class="st" data-part="p2">
+            <span class="st-k"><span data-i18n="path.part">Partie</span> 2</span>
+            <h3 data-i18n="path.p2.t">L’IA créative</h3>
+            <p data-i18n="path.p2.x">Prompting, images et vidéos IA, voix et sous-titres, UGC avec l’IA, cinématique.</p>
+            <ul class="chips" data-chips="p2"></ul>
+          </li>
+          <li class="st" data-part="p3">
+            <span class="st-k"><span data-i18n="path.part">Partie</span> 3</span>
+            <h3 data-i18n="path.p3.t">Vendre ton savoir-faire</h3>
+            <p data-i18n="path.p3.x">Mesurer avec Hooked Lab, itérer, choisir ta niche, prospecter, signer.</p>
+            <ul class="chips" data-chips="p3"></ul>
+          </li>
+          <li class="st st--final" data-part="final">
+            <span class="st-k" data-i18n="path.final">Final</span>
+            <h3 data-i18n="path.f.t">Projet &amp; certificat</h3>
+            <p data-i18n="path.f.x">Une campagne complète, relue et validée par l’équipe.</p>
+            <ul class="chips" data-chips="final"></ul>
+          </li>
+        </ol>
       </div>
     </div>
   </section>
 
-  <section class="path" data-part="body">
-    <header class="sec-head">
-      <p class="kicker"><i></i>Ton parcours</p>
-      <h2 class="h2">De zéro à <em>tes premiers clients</em>.</h2>
+  <!-- PLAN 06 · Tu te reconnais ? : le casting ========================== -->
+  <section class="sh who" id="profils" data-ton="encre" data-plan="06" data-name="plan.06" aria-labelledby="who-h">
+    <header class="sec-h who-head">
+      <p class="lbl" data-i18n="who.k">Pour qui</p>
+      <h2 class="h2" id="who-h" data-i18n="who.h">Tu te reconnais ?</h2>
     </header>
-    <div class="path-wrap">
-      <svg class="path-svg" viewBox="0 0 1000 900" preserveAspectRatio="none" aria-hidden="true"><path id="path-line" d="M120 40 C 120 200, 880 160, 880 330 S 120 470, 120 620 S 880 760, 880 880"/></svg>
-      <ol class="path-steps">
-        <li><span>Partie 1</span><b>Les fondamentaux</b><p>Créative, formats, outils, Hook · Body · CTA, AIDA, PAS, production dans CapCut et Canva.</p></li>
-        <li><span>Partie 2</span><b>L’IA créative</b><p>Prompting, images et vidéos IA, voix et sous-titres, UGC, cinématique.</p></li>
-        <li><span>Partie 3</span><b>Vendre ton savoir-faire</b><p>Mesurer avec Hooked Lab, itérer, choisir ta niche, prospecter, signer.</p></li>
-        <li><span>Final</span><b>Projet &amp; certificat</b><p>Une campagne complète, relue et validée par l’équipe.</p></li>
+    <div class="script">
+      <p class="script-slug" data-i18n="who.slug">INT. TON TÉLÉPHONE — JOUR</p>
+      <ol class="roles">
+        <li class="role">
+          <h3 class="role-name" data-i18n="who.r1">L’e-commerçant·e</h3>
+          <p class="role-par" data-i18n="who.r1.p">(vend déjà, ses pubs coûtent cher)</p>
+          <p class="role-x" data-i18n="who.r1.x">Tu vends déjà et tes pubs coûtent cher : tu veux produire des créatives qui convertissent, toi-même.</p>
+          <button class="role-me" type="button" data-profil="ecommercant" data-i18n="who.me">C’est moi</button>
+        </li>
+        <li class="cut" aria-hidden="true" data-i18n="who.cut">Coupe franche :</li>
+        <li class="role">
+          <h3 class="role-name" data-i18n="who.r2">Le/la freelance, CM</h3>
+          <p class="role-par" data-i18n="who.r2.p">(veut vendre plus cher)</p>
+          <p class="role-x" data-i18n="who.r2.x">Tu veux ajouter les créatives IA à ton offre et facturer plus cher.</p>
+          <button class="role-me" type="button" data-profil="freelance" data-i18n="who.me">C’est moi</button>
+        </li>
+        <li class="cut" aria-hidden="true" data-i18n="who.cut">Coupe franche :</li>
+        <li class="role">
+          <h3 class="role-name" data-i18n="who.r3">Le/la débutant·e</h3>
+          <p class="role-par" data-i18n="who.r3.p">(part de zéro)</p>
+          <p class="role-x" data-i18n="who.r3.x">Tu pars de zéro : on commence par « c’est quoi une créative ? ».</p>
+          <button class="role-me" type="button" data-profil="debutant" data-i18n="who.me">C’est moi</button>
+        </li>
+        <li class="cut" aria-hidden="true" data-i18n="who.cut">Coupe franche :</li>
+        <li class="role">
+          <h3 class="role-name" data-i18n="who.r4">Le créateur, la créatrice</h3>
+          <p class="role-par" data-i18n="who.r4.p">(fait déjà du contenu)</p>
+          <p class="role-x" data-i18n="who.r4.x">Tu fais déjà du contenu et tu veux passer à l’UGC et au cinématique.</p>
+          <button class="role-me" type="button" data-profil="createur" data-i18n="who.me">C’est moi</button>
+        </li>
       </ol>
     </div>
   </section>
 
-  <section class="who" data-part="body">
-    <header class="sec-head">
-      <p class="kicker"><i></i>Pour qui</p>
-      <h2 class="h2">Tu te reconnais&nbsp;?</h2>
-    </header>
-    <div class="who-grid">
-      <article class="who-c"><span class="who-i" data-icon="cart"></span><h3>E-commerçant·e</h3><p>Tu vends déjà et tes pubs coûtent cher : tu veux produire des créatives qui convertissent, toi-même.</p></article>
-      <article class="who-c"><span class="who-i" data-icon="users"></span><h3>Freelance, CM</h3><p>Tu veux ajouter les créatives IA à ton offre et facturer plus cher.</p></article>
-      <article class="who-c"><span class="who-i" data-icon="spark"></span><h3>Débutant·e</h3><p>Tu pars de zéro : on commence par « c’est quoi une créative ? ».</p></article>
-      <article class="who-c"><span class="who-i" data-icon="camera"></span><h3>Créateur·rice</h3><p>Tu fais déjà du contenu et tu veux passer à l’UGC et au cinématique.</p></article>
+  <!-- PLAN 07 · Hooked Lab : retour labo ================================ -->
+  <section class="sh lab" id="hooked-lab" data-ton="citron" data-plan="07" data-name="plan.07" aria-labelledby="lab-h">
+    <div class="lab-mark" id="lab-mark" aria-hidden="true"></div>
+    <div class="lab-copy">
+      <p class="lbl">Hooked Lab</p>
+      <h2 class="h2" id="lab-h" data-i18n-html="lab.h">Hooked Lab analyse les pubs qui marchent. <span class="nb">L’Academy t’apprend à les créer.</span></h2>
+      <p class="lead" data-i18n="lab.x">Hooked Lab décortique une publicité en quelques minutes : script, séquences, hook noté, angles marketing, pack de lancement. Dans l’Academy, tu t’en sers pour analyser, comprendre, puis produire tes propres créatives.</p>
+      <ul class="lab-chips">
+        <li data-i18n="lab.c1">Script reconstitué</li>
+        <li data-i18n="lab.c2">Séquences clés</li>
+        <li data-i18n="lab.c3">Hook noté</li>
+        <li data-i18n="lab.c4">Angles marketing</li>
+        <li data-i18n="lab.c5">Mots-clés</li>
+        <li data-i18n="lab.c6">Pack de lancement</li>
+      </ul>
+      <a class="bt bt--ink" href="https://hooked-lab.com" target="_blank" rel="noopener" data-i18n="lab.go">Découvrir Hooked Lab ↗</a>
     </div>
   </section>
 
-  <!-- CTA ============================================================= -->
-  <section class="join" id="inscription" data-part="cta">
+  <!-- PLAN 08 · Inscription : l'ardoise devient le formulaire ========== -->
+  <section class="sh join" id="inscription" data-ton="encre" data-plan="08" data-name="plan.08" aria-labelledby="join-h">
     <div class="join-copy">
-      <p class="kicker"><i></i>Inscription</p>
-      <h2 class="h2">Réserve ta place. <em>L’équipe te rappelle.</em></h2>
+      <p class="lbl" data-i18n="join.k">Inscription</p>
+      <h2 class="h2" id="join-h" data-i18n-html="join.h">Réserve ta place. <span class="nb dim">L’équipe te rappelle.</span></h2>
       <ol class="join-steps">
-        <li><b>1</b><div><strong>Tu remplis le formulaire</strong><span>1 minute, sans paiement en ligne.</span></div></li>
-        <li><b>2</b><div><strong>L’équipe te contacte sur WhatsApp</strong><span>Session, tarif, paiement (CCP, BaridiMob ou espèces).</span></div></li>
-        <li><b>3</b><div><strong>Tu reçois ton accès</strong><span>Ton espace étudiant s’ouvre : module 1, leçon 1.</span></div></li>
+        <li><b>1</b><div><strong data-i18n="join.s1">Tu remplis le formulaire</strong><span data-i18n="join.s1.x">1 minute, sans paiement en ligne.</span></div></li>
+        <li><b>2</b><div><strong data-i18n="join.s2">L’équipe te contacte sur WhatsApp</strong><span data-i18n="join.s2.x">Session, tarif, paiement (CCP, BaridiMob ou espèces).</span></div></li>
+        <li><b>3</b><div><strong data-i18n="join.s3">Tu reçois ton accès</strong><span data-i18n="join.s3.x">Ton espace étudiant s’ouvre : module 1, leçon 1.</span></div></li>
       </ol>
     </div>
-    <form class="form" id="form" novalidate>
-      <div class="form-prog" aria-hidden="true"><i id="form-bar"></i></div>
-      <fieldset class="fs is-on" data-step="0">
-        <legend>Qui es-tu&nbsp;?</legend>
-        <label class="fld"><span>Nom et prénom</span><input name="name" autocomplete="name" required minlength="2" placeholder="Ex. : Amina Benali"></label>
-        <label class="fld"><span>WhatsApp</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="05 50 00 00 00" pattern="[\d\s+\(\)\.\-]{8,}"></label>
-        <label class="fld"><span>E-mail <em>(pour ton accès)</em></span><input name="email" type="email" autocomplete="email" required placeholder="toi@mail.com"></label>
-        <label class="fld"><span>Ville / wilaya</span><input name="city" autocomplete="address-level2" placeholder="Alger"></label>
-      </fieldset>
-      <fieldset class="fs" data-step="1">
-        <legend>Ton profil</legend>
-        <div class="chips" role="radiogroup" aria-label="Profil">
-          <label><input type="radio" name="profil" value="debutant" checked><span>Je débute</span></label>
-          <label><input type="radio" name="profil" value="ecommercant"><span>E-commerçant·e</span></label>
-          <label><input type="radio" name="profil" value="freelance"><span>Freelance / CM</span></label>
-          <label><input type="radio" name="profil" value="createur"><span>Créateur·rice</span></label>
-          <label><input type="radio" name="profil" value="agence"><span>Agence / équipe</span></label>
+
+    <div class="slate slate--form" id="fslate">
+      <div class="clapper" id="fclapper" aria-hidden="true"><span class="clapper-hinge"></span></div>
+      <div class="clapper-base" aria-hidden="true"></div>
+      <form class="slate-body form" id="form" novalidate>
+        <dl class="slate-row slate-row--top" aria-hidden="true">
+          <div><dt data-i18n="slate.prod">Prod.</dt><dd>Hooked Academy</dd></div>
+          <div><dt data-i18n="slate.scene">Scène</dt><dd data-i18n="join.scene">Inscription</dd></div>
+          <div><dt data-i18n="slate.take">Prise</dt><dd><span id="f-step">1</span>/3</dd></div>
+        </dl>
+        <fieldset class="fs is-on" data-step="0">
+          <legend data-i18n="f.l0">Qui es-tu ?</legend>
+          <label class="fld"><span data-i18n="f.name">Nom et prénom</span><input name="name" autocomplete="name" required minlength="2" placeholder="Ex. : Amina Benali" data-i18n-attr="placeholder:f.name.ph"></label>
+          <label class="fld"><span>WhatsApp</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="05 50 00 00 00" pattern="[\d\s+\(\)\.\-]{8,}" dir="ltr"></label>
+          <label class="fld"><span data-i18n-html="f.email">E-mail <em>(pour ton accès)</em></span><input name="email" type="email" autocomplete="email" required placeholder="toi@mail.com" dir="ltr" data-i18n-attr="placeholder:f.email.ph"></label>
+          <label class="fld"><span data-i18n="f.city">Ville / wilaya</span><input name="city" autocomplete="address-level2" placeholder="Alger" data-i18n-attr="placeholder:f.city.ph"></label>
+        </fieldset>
+        <fieldset class="fs" data-step="1">
+          <legend data-i18n="f.l1">Ton profil</legend>
+          <div class="fld">
+            <span id="f-trk-l" data-i18n="f.track">Quelle formation ?</span>
+            <div class="seg" role="radiogroup" aria-labelledby="f-trk-l">
+              <label><input type="radio" name="formation" value="creative"><span data-i18n="f.track.c">Créative</span></label>
+              <label><input type="radio" name="formation" value="ia"><span data-i18n="f.track.i">IA</span></label>
+              <label><input type="radio" name="formation" value="both" checked><span data-i18n="f.track.b">Les deux</span></label>
+            </div>
+          </div>
+          <div class="fld">
+            <span id="f-pro-l" data-i18n="f.profil">Tu es…</span>
+            <div class="chips-in" role="radiogroup" aria-labelledby="f-pro-l">
+              <label><input type="radio" name="profil" value="debutant" checked><span data-i18n="f.p.debutant">Je débute</span></label>
+              <label><input type="radio" name="profil" value="ecommercant"><span data-i18n="f.p.ecommercant">E-commerçant·e</span></label>
+              <label><input type="radio" name="profil" value="freelance"><span data-i18n="f.p.freelance">Freelance / CM</span></label>
+              <label><input type="radio" name="profil" value="createur"><span data-i18n="f.p.createur">Créateur·rice</span></label>
+              <label><input type="radio" name="profil" value="agence"><span data-i18n="f.p.agence">Agence / équipe</span></label>
+            </div>
+          </div>
+          <label class="fld"><span data-i18n="f.level">Ton niveau aujourd’hui</span>
+            <select name="niveau">
+              <option value="Débutant complet" data-i18n="f.lv0">Débutant complet</option>
+              <option value="Je fais déjà un peu de montage" data-i18n="f.lv1">Je fais déjà un peu de montage</option>
+              <option value="Je vends déjà, mes pubs ne marchent pas assez" data-i18n="f.lv2">Je vends déjà, mes pubs ne marchent pas assez</option>
+              <option value="Je crée déjà du contenu régulièrement" data-i18n="f.lv3">Je crée déjà du contenu régulièrement</option>
+            </select>
+          </label>
+        </fieldset>
+        <fieldset class="fs" data-step="2">
+          <legend data-i18n="f.l2">Ton objectif</legend>
+          <label class="fld"><span data-i18n="f.goal">Qu’est-ce que tu veux réussir grâce à la formation ?</span><textarea name="objectif" rows="4" maxlength="500" placeholder="Ex. : faire mes propres vidéos pour ma boutique, proposer des créatives IA à des clients…" data-i18n-attr="placeholder:f.goal.ph"></textarea></label>
+          <label class="check"><input type="checkbox" name="ok" required><span data-i18n="f.ok">J’accepte d’être contacté·e par l’équipe Hooked Academy sur WhatsApp.</span></label>
+        </fieldset>
+        <div class="form-nav">
+          <button type="button" class="bt bt--line-ink bt--s" id="form-prev" hidden data-i18n="f.prev">Retour</button>
+          <button type="button" class="bt bt--ink" id="form-next">Continuer</button>
         </div>
-        <label class="fld"><span>Ton niveau aujourd’hui</span>
-          <select name="niveau">
-            <option>Débutant complet</option>
-            <option>Je fais déjà un peu de montage</option>
-            <option>Je vends déjà, mes pubs ne marchent pas assez</option>
-            <option>Je crée déjà du contenu régulièrement</option>
-          </select>
-        </label>
-      </fieldset>
-      <fieldset class="fs" data-step="2">
-        <legend>Ton objectif</legend>
-        <label class="fld"><span>Qu’est-ce que tu veux réussir grâce à la formation&nbsp;?</span><textarea name="objectif" rows="4" maxlength="500" placeholder="Ex. : faire mes propres vidéos pour ma boutique, proposer des créatives IA à des clients…"></textarea></label>
-        <label class="check"><input type="checkbox" name="ok" required><span>J’accepte d’être contacté·e par l’équipe Hooked Academy sur WhatsApp.</span></label>
-      </fieldset>
-      <div class="form-nav">
-        <button type="button" class="btn btn--ghost btn--s" id="form-prev" hidden>Retour</button>
-        <button type="button" class="btn btn--or" id="form-next" data-cursor="Go">Continuer</button>
-      </div>
-      <p class="form-err" id="form-err" role="alert"></p>
-      <div class="form-done" id="form-done" hidden tabindex="-1">
-        <div class="done-mark" id="done-mark"></div>
-        <h3>C’est noté, <span id="done-name"></span>&nbsp;!</h3>
-        <p>Ton inscription est arrivée chez l’équipe. On te contacte sur WhatsApp pour la session, le tarif et le paiement. Ensuite, tu reçois ton code d’accès.</p>
-        <p class="done-demo">Démo&nbsp;: ouvre <a href="admin/">l’espace équipe</a> pour voir ton inscription arriver.</p>
-      </div>
-    </form>
+        <p class="form-err" id="form-err" role="alert"></p>
+        <div class="form-done" id="form-done" hidden tabindex="-1">
+          <div class="done-mark" id="done-mark"></div>
+          <h3 id="done-t">C’est dans la boîte !</h3>
+          <p data-i18n="f.done.x">Ton inscription est arrivée chez l’équipe. On te contacte sur WhatsApp pour la session, le tarif et le paiement. Ensuite, tu reçois ton code d’accès.</p>
+          <p class="done-demo" data-i18n-html="f.done.demo">Démo : ouvre <a href="admin/">l’espace équipe</a> pour voir ton inscription arriver.</p>
+        </div>
+      </form>
+    </div>
   </section>
 
-  <section class="faq" id="faq" data-part="cta">
-    <header class="sec-head">
-      <p class="kicker"><i></i>Questions</p>
-      <h2 class="h2">Avant de te lancer.</h2>
+  <!-- PLAN 09 · Questions : le fichier de sous-titres ===================== -->
+  <section class="sh faq" id="faq" data-ton="papier" data-plan="09" data-name="plan.09" aria-labelledby="faq-h">
+    <header class="sec-h faq-head">
+      <p class="lbl" data-i18n="faq.k">Questions</p>
+      <h2 class="h2" id="faq-h" data-i18n="faq.h">Avant de te lancer.</h2>
+      <p class="burn faq-file" aria-hidden="true" id="faq-file">questions_fr.srt</p>
     </header>
-    <div class="faq-list">
-      <details><summary>Faut-il un ordinateur&nbsp;?</summary><p>Non. Les leçons se suivent sur téléphone et les trois outils de base (CapCut, Canva, ChatGPT) existent sur mobile, en version gratuite. Un ordinateur est plus confortable pour le montage avancé et la cinématique.</p></details>
-      <details><summary>Je n’y connais rien, c’est pour moi&nbsp;?</summary><p>Oui. Le module 1 commence par « c’est quoi une créative&nbsp;? ». Chaque leçon dure 2 minutes au maximum et ne traite qu’une idée.</p></details>
-      <details><summary>Les outils IA sont-ils payants&nbsp;?</summary><p>Plusieurs outils ont une version gratuite suffisante pour apprendre. Pour produire en volume, certains abonnements deviennent utiles : la formation t’explique lesquels choisir selon ton usage et ton budget.</p></details>
-      <details><summary>Quel est le lien avec Hooked Lab&nbsp;?</summary><p>Hooked Lab est l’application d’analyse de créatives de la même équipe. Dans la formation, tu l’utilises pour décortiquer les publicités qui marchent avant de produire les tiennes.</p></details>
-      <details><summary>Comment se passe le paiement&nbsp;?</summary><p>Aucun paiement sur le site. Après ton inscription, l’équipe te contacte sur WhatsApp pour t’indiquer le tarif de la session et les moyens de paiement (CCP, BaridiMob ou espèces). Ton accès est activé dès la validation.</p></details>
-      <details><summary>Est-ce qu’il y a un certificat&nbsp;?</summary><p>Oui, quand toutes les leçons sont terminées, les quiz réussis et ton projet final validé par l’équipe.</p></details>
+    <div class="srt" id="srt">
+      <details><summary><span class="srt-i" aria-hidden="true"><b>1</b><span>00:00:01,000 --&gt; 00:00:04,800</span></span><span data-i18n="faq.q1">Faut-il un ordinateur ?</span></summary><p data-i18n="faq.a1">Non. Les leçons se suivent sur téléphone et les trois outils de base (CapCut, Canva, ChatGPT) existent sur mobile, en version gratuite. Un ordinateur est plus confortable pour le montage avancé et la cinématique.</p></details>
+      <details><summary><span class="srt-i" aria-hidden="true"><b>2</b><span>00:00:05,000 --&gt; 00:00:08,200</span></span><span data-i18n="faq.q2">Je n’y connais rien, c’est pour moi ?</span></summary><p data-i18n="faq.a2">Oui. Le module 1 commence par « c’est quoi une créative ? ». Chaque leçon dure 2 minutes au maximum et ne traite qu’une idée.</p></details>
+      <details><summary><span class="srt-i" aria-hidden="true"><b>3</b><span>00:00:08,400 --&gt; 00:00:12,000</span></span><span data-i18n="faq.q3">Pourquoi deux formations ?</span></summary><p data-i18n="faq.a3">La Formation Créative t’apprend ce qui fait vendre une pub et comment la produire avec ton téléphone, CapCut et Canva. La Formation IA t’apprend à produire avec l’IA (images, vidéos, voix, UGC), puis à vendre ce savoir-faire. Tu peux suivre l’une, l’autre, ou les deux.</p></details>
+      <details><summary><span class="srt-i" aria-hidden="true"><b>4</b><span>00:00:12,200 --&gt; 00:00:15,600</span></span><span data-i18n="faq.q4">Les outils IA sont-ils payants ?</span></summary><p data-i18n="faq.a4">Plusieurs outils ont une version gratuite suffisante pour apprendre. Pour produire en volume, certains abonnements deviennent utiles : la formation t’explique lesquels choisir selon ton usage et ton budget.</p></details>
+      <details><summary><span class="srt-i" aria-hidden="true"><b>5</b><span>00:00:15,800 --&gt; 00:00:19,400</span></span><span data-i18n="faq.q5">Quel est le lien avec Hooked Lab ?</span></summary><p data-i18n="faq.a5">Hooked Lab est l’application d’analyse de créatives de la même équipe. Dans la formation, tu l’utilises pour décortiquer les publicités qui marchent avant de produire les tiennes.</p></details>
+      <details><summary><span class="srt-i" aria-hidden="true"><b>6</b><span>00:00:19,600 --&gt; 00:00:23,000</span></span><span data-i18n="faq.q6">Comment se passe le paiement ?</span></summary><p data-i18n="faq.a6">Aucun paiement sur le site. Après ton inscription, l’équipe te contacte sur WhatsApp pour t’indiquer le tarif de la session et les moyens de paiement (CCP, BaridiMob ou espèces). Ton accès est activé dès la validation.</p></details>
+      <details><summary><span class="srt-i" aria-hidden="true"><b>7</b><span>00:00:23,200 --&gt; 00:00:26,000</span></span><span data-i18n="faq.q7">Est-ce qu’il y a un certificat ?</span></summary><p data-i18n="faq.a7">Oui, un par formation : quand toutes ses leçons sont terminées, les quiz réussis et, pour la Formation IA, ton projet final validé par l’équipe.</p></details>
     </div>
   </section>
 </main>
 
-<footer class="foot" data-part="cta">
-  <div class="foot-big" aria-hidden="true"><span>HOOKED</span><span>ACADEMY</span></div>
-  <div class="foot-row">
-    <a class="ha-logo" href="#top" id="foot-logo" aria-label="Hooked Academy"></a>
-    <nav aria-label="Liens">
-      <a href="app/">Espace étudiant</a>
-      <a href="admin/">Espace équipe</a>
+<!-- PLAN 10 · Générique ================================================ -->
+<footer class="sh foot" data-ton="encre" data-plan="10" data-name="plan.10">
+  <div class="credits">
+    <dl>
+      <div><dt data-i18n="foot.prod">Une production</dt><dd>Hooked Lab</dd></div>
+      <div><dt data-i18n="foot.dir">Réalisation</dt><dd data-i18n="slate.you">Toi</dd></div>
+      <div><dt data-i18n="foot.courses">Formations</dt><dd><span data-i18n="track.creative">Formation Créative</span> · <span data-i18n="track.ia">Formation IA</span></dd></div>
+      <div><dt data-i18n="foot.voice">Voix</dt><dd data-i18n="foot.voice.x">Le formateur, en darija</dd></div>
+    </dl>
+    <nav class="foot-nav" aria-label="Liens" data-i18n-attr="aria-label:foot.links">
+      <a href="app/" data-i18n="nav.space">Espace étudiant</a>
+      <a href="admin/" data-i18n="foot.team">Espace équipe</a>
+      <a href="#inscription" data-i18n="join.k">Inscription</a>
       <a href="https://hooked-lab.com" target="_blank" rel="noopener">Hooked Lab ↗</a>
-      <a href="#inscription">Inscription</a>
     </nav>
-    <p class="foot-note">Site de démonstration. Les exemples de publicités, de produits et de comptes sont fictifs et présentés comme tels.</p>
+  </div>
+  <div class="foot-end">
+    <a class="ha-logo" href="#top" id="foot-logo" aria-label="Hooked Academy" data-i18n-attr="aria-label:nav.top"></a>
+    <p class="foot-fin" data-i18n="foot.fin">Fin de la prise. À toi de monter la tienne.</p>
+    <p class="foot-note" data-i18n="foot.note">Site de démonstration. Les exemples de publicités, de produits et de comptes sont fictifs et présentés comme tels.</p>
   </div>
 </footer>
 </body>

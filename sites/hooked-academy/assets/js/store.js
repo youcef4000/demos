@@ -178,6 +178,8 @@ export function addApplication(form) {
     email: String(form.email || '').trim().toLowerCase(),
     city: String(form.city || '').trim(),
     profil: form.profil || 'debutant',
+    formation: ['creative', 'ia', 'both'].includes(form.formation) ? form.formation : 'both',
+    lang: ['fr', 'en', 'ar'].includes(form.lang) ? form.lang : 'fr',
     niveau: String(form.niveau || '').trim(),
     objectif: String(form.objectif || '').trim(),
     source: form.source || 'Landing',
