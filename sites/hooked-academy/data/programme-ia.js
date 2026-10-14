@@ -4,10 +4,10 @@
 // Tester & analyser avec Hooked Lab (avant de vendre, on mesure) et un projet final.
 // Les outils cités sont des exemples : ils changent vite, la méthode reste.
 
-export const MODULES_2 = [
+export const MODULES_IA = [
   {
-    id: 'm5',
-    n: 5,
+    id: 'ia1',
+    n: 1,
     part: 'p2',
     title: 'Prompting : parler à l’IA',
     ar: 'البرومبتينغ',
@@ -16,7 +16,7 @@ export const MODULES_2 = [
     pitch: 'La compétence qui conditionne toutes les autres : écrire des instructions que l’IA comprend.',
     lessons: [
       {
-        id: 'm5-l1',
+        id: 'ia1-l1',
         n: 1,
         title: 'C’est quoi un prompt ?',
         ar: 'شنو هو البرومبت',
@@ -31,7 +31,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Pourquoi un prompt vague donne un mauvais résultat ?', a: ['L’IA complète avec des choix génériques', 'L’IA est en panne', 'Il faut payer plus'], ok: 0, why: 'Sans précision, l’IA prend les options les plus courantes.' }],
       },
       {
-        id: 'm5-l2',
+        id: 'ia1-l2',
         n: 2,
         title: 'La structure d’un bon prompt',
         ar: 'هيكل البرومبت',
@@ -51,7 +51,7 @@ export const MODULES_2 = [
         res: [{ title: 'Gabarit RCTFC', text: 'Rôle : Tu es [rôle].\nContexte : [produit, prix, cible, ville, livraison, ce qui le rend différent].\nTâche : [ce que tu veux].\nFormat : [liste, tableau, Hook/Body/CTA, nombre de versions].\nContraintes : [ton, langue, longueur, ce qu’il ne faut pas dire].' }],
       },
       {
-        id: 'm5-l3',
+        id: 'ia1-l3',
         n: 3,
         title: 'Prompts pour hooks, scripts et textes d’annonce',
         ar: 'برومبتات للنصوص',
@@ -67,7 +67,7 @@ export const MODULES_2 = [
         res: [{ title: 'Prompt — texte d’annonce Meta', text: 'Tu es expert en publicité Meta. Pour [produit] vendu à [prix] avec [livraison/paiement], écris 3 versions de : texte principal (max 125 caractères), titre (max 40 caractères), description (max 30 caractères). Ton [ton], langue [langue]. Aucune promesse non vérifiable.' }],
       },
       {
-        id: 'm5-l4',
+        id: 'ia1-l4',
         n: 4,
         title: 'Le prompt image',
         ar: 'برومبت الصورة',
@@ -84,7 +84,7 @@ export const MODULES_2 = [
         res: [{ title: 'Gabarit prompt image', text: '[Sujet précis : produit, matière, couleur], [action ou position], [décor], [lumière : direction, douceur, moment de la journée], [cadrage : plan, angle, focale], [style : photo produit, lifestyle, éditorial], format [4:5 / 9:16 / 1:1].' }],
       },
       {
-        id: 'm5-l5',
+        id: 'ia1-l5',
         n: 5,
         title: 'Le prompt vidéo',
         ar: 'برومبت الفيديو',
@@ -99,7 +99,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Combien de mouvements de caméra par plan ?', a: ['Un', 'Trois', 'Autant que possible'], ok: 0, why: 'Une seule intention par plan, sinon le résultat devient confus.' }],
       },
       {
-        id: 'm5-l6',
+        id: 'ia1-l6',
         n: 6,
         title: 'Itérer et construire sa bibliothèque',
         ar: 'التحسين ومكتبة البرومبتات',
@@ -116,8 +116,8 @@ export const MODULES_2 = [
     ],
   },
   {
-    id: 'm6',
-    n: 6,
+    id: 'ia2',
+    n: 2,
     part: 'p2',
     title: 'Génération d’images',
     ar: 'توليد الصور',
@@ -126,7 +126,7 @@ export const MODULES_2 = [
     pitch: 'Packshots, mises en situation, personnages cohérents, retouche : des visuels pro sans studio.',
     lessons: [
       {
-        id: 'm6-l1',
+        id: 'ia2-l1',
         n: 1,
         title: 'Choisir son outil d’image',
         ar: 'اختيار الأداة',
@@ -141,7 +141,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Pour vendre ton vrai produit, tu pars…', a: ['De ta vraie photo produit', 'D’un produit inventé par l’IA', 'D’une photo trouvée sur internet'], ok: 0, why: 'Le client doit recevoir ce qu’il a vu dans la pub.' }],
       },
       {
-        id: 'm6-l2',
+        id: 'ia2-l2',
         n: 2,
         title: 'Packshot : du téléphone au studio',
         ar: 'صورة المنتج',
@@ -156,7 +156,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Que doit-on vérifier après génération ?', a: ['Que le produit est identique au vrai', 'Que l’image est grande', 'Rien'], ok: 0, why: 'Un produit modifié trompe le client.' }],
       },
       {
-        id: 'm6-l3',
+        id: 'ia2-l3',
         n: 3,
         title: 'Mises en situation (lifestyle)',
         ar: 'صور في سياق الاستعمال',
@@ -170,7 +170,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Pourquoi varier les décors ?', a: ['Pour parler à différents moments de vie', 'Pour remplir le compte', 'Aucune raison'], ok: 0, why: 'Chaque décor est un angle de créative à tester.' }],
       },
       {
-        id: 'm6-l4',
+        id: 'ia2-l4',
         n: 4,
         title: 'Un personnage cohérent',
         ar: 'شخصية ثابتة',
@@ -185,7 +185,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Quelle est la base d’un personnage cohérent ?', a: ['Une image de référence réutilisée', 'Un prompt différent à chaque fois', 'La chance'], ok: 0, why: 'La référence fixe le visage.' }],
       },
       {
-        id: 'm6-l5',
+        id: 'ia2-l5',
         n: 5,
         title: 'Retouche : fond, détails, agrandissement',
         ar: 'التعديل والتحسين',
@@ -199,7 +199,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Pour passer d’un carré à du 9:16 sans couper le produit, on utilise…', a: ['L’agrandissement du cadre', 'Le recadrage', 'Le filtre noir et blanc'], ok: 0, why: 'L’IA invente le décor manquant autour.' }],
       },
       {
-        id: 'm6-l6',
+        id: 'ia2-l6',
         n: 6,
         title: 'Du visuel IA à la publicité finale',
         ar: 'من الصورة إلى الإعلان',
@@ -209,14 +209,14 @@ export const MODULES_2 = [
           { type: 'quote', text: 'L’IA fait l’*image*. La structure de vente fait la *pub*.', say: 'Retiens : l’IA fait l’image, mais c’est la structure de vente qui fait la publicité.' },
           { type: 'outro', say: 'Module suivant : la génération de vidéos.' },
         ],
-        key: ['Une image IA devient une pub avec hook, preuve et CTA.', 'Assemble dans Canva : image IA, vraie photo produit, texte, CTA.', 'La structure de vente reste la même qu’au module 2.'],
+        key: ['Une image IA devient une pub avec hook, preuve et CTA.', 'Assemble dans Canva : image IA, vraie photo produit, texte, CTA.', 'La structure de vente reste la même : Hook, Body, CTA.'],
         quiz: [{ q: 'Qu’est-ce qui transforme une image en publicité ?', a: ['La structure de vente (hook, preuve, CTA)', 'Un filtre', 'La résolution'], ok: 0, why: 'Sans message ni appel à l’action, c’est juste une image.' }],
       },
     ],
   },
   {
-    id: 'm7',
-    n: 7,
+    id: 'ia3',
+    n: 3,
     part: 'p2',
     title: 'Génération de vidéos',
     ar: 'توليد الفيديوهات',
@@ -225,7 +225,7 @@ export const MODULES_2 = [
     pitch: 'Animer un packshot, maîtriser les mouvements de caméra, garder le produit identique d’un plan à l’autre.',
     lessons: [
       {
-        id: 'm7-l1',
+        id: 'ia3-l1',
         n: 1,
         title: 'Texte → vidéo ou image → vidéo ?',
         ar: 'نص أو صورة إلى فيديو',
@@ -239,7 +239,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Pour garder ton produit fidèle, tu choisis…', a: ['Image → vidéo', 'Texte → vidéo', 'Aucun des deux'], ok: 0, why: 'L’image de départ verrouille l’apparence du produit.' }],
       },
       {
-        id: 'm7-l2',
+        id: 'ia3-l2',
         n: 2,
         title: 'Les mouvements de caméra',
         ar: 'حركات الكاميرا',
@@ -254,7 +254,7 @@ export const MODULES_2 = [
         widget: 'camera',
       },
       {
-        id: 'm7-l3',
+        id: 'ia3-l3',
         n: 3,
         title: 'Garder le produit identique',
         ar: 'المحافظة على المنتج',
@@ -268,7 +268,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Pour un gros plan sur l’étiquette, le plus sûr est…', a: ['Ta vraie vidéo du produit', 'Un plan IA rapide', 'Un dessin'], ok: 0, why: 'L’étiquette doit être exactement celle que le client recevra.' }],
       },
       {
-        id: 'm7-l4',
+        id: 'ia3-l4',
         n: 4,
         title: 'Animer un packshot en 5 secondes',
         ar: 'تحريك صورة المنتج',
@@ -282,7 +282,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Par quoi commence le prompt d’un packshot animé ?', a: ['« Garde le produit identique »', '« Fais quelque chose de fou »', '« Change la couleur »'], ok: 0, why: 'On protège le produit avant d’ajouter du mouvement.' }],
       },
       {
-        id: 'm7-l5',
+        id: 'ia3-l5',
         n: 5,
         title: 'Assembler les plans IA dans CapCut',
         ar: 'تركيب اللقطات',
@@ -292,14 +292,14 @@ export const MODULES_2 = [
           { type: 'quote', text: 'L’IA attire le regard. *Le vrai* rassure et fait acheter.', say: 'Retiens : l’IA attire le regard, le vrai rassure et fait acheter.' },
           { type: 'outro', say: 'Module suivant : la voix, la musique et les sous-titres.' },
         ],
-        key: ['Montage hybride : plans IA pour l’effet, vraies images pour la preuve.', 'Ta voix apporte la confiance.', 'Mêmes règles qu’au module 4 : rythme, sous-titres, CTA.'],
+        key: ['Montage hybride : plans IA pour l’effet, vraies images pour la preuve.', 'Ta voix apporte la confiance.', 'Mêmes règles qu’en production sans IA : rythme, sous-titres, CTA.'],
         quiz: [{ q: 'À quoi servent les vraies images dans un montage IA ?', a: ['À prouver et rassurer', 'À rien', 'À rallonger'], ok: 0, why: 'Le client veut voir le vrai produit.' }],
       },
     ],
   },
   {
-    id: 'm8',
-    n: 8,
+    id: 'ia4',
+    n: 4,
     part: 'p2',
     title: 'Voix, musique et sous-titres',
     ar: 'الصوت والموسيقى',
@@ -308,7 +308,7 @@ export const MODULES_2 = [
     pitch: 'Le son fait la moitié de la créative : voix off, musique, effets et sous-titres qui retiennent.',
     lessons: [
       {
-        id: 'm8-l1',
+        id: 'ia4-l1',
         n: 1,
         title: 'Voix off : la tienne ou une voix IA ?',
         ar: 'التعليق الصوتي',
@@ -323,7 +323,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Où placer le téléphone pour enregistrer ?', a: ['À environ 20 cm de la bouche', 'À 2 mètres', 'Dans la poche'], ok: 0, why: 'Assez près pour une voix claire, sans saturation.' }],
       },
       {
-        id: 'm8-l2',
+        id: 'ia4-l2',
         n: 2,
         title: 'Musique et effets sonores',
         ar: 'الموسيقى والمؤثرات',
@@ -337,7 +337,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'La musique doit être…', a: ['Plus forte que la voix', 'Sous la voix', 'Absente'], ok: 1, why: 'Le message passe par la voix.' }],
       },
       {
-        id: 'm8-l3',
+        id: 'ia4-l3',
         n: 3,
         title: 'Des sous-titres qui retiennent',
         ar: 'الترجمة على الشاشة',
@@ -353,8 +353,8 @@ export const MODULES_2 = [
     ],
   },
   {
-    id: 'm9',
-    n: 9,
+    id: 'ia5',
+    n: 5,
     part: 'p2',
     title: 'UGC avec l’IA',
     ar: 'UGC بالذكاء الاصطناعي',
@@ -363,7 +363,7 @@ export const MODULES_2 = [
     pitch: 'Le format qui ressemble à du contenu de vrais gens — avec des scripts solides et des règles claires.',
     lessons: [
       {
-        id: 'm9-l1',
+        id: 'ia5-l1',
         n: 1,
         title: 'C’est quoi l’UGC ?',
         ar: 'شنو هو UGC',
@@ -377,7 +377,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Pourquoi l’UGC marche ?', a: ['Il ressemble au contenu des amis', 'Il est plus cher', 'Il est plus long'], ok: 0, why: 'On ne scrolle pas par réflexe.' }],
       },
       {
-        id: 'm9-l2',
+        id: 'ia5-l2',
         n: 2,
         title: 'Écrire un script UGC',
         ar: 'كتابة سكريبت UGC',
@@ -391,7 +391,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Un CTA UGC doit sonner…', a: ['Naturel', 'Agressif', 'Robotique'], ok: 0, why: 'On garde le ton d’une recommandation sincère.' }],
       },
       {
-        id: 'm9-l3',
+        id: 'ia5-l3',
         n: 3,
         title: 'Créer un avatar et le faire parler',
         ar: 'إنشاء أفاتار يتكلم',
@@ -405,7 +405,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Le lip-sync sert à…', a: ['Faire suivre la voix par la bouche', 'Changer la musique', 'Mettre des sous-titres'], ok: 0, why: 'La synchronisation labiale rend l’avatar naturel.' }],
       },
       {
-        id: 'm9-l4',
+        id: 'ia5-l4',
         n: 4,
         title: 'Les formats UGC qui marchent',
         ar: 'صيغ UGC',
@@ -419,7 +419,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Lequel est un format UGC ?', a: ['Unboxing', 'Bannière clignotante', 'Fax'], ok: 0, why: 'Ouvrir le colis face caméra.' }],
       },
       {
-        id: 'm9-l5',
+        id: 'ia5-l5',
         n: 5,
         title: 'Éthique et règles des plateformes',
         ar: 'الأخلاقيات والقواعد',
@@ -435,8 +435,8 @@ export const MODULES_2 = [
     ],
   },
   {
-    id: 'm10',
-    n: 10,
+    id: 'ia6',
+    n: 6,
     part: 'p2',
     title: 'Cinématique',
     ar: 'الإعلان السينمائي',
@@ -445,7 +445,7 @@ export const MODULES_2 = [
     pitch: 'Le niveau au-dessus : langage du cinéma, storyboard, cohérence visuelle et sound design.',
     lessons: [
       {
-        id: 'm10-l1',
+        id: 'ia6-l1',
         n: 1,
         title: 'Le langage du cinéma',
         ar: 'لغة السينما',
@@ -459,7 +459,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Quel plan montre l’émotion ?', a: ['Le gros plan', 'Le plan large', 'Aucun'], ok: 0, why: 'Le visage de près transmet l’émotion.' }],
       },
       {
-        id: 'm10-l2',
+        id: 'ia6-l2',
         n: 2,
         title: 'Le storyboard',
         ar: 'الستوري بورد',
@@ -473,7 +473,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Quand fait-on le storyboard ?', a: ['Avant de générer', 'Après la publication', 'Jamais'], ok: 0, why: 'Il évite de générer au hasard.' }],
       },
       {
-        id: 'm10-l3',
+        id: 'ia6-l3',
         n: 3,
         title: 'Cohérence : personnages, décors, couleurs',
         ar: 'الانسجام البصري',
@@ -487,7 +487,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Pour la cohérence, on répète dans chaque prompt…', a: ['La même phrase de style', 'Des styles différents', 'Rien'], ok: 0, why: 'La phrase de style verrouille l’ambiance.' }],
       },
       {
-        id: 'm10-l4',
+        id: 'ia6-l4',
         n: 4,
         title: 'Sound design et rythme',
         ar: 'تصميم الصوت',
@@ -501,7 +501,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Où couper les plans ?', a: ['Sur les temps forts de la musique', 'Au hasard', 'Jamais'], ok: 0, why: 'Le rythme visuel suit le rythme sonore.' }],
       },
       {
-        id: 'm10-l5',
+        id: 'ia6-l5',
         n: 5,
         title: 'Projet : un spot cinématique de 15 s',
         ar: 'مشروع إعلان سينمائي',
@@ -517,8 +517,8 @@ export const MODULES_2 = [
     ],
   },
   {
-    id: 'm11',
-    n: 11,
+    id: 'ia7',
+    n: 7,
     part: 'p3',
     title: 'Tester et analyser avec Hooked Lab',
     ar: 'التحليل مع Hooked Lab',
@@ -527,7 +527,7 @@ export const MODULES_2 = [
     pitch: 'Mesurer ce qui marche, analyser les créatives qui performent et itérer avec Hooked Lab.',
     lessons: [
       {
-        id: 'm11-l1',
+        id: 'ia7-l1',
         n: 1,
         title: 'Les métriques d’une créative',
         ar: 'مؤشرات الأداء',
@@ -545,7 +545,7 @@ export const MODULES_2 = [
         widget: 'metrics',
       },
       {
-        id: 'm11-l2',
+        id: 'ia7-l2',
         n: 2,
         title: 'Analyser une créative avec Hooked Lab',
         ar: 'تحليل كرياتيف',
@@ -560,7 +560,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Après l’analyse d’une créative concurrente, on…', a: ['Adapte la structure à son produit', 'Copie la vidéo', 'Ne fait rien'], ok: 0, why: 'La structure s’apprend, le contenu appartient à la marque.' }],
       },
       {
-        id: 'm11-l3',
+        id: 'ia7-l3',
         n: 3,
         title: 'Itérer : une gagnante, cinq variantes',
         ar: 'من كرياتيف ناجح إلى 5',
@@ -576,8 +576,8 @@ export const MODULES_2 = [
     ],
   },
   {
-    id: 'm12',
-    n: 12,
+    id: 'ia8',
+    n: 8,
     part: 'p3',
     title: 'Acquisition de clients',
     ar: 'جلب الزبائن',
@@ -586,7 +586,7 @@ export const MODULES_2 = [
     pitch: 'Choisir sa niche, construire un portfolio, fixer ses prix, prospecter et signer.',
     lessons: [
       {
-        id: 'm12-l1',
+        id: 'ia8-l1',
         n: 1,
         title: 'Choisir sa niche et son offre',
         ar: 'اختيار التخصص والعرض',
@@ -600,7 +600,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Une bonne niche est…', a: ['Précise', 'Tout le monde', 'Secrète'], ok: 0, why: 'Le client doit se reconnaître immédiatement.' }],
       },
       {
-        id: 'm12-l2',
+        id: 'ia8-l2',
         n: 2,
         title: 'Un portfolio, même sans clients',
         ar: 'بورتفوليو بدون زبائن',
@@ -614,7 +614,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Comment présenter une créative faite pour une marque qui ne t’a rien demandé ?', a: ['Comme un projet personnel', 'Comme une commande officielle', 'Sans rien dire'], ok: 0, why: 'L’honnêteté protège ta réputation.' }],
       },
       {
-        id: 'm12-l3',
+        id: 'ia8-l3',
         n: 3,
         title: 'Fixer ses prix',
         ar: 'تحديد الأسعار',
@@ -629,7 +629,7 @@ export const MODULES_2 = [
         widget: 'prix',
       },
       {
-        id: 'm12-l4',
+        id: 'ia8-l4',
         n: 4,
         title: 'Prospecter : Instagram, LinkedIn, WhatsApp',
         ar: 'البحث عن الزبائن',
@@ -644,7 +644,7 @@ export const MODULES_2 = [
         widget: 'dm',
       },
       {
-        id: 'm12-l5',
+        id: 'ia8-l5',
         n: 5,
         title: 'L’appel et la proposition',
         ar: 'المكالمة والعرض',
@@ -658,7 +658,7 @@ export const MODULES_2 = [
         quiz: [{ q: 'Que fait-on en premier pendant l’appel ?', a: ['Poser des questions (découverte)', 'Annoncer le prix', 'Raccrocher'], ok: 0, why: 'On comprend avant de proposer.' }],
       },
       {
-        id: 'm12-l6',
+        id: 'ia8-l6',
         n: 6,
         title: 'Livrer, fidéliser, se faire recommander',
         ar: 'التسليم والوفاء',
@@ -674,8 +674,8 @@ export const MODULES_2 = [
     ],
   },
   {
-    id: 'm13',
-    n: 13,
+    id: 'ia9',
+    n: 9,
     part: 'p3',
     title: 'Projet final et certificat',
     ar: 'المشروع النهائي',
@@ -684,7 +684,7 @@ export const MODULES_2 = [
     pitch: 'Une campagne complète, de l’analyse à la créative, présentée comme à un vrai client.',
     lessons: [
       {
-        id: 'm13-l1',
+        id: 'ia9-l1',
         n: 1,
         title: 'Ton projet final',
         ar: 'مشروعك النهائي',

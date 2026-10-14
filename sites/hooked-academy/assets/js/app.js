@@ -81,10 +81,10 @@ function checkBadges(st) {
     fondations: modDone('m1'),
     structure: modDone('m2'),
     'sans-faute': Object.values(L).some((x) => x.quiz === 1),
-    prompteur: modDone('m5'),
+    prompteur: modDone('ia1'),
     serie: S.streak(st.progress.days) >= 5,
-    ia: modDone('m6') && modDone('m7'),
-    closer: modDone('m12'),
+    ia: modDone('ia2') && modDone('ia3'),
+    closer: modDone('ia8'),
     diplome: P.done === P.total,
   };
   Object.entries(rules).forEach(([k, ok]) => {
@@ -646,7 +646,7 @@ function viewProfile() {
         <div class="kpis" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
           <div class="kpi"><b>${Math.round(P.pct * 100)} %</b><span>leçons terminées</span><div class="meter"><i style="width:${P.pct * 100}%"></i></div></div>
           <div class="kpi"><b>${P.quizN ? Math.round(P.quizAvg * 100) + ' %' : '—'}</b><span>réussite aux quiz (70 % requis)</span><em style="color:${quizOk ? 'var(--body)' : 'var(--mist-400)'}">${quizOk ? 'Validé' : 'En cours'}</em></div>
-          <div class="kpi"><b>À rendre</b><span>projet final (module 13)</span><em class="muted">Relu par l’équipe</em></div>
+          <div class="kpi"><b>À rendre</b><span>projet final (IA09)</span><em class="muted">Relu par l’équipe</em></div>
         </div>
       </section>
       <section style="grid-column:span 12;display:grid;gap:10px"><h2 style="margin:6px 0 0;font-family:var(--font-display);font-size:24px">Badges</h2><div class="badges">${Object.entries(S.BADGES)

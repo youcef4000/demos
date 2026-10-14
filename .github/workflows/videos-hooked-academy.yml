@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
     inputs:
       lecons:
-        description: 'Leçons : identifiants séparés par des espaces (ex. m2-l1 m2-l2), « voix » ou « toutes »'
+        description: 'Leçons : identifiants séparés par des espaces (ex. m2-l1 ia1-l2), « voix » ou « toutes »'
         default: 'voix'
       publier:
         description: 'Publier sur le site les MP4 qui ont une voix off'
@@ -41,7 +41,7 @@ jobs:
         id: quoi
         run: |
           if [ "${{ github.event_name }}" = "push" ]; then
-            ids=$(git diff --name-only HEAD~1 HEAD -- sites/hooked-academy/video/voix | sed -E 's#.*/(m[0-9]+-l[0-9]+).*#\1#' | grep -E '^m[0-9]+-l[0-9]+$' | sort -u | tr '\n' ' ')
+            ids=$(git diff --name-only HEAD~1 HEAD -- sites/hooked-academy/video/voix | sed -E 's#.*/((m|ia)[0-9]+-l[0-9]+).*#\1#' | grep -E '^(m|ia)[0-9]+-l[0-9]+$' | sort -u | tr '\n' ' ')
           else
             ids="${{ inputs.lecons }}"
           fi

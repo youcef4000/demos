@@ -7,9 +7,29 @@
 const KEY = 'hooked-academy:data:v1';
 const SESSION = 'hooked-academy:session:v1';
 const ADMIN = 'hooked-academy:admin:v1';
-export const VERSION = 1;
+export const VERSION = 2;
 export const TEAM_CODE = 'HOOKED-TEAM';
 export const DEMO_STUDENT = { email: 'demo@hooked.academy', code: 'DEMO-2026' };
+
+/** Le compte démo ne montre presque rien : une leçon par formation, le reste est verrouillé. */
+export const DEMO_OPEN = ['m1-l1', 'ia1-l1'];
+
+/**
+ * Comptes à mot de passe (créés par l'équipe). Ni l'e-mail ni le mot de passe ne sont écrits en clair :
+ * on garde l'empreinte SHA-256 de l'e-mail et une dérivation PBKDF2 (SHA-256, 310000 itérations) du mot de passe.
+ * Site statique : la vérification se fait dans le navigateur. Ce n'est pas une vraie sécurité serveur,
+ * seulement de quoi ne pas publier d'identifiants lisibles. Pour la production : une API d'authentification.
+ */
+const ACCOUNTS = [
+  {
+    studentId: 'st-youcef',
+    emailHash: 'db1572b1c8e0b2192074866704364e1acdb42f4284baf23279601b55e5720969',
+    salt: '94aad5e8fc81e5d62f36079fe0989450',
+    iter: 310000,
+    passHash: '18f6257adb0a6762c3c2ccfb879219f0b865880f1137010d4f4a80fd4afdad30',
+    profile: { name: 'Youcef', firstName: 'Youcef', cohort: 'Équipe Hooked', role: 'formateur' },
+  },
+];
 
 export const STATUS = {
   nouvelle: { label: 'Nouvelle', c: '#e0be55' },
@@ -75,14 +95,9 @@ function seed() {
     ex({ id: 'ex-a6', createdAt: daysAgo(6, 19, 12), name: 'Exemple — Karim D.', phone: '0540 00 00 06', email: 'karim.exemple@mail.dz', city: 'Tizi Ouzou', profil: 'agence', niveau: 'Équipe de 3 personnes', objectif: 'Former l’équipe au prompting', status: 'refusee', notes: [{ at: daysAgo(5, 10), by: 'Équipe', text: 'Préfère une formation en présentiel : orienté vers la prochaine masterclass.' }] }),
   ];
 
-  // Compte démo : un peu de progression pour que l'espace étudiant soit vivant
-  const done = ['m1-l1', 'm1-l2', 'm1-l3', 'm1-l4', 'm2-l1', 'm2-l2'];
-  const lessons = {};
-  done.forEach((id, i) => {
-    lessons[id] = { done: true, at: daysAgo(done.length - i, 20, 10), quiz: i % 3 === 2 ? 0.67 : 1 };
-  });
-  lessons['m2-l3'] = { done: false, watched: 18 };
-  const days = [6, 5, 4, 2, 1, 0].map((n) => iso(new Date(Date.now() - n * 864e5)));
+  // Compte démo : volontairement presque vide (une leçon ouverte par formation)
+  const lessons = { 'm1-l1': { done: false, watched: 12 } };
+  const days = [0].map((n) => iso(new Date(Date.now() - n * 864e5)));
   const demo = {
     id: 'st-demo',
     appId: 'ex-a5',
@@ -95,17 +110,51 @@ function seed() {
     createdAt: daysAgo(7),
     active: true,
     cohort: 'Session découverte',
-    progress: { lessons, last: 'm2-l3', days, xp: done.length * 120 + 40, badges: ['premier-pas', 'fondations'] },
+    demo: true,
+    progress: { lessons, last: 'm1-l1', days, xp: 0, badges: [] },
   };
-  return { version: VERSION, applications, students: [demo], settings: { whatsapp: '213558678038', cohort: 'Prochaine session' } };
+  return ensureAccounts({ version: VERSION, applications, students: [demo], settings: { whatsapp: '213558678038', cohort: 'Prochaine session' } });
+}
+
+/** Ajoute les comptes à mot de passe qui manquent (sans toucher à leur progression s'ils existent). */
+function ensureAccounts(d) {
+  let changed = false;
+  ACCOUNTS.forEach((a) => {
+    if (d.students.some((s) => s.id === a.studentId)) return;
+    d.students.push({
+      id: a.studentId,
+      appId: null,
+      exemple: false,
+      ...a.profile,
+      email: '',
+      phone: '',
+      code: null,
+      protected: true,
+      createdAt: new Date().toISOString(),
+      active: true,
+      progress: { lessons: {}, last: null, days: [], xp: 0, badges: [] },
+    });
+    changed = true;
+  });
+  d._accountsChanged = changed;
+  return d;
 }
 
 /* ------------------------------------------------------------------ */
 
 export function load() {
   const d = read(KEY);
-  if (d && d.version === VERSION) return d;
+  if (d && d.version === VERSION) {
+    ensureAccounts(d);
+    if (d._accountsChanged) {
+      delete d._accountsChanged;
+      write(KEY, d);
+    }
+    delete d._accountsChanged;
+    return d;
+  }
   const s = seed();
+  delete s._accountsChanged;
   write(KEY, s);
   return s;
 }
@@ -197,17 +246,52 @@ export function setStudentActive(id, active) {
   return st;
 }
 
-/** Connexion étudiant : e-mail ou téléphone + code. */
-export function loginStudent(ident, code) {
+const hex = (buf) => Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, '0')).join('');
+const unhex = (h) => new Uint8Array(h.match(/../g).map((x) => parseInt(x, 16)));
+async function sha256(text) {
+  return hex(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)));
+}
+async function pbkdf2(pass, saltHex, iter) {
+  const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveBits']);
+  return hex(await crypto.subtle.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt: unhex(saltHex), iterations: iter }, key, 256));
+}
+
+/**
+ * Connexion étudiant : e-mail (ou téléphone) + mot de passe ou code d'accès. Asynchrone.
+ * Renvoie { student } ou { error: 'bad' | 'suspended', message } (message en français, à traduire côté interface).
+ */
+export async function loginStudent(ident, secret) {
   const d = load();
   const id = String(ident || '').trim().toLowerCase().replace(/\s+/g, '');
-  const c = String(code || '').trim().toUpperCase();
-  const st = d.students.find((s) => (s.email === id || s.phone.replace(/\s+/g, '') === id) && s.code === c);
-  if (!st) return { error: 'Identifiant ou code incorrect.' };
-  if (!st.active) return { error: 'Ton accès est suspendu. Contacte l’équipe.' };
+  const raw = String(secret || '').trim();
+  const bad = { error: 'bad', message: 'Identifiant ou mot de passe incorrect.' };
+  if (!id || !raw) return bad;
+  // 1. Comptes à mot de passe (empreintes)
+  if (globalThis.crypto?.subtle) {
+    const eh = await sha256(`hooked-academy:${id}`);
+    const acc = ACCOUNTS.find((a) => a.emailHash === eh);
+    if (acc) {
+      if ((await pbkdf2(raw, acc.salt, acc.iter)) !== acc.passHash) return bad;
+      const st = d.students.find((s) => s.id === acc.studentId);
+      if (!st) return bad;
+      if (!st.active) return { error: 'suspended', message: 'Ton accès est suspendu. Contacte l’équipe.' };
+      write(SESSION, { role: 'student', id: st.id, at: Date.now() });
+      return { student: st };
+    }
+  }
+  // 2. Codes d'accès remis à la validation (HA-XXXX-XXXX) et compte démo
+  const c = raw.toUpperCase();
+  const st = d.students.find((s) => !s.protected && (s.email === id || (s.phone || '').replace(/\s+/g, '') === id) && s.code === c);
+  if (!st) return bad;
+  if (!st.active) return { error: 'suspended', message: 'Ton accès est suspendu. Contacte l’équipe.' };
   write(SESSION, { role: 'student', id: st.id, at: Date.now() });
   return { student: st };
 }
+
+/** Le compte démo (ou ?demo=1) : accès limité à DEMO_OPEN. */
+export const isDemo = (st) => !!st && (st.demo || st.id === 'st-demo');
+/** Une leçon est-elle ouverte pour cet étudiant ? */
+export const canAccess = (st, lessonId) => !!st && (!isDemo(st) || DEMO_OPEN.includes(lessonId));
 
 export function loginAdmin(code) {
   if (String(code || '').trim().toUpperCase() !== TEAM_CODE) return false;

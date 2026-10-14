@@ -3,6 +3,7 @@
 // et au rendu MP4 (tools/hooked-academy/render.mjs), image par image.
 
 import * as S from './scenes.js';
+import * as SC from './scenes-cours.js';
 import { G, fmt, autoDuration, esc } from './kit.js';
 import { markSVG } from '../assets/js/brand.js';
 
@@ -10,7 +11,7 @@ import { markSVG } from '../assets/js/brand.js';
 const BASE = {
   title: 4.2, big: 4.6, quote: 5, stat: 4.6, cards: 6, grid: 6, steps: 7, checklist: 6.5, compare: 7,
   formula: 6, flow: 7, funnel: 6, curve: 7, timeline: 8, prompt: 9, chat: 8, wave: 6, storyboard: 8,
-  camera: 10, ratio: 8, layers: 8, scan: 9, price: 7, phone: 7, anatomy: 10, outro: 4.2,
+  camera: 10, ratio: 8, layers: 8, scan: 9, price: 7, phone: 7, anatomy: 10, acronym: 8, table: 9, hooks: 8, outro: 4.2,
 };
 
 export const sceneDuration = (sc) => +(sc.d ?? autoDuration(sc, BASE[sc.type] ?? 5)).toFixed(2);
@@ -69,7 +70,7 @@ export function compose(lesson, mount, { module, next, chrome = true } = {}) {
     sec.className = `sc sc-${sc.type}`;
     sec.dataset.i = i;
     sceneBox.appendChild(sec);
-    const make = S[sc.type] || S.big;
+    const make = SC[sc.type] || S[sc.type] || S.big;
     let sub;
     try {
       sub = make(sec, sc, d, ctx);

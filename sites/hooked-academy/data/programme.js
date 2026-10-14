@@ -3,12 +3,24 @@
 // Les autres ont leur texte « à dire » (say) : le studio de l'équipe l'affiche en prompteur pendant
 // que l'animation tourne, pour enregistrer la voix off en darija parfaitement synchronisée.
 
-import { MODULES_2 } from './programme-ia.js';
+import { MODULES_IA } from './programme-ia.js';
+import { OVERLAY } from './i18n/index.js';
+
+/**
+ * Deux formations distinctes :
+ *  - « creative » : modules M01 à M05 (identifiants m1…m5), les bases, sans IA ;
+ *  - « ia »       : modules IA01 à IA09 (identifiants ia1…ia9), l'IA créative puis la vente.
+ * Chaque formation a son identité (couleur, icône), sa progression et sa fin.
+ */
+export const TRACKS = [
+  { id: 'creative', code: 'M', title: 'Formation Créative', ar: 'التكوين الإبداعي', color: '#e0be55', icon: 'film', pitch: 'Comprendre ce qui fait vendre une publicité, et la produire avec ton téléphone, CapCut et Canva.' },
+  { id: 'ia', code: 'IA', title: 'Formation IA', ar: 'تكوين الذكاء الاصطناعي', color: '#c8b6ff', icon: 'sparkles', pitch: 'Prompting, images et vidéos IA, voix, UGC, cinématique — puis analyser, vendre et signer tes clients.' },
+];
 
 export const PARTS = [
-  { id: 'p1', n: 1, title: 'Les fondamentaux', ar: 'الأساسيات', pitch: 'Comprendre ce qui fait vendre une créative, et la produire sans IA.' },
-  { id: 'p2', n: 2, title: 'L’IA créative', ar: 'الذكاء الاصطناعي الإبداعي', pitch: 'Prompting, images, vidéos, voix, UGC et cinématique.' },
-  { id: 'p3', n: 3, title: 'Vendre son savoir-faire', ar: 'بيع خدماتك', pitch: 'Analyser, itérer et signer ses premiers clients.' },
+  { id: 'p1', n: 1, track: 'creative', title: 'Les fondamentaux', ar: 'الأساسيات', pitch: 'Comprendre ce qui fait vendre une créative, et la produire sans IA.' },
+  { id: 'p2', n: 2, track: 'ia', title: 'L’IA créative', ar: 'الذكاء الاصطناعي الإبداعي', pitch: 'Prompting, images, vidéos, voix, UGC et cinématique.' },
+  { id: 'p3', n: 3, track: 'ia', title: 'Vendre son savoir-faire', ar: 'بيع خدماتك', pitch: 'Analyser, itérer et signer ses premiers clients.' },
 ];
 
 const MODULES_1 = [
@@ -201,7 +213,7 @@ const MODULES_1 = [
             side: [
               { label: 'Des idées', sub: 'Angles, hooks, concepts', at: 2, c: 'ia' },
               { label: 'Des scripts', sub: 'Le texte de tes vidéos', at: 6.5, c: 'ia' },
-              { label: 'Des prompts', sub: 'Pour les images et vidéos IA : on y revient au module 5', at: 11, c: 'ia' },
+              { label: 'Des prompts', sub: 'Pour les images et vidéos IA : on y revient dans la formation IA', at: 11, c: 'ia' },
             ],
           },
           { type: 'outro', d: 3, text: 'Installe CapCut et Canva, et ouvre un compte sur une IA.' },
@@ -589,8 +601,8 @@ const MODULES_1 = [
     ],
   },
   {
-    id: 'm4',
-    n: 4,
+    id: 'm5',
+    n: 5,
     part: 'p1',
     title: 'Produire sans IA : vidéo, image, carrousel',
     ar: 'الإنتاج بدون ذكاء اصطناعي',
@@ -599,7 +611,7 @@ const MODULES_1 = [
     pitch: 'Les gestes de base dans CapCut et Canva, avant d’ajouter l’IA.',
     lessons: [
       {
-        id: 'm4-l1',
+        id: 'm5-l1',
         n: 1,
         title: 'Monter une pub vidéo dans CapCut',
         ar: 'المونتاج في CapCut',
@@ -614,7 +626,7 @@ const MODULES_1 = [
         quiz: [{ q: 'À quel rythme change-t-on de plan ?', a: ['Toutes les 2 à 3 secondes', 'Toutes les 15 secondes', 'Jamais'], ok: 0, why: 'Un rythme rapide garde l’attention.' }],
       },
       {
-        id: 'm4-l2',
+        id: 'm5-l2',
         n: 2,
         title: 'Une image qui convertit dans Canva',
         ar: 'صورة تبيع في Canva',
@@ -629,7 +641,7 @@ const MODULES_1 = [
         quiz: [{ q: 'Combien de messages dans une image publicitaire ?', a: ['Un seul', 'Trois', 'Le plus possible'], ok: 0, why: 'Un message clair se lit en une seconde.' }],
       },
       {
-        id: 'm4-l3',
+        id: 'm5-l3',
         n: 3,
         title: 'Construire un carrousel slide par slide',
         ar: 'بناء الكاروسيل',
@@ -644,7 +656,7 @@ const MODULES_1 = [
         widget: 'carrousel',
       },
       {
-        id: 'm4-l4',
+        id: 'm5-l4',
         n: 4,
         title: 'Exporter sans perdre la qualité',
         ar: 'التصدير بجودة عالية',
@@ -662,7 +674,51 @@ const MODULES_1 = [
   },
 ];
 
-export const MODULES = [...MODULES_1, ...MODULES_2];
+export const MODULES = [...MODULES_1, ...MODULES_IA];
+
+/* ------------------------------------------------------------------ */
+/* Parcours et numérotation                                            */
+/* ------------------------------------------------------------------ */
+
+const PART_TRACK = Object.fromEntries(PARTS.map((p) => [p.id, p.track]));
+MODULES.forEach((m) => {
+  m.track = PART_TRACK[m.part] || 'creative';
+});
+
+/** Code affiché d'un module : M01…M05 pour la formation Créative, IA01…IA09 pour la formation IA. */
+export const modCode = (m) => `${m.track === 'ia' ? 'IA' : 'M'}${String(m.n).padStart(2, '0')}`;
+export const trackOf = (idOrModule) => TRACKS.find((t) => t.id === (typeof idOrModule === 'string' ? idOrModule : idOrModule?.track)) || TRACKS[0];
+export const modulesOf = (track) => MODULES.filter((m) => m.track === track);
+
+/* ------------------------------------------------------------------ */
+/* Traduction : la surcouche de la langue choisie (data/i18n/<langue>/) */
+/* ------------------------------------------------------------------ */
+
+const isObj = (v) => v && typeof v === 'object' && !Array.isArray(v);
+/** Fusionne une traduction dans l'original : seuls les textes changent, la structure et les temps restent. */
+function merge(base, ov) {
+  if (ov == null) return base;
+  if (Array.isArray(base)) return Array.isArray(ov) ? base.map((b, i) => (i < ov.length ? merge(b, ov[i]) : b)) : base;
+  if (isObj(base)) {
+    if (!isObj(ov)) return base;
+    const out = { ...base };
+    for (const k of Object.keys(ov)) out[k] = k in base ? merge(base[k], ov[k]) : typeof ov[k] === 'string' ? ov[k] : out[k];
+    return out;
+  }
+  if (typeof base === 'string') return typeof ov === 'string' && ov.trim() ? ov : base;
+  return base;
+}
+
+if (OVERLAY) {
+  const O = OVERLAY;
+  TRACKS.forEach((t, i) => (TRACKS[i] = merge(t, O.tracks?.[t.id])));
+  PARTS.forEach((p, i) => (PARTS[i] = merge(p, O.parts?.[p.id])));
+  MODULES.forEach((m) => {
+    const mo = O.modules?.[m.id];
+    if (mo) for (const k of ['title', 'pitch']) if (typeof mo[k] === 'string' && mo[k].trim()) m[k] = mo[k];
+    m.lessons = m.lessons.map((l) => merge(l, O.lessons?.[l.id]));
+  });
+}
 
 /* ------------------------------------------------------------------ */
 
@@ -674,11 +730,15 @@ export function allLessons() {
   return _all;
 }
 
+/** Une leçon, son module, et ses voisines DANS LA MÊME FORMATION (on ne passe pas de la Créative à l'IA sans le savoir). */
 export function findLesson(id) {
   const list = allLessons();
   const i = list.findIndex((l) => l.id === id);
   if (i < 0) return null;
-  return { lesson: list[i], module: list[i].module, prev: list[i - 1] || null, next: list[i + 1] || null, index: i };
+  const L = list[i];
+  const same = (x) => (x && x.module.track === L.module.track ? x : null);
+  return { lesson: L, module: L.module, track: trackOf(L.module), prev: same(list[i - 1]), next: same(list[i + 1]), index: i };
 }
 
-export const totalLessons = () => allLessons().length;
+export const lessonsOf = (track) => allLessons().filter((l) => l.module.track === track);
+export const totalLessons = (track) => (track ? lessonsOf(track).length : allLessons().length);
