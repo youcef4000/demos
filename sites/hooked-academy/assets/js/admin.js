@@ -7,7 +7,7 @@
 import { LANGS, lang, isRTL, locale, t, tIn, fmtNum, fmtDate, switcher, bindSwitchers } from './i18n.js';
 import './i18n/common.js';
 import { plural, exText } from './i18n/admin.js';
-import { logoInner } from './brand.js';
+import { logoInner, markSVG } from './brand.js';
 import { icon } from './icons.js';
 import * as S from './store.js';
 import { MODULES, allLessons, findLesson, modCode, modulesOf, lessonsOf, trackOf } from '../../data/programme.js';
@@ -220,7 +220,7 @@ function viewLogin(err = '') {
       <button class="b b--or" type="submit">${t('ad.login.enter')}</button>
     </form>
     <div class="login-demo">${t('ad.login.demo')} <code dir="ltr">${S.TEAM_CODE}</code><br><button class="b b--s" type="button" id="ademo" style="margin-top:10px">${t('ad.login.demoBtn')}</button></div>
-  </section><aside class="login-art" aria-hidden="true" style="display:grid;place-items:center"><div style="width:min(70%,420px)">${logoInner().replace('ha-logo__pastille', 'ha-logo__pastille" style="width:9em;height:9em;border-radius:2.4em;font-size:16px"')}</div></aside></div>`;
+  </section><aside class="login-art la-team" aria-hidden="true"><div class="la-mark">${markSVG()}</div><p class="la-name">Hooked Academy</p><p class="la-sub">${t('ad.nav.team')}</p></aside></div>`;
   $('#af').addEventListener('submit', (e) => {
     e.preventDefault();
     if (S.loginAdmin(new FormData(e.target).get('code'))) route();

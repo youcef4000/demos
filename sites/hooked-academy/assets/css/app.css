@@ -3911,3 +3911,123 @@ main[data-track] .lab-card .card-k {
 [dir='rtl'] :is(.cont-b h2, .prod-next b, .node-t b, .ls-title h1, .map-head h2, .ls-list a span, .ls-next b, .res-h b, .file-b b, .crumb-mod, .ls-mt, .keys li, .qz legend, .qz button, .fc-f b, .fc-b) {
   unicode-bidi: plaintext;
 }
+
+/* ===== Connexion : panneau de droite (grand écran) ===== */
+@media (min-width: 980px) {
+  .login-art {
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 22px;
+    padding: 48px;
+    background:
+      radial-gradient(60% 50% at 50% 42%, rgb(201 162 39 / 0.16), transparent 70%),
+      linear-gradient(170deg, #121016, #08070a);
+  }
+  .login-art-cap {
+    position: static;
+  }
+}
+.la-screen {
+  position: relative;
+  width: min(100%, 640px);
+  margin: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #000 url('../../video/m1-l1.jpg') center / cover;
+  box-shadow: 0 0 0 1px rgb(242 223 160 / 0.18), 0 50px 120px -40px rgb(201 162 39 / 0.45), 0 30px 60px -30px #000;
+}
+.la-screen video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.la-screen figcaption {
+  position: absolute;
+  inset-inline: 14px;
+  top: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgb(246 242 234 / 0.75);
+  direction: ltr;
+}
+.la-rec {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #ec7a45;
+}
+.la-rec i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: la-rec 1s steps(1) infinite;
+}
+@keyframes la-rec {
+  50% {
+    opacity: 0;
+  }
+}
+.la-team {
+  text-align: center;
+}
+.la-mark {
+  width: 168px;
+  height: 168px;
+  display: grid;
+  place-items: center;
+  border-radius: 44px;
+  background: rgb(201 162 39 / 0.1);
+  box-shadow: inset 0 0 0 1px rgb(201 162 39 / 0.35), 0 40px 90px -40px rgb(201 162 39 / 0.6);
+}
+.la-mark svg {
+  width: 104px;
+  height: 104px;
+}
+.la-name {
+  margin: 6px 0 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 112%;
+  font-size: 24px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.la-sub {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+html[lang='ar'] .la-sub {
+  font-family: var(--font-ar);
+  letter-spacing: 0;
+  font-size: 15px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .la-rec i {
+    animation: none;
+  }
+}
+
+/* Connexion : rythme vertical régulier, message d'erreur sans trou quand il est vide */
+.login-err:empty {
+  min-height: 0;
+  margin-top: -6px;
+}
+.login-box {
+  gap: 18px;
+}
+/* Arabe : l'indication du champ se lit de droite à gauche, la saisie reste de gauche à droite */
+[dir='rtl'] .in--ltr:placeholder-shown {
+  direction: rtl;
+}

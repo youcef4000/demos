@@ -321,7 +321,10 @@ function viewLogin() {
       </div>
       <p class="muted login-foot">${t('app.login.noaccount')} <a href="${RESERVE}">${t('app.cta.reserve')}</a></p>
     </section>
-    <aside class="login-art" id="lart" aria-hidden="true"><div class="login-art-cap"><span>${t('app.login.art')}</span></div></aside>
+    <aside class="login-art" id="lart" aria-hidden="true">
+      <figure class="la-screen"><video id="lart-v" poster="../video/m1-l1.jpg" muted loop playsinline preload="none"></video></figure>
+      <div class="login-art-cap"><span>${t('app.login.art')}</span></div>
+    </aside>
   </div>`;
   const f = $('#lf');
   const err = $('#lerr');
@@ -393,7 +396,13 @@ function viewLogin() {
     else route();
   });
   const art = $('#lart');
-  if (getComputedStyle(art).display !== 'none') stop.push(livePreview(art, 'm1-l2', { from: 0, to: 14 }));
+  // Grand écran : l'extrait réel de la leçon 1 tourne en boucle, sans le son
+  if (getComputedStyle(art).display !== 'none') {
+    const v = $('#lart-v');
+    v.src = '../video/m1-l1.mp4';
+    if (!reduce) v.play().catch(() => {});
+    stop.push(() => v.pause());
+  }
   const g = G();
   if (g) g.from('.login-box > *', { y: 18, autoAlpha: 0, duration: 0.8, ease: 'expo.out', stagger: 0.06, clearProps: 'all' });
 }
