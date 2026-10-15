@@ -8,6 +8,7 @@ import './i18n/landing.js';
 import { logoInner, markSVG, morphMark } from './brand.js';
 import { TRACKS, MODULES, allLessons, modCode, modulesOf, findLesson } from '../../data/programme.js';
 import { addApplication } from './store.js';
+import * as FAQ from './faq.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -80,6 +81,31 @@ const yymmdd = `${pad(now.getFullYear() % 100)}${pad(now.getMonth() + 1)}${pad(n
 $('#clip-id').textContent = `A001_C001_${yymmdd}`;
 $('#slate-date').textContent = `${pad(now.getDate())}.${pad(now.getMonth() + 1)}.${pad(now.getFullYear() % 100)}`;
 $('#faq-file').textContent = `questions_${lang}.srt`;
+
+// Questions : liste gérée par l'équipe (data/faq.json, page « Questions fréquentes » de l'espace équipe).
+// Les questions cochées « page d'accueil » remplacent la liste écrite dans le HTML.
+const srtTime = (s) => {
+  const ms = Math.round(s * 1000);
+  return `00:${pad(Math.floor(ms / 60000))}:${pad(Math.floor(ms / 1000) % 60)},${String(ms % 1000).padStart(3, '0')}`;
+};
+FAQ.ready().then(() => {
+  const items = FAQ.list().filter((x) => x.landing);
+  if (!items.length) return;
+  let at = 1;
+  $('#srt').innerHTML = items
+    .map((x, i) => {
+      const q = FAQ.pickLang(x.q, lang);
+      const a = FAQ.pickLang(x.a, lang)
+        .split(/\n\s*\n/)
+        .map((p) => `<p>${esc(p.trim()).replace(/\n/g, '<br>')}</p>`)
+        .join('');
+      const end = at + Math.max(2.6, q.length * 0.07);
+      const tc = `${srtTime(at)} --&gt; ${srtTime(end)}`;
+      at = end + 0.2;
+      return `<details><summary><span class="srt-i" aria-hidden="true"><b>${i + 1}</b><span>${tc}</span></span><span>${esc(q)}</span></summary>${a}</details>`;
+    })
+    .join('');
+});
 
 /* ------------------------------------------------------------------ */
 /* Défilement : Lenis sur pointeur fin, ancres, timecode et plans      */

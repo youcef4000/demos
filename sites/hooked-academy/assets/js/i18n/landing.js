@@ -241,7 +241,7 @@ add({
     'faq.q5': 'How is it linked to Hooked Lab?',
     'faq.a5': 'Hooked Lab is the same team’s ad-creative analysis app. In the course, you use it to break down the ads that work before producing your own.',
     'faq.q6': 'How does payment work?',
-    'faq.a6': 'No payment on the website. After you sign up, the team contacts you on WhatsApp with the session price and payment options (CCP, BaridiMob or cash). Your access is activated as soon as it’s approved.',
+    'faq.a6': 'No payment on the website. After you sign up, the team contacts you on WhatsApp to confirm your plan (Creative, AI or the bundle) and the payment options (CCP, BaridiMob or cash). Your access is activated as soon as it’s approved.',
     'faq.q7': 'Is there a certificate?',
     'faq.a7': 'Yes, one per course: once all its lessons are completed, the quizzes passed and, for the AI Course, your final project approved by the team.',
 
@@ -460,7 +460,7 @@ add({
     'faq.q5': 'ما العلاقة مع Hooked Lab؟',
     'faq.a5': 'Hooked Lab هو تطبيق تحليل الكرياتيف من الفريق نفسه. في التكوين تستعمله لتفكيك الإعلانات الناجحة قبل أن تنتج إعلاناتك.',
     'faq.q6': 'كيف يتم الدفع؟',
-    'faq.a6': 'لا دفع على الموقع. بعد تسجيلك يتواصل معك الفريق على واتساب ليخبرك بسعر الدورة وطرق الدفع (CCP أو BaridiMob أو نقدًا). ويُفعَّل دخولك فور المصادقة.',
+    'faq.a6': 'لا دفع على الموقع. بعد تسجيلك يتواصل معك الفريق على واتساب لتأكيد الصيغة التي اخترتها (الإبداعي أو الذكاء الاصطناعي أو الباقة الكاملة) وطرق الدفع (CCP أو BaridiMob أو نقدًا). ويُفعَّل دخولك فور المصادقة.',
     'faq.q7': 'هل هناك شهادة؟',
     'faq.a7': 'نعم، شهادة لكل تكوين: عندما تُكمل كل دروسه، وتنجح في الاختبارات، وبالنسبة لتكوين الذكاء الاصطناعي، عندما يعتمد الفريق مشروعك النهائي.',
 

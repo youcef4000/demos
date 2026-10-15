@@ -1,5 +1,5 @@
 // Hooked Academy — espace étudiant, en français, anglais et arabe (de droite à gauche).
-// Routes : #/ (accueil) · #/parcours/creative · #/parcours/ia · #/lecon/<id> · #/ressources · #/profil
+// Routes : #/ (accueil) · #/parcours/creative · #/parcours/ia · #/lecon/<id> · #/ressources · #/aide · #/profil
 // Données : assets/js/store.js (localStorage) ; programme déjà traduit : data/programme.js.
 // Fichiers de l'équipe : ressources/manifest.json (facultatif) ; vidéos publiées : video/manifest.json.
 // Textes de l'interface : assets/js/i18n/app.js (+ i18n/common.js pour niveaux, badges, formations).
@@ -13,6 +13,7 @@ import * as S from './store.js';
 import { TRACKS, PARTS, MODULES, allLessons, findLesson, modCode, modulesOf, lessonsOf } from '../../data/programme.js';
 import { compose, lessonDuration } from '../../motion/engine.js';
 import { renderWidget, flashcards } from './widgets.js';
+import * as FAQ from './faq.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -439,6 +440,7 @@ function shell(active, html, { track = '' } = {}) {
     ['#/', 'home', t('app.nav.home'), active === 'home'],
     [`#/parcours/${active.startsWith('track:') || active.startsWith('lesson:') ? active.split(':')[1] : lastTrack()}`, 'map', t('app.nav.path'), active.startsWith('track:') || active.startsWith('lesson:')],
     ['#/ressources', 'book', t('app.nav.resources'), active === 'res'],
+    ['#/aide', 'help', t('app.nav.help'), active === 'help'],
     ['#/profil', 'user', t('app.nav.profile'), active === 'profile'],
   ];
   root.innerHTML = `${RING_DEF}
@@ -458,6 +460,7 @@ function shell(active, html, { track = '' } = {}) {
         ).join('')}
         <p class="side-k">${t('app.nav.space')}</p>
         <a class="nv" href="#/ressources" ${isOn('res')}>${icon('book', { size: 20 })}<span>${t('app.nav.resources')}</span>${demo ? icon('lock', { size: 14, cls: 'nv-lk' }) : ''}</a>
+        <a class="nv" href="#/aide" ${isOn('help')}>${icon('help', { size: 20 })}<span>${t('app.nav.faq')}</span></a>
         <a class="nv" href="#/profil" ${isOn('profile')}>${icon('user', { size: 20 })}<span>${t('app.nav.profile')}</span></a>
       </nav>
       <div class="side-foot">
@@ -1472,6 +1475,74 @@ function viewProfile() {
 }
 
 /* ------------------------------------------------------------------ */
+/* Questions fréquentes (#/aide) — liste gérée par l'équipe (faq.js)   */
+/* ------------------------------------------------------------------ */
+
+// Réponse en texte brut : paragraphes séparés par une ligne vide, retours à la ligne conservés.
+const faqText = (s) =>
+  String(s || '')
+    .split(/\n\s*\n/)
+    .map((p) => `<p>${esc(p.trim()).replace(/\n/g, '<br>')}</p>`)
+    .join('');
+
+async function viewHelp() {
+  setTitle(t('app.title.help'));
+  const ticket = routing;
+  await FAQ.ready();
+  if (ticket !== routing) return;
+  const all = FAQ.list().filter((x) => FAQ.pickLang(x.q, lang) && FAQ.pickLang(x.a, lang));
+  const cats = ['all', ...FAQ.CATS.filter((c) => all.some((x) => x.cat === c))];
+  const catLabel = (c) => t(c === 'all' ? 'app.lib.cat.all' : `faq.cat.${c}`);
+  let wa = '';
+  try {
+    wa = String(S.load().settings?.whatsapp || '').replace(/\D/g, '');
+  } catch {}
+  shell(
+    'help',
+    `<div class="faq">
+      <div class="ph-h"><div><p class="card-k">${icon('help', { size: 14 })} ${t('app.faq.k')}</p><h1>${t('app.faq.title')}</h1><p>${t('app.faq.lead')}</p></div></div>
+      <div class="lib-tools">
+        <label class="search">${icon('search', { size: 18 })}<span class="sr-only">${t('app.lib.search')}</span><input class="in" id="fq" type="search" placeholder="${esc(t('app.faq.search.ph'))}" autocomplete="off"></label>
+        ${cats.length > 2 ? `<div class="seg" id="fcats" role="group" aria-label="${esc(t('app.lib.cats'))}">${cats.map((c, i) => `<button type="button" aria-pressed="${i === 0}" data-c="${c}">${esc(catLabel(c))}</button>`).join('')}</div>` : ''}
+      </div>
+      <p class="lib-count muted" id="faq-n" aria-live="polite"></p>
+      <div class="faq-list" id="faq-list"></div>
+      <section class="card faq-more">
+        <span class="empty-ic">${icon('whatsapp', { size: 24 })}</span>
+        <div><h2>${t('app.faq.more.t')}</h2><p>${t('app.faq.more.x')}</p></div>
+        ${wa ? `<a class="b b--or b--s" href="https://wa.me/${wa}" target="_blank" rel="noopener">${icon('whatsapp', { size: 16 })} ${t('app.faq.more.cta')}</a>` : ''}
+      </section>
+    </div>`,
+  );
+  let cat = 'all';
+  const draw = () => {
+    const s = $('#fq').value.trim().toLowerCase();
+    const items = all.filter((x) => (cat === 'all' || x.cat === cat) && (!s || `${FAQ.pickLang(x.q, lang)} ${FAQ.pickLang(x.a, lang)}`.toLowerCase().includes(s)));
+    $('#faq-n').textContent = t('app.faq.count', { n: items.length });
+    $('#faq-list').innerHTML = items.length
+      ? items
+          .map(
+            (x) => `<details class="card faq-i" ${s && items.length < 4 ? 'open' : ''}>
+              <summary><span class="faq-c">${esc(catLabel(x.cat))}</span><b>${esc(FAQ.pickLang(x.q, lang))}</b><span class="faq-pm" aria-hidden="true"></span></summary>
+              <div class="faq-a">${faqText(FAQ.pickLang(x.a, lang))}</div>
+            </details>`,
+          )
+          .join('')
+      : emptyState('search', t('app.lib.none.t'), t('app.faq.none.x'));
+  };
+  $('#fq').addEventListener('input', draw);
+  $('#fcats')?.addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-c]');
+    if (!b) return;
+    cat = b.dataset.c;
+    $$('#fcats button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    draw();
+  });
+  draw();
+  enter('.faq .ph-h, .faq .lib-tools, .faq-i, .faq-more');
+}
+
+/* ------------------------------------------------------------------ */
 /* Routeur                                                             */
 /* ------------------------------------------------------------------ */
 
@@ -1503,6 +1574,7 @@ async function route() {
   }
   if (h.startsWith('#/lecon/')) return viewLesson(decodeURIComponent(h.slice(8)));
   if (h === '#/ressources') return viewRes();
+  if (h === '#/aide') return viewHelp();
   if (h === '#/profil') return viewProfile();
   return viewHome();
 }

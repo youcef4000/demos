@@ -2363,6 +2363,9 @@ html[lang='ar'] .srt summary > span:nth-child(2) {
   font-size: 18px;
   line-height: 1.55;
 }
+.srt details p:not(:last-child) {
+  padding-bottom: 12px;
+}
 @media (max-width: 899px) {
   .faq-file {
     position: static;

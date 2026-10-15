@@ -2254,3 +2254,207 @@ details[open] > summary .rs-car {
     overflow-wrap: anywhere;
   }
 }
+
+/* ------------------------------------------------------------------ */
+/* Questions fréquentes (#/faq)                                        */
+/* ------------------------------------------------------------------ */
+.fq-pub {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px 14px;
+  align-items: center;
+  max-width: 900px;
+  margin-bottom: 14px;
+}
+.fq-pub-i {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  color: var(--body, #55b894);
+  background: rgb(85 184 148 / 0.14);
+}
+.fq-pub.is-dirty .fq-pub-i {
+  color: var(--gold-300);
+  background: rgb(201 162 39 / 0.16);
+}
+.fq-pub.is-dirty {
+  box-shadow: inset 0 0 0 1px rgb(201 162 39 / 0.45), 0 24px 50px -36px #000;
+}
+.fq-pub p {
+  margin: 2px 0 0;
+  font-size: 13.5px;
+  color: var(--mist-400);
+}
+.fq-pub .acts {
+  grid-column: 1 / -1;
+}
+@media (min-width: 760px) {
+  .fq-pub {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+  .fq-pub .acts {
+    grid-column: auto;
+  }
+}
+.fq-n {
+  margin: 0 0 10px;
+  font-size: 13px;
+}
+.fq-list {
+  display: grid;
+  gap: 10px;
+  max-width: 900px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.fq-row {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 10px 12px;
+  align-items: start;
+  padding: 14px 16px;
+}
+.fq-i {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--mist-300);
+  background: rgb(255 255 255 / 0.06);
+}
+.fq-m {
+  min-width: 0;
+}
+.fq-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 6px;
+}
+.fq-tags .chip {
+  padding: 2px 8px;
+  font-size: 11px;
+}
+.fq-m b {
+  display: block;
+  font-size: 15.5px;
+  line-height: 1.35;
+}
+.fq-a {
+  margin: 4px 0 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--mist-400);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.fq-acts {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.fq-acts .b--i {
+  width: 36px;
+  min-height: 36px;
+}
+.fq-ar {
+  font-size: 16px;
+  line-height: 1;
+}
+@media (min-width: 760px) {
+  .fq-row {
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+    align-items: center;
+  }
+  .fq-acts {
+    grid-column: auto;
+    flex-wrap: nowrap;
+  }
+}
+.fq-form {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}
+.fq-row2 {
+  display: grid;
+  gap: 8px;
+}
+.fq-land {
+  min-height: 44px;
+}
+.fq-lg {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 14px;
+  border: 0;
+  border-radius: 18px;
+  background: rgb(255 255 255 / 0.025);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.07);
+}
+.fq-lg legend {
+  float: left;
+  width: 100%;
+  margin-bottom: 4px;
+  padding: 0;
+  font-weight: 750;
+  font-size: 14px;
+}
+[dir='rtl'] .fq-lg legend {
+  float: right;
+}
+.fq-lg legend small {
+  font-weight: 500;
+  color: var(--mist-400);
+}
+.fq-lg legend .chip {
+  padding: 2px 8px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+}
+.fq-hint {
+  margin: 0;
+  font-size: 13px;
+}
+.fq-del {
+  margin-inline-start: auto;
+}
+.fq-steps {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0;
+  padding-inline-start: 22px;
+  line-height: 1.5;
+  color: var(--mist-300);
+}
+.fq-json {
+  margin-top: 16px;
+}
+.fq-json textarea {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.fq-json code {
+  font-size: 12px;
+  color: var(--gold-300);
+}
+.fq-empty {
+  max-width: 900px;
+}
+.fq-lg textarea.in {
+  min-height: 132px;
+  max-height: 55vh;
+  field-sizing: content;
+}

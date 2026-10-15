@@ -12,6 +12,7 @@ import { icon } from './icons.js';
 import * as S from './store.js';
 import { MODULES, allLessons, findLesson, modCode, modulesOf, lessonsOf, trackOf } from '../../data/programme.js';
 import { plan, lessonDuration } from '../../motion/engine.js';
+import * as FAQ from './faq.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -239,6 +240,7 @@ const NAV = [
   { h: '#/ressources', ic: 'box', k: 'res' },
   { h: '#/studio', ic: 'mic', k: 'studio' },
   { h: '#/programme', ic: 'layers', k: 'prog' },
+  { h: '#/faq', ic: 'help', k: 'faq' },
   { h: '#/reglages', ic: 'settings', k: 'settings' },
 ];
 const TABS = ['#/', '#/inscriptions', '#/etudiants', '#/ressources'];
@@ -1063,6 +1065,160 @@ function viewSettings() {
 }
 
 /* ------------------------------------------------------------------ */
+/* Questions fréquentes : brouillon dans ce navigateur, publication     */
+/* par data/faq.json sur GitHub (le Worker met le site à jour)           */
+/* ------------------------------------------------------------------ */
+
+const FQ_LANGS = [
+  { code: 'fr', label: 'Français', req: true },
+  { code: 'en', label: 'English' },
+  { code: 'ar', label: 'العربية', dir: 'rtl' },
+];
+
+async function viewFaq() {
+  await FAQ.ready();
+  if (location.hash !== '#/faq') return;
+  if (!FAQ.dirty()) FAQ.discard();
+  const items = FAQ.list();
+  const dirty = FAQ.dirty();
+  const nLand = items.filter((x) => x.landing).length;
+  const missing = (x) => FQ_LANGS.filter((l) => !x.q[l.code] || !x.a[l.code]).map((l) => l.code.toUpperCase());
+  shell(
+    '#/faq',
+    `<div class="ph-h"><div><h1>${t('ad.nav.faq')}</h1><p>${t('ad.fq.lead')}</p></div>
+      <div class="acts"><button class="b b--or" type="button" id="fq-add">${icon('plus', { size: 16 })} ${t('ad.fq.add')}</button></div></div>
+    <section class="card fq-pub${dirty ? ' is-dirty' : ''}" aria-live="polite">
+      <span class="fq-pub-i">${icon(dirty ? 'pen' : 'check', { size: 20 })}</span>
+      <div><b>${t(dirty ? 'ad.fq.dirty' : 'ad.fq.clean')}</b><p>${t(dirty ? 'ad.fq.dirtyP' : 'ad.fq.cleanP')}</p></div>
+      ${dirty ? `<div class="acts"><button class="b b--or b--s" type="button" id="fq-pub">${icon('globe', { size: 15 })} ${t('ad.fq.publish')}</button><button class="b b--s" type="button" id="fq-undo">${t('ad.fq.discard')}</button></div>` : ''}
+    </section>
+    <p class="muted fq-n">${t('ad.fq.count', { n: fmtNum(items.length), l: fmtNum(nLand) })}</p>
+    ${
+      items.length
+        ? `<ol class="fq-list">${items
+            .map((x, i) => {
+              const miss = missing(x);
+              return `<li class="card fq-row" data-id="${esc(x.id)}">
+              <span class="fq-i">${fmtNum(i + 1)}</span>
+              <div class="fq-m">
+                <p class="fq-tags"><span class="chip">${esc(t(`faq.cat.${x.cat}`))}</span>${x.landing ? `<span class="chip chip--or">${icon('globe', { size: 12 })} ${t('ad.fq.onLanding')}</span>` : ''}${miss.length ? `<span class="chip chip--off" title="${esc(t('ad.fq.missingT'))}">${t('ad.fq.missing', { l: miss.join(' · ') })}</span>` : ''}</p>
+                <b dir="auto">${esc(FAQ.pickLang(x.q, lang))}</b>
+                <p class="fq-a" dir="auto">${esc(FAQ.pickLang(x.a, lang))}</p>
+              </div>
+              <div class="fq-acts">
+                <button class="b b--s b--i" type="button" data-mv="-1" ${i === 0 ? 'disabled' : ''} aria-label="${esc(t('ad.fq.up'))}" title="${esc(t('ad.fq.up'))}"><span class="fq-ar" aria-hidden="true">↑</span></button>
+                <button class="b b--s b--i" type="button" data-mv="1" ${i === items.length - 1 ? 'disabled' : ''} aria-label="${esc(t('ad.fq.down'))}" title="${esc(t('ad.fq.down'))}"><span class="fq-ar" aria-hidden="true">↓</span></button>
+                <button class="b b--s" type="button" data-ed>${icon('pen', { size: 15 })} ${t('ad.fq.edit')}</button>
+                <button class="b b--s b--danger b--i" type="button" data-rm aria-label="${esc(t('ad.fq.delete'))}" title="${esc(t('ad.fq.delete'))}">${icon('x', { size: 16 })}</button>
+              </div>
+            </li>`;
+            })
+            .join('')}</ol>`
+        : `<section class="card fq-empty"><p class="muted">${t('ad.fq.empty')}</p></section>`
+    }`,
+  );
+  $('#fq-add').addEventListener('click', () => faqDrawer());
+  $('#fq-pub')?.addEventListener('click', faqPublish);
+  $('#fq-undo')?.addEventListener('click', () => {
+    if (!confirm(t('ad.fq.discardC'))) return;
+    FAQ.discard();
+    viewFaq();
+  });
+  $$('.fq-row').forEach((row) => {
+    const id = row.dataset.id;
+    row.addEventListener('click', (e) => {
+      const b = e.target.closest('button');
+      if (!b || b.disabled) return;
+      if (b.dataset.mv) {
+        FAQ.move(id, Number(b.dataset.mv));
+        viewFaq().then(() => $(`.fq-row[data-id="${CSS.escape(id)}"] [data-mv="${b.dataset.mv}"]`)?.focus());
+      } else if ('ed' in b.dataset) faqDrawer(FAQ.list().find((x) => x.id === id));
+      else if ('rm' in b.dataset) {
+        const it = FAQ.list().find((x) => x.id === id);
+        if (!it || !confirm(t('ad.fq.deleteC', { q: FAQ.pickLang(it.q, lang) }))) return;
+        FAQ.remove(id);
+        toast(`${icon('check', { size: 16 })} ${t('ad.fq.deleted')}`);
+        viewFaq();
+      }
+    });
+  });
+}
+
+function faqDrawer(item = null) {
+  const it = item || { cat: 'formation', landing: false, q: {}, a: {} };
+  const html = `${drawerHead(icon('help', { size: 14 }) + ' ' + t('ad.nav.faq'), item ? t('ad.fq.editT') : t('ad.fq.addT'))}
+    <form id="fqf" class="fq-form" novalidate>
+      <div class="fq-row2">
+        <label class="lbl">${t('ad.fq.cat')}<select class="in" name="cat">${FAQ.CATS.map((c) => `<option value="${c}"${c === it.cat ? ' selected' : ''}>${esc(t(`faq.cat.${c}`))}</option>`).join('')}</select></label>
+        <label class="rs-only fq-land"><input type="checkbox" name="landing"${it.landing ? ' checked' : ''}><span>${t('ad.fq.landing')}</span></label>
+      </div>
+      ${FQ_LANGS.map(
+        (l) => `<fieldset class="fq-lg" lang="${l.code}"${l.dir ? ` dir="${l.dir}"` : ''}>
+          <legend><span class="chip">${l.code.toUpperCase()}</span> ${l.label}${l.req ? ` <small>${t('ad.fq.req')}</small>` : ` <small>${t('ad.fq.opt')}</small>`}</legend>
+          <label class="lbl">${t('ad.fq.q')}<input class="in" name="q-${l.code}" value="${esc(it.q?.[l.code] || '')}" ${l.req ? 'required' : ''} maxlength="200" dir="auto"></label>
+          <label class="lbl">${t('ad.fq.a')}<textarea class="in" name="a-${l.code}" rows="4" ${l.req ? 'required' : ''} maxlength="1500" dir="auto">${esc(it.a?.[l.code] || '')}</textarea></label>
+        </fieldset>`,
+      ).join('')}
+      <p class="muted fq-hint">${t('ad.fq.hint')}</p>
+      <p class="login-err" id="fq-err" role="alert"></p>
+      <div class="acts">
+        <button class="b b--or" type="submit">${t('ad.fq.save')}</button>
+        <button class="b" type="button" data-x>${t('ad.fq.cancel')}</button>
+        ${item ? `<button class="b b--danger fq-del" type="button" id="fq-del">${t('ad.fq.delete')}</button>` : ''}
+      </div>
+    </form>`;
+  const dw = drawer(item ? t('ad.fq.editT') : t('ad.fq.addT'), html);
+  const f = $('#fqf', dw.dw);
+  setTimeout(() => f.elements['q-fr'].focus(), 30);
+  f.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const v = (n) => f.elements[n].value.trim();
+    if (!v('q-fr') || !v('a-fr')) {
+      $('#fq-err', dw.dw).textContent = t('ad.fq.needFr');
+      f.elements[v('q-fr') ? 'a-fr' : 'q-fr'].focus();
+      return;
+    }
+    FAQ.save({
+      id: item?.id,
+      cat: f.elements.cat.value,
+      landing: f.elements.landing.checked,
+      q: Object.fromEntries(FQ_LANGS.map((l) => [l.code, v(`q-${l.code}`)])),
+      a: Object.fromEntries(FQ_LANGS.map((l) => [l.code, v(`a-${l.code}`)])),
+    });
+    dw.dispose();
+    toast(`${icon('check', { size: 16 })} ${t('ad.fq.saved')}`);
+    viewFaq();
+  });
+  $('#fq-del', dw.dw)?.addEventListener('click', () => {
+    if (!confirm(t('ad.fq.deleteC', { q: FAQ.pickLang(item.q, lang) }))) return;
+    FAQ.remove(item.id);
+    dw.dispose();
+    toast(`${icon('check', { size: 16 })} ${t('ad.fq.deleted')}`);
+    viewFaq();
+  });
+}
+
+function faqPublish() {
+  const json = FAQ.toJSON();
+  const edit = `${GH}/edit/main/${FAQ.FILE}`;
+  const html = `${drawerHead(icon('globe', { size: 14 }) + ' ' + t('ad.nav.faq'), t('ad.fq.pubT'))}
+    <ol class="fq-steps">
+      <li>${t('ad.fq.pub1')}</li>
+      <li>${t('ad.fq.pub2')}</li>
+      <li>${t('ad.fq.pub3')}</li>
+    </ol>
+    <div class="acts">
+      <button class="b b--or" type="button" id="fq-cp">${icon('copy', { size: 16 })} ${t('ad.fq.pubCopy')}</button>
+      <a class="b" href="${edit}" target="_blank" rel="noopener">${t('ad.fq.pubGh')} <span aria-hidden="true">${EXT}</span></a>
+      <button class="b b--s" type="button" id="fq-dl">${icon('download', { size: 15 })} faq.json</button>
+    </div>
+    <label class="lbl fq-json">${t('ad.fq.pubFile')} <code dir="ltr">${FAQ.FILE}</code><textarea class="in" readonly rows="10" dir="ltr" spellcheck="false">${esc(json)}</textarea></label>`;
+  const dw = drawer(t('ad.fq.pubT'), html);
+  $('#fq-cp', dw.dw).addEventListener('click', () => copy(json));
+  $('#fq-dl', dw.dw).addEventListener('click', () => download('faq.json', json, 'application/json'));
+}
+
+/* ------------------------------------------------------------------ */
 
 function route() {
   $$('.drawer, .sheet').forEach((d) => d.remove());
@@ -1080,6 +1236,7 @@ function route() {
   if (h === '#/ressources') return viewRes();
   if (h.startsWith('#/studio')) return viewStudio(decodeURIComponent(h.split('/')[2] || ''));
   if (h === '#/programme') return viewProgramme();
+  if (h === '#/faq') return viewFaq();
   if (h === '#/reglages') return viewSettings();
   return viewOverview();
 }

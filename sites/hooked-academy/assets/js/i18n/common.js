@@ -44,6 +44,10 @@ add({
     'word.lessons': 'leçons',
     'word.min': 'min',
     'word.next': 'Leçon suivante',
+    'faq.cat.inscription': 'Inscription',
+    'faq.cat.formation': 'Formation',
+    'faq.cat.plateforme': 'Plateforme',
+    'faq.cat.ia': 'Outils IA',
   },
   en: {
     'status.nouvelle': 'New',
@@ -86,6 +90,10 @@ add({
     'word.lessons': 'lessons',
     'word.min': 'min',
     'word.next': 'Next lesson',
+    'faq.cat.inscription': 'Sign-up',
+    'faq.cat.formation': 'Course',
+    'faq.cat.plateforme': 'Platform',
+    'faq.cat.ia': 'AI tools',
   },
   ar: {
     'status.nouvelle': 'جديد',
@@ -128,5 +136,9 @@ add({
     'word.lessons': 'دروس',
     'word.min': 'د',
     'word.next': 'الدرس التالي',
+    'faq.cat.inscription': 'التسجيل',
+    'faq.cat.formation': 'التكوين',
+    'faq.cat.plateforme': 'المنصة',
+    'faq.cat.ia': 'أدوات الذكاء الاصطناعي',
   },
 });

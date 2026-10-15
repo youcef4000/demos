@@ -1,0 +1,182 @@
+[
+  {
+    "id": "ordi",
+    "cat": "formation",
+    "landing": true,
+    "q": {
+      "fr": "Faut-il un ordinateur ?",
+      "en": "Do I need a computer?",
+      "ar": "هل أحتاج إلى حاسوب؟"
+    },
+    "a": {
+      "fr": "Non. Les leçons se suivent sur téléphone et les trois outils de base (CapCut, Canva, ChatGPT) existent sur mobile, en version gratuite. Un ordinateur est plus confortable pour le montage avancé et la cinématique.",
+      "en": "No. Lessons work on your phone, and the three basic tools (CapCut, Canva, ChatGPT) have free mobile versions. A computer is more comfortable for advanced editing and cinematic ads.",
+      "ar": "لا. تُتابَع الدروس على الهاتف، والأدوات الأساسية الثلاث (CapCut وCanva وChatGPT) متوفرة على الهاتف بنسخة مجانية. الحاسوب أريح للمونتاج المتقدم والإعلان السينمائي."
+    }
+  },
+  {
+    "id": "debutant",
+    "cat": "formation",
+    "landing": true,
+    "q": {
+      "fr": "Je n’y connais rien, c’est pour moi ?",
+      "en": "I know nothing about it — is this for me?",
+      "ar": "لا أعرف شيئًا، هل هذا التكوين لي؟"
+    },
+    "a": {
+      "fr": "Oui. Le module 1 commence par « c’est quoi une créative ? ». Chaque leçon dure 2 minutes au maximum et ne traite qu’une idée.",
+      "en": "Yes. Module 1 starts with “what is an ad creative?”. Every lesson lasts 2 minutes at most and covers one idea only.",
+      "ar": "نعم. تبدأ الوحدة 1 بسؤال «ما هو الكرياتيف؟». لا يتجاوز أي درس دقيقتين، ولا يتناول إلا فكرة واحدة."
+    }
+  },
+  {
+    "id": "deux",
+    "cat": "formation",
+    "landing": true,
+    "q": {
+      "fr": "Pourquoi deux formations ?",
+      "en": "Why two courses?",
+      "ar": "لماذا تكوينان؟"
+    },
+    "a": {
+      "fr": "La Formation Créative t’apprend ce qui fait vendre une pub et comment la produire avec ton téléphone, CapCut et Canva. La Formation IA t’apprend à produire avec l’IA (images, vidéos, voix, UGC), puis à vendre ce savoir-faire. Tu peux suivre l’une, l’autre, ou les deux.",
+      "en": "The Creative Course teaches you what makes an ad sell and how to produce it with your phone, CapCut and Canva. The AI Course teaches you to produce with AI (images, videos, voice, UGC), then to sell that skill. Take one, the other, or both.",
+      "ar": "يعلّمك التكوين الإبداعي ما الذي يجعل الإعلان يبيع وكيف تنتجه بهاتفك وCapCut وCanva. ويعلّمك تكوين الذكاء الاصطناعي الإنتاج بالذكاء الاصطناعي (صور، فيديوهات، صوت، UGC)، ثم بيع هذه المهارة. يمكنك أن تتابع أحدهما أو كليهما."
+    }
+  },
+  {
+    "id": "outils",
+    "cat": "ia",
+    "landing": true,
+    "q": {
+      "fr": "Les outils IA sont-ils payants ?",
+      "en": "Are the AI tools paid?",
+      "ar": "هل أدوات الذكاء الاصطناعي مدفوعة؟"
+    },
+    "a": {
+      "fr": "Plusieurs outils ont une version gratuite suffisante pour apprendre. Pour produire en volume, certains abonnements deviennent utiles : la formation t’explique lesquels choisir selon ton usage et ton budget.",
+      "en": "Several tools have a free version that is enough to learn. To produce at volume, some subscriptions become useful: the course explains which ones to pick for your use and budget.",
+      "ar": "لعدة أدوات نسخة مجانية تكفي للتعلّم. وللإنتاج بكميات كبيرة تصبح بعض الاشتراكات مفيدة: يشرح لك التكوين أيّها تختار حسب استعمالك وميزانيتك."
+    }
+  },
+  {
+    "id": "lab",
+    "cat": "ia",
+    "landing": true,
+    "q": {
+      "fr": "Quel est le lien avec Hooked Lab ?",
+      "en": "How is it linked to Hooked Lab?",
+      "ar": "ما العلاقة مع Hooked Lab؟"
+    },
+    "a": {
+      "fr": "Hooked Lab est l’application d’analyse de créatives de la même équipe. Dans la formation, tu l’utilises pour décortiquer les publicités qui marchent avant de produire les tiennes.",
+      "en": "Hooked Lab is the same team’s ad-creative analysis app. In the course, you use it to break down the ads that work before producing your own.",
+      "ar": "Hooked Lab هو تطبيق تحليل الكرياتيف من الفريق نفسه. في التكوين تستعمله لتفكيك الإعلانات الناجحة قبل أن تنتج إعلاناتك."
+    }
+  },
+  {
+    "id": "paiement",
+    "cat": "inscription",
+    "landing": true,
+    "q": {
+      "fr": "Comment se passe le paiement ?",
+      "en": "How does payment work?",
+      "ar": "كيف يتم الدفع؟"
+    },
+    "a": {
+      "fr": "Aucun paiement sur le site. Après ton inscription, l’équipe te contacte sur WhatsApp pour confirmer ta formule (Créative, IA ou le pack des deux) et les moyens de paiement (CCP, BaridiMob ou espèces). Ton accès est activé dès la validation.",
+      "en": "No payment on the website. After you sign up, the team contacts you on WhatsApp to confirm your plan (Creative, AI or the bundle) and the payment options (CCP, BaridiMob or cash). Your access is activated as soon as it’s approved.",
+      "ar": "لا دفع على الموقع. بعد تسجيلك يتواصل معك الفريق على واتساب لتأكيد الصيغة التي اخترتها (الإبداعي أو الذكاء الاصطناعي أو الباقة الكاملة) وطرق الدفع (CCP أو BaridiMob أو نقدًا). ويُفعَّل دخولك فور المصادقة."
+    }
+  },
+  {
+    "id": "certificat",
+    "cat": "formation",
+    "landing": true,
+    "q": {
+      "fr": "Est-ce qu’il y a un certificat ?",
+      "en": "Is there a certificate?",
+      "ar": "هل هناك شهادة؟"
+    },
+    "a": {
+      "fr": "Oui, un par formation : quand toutes ses leçons sont terminées, les quiz réussis et, pour la Formation IA, ton projet final validé par l’équipe.",
+      "en": "Yes, one per course: once all its lessons are completed, the quizzes passed and, for the AI Course, your final project approved by the team.",
+      "ar": "نعم، شهادة لكل تكوين: عندما تُكمل كل دروسه، وتنجح في الاختبارات، وبالنسبة لتكوين الذكاء الاصطناعي، عندما يعتمد الفريق مشروعك النهائي."
+    }
+  },
+  {
+    "id": "code",
+    "cat": "inscription",
+    "landing": false,
+    "q": {
+      "fr": "Je n’ai pas reçu mon code d’accès, que faire ?",
+      "en": "I haven’t received my access code. What should I do?",
+      "ar": "لم أستلم رمز الدخول، ماذا أفعل؟"
+    },
+    "a": {
+      "fr": "Il t’est envoyé sur WhatsApp dès que l’équipe valide ton inscription, après le paiement. S’il tarde, écris à l’équipe sur WhatsApp depuis le numéro donné à l’inscription.",
+      "en": "It’s sent to you on WhatsApp as soon as the team approves your sign-up, after payment. If it’s late, message the team on WhatsApp from the number you signed up with.",
+      "ar": "يُرسَل إليك على واتساب بمجرد أن يقبل الفريق تسجيلك بعد الدفع. إذا تأخر، راسل الفريق على واتساب من الرقم الذي سجّلت به."
+    }
+  },
+  {
+    "id": "terminee",
+    "cat": "plateforme",
+    "landing": false,
+    "q": {
+      "fr": "Comment une leçon est-elle marquée comme terminée ?",
+      "en": "How is a lesson marked as completed?",
+      "ar": "كيف يُعلَّم الدرس على أنه مكتمل؟"
+    },
+    "a": {
+      "fr": "Automatiquement quand tu as regardé 90 % de la vidéo, ou avec le bouton « Marquer comme terminée ». Le quiz et l’exercice te rapportent des XP en plus.",
+      "en": "Automatically once you’ve watched 90% of the video, or with the “Mark as completed” button. The quiz and the exercise earn you extra XP.",
+      "ar": "تلقائيًا عندما تشاهد 90% من الفيديو، أو بزر «وضع علامة مكتمل». ويمنحك الاختبار والتمرين نقاط XP إضافية."
+    }
+  },
+  {
+    "id": "ressources",
+    "cat": "ia",
+    "landing": false,
+    "q": {
+      "fr": "Où trouver les PDF, prompts et ressources ?",
+      "en": "Where do I find the PDFs, prompts and resources?",
+      "ar": "أين أجد ملفات PDF والبرومبتات والموارد؟"
+    },
+    "a": {
+      "fr": "Dans l’atelier de chaque leçon IA (onglets PDF, Prompts et Ressources), et dans la page Ressources qui rassemble la bibliothèque de prompts.",
+      "en": "In the workshop of each AI lesson (PDF, Prompts and Resources tabs), and on the Resources page, which gathers the prompt library.",
+      "ar": "في ورشة كل درس من دروس الذكاء الاصطناعي (تبويبات PDF والبرومبتات والموارد)، وفي صفحة الموارد التي تجمع مكتبة البرومبتات."
+    }
+  },
+  {
+    "id": "langue",
+    "cat": "plateforme",
+    "landing": false,
+    "q": {
+      "fr": "Puis-je changer la langue ?",
+      "en": "Can I change the language?",
+      "ar": "هل يمكنني تغيير اللغة؟"
+    },
+    "a": {
+      "fr": "Oui : français, anglais ou arabe, avec le sélecteur de langue en haut de l’écran ou dans ton profil. La voix off reste en darija.",
+      "en": "Yes: French, English or Arabic, with the language switcher at the top of the screen or in your profile. The voice-over stays in Darija.",
+      "ar": "نعم: الفرنسية أو الإنجليزية أو العربية، من مبدّل اللغة أعلى الشاشة أو من ملفك. يبقى التعليق الصوتي بالدارجة."
+    }
+  },
+  {
+    "id": "aide",
+    "cat": "plateforme",
+    "landing": false,
+    "q": {
+      "fr": "Je bloque sur un exercice ou un prompt, qui peut m’aider ?",
+      "en": "I’m stuck on an exercise or a prompt. Who can help?",
+      "ar": "تعثّرت في تمرين أو برومبت، من يساعدني؟"
+    },
+    "a": {
+      "fr": "Pose ta question à l’équipe sur WhatsApp, au numéro qui t’a envoyé ton accès. Joins une capture d’écran : on te répond plus vite.",
+      "en": "Ask the team on WhatsApp, at the number that sent you your access. Attach a screenshot: we can answer faster.",
+      "ar": "اطرح سؤالك على الفريق عبر واتساب، على الرقم الذي أرسل إليك دخولك. أرفق لقطة شاشة لنجيبك بسرعة أكبر."
+    }
+  }
+]
