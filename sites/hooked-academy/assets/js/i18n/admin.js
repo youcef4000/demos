@@ -298,7 +298,7 @@ add({
 
     // Messages envoyés aux étudiants (tIn)
     'ad.msg.welcome':
-      'Salam {name} ! Ton inscription à Hooked Academy est validée 🎉\n\nTon espace étudiant : {url}\n{id}\nCode d’accès : {code}\n\nTu y trouves la Formation Créative (M01 à M05) et la Formation IA (IA01 à IA09), avec des quiz et des ressources à télécharger. Bonne formation !',
+      'Salam {name} ! Ton inscription à Hooked Academy est validée 🎉\n\nTon espace étudiant : {url}\n{id}\nCode d’accès : {code}\n\nTu y trouves la Formation Créative et la Formation IA, avec leurs vidéos de bienvenue, des quiz, des ateliers pratiques et des ressources à télécharger. Bonne formation !',
     'ad.msg.email': 'Identifiant (e-mail) : {v}',
     'ad.msg.phone': 'Identifiant (téléphone) : {v}',
     'ad.msg.contact':
@@ -598,7 +598,7 @@ add({
     'ad.rs.refresh': 'Refresh',
 
     'ad.msg.welcome':
-      'Hi {name}! Your Hooked Academy enrolment is confirmed 🎉\n\nYour student space: {url}\n{id}\nAccess code: {code}\n\nInside, you’ll find the Creative Course (M01 to M05) and the AI Course (IA01 to IA09), with quizzes and downloadable resources. Enjoy the course!',
+      'Hi {name}! Your Hooked Academy enrolment is confirmed 🎉\n\nYour student space: {url}\n{id}\nAccess code: {code}\n\nInside, you’ll find the Creative Course and the AI Course, with their welcome videos, quizzes, hands-on workshops and downloadable resources. Enjoy the course!',
     'ad.msg.email': 'Login (email): {v}',
     'ad.msg.phone': 'Login (phone): {v}',
     'ad.msg.contact':
@@ -898,7 +898,7 @@ add({
     'ad.rs.refresh': 'تحديث',
 
     'ad.msg.welcome':
-      'السلام عليكم {name}! تم تأكيد تسجيلك في Hooked Academy 🎉\n\nفضاء الطالب: {url}\n{id}\nرمز الدخول: {code}\n\nستجد فيه التكوين الإبداعي (من M01 إلى M05) وتكوين الذكاء الاصطناعي (من IA01 إلى IA09)، مع اختبارات وموارد قابلة للتحميل. بالتوفيق في تكوينك!',
+      'السلام عليكم {name}! تم تأكيد تسجيلك في Hooked Academy 🎉\n\nفضاء الطالب: {url}\n{id}\nرمز الدخول: {code}\n\nستجد فيه التكوين الإبداعي وتكوين الذكاء الاصطناعي، مع فيديوهات الترحيب والاختبارات والورشات التطبيقية والموارد القابلة للتحميل. بالتوفيق في تكوينك!',
     'ad.msg.email': 'معرّف الدخول (البريد الإلكتروني): {v}',
     'ad.msg.phone': 'معرّف الدخول (رقم الهاتف): {v}',
     'ad.msg.contact':
