@@ -101,7 +101,9 @@ add({
     'mo.an.c3': 'Ses points forts',
 
     'mo.ou.next': 'Leçon suivante',
-    'mo.ou.final': 'Projet final',
+    'mo.ou.end': 'Bravo, tu as terminé',
+    'mo.ou.end.creative': 'La Formation Créative',
+    'mo.ou.end.ia': 'La Formation IA',
 
     'mo.pl.play': 'Lire la vidéo',
     'mo.pl.say': 'À dire',
@@ -209,7 +211,9 @@ add({
     'mo.an.c3': 'Its strengths',
 
     'mo.ou.next': 'Next lesson',
-    'mo.ou.final': 'Final project',
+    'mo.ou.end': 'Well done, you’ve finished',
+    'mo.ou.end.creative': 'The Creative Course',
+    'mo.ou.end.ia': 'The AI Course',
 
     'mo.pl.play': 'Play the video',
     'mo.pl.say': 'To say',
@@ -317,7 +321,9 @@ add({
     'mo.an.c3': 'نقاط قوته',
 
     'mo.ou.next': 'الدرس التالي',
-    'mo.ou.final': 'المشروع النهائي',
+    'mo.ou.end': 'أحسنت، لقد أنهيت',
+    'mo.ou.end.creative': 'التكوين الإبداعي',
+    'mo.ou.end.ia': 'تكوين الذكاء الاصطناعي',
 
     'mo.pl.play': 'شغّل الفيديو',
     'mo.pl.say': 'النص المنطوق',
