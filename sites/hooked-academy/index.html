@@ -31,7 +31,7 @@
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:ital,wght@0,600..900;1,800&family=Sofia+Sans:wght@400..800&family=Doto:wght@700..900&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Alexandria:wght@500..900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:ital,wght@0,600..900;1,800&family=Sofia+Sans:wght@400..800&family=Doto:wght@700..900&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Alexandria:wght@500..900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Permanent+Marker&family=Marhey:wght@600&display=swap">
 <link rel="stylesheet" href="assets/css/brand.css">
 <link rel="stylesheet" href="assets/css/landing.css">
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
@@ -87,12 +87,15 @@
     <p class="burn burn--tr" aria-hidden="true" data-i18n="hero.fps">DÉMO · 25 I/S</p>
 
     <div class="hero-in">
-      <div class="slate" id="slate" role="group" aria-labelledby="hero-title">
-        <div class="clapper" id="clapper" aria-hidden="true"><span class="clapper-hinge"></span></div>
-        <div class="clapper-base" aria-hidden="true"></div>
+      <div class="slate slate--noir" id="slate" role="group" aria-labelledby="hero-title">
+        <div class="sticks" aria-hidden="true">
+          <div class="clapper" id="clapper"></div>
+          <div class="clapper-base"></div>
+          <span class="hinge"><i></i><i></i></span>
+        </div>
         <div class="slate-body">
           <dl class="slate-row slate-row--top">
-            <div><dt data-i18n="slate.prod">Prod.</dt><dd>Hooked Academy</dd></div>
+            <div><dt data-i18n="slate.prod">Prod.</dt><dd><span class="tape">Hooked Academy</span></dd></div>
             <div><dt data-i18n="slate.dir">Réal.</dt><dd data-i18n="slate.you">Toi</dd></div>
           </dl>
           <h1 class="hero-title" id="hero-title" data-i18n-html="hero.title">Une pub qui vend, <span class="nb">ça se monte.</span></h1>
@@ -442,11 +445,14 @@
     </div>
 
     <div class="slate slate--form" id="fslate">
-      <div class="clapper" id="fclapper" aria-hidden="true"><span class="clapper-hinge"></span></div>
-      <div class="clapper-base" aria-hidden="true"></div>
+      <div class="sticks" aria-hidden="true">
+        <div class="clapper" id="fclapper"></div>
+        <div class="clapper-base"></div>
+        <span class="hinge"><i></i><i></i></span>
+      </div>
       <form class="slate-body form" id="form" novalidate>
         <dl class="slate-row slate-row--top" aria-hidden="true">
-          <div><dt data-i18n="slate.prod">Prod.</dt><dd>Hooked Academy</dd></div>
+          <div><dt data-i18n="slate.prod">Prod.</dt><dd><span class="tape">Hooked Academy</span></dd></div>
           <div><dt data-i18n="slate.scene">Scène</dt><dd data-i18n="join.scene">Inscription</dd></div>
           <div><dt data-i18n="slate.take">Prise</dt><dd><span id="f-step">1</span>/3</dd></div>
         </dl>

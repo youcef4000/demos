@@ -230,37 +230,143 @@ onScroll();
 /* Le clap                                                             */
 /* ------------------------------------------------------------------ */
 
-function clap(slate, clapper, { onShut } = {}) {
+// Son du clap : synthétisé (bruit filtré + coup sourd), joué seulement après un clic.
+let actx = null;
+function armSound() {
+  try {
+    actx ||= new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === 'suspended') actx.resume();
+  } catch {
+    actx = null;
+  }
+}
+function clapSound() {
+  if (!actx) return;
+  try {
+    const t0 = actx.currentTime;
+    const sr = actx.sampleRate;
+    const buf = actx.createBuffer(1, Math.floor(sr * 0.22), sr);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.exp(-i / (sr * 0.016));
+    const crack = actx.createBufferSource();
+    crack.buffer = buf;
+    const bp = actx.createBiquadFilter();
+    bp.type = 'bandpass';
+    bp.frequency.value = 2400;
+    bp.Q.value = 0.8;
+    const cg = actx.createGain();
+    cg.gain.value = 0.55;
+    crack.connect(bp).connect(cg).connect(actx.destination);
+    const knock = actx.createOscillator();
+    knock.frequency.setValueAtTime(210, t0);
+    knock.frequency.exponentialRampToValueAtTime(70, t0 + 0.09);
+    const kg = actx.createGain();
+    kg.gain.setValueAtTime(0.4, t0);
+    kg.gain.exponentialRampToValueAtTime(0.001, t0 + 0.11);
+    knock.connect(kg).connect(actx.destination);
+    crack.start(t0);
+    knock.start(t0);
+    knock.stop(t0 + 0.12);
+  } catch {}
+}
+
+// Contact des claquettes : secousse, éclair de synchro, poussière de craie
+function impact(slate, sound) {
+  const g = window.gsap;
+  if (sound) clapSound();
+  g.fromTo(
+    slate,
+    { x: 0, y: 0, rotation: 0 },
+    {
+      keyframes: [
+        { x: -3, y: 2, rotation: -0.35, duration: 0.03 },
+        { x: 2.4, y: -1, rotation: 0.22, duration: 0.03 },
+        { x: -1, y: 0.5, rotation: -0.08, duration: 0.03 },
+        { x: 0, y: 0, rotation: 0, duration: 0.06 },
+      ],
+      clearProps: 'transform',
+    },
+  );
+  const sec = slate.closest('.sh');
+  let fl = $('.sync-flash', sec);
+  if (!fl) {
+    fl = document.createElement('div');
+    fl.className = 'sync-flash';
+    fl.setAttribute('aria-hidden', 'true');
+    sec.prepend(fl);
+  }
+  const r = slate.getBoundingClientRect();
+  const rs = sec.getBoundingClientRect();
+  fl.style.setProperty('--fx', `${(((r.left + r.width / 2 - rs.left) / rs.width) * 100).toFixed(1)}%`);
+  g.fromTo(fl, { opacity: 0.42 }, { opacity: 0, duration: 0.32, ease: 'power2.out' });
+  const sticks = $('.sticks', slate);
+  const w = sticks.offsetWidth;
+  const y = $('.clapper', sticks).offsetHeight;
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('i');
+    p.className = 'dust';
+    sticks.appendChild(p);
+    const x0 = w * (0.12 + Math.random() * 0.84);
+    const s = 0.5 + Math.random() * 1.3;
+    g.set(p, { x: x0, y, scale: s, opacity: 0.85 });
+    g.to(p, { x: x0 + (Math.random() - 0.5) * 90, y: y - 20 - Math.random() * 60, duration: 0.35 + Math.random() * 0.25, ease: 'power2.out' });
+    g.to(p, { y: `+=${18 + Math.random() * 30}`, opacity: 0, scale: s * 0.4, duration: 0.5, delay: 0.3, ease: 'power1.in', onComplete: () => p.remove() });
+  }
+}
+
+function clap(slate, clapper, { onShut, sound = false } = {}) {
   const g = window.gsap;
   if (!g || reduce) {
     clapper.style.setProperty('--open', '0deg');
+    if (sound) clapSound();
     onShut?.();
     return;
   }
+  g.killTweensOf(clapper);
   const tl = g.timeline();
-  // anticipation (4 images), claquement (2 images), contact (1 image)
-  tl.to(clapper, { '--open': '-24deg', duration: 0.16, ease: 'steps(2)' })
-    .to(clapper, { '--open': '0deg', duration: 0.08, ease: 'steps(2)' })
+  // ouverture (élan), claquement, petit rebond
+  tl.to(clapper, { '--open': '-28deg', duration: 0.22, ease: 'power2.out' })
+    .to(clapper, { '--open': '0deg', duration: 0.075, ease: 'power4.in' })
     .add(() => {
-      slate.classList.add('is-flash');
+      impact(slate, sound);
       onShut?.();
     })
-    .add(() => slate.classList.remove('is-flash'), '+=0.04');
+    .to(clapper, { '--open': '-2.4deg', duration: 0.05, ease: 'power1.out' })
+    .to(clapper, { '--open': '0deg', duration: 0.08, ease: 'power2.in' });
   return tl;
 }
 const slate = $('#slate');
 const clapper = $('#clapper');
 let take = 1;
 $('#slate-hit').addEventListener('click', () => {
-  const g = window.gsap;
-  if (g && !reduce) g.set(clapper, { '--open': '-16deg' });
+  armSound();
   clap(slate, clapper, {
+    sound: true,
     onShut: () => {
       take += 1;
       $('#take').textContent = pad(take);
     },
   });
 });
+// Au survol, les claquettes s'entrouvrent ; le reflet de l'acrylique suit la souris
+if (fine && !reduce) {
+  const hit = $('#slate-hit');
+  hit.addEventListener('pointerenter', () => window.gsap?.to(clapper, { '--open': '-9deg', duration: 0.25, ease: 'power2.out' }));
+  hit.addEventListener('pointerleave', () => window.gsap?.to(clapper, { '--open': '0deg', duration: 0.2, ease: 'power2.in' }));
+  let raf = 0;
+  $$('.slate').forEach((sl) =>
+    sl.addEventListener('pointermove', (e) => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const body = $('.slate-body', sl);
+        const r = body.getBoundingClientRect();
+        body.style.setProperty('--mx', `${(((e.clientX - r.left) / r.width) * 100).toFixed(1)}%`);
+        body.style.setProperty('--my', `${(((e.clientY - r.top) / r.height) * 100).toFixed(1)}%`);
+      });
+    }),
+  );
+}
 
 /* ------------------------------------------------------------------ */
 /* Titres en « jump cut » : les mots apparaissent par morceaux de 4 images */
@@ -492,7 +598,9 @@ next.addEventListener('click', () => {
   const first = app.name.split(/\s+/)[0] || '';
   $('#done-t').textContent = first ? t('f.done.t', { name: first }) : t('f.done.t0');
   const done = $('#form-done');
+  armSound();
   clap($('#fslate'), $('#fclapper'), {
+    sound: true,
     onShut: () => {
       form.classList.add('is-done');
       done.hidden = false;

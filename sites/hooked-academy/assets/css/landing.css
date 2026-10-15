@@ -552,71 +552,206 @@ html[lang='ar'] .tc-plan span {
 .burn--tr {
   inset-inline-end: calc(var(--gut) / 2 + 40px);
 }
+/* Plateau : une découpe de projecteur derrière le clap, et le grain de la pellicule */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(46% 62% at 31% 57%, rgb(255 236 200 / 0.16), rgb(255 236 200 / 0.05) 55%, rgb(255 236 200 / 0) 76%),
+    radial-gradient(60% 30% at 31% 100%, rgb(0 0 0 / 0.55), rgb(0 0 0 / 0) 70%);
+  pointer-events: none;
+}
+[dir='rtl'] .hero::before {
+  background:
+    radial-gradient(46% 62% at 69% 57%, rgb(255 236 200 / 0.16), rgb(255 236 200 / 0.05) 55%, rgb(255 236 200 / 0) 76%),
+    radial-gradient(60% 30% at 69% 100%, rgb(0 0 0 / 0.55), rgb(0 0 0 / 0) 70%);
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  inset: -40%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .7 -.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0 / 180px 180px;
+  opacity: 0.07;
+  pointer-events: none;
+  animation: grain 0.48s steps(1) infinite;
+}
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  17% { transform: translate(-6%, 3%); }
+  33% { transform: translate(4%, -5%); }
+  50% { transform: translate(-3%, -2%); }
+  67% { transform: translate(5%, 4%); }
+  83% { transform: translate(-5%, 6%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero::after {
+    animation: none;
+  }
+}
 .hero-in {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 1.62fr) minmax(0, 1fr);
   align-items: end;
   gap: clamp(32px, 4vw, 72px);
 }
 
-/* L'ardoise (clap) : plate, de face, sans texture */
+/* L'ardoise : un vrai clap de tournage. Claquettes rayées en acrylique, charnière en acier
+   vissée, ardoise noire (ouverture) ou blanche (inscription), valeurs écrites au marqueur,
+   ruban gaffer citron. C'est le seul objet « matière » de la page : reflets, grain et ombre portée. */
 .slate {
+  --stick-h: clamp(30px, 3.5vw, 50px);
+  --stripe: clamp(20px, 2.3vw, 32px);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 -.18'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --scratch: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' fill='none' stroke='%23fff' stroke-linecap='round'%3E%3Cg stroke-opacity='.07' stroke-width='.8'%3E%3Cpath d='M40 60 190 38M310 90l170-22M90 300l140-30M380 330l150-12M250 200l60-40M470 180l90 25'/%3E%3C/g%3E%3Cg stroke-opacity='.045' stroke-width='1.6'%3E%3Cpath d='M120 140c40-6 90-4 150 4M330 250c50 8 110 6 170-4M60 220c30-10 60-12 90-8'/%3E%3C/g%3E%3C/svg%3E");
   position: relative;
   color: var(--ink);
+  filter: drop-shadow(0 36px 34px rgb(0 0 0 / 0.5)) drop-shadow(0 4px 6px rgb(0 0 0 / 0.45));
 }
 .hero .slate {
-  margin-inline-start: calc(var(--gut) * -1.2);
+  rotate: -1.2deg;
+}
+[dir='rtl'] .hero .slate {
+  rotate: 1.2deg;
+}
+.sticks {
+  position: relative;
+  z-index: 2;
 }
 .clapper,
 .clapper-base {
   position: relative;
-  height: clamp(28px, 3.4vw, 46px);
-  background: repeating-linear-gradient(-58deg, var(--ink) 0 26px, var(--lime) 26px 52px);
-  box-shadow: inset 0 0 0 2px var(--ink);
+  height: var(--stick-h);
+  border-radius: 3px;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.26), rgb(255 255 255 / 0.05) 32%, rgb(0 0 0 / 0) 58%, rgb(0 0 0 / 0.38)),
+    var(--grain),
+    repeating-linear-gradient(-56deg, #141413 0 var(--stripe), #f1eee6 var(--stripe) calc(var(--stripe) * 2));
+  background-size: auto, 160px 160px, auto;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.5), inset 0 -1px 0 rgb(0 0 0 / 0.65), inset 0 0 0 1px rgb(0 0 0 / 0.6);
 }
 .clapper-base {
-  background: repeating-linear-gradient(58deg, var(--ink) 0 26px, var(--lime) 26px 52px);
-  border-top: 2px solid var(--ink);
+  margin-top: 2px;
+  background:
+    linear-gradient(180deg, rgb(0 0 0 / 0.3), rgb(255 255 255 / 0.12) 26%, rgb(0 0 0 / 0) 60%, rgb(0 0 0 / 0.42)),
+    var(--grain),
+    repeating-linear-gradient(56deg, #141413 0 var(--stripe), #f1eee6 var(--stripe) calc(var(--stripe) * 2));
+  background-size: auto, 160px 160px, auto;
 }
 .clapper {
   z-index: 2;
-  margin-bottom: -2px;
-  transform-origin: 0 100%;
+  transform-origin: calc(var(--stick-h) * 0.5) calc(var(--stick-h) * 0.66);
   transform: rotate(var(--open, -16deg));
-  border-radius: 3px 3px 0 0;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.5), inset 0 -1px 0 rgb(0 0 0 / 0.65), inset 0 0 0 1px rgb(0 0 0 / 0.6), 0 12px 16px -8px rgb(0 0 0 / 0.6);
+  will-change: transform;
 }
 [dir='rtl'] .clapper {
-  transform-origin: 100% 100%;
+  transform-origin: calc(100% - var(--stick-h) * 0.5) calc(var(--stick-h) * 0.66);
   transform: rotate(calc(var(--open, -16deg) * -1));
 }
-.clapper-hinge {
+/* Charnière : plaque d'acier brossé, deux vis */
+.hinge {
   position: absolute;
-  inset-inline-start: 10px;
-  bottom: -9px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--ink);
-  box-shadow: inset 0 0 0 5px var(--ink), inset 0 0 0 16px var(--paper);
+  z-index: 3;
+  inset-inline-start: calc(var(--stick-h) * 0.14);
+  top: calc(var(--stick-h) * 0.38);
+  width: calc(var(--stick-h) * 0.72);
+  height: calc(var(--stick-h) * 1.26);
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(0deg, rgb(255 255 255 / 0.06) 0 1px, rgb(0 0 0 / 0.05) 1px 2px),
+    linear-gradient(100deg, #5f5f5b, #dcdbd5 26%, #8d8c86 50%, #cfcec7 72%, #62615d);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.65), inset 0 -1px 0 rgb(0 0 0 / 0.5), inset 0 0 0 1px rgb(0 0 0 / 0.35), 0 3px 4px rgb(0 0 0 / 0.55);
 }
+.hinge i {
+  position: absolute;
+  left: 50%;
+  width: 34%;
+  aspect-ratio: 1;
+  margin-left: -17%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fbfaf6, #9a9993 48%, #4a4946);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.45), 0 1px 0 rgb(255 255 255 / 0.5);
+}
+.hinge i::after {
+  content: '';
+  position: absolute;
+  inset: 44% 14%;
+  border-radius: 1px;
+  background: rgb(0 0 0 / 0.6);
+  transform: rotate(32deg);
+}
+.hinge i:first-child {
+  top: 15%;
+}
+.hinge i:last-child {
+  bottom: 14%;
+}
+.hinge i:last-child::after {
+  transform: rotate(-58deg);
+}
+/* Poussière de craie et éclair de synchro (créés au claquement) */
+.dust {
+  position: absolute;
+  z-index: 4;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #f4f1ea;
+  pointer-events: none;
+}
+.sync-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  mix-blend-mode: screen;
+  background: radial-gradient(70% 80% at var(--fx, 30%) 45%, #fffdf5, rgb(255 253 245 / 0.25) 60%, rgb(255 253 245 / 0) 100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
 .slate-body {
+  --line: rgb(15 15 13 / 0.85);
+  --label: var(--paper-mute);
   position: relative;
   display: grid;
-  background: var(--paper);
-  border-radius: 0 0 10px 10px;
+  margin-top: 3px;
+  border-radius: 2px 2px 14px 14px;
   padding: clamp(16px, 2.2vw, 30px);
+  background:
+    radial-gradient(55% 45% at var(--mx, 24%) var(--my, 10%), rgb(255 255 255 / 0.85), rgb(255 255 255 / 0) 70%),
+    radial-gradient(26% 12% at 74% 34%, rgb(15 15 13 / 0.018), transparent 70%),
+    radial-gradient(20% 10% at 28% 86%, rgb(15 15 13 / 0.02), transparent 70%),
+    var(--grain),
+    linear-gradient(172deg, #fbfaf6, #edebe4 58%, #e1dfd7);
+  background-size: auto, auto, auto, 160px 160px, auto;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.14), inset 0 2px 0 #fff, inset 0 -4px 8px rgb(0 0 0 / 0.1);
+}
+.slate--noir .slate-body {
+  --line: rgb(242 239 231 / 0.8);
+  --label: rgb(242 239 231 / 0.55);
+  color: #f3f0e8;
+  background:
+    radial-gradient(55% 45% at var(--mx, 24%) var(--my, 10%), rgb(255 255 255 / 0.11), rgb(255 255 255 / 0) 70%),
+    radial-gradient(26% 12% at 74% 34%, rgb(255 255 255 / 0.04), transparent 70%),
+    radial-gradient(20% 10% at 28% 86%, rgb(255 255 255 / 0.05), transparent 70%),
+    var(--scratch),
+    var(--grain),
+    linear-gradient(172deg, #252522, #141413 55%, #0b0b0a);
+  background-size: auto, auto, auto, cover, 160px 160px, auto;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1), inset 0 2px 0 rgb(255 255 255 / 0.12), inset 0 -4px 10px rgb(0 0 0 / 0.7), 0 0 0 1px #000;
 }
 .slate-body::before {
   content: '';
   position: absolute;
   inset: 9px;
-  border: 1.5px solid var(--ink);
+  border: 1.5px solid var(--line);
   border-top: 0;
-  border-radius: 0 0 5px 5px;
+  border-radius: 0 0 6px 6px;
   pointer-events: none;
-}
-.slate.is-flash .slate-body {
-  background: var(--lime);
 }
 .slate-row {
   position: relative;
@@ -625,18 +760,18 @@ html[lang='ar'] .tc-plan span {
 }
 .slate-row--top {
   grid-template-columns: 1fr 1fr;
-  border-bottom: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--line);
 }
 .slate-row--bot {
   grid-template-columns: repeat(4, 1fr);
-  border-top: 1.5px solid var(--ink);
+  border-top: 1.5px solid var(--line);
 }
 .slate-row > div {
   padding: 8px 12px 10px;
   min-width: 0;
 }
 .slate-row > div + div {
-  border-inline-start: 1.5px solid var(--ink);
+  border-inline-start: 1.5px solid var(--line);
 }
 .slate-row dt {
   font-family: var(--f-dot);
@@ -644,23 +779,60 @@ html[lang='ar'] .tc-plan span {
   font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--paper-mute);
+  color: var(--label);
 }
 html[lang='ar'] .slate-row dt {
   font-family: var(--f-text);
   font-weight: 600;
   letter-spacing: 0;
 }
+/* Valeurs écrites à la main, au marqueur */
 .slate-row dd {
-  margin: 2px 0 0;
-  font-family: var(--f-cond);
-  font-weight: 800;
-  font-size: clamp(18px, 1.7vw, 26px);
-  line-height: 1.05;
-  text-transform: uppercase;
+  margin: 4px 0 0;
+  font-family: 'Permanent Marker', var(--f-cond);
+  font-weight: 400;
+  font-size: clamp(18px, 1.75vw, 27px);
+  line-height: 1.12;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transform: rotate(-1.4deg);
+  transform-origin: 0 50%;
+}
+.slate-row > div:nth-child(2n) dd {
+  transform: rotate(0.9deg);
+}
+[dir='rtl'] .slate-row dd {
+  transform-origin: 100% 50%;
+}
+html[lang='ar'] .slate-row dd {
+  font-family: 'Marhey', var(--f-text);
+  font-weight: 600;
+}
+.slate--noir .slate-row dd {
+  color: #f7f5ef;
+  text-shadow: 0 0 1px rgb(255 255 255 / 0.55), 0 0 6px rgb(255 255 255 / 0.08);
+}
+/* Ruban gaffer citron, déchiré à la main */
+.slate-row dd:has(.tape) {
+  overflow: visible;
+  transform: none;
+}
+.tape {
+  display: inline-block;
+  max-width: 100%;
+  padding: 3px 14px 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: top;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.28), rgb(255 255 255 / 0) 40%, rgb(0 0 0 / 0.1)),
+    repeating-linear-gradient(90deg, rgb(0 0 0 / 0.025) 0 2px, transparent 2px 5px),
+    var(--lime);
+  color: var(--ink);
+  text-shadow: none !important;
+  clip-path: polygon(1.5% 0, 98.5% 0, 100% 10%, 98.2% 24%, 100% 37%, 98.6% 52%, 100% 66%, 98.1% 80%, 100% 92%, 98.5% 100%, 1.5% 100%, 0 88%, 1.9% 74%, 0 60%, 1.5% 46%, 0 32%, 2% 18%, 0 6%);
+  transform: rotate(-1.8deg);
 }
 .hero-title {
   position: relative;
@@ -668,15 +840,19 @@ html[lang='ar'] .slate-row dt {
   padding: clamp(20px, 3vw, 44px) 12px clamp(18px, 2.6vw, 38px);
   font-family: var(--f-cond);
   font-weight: 900;
-  font-size: clamp(54px, 8.4vw, 158px);
+  font-size: clamp(54px, 7.3vw, 138px);
   line-height: 0.84;
   letter-spacing: -0.01em;
   text-transform: uppercase;
   text-wrap: balance;
 }
+.slate--noir .hero-title {
+  color: #f4f1e9;
+  text-shadow: 0 0 1px rgb(255 255 255 / 0.35);
+}
 html[lang='ar'] .hero-title {
   font-weight: 800;
-  font-size: clamp(40px, 5.6vw, 100px);
+  font-size: clamp(40px, 4.7vw, 88px);
   line-height: 1.22;
 }
 .slate-hit {
@@ -768,6 +944,10 @@ html[lang='ar'] .hero-legend span {
   color: var(--ink-mute);
 }
 @media (max-width: 899px) {
+  .hero::before,
+  [dir='rtl'] .hero::before {
+    background: radial-gradient(90% 34% at 50% 30%, rgb(255 236 200 / 0.12), rgb(255 236 200 / 0) 75%);
+  }
   .hero {
     padding-top: calc(var(--nav-h) + 56px);
     padding-bottom: 56px;
@@ -778,6 +958,14 @@ html[lang='ar'] .hero-legend span {
   }
   .hero .slate {
     margin-inline: -6px;
+    rotate: 0deg;
+  }
+  .slate-row--top {
+    grid-template-columns: 1.55fr 1fr;
+  }
+  .tape {
+    padding-inline: 10px;
+    font-size: 0.82em;
   }
   .slate-row--bot {
     grid-template-columns: repeat(4, auto);
@@ -2562,6 +2750,13 @@ html[lang='ar'] .form-done h3 {
 @media (max-width: 899px) {
   .join {
     grid-template-columns: minmax(0, 1fr);
+  }
+  .slate--form .slate-row--top {
+    grid-template-columns: 1.75fr 1.2fr 0.7fr;
+  }
+  .slate--form .tape {
+    padding-inline: 8px;
+    font-size: 0.78em;
   }
   .slate--form {
     margin-inline: -6px;
