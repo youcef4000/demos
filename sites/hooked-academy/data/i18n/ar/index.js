@@ -7,7 +7,7 @@ const base = {
   lessons: {},
 };
 // MODULES : liste des fichiers de module disponibles pour cette langue (mis à jour quand une traduction arrive).
-const MODULES = ['m0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm6', 'ia0', 'ia1', 'ia2', 'ia3', 'ia4', 'ia5', 'ia6', 'ia7', 'ia8', 'ia9'];
+const MODULES = ['m0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm6', 'm7', 'ia0', 'ia1', 'ia2', 'ia3', 'ia4', 'ia5', 'ia6', 'ia7', 'ia8', 'ia9'];
 const loaded = await Promise.all(MODULES.map((m) => import(`./${m}.js`).then((x) => x.default).catch((e) => (console.warn('[i18n]', m, e), null))));
 for (const f of loaded.filter(Boolean)) for (const k of ['tracks', 'parts', 'modules', 'lessons']) Object.assign(base[k], f[k] || {});
 export default base;
