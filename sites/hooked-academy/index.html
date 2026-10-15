@@ -50,6 +50,7 @@
     <a href="#lecon" data-i18n="nav.lesson">La leçon</a>
     <a href="#parcours" data-i18n="nav.path">Parcours</a>
     <a href="#hooked-lab">Hooked Lab</a>
+    <a href="#tarifs" data-i18n="nav.price">Tarifs</a>
     <a href="#faq" data-i18n="nav.faq">Questions</a>
   </nav>
   <div class="nav-end">
@@ -348,14 +349,94 @@
     </div>
   </section>
 
-  <!-- PLAN 08 · Inscription : l'ardoise devient le formulaire ========== -->
-  <section class="sh join" id="inscription" data-ton="encre" data-plan="08" data-name="plan.08" aria-labelledby="join-h">
+  <!-- PLAN 08 · Tarifs : la billetterie (trois billets, le pack au centre) === -->
+  <section class="sh tix" id="tarifs" data-ton="papier" data-plan="08" data-name="plan.08" aria-labelledby="tix-h">
+    <header class="sec-h tix-head">
+      <p class="lbl" data-i18n="tix.k">Tarifs</p>
+      <h2 class="h2" id="tix-h" data-i18n-html="tix.h">Choisis ta séance. <span class="nb dim">Paie après l’appel.</span></h2>
+      <p class="lead" data-i18n="tix.lead">Une formation, l’autre, ou les deux à prix réduit. Aucun paiement en ligne : l’équipe t’appelle d’abord, puis tu paies par CCP, BaridiMob ou en espèces.</p>
+    </header>
+    <div class="tix-row">
+      <article class="tk" data-offre="creative" aria-labelledby="tk-creative">
+        <div class="tk-main">
+          <p class="tk-k burn" data-i18n="tix.c.k">Billet 01 · Séance simple</p>
+          <h3 class="tk-t" id="tk-creative"><span class="tk-big" data-i18n="duo.big1">Créative</span> <span class="tk-name" data-i18n="track.creative">Formation Créative</span></h3>
+          <p class="tk-p" data-i18n="tix.c.p">Comprendre ce qui fait vendre une pub, et la produire avec ton téléphone.</p>
+          <p class="tk-price"><span class="tk-amt js-amt" data-offre="creative">14&#8239;900&nbsp;DA</span></p>
+          <ul class="tk-inc">
+            <li class="js-inc" data-k="tix.inc.lessons" data-track="creative">27 leçons animées de 2 min, en darija</li>
+            <li class="js-inc" data-k="tix.c.1" data-mods="creative">6 modules, des bases au brand content</li>
+            <li data-i18n="tix.c.2">Hooks, scripts, formules de vente et UGC</li>
+            <li data-i18n="tix.c.3">Production au téléphone avec CapCut et Canva</li>
+            <li data-i18n="tix.c.4">Un quiz et un exercice à chaque leçon</li>
+            <li data-i18n="tix.c.5">Certificat Formation Créative</li>
+          </ul>
+        </div>
+        <div class="tk-stub">
+          <a class="bt bt--ink tk-go" href="#inscription" data-pick="creative" data-i18n="tix.go">Choisir ce billet</a>
+          <p class="tk-adm" aria-hidden="true"><span class="burn ltr">Admit one · HA-01</span><i class="tk-code"></i></p>
+        </div>
+      </article>
+      <article class="tk tk--pack" data-offre="both" aria-labelledby="tk-both">
+        <p class="tk-stamp" data-i18n="tix.stamp">Recommandé</p>
+        <div class="tk-main">
+          <p class="tk-k burn" data-i18n="tix.b.k">Billet 03 · Séance double</p>
+          <h3 class="tk-t" id="tk-both"><span class="tk-big" data-i18n="tix.b.big">Pack complet</span> <span class="tk-name" data-i18n="tix.b.name">Créative + IA</span></h3>
+          <p class="tk-p" data-i18n="tix.b.p">Les deux formations, dans l’ordre conseillé : la créative d’abord, l’IA ensuite.</p>
+          <p class="tk-price"><span class="tk-amt js-amt" data-offre="both">32&#8239;900&nbsp;DA</span><s class="tk-was js-was">au lieu de 39&#8239;800&nbsp;DA</s><span class="tk-save js-save">Tu économises 6&#8239;900&nbsp;DA</span></p>
+          <ul class="tk-inc">
+            <li class="js-inc" data-k="tix.b.1" data-track="all">Les 67 leçons des deux formations</li>
+            <li data-i18n="tix.b.2">Tout le contenu Créative et tout le contenu IA</li>
+            <li data-i18n="tix.b.3">Les ateliers, la bibliothèque de prompts et les ressources</li>
+            <li data-i18n="tix.b.4">Projet final validé par l’équipe</li>
+            <li data-i18n="tix.b.5">Les deux certificats</li>
+          </ul>
+        </div>
+        <div class="tk-stub">
+          <a class="bt bt--lime tk-go" href="#inscription" data-pick="both" data-i18n="tix.go.b">Choisir le pack</a>
+          <p class="tk-adm" aria-hidden="true"><span class="burn ltr">Admit one · HA-03</span><i class="tk-code"></i></p>
+        </div>
+      </article>
+      <article class="tk" data-offre="ia" aria-labelledby="tk-ia">
+        <div class="tk-main">
+          <p class="tk-k burn" data-i18n="tix.i.k">Billet 02 · Séance simple</p>
+          <h3 class="tk-t" id="tk-ia"><span class="tk-big" data-i18n="duo.big2">IA</span> <span class="tk-name" data-i18n="track.ia">Formation IA</span></h3>
+          <p class="tk-p" data-i18n="tix.i.p">Produire avec l’IA (images, vidéos, voix, UGC), puis vendre ce savoir-faire.</p>
+          <p class="tk-price"><span class="tk-amt js-amt" data-offre="ia">24&#8239;900&nbsp;DA</span></p>
+          <ul class="tk-inc">
+            <li class="js-inc" data-k="tix.inc.lessons" data-track="ia">40 leçons animées de 2 min, en darija</li>
+            <li class="js-inc" data-k="tix.i.1" data-mods="ia">9 modules, du prompting aux premiers clients</li>
+            <li data-i18n="tix.i.2">Un atelier par leçon : PDF, prompts, ressources</li>
+            <li data-i18n="tix.i.3">Images, vidéos, voix et UGC générés par l’IA</li>
+            <li data-i18n="tix.i.4">Projet final validé par l’équipe</li>
+            <li data-i18n="tix.i.5">Certificat Formation IA</li>
+          </ul>
+        </div>
+        <div class="tk-stub">
+          <a class="bt bt--ink tk-go" href="#inscription" data-pick="ia" data-i18n="tix.go">Choisir ce billet</a>
+          <p class="tk-adm" aria-hidden="true"><span class="burn ltr">Admit one · HA-02</span><i class="tk-code"></i></p>
+        </div>
+      </article>
+    </div>
+    <div class="tix-all">
+      <p class="tix-all-k burn" data-i18n="tix.all">Dans chaque billet</p>
+      <ul>
+        <li data-i18n="tix.all.1">Ton espace étudiant : progression, XP, badges</li>
+        <li data-i18n="tix.all.2">Voix en darija, textes à l’écran en français, anglais ou arabe</li>
+        <li data-i18n="tix.all.3">Tes questions à l’équipe sur WhatsApp</li>
+      </ul>
+      <p class="tix-note" data-i18n="tix.note">Prix en dinars algériens (DA). Aucun paiement en ligne.</p>
+    </div>
+  </section>
+
+  <!-- PLAN 09 · Inscription : l'ardoise devient le formulaire ========== -->
+  <section class="sh join" id="inscription" data-ton="encre" data-plan="09" data-name="plan.09" aria-labelledby="join-h">
     <div class="join-copy">
       <p class="lbl" data-i18n="join.k">Inscription</p>
       <h2 class="h2" id="join-h" data-i18n-html="join.h">Réserve ta place. <span class="nb dim">L’équipe te rappelle.</span></h2>
       <ol class="join-steps">
         <li><b>1</b><div><strong data-i18n="join.s1">Tu remplis le formulaire</strong><span data-i18n="join.s1.x">1 minute, sans paiement en ligne.</span></div></li>
-        <li><b>2</b><div><strong data-i18n="join.s2">L’équipe te contacte sur WhatsApp</strong><span data-i18n="join.s2.x">Session, tarif, paiement (CCP, BaridiMob ou espèces).</span></div></li>
+        <li><b>2</b><div><strong data-i18n="join.s2">L’équipe te contacte sur WhatsApp</strong><span data-i18n="join.s2.x">Formule, session et paiement (CCP, BaridiMob ou espèces).</span></div></li>
         <li><b>3</b><div><strong data-i18n="join.s3">Tu reçois ton accès</strong><span data-i18n="join.s3.x">Ton espace étudiant s’ouvre : module 1, leçon 1.</span></div></li>
       </ol>
     </div>
@@ -381,9 +462,9 @@
           <div class="fld">
             <span id="f-trk-l" data-i18n="f.track">Quelle formation ?</span>
             <div class="seg" role="radiogroup" aria-labelledby="f-trk-l">
-              <label><input type="radio" name="formation" value="creative"><span data-i18n="f.track.c">Créative</span></label>
-              <label><input type="radio" name="formation" value="ia"><span data-i18n="f.track.i">IA</span></label>
-              <label><input type="radio" name="formation" value="both" checked><span data-i18n="f.track.b">Les deux</span></label>
+              <label><input type="radio" name="formation" value="creative"><span><b data-i18n="f.track.c">Créative</b><small class="js-amt" data-offre="creative">14&#8239;900&nbsp;DA</small></span></label>
+              <label><input type="radio" name="formation" value="ia"><span><b data-i18n="f.track.i">IA</b><small class="js-amt" data-offre="ia">24&#8239;900&nbsp;DA</small></span></label>
+              <label><input type="radio" name="formation" value="both" checked><span><b data-i18n="f.track.b">Les deux</b><small class="js-amt" data-offre="both">32&#8239;900&nbsp;DA</small></span></label>
             </div>
           </div>
           <div class="fld">
@@ -418,15 +499,15 @@
         <div class="form-done" id="form-done" hidden tabindex="-1">
           <div class="done-mark" id="done-mark"></div>
           <h3 id="done-t">C’est dans la boîte !</h3>
-          <p data-i18n="f.done.x">Ton inscription est arrivée chez l’équipe. On te contacte sur WhatsApp pour la session, le tarif et le paiement. Ensuite, tu reçois ton code d’accès.</p>
+          <p data-i18n="f.done.x">Ton inscription est arrivée chez l’équipe. On te contacte sur WhatsApp pour confirmer ta formule, la session et le paiement. Ensuite, tu reçois ton code d’accès.</p>
           <p class="done-demo" data-i18n-html="f.done.demo">Démo : ouvre <a href="admin/">l’espace équipe</a> pour voir ton inscription arriver.</p>
         </div>
       </form>
     </div>
   </section>
 
-  <!-- PLAN 09 · Questions : le fichier de sous-titres ===================== -->
-  <section class="sh faq" id="faq" data-ton="papier" data-plan="09" data-name="plan.09" aria-labelledby="faq-h">
+  <!-- PLAN 10 · Questions : le fichier de sous-titres ===================== -->
+  <section class="sh faq" id="faq" data-ton="papier" data-plan="10" data-name="plan.10" aria-labelledby="faq-h">
     <header class="sec-h faq-head">
       <p class="lbl" data-i18n="faq.k">Questions</p>
       <h2 class="h2" id="faq-h" data-i18n="faq.h">Avant de te lancer.</h2>
@@ -444,8 +525,8 @@
   </section>
 </main>
 
-<!-- PLAN 10 · Générique ================================================ -->
-<footer class="sh foot" data-ton="encre" data-plan="10" data-name="plan.10">
+<!-- PLAN 11 · Générique ================================================ -->
+<footer class="sh foot" data-ton="encre" data-plan="11" data-name="plan.11">
   <div class="credits">
     <dl>
       <div><dt data-i18n="foot.prod">Une production</dt><dd>Hooked Lab</dd></div>

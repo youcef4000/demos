@@ -1982,7 +1982,276 @@ html[lang='ar'] .lab-chips li {
 }
 
 /* --------------------------------------------------------------------------
-   PLAN 08 · inscription : l'ardoise-formulaire
+   PLAN 08 · tarifs : la billetterie (des billets de cinéma, en aplats)
+   Le talon est séparé par une ligne perforée et deux encoches (masque).
+   -------------------------------------------------------------------------- */
+.tix-head .lead {
+  max-width: 54ch;
+}
+.tix-row {
+  display: grid;
+  gap: 22px;
+}
+@media (min-width: 1000px) {
+  .tix-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr) minmax(0, 1fr);
+    align-items: end;
+    gap: clamp(16px, 2vw, 30px);
+  }
+}
+.tk {
+  --stub: 112px;
+  --notch: 15px;
+  --cut: calc(100% - var(--stub));
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr var(--stub);
+  border-radius: 6px;
+  background: var(--orange);
+  color: var(--ink);
+  -webkit-mask:
+    radial-gradient(circle var(--notch) at 0 var(--cut), #0000 97%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--notch) at 100% var(--cut), #0000 97%, #000) right / 51% 100% no-repeat;
+  mask:
+    radial-gradient(circle var(--notch) at 0 var(--cut), #0000 97%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--notch) at 100% var(--cut), #0000 97%, #000) right / 51% 100% no-repeat;
+  transition: transform calc(var(--img) * 3) steps(3);
+}
+.tk[data-offre='ia'] {
+  background: var(--lav);
+}
+.tk--pack {
+  background: var(--ink);
+  color: var(--paper);
+}
+.tk-main {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 24px 26px;
+}
+.tk--pack .tk-main {
+  padding-top: 30px;
+}
+@media (min-width: 1000px) {
+  .tk--pack .tk-main {
+    padding-top: 58px;
+    padding-bottom: 34px;
+  }
+}
+.tk-k {
+  font-size: 12px;
+  opacity: 0.78;
+}
+.tk--pack .tk-k {
+  padding-inline-end: 128px;
+}
+.tk-t {
+  display: grid;
+  margin: 18px 0 0;
+}
+.tk-big {
+  font-family: var(--f-cond);
+  font-weight: 900;
+  font-size: clamp(56px, 6.2vw, 92px);
+  line-height: 0.84;
+  text-transform: uppercase;
+}
+.tk--pack .tk-big {
+  font-size: clamp(50px, 5.4vw, 80px);
+}
+html[lang='ar'] .tk-big {
+  font-weight: 800;
+  font-size: clamp(40px, 4.4vw, 62px);
+  line-height: 1.15;
+}
+.tk-name {
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 800;
+}
+.tk-p {
+  margin: 12px 0 0;
+  max-width: 36ch;
+  font-size: 16px;
+  line-height: 1.45;
+}
+.tk-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 14px;
+  margin: 22px 0 0;
+  padding-top: 18px;
+  border-top: 2px solid currentColor;
+}
+.tk-amt {
+  font-family: var(--f-dot);
+  font-weight: 900;
+  font-size: clamp(42px, 4.4vw, 60px);
+  line-height: 1;
+  white-space: nowrap;
+}
+.tk--pack .tk-amt {
+  color: var(--lime);
+}
+.tk-was {
+  font-size: 15px;
+  opacity: 0.7;
+}
+.tk-save {
+  padding: 4px 9px 3px;
+  background: var(--lime);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 800;
+}
+.tk-inc {
+  display: grid;
+  gap: 10px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 15.5px;
+  line-height: 1.35;
+}
+.tk-inc li {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  gap: 10px;
+}
+.tk-inc li::before {
+  content: '';
+  width: 13px;
+  height: 7px;
+  margin-top: 5px;
+  border-left: 2.5px solid currentColor;
+  border-bottom: 2.5px solid currentColor;
+  transform: rotate(-45deg);
+}
+.tk--pack .tk-inc li::before {
+  border-color: var(--lime);
+}
+.tk-stub {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+}
+.tk-stub::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  inset-inline: calc(var(--notch) + 8px);
+  border-top: 2.5px dashed currentColor;
+  opacity: 0.5;
+}
+.tk-go {
+  width: 100%;
+  padding: 0 14px;
+}
+.tk[data-offre='creative'] .tk-go:hover,
+.tk[data-offre='ia'] .tk-go:hover {
+  background: var(--paper);
+  color: var(--ink);
+}
+.tk-adm {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  margin: 0;
+}
+.tk-adm .burn {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  opacity: 0.8;
+}
+.tk-code {
+  display: block;
+  width: 70px;
+  height: 38px;
+  background: repeating-linear-gradient(90deg, currentColor 0 2px, #0000 2px 4px, currentColor 4px 5px, #0000 5px 8px, currentColor 8px 11px, #0000 11px 12px, currentColor 12px 13px, #0000 13px 17px);
+}
+.tk-stamp {
+  position: absolute;
+  z-index: 1;
+  top: 20px;
+  inset-inline-end: 18px;
+  margin: 0;
+  padding: 7px 10px 6px;
+  border: 3px double var(--lime);
+  color: var(--lime);
+  font-family: var(--f-dot);
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: rotate(-7deg);
+}
+html[lang='ar'] .tk-stamp {
+  font-family: var(--f-text);
+  font-weight: 800;
+  letter-spacing: 0;
+  transform: rotate(7deg);
+}
+@media (hover: hover) and (pointer: fine) {
+  .tk:hover {
+    transform: translateY(-8px) rotate(-0.8deg);
+  }
+  .tk--pack:hover {
+    transform: translateY(-8px) rotate(0.8deg);
+  }
+}
+@media (max-width: 380px) {
+  .tk-main,
+  .tk-stub {
+    padding-inline: 18px;
+  }
+  .tk-code {
+    width: 54px;
+  }
+}
+.tix-all {
+  display: grid;
+  gap: 12px;
+  margin-top: clamp(30px, 4vw, 52px);
+  padding-top: 18px;
+  border-top: 2px solid var(--ink);
+}
+.tix-all-k {
+  font-size: 12px;
+}
+.tix-all ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 26px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-weight: 700;
+}
+.tix-all li::before {
+  content: '+';
+  margin-inline-end: 8px;
+  font-family: var(--f-dot);
+  font-weight: 900;
+  color: var(--orange);
+}
+.tix-note {
+  margin: 0;
+  font-size: 14px;
+  color: var(--paper-mute);
+}
+@media (prefers-reduced-motion: reduce) {
+  .tk {
+    transition: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   PLAN 09 · inscription : l'ardoise-formulaire
    -------------------------------------------------------------------------- */
 .join {
   display: grid;
@@ -2183,6 +2452,26 @@ html[lang='ar'] .fld > span {
   font-size: 19px;
   text-transform: uppercase;
 }
+.seg span {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2px;
+  min-height: 54px;
+  line-height: 1;
+}
+.seg span b {
+  font-weight: inherit;
+}
+.seg span small {
+  font-family: var(--f-text);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+  opacity: 0.75;
+}
 .seg input:checked + span,
 .chips-in input:checked + span {
   background: var(--ink);
@@ -2280,7 +2569,7 @@ html[lang='ar'] .form-done h3 {
 }
 
 /* --------------------------------------------------------------------------
-   PLAN 09 · questions : le fichier .srt
+   PLAN 10 · questions : le fichier .srt
    -------------------------------------------------------------------------- */
 .faq-head {
   position: relative;
@@ -2387,7 +2676,7 @@ html[lang='ar'] .srt summary > span:nth-child(2) {
 }
 
 /* --------------------------------------------------------------------------
-   PLAN 10 · générique
+   PLAN 11 · générique
    -------------------------------------------------------------------------- */
 .foot {
   padding-bottom: clamp(48px, 6vw, 80px);

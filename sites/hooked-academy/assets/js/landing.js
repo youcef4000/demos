@@ -9,6 +9,7 @@ import { logoInner, markSVG, morphMark } from './brand.js';
 import { TRACKS, MODULES, allLessons, modCode, modulesOf, findLesson } from '../../data/programme.js';
 import { addApplication } from './store.js';
 import * as FAQ from './faq.js';
+import { OFFRES } from '../../data/offres.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -41,6 +42,17 @@ function translateDom() {
   );
 }
 translateDom();
+
+// Typographie française : espace insécable avant « : ; ! ? » et dans les guillemets, pour qu'aucun
+// signe ne se retrouve seul en début de ligne.
+function frTypo(root) {
+  if (lang !== 'fr' || !root) return;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  for (let n = w.nextNode(); n; n = w.nextNode()) {
+    const v = n.nodeValue.replace(/ ([:;!?»])/g, ' $1').replace(/« /g, '« ');
+    if (v !== n.nodeValue) n.nodeValue = v;
+  }
+}
 $$('#lsw [data-lang]').forEach((b) => {
   b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
   b.addEventListener('click', () => setLang(b.dataset.lang));
@@ -66,6 +78,27 @@ for (const tr of TRACKS) {
   $(`#duo-n-${tr.id}`).textContent = [nL(lessons.length), nM(mods.length), ...(tr.id === 'ia' ? [t('duo.final')] : [])].join(' · ');
 }
 $('#count-t').textContent = `${nL(LESSONS.length)}, ${nM(MODULES.length)}, ${t('count.final')}`;
+
+// Tarifs (data/offres.js) : billets et choix de formation du formulaire
+const money = (n) => `${new Intl.NumberFormat(lang === 'en' ? 'en-GB' : 'fr-FR').format(n)} ${t('tix.cur')}`;
+const sep = OFFRES.creative + OFFRES.ia;
+$$('.js-amt').forEach((el) => (el.textContent = money(OFFRES[el.dataset.offre])));
+$$('.js-was, .js-save').forEach((el) => {
+  el.hidden = sep <= OFFRES.both;
+  el.textContent = el.matches('.js-was') ? t('tix.was', { p: money(sep) }) : t('tix.save', { p: money(sep - OFFRES.both) });
+});
+$$('.js-inc').forEach((el) => {
+  const { track, mods } = el.dataset;
+  const n = track === 'all' ? LESSONS.length : track ? byTrack[track].lessons.length : byTrack[mods].mods.length;
+  el.textContent = t(el.dataset.k, { n });
+});
+$$('[data-pick]').forEach((a) =>
+  a.addEventListener('click', () => {
+    const r = $(`#form input[name="formation"][value="${a.dataset.pick}"]`);
+    if (r) r.checked = true;
+  }),
+);
+frTypo(document.body);
 
 // Parcours : les modules de chaque partie, le dernier module (projet final) à part
 const LAST = MODULES[MODULES.length - 1];
@@ -105,6 +138,7 @@ FAQ.ready().then(() => {
       return `<details><summary><span class="srt-i" aria-hidden="true"><b>${i + 1}</b><span>${tc}</span></span><span>${esc(q)}</span></summary>${a}</details>`;
     })
     .join('');
+  frTypo($('#srt'));
 });
 
 /* ------------------------------------------------------------------ */
@@ -564,6 +598,11 @@ function animate() {
   // Hooked Lab : morph du monogramme, en 6 images
   const svg = $('#lab-mark svg');
   ST.create({ trigger: '#hooked-lab', start: 'top 60%', once: true, onEnter: () => morphMark(svg, g, { duration: 0.24, ease: 'steps(6)' }) });
+
+  // Billetterie : les billets sortent de la machine, en 6 images chacun
+  const tks = $$('.tk');
+  g.set(tks, { clipPath: 'inset(0 0 100% 0)' });
+  ST.create({ trigger: '.tix-row', start: 'top 80%', once: true, onEnter: () => g.to(tks, { clipPath: 'inset(0 0 0% 0)', duration: 0.24, ease: 'steps(6)', stagger: 0.14, clearProps: 'clipPath' }) });
 
   // Coupe : chaque plan « tombe » en une image (aucun fondu)
   addEventListener('load', () => ST.refresh());
