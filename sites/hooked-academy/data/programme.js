@@ -8,8 +8,8 @@ import { OVERLAY } from './i18n/index.js';
 
 /**
  * Deux formations distinctes :
- *  - « creative » : modules M01 à M05 (identifiants m1…m5), les bases, sans IA ;
- *  - « ia »       : modules IA01 à IA09 (identifiants ia1…ia9), l'IA créative puis la vente.
+ *  - « creative » : bienvenue M00 (m0), puis modules M01 à M06, les bases, sans IA ;
+ *  - « ia »       : bienvenue IA00 (ia0), puis modules IA01 à IA09, l'IA créative puis la vente.
  * Chaque formation a son identité (couleur, icône), sa progression et sa fin.
  */
 export const TRACKS = [
@@ -24,6 +24,51 @@ export const PARTS = [
 ];
 
 const MODULES_1 = [
+  // Bienvenue (leçon 00) : ce qui attend l'étudiant et comment réussir. Ouverte à tous, même en démo.
+  // Texte « say » en darija (écriture arabe) : prompteur de l'enregistrement, ou texte de la voix clonée.
+  {
+    id: 'm0',
+    n: 0,
+    part: 'p1',
+    intro: true,
+    title: 'Bienvenue',
+    ar: 'مرحبا بيك',
+    color: '#e0be55',
+    icon: 'play',
+    pitch: 'Ce qui t’attend dans la formation, et ce qu’il faut faire pour la réussir.',
+    lessons: [
+      {
+        id: 'm0-l1',
+        n: 0,
+        title: 'Bienvenue dans la Formation Créative',
+        ar: 'مرحبا بيك في التكوين الإبداعي',
+        scenes: [
+          { type: 'title', kicker: 'Module 00 · Bienvenue', sub: 'Ce qui t’attend, et ce qu’il faut faire pour réussir', say: 'مرحبا بيك في الفورماسيون الكرياتيف تاع Hooked Academy! قبل ما نبداو، حبيت نقولك واش راك رايح تلقى هنا، وواش لازم عليك دير باش تنجح.' },
+          { type: 'big', kicker: 'Ton objectif', text: 'Faire des pubs qui *arrêtent le scroll*… et qui *vendent*.', say: 'الهدف تاعنا واضح: تولّي تدير إعلانات توقّف السكرول، وفوق كلش… تبيع.' },
+          {
+            type: 'cards',
+            title: 'Ce qui t’attend',
+            items: [
+              { icon: 'hook', label: 'Comprendre', sub: 'Hook, structure, formules de vente', c: 'hook' },
+              { icon: 'video', label: 'Produire', sub: 'Ton téléphone, CapCut, Canva, l’UGC', c: 'body' },
+              { icon: 'diamond', label: 'Bâtir ta marque', sub: 'Le brand content qui crée du prestige', c: 'cta' },
+            ],
+            say: 'راك رايح تفهم واش اللي يخلّي إعلان يبيع: الهوك، الهيكل، والفورمولات تاع البيع. من بعد تتعلم تنتج بالتيليفون تاعك، بـ CapCut و Canva، وتدخل لعالم الـ UGC. وفي الأخير تتعلم كيفاش تبني ماركة عندها قيمة وهيبة.',
+          },
+          {
+            type: 'checklist',
+            title: 'Pour réussir',
+            items: ['Une leçon par jour : *10 minutes* suffisent', 'Fais *l’exercice*, ne te contente pas de regarder', 'Réussis le *quiz* avant de passer à la suite', 'Publie, teste, *recommence*'],
+            say: 'باش تنجح، كاين أربعة قواعد: درس واحد في النهار، عشر دقايق برك. دير التمرين، ما تكتفاش بالشوف. جاوب على الكويز قبل ما تفوت للدرس اللي موراه. ومن بعد: انشر، جرّب، وعاود.',
+          },
+          { type: 'quote', text: 'Une créative parfaite qui reste dans ton téléphone ne vend *rien*.', say: 'وتفكّر مليح: كرياتيف مليحة تبقى في التيليفون تاعك ما تبيع والو. اللي يفرق هو الخدمة.' },
+          { type: 'outro', text: 'On commence ?', say: 'يلا، نبداو! أول درس: واش هي الكرياتيف؟' },
+        ],
+        key: ['L’objectif : des pubs qui arrêtent le scroll et qui vendent.', 'Le parcours : comprendre, produire, puis bâtir ta marque.', 'Une leçon par jour, l’exercice à chaque fois, le quiz avant d’avancer.'],
+        quiz: [{ q: 'Quelle est la meilleure façon d’avancer dans la formation ?', a: ['Tout regarder en une soirée', 'Une leçon par jour, avec l’exercice et le quiz', 'Sauter les exercices'], ok: 1, why: 'La régularité et la pratique font la différence.' }],
+      },
+    ],
+  },
   {
     id: 'm1',
     n: 1,
@@ -1500,6 +1545,8 @@ MODULES.forEach((m) => {
 export const modCode = (m) => `${m.track === 'ia' ? 'IA' : 'M'}${String(m.n).padStart(2, '0')}`;
 export const trackOf = (idOrModule) => TRACKS.find((t) => t.id === (typeof idOrModule === 'string' ? idOrModule : idOrModule?.track)) || TRACKS[0];
 export const modulesOf = (track) => MODULES.filter((m) => m.track === track);
+/** Modules du programme sans la bienvenue (module 00) : pour les comptes, les plages M01–M06, la landing. */
+export const coreModulesOf = (track) => modulesOf(track).filter((m) => !m.intro);
 
 /* ------------------------------------------------------------------ */
 /* Traduction : la surcouche de la langue choisie (data/i18n/<langue>/) */

@@ -6,7 +6,7 @@
 import { lang, isRTL, t, has, setLang } from './i18n.js';
 import './i18n/landing.js';
 import { logoInner, markSVG, morphMark } from './brand.js';
-import { TRACKS, MODULES, allLessons, modCode, modulesOf, findLesson } from '../../data/programme.js';
+import { TRACKS, MODULES as ALL_MODULES, allLessons, modCode, coreModulesOf, findLesson } from '../../data/programme.js';
 import { addApplication } from './store.js';
 import * as FAQ from './faq.js';
 import { OFFRES } from '../../data/offres.js';
@@ -64,8 +64,10 @@ $('#foot-logo').innerHTML = logoInner();
 /* Données réelles du programme                                        */
 /* ------------------------------------------------------------------ */
 
-const LESSONS = allLessons();
-const byTrack = Object.fromEntries(TRACKS.map((x) => [x.id, { mods: modulesOf(x.id), lessons: LESSONS.filter((l) => l.module.track === x.id) }]));
+// La bienvenue (module 00) n'entre ni dans les comptes ni dans les listes de modules
+const MODULES = ALL_MODULES.filter((m) => !m.intro);
+const LESSONS = allLessons().filter((l) => !l.module.intro);
+const byTrack = Object.fromEntries(TRACKS.map((x) => [x.id, { mods: coreModulesOf(x.id), lessons: LESSONS.filter((l) => l.module.track === x.id) }]));
 const nL = (n) => t('count.lessons', { n });
 const nM = (n) => t('count.modules', { n });
 

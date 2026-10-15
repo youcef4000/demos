@@ -5,6 +5,56 @@
 // Les outils cités sont des exemples : ils changent vite, la méthode reste.
 
 export const MODULES_IA = [
+  // Bienvenue (leçon 00) : ouverte à tous, même en démo. « say » en darija (prompteur ou voix clonée).
+  {
+    id: 'ia0',
+    n: 0,
+    part: 'p2',
+    intro: true,
+    title: 'Bienvenue',
+    ar: 'مرحبا بيك',
+    color: '#c8b6ff',
+    icon: 'play',
+    pitch: 'Comment fonctionne la Formation IA, et comment en tirer le maximum.',
+    lessons: [
+      {
+        id: 'ia0-l1',
+        n: 0,
+        title: 'Bienvenue dans la Formation IA',
+        ar: 'مرحبا بيك في تكوين الذكاء الاصطناعي',
+        scenes: [
+          { type: 'title', kicker: 'Module 00 · Bienvenue', sub: 'L’IA ne remplace pas ton œil : elle le multiplie', say: 'مرحبا بيك في الفورماسيون تاع الذكاء الاصطناعي! هنا ما راكش رايح تتعلم برك تستعمل الأدوات: راك رايح تتعلم تنتج بيهم، وتبيع هاذ المهارة.' },
+          {
+            type: 'flow',
+            title: 'Ton parcours en *trois étapes*',
+            nodes: [
+              { icon: 'chat', label: 'Maîtriser', sub: 'Prompting, images, vidéos, voix' },
+              { icon: 'film', label: 'Produire', sub: 'UGC et cinématique' },
+              { icon: 'handshake', label: 'Vendre', sub: 'Hooked Lab, clients, projet final' },
+            ],
+            say: 'الطريق فيه ثلاث مراحل. الأولى: تتحكم في الأدوات، البرومبت، الصور، الفيديوهات والصوت. الثانية: تنتج، UGC وسينماتيك. والثالثة: تبيع، تحلل بـ Hooked Lab، تلقى الكليان، وتكمّل بالمشروع النهائي.',
+          },
+          {
+            type: 'compare',
+            title: 'Ce qui fait *la différence*',
+            left: { title: 'Copier des prompts', tone: 'bad', items: ['Des résultats génériques', 'Bloqué dès que l’outil change'] },
+            right: { title: 'Comprendre la méthode', tone: 'good', items: ['Des résultats sur mesure', 'Un service que tu peux vendre'] },
+            say: 'واش اللي يفرق؟ اللي ينسخ البرومبتات بلا ما يفهم، يخرج بنتايج كيف كيف كامل الناس، ويتبلوكا كي تتبدل الأداة. واللي يفهم الميطود، يخرج بنتايج على المقاس، وعندو خدمة يقدر يبيعها.',
+          },
+          {
+            type: 'checklist',
+            title: 'Pour réussir',
+            items: ['Ouvre l’*atelier* de chaque leçon', 'Teste chaque prompt *toi-même*', 'Garde tes meilleurs résultats : ton *portfolio*', 'Termine le *projet final* pour ton certificat'],
+            say: 'باش تنجح: افتح الأتولييه تاع كل درس. جرّب كل برومبت بيدّك. خبّي أحسن النتايج تاعك، هوما البورتفوليو تاعك. وكمّل المشروع النهائي باش تدّي الشهادة.',
+          },
+          { type: 'quote', text: 'L’IA ne remplace pas ta créativité. Elle *la multiplie*.', say: 'وتفكّر: الذكاء الاصطناعي ما يعوّضش الإبداع تاعك… يضاعفو.' },
+          { type: 'outro', text: 'On commence ?', say: 'يلا نبداو! أول درس: واش هو البرومبت؟' },
+        ],
+        key: ['Trois étapes : maîtriser les outils, produire, puis vendre.', 'Comprendre la méthode vaut mieux que copier des prompts.', 'Atelier, essais, portfolio, puis projet final pour le certificat.'],
+        quiz: [{ q: 'Qu’est-ce qui rend ton savoir-faire IA vendable ?', a: ['Copier les prompts des autres', 'Comprendre la méthode et l’appliquer à chaque client', 'Changer d’outil tous les jours'], ok: 1, why: 'La méthode s’adapte à chaque client et à chaque outil.' }],
+      },
+    ],
+  },
   {
     id: 'ia1',
     n: 1,

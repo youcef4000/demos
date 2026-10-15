@@ -10,7 +10,7 @@ import { plural, exText } from './i18n/admin.js';
 import { logoInner, markSVG } from './brand.js';
 import { icon } from './icons.js';
 import * as S from './store.js';
-import { MODULES, allLessons, findLesson, modCode, modulesOf, lessonsOf, trackOf } from '../../data/programme.js';
+import { MODULES, allLessons, findLesson, modCode, modulesOf, coreModulesOf, lessonsOf, trackOf } from '../../data/programme.js';
 import { plan, lessonDuration } from '../../motion/engine.js';
 import * as FAQ from './faq.js';
 
@@ -341,7 +341,7 @@ function viewOverview() {
     .slice(0, 8);
   const tracks = ['creative', 'ia'].map((id) => {
     const tr = trackOf(id);
-    const mods = modulesOf(id);
+    const mods = coreModulesOf(id);
     return `<a class="ov-tr" href="#/programme" style="--t:${tr.color}"><span class="ov-tr-i">${icon(tr.icon, { size: 20 })}</span><span class="ov-tr-t"><b>${t(`track.${id}`)}</b><small>${plural('module', mods.length)} · ${plural('lesson', lessonsOf(id).length)}</small></span><em dir="ltr">${modCode(mods[0])}–${modCode(mods[mods.length - 1])}</em></a>`;
   });
   shell(
@@ -602,7 +602,7 @@ function viewStudents() {
 
 function trackHead(id, stats) {
   const tr = trackOf(id);
-  const mods = modulesOf(id);
+  const mods = coreModulesOf(id);
   return `<header class="trh" data-track="${id}" style="--t:${tr.color}">
     <span class="trh-i">${icon(tr.icon, { size: 26 })}</span>
     <div class="trh-t"><p class="trh-k" dir="ltr">${modCode(mods[0])} – ${modCode(mods[mods.length - 1])}</p><h2>${t(`track.${id}`)}</h2>${arLine(tr.ar)}<p class="trh-p">${esc(tr.pitch)}</p></div>

@@ -10,7 +10,7 @@ import './i18n/app.js';
 import { logoInner, markSVG } from './brand.js';
 import { icon } from './icons.js';
 import * as S from './store.js';
-import { TRACKS, PARTS, MODULES, allLessons, findLesson, modCode, modulesOf, lessonsOf } from '../../data/programme.js';
+import { TRACKS, PARTS, MODULES, allLessons, findLesson, modCode, modulesOf, coreModulesOf, lessonsOf } from '../../data/programme.js';
 import { compose, lessonDuration } from '../../motion/engine.js';
 import { renderWidget, flashcards } from './widgets.js';
 import * as FAQ from './faq.js';
@@ -167,7 +167,7 @@ function lastTrack(st = me) {
   return findLesson(st?.progress?.last || '')?.module.track || TRACKS[0].id;
 }
 const rangeOf = (track) => {
-  const ms = modulesOf(track);
+  const ms = coreModulesOf(track);
   return `${modCode(ms[0])}–${modCode(ms[ms.length - 1])}`;
 };
 
@@ -454,7 +454,7 @@ function shell(active, html, { track = '' } = {}) {
         ${TRACKS.map(
           (x) => `<a class="nv nv-trk" data-track="${x.id}" href="#/parcours/${x.id}" ${trackActive(x.id) ? 'aria-current="page"' : ''}>
             <span class="nv-ic">${icon(x.icon, { size: 18 })}</span>
-            <span class="nv-t"><b>${trName(x.id)}</b><small>${demo ? t('app.demo.open1') : `${bdi(rangeOf(x.id))} · ${pc(PP[x.id].pct)}`}</small></span>
+            <span class="nv-t"><b>${trName(x.id)}</b><small>${demo ? t('app.demo.trk.title', { n: PP[x.id].open.length }) : `${bdi(rangeOf(x.id))} · ${pc(PP[x.id].pct)}`}</small></span>
             ${demo ? '' : `<span class="nv-bar" aria-hidden="true"><i style="width:${(PP[x.id].pct * 100).toFixed(1)}%"></i></span>`}
           </a>`,
         ).join('')}
@@ -690,7 +690,7 @@ function trackSwitch(active, PP, demo) {
   return `<nav class="trk-sw" aria-label="${esc(t('app.track.switch'))}">${TRACKS.map(
     (x) => `<a href="#/parcours/${x.id}" data-track="${x.id}" ${x.id === active ? 'aria-current="page"' : ''}>
       <span class="trk-sw-ic">${icon(x.icon, { size: 20 })}</span>
-      <span class="trk-sw-t"><b>${trName(x.id)}</b><small>${bdi(rangeOf(x.id))} · ${t('app.n.modules', { n: modulesOf(x.id).length })}</small></span>
+      <span class="trk-sw-t"><b>${trName(x.id)}</b><small>${bdi(rangeOf(x.id))} · ${t('app.n.modules', { n: coreModulesOf(x.id).length })}</small></span>
       ${demo ? '' : `<span class="trk-sw-pc">${pc(PP[x.id].pct)}</span><span class="trk-sw-bar" aria-hidden="true"><i style="width:${(PP[x.id].pct * 100).toFixed(1)}%"></i></span>`}
     </a>`,
   ).join('')}</nav>`;
@@ -723,7 +723,7 @@ function moduleHTML(m, P, demo) {
       const done = L[l.id]?.done;
       const cur = l.id === P.next?.id && !P.complete;
       const q = L[l.id]?.quiz;
-      return `<a class="node ${done ? 'is-done' : ''} ${cur ? 'is-cur' : ''}" role="listitem" href="#/lecon/${l.id}" ${cur ? 'aria-current="step"' : ''}>${cur ? `<span class="node-tag">${t('app.map.here')}</span>` : ''}<span class="node-b">${done ? icon('check', { size: 26, stroke: 3 }) : num(l.n)}</span><span class="node-t"><b>${esc(l.title)}</b><span>${dur(DUR[l.id])}${(lang === 'fr' && l.voice) || l.audio ? ` · ${t('app.map.voice')}` : ''}${q != null ? ` · ${t('app.map.quiz', { s: pc(q) })}` : ''}</span></span></a>`;
+      return `<a class="node ${done ? 'is-done' : ''} ${cur ? 'is-cur' : ''}" role="listitem" href="#/lecon/${l.id}" ${cur ? 'aria-current="step"' : ''}>${cur ? `<span class="node-tag">${t('app.map.here')}</span>` : ''}<span class="node-b">${done ? icon('check', { size: 26, stroke: 3 }) : m.intro ? icon('play', { size: 22 }) : num(l.n)}</span><span class="node-t"><b>${esc(l.title)}</b><span>${dur(DUR[l.id])}${(lang === 'fr' && l.voice) || l.audio ? ` · ${t('app.map.voice')}` : ''}${q != null ? ` · ${t('app.map.quiz', { s: pc(q) })}` : ''}</span></span></a>`;
     })
     .join('');
   return `<section class="map-mod" style="--c:${m.color}" id="mod-${m.id}" aria-label="${esc(`${modCode(m)} · ${m.title}`)}">${head}${demo ? '' : `<div class="map-bar" aria-hidden="true"><i style="width:${((d / m.lessons.length) * 100).toFixed(1)}%"></i></div>`}<div class="trail" role="list">${nodes}</div></section>`;
@@ -751,7 +751,7 @@ function viewTrack(trackId) {
       <header class="trk-h">
         <span class="trk-code" aria-hidden="true">${esc(tr.code)}</span>
         <div class="trk-hb">
-          <p class="card-k">${icon(tr.icon, { size: 14 })} ${bdi(rangeOf(trackId))} · ${t('app.n.modules', { n: mods.length })} · ${t('app.n.lessons', { n: P.total })}</p>
+          <p class="card-k">${icon(tr.icon, { size: 14 })} ${bdi(rangeOf(trackId))} · ${t('app.n.modules', { n: mods.filter((m) => !m.intro).length })} · ${t('app.n.lessons', { n: P.total })}</p>
           <h1>${trName(trackId)}</h1>
           ${!AR && tr.ar ? `<p class="trk-ar ar" lang="ar">${esc(tr.ar)}</p>` : ''}
           <p class="trk-p">${esc(tr.pitch)}</p>
@@ -1101,7 +1101,7 @@ function viewLesson(id) {
       <aside class="ls-aside">
         <a class="card ls-trk" href="#/parcours/${track.id}">
           <span class="ls-trk-ic">${icon(track.icon, { size: 20 })}</span>
-          <span class="ls-trk-t"><small>${trName(track.id)}</small><b>${demo ? t('app.demo.open1') : t('app.map.done', { d: num(P.done), n: num(P.total) })}</b></span>
+          <span class="ls-trk-t"><small>${trName(track.id)}</small><b>${demo ? t('app.demo.trk.title', { n: P.open.length }) : t('app.map.done', { d: num(P.done), n: num(P.total) })}</b></span>
           ${demo ? '' : ring(P.pct, { size: 44, sw: 10, track: track.id, title: pc(P.pct) })}
         </a>
         <section class="card">

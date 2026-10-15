@@ -13,6 +13,8 @@ export const DEMO_STUDENT = { email: 'demo@hooked.academy', code: 'DEMO-2026' };
 
 /** Le compte démo ne montre presque rien : une leçon par formation, le reste est verrouillé. */
 export const DEMO_OPEN = ['m1-l1', 'ia1-l1'];
+/** Bienvenue de chaque formation (leçon 00) : ouverte à tous, en démo comme avant l'inscription. */
+export const FREE_OPEN = ['m0-l1', 'ia0-l1'];
 
 /**
  * Comptes à mot de passe (créés par l'équipe). Ni l'e-mail ni le mot de passe ne sont écrits en clair :
@@ -293,7 +295,7 @@ export async function loginStudent(ident, secret) {
 /** Le compte démo (ou ?demo=1) : accès limité à DEMO_OPEN. */
 export const isDemo = (st) => !!st && (st.demo || st.id === 'st-demo');
 /** Une leçon est-elle ouverte pour cet étudiant ? */
-export const canAccess = (st, lessonId) => !!st && (!isDemo(st) || DEMO_OPEN.includes(lessonId));
+export const canAccess = (st, lessonId) => !!st && (!isDemo(st) || DEMO_OPEN.includes(lessonId) || FREE_OPEN.includes(lessonId));
 
 export function loginAdmin(code) {
   if (String(code || '').trim().toUpperCase() !== TEAM_CODE) return false;
