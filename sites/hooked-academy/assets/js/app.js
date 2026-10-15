@@ -723,7 +723,7 @@ function moduleHTML(m, P, demo) {
       const done = L[l.id]?.done;
       const cur = l.id === P.next?.id && !P.complete;
       const q = L[l.id]?.quiz;
-      return `<a class="node ${done ? 'is-done' : ''} ${cur ? 'is-cur' : ''}" role="listitem" href="#/lecon/${l.id}" ${cur ? 'aria-current="step"' : ''}>${cur ? `<span class="node-tag">${t('app.map.here')}</span>` : ''}<span class="node-b">${done ? icon('check', { size: 26, stroke: 3 }) : m.intro ? icon('play', { size: 22 }) : num(l.n)}</span><span class="node-t"><b>${esc(l.title)}</b><span>${dur(DUR[l.id])}${(lang === 'fr' && l.voice) || l.audio ? ` · ${t('app.map.voice')}` : ''}${q != null ? ` · ${t('app.map.quiz', { s: pc(q) })}` : ''}</span></span></a>`;
+      return `<a class="node ${done ? 'is-done' : ''} ${cur ? 'is-cur' : ''}" role="listitem" href="#/lecon/${l.id}" ${cur ? 'aria-current="step"' : ''}>${cur ? `<span class="node-tag">${t('app.map.here')}</span>` : ''}<span class="node-b">${done ? icon('check', { size: 26, stroke: 3 }) : m.intro && !l.n ? icon('play', { size: 22 }) : num(l.n)}</span><span class="node-t"><b>${esc(l.title)}</b><span>${dur(DUR[l.id])}${(lang === 'fr' && l.voice) || l.audio ? ` · ${t('app.map.voice')}` : ''}${q != null ? ` · ${t('app.map.quiz', { s: pc(q) })}` : ''}</span></span></a>`;
     })
     .join('');
   return `<section class="map-mod" style="--c:${m.color}" id="mod-${m.id}" aria-label="${esc(`${modCode(m)} · ${m.title}`)}">${head}${demo ? '' : `<div class="map-bar" aria-hidden="true"><i style="width:${((d / m.lessons.length) * 100).toFixed(1)}%"></i></div>`}<div class="trail" role="list">${nodes}</div></section>`;
