@@ -1,4 +1,81 @@
 {
-  "generated": "2026-10-14T13:25:34.419Z",
-  "lessons": {}
+  "generated": "2026-10-15T10:36:09.377Z",
+  "lessons": {
+    "m6-l1": [
+      {
+        "kind": "pdf",
+        "title": "Ta marque en 7 jours",
+        "file": "01-ta-marque-en-7-jours.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m6-l1/01-ta-marque-en-7-jours.fr.pdf",
+        "size": 337369
+      },
+      {
+        "kind": "pdf",
+        "title": "Your brand in 7 days",
+        "file": "01-your-brand-in-7-days.en.pdf",
+        "lang": "en",
+        "path": "ressources/m6-l1/01-your-brand-in-7-days.en.pdf",
+        "size": 310285
+      },
+      {
+        "kind": "pdf",
+        "title": "علامتك التجارية في 7 أيام",
+        "file": "01-علامتك-التجارية-في-7-أيام.ar.pdf",
+        "lang": "ar",
+        "path": "ressources/m6-l1/01-علامتك-التجارية-في-7-أيام.ar.pdf",
+        "size": 386321
+      }
+    ],
+    "ia8-l2": [
+      {
+        "kind": "pdf",
+        "title": "23 prompts for your personal brand",
+        "file": "01-23-prompts-for-your-personal-brand.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia8-l2/01-23-prompts-for-your-personal-brand.en.pdf",
+        "size": 251832
+      },
+      {
+        "kind": "pdf",
+        "title": "23 prompts pour ta marque personnelle",
+        "file": "01-23-prompts-pour-ta-marque-personnelle.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia8-l2/01-23-prompts-pour-ta-marque-personnelle.fr.pdf",
+        "size": 260719
+      },
+      {
+        "kind": "pdf",
+        "title": "23 برومبت لبناء علامتك الشخصية",
+        "file": "01-23-برومبت-لبناء-علامتك-الشخصية.ar.pdf",
+        "lang": "ar",
+        "path": "ressources/ia8-l2/01-23-برومبت-لبناء-علامتك-الشخصية.ar.pdf",
+        "size": 289907
+      },
+      {
+        "kind": "pdf",
+        "title": "Check list ta marque personnelle",
+        "file": "02-check-list-ta-marque-personnelle.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia8-l2/02-check-list-ta-marque-personnelle.fr.pdf",
+        "size": 180975
+      },
+      {
+        "kind": "pdf",
+        "title": "Checklist your personal brand",
+        "file": "02-checklist-your-personal-brand.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia8-l2/02-checklist-your-personal-brand.en.pdf",
+        "size": 169979
+      },
+      {
+        "kind": "pdf",
+        "title": "قائمة التحقق علامتك الشخصية",
+        "file": "02-قائمة-التحقق-علامتك-الشخصية.ar.pdf",
+        "lang": "ar",
+        "path": "ressources/ia8-l2/02-قائمة-التحقق-علامتك-الشخصية.ar.pdf",
+        "size": 203514
+      }
+    ]
+  }
 }

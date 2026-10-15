@@ -45,7 +45,29 @@ export function parse(md) {
     list = null;
   };
   const flushQuote = () => {
-    if (quote.length) out.push(`<aside class="call">${quote.map((q) => (q ? `<p>${inline(q)}</p>` : '')).join('')}</aside>`);
+    if (!quote.length) return;
+    // dans un encadré : lignes vides = paragraphes, « - … » = liste
+    const parts = [];
+    let p = [];
+    let ul = [];
+    const endP = () => (p.length && parts.push(`<p>${inline(p.join(' '))}</p>`), (p = []));
+    const endUl = () => (ul.length && parts.push(`<ul>${ul.map((x) => `<li dir="auto">${inline(x)}</li>`).join('')}</ul>`), (ul = []));
+    for (const q of quote) {
+      const m = q.match(/^\s*[-*•]\s+(.+)$/);
+      if (m) {
+        endP();
+        ul.push(m[1]);
+      } else if (!q.trim()) {
+        endP();
+        endUl();
+      } else {
+        endUl();
+        p.push(q.trim());
+      }
+    }
+    endP();
+    endUl();
+    out.push(`<aside class="call">${parts.join('')}</aside>`);
     quote = [];
   };
   const flushAll = () => {
@@ -153,7 +175,7 @@ ul.task li { position: relative; padding-inline-start: 26px; break-inside: avoid
 ul.task li::before { content: ''; position: absolute; inset-inline-start: 0; top: 4px; width: 13px; height: 13px; border: 1.6px solid var(--ink); border-radius: 3px; }
 .call { margin: 12px 0 16px; padding: 12px 16px; border-inline-start: 4px solid var(--acc); background: #f4efe0; border-radius: 0 8px 8px 0; break-inside: avoid; }
 [dir='rtl'] .call { border-radius: 8px 0 0 8px; }
-.call p:last-child { margin: 0; }
+.call p:last-child, .call ul:last-child { margin: 0; }
 .prompt { margin: 10px 0 16px; border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; break-inside: avoid; }
 .prompt-k { display: block; padding: 6px 12px; background: var(--ink); color: var(--acc); font: 800 8pt/1.4 'Sofia Sans', sans-serif; letter-spacing: .12em; text-transform: uppercase; }
 [dir='rtl'] .prompt-k { letter-spacing: 0; font-family: 'IBM Plex Sans Arabic', sans-serif; }
