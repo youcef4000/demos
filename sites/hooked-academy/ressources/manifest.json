@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-15T10:36:09.377Z",
+  "generated": "2026-10-20T13:25:25.111Z",
   "lessons": {
     "m6-l1": [
       {
@@ -25,6 +25,32 @@
         "lang": "ar",
         "path": "ressources/m6-l1/01-علامتك-التجارية-في-7-أيام.ar.pdf",
         "size": 386321
+      }
+    ],
+    "ia1-l6": [
+      {
+        "kind": "pdf",
+        "title": "Advanced prompting pro techniques",
+        "file": "01-advanced-prompting-pro-techniques.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia1-l6/01-advanced-prompting-pro-techniques.en.pdf",
+        "size": 315932
+      },
+      {
+        "kind": "pdf",
+        "title": "Le prompt avancé les techniques des pros",
+        "file": "01-le-prompt-avancé-les-techniques-des-pros.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia1-l6/01-le-prompt-avancé-les-techniques-des-pros.fr.pdf",
+        "size": 346192
+      },
+      {
+        "kind": "pdf",
+        "title": "البرومبت المتقدّم تقنيات المحترفين",
+        "file": "01-البرومبت-المتقدّم-تقنيات-المحترفين.ar.pdf",
+        "lang": "ar",
+        "path": "ressources/ia1-l6/01-البرومبت-المتقدّم-تقنيات-المحترفين.ar.pdf",
+        "size": 408467
       }
     ],
     "ia8-l2": [
