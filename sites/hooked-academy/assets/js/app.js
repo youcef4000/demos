@@ -1,5 +1,5 @@
 // Hooked Academy — espace étudiant, en français, anglais et arabe (de droite à gauche).
-// Routes : #/ (accueil) · #/parcours/creative · #/parcours/ia · #/lecon/<id> · #/ressources · #/aide · #/profil
+// Routes : #/ (accueil) · #/parcours/creative · #/parcours/ia · #/lecon/<id> · #/ressources · #/outils · #/aide · #/profil
 // Données : assets/js/store.js (localStorage) ; programme déjà traduit : data/programme.js.
 // Fichiers de l'équipe : ressources/manifest.json (facultatif) ; vidéos publiées : video/manifest.json.
 // Textes de l'interface : assets/js/i18n/app.js (+ i18n/common.js pour niveaux, badges, formations).
@@ -14,6 +14,7 @@ import { TRACKS, PARTS, MODULES, allLessons, findLesson, modCode, modulesOf, cor
 import { compose, lessonDuration } from '../../motion/engine.js';
 import { renderWidget, flashcards } from './widgets.js';
 import * as FAQ from './faq.js';
+import { OUTILS, CATS as TOOL_CATS, BUDGETS, PROMPTS, PROMPT_TYPES, CHECKED as TOOLS_CHECKED } from '../../data/outils.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -34,7 +35,8 @@ const num = (n) => fmtNum(n);
 const pc = (x) => t('app.fmt.pct', { n: fmtNum(Math.round((x || 0) * 100)) });
 const pad2 = (n) => String(n).padStart(2, '0');
 const trName = (id) => t(`track.${id}`);
-const lessonN = (n) => t('app.lesson.n', { n: pad2(n) });
+// La leçon 00 d'un module d'accueil (M00, IA00) est la vidéo de bienvenue
+const lessonN = (n) => (n ? t('app.lesson.n', { n: pad2(n) }) : t('app.lc.welcome'));
 const bdi = (s) => `<bdi>${esc(s)}</bdi>`;
 const arrow = (size = 18, cls = '') => icon('arrow', { size, cls: `i-dir ${cls}` });
 const back = (size = 18) => icon('arrow', { size, cls: 'i-back' });
@@ -454,12 +456,13 @@ function shell(active, html, { track = '' } = {}) {
         ${TRACKS.map(
           (x) => `<a class="nv nv-trk" data-track="${x.id}" href="#/parcours/${x.id}" ${trackActive(x.id) ? 'aria-current="page"' : ''}>
             <span class="nv-ic">${icon(x.icon, { size: 18 })}</span>
-            <span class="nv-t"><b>${trName(x.id)}</b><small>${demo ? t('app.demo.trk.title', { n: PP[x.id].open.length }) : `${bdi(rangeOf(x.id))} · ${pc(PP[x.id].pct)}`}</small></span>
-            ${demo ? '' : `<span class="nv-bar" aria-hidden="true"><i style="width:${(PP[x.id].pct * 100).toFixed(1)}%"></i></span>`}
+            <span class="nv-t"><b>${trName(x.id)}</b><small>${demo ? t('app.demo.trk.title', { n: PP[x.id].open.length }) : notOwned(x.id) ? t('app.pack.notIn') : `${bdi(rangeOf(x.id))} · ${pc(PP[x.id].pct)}`}</small></span>
+            ${demo ? '' : notOwned(x.id) ? icon('lock', { size: 14, cls: 'nv-lk' }) : `<span class="nv-bar" aria-hidden="true"><i style="width:${(PP[x.id].pct * 100).toFixed(1)}%"></i></span>`}
           </a>`,
         ).join('')}
         <p class="side-k">${t('app.nav.space')}</p>
         <a class="nv" href="#/ressources" ${isOn('res')}>${icon('book', { size: 20 })}<span>${t('app.nav.resources')}</span>${demo ? icon('lock', { size: 14, cls: 'nv-lk' }) : ''}</a>
+        <a class="nv" href="#/outils" ${isOn('tools')}>${icon('sparkles', { size: 20 })}<span>${t('app.nav.tools')}</span></a>
         <a class="nv" href="#/aide" ${isOn('help')}>${icon('help', { size: 20 })}<span>${t('app.nav.faq')}</span></a>
         <a class="nv" href="#/profil" ${isOn('profile')}>${icon('user', { size: 20 })}<span>${t('app.nav.profile')}</span></a>
       </nav>
@@ -532,27 +535,32 @@ function contCard(P, { demo = false } = {}) {
   </a>`;
 }
 
+/** Carte de formation façon « classroom » : couverture, description, progression, accès. */
 function productCard(tr, P, demo) {
-  const ms = P.mods;
+  const own = demo || !notOwned(tr.id);
+  const cover = P.list[0] ? thumb(P.list[0]) : '';
   const footer = demo
     ? `<a class="prod-next" href="#/lecon/${P.open[0]?.id || P.next.id}"><span><small>${t('app.demo.openLesson')}</small><b>${bdi(modCode(P.open[0]?.module || P.next.module))} · ${esc((P.open[0] || P.next).title)}</b></span><span class="prod-go">${arrow(18)}</span></a>`
-    : P.complete
-      ? `<div class="prod-end">${icon('trophy', { size: 20 })}<span><b>${t(`app.end.${tr.id}.title`)}</b><small>${t(`app.end.${tr.id}.short`)}</small></span></div>`
-      : `<a class="prod-next" href="#/lecon/${P.next.id}"><span><small>${t(P.resume ? 'app.home.resume' : P.done ? 'app.home.continue' : 'app.home.start')}</small><b>${bdi(modCode(P.next.module))} · ${esc(P.next.title)}</b></span><span class="prod-go">${arrow(18)}</span></a>`;
-  return `<section class="prod" data-track="${tr.id}" aria-labelledby="prod-${tr.id}">
-    <span class="prod-art" aria-hidden="true">${esc(tr.code)}</span>
-    <a class="prod-h" href="#/parcours/${tr.id}">
-      <span class="prod-ic">${icon(tr.icon, { size: 26 })}</span>
-      <span class="prod-t"><small>${bdi(rangeOf(tr.id))} · ${t('app.n.lessons', { n: P.total })}</small><b id="prod-${tr.id}">${trName(tr.id)}</b></span>
-      ${demo ? `<span class="chip chip--lock">${icon('lock', { size: 12 })} ${t('app.demo.chip')}</span>` : ring(P.pct, { size: 62, sw: 9, track: tr.id, title: pc(P.pct), label: `<b>${pc(P.pct)}</b>` })}
+    : !own
+      ? `<a class="prod-next is-add" href="${waUpgrade(tr.id)}" target="_blank" rel="noopener"><span><small>${t(S.isExpired(me) ? 'app.pack.expired.short' : 'app.pack.notIn')}</small><b>${t(S.isExpired(me) ? 'app.pack.renew' : 'app.pack.add')}</b></span><span class="prod-go">${icon('whatsapp', { size: 18 })}</span></a>`
+      : P.complete
+        ? `<div class="prod-end">${icon('trophy', { size: 20 })}<span><b>${t(`app.end.${tr.id}.title`)}</b><small>${t(`app.end.${tr.id}.short`)}</small></span></div>`
+        : `<a class="prod-next" href="#/lecon/${P.next.id}"><span><small>${t(P.resume ? 'app.home.resume' : P.done ? 'app.home.continue' : 'app.home.start')}</small><b>${bdi(modCode(P.next.module))} · ${esc(P.next.title)}</b></span><span class="prod-go">${arrow(18)}</span></a>`;
+  return `<section class="prod cc${own ? '' : ' is-lock'}" data-track="${tr.id}" aria-labelledby="prod-${tr.id}">
+    <a class="cc-img" href="#/parcours/${tr.id}" tabindex="-1" aria-hidden="true">
+      <span class="lc-ph">${icon(tr.icon, { size: 46 })}</span>${cover ? `<img src="${cover}" alt="" loading="lazy" decoding="async" ${THUMB_ERR}>` : ''}
+      <span class="cc-code">${esc(tr.code)}</span>
+      ${own ? '' : `<span class="cc-lock">${icon('lock', { size: 22 })}</span>`}
     </a>
-    <p class="prod-p">${esc(tr.pitch)}</p>
-    ${
-      demo
-        ? `<ol class="prod-list">${ms.map((x) => `<li class="${x.open ? 'is-open' : 'is-lock'}">${x.open ? icon('play', { size: 13 }) : icon('lock', { size: 13 })}<span class="prod-code">${bdi(modCode(x.m))}</span><span>${esc(x.m.title)}</span></li>`).join('')}</ol>`
-        : `<ol class="prod-mods" aria-label="${esc(t('app.word.modules'))}">${ms.map((x) => `<li style="--c:${x.m.color};--p:${x.pct.toFixed(3)}" title="${esc(`${modCode(x.m)} · ${x.m.title} — ${x.done}/${x.total}`)}" class="${x.done === x.total ? 'is-done' : x.m.id === P.next?.module.id ? 'is-cur' : ''}"><i aria-hidden="true"></i><span>${bdi(modCode(x.m))}</span></li>`).join('')}</ol>`
-    }
-    ${footer}
+    <div class="cc-b">
+      <a class="cc-h" href="#/parcours/${tr.id}">
+        <small>${bdi(rangeOf(tr.id))} · ${t('app.n.modules', { n: coreModulesOf(tr.id).length })} · ${t('app.n.lessons', { n: P.total })}</small>
+        <b id="prod-${tr.id}">${trName(tr.id)}</b>
+      </a>
+      <p class="prod-p">${esc(tr.pitch)}</p>
+      ${demo ? `<span class="chip chip--lock">${icon('lock', { size: 12 })} ${t('app.demo.chip')}</span>` : own ? `<div class="cc-prog"><span class="cc-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(P.pct * 100)}" aria-label="${esc(trName(tr.id))}"><i style="width:${(P.pct * 100).toFixed(1)}%"></i></span><small>${pc(P.pct)} · ${t('app.map.done', { d: num(P.done), n: num(P.total) })}</small></div>` : ''}
+      ${footer}
+    </div>
   </section>`;
 }
 
@@ -563,7 +571,8 @@ function viewHome() {
   if (demo) return viewHomeDemo(PP);
   const lv = S.level(me.progress.xp);
   let heroT = lastTrack();
-  if (PP[heroT].complete) heroT = TRACKS.find((x) => !PP[x.id].complete)?.id || heroT;
+  if (notOwned(heroT)) heroT = TRACKS.find((x) => !notOwned(x.id))?.id || heroT;
+  if (PP[heroT].complete) heroT = TRACKS.find((x) => !PP[x.id].complete && !notOwned(x.id))?.id || heroT;
   const hero = PP[heroT];
   const done = TRACKS.reduce((s, x) => s + PP[x.id].done, 0);
   const seconds = TRACKS.reduce((s, x) => s + PP[x.id].seconds, 0);
@@ -638,7 +647,7 @@ function viewHome() {
     g.fromTo('#lvl-i', { scaleX: 0 }, { scaleX: lv.pct, duration: 1.4, ease: 'expo.out', delay: 0.2 });
     g.fromTo('#wave', { rotate: 0 }, { rotate: 18, duration: 0.25, repeat: 5, yoyo: true, ease: 'sine.inOut', delay: 0.6 });
     g.from('.dash > *', { y: 30, autoAlpha: 0, duration: 0.8, ease: 'expo.out', stagger: 0.06, clearProps: 'transform,opacity,visibility' });
-    g.from('.prod-mods li', { y: 14, autoAlpha: 0, duration: 0.5, ease: 'expo.out', stagger: 0.03, delay: 0.4, clearProps: 'transform,opacity,visibility' });
+    g.from('.cc-img img', { scale: 1.08, duration: 1.4, ease: 'expo.out', delay: 0.2, clearProps: 'transform' });
   }
   stop.push(livePreview($('#cont-stage'), hero.next.id, { from: 0, to: 9 }));
 }
@@ -702,31 +711,86 @@ function endCard(trackId) {
   return `<section class="card trk-end"><span class="trk-end-ic">${icon('trophy', { size: 28 })}</span><div><h2>${t(`app.end.${trackId}.title`)}</h2><p>${t(`app.end.${trackId}.text`)}</p></div>${cta}</section>`;
 }
 
-function lockedNode(l) {
-  return `<span class="node is-lock" role="listitem" aria-label="${esc(`${lessonN(l.n)} — ${t('app.lock.members')}`)}"><span class="node-b">${icon('lock', { size: 20 })}</span><span class="node-t"><b>${lessonN(l.n)}</b><span class="node-sk" aria-hidden="true"><i></i><i></i></span><span class="node-lk">${t('app.lock.members')}</span></span></span>`;
+/* Cartes de leçon façon « classroom » : miniature, petite intro, progression */
+// Miniature tirée de la vidéo animée, dans la langue de l'interface (FR à la racine, EN et AR dans leur dossier)
+const thumb = (l) => `../video/vignettes/${lang === 'fr' ? '' : `${lang}/`}${l.id}.jpg`;
+// Si la miniature traduite manque, on retombe sur la française, puis sur l'icône du module
+const THUMB_ERR = `onerror="const r=/vignettes\\/(en|ar)\\//;r.test(this.src)?(this.src=this.src.replace(r,'vignettes/')):this.remove()"`;
+const introOf = (l) => l.scenes?.[0]?.sub || l.key?.[0] || '';
+const lessonTag = (l, m) => (m.intro && !l.n ? lessonN(0) : `${modCode(m)} · ${lessonN(l.n)}`);
+/** Formation hors du pack de l'étudiant (ou accès d'un an terminé). */
+const notOwned = (track) => !S.isDemo(me) && !S.hasTrack(me, track);
+function waUpgrade(track) {
+  let wa = '';
+  try {
+    wa = String(S.load().settings?.whatsapp || '').replace(/\D/g, '');
+  } catch {}
+  const msg = t(S.isExpired(me) ? 'app.pack.renewMsg' : 'app.pack.addMsg', { track: trName(track) });
+  return wa ? `https://wa.me/${wa}?text=${encodeURIComponent(msg)}` : RESERVE;
+}
+
+function lessonCard(l, m, P) {
+  const L = me.progress.lessons;
+  const open = S.canAccess(me, l.id);
+  const rec = L[l.id] || {};
+  const done = !!rec.done;
+  const cur = open && l.id === P.next?.id && !P.complete;
+  const seen = done ? 1 : Math.min(1, (rec.watched || 0) / (DUR[l.id] || 1));
+  const state = !open ? 'lock' : done ? 'done' : seen > 0.03 ? 'prog' : 'todo';
+  const q = rec.quiz;
+  const meta = {
+    lock: S.isDemo(me) ? t('app.lock.members') : t('app.pack.notIn'),
+    done: `${t('app.lc.done')}${q != null ? ` · ${t('app.map.quiz', { s: pc(q) })}` : ''}`,
+    prog: t('app.lc.prog', { p: pc(seen) }),
+    todo: t('app.lc.todo'),
+  }[state];
+  const tag = open ? 'a' : 'div';
+  return `<${tag} class="lc is-${state}${cur ? ' is-cur' : ''}" role="listitem" ${open ? `href="#/lecon/${l.id}"` : 'aria-disabled="true"'} style="--c:${m.color}">
+    <span class="lc-img"><span class="lc-ph" aria-hidden="true">${icon(m.icon, { size: 34 })}</span><img src="${thumb(l)}" alt="" loading="lazy" decoding="async" ${THUMB_ERR}>
+      <span class="lc-dur">${dur(DUR[l.id])}</span>
+      ${state === 'done' ? `<span class="lc-ok" aria-hidden="true">${icon('check', { size: 15, stroke: 3 })}</span>` : ''}
+      <span class="lc-go" aria-hidden="true">${icon(state === 'lock' ? 'lock' : 'play', { size: 20 })}</span>
+      ${cur ? `<span class="lc-here">${t('app.map.here')}</span>` : ''}
+    </span>
+    <span class="lc-b">
+      <small class="lc-k">${bdi(lessonTag(l, m))}${(lang === 'fr' && l.voice) || l.audio ? ` · ${t('app.map.voice')}` : ''}</small>
+      <b class="lc-t">${esc(l.title)}</b>
+      <span class="lc-x">${esc(introOf(l))}</span>
+      <span class="lc-bar" aria-hidden="true"><i style="width:${(seen * 100).toFixed(0)}%"></i></span>
+      <span class="lc-meta">${meta}</span>
+    </span>
+  </${tag}>`;
 }
 
 function moduleHTML(m, P, demo) {
   const L = me.progress.lessons;
   const openHere = m.lessons.filter((l) => S.canAccess(me, l.id));
-  const locked = demo && !openHere.length;
   const d = m.lessons.filter((l) => L[l.id]?.done).length;
-  const head = `<div class="map-head">
-      <span class="map-n">${esc(modCode(m))}</span>
-      <div class="map-ht"><h2>${esc(m.title)}</h2><p>${m.ar && !AR ? `<span class="ar" lang="ar">${esc(m.ar)}</span><span class="dot" aria-hidden="true">·</span>` : ''}<span>${t('app.n.lessons', { n: m.lessons.length })}</span>${demo ? '' : `<span class="dot" aria-hidden="true">·</span><span>${t('app.map.done', { d: num(d), n: num(m.lessons.length) })}</span>`}</p></div>
-      ${locked ? `<span class="lock-tag">${icon('lock', { size: 13 })} ${t('app.lock.members')}</span>` : !demo && d === m.lessons.length ? `<span class="done-tag">${icon('check', { size: 14, stroke: 2.6 })}</span>` : ''}
-    </div>`;
-  if (locked) return `<section class="map-mod is-locked" style="--c:${m.color}" aria-label="${esc(`${modCode(m)} · ${m.title}`)}">${head}</section>`;
-  const nodes = m.lessons
-    .map((l) => {
-      if (!S.canAccess(me, l.id)) return lockedNode(l);
-      const done = L[l.id]?.done;
-      const cur = l.id === P.next?.id && !P.complete;
-      const q = L[l.id]?.quiz;
-      return `<a class="node ${done ? 'is-done' : ''} ${cur ? 'is-cur' : ''}" role="listitem" href="#/lecon/${l.id}" ${cur ? 'aria-current="step"' : ''}>${cur ? `<span class="node-tag">${t('app.map.here')}</span>` : ''}<span class="node-b">${done ? icon('check', { size: 26, stroke: 3 }) : m.intro && !l.n ? icon('play', { size: 22 }) : num(l.n)}</span><span class="node-t"><b>${esc(l.title)}</b><span>${dur(DUR[l.id])}${(lang === 'fr' && l.voice) || l.audio ? ` · ${t('app.map.voice')}` : ''}${q != null ? ` · ${t('app.map.quiz', { s: pc(q) })}` : ''}</span></span></a>`;
-    })
-    .join('');
-  return `<section class="map-mod" style="--c:${m.color}" id="mod-${m.id}" aria-label="${esc(`${modCode(m)} · ${m.title}`)}">${head}${demo ? '' : `<div class="map-bar" aria-hidden="true"><i style="width:${((d / m.lessons.length) * 100).toFixed(1)}%"></i></div>`}<div class="trail" role="list">${nodes}</div></section>`;
+  const pct = m.lessons.length ? d / m.lessons.length : 0;
+  const lockedAll = !openHere.length;
+  return `<section class="cmod${lockedAll ? ' is-locked' : ''}" style="--c:${m.color}" id="mod-${m.id}" aria-label="${esc(`${modCode(m)} · ${m.title}`)}">
+    <header class="cmod-h">
+      <span class="cmod-n">${esc(modCode(m))}</span>
+      <div class="cmod-ht">
+        <h2>${esc(m.title)}${m.level === 'avance' ? ` <span class="cmod-lv">${t('app.lc.advanced')}</span>` : ''}</h2>
+        <p>${m.ar && !AR ? `<span class="ar" lang="ar">${esc(m.ar)}</span><span class="dot" aria-hidden="true">·</span>` : ''}<span>${t('app.n.lessons', { n: m.lessons.length })}</span>${demo ? '' : `<span class="dot" aria-hidden="true">·</span><span>${t('app.map.done', { d: num(d), n: num(m.lessons.length) })}</span>`}</p>
+        ${m.pitch ? `<p class="cmod-p">${esc(m.pitch)}</p>` : ''}
+      </div>
+      ${lockedAll ? `<span class="lock-tag">${icon('lock', { size: 13 })} ${S.isDemo(me) ? t('app.lock.members') : t('app.pack.notIn')}</span>` : !demo && d === m.lessons.length ? `<span class="done-tag">${icon('check', { size: 14, stroke: 2.6 })}</span>` : ''}
+    </header>
+    ${demo ? '' : `<div class="cmod-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(pct * 100)}" aria-label="${esc(modCode(m))}"><i style="width:${(pct * 100).toFixed(1)}%"></i></div>`}
+    <div class="lc-g" role="list">${m.lessons.map((l) => lessonCard(l, m, P)).join('')}</div>
+  </section>`;
+}
+
+/** Bandeau d'une formation qui n'est pas dans le pack de l'étudiant (ou dont l'accès est terminé). */
+function packLock(trackId) {
+  const exp = S.isExpired(me) && S.accessOf(me).includes(trackId);
+  return `<section class="card pk-lock" data-track="${trackId}">
+    <span class="empty-ic">${icon('lock', { size: 24 })}</span>
+    <div><h2>${t(exp ? 'app.pack.expired.t' : 'app.pack.lock.t', { track: trName(trackId) })}</h2><p>${t(exp ? 'app.pack.expired.x' : 'app.pack.lock.x', { track: trName(trackId), d: me.expiresAt ? esc(fmtDate(me.expiresAt, { dateStyle: 'long' })) : '' })}</p></div>
+    <a class="b b--acc" href="${waUpgrade(trackId)}" target="_blank" rel="noopener">${icon('whatsapp', { size: 16 })} ${t(exp ? 'app.pack.renew' : 'app.pack.add')}</a>
+  </section>`;
 }
 
 function viewTrack(trackId) {
@@ -764,8 +828,9 @@ function viewTrack(trackId) {
               <dl class="trk-dl"><div><dt>${t('app.stat.minutes')}</dt><dd>${num(Math.round(P.seconds / 60))}</dd></div><div><dt>${t('app.stat.quiz')}</dt><dd>${P.quizN ? pc(P.quizAvg) : '—'}</dd></div></dl></div>`
         }
       </header>
+      ${notOwned(trackId) ? packLock(trackId) : ''}
       ${!demo && P.complete ? endCard(trackId) : ''}
-      <div class="map">${mods
+      <div class="map cls">${mods
         .map((m) => {
           let head = '';
           if (parts.length > 1 && m.part !== lastPart) {
@@ -782,17 +847,17 @@ function viewTrack(trackId) {
   const g = G();
   if (g) {
     g.from('.trk-h > *, .trk-sw', { y: 22, autoAlpha: 0, duration: 0.8, ease: 'expo.out', stagger: 0.06, clearProps: 'transform,opacity,visibility' });
-    $$('.map-mod').forEach((mod) => {
+    $$('.cmod').forEach((mod) => {
       const io = new IntersectionObserver(([e]) => {
         if (!e.isIntersecting) return;
         io.disconnect();
-        g.from($$('.node', mod), { x: X(-30), autoAlpha: 0, scale: 0.92, duration: 0.6, ease: 'back.out(1.6)', stagger: 0.06, clearProps: 'transform,opacity,visibility' });
+        g.from($$('.lc', mod), { y: 26, autoAlpha: 0, duration: 0.6, ease: 'expo.out', stagger: 0.05, clearProps: 'transform,opacity,visibility' });
       });
       io.observe(mod);
       stop.push(() => io.disconnect());
     });
   }
-  const cur = $('.node.is-cur');
+  const cur = $('.lc.is-cur');
   if (cur && P.done > 0) {
     const tm = setTimeout(() => cur.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }), 450);
     stop.push(() => clearTimeout(tm));
@@ -1008,10 +1073,10 @@ function viewLocked(f) {
       <div class="lk-stage" aria-hidden="true"><div class="lk-art">${markSVG()}<i></i><i></i><i></i><i></i></div><span class="lk-lock">${icon('lock', { size: 30 })}</span></div>
       <div class="lk-b">
         <p class="card-k">${bdi(modCode(m))} · ${lessonN(l.n)}</p>
-        <h1>${t('app.lock.title')}</h1>
-        <p>${t('app.lock.text', { n: P.total, track: trName(track.id) })}</p>
+        <h1>${notOwned(track.id) ? t('app.pack.lock.t', { track: trName(track.id) }) : t('app.lock.title')}</h1>
+        <p>${notOwned(track.id) ? t('app.pack.lock.x', { track: trName(track.id) }) : t('app.lock.text', { n: P.total, track: trName(track.id) })}</p>
         <ul class="lk-list">${['app.lock.inc.lessons', 'app.lock.inc.quiz', 'app.lock.inc.files', 'app.lock.inc.cert'].map((k) => `<li>${icon('check', { size: 15, stroke: 2.4 })} ${t(k)}</li>`).join('')}</ul>
-        <div class="lk-act"><a class="b b--or" href="${RESERVE}">${t('app.cta.reserve')}</a>${open ? `<a class="b" href="#/lecon/${open.id}">${icon('play', { size: 15 })} ${t('app.lock.open')}</a>` : ''}</div>
+        <div class="lk-act">${notOwned(track.id) ? `<a class="b b--or" href="${waUpgrade(track.id)}" target="_blank" rel="noopener">${icon('whatsapp', { size: 15 })} ${t(S.isExpired(me) ? 'app.pack.renew' : 'app.pack.add')}</a>` : `<a class="b b--or" href="${RESERVE}">${t('app.cta.reserve')}</a>`}${open ? `<a class="b" href="#/lecon/${open.id}">${icon('play', { size: 15 })} ${t('app.lock.open')}</a>` : ''}</div>
       </div>
     </div>`,
     { track: track.id },
@@ -1167,9 +1232,20 @@ function viewLesson(id) {
       if (vid.duration && vid.currentTime / vid.duration > 0.9) markDone(true);
     });
   }
+  // Progression de visionnage (barre des cartes de leçon), enregistrée toutes les 3 s au plus
+  let lastSave = 0;
+  const saveWatched = (sec) => {
+    const now = Date.now();
+    if (now - lastSave < 3000 || !(sec > 0)) return;
+    lastSave = now;
+    const r = me.progress.lessons[l.id] || {};
+    if (sec > (r.watched || 0)) S.recordLesson(me.id, l.id, { watched: Math.round(sec) });
+  };
+  if (vid) vid.addEventListener('timeupdate', () => saveWatched(vid.currentTime));
   const onMsg = (e) => {
     const d = e.data;
     if (!d || d.type !== 'ha-player' || d.id !== l.id) return;
+    if (d.event === 'time') saveWatched(d.t);
     if (d.event === 'ended' || (d.event === 'time' && d.duration && d.t / d.duration > 0.9)) markDone(true);
   };
   addEventListener('message', onMsg);
@@ -1279,7 +1355,7 @@ function viewRes() {
   if (demo) {
     shell(
       'res',
-      `<div class="ph-h"><div><h1>${t('app.lib.title')}</h1><p>${t('app.lib.lead')}</p></div></div>
+      `<div class="ph-h"><div><h1>${t('app.lib.title')}</h1><p>${t('app.lib.lead')}</p></div><a class="b b--s" href="#/outils">${icon('sparkles', { size: 16 })} ${t('app.nav.tools')}</a></div>
       <div class="lib-lock">
         <div class="lib-sk" aria-hidden="true">${Array.from({ length: 4 }, () => '<div class="card"><i></i><i></i><i></i></div>').join('')}</div>
         <div class="card lib-lock-c"><span class="empty-ic">${icon('lock', { size: 26 })}</span><h2>${t('app.lock.members')}</h2><p>${t('app.lock.lib')}</p><a class="b b--or" href="${RESERVE}">${t('app.cta.reserve')}</a></div>
@@ -1299,7 +1375,7 @@ function viewRes() {
   shell(
     'res',
     `<div class="lib">
-      <div class="ph-h"><div><h1>${t('app.lib.title')}</h1><p>${t('app.lib.lead')}</p></div></div>
+      <div class="ph-h"><div><h1>${t('app.lib.title')}</h1><p>${t('app.lib.lead')}</p></div><a class="b b--s" href="#/outils">${icon('sparkles', { size: 16 })} ${t('app.nav.tools')}</a></div>
       ${tabList('lib', [
         { k: 'prompts', ic: 'chat', label: t('app.lib.tab.prompts'), count: prompts.length },
         { k: 'docs', ic: 'doc', label: t('app.lib.tab.docs'), count: docs.length },
@@ -1385,6 +1461,18 @@ function prefsCard({ demo = false } = {}) {
   </section>`;
 }
 
+/** Profil : formations du pack et date de fin d'accès. */
+function packCard() {
+  const tr = S.accessOf(me);
+  const missing = TRACKS.find((x) => notOwned(x.id));
+  return `<section class="card pk-card">
+    <p class="card-k">${icon('key', { size: 14 })} ${t('app.pack.k')}</p>
+    <div class="pk-tr">${TRACKS.map((x) => `<span class="pk-chip${tr.includes(x.id) && !S.isExpired(me) ? ' is-on' : ''}" data-track="${x.id}">${icon(tr.includes(x.id) && !S.isExpired(me) ? 'check' : 'lock', { size: 14 })} ${trName(x.id)}</span>`).join('')}</div>
+    ${me.expiresAt ? `<p class="muted pk-until">${t(S.isExpired(me) ? 'app.pack.expired.x' : 'app.pack.until', { d: esc(fmtDate(me.expiresAt, { dateStyle: 'long' })) })}</p>` : ''}
+    ${missing ? `<a class="b b--s" href="${waUpgrade(missing.id)}" target="_blank" rel="noopener">${icon('whatsapp', { size: 15 })} ${t(S.isExpired(me) ? 'app.pack.renew' : 'app.pack.add')}</a>` : ''}
+  </section>`;
+}
+
 function viewProfile() {
   setTitle(t('app.title.profile'));
   const demo = S.isDemo(me);
@@ -1421,6 +1509,7 @@ function viewProfile() {
       'profile',
       `<div class="prof">
         ${head}
+        ${me.protected ? '' : packCard()}
         <section class="card lvl-card">
           <p class="card-k">${icon('bolt', { size: 14 })} ${t('app.level.k')}</p>
           <h2>${t(`level.${lv.i}`)} <span class="lvl-xp"><bdi>${num(me.progress.xp)} XP</bdi></span></h2>
@@ -1436,7 +1525,7 @@ function viewProfile() {
               <ul class="cert-req">
                 <li class="${P.complete ? 'ok' : ''}">${icon(P.complete ? 'check' : 'clock', { size: 15, stroke: 2.2 })} ${t('app.cert.lessons', { d: num(P.done), n: num(P.total) })}</li>
                 <li class="${quizOk ? 'ok' : ''}">${icon(quizOk ? 'check' : 'clock', { size: 15, stroke: 2.2 })} ${t('app.cert.quiz', { s: P.quizN ? pc(P.quizAvg) : '—' })}</li>
-                ${tr.id === 'ia' ? `<li>${icon('doc', { size: 15 })} ${t('app.cert.project')}</li>` : ''}
+                <li>${icon('doc', { size: 15 })} ${t('app.cert.project')}</li>
               </ul>
             </div>
             ${P.complete ? `<p class="cert-msg">${t(`app.end.${tr.id}.short`)}</p>` : ''}
@@ -1472,6 +1561,130 @@ function viewProfile() {
     toast(`${icon('repeat', { size: 18 })} ${t('app.demo.reset.done')}`);
   });
   enter('.prof > *');
+}
+
+/* ------------------------------------------------------------------ */
+/* Outils IA (#/outils) — à quoi sert chaque outil, ce qu'il coûte,    */
+/* sa leçon atelier, et un générateur de prompts prêts à coller        */
+/* ------------------------------------------------------------------ */
+
+const pickT = (o) => (o && typeof o === 'object' ? o[lang] || o.fr : o || '');
+const usd = (n) => t('app.tools.usd', { n: num(n) });
+
+function viewTools() {
+  setTitle(t('app.title.tools'));
+  const byId = Object.fromEntries(OUTILS.map((o) => [o.id, o]));
+  const cats = ['all', ...Object.keys(TOOL_CATS)];
+  const [y, mo] = TOOLS_CHECKED.split('-').map(Number);
+  const checked = fmtDate(new Date(y, mo - 1, 1), { month: 'long', year: 'numeric' });
+  const budgetPrice = (b) => (b.max ? t('app.tools.range', { a: usd(b.min), b: usd(b.max) }) : t('app.tools.free'));
+  const lessonLink = (o) => {
+    const f = findLesson(o.lesson);
+    if (!f) return '';
+    const open = S.canAccess(me, o.lesson);
+    return `<a class="tl-ls${open ? '' : ' is-lock'}" href="#/lecon/${o.lesson}">${icon(open ? 'play' : 'lock', { size: 13 })}<span>${bdi(modCode(f.module))} · ${esc(f.lesson.title)}</span></a>`;
+  };
+  shell(
+    'tools',
+    `<div class="tools">
+      <div class="ph-h"><div><p class="card-k">${icon('sparkles', { size: 14 })} ${t('app.tools.k')}</p><h1>${t('app.tools.title')}</h1><p>${t('app.tools.lead')}</p></div></div>
+
+      <section class="tl-sec" aria-labelledby="tl-b-h">
+        <h2 class="tl-h" id="tl-b-h">${t('app.tools.budget.title')}</h2>
+        <div class="tl-budgets">${BUDGETS.map(
+          (b, i) => `<article class="card tl-bud${i === 0 ? ' is-free' : ''}">
+            <p class="card-k">${esc(pickT(b.title))}</p>
+            <p class="tl-bud-p"><b>${budgetPrice(b)}</b>${b.max ? `<small>${t('app.tools.perMonth')}</small>` : ''}</p>
+            <p class="tl-bud-x">${esc(pickT(b.text))}</p>
+            <p class="tl-bud-t">${b.tools.map((id) => `<span class="chip">${esc(byId[id]?.name || id)}</span>`).join('')}</p>
+          </article>`,
+        ).join('')}</div>
+        <p class="tl-note muted">${icon('info', { size: 14 })} ${t('app.tools.checked', { d: esc(checked) })}</p>
+      </section>
+
+      <section class="tl-sec" aria-labelledby="tl-l-h">
+        <div class="tl-sec-h"><h2 class="tl-h" id="tl-l-h">${t('app.tools.list.title')}</h2>
+          <div class="seg" id="tcats" role="group" aria-label="${esc(t('app.lib.cats'))}">${cats.map((c, i) => `<button type="button" aria-pressed="${i === 0}" data-c="${c}">${esc(c === 'all' ? t('app.lib.cat.all') : pickT(TOOL_CATS[c]))}</button>`).join('')}</div>
+        </div>
+        <div class="tl-grid" id="tl-grid">${OUTILS.map(
+          (o) => `<article class="card tl" data-cat="${o.cat}">
+            <header class="tl-hd"><span class="tl-ic" aria-hidden="true">${esc(o.name.slice(0, 1))}</span><div><h3>${esc(o.name)}</h3><span class="chip">${esc(pickT(TOOL_CATS[o.cat]))}</span></div><span class="tl-pr">${o.price ? usd(o.price) : t('app.tools.free')}</span></header>
+            <p class="tl-use">${esc(pickT(o.use))}</p>
+            <dl class="tl-dl"><div><dt>${t('app.tools.freeL')}</dt><dd>${esc(pickT(o.free))}</dd></div><div><dt>${t('app.tools.paidL')}</dt><dd>${esc(pickT(o.paid))}</dd></div></dl>
+            <footer class="tl-ft">${lessonLink(o)}<a class="b b--s" href="${esc(o.url)}" target="_blank" rel="noopener">${t('app.tools.open')}${icon('arrow', { size: 14, cls: 'i-ext' })}</a></footer>
+          </article>`,
+        ).join('')}</div>
+      </section>
+
+      <section class="card tl-gen" aria-labelledby="tl-g-h">
+        <p class="card-k">${icon('wand', { size: 14 })} ${t('app.tools.gen.k')}</p>
+        <h2 class="tl-h" id="tl-g-h">${t('app.tools.gen.title')}</h2>
+        <p class="muted">${t('app.tools.gen.lead')}</p>
+        <div class="seg tl-types" id="gtype" role="group" aria-label="${esc(t('app.tools.gen.type'))}">${PROMPT_TYPES.map((k, i) => `<button type="button" aria-pressed="${i === 0}" data-k="${k}">${t(`app.tools.gen.t.${k}`)}</button>`).join('')}</div>
+        <div class="tl-gen-g">
+          <div class="tl-form">${['p', 'c', 'b', 'o']
+            .map((k) => `<label class="lbl" data-f="${k}"><span>${t(`app.tools.gen.${k}`)}</span><input class="in" id="g-${k}" type="text" placeholder="${esc(t(`app.tools.gen.${k}.ph`))}" autocomplete="off"></label>`)
+            .join('')}
+            <button class="b b--s" type="button" id="g-ex">${icon('spark', { size: 15 })} ${t('app.tools.gen.example')}</button>
+          </div>
+          <div class="tl-out">
+            <p class="tl-en muted" id="g-en" hidden>${icon('info', { size: 14 })} ${t('app.tools.gen.en')}</p>
+            <pre class="out tl-pre" id="g-out" dir="auto"></pre>
+            <div class="tl-act" id="g-act"></div>
+          </div>
+        </div>
+      </section>
+    </div>`,
+  );
+
+  // Filtre par catégorie
+  $('#tcats').addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-c]');
+    if (!b) return;
+    $$('#tcats button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    $$('#tl-grid .tl').forEach((c) => (c.hidden = b.dataset.c !== 'all' && c.dataset.cat !== b.dataset.c));
+  });
+
+  // Générateur : le prompt se remplit à mesure que l'étudiant écrit
+  let type = PROMPT_TYPES[0];
+  const field = (k) => $(`#g-${k}`).value.trim();
+  const draw = () => {
+    const P = PROMPTS[type];
+    const fill = { p: field('p'), c: field('c'), b: field('b'), o: field('o') };
+    const txt = (P.en ? P.text : pickT(P.text)).replace(/\{([pcbo])\}/g, (_, k) => fill[k] || `[${t(`app.tools.gen.${k}`)}]`);
+    $('#g-out').textContent = txt;
+    $('#g-en').hidden = !P.en;
+    $('[data-f="o"]').hidden = !/\{o\}/.test(P.en ? P.text : pickT(P.text));
+    const q = encodeURIComponent(txt);
+    const launch = { chatgpt: `https://chatgpt.com/?q=${q}`, claude: `https://claude.ai/new?q=${q}` };
+    $('#g-act').innerHTML = `<button class="b b--or" type="button" id="g-copy">${icon('copy', { size: 16 })} ${t('app.tools.gen.copy')}</button>${P.tools
+      .map((id) => byId[id])
+      .filter(Boolean)
+      .map((o) => `<a class="b b--s" href="${esc(launch[o.id] || o.url)}" target="_blank" rel="noopener">${t(launch[o.id] ? 'app.tools.gen.in' : 'app.tools.gen.go', { name: esc(o.name) })}${icon('arrow', { size: 14, cls: 'i-ext' })}</a>`)
+      .join('')}`;
+    $('#g-copy').addEventListener('click', (e) => {
+      const btn = e.currentTarget;
+      navigator.clipboard?.writeText(txt).then(() => {
+        const o = btn.innerHTML;
+        btn.innerHTML = `${icon('check', { size: 15 })} ${t('app.tools.gen.copied')}`;
+        setTimeout(() => (btn.innerHTML = o), 1400);
+      });
+    });
+  };
+  $('#gtype').addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-k]');
+    if (!b) return;
+    type = b.dataset.k;
+    $$('#gtype button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    draw();
+  });
+  $$('.tl-form input').forEach((i) => i.addEventListener('input', draw));
+  $('#g-ex').addEventListener('click', () => {
+    ['p', 'c', 'b', 'o'].forEach((k) => ($(`#g-${k}`).value = t(`app.tools.gen.${k}.ex`)));
+    draw();
+  });
+  draw();
+  enter('.tools .ph-h, .tl-bud, .tl, .tl-gen');
 }
 
 /* ------------------------------------------------------------------ */
@@ -1575,6 +1788,7 @@ async function route() {
   if (h.startsWith('#/lecon/')) return viewLesson(decodeURIComponent(h.slice(8)));
   if (h === '#/ressources') return viewRes();
   if (h === '#/aide') return viewHelp();
+  if (h === '#/outils') return viewTools();
   if (h === '#/profil') return viewProfile();
   return viewHome();
 }

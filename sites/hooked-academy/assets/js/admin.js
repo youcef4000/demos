@@ -125,7 +125,11 @@ const firstOf = (name) => String(name || '').replace(/^Exemple — /, '').split(
 function welcomeText(st, l) {
   const id = st.email ? tIn(l, 'ad.msg.email', { v: st.email }) : tIn(l, 'ad.msg.phone', { v: st.phone || '—' });
   const name = S.isDemo(st) ? tIn(l, 'ad.msg.demoName') : st.firstName || firstOf(st.name);
-  return tIn(l, 'ad.msg.welcome', { name, url: studentUrl(l), id, code: st.code });
+  const tr = S.accessOf(st);
+  const packName = tr.map((x) => tIn(l, `track.${x}`)).join(' + ');
+  const until = st.expiresAt ? new Intl.DateTimeFormat({ fr: 'fr-FR', en: 'en-GB', ar: 'ar-DZ' }[l] || 'fr-FR', { dateStyle: 'long' }).format(new Date(st.expiresAt)) : '';
+  const pack = !S.isDemo(st) && tr.length && until ? `${tIn(l, 'ad.msg.pack', { p: packName, d: until })}\n` : '';
+  return tIn(l, 'ad.msg.welcome', { name, url: studentUrl(l), id, code: st.code, pack });
 }
 const contactText = (a, l) => tIn(l, 'ad.msg.contact', { name: firstOf(a.name) });
 
@@ -563,19 +567,28 @@ function viewStudents() {
   const acts = (s, full) =>
     s.protected
       ? ''
-      : `<div class="acts"><button class="b b--s" data-send="${esc(s.id)}" type="button" ${full ? '' : `aria-label="${esc(t('ad.st.resend'))}" title="${esc(t('ad.st.resend'))}"`}>${icon('whatsapp', { size: 15 })}${full ? ` ${t('ad.st.resend')}` : ''}</button><button class="b b--s ${s.active ? 'b--danger' : 'b--ok'}" data-act="${esc(s.id)}" type="button">${t(s.active ? 'ad.st.suspend' : 'ad.st.reactivate')}</button></div>`;
+      : `<div class="acts">${accBtn(s, full)}<button class="b b--s" data-send="${esc(s.id)}" type="button" ${full ? '' : `aria-label="${esc(t('ad.st.resend'))}" title="${esc(t('ad.st.resend'))}"`}>${icon('whatsapp', { size: 15 })}${full ? ` ${t('ad.st.resend')}` : ''}</button><button class="b b--s ${s.active ? 'b--danger' : 'b--ok'}" data-act="${esc(s.id)}" type="button">${t(s.active ? 'ad.st.suspend' : 'ad.st.reactivate')}</button></div>`;
   const code = (s) => (s.protected ? `<span class="muted" title="${esc(t('ad.st.protectedHint'))}">${lock}</span>` : `<code dir="ltr">${esc(s.code || '—')}</code>`);
+  const access = (s) => {
+    if (s.demo) return '<small class="muted">—</small>';
+    const tr = S.accessOf(s);
+    const chips = tr.length ? tr.map((x) => `<span class="fm" data-fm="${x}">${esc(t(`ad.fm.${x}`))}</span>`).join(' ') : `<span class="chip chip--off">${t('ad.ac.none')}</span>`;
+    const until = s.protected || !s.expiresAt ? '' : `<br><small class="${S.isExpired(s) ? 'ac-exp' : 'muted'}">${t(S.isExpired(s) ? 'ad.ac.expired' : 'ad.ac.untilShort', { d: esc(fmtDate(s.expiresAt, { day: '2-digit', month: 'short', year: 'numeric' })) })}</small>`;
+    return `<span class="ac-chips">${chips}</span>${until}`;
+  };
+  const accBtn = (s, full) =>
+    s.protected || s.demo ? '' : `<button class="b b--s" data-acc="${esc(s.id)}" type="button" ${full ? '' : `aria-label="${esc(t('ad.ac.btn'))}" title="${esc(t('ad.ac.btn'))}"`}>${icon('key', { size: 15 })}${full ? ` ${t('ad.ac.btn')}` : ''}</button>`;
   shell(
     '#/etudiants',
     `<div class="ph-h"><div><h1>${t('ad.nav.students')}</h1><p>${t('ad.st.lead', { n: fmtNum(rows.filter((r) => r.s.active).length) })}</p></div></div>
-    <div class="card tbl-wrap scroll-x"><table class="tbl"><thead><tr><th>${t('ad.st.th.student')}</th><th>${t('ad.st.th.progress')}</th><th>${t('ad.st.th.level')}</th><th>${t('ad.st.th.streak')}</th><th>${t('ad.st.th.last')}</th><th>${t('ad.st.th.code')}</th><th><span class="sr">${t('ad.st.th.actions')}</span></th></tr></thead><tbody>${rows
+    <div class="card tbl-wrap scroll-x"><table class="tbl"><thead><tr><th>${t('ad.st.th.student')}</th><th>${t('ad.st.th.progress')}</th><th>${t('ad.st.th.level')}</th><th>${t('ad.st.th.streak')}</th><th>${t('ad.st.th.last')}</th><th>${t('ad.st.th.access')}</th><th>${t('ad.st.th.code')}</th><th><span class="sr">${t('ad.st.th.actions')}</span></th></tr></thead><tbody>${rows
       .map(
-        ({ s, p, lastDay, xp, streak }) => `<tr${s.protected ? ' class="is-prot"' : ''}><td><b>${esc(stuName(s))}</b>${flags(s)}<br>${who(s)}</td><td><div class="meter"><i style="width:${p * 100}%"></i></div><small class="muted">${pct(p)}</small></td><td>${esc(lvName(xp))}<br><small class="muted">${fmtNum(xp)} XP</small></td><td>🔥 ${fmtNum(streak)}</td><td>${lastDay ? esc(fmtD(lastDay)) : '—'}</td><td>${code(s)}</td><td>${acts(s, false)}</td></tr>`,
+        ({ s, p, lastDay, xp, streak }) => `<tr${s.protected ? ' class="is-prot"' : ''}><td><b>${esc(stuName(s))}</b>${flags(s)}<br>${who(s)}</td><td><div class="meter"><i style="width:${p * 100}%"></i></div><small class="muted">${pct(p)}</small></td><td>${esc(lvName(xp))}<br><small class="muted">${fmtNum(xp)} XP</small></td><td>🔥 ${fmtNum(streak)}</td><td>${lastDay ? esc(fmtD(lastDay)) : '—'}</td><td>${access(s)}</td><td>${code(s)}</td><td>${acts(s, false)}</td></tr>`,
       )
       .join('')}</tbody></table></div>
     <div class="stu-cards">${rows
       .map(
-        ({ s, p, xp, streak }) => `<div class="card stu-card${s.protected ? ' is-prot' : ''}"><div class="stu-h"><b>${esc(stuName(s))}</b><span>${flags(s)}</span></div>${s.protected ? who(s) : ''}<div class="meter"><i style="width:${p * 100}%"></i></div><small class="muted">${pct(p)} · ${esc(lvName(xp))} · 🔥 ${fmtNum(streak)}${s.protected ? '' : ` · <code dir="ltr" style="color:var(--gold-300)">${esc(s.code || '—')}</code>`}</small>${acts(s, true)}</div>`,
+        ({ s, p, xp, streak }) => `<div class="card stu-card${s.protected ? ' is-prot' : ''}"><div class="stu-h"><b>${esc(stuName(s))}</b><span>${flags(s)}</span></div>${s.protected ? who(s) : ''}<p class="stu-ac">${access(s)}</p><div class="meter"><i style="width:${p * 100}%"></i></div><small class="muted">${pct(p)} · ${esc(lvName(xp))} · 🔥 ${fmtNum(streak)}${s.protected ? '' : ` · <code dir="ltr" style="color:var(--gold-300)">${esc(s.code || '—')}</code>`}</small>${acts(s, true)}</div>`,
       )
       .join('')}</div>`,
   );
@@ -583,6 +596,12 @@ function viewStudents() {
     b.addEventListener('click', () => {
       const s = d.students.find((x) => x.id === b.dataset.send);
       if (s && !s.protected) openAccess(s);
+    }),
+  );
+  $$('[data-acc]').forEach((b) =>
+    b.addEventListener('click', () => {
+      const s = d.students.find((x) => x.id === b.dataset.acc);
+      if (s && !s.protected) editAccess(s);
     }),
   );
   $$('[data-act]').forEach((b) =>
@@ -594,6 +613,40 @@ function viewStudents() {
       viewStudents();
     }),
   );
+}
+
+/** Formations ouvertes et durée d'accès d'un étudiant (pack du formulaire appliqué à la validation). */
+function editAccess(s) {
+  const app = S.load().applications.find((a) => a.id === s.appId);
+  const tr = S.accessOf(s);
+  const ymd = (iso) => (iso ? new Date(iso).toISOString().slice(0, 10) : '');
+  const html = `${drawerHead(icon('key', { size: 14 }) + ' ' + t('ad.ac.k'), t('ad.ac.title', { name: stuName(s) }))}
+    <form id="acf" class="ac-form">
+      ${app && fmOf(app) ? `<p class="muted">${t('ad.ac.pack', { p: esc(fmLabel(fmOf(app), true)) })}</p>` : ''}
+      <fieldset class="ac-tracks"><legend>${t('ad.ac.tracks')}</legend>
+        ${S.TRACK_IDS.map((x) => `<label class="ac-tr" data-fm="${x}"><input type="checkbox" name="tr" value="${x}"${tr.includes(x) ? ' checked' : ''}><span>${icon(x === 'ia' ? 'sparkles' : 'film', { size: 18 })}<b>${esc(t(`track.${x}`))}</b></span></label>`).join('')}
+      </fieldset>
+      <label class="lbl">${t('ad.ac.until')}<input class="in" type="date" name="until" value="${ymd(s.expiresAt)}" dir="ltr"></label>
+      <p class="muted ac-state">${S.isExpired(s) ? `<span class="ac-exp">${t('ad.ac.expired', { d: esc(fmtDate(s.expiresAt, { dateStyle: 'long' })) })}</span>` : ''}</p>
+      <div class="acts"><button class="b b--s" type="button" id="ac-plus">${icon('plus', { size: 15 })} ${t('ad.ac.plus')}</button></div>
+      <p class="muted" style="font-size:13px">${t('ad.ac.hint')}</p>
+      <div class="acts"><button class="b b--or" type="submit">${t('ad.ac.save')}</button><button class="b" type="button" data-x>${t('ad.fq.cancel')}</button></div>
+    </form>`;
+  const dw = drawer(t('ad.ac.title', { name: stuName(s) }), html);
+  const f = $('#acf', dw.dw);
+  $('#ac-plus', dw.dw).addEventListener('click', () => {
+    const base = Math.max(Date.now(), Date.parse(f.elements.until.value || 0) || 0);
+    f.elements.until.value = new Date(base + S.ACCESS_DAYS * 864e5).toISOString().slice(0, 10);
+  });
+  f.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const tracks = $$('input[name="tr"]:checked', f).map((i) => i.value);
+    S.setStudentAccess(s.id, tracks);
+    if (f.elements.until.value) S.setStudentExpiry(s.id, f.elements.until.value);
+    dw.dispose();
+    toast(`${icon('check', { size: 16 })} ${t('ad.ac.saved')}`);
+    viewStudents();
+  });
 }
 
 /* ------------------------------------------------------------------ */

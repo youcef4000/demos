@@ -13,8 +13,21 @@ export const DEMO_STUDENT = { email: 'demo@hooked.academy', code: 'DEMO-2026' };
 
 /** Le compte démo ne montre presque rien : une leçon par formation, le reste est verrouillé. */
 export const DEMO_OPEN = ['m1-l1', 'ia1-l1'];
-/** Bienvenue de chaque formation (leçon 00) : ouverte à tous, en démo comme avant l'inscription. */
-export const FREE_OPEN = ['m0-l1', 'ia0-l1'];
+/** Bienvenue et prise en main de chaque formation : ouvertes à tous, en démo comme avant l'inscription. */
+export const FREE_OPEN = ['m0-l1', 'm0-l2', 'ia0-l1', 'ia0-l4'];
+
+/**
+ * Accès par formation. Chaque pack ouvre une ou deux formations pour un an :
+ * « creative » (Formation Créative), « ia » (Formation IA), « both » (les deux).
+ * L'équipe peut ensuite ajouter ou retirer une formation et prolonger l'accès (espace équipe → Étudiants).
+ */
+export const TRACK_IDS = ['creative', 'ia'];
+export const ACCESS_DAYS = 365;
+export const PACKS = ['creative', 'ia', 'both'];
+export const packTracks = (f) => (f === 'creative' ? ['creative'] : f === 'ia' ? ['ia'] : ['creative', 'ia']);
+export const packOf = (tracks = []) => (tracks.includes('creative') && tracks.includes('ia') ? 'both' : tracks.includes('ia') ? 'ia' : tracks.includes('creative') ? 'creative' : null);
+const lessonTrack = (id) => (String(id).startsWith('ia') ? 'ia' : 'creative');
+const plusDays = (from, days) => new Date(from + days * 864e5).toISOString();
 
 /**
  * Comptes à mot de passe (créés par l'équipe). Ni l'e-mail ni le mot de passe ne sont écrits en clair :
@@ -225,10 +238,17 @@ export function validateApplication(id, by = 'Équipe') {
       createdAt: new Date().toISOString(),
       active: true,
       cohort: d.settings.cohort,
+      access: packTracks(a.formation),
+      expiresAt: plusDays(Date.now(), ACCESS_DAYS),
       progress: { lessons: {}, last: null, days: [], xp: 0, badges: [] },
     };
     d.students.push(st);
-  } else st.active = true;
+  } else {
+    // Réinscription : on ajoute les formations du nouveau pack et on repart pour un an
+    st.active = true;
+    st.access = [...new Set([...accessOf(st), ...packTracks(a.formation)])].filter((x) => TRACK_IDS.includes(x));
+    st.expiresAt = plusDays(Math.max(Date.now(), Date.parse(st.expiresAt || 0) || 0), ACCESS_DAYS);
+  }
   if (a.status !== 'validee') a.history.push({ at: new Date().toISOString(), status: 'validee', by });
   a.status = 'validee';
   a.studentId = st.id;
@@ -246,6 +266,42 @@ export function setStudentActive(id, active) {
   const st = d.students.find((s) => s.id === id);
   if (!st) return null;
   st.active = active;
+  save(d);
+  return st;
+}
+
+/** Formations ouvertes à un étudiant (le compte formateur et les comptes d'avant les packs ont les deux). */
+export const accessOf = (st) => (!st ? [] : st.protected || !Array.isArray(st.access) ? [...TRACK_IDS] : st.access.filter((x) => TRACK_IDS.includes(x)));
+/** L'accès d'un an est-il terminé ? */
+export const isExpired = (st) => !!st && !st.protected && !!st.expiresAt && Date.now() > Date.parse(st.expiresAt);
+/** L'étudiant a-t-il cette formation dans son pack (et un accès en cours) ? */
+export const hasTrack = (st, track) => !!st && !isDemo(st) && accessOf(st).includes(track) && !isExpired(st);
+
+/** Espace équipe : choisir les formations d'un étudiant (au moins zéro, au plus les deux). */
+export function setStudentAccess(id, tracks) {
+  const d = load();
+  const st = d.students.find((s) => s.id === id);
+  if (!st || st.protected) return null;
+  st.access = TRACK_IDS.filter((x) => tracks.includes(x));
+  if (!st.expiresAt) st.expiresAt = plusDays(Date.now(), ACCESS_DAYS);
+  save(d);
+  return st;
+}
+/** Espace équipe : prolonger l'accès (par défaut d'un an, à partir de la date de fin si elle n'est pas passée). */
+export function extendStudent(id, days = ACCESS_DAYS) {
+  const d = load();
+  const st = d.students.find((s) => s.id === id);
+  if (!st || st.protected) return null;
+  st.expiresAt = plusDays(Math.max(Date.now(), Date.parse(st.expiresAt || 0) || 0), days);
+  save(d);
+  return st;
+}
+/** Espace équipe : fixer la date de fin d'accès (AAAA-MM-JJ). */
+export function setStudentExpiry(id, ymd) {
+  const d = load();
+  const st = d.students.find((s) => s.id === id);
+  if (!st || st.protected || !/^\d{4}-\d{2}-\d{2}$/.test(ymd)) return null;
+  st.expiresAt = new Date(`${ymd}T23:59:59`).toISOString();
   save(d);
   return st;
 }
@@ -294,8 +350,8 @@ export async function loginStudent(ident, secret) {
 
 /** Le compte démo (ou ?demo=1) : accès limité à DEMO_OPEN. */
 export const isDemo = (st) => !!st && (st.demo || st.id === 'st-demo');
-/** Une leçon est-elle ouverte pour cet étudiant ? */
-export const canAccess = (st, lessonId) => !!st && (!isDemo(st) || DEMO_OPEN.includes(lessonId) || FREE_OPEN.includes(lessonId));
+/** Une leçon est-elle ouverte pour cet étudiant ? (bienvenue : tout le monde ; démo : DEMO_OPEN ; sinon : son pack) */
+export const canAccess = (st, lessonId) => !!st && (FREE_OPEN.includes(lessonId) || (isDemo(st) ? DEMO_OPEN.includes(lessonId) : hasTrack(st, lessonTrack(lessonId))));
 
 export function loginAdmin(code) {
   if (String(code || '').trim().toUpperCase() !== TEAM_CODE) return false;

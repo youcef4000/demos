@@ -2286,6 +2286,17 @@ html[lang='ar'] .tk-big {
   font-size: 15px;
   opacity: 0.7;
 }
+.tk-year {
+  flex-basis: 100%;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+html[lang='ar'] .tk-year {
+  letter-spacing: 0;
+}
 .tk-save {
   padding: 4px 9px 3px;
   background: var(--lime);
