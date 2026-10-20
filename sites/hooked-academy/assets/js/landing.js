@@ -3,7 +3,7 @@
 // comme une leçon au maximum), coupes franches. Les chiffres viennent de data/programme.js.
 // Mouvement : sauts en steps() (pellicule), jamais de fondu ; tout est désactivé en mouvement réduit.
 
-import { lang, isRTL, t, has, setLang } from './i18n.js';
+import { lang, isRTL, t, has, setLang, locale } from './i18n.js';
 import './i18n/landing.js';
 import { logoInner, markSVG, morphMark } from './brand.js';
 import { TRACKS, MODULES as ALL_MODULES, allLessons, modCode, coreModulesOf, findLesson } from '../../data/programme.js';
@@ -11,6 +11,7 @@ import { addApplication, load as loadStore } from './store.js';
 import * as FAQ from './faq.js';
 import { OFFRES } from '../../data/offres.js';
 import { mountAssistant } from './assistant.js';
+import { OUTILS, BUDGETS, CHECKED } from '../../data/outils.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -73,12 +74,36 @@ const nL = (n) => t('count.lessons', { n });
 const nM = (n) => t('count.modules', { n });
 
 $$('.js-count').forEach((el) => (el.textContent = nL(byTrack[el.dataset.track].lessons.length)));
+$('#coach-lessons').textContent = String(LESSONS.length);
+
+// Combien coûte l'IA pour commencer : les trois budgets de data/outils.js (prix relevés, en dollars par mois)
+{
+  const byId = Object.fromEntries(OUTILS.map((o) => [o.id, o]));
+  const pk = (o) => (o && (o[lang] || o.fr)) || '';
+  const usd = (n) => t('ai.usd', { n });
+  $('#tix-ai-row').innerHTML = BUDGETS.map(
+    (b) => `<li class="ai-c${b.max ? '' : ' is-free'}">
+      <p class="burn">${esc(pk(b.title))}</p>
+      <p class="ai-p">${b.max ? esc(t('ai.range', { a: usd(b.min), b: usd(b.max) })) : esc(t('ai.free'))}${b.max ? ` <small>${esc(t('ai.month'))}</small>` : ''}</p>
+      <p class="ai-t">${esc(pk(b.text))}</p>
+      <p class="ai-tools">${b.tools.map((id) => `<span>${esc(byId[id]?.name || id)}</span>`).join('')}</p>
+    </li>`,
+  ).join('');
+  const [y, m] = CHECKED.split('-').map(Number);
+  $('#tix-ai-note').textContent = t('ai.note', { d: new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }).format(new Date(y, m - 1, 1)) });
+}
 for (const tr of TRACKS) {
   const { mods, lessons } = byTrack[tr.id];
   $(`#duo-range-${tr.id}`).textContent = `${modCode(mods[0])}–${modCode(mods[mods.length - 1])}`;
   $(`#duo-pitch-${tr.id}`).textContent = tr.pitch;
-  $(`#duo-mods-${tr.id}`).innerHTML = mods.map((m) => `<li><span class="c">${modCode(m)}</span><span>${esc(m.title)}</span><span class="n">${esc(nL(m.lessons.length))}</span></li>`).join('');
-  $(`#duo-n-${tr.id}`).textContent = [nL(lessons.length), nM(mods.length), ...(tr.id === 'ia' ? [t('duo.final')] : [])].join(' · ');
+  // Programme détaillé : chaque module se déplie sur la liste de ses leçons
+  $(`#duo-mods-${tr.id}`).innerHTML = mods
+    .map(
+      (m) => `<li><details><summary><span class="c">${modCode(m)}</span><span class="t">${esc(m.title)}${m.level === 'avance' ? ` <em class="lv">${t('duo.lv')}</em>` : ''}</span><span class="n">${esc(nL(m.lessons.length))}</span><i class="pm" aria-hidden="true"></i></summary>
+        <ol class="dm-ls">${m.lessons.map((l) => `<li><span class="c">${pad(l.n)}</span><span>${esc(l.title)}</span></li>`).join('')}</ol></details></li>`,
+    )
+    .join('');
+  $(`#duo-n-${tr.id}`).textContent = [nL(lessons.length), nM(mods.length), t('duo.final')].join(' · ');
 }
 $('#count-t').textContent = `${nL(LESSONS.length)}, ${nM(MODULES.length)}, ${t('count.final')}`;
 

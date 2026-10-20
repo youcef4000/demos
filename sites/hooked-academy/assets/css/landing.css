@@ -1123,16 +1123,109 @@ html[lang='ar'] .duo-big {
   list-style: none;
   border-bottom: 2px solid var(--ink);
 }
-.duo-mods li {
+.duo-mods > li {
+  border-top: 2px solid var(--ink);
+}
+/* Programme détaillé : la ligne du module se déplie sur ses leçons */
+.duo-mods summary {
   display: grid;
-  grid-template-columns: 64px 1fr auto;
+  grid-template-columns: 64px 1fr auto 14px;
   align-items: baseline;
   gap: 12px;
   padding: 10px 0 9px;
-  border-top: 2px solid var(--ink);
   font-size: 16px;
   font-weight: 600;
   line-height: 1.25;
+  cursor: pointer;
+  list-style: none;
+}
+.duo-mods summary::-webkit-details-marker {
+  display: none;
+}
+.duo-mods summary:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+.duo-mods summary:hover .t {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.duo-mods .lv {
+  display: inline-block;
+  margin-inline-start: 6px;
+  padding: 1px 7px;
+  font-family: var(--f-dot);
+  font-style: normal;
+  font-size: 10.5px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: 2px;
+  color: var(--paper, #f2ede2);
+  background: var(--ink);
+}
+.duo-mods .pm {
+  position: relative;
+  align-self: center;
+  width: 12px;
+  height: 12px;
+}
+.duo-mods .pm::before,
+.duo-mods .pm::after {
+  content: '';
+  position: absolute;
+  inset: 5px 0 auto;
+  height: 2px;
+  background: var(--ink);
+}
+.duo-mods .pm::after {
+  transform: rotate(90deg);
+}
+.duo-mods details[open] .pm::after {
+  transform: none;
+}
+.dm-ls {
+  display: grid;
+  gap: 2px;
+  margin: 0 0 12px;
+  padding: 0 0 0 76px;
+  list-style: none;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+[dir='rtl'] .dm-ls {
+  padding: 0 76px 0 0;
+}
+.dm-ls li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 8px;
+  padding: 3px 0;
+}
+.dm-ls .c {
+  font-size: 12px;
+  opacity: 0.7;
+}
+.duo-hint {
+  margin: 10px 0 0;
+  font-family: var(--f-dot);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  opacity: 0.75;
+}
+@media (max-width: 560px) {
+  .duo-mods summary {
+    grid-template-columns: 48px 1fr auto 14px;
+    font-size: 15px;
+  }
+  .dm-ls {
+    padding-inline-start: 0;
+  }
+  [dir='rtl'] .dm-ls {
+    padding: 0;
+  }
 }
 .duo-mods .c {
   font-family: var(--f-dot);
@@ -3001,4 +3094,247 @@ html[lang='ar'] .credits dd {
 html[lang='ar'] .duo-big {
   line-height: 1.45;
   margin-bottom: -0.1em;
+}
+
+/* --------------------------------------------------------------------------
+   Plan 03 · Le formateur : « réalisé par » (photo dans un cadre de visée)
+   La photo vient de assets/img/formateur.webp ; sans elle, le monogramme reste.
+   -------------------------------------------------------------------------- */
+.coach {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 96px);
+}
+.coach-frame {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--orange);
+}
+.coach-mono {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--f-cond);
+  font-weight: 900;
+  font-size: clamp(220px, 34vw, 520px);
+  line-height: 0.8;
+  color: var(--ink);
+}
+.coach-ph {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.coach-crop {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border: 0 solid var(--paper);
+}
+.coach-crop--tl {
+  top: 16px;
+  left: 16px;
+  border-width: 2px 0 0 2px;
+}
+.coach-crop--tr {
+  top: 16px;
+  right: 16px;
+  border-width: 2px 2px 0 0;
+}
+.coach-crop--bl {
+  bottom: 16px;
+  left: 16px;
+  border-width: 0 0 2px 2px;
+}
+.coach-crop--br {
+  bottom: 16px;
+  right: 16px;
+  border-width: 0 2px 2px 0;
+}
+.coach-burn {
+  position: absolute;
+  inset: auto 60px 22px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--paper);
+}
+.coach-burn .rec i {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-inline-end: 6px;
+  border-radius: 50%;
+  background: #ff3b30;
+}
+.coach-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 36px 0 0;
+  padding: 22px 0 0;
+  border-top: 2px solid var(--paper);
+}
+.coach-stats div {
+  margin: 0;
+}
+.coach-n {
+  font-family: var(--f-dot);
+  font-weight: 900;
+  font-size: clamp(30px, 3.6vw, 54px);
+  line-height: 1;
+  color: var(--lime);
+}
+.coach-stats dd {
+  margin: 8px 0 0;
+  font-size: 15px;
+  line-height: 1.35;
+  color: var(--ink-mute);
+}
+.coach-sign {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+  margin: 34px 0 0;
+  font-size: 15px;
+  color: var(--ink-mute);
+}
+.coach-sig {
+  font-family: 'Permanent Marker', var(--f-cond);
+  font-size: clamp(30px, 3vw, 42px);
+  line-height: 1;
+  color: var(--paper);
+  transform: rotate(-4deg);
+}
+@media (max-width: 860px) {
+  .coach {
+    grid-template-columns: 1fr;
+  }
+  .coach-frame {
+    max-width: 420px;
+    width: 100%;
+  }
+}
+@media (max-width: 560px) {
+  .coach-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+  .coach-stats div:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Tarifs · combien coûte l'IA pour commencer (data/outils.js) */
+.tix-ai {
+  margin-top: clamp(56px, 7vw, 96px);
+  padding-top: clamp(36px, 4vw, 56px);
+  border-top: 2px solid var(--ink);
+}
+.tix-ai-h {
+  margin: 0;
+  font-family: var(--f-cond);
+  font-weight: 900;
+  font-size: clamp(36px, 4.6vw, 72px);
+  line-height: 0.9;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+html[lang='ar'] .tix-ai-h {
+  font-weight: 800;
+  font-size: clamp(30px, 3.6vw, 52px);
+  line-height: 1.25;
+}
+.tix-ai-x {
+  margin: 16px 0 0;
+  max-width: 52ch;
+}
+.tix-ai-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 34px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ai-c {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px;
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+.ai-c.is-free {
+  background: var(--lime);
+}
+.ai-p {
+  margin: 0;
+  font-family: var(--f-cond);
+  font-weight: 900;
+  font-size: clamp(34px, 3.4vw, 50px);
+  line-height: 0.95;
+}
+html[lang='ar'] .ai-p {
+  font-weight: 800;
+  font-size: clamp(26px, 2.6vw, 36px);
+  line-height: 1.25;
+}
+.ai-p small {
+  font-family: var(--f-text);
+  font-size: 15px;
+  font-weight: 600;
+}
+.ai-t {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.5;
+}
+.ai-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: auto 0 0;
+  padding-top: 6px;
+}
+.ai-tools span {
+  padding: 3px 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  box-shadow: inset 0 0 0 1.5px var(--ink);
+}
+@media (max-width: 860px) {
+  .tix-ai-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Assistant (assets/css/assistant.css) : au-dessus du timecode, et de la barre du bas sur mobile */
+.lp .hb {
+  --hb-bottom: 64px;
+}
+@media (max-width: 899px) {
+  .lp .hb {
+    --hb-bottom: 84px;
+  }
+}
+.tix-ai .tix-note {
+  margin-top: 16px;
+}
+.coach-n {
+  white-space: nowrap;
+}
+@media (max-width: 560px) {
+  .coach-n {
+    font-size: 26px;
+  }
+}
+html[lang='ar'] :is(.duo-hint, .duo-mods .lv) {
+  font-family: var(--f-text);
+  letter-spacing: 0;
 }

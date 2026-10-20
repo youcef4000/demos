@@ -81,7 +81,7 @@
 <main id="top">
 
   <!-- PLAN 01 · Ouverture : le clap ====================================== -->
-  <section class="sh hero" id="hero" data-ton="encre" data-plan="01" data-name="plan.01">
+  <section class="sh hero" id="hero" data-ton="encre" data-plan="01" data-name="plan.hero">
     <div class="frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <p class="burn burn--tl" aria-hidden="true" id="clip-id">A001_C001</p>
     <p class="burn burn--tr" aria-hidden="true" data-i18n="hero.fps">DÉMO · 25 I/S</p>
@@ -125,7 +125,7 @@
   </section>
 
   <!-- PLAN 02 · Deux formations : champ / contrechamp ===================== -->
-  <section class="sh duo" id="formations" data-ton="duo" data-plan="02" data-name="plan.02" aria-labelledby="duo-h">
+  <section class="sh duo" id="formations" data-ton="duo" data-plan="02" data-name="plan.formations" aria-labelledby="duo-h">
     <h2 class="sr-only" id="duo-h" data-i18n="duo.h">Deux formations, une méthode</h2>
     <p class="duo-seam" aria-hidden="true"><span data-i18n="duo.seam">Deux formations · une méthode</span></p>
     <article class="duo-p" data-track="creative" id="duo-creative">
@@ -133,6 +133,7 @@
         <p class="duo-k"><span data-i18n="duo.k1">Formation 01</span><span class="duo-range" id="duo-range-creative"></span></p>
         <h3 class="duo-t"><span class="duo-big" aria-hidden="true" data-i18n="duo.big1">Créative</span><span class="duo-name" data-i18n="track.creative">Formation Créative</span></h3>
         <p class="duo-pitch" id="duo-pitch-creative"></p>
+        <p class="duo-hint" data-i18n="duo.hint">Touche un module pour voir ses leçons.</p>
       </header>
       <ol class="duo-mods" id="duo-mods-creative"></ol>
       <footer class="duo-f"><span class="duo-n" id="duo-n-creative"></span><a class="duo-go" href="#parcours" data-i18n="duo.go">Voir le parcours</a></footer>
@@ -142,14 +143,36 @@
         <p class="duo-k"><span data-i18n="duo.k2">Formation 02</span><span class="duo-range" id="duo-range-ia"></span></p>
         <h3 class="duo-t"><span class="duo-big" aria-hidden="true" data-i18n="duo.big2">IA</span><span class="duo-name" data-i18n="track.ia">Formation IA</span></h3>
         <p class="duo-pitch" id="duo-pitch-ia"></p>
+        <p class="duo-hint" data-i18n="duo.hint">Touche un module pour voir ses leçons.</p>
       </header>
       <ol class="duo-mods" id="duo-mods-ia"></ol>
       <footer class="duo-f"><span class="duo-n" id="duo-n-ia"></span><a class="duo-go" href="#parcours" data-i18n="duo.go">Voir le parcours</a></footer>
     </article>
   </section>
 
-  <!-- PLAN 03 · La formation : la table de montage d'une vraie leçon ====== -->
-  <section class="sh lecon" id="lecon" data-ton="papier" data-plan="03" data-name="plan.03" aria-labelledby="lecon-h">
+  <!-- PLAN 03 · Le formateur : « réalisé par » ============================= -->
+  <section class="sh coach" id="formateur" data-ton="encre" data-plan="03" data-name="plan.formateur" aria-labelledby="coach-h">
+    <figure class="coach-frame" aria-hidden="true">
+      <span class="coach-mono">Y</span>
+      <!-- Photo du formateur : ajouter <img class="coach-ph" src="assets/img/formateur.webp" alt="" width="800" height="1000" loading="lazy" decoding="async"> (portrait 4:5) -->
+      <i class="coach-crop coach-crop--tl"></i><i class="coach-crop coach-crop--tr"></i><i class="coach-crop coach-crop--bl"></i><i class="coach-crop coach-crop--br"></i>
+      <figcaption class="coach-burn"><span class="burn ltr">CAM A · 50 mm</span><span class="burn rec"><i></i>REC</span></figcaption>
+    </figure>
+    <div class="coach-copy">
+      <p class="lbl" data-i18n="coach.k">Ton formateur</p>
+      <h2 class="h2" id="coach-h" data-i18n-html="coach.h">Réalisé <span class="nb">par Youcef.</span></h2>
+      <p class="lead" data-i18n="coach.x">Plus de 10 000 étudiants sont passés par mes formations, et j’ai analysé plus de 20 000 créatives publicitaires. Hooked Academy, c’est cette méthode, découpée en leçons de 2 minutes : ce qui fait arrêter le scroll, et ce qui fait acheter.</p>
+      <dl class="coach-stats">
+        <div><dt class="coach-n ltr">+10 000</dt><dd data-i18n="coach.s1">étudiants formés</dd></div>
+        <div><dt class="coach-n ltr">+20 000</dt><dd data-i18n="coach.s2">créatives analysées</dd></div>
+        <div><dt class="coach-n ltr" id="coach-lessons">119</dt><dd data-i18n="coach.s3">leçons dans la méthode</dd></div>
+      </dl>
+      <p class="coach-sign"><span class="coach-sig" lang="fr">Youcef</span><span data-i18n="coach.role">ton formateur, Hooked Academy</span></p>
+    </div>
+  </section>
+
+  <!-- PLAN 04 · La formation : la table de montage d'une vraie leçon ====== -->
+  <section class="sh lecon" id="lecon" data-ton="papier" data-plan="04" data-name="plan.lecon" aria-labelledby="lecon-h">
     <header class="sec-h">
       <p class="lbl" data-i18n="lecon.k">La formation</p>
       <h2 class="h2 derush" id="lecon-h" data-i18n-html="lecon.h">Pensée pour être <span class="um" aria-hidden="true">euh…</span> finie, pas <span class="um" aria-hidden="true">pas…</span> abandonnée.</h2>
@@ -210,15 +233,15 @@
         </li>
         <li class="note note--count">
           <span class="note-n">05</span>
-          <h3 id="count-t">— leçons, — modules, 1 projet final</h3>
+          <h3 id="count-t">— leçons, — modules, un projet final par formation</h3>
           <p data-i18n="lecon.n5.x">Des bases de la créative jusqu’à la signature de tes premiers clients.</p>
         </li>
       </ol>
     </div>
   </section>
 
-  <!-- PLAN 04 · L'espace étudiant : le retour vidéo ======================= -->
-  <section class="sh space" id="espace" data-ton="encre" data-plan="04" data-name="plan.04" aria-labelledby="space-h">
+  <!-- PLAN 05 · L'espace étudiant : le retour vidéo ======================= -->
+  <section class="sh space" id="espace" data-ton="encre" data-plan="05" data-name="plan.espace" aria-labelledby="space-h">
     <div class="space-copy">
       <p class="lbl" data-i18n="space.k">L’espace étudiant</p>
       <h2 class="h2" id="space-h" data-i18n-html="space.h">Ta progression, <span class="nb">visible chaque jour.</span></h2>
@@ -253,8 +276,8 @@
     </figure>
   </section>
 
-  <!-- PLAN 05 · Ton parcours : le travelling ============================ -->
-  <section class="sh path" id="parcours" data-ton="papier" data-plan="05" data-name="plan.05" aria-labelledby="path-h">
+  <!-- PLAN 06 · Ton parcours : le travelling ============================ -->
+  <section class="sh path" id="parcours" data-ton="papier" data-plan="06" data-name="plan.parcours" aria-labelledby="path-h">
     <div class="path-pin" id="path-pin">
       <header class="sec-h path-head">
         <p class="lbl" data-i18n="path.k">Ton parcours</p>
@@ -293,8 +316,8 @@
     </div>
   </section>
 
-  <!-- PLAN 06 · Tu te reconnais ? : le casting ========================== -->
-  <section class="sh who" id="profils" data-ton="encre" data-plan="06" data-name="plan.06" aria-labelledby="who-h">
+  <!-- PLAN 07 · Tu te reconnais ? : le casting ========================== -->
+  <section class="sh who" id="profils" data-ton="encre" data-plan="07" data-name="plan.profils" aria-labelledby="who-h">
     <header class="sec-h who-head">
       <p class="lbl" data-i18n="who.k">Pour qui</p>
       <h2 class="h2" id="who-h" data-i18n="who.h">Tu te reconnais ?</h2>
@@ -333,8 +356,8 @@
     </div>
   </section>
 
-  <!-- PLAN 07 · Hooked Lab : retour labo ================================ -->
-  <section class="sh lab" id="hooked-lab" data-ton="citron" data-plan="07" data-name="plan.07" aria-labelledby="lab-h">
+  <!-- PLAN 08 · Hooked Lab : retour labo ================================ -->
+  <section class="sh lab" id="hooked-lab" data-ton="citron" data-plan="08" data-name="plan.lab" aria-labelledby="lab-h">
     <div class="lab-mark" id="lab-mark" aria-hidden="true"></div>
     <div class="lab-copy">
       <p class="lbl">Hooked Lab</p>
@@ -352,8 +375,8 @@
     </div>
   </section>
 
-  <!-- PLAN 08 · Tarifs : la billetterie (trois billets, le pack au centre) === -->
-  <section class="sh tix" id="tarifs" data-ton="papier" data-plan="08" data-name="plan.08" aria-labelledby="tix-h">
+  <!-- PLAN 09 · Tarifs : la billetterie (trois billets, le pack au centre) === -->
+  <section class="sh tix" id="tarifs" data-ton="papier" data-plan="09" data-name="plan.tarifs" aria-labelledby="tix-h">
     <header class="sec-h tix-head">
       <p class="lbl" data-i18n="tix.k">Tarifs</p>
       <h2 class="h2" id="tix-h" data-i18n-html="tix.h">Choisis ta séance. <span class="nb dim">Paie après l’appel.</span></h2>
@@ -368,11 +391,11 @@
           <p class="tk-price"><span class="tk-amt js-amt" data-offre="creative">14&#8239;900&nbsp;DA</span><span class="tk-year" data-i18n="tix.year">Accès 1 an</span></p>
           <ul class="tk-inc">
             <li class="js-inc" data-k="tix.inc.lessons" data-track="creative">27 leçons animées de 2 min, en darija</li>
-            <li class="js-inc" data-k="tix.c.1" data-mods="creative">6 modules, des bases au brand content</li>
+            <li class="js-inc" data-k="tix.c.1" data-mods="creative">12 modules, des bases au projet final</li>
             <li data-i18n="tix.c.2">Hooks, scripts, formules de vente et UGC</li>
-            <li data-i18n="tix.c.3">Production au téléphone avec CapCut et Canva</li>
-            <li data-i18n="tix.c.4">Un quiz et un exercice à chaque leçon</li>
-            <li data-i18n="tix.c.5">Certificat Formation Créative</li>
+            <li data-i18n="tix.c.3">Tournage, montage avancé et stratégie marketing</li>
+            <li data-i18n="tix.c.4">Un quiz et une to-do pratique à chaque leçon</li>
+            <li data-i18n="tix.c.5">Projet final de 30 s et certificat</li>
           </ul>
         </div>
         <div class="tk-stub">
@@ -430,10 +453,18 @@
       </ul>
       <p class="tix-note" data-i18n="tix.note">Prix en dinars algériens (DA), pour un an d’accès à la plateforme. Aucun paiement en ligne.</p>
     </div>
+    <!-- Coûts des outils IA : data/outils.js (budgets, prix relevés, outils) -->
+    <div class="tix-ai" aria-labelledby="tix-ai-h">
+      <p class="lbl" data-i18n="ai.k">Et les outils IA ?</p>
+      <h3 class="tix-ai-h" id="tix-ai-h" data-i18n="ai.h">Combien coûte l’IA pour commencer ?</h3>
+      <p class="tix-ai-x" data-i18n="ai.x">Tu n’as pas besoin de tout acheter. La formation te dit quel outil prendre, et quand.</p>
+      <ol class="tix-ai-row" id="tix-ai-row"></ol>
+      <p class="tix-note" id="tix-ai-note"></p>
+    </div>
   </section>
 
-  <!-- PLAN 09 · Inscription : l'ardoise devient le formulaire ========== -->
-  <section class="sh join" id="inscription" data-ton="encre" data-plan="09" data-name="plan.09" aria-labelledby="join-h">
+  <!-- PLAN 10 · Inscription : l'ardoise devient le formulaire ========== -->
+  <section class="sh join" id="inscription" data-ton="encre" data-plan="10" data-name="plan.inscription" aria-labelledby="join-h">
     <div class="join-copy">
       <p class="lbl" data-i18n="join.k">Inscription</p>
       <h2 class="h2" id="join-h" data-i18n-html="join.h">Réserve ta place. <span class="nb dim">L’équipe te rappelle.</span></h2>
@@ -512,8 +543,8 @@
     </div>
   </section>
 
-  <!-- PLAN 10 · Questions : le fichier de sous-titres ===================== -->
-  <section class="sh faq" id="faq" data-ton="papier" data-plan="10" data-name="plan.10" aria-labelledby="faq-h">
+  <!-- PLAN 11 · Questions : le fichier de sous-titres ===================== -->
+  <section class="sh faq" id="faq" data-ton="papier" data-plan="11" data-name="plan.faq" aria-labelledby="faq-h">
     <header class="sec-h faq-head">
       <p class="lbl" data-i18n="faq.k">Questions</p>
       <h2 class="h2" id="faq-h" data-i18n="faq.h">Avant de te lancer.</h2>
@@ -531,8 +562,8 @@
   </section>
 </main>
 
-<!-- PLAN 11 · Générique ================================================ -->
-<footer class="sh foot" data-ton="encre" data-plan="11" data-name="plan.11">
+<!-- PLAN 12 · Générique ================================================ -->
+<footer class="sh foot" data-ton="encre" data-plan="12" data-name="plan.foot">
   <div class="credits">
     <dl>
       <div><dt data-i18n="foot.prod">Une production</dt><dd>Hooked Lab</dd></div>

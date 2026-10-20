@@ -2570,3 +2570,8 @@ details[open] > summary .rs-car {
   font-weight: 500;
   line-height: 1.45;
 }
+.fq-kw-l {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}

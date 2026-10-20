@@ -1227,7 +1227,7 @@ function faqDrawer(item = null) {
         <label class="lbl">${t('ad.fq.cat')}<select class="in" name="cat">${FAQ.CATS.map((c) => `<option value="${c}"${c === it.cat ? ' selected' : ''}>${esc(t(`faq.cat.${c}`))}</option>`).join('')}</select></label>
         <label class="rs-only fq-land"><input type="checkbox" name="landing"${it.landing ? ' checked' : ''}><span>${t('ad.fq.landing')}</span></label>
       </div>
-      <label class="lbl">${icon('bot', { size: 14 })} ${t('ad.fq.kw')}<input class="in" name="kw" value="${esc(it.kw || '')}" maxlength="600" placeholder="${esc(t('ad.fq.kw.ph'))}" dir="auto"><small class="muted fq-kw-h">${t('ad.fq.kw.hint')}</small></label>
+      <label class="lbl"><span class="fq-kw-l">${icon('bot', { size: 14 })} ${t('ad.fq.kw')}</span><input class="in" name="kw" value="${esc(it.kw || '')}" maxlength="600" placeholder="${esc(t('ad.fq.kw.ph'))}" dir="auto"><small class="muted fq-kw-h">${t('ad.fq.kw.hint')}</small></label>
       ${FQ_LANGS.map(
         (l) => `<fieldset class="fq-lg" lang="${l.code}"${l.dir ? ` dir="${l.dir}"` : ''}>
           <legend><span class="chip">${l.code.toUpperCase()}</span> ${l.label}${l.req ? ` <small>${t('ad.fq.req')}</small>` : ` <small>${t('ad.fq.opt')}</small>`}</legend>
