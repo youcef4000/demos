@@ -111,6 +111,13 @@ export default {
           "title": "Ad analysis sheet",
           "text": "Ad no. [  ]\nLink: [ad link]\nPage / brand: [name]\nPlatform: [Facebook / Instagram / TikTok]\nRunning since: [start date]\n\nHook (first 3 seconds): [what you see] / [what you hear] / [on-screen text]\nLength: [  ] s\nFormat: [UGC / demo / talking to camera / before-after / unboxing…]\nAngle: [problem / desire / price / gift / something new…]\nOffer: [price, bundle, delivery, payment…]\nCTA: [what viewers are asked to do]\n\nWhat I’m reusing (the structure, not the content): [  ]"
         }
+      ],
+      "todo": [
+        "In the Meta Ad Library, select Algeria and a keyword from your niche",
+        "Keep 3 ads that have been running for several weeks, with their link and start date",
+        "Also check the Top Ads in TikTok Creative Center for your category",
+        "Fill in the “Ad analysis sheet” from the resources for each ad you kept",
+        "Note the structure you’ll reuse for your product, without copying the content"
       ]
     },
     "m7-l2": {
@@ -186,6 +193,14 @@ export default {
           ],
           "why": "Length depends on the message: cut anything that adds nothing."
         }
+      ],
+      "todo": [
+        "Set your ad’s target length based on what your product needs to show",
+        "In CapCut, cut the intro of your latest video, the “Salam, today I’m going to…” kind",
+        "Remove repetitions and silences, and open straight on the hook",
+        "Check that a shot, a zoom or a text changes every 2 to 3 seconds",
+        "Watch it all the way through, note where you get bored, and cut that part",
+        "Compare the final length with your target length"
       ]
     },
     "m7-l3": {
@@ -283,6 +298,14 @@ export default {
           "title": "Shot list",
           "text": "Product: [name]\nLocation: [quiet room, near a window] · Time: [daytime]\nSettings: vertical 9:16 · clean lens · phone on a tripod or stand · airplane mode\n\n1. Product in hand: [pick it up, show it to the camera]\n2. Details: [close-ups: material, cap, texture, label]\n3. Use: [the real action, start to finish]\n4. Result: [what it changes, no filter or retouching]\n5. Talking to camera: [your opinion or explanation, sentence by sentence]\n6. Cutaways: [hands, packaging, setting, atmosphere]\n\nFor each shot: 3 takes · 2 seconds of margin before and after · more footage than you need."
         }
+      ],
+      "todo": [
+        "Fill in the “Shot list” from the resources for your product",
+        "Set up facing a window, during the day, in a quiet spot",
+        "Clean the lens, switch to airplane mode and prop the phone up vertically",
+        "Film each shot on your list 3 times, with 2 seconds of margin before and after",
+        "Add cutaways: your hands, the packaging, the setting",
+        "Review your footage and mark the best take of each shot"
       ]
     },
     "m7-l4": {
@@ -373,6 +396,13 @@ export default {
           "title": "Voice-over script (template)",
           "text": "Product: [name] · Target length: [  ] s · Language: [Darija / French / Arabic]\n\nHOOK (0 to 3 s): [a line that stops the scroll]\nBODY: [the problem] → [the product] → [how to use it] → [the proof: demo, real guarantee]\nCTA: [the action] + [reassurance, e.g. cash on delivery, if true]\n\nBefore recording: read it aloud, time it, shorten the sentences you trip over.\nDuring: small room, phone at 15–20 cm, AC and fan off, 3 takes.\nAfter: keep the best take, noise reduction in CapCut."
         }
+      ],
+      "todo": [
+        "Fill in the “Voice-over script” template from the resources: hook, body, CTA",
+        "Read it aloud while timing it, and shorten the sentences you trip over",
+        "Set up in a small room full of fabric, with noisy appliances off",
+        "Record 3 takes, phone 15–20 cm from your mouth, with energy and a smile",
+        "Import the best take into CapCut and turn on noise reduction"
       ]
     },
     "m7-l5": {
@@ -461,6 +491,14 @@ export default {
           ],
           "why": "The description, account name and buttons cover these areas."
         }
+      ],
+      "todo": [
+        "In CapCut, run auto captions on your ad and choose the language",
+        "Check every line and fix names, prices and words in Darija",
+        "Keep them to 2 lines, in big text with an outline or a dark background",
+        "Color 1 or 2 keywords per sentence: the price, the benefit, the hook word",
+        "Place them in the center, away from the bottom and the right edge of the screen",
+        "Watch your ad with the sound off and note whether the product and offer come across"
       ]
     },
     "m7-l6": {
@@ -565,6 +603,14 @@ export default {
           ],
           "why": "The same size as the video, or the card gets cropped or framed by bars."
         }
+      ],
+      "todo": [
+        "Write your 4 elements: the product, the offer if it’s real, the action, the reassurance",
+        "In Canva, create a 1080 × 1920 design with a solid background and a big headline",
+        "Add a sharp photo of the product and a button in a color that stands out",
+        "Download it as a PNG and place it at the end of your video in CapCut, for 2 to 3 seconds",
+        "Say the CTA in the voice-over at the same moment",
+        "Check: readable in one second, inside the safe zone, only one action asked"
       ]
     },
     "m7-l7": {
@@ -659,6 +705,13 @@ export default {
           "title": "Ad copy (template)",
           "text": "PRIMARY TEXT\n[Hook line: your customer’s question or problem]\n[Benefit 1]\n[Benefit 2]\n[Real proof: demo, real guarantee, genuine review]\n[Call to action] + [reassurance: cash on delivery, delivery time… if true]\n\nHEADLINE (short): [the benefit or offer in a few words]\nDESCRIPTION (not always shown): [a reassuring detail]\n\n3 versions to test:\nV1, problem angle: [  ]\nV2, benefit angle: [  ]\nV3, offer angle: [  ]\n\nLanguage: [Darija / French / Arabic] · 1 or 2 emojis max · no promise you can’t prove."
         }
+      ],
+      "todo": [
+        "Read the first line of the copy on 2 ads in your niche, the one before “See more”",
+        "Fill in the “Ad copy” template from the resources for your product",
+        "Write 3 versions of the primary text: problem angle, benefit angle, offer angle",
+        "Add a short headline, then a short line for TikTok",
+        "Remove any promise you can’t prove and keep 1 or 2 emojis at most"
       ]
     },
     "m7-l8": {
@@ -749,6 +802,14 @@ export default {
           "title": "Variation plan",
           "text": "Naming rule: product-variable-format-version (e.g. perfume-hookB-9x16-v2)\n\nWinner: [product]-hookA-9x16-v1\n\nVariation 1, hook: [new first 3 seconds] → [product]-hookB-9x16-v2\nVariation 2, 1st frame: [new opening frame] → [product]-frameB-9x16-v3\nVariation 3, music: [new music] → [product]-musicB-9x16-v4\nVariation 4, format: [1:1 or 4:5] → [product]-hookA-4x5-v5\nVariation 5, CTA: [new card or new line] → [product]-ctaB-9x16-v6\n\nOnly one thing changes per variation. Publish them at the same time, with the same budget, then compare."
         }
+      ],
+      "todo": [
+        "Pick the ad that performed best, or your most polished version",
+        "Fill in the “Variation plan” from the resources: only one thing changes per variation",
+        "In CapCut, duplicate the project and change only the hook",
+        "Do it again for the first frame, the music, the format and the CTA",
+        "Export each variation with a clear name, like perfume-hookB-9x16-v2",
+        "If you publish them, do it at the same time with the same budget, then compare"
       ]
     },
     "m7-l9": {
@@ -860,6 +921,14 @@ export default {
           "title": "UGC brief (template)",
           "text": "UGC BRIEF: [product name]\n\nProduct: [what it does, price, how to use it] · sent on [date]\nAudience: [who, age, city, problem or desire]\nKey message: [one idea to remember]\nScript or key points: [suggested hook] / [3 points to say in your own words] / [CTA]\nDon’t say: [banned claims, competitor brands, price if it may change]\n\nShots to film: product in hand · details · use · result · talking to camera · cutaways\nFormat: vertical 9:16 · target length [  ] s · daylight · clear voice\nTo deliver: the edited video + the raw footage, no added music\nDelivery date: [date] · via [WhatsApp / download link]\n\nUsage rights: platforms [Facebook, Instagram, TikTok] · duration [  ] months · in paid ads: [yes / no]\nRevisions included: [number]\nPayment: [amount, payment terms]\n\nOn delivery, I check: hook in the first 3 seconds · product visible and correctly named · vertical, sharp, clear voice · nothing false said about the product."
         }
+      ],
+      "todo": [
+        "Fill in the “UGC brief” template from the resources for your product",
+        "Write one key message and 3 points to say, with no word-for-word script",
+        "List the shots to film, the vertical format, the target length and the delivery date",
+        "Set the usage rights and the number of revisions in writing",
+        "Reread the brief as a creator: could they film without asking you anything?",
+        "Prepare your delivery checklist: hook, visible product, sharp picture, nothing false"
       ]
     }
   }

@@ -14,6 +14,8 @@ import { TRACKS, PARTS, MODULES, allLessons, findLesson, modCode, modulesOf, cor
 import { compose, lessonDuration } from '../../motion/engine.js';
 import { renderWidget, flashcards } from './widgets.js';
 import * as FAQ from './faq.js';
+import { mountAssistant } from './assistant.js';
+import { getTheme, setTheme } from './theme.js';
 import { OUTILS, CATS as TOOL_CATS, BUDGETS, PROMPTS, PROMPT_TYPES, CHECKED as TOOLS_CHECKED } from '../../data/outils.js';
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -487,6 +489,7 @@ function shell(active, html, { track = '' } = {}) {
               : `<span class="streak" title="${esc(t('app.streak.title'))}">${icon('fire', { size: 18 })}<b>${num(st)}</b></span>
           <span class="xp" title="${esc(t(`level.${S.level(me.progress.xp).i}`))}"><span aria-hidden="true">⚡</span><b id="xp-v">${num(me.progress.xp)}</b> XP</span>`
           }
+          <button class="th-btn" type="button" data-theme-toggle aria-label="${esc(t(getTheme() === 'light' ? 'app.theme.toDark' : 'app.theme.toLight'))}" title="${esc(t(getTheme() === 'light' ? 'app.theme.toDark' : 'app.theme.toLight'))}">${icon('sun', { size: 18, cls: 'i-sun' })}${icon('moon', { size: 18, cls: 'i-moon' })}</button>
           ${langMenu()}
           <a class="av" href="#/profil" aria-label="${esc(t('app.nav.profile'))}">${esc(initial.toUpperCase())}</a>
         </div>
@@ -1107,7 +1110,7 @@ function viewLesson(id) {
 
   const learnTabs = [
     { k: 'ess', ic: 'star', label: t('app.tab.ess') },
-    { k: 'ex', ic: 'pen', label: t('app.tab.ex') },
+    { k: 'ex', ic: 'pen', label: t('app.tab.ex'), count: l.todo?.length || undefined },
   ];
   let tabsHTML;
   if (isIA) {
@@ -1194,7 +1197,11 @@ function viewLesson(id) {
       if (g) g.from($$('.keys li', panel), { x: X(-24), autoAlpha: 0, stagger: 0.08, duration: 0.6, ease: 'expo.out', clearProps: 'transform,opacity,visibility' });
       return;
     }
-    if (k === 'ex') return renderWidget(l.widget, panel, { lesson: l, module: m, onXP: (n, why) => gainXP(n, why) });
+    if (k === 'ex') {
+      panel.innerHTML = `${todoHTML(l)}<div id="wdx"></div>`;
+      bindTodo(panel, l);
+      return renderWidget(l.widget, $('#wdx', panel), { lesson: l, module: m, onXP: (n, why) => gainXP(n, why) });
+    }
     if (k === 'quiz') return renderQuiz(panel, l);
     if (k === 'pdf') return demo ? (panel.innerHTML = lockedPanel(t('app.lock.atl'))) : renderPdfs(panel, pdfs);
     if (k === 'prompts') return demo ? (panel.innerHTML = lockedPanel(t('app.lock.atl'))) : renderPrompts(panel, prompts);
@@ -1250,6 +1257,45 @@ function viewLesson(id) {
   };
   addEventListener('message', onMsg);
   stop.push(() => removeEventListener('message', onMsg));
+}
+
+/** Partie pratique : la to-do de la leçon, cochée action par action (gardée dans la progression). */
+function todoHTML(l) {
+  const items = l.todo || [];
+  if (!items.length) return '';
+  const on = me.progress.lessons[l.id]?.todo || [];
+  const d = items.filter((_, i) => on.includes(i)).length;
+  return `<section class="todo" aria-labelledby="todo-h">
+    <div class="todo-hd"><div><p class="card-k">${icon('check', { size: 14, stroke: 2.4 })} ${t('app.todo.k')}</p><h3 id="todo-h">${t('app.todo.title')}</h3></div><span class="todo-n" id="todo-n">${t('app.todo.n', { d: num(d), n: num(items.length) })}</span></div>
+    <div class="todo-bar" aria-hidden="true"><i id="todo-bar" style="width:${((d / items.length) * 100).toFixed(1)}%"></i></div>
+    <ul class="todo-l">${items
+      .map((x, i) => `<li><label class="todo-i"><input type="checkbox" data-i="${i}" ${on.includes(i) ? 'checked' : ''}><span class="todo-b" aria-hidden="true">${icon('check', { size: 13, stroke: 3 })}</span><span class="todo-t">${esc(x)}</span></label></li>`)
+      .join('')}</ul>
+    <p class="todo-x muted">${t('app.todo.hint', { xp: num(S.TODO_XP) })}</p>
+  </section>`;
+}
+
+function bindTodo(panel, l) {
+  const items = l.todo || [];
+  if (!items.length) return;
+  panel.addEventListener('change', (e) => {
+    const box = e.target.closest('.todo input[type="checkbox"]');
+    if (!box) return;
+    const on = $$('.todo input[type="checkbox"]', panel)
+      .filter((x) => x.checked)
+      .map((x) => +x.dataset.i);
+    const all = on.length === items.length;
+    const r = S.recordLesson(me.id, l.id, { todo: on, ...(all ? { todoDone: true } : {}) });
+    refreshMe();
+    $('#todo-n', panel).textContent = t('app.todo.n', { d: num(on.length), n: num(items.length) });
+    $('#todo-bar', panel).style.width = `${((on.length / items.length) * 100).toFixed(1)}%`;
+    if (r?.gained) {
+      const x = $('#xp-v');
+      if (x) x.textContent = num(me.progress.xp);
+      burst(t('app.burst.xp', { n: num(r.gained) }));
+      toast(`${icon('trophy', { size: 18 })} ${t('app.todo.done', { xp: `<b>+${num(r.gained)} XP</b>` })}`);
+    }
+  });
 }
 
 function gainXP(n, why) {
@@ -1457,6 +1503,8 @@ function prefsCard({ demo = false } = {}) {
     <p class="card-k">${icon('globe', { size: 14 })} ${t('app.prefs.lang')}</p>
     <p class="muted">${t('app.prefs.lang.text')}</p>
     ${switcher('lang-sw lang-sw--l')}
+    <hr><p class="card-k">${icon('sun', { size: 14 })} ${t('app.theme.k')}</p><p class="muted">${t('app.theme.text')}</p>
+    <div class="seg th-seg" role="group" aria-label="${esc(t('app.theme.k'))}">${['dark', 'light'].map((v) => `<button type="button" data-theme-set="${v}" aria-pressed="${getTheme() === v}">${icon(v === 'light' ? 'sun' : 'moon', { size: 15 })} ${t(`app.theme.${v}`)}</button>`).join('')}</div>
     ${demo ? `<hr><p class="card-k">${icon('repeat', { size: 14 })} ${t('app.demo.reset.k')}</p><p class="muted">${t('app.demo.reset.text')}</p><button class="b b--s b--danger" id="rst" type="button">${t('app.demo.reset')}</button>` : ''}
   </section>`;
 }
@@ -1795,6 +1843,19 @@ async function route() {
 
 addEventListener('hashchange', route);
 
+// Thème sombre / clair : bouton de la barre du haut et réglage du profil
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('[data-theme-toggle], [data-theme-set]');
+  if (!b) return;
+  const th = setTheme(b.dataset.themeSet || (getTheme() === 'light' ? 'dark' : 'light'));
+  const label = t(th === 'light' ? 'app.theme.toDark' : 'app.theme.toLight');
+  $$('[data-theme-toggle]').forEach((x) => {
+    x.setAttribute('aria-label', label);
+    x.title = label;
+  });
+  $$('[data-theme-set]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.themeSet === th)));
+});
+
 // Vidéos finales (voix off montée) publiées par le rendu : video/manifest.json
 async function loadVideos() {
   try {
@@ -1814,6 +1875,34 @@ async function loadTeam() {
     if (m && typeof m.lessons === 'object' && m.lessons) TEAM = m;
   } catch {}
 }
-const start = () => Promise.all([document.fonts?.ready, loadVideos(), loadTeam()]).then(route);
+// Assistant (bot) : répond à partir de la FAQ de l'équipe ; ses réponses renvoient vers les pages utiles
+function bot() {
+  let wa = '';
+  try {
+    wa = String(S.load().settings?.whatsapp || '').replace(/\D/g, '');
+  } catch {}
+  const go = (href, k) => ({ href, label: t(k) });
+  mountAssistant({
+    whatsapp: wa,
+    faqHref: '#/aide',
+    bottom: 'var(--hb-app-bottom)',
+    filter: (e) => ['commencer', 'pratique', 'acces', 'outils', 'code', 'certificat'].includes(e.id),
+    links: {
+      outils: go('#/outils', 'app.nav.tools'),
+      ressources: go('#/ressources', 'app.nav.resources'),
+      certificat: go('#/profil', 'app.nav.profile'),
+      acces: go('#/profil', 'app.nav.profile'),
+      pack: go('#/profil', 'app.nav.profile'),
+      langue: go('#/profil', 'app.nav.profile'),
+      commencer: go('#/parcours', 'app.nav.path'),
+      pratique: go('#/parcours', 'app.nav.path'),
+      aide: go('#/aide', 'app.nav.faq'),
+    },
+  });
+}
+const start = () =>
+  Promise.all([document.fonts?.ready, loadVideos(), loadTeam()])
+    .then(route)
+    .then(bot);
 if (window.gsap || document.readyState === 'complete') start();
 else addEventListener('load', start, { once: true });

@@ -85,6 +85,13 @@ export default {
           ],
           "why": "More perceived value, and an emotional bond that lasts."
         }
+      ],
+      "todo": [
+        "Find 2 brands that post without saying “buy”: what lifestyle are they selling?",
+        "Write in 3 words what you want people to feel when they see your product",
+        "Describe your ideal customer’s lifestyle in one sentence",
+        "Write 3 post ideas that show this lifestyle without selling directly",
+        "Take a photo of your product in that everyday setting, with no sales text"
       ]
     },
     "m6-l2": {
@@ -156,6 +163,13 @@ export default {
           ],
           "why": "The creative aims for immediate conversion."
         }
+      ],
+      "todo": [
+        "Sort 5 posts you saw today: a creative that sells, or Brand Content that builds",
+        "Write a creative line for your product: the problem solved, then the action",
+        "Write a Brand Content line: your vision, and the movement the customer joins",
+        "Decide your current priority: sell fast, or build loyalty and move upmarket",
+        "Plan a week of posts that mixes creatives and Brand Content"
       ]
     },
     "m6-l3": {
@@ -231,6 +245,14 @@ export default {
           ],
           "why": "You sell a projection, not just an object."
         }
+      ],
+      "todo": [
+        "In Canva, choose 2 colors and 1 font for your brand, and write them down",
+        "Write your brand’s “why” in 3 sentences: your mission, your behind the scenes",
+        "Film a behind-the-scenes shot: preparing, packing or making the product",
+        "Describe the person your customer dreams of becoming by using your product",
+        "Make a Canva visual that shows this moment, with your colors and font",
+        "Check it: sharp image, same colors, a story, a customer who can picture themselves"
       ]
     },
     "m6-l4": {
@@ -305,6 +327,13 @@ export default {
           ],
           "why": "Attract, convince, guide: each part has its job."
         }
+      ],
+      "todo": [
+        "Pick an ad in your niche and name its 3 parts: spark, engine, destination",
+        "In its body, note what sells, what reassures and what enhances the brand",
+        "Write the outline of your ad: a hook, an AIDA or PAS body, a CTA",
+        "Add a reassuring UGC moment to the body and a polished detail that enhances your brand",
+        "Send this outline to the team on WhatsApp and note the feedback you get"
       ]
     }
   }

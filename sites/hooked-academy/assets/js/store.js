@@ -378,6 +378,8 @@ export function currentStudent() {
   return load().students.find((x) => x.id === s.id) || null;
 }
 
+export const TODO_XP = 40;
+
 /** Met à jour la progression d'une leçon et l'XP. */
 export function recordLesson(studentId, lessonId, patch) {
   const d = load();
@@ -392,6 +394,8 @@ export function recordLesson(studentId, lessonId, patch) {
     gained += 100;
   }
   if (typeof patch.quiz === 'number' && (prev.quiz ?? -1) < patch.quiz) gained += Math.round(patch.quiz * 50) - Math.round(Math.max(0, prev.quiz || 0) * 50);
+  // Partie pratique : toutes les actions de la to-do cochées (une seule fois par leçon)
+  if (patch.todoDone && !prev.todoDone) gained += TODO_XP;
   P.lessons[lessonId] = next;
   P.last = lessonId;
   P.xp = (P.xp || 0) + Math.max(0, gained);

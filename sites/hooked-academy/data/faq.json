@@ -12,7 +12,8 @@
       "fr": "Non. Les leçons se suivent sur téléphone et les trois outils de base (CapCut, Canva, ChatGPT) existent sur mobile, en version gratuite. Un ordinateur est plus confortable pour le montage avancé et la cinématique.",
       "en": "No. Lessons work on your phone, and the three basic tools (CapCut, Canva, ChatGPT) have free mobile versions. A computer is more comfortable for advanced editing and cinematic ads.",
       "ar": "لا. تُتابَع الدروس على الهاتف، والأدوات الأساسية الثلاث (CapCut وCanva وChatGPT) متوفرة على الهاتف بنسخة مجانية. الحاسوب أريح للمونتاج المتقدم والإعلان السينمائي."
-    }
+    },
+    "kw": "ordinateur, pc, laptop, téléphone, smartphone, mobile, computer, phone, حاسوب, كمبيوتر, هاتف, تيليفون, ordi, بيسي, لابتوب"
   },
   {
     "id": "debutant",
@@ -27,7 +28,24 @@
       "fr": "Oui. Le module 1 commence par « c’est quoi une créative ? ». Chaque leçon dure 2 minutes au maximum et ne traite qu’une idée.",
       "en": "Yes. Module 1 starts with “what is an ad creative?”. Every lesson lasts 2 minutes at most and covers one idea only.",
       "ar": "نعم. تبدأ الوحدة 1 بسؤال «ما هو الكرياتيف؟». لا يتجاوز أي درس دقيقتين، ولا يتناول إلا فكرة واحدة."
-    }
+    },
+    "kw": "débutant, zéro, rien, niveau, expérience, novice, beginner, experience, level, مبتدئ, مستوى, خبرة"
+  },
+  {
+    "id": "pratique",
+    "cat": "formation",
+    "landing": true,
+    "q": {
+      "fr": "Comment se passe la partie pratique ?",
+      "en": "How does the practical part work?",
+      "ar": "كيف يجري الجزء التطبيقي؟"
+    },
+    "a": {
+      "fr": "Après chaque vidéo, l’onglet Exercice te donne une to-do de 4 à 6 actions concrètes à faire avec ton téléphone ou tes outils IA : coche-les au fur et à mesure. Le module M07 est un atelier complet (une pub de A à Z), et chaque formation se termine par un projet final relu par l’équipe.",
+      "en": "After each video, the Exercise tab gives you a to-do list of 4 to 6 concrete actions to do with your phone or your AI tools: tick them as you go. Module M07 is a full workshop (an ad from A to Z), and each course ends with a final project reviewed by the team.",
+      "ar": "بعد كل فيديو، يقدّم لك تبويب « تمرين » قائمة من 4 إلى 6 خطوات عملية تنجزها بهاتفك أو بأدوات الذكاء الاصطناعي: ضع علامة عليها كلما أنجزتها. والوحدة M07 ورشة كاملة (إعلان من الألف إلى الياء)، وينتهي كل تكوين بمشروع نهائي يراجعه الفريق."
+    },
+    "kw": "pratique, exercice, exercices, to-do, todo, atelier, filmer, devoir, practice, exercise, workshop, homework, تطبيق, تمرين, ورشة"
   },
   {
     "id": "deux",
@@ -42,7 +60,8 @@
       "fr": "La Formation Créative t’apprend ce qui fait vendre une pub et comment la produire avec ton téléphone, CapCut et Canva. La Formation IA t’apprend à produire avec l’IA (images, vidéos, voix, UGC), puis à vendre ce savoir-faire. Tu peux suivre l’une, l’autre, ou les deux.",
       "en": "The Creative Course teaches you what makes an ad sell and how to produce it with your phone, CapCut and Canva. The AI Course teaches you to produce with AI (images, videos, voice, UGC), then to sell that skill. Take one, the other, or both.",
       "ar": "يعلّمك التكوين الإبداعي ما الذي يجعل الإعلان يبيع وكيف تنتجه بهاتفك وCapCut وCanva. ويعلّمك تكوين الذكاء الاصطناعي الإنتاج بالذكاء الاصطناعي (صور، فيديوهات، صوت، UGC)، ثم بيع هذه المهارة. يمكنك أن تتابع أحدهما أو كليهما."
-    }
+    },
+    "kw": "deux formations, différence, choisir, laquelle, créative ou ia, two courses, difference, choose, which, تكوينان, الفرق, أختار"
   },
   {
     "id": "outils",
@@ -54,10 +73,11 @@
       "ar": "هل أدوات الذكاء الاصطناعي مدفوعة؟"
     },
     "a": {
-      "fr": "Plusieurs outils ont une version gratuite suffisante pour apprendre. Pour produire en volume, certains abonnements deviennent utiles : la formation t’explique lesquels choisir selon ton usage et ton budget.",
-      "en": "Several tools have a free version that is enough to learn. To produce at volume, some subscriptions become useful: the course explains which ones to pick for your use and budget.",
-      "ar": "لعدة أدوات نسخة مجانية تكفي للتعلّم. وللإنتاج بكميات كبيرة تصبح بعض الاشتراكات مفيدة: يشرح لك التكوين أيّها تختار حسب استعمالك وميزانيتك."
-    }
+      "fr": "Plusieurs outils ont une version gratuite suffisante pour apprendre. Pour produire en volume, certains abonnements deviennent utiles : la formation t’explique lesquels choisir selon ton usage et ton budget. La page « Outils IA » de ton espace détaille, pour chaque outil, ce qui est gratuit, le prix de départ et trois budgets types.",
+      "en": "Several tools have a free version that is enough to learn. To produce at volume, some subscriptions become useful: the course explains which ones to pick for your use and budget. The “AI tools” page in your space details, for each tool, what is free, the starting price and three typical budgets.",
+      "ar": "لعدة أدوات نسخة مجانية تكفي للتعلّم. وللإنتاج بكميات كبيرة تصبح بعض الاشتراكات مفيدة: يشرح لك التكوين أيّها تختار حسب استعمالك وميزانيتك. تعرض صفحة « أدوات الذكاء الاصطناعي » في فضائك، لكل أداة، ما هو مجاني وسعر البداية وثلاث ميزانيات نموذجية."
+    },
+    "kw": "outils, payant, gratuit, abonnement, prix, coût, budget, chatgpt, claude, gemini, kling, elevenlabs, higgsfield, tools, paid, free, subscription, cost, price, أدوات, مدفوع, مجاني, اشتراك, سعر, تكلفة"
   },
   {
     "id": "lab",
@@ -72,7 +92,8 @@
       "fr": "Hooked Lab est l’application d’analyse de créatives de la même équipe. Dans la formation, tu l’utilises pour décortiquer les publicités qui marchent avant de produire les tiennes.",
       "en": "Hooked Lab is the same team’s ad-creative analysis app. In the course, you use it to break down the ads that work before producing your own.",
       "ar": "Hooked Lab هو تطبيق تحليل الكرياتيف من الفريق نفسه. في التكوين تستعمله لتفكيك الإعلانات الناجحة قبل أن تنتج إعلاناتك."
-    }
+    },
+    "kw": "hooked lab, lab, analyser, analyse, score, analysis, analyze, تحليل"
   },
   {
     "id": "paiement",
@@ -84,10 +105,43 @@
       "ar": "كيف يتم الدفع؟"
     },
     "a": {
-      "fr": "Aucun paiement sur le site. Après ton inscription, l’équipe te contacte sur WhatsApp pour confirmer ta formule (Créative, IA ou le pack des deux) et les moyens de paiement (CCP, BaridiMob ou espèces). Ton accès est activé dès la validation.",
-      "en": "No payment on the website. After you sign up, the team contacts you on WhatsApp to confirm your plan (Creative, AI or the bundle) and the payment options (CCP, BaridiMob or cash). Your access is activated as soon as it’s approved.",
-      "ar": "لا دفع على الموقع. بعد تسجيلك يتواصل معك الفريق على واتساب لتأكيد الصيغة التي اخترتها (الإبداعي أو الذكاء الاصطناعي أو الباقة الكاملة) وطرق الدفع (CCP أو BaridiMob أو نقدًا). ويُفعَّل دخولك فور المصادقة."
-    }
+      "fr": "Aucun paiement sur le site. Après ton inscription, l’équipe te contacte sur WhatsApp pour confirmer ton pack (Créative, IA ou les deux, accès d’un an) et les moyens de paiement (CCP, BaridiMob ou espèces). Ton accès est activé dès la validation.",
+      "en": "No payment on the website. After you sign up, the team contacts you on WhatsApp to confirm your pack (Creative, AI or both, one-year access) and the payment options (CCP, BaridiMob or cash). Your access is activated as soon as it’s approved.",
+      "ar": "لا دفع على الموقع. بعد تسجيلك يتواصل معك الفريق على واتساب لتأكيد باقتك (الإبداعي أو الذكاء الاصطناعي أو كلاهما، مع وصول لمدة سنة) وطرق الدفع (CCP أو BaridiMob أو نقدًا). ويُفعَّل دخولك فور المصادقة."
+    },
+    "kw": "paiement, payer, ccp, baridimob, espèces, prix, tarif, combien, payment, pay, price, cash, how much, دفع, سعر, ثمن, كم, ندفع, نخلص, خلاص, الخلاص"
+  },
+  {
+    "id": "acces",
+    "cat": "inscription",
+    "landing": true,
+    "q": {
+      "fr": "Combien de temps dure mon accès ?",
+      "en": "How long does my access last?",
+      "ar": "كم تدوم مدة وصولي؟"
+    },
+    "a": {
+      "fr": "Ton accès dure un an à partir de la validation de ton inscription, pour la ou les formations de ton pack. La date de fin est affichée dans ton profil (« Mon pack »). Tu peux le renouveler auprès de l’équipe sur WhatsApp : ta progression est gardée.",
+      "en": "Your access lasts one year from the day your sign-up is approved, for the course(s) in your pack. The end date is shown in your profile (“My pack”). You can renew it with the team on WhatsApp: your progress is kept.",
+      "ar": "يدوم وصولك سنة واحدة ابتداءً من المصادقة على تسجيلك، للتكوين أو التكوينين في باقتك. يظهر تاريخ الانتهاء في ملفك الشخصي (« باقتي »). يمكنك تجديده مع الفريق عبر واتساب: يُحفَظ تقدّمك."
+    },
+    "kw": "durée, temps, un an, 1 an, expiration, expire, renouveler, fin, duration, how long, year, renew, مدة, سنة, تجديد, ينتهي"
+  },
+  {
+    "id": "pack",
+    "cat": "inscription",
+    "landing": false,
+    "q": {
+      "fr": "Puis-je ajouter l’autre formation à mon pack ?",
+      "en": "Can I add the other course to my pack?",
+      "ar": "هل يمكنني إضافة التكوين الآخر إلى باقتي؟"
+    },
+    "a": {
+      "fr": "Oui. Si tu as commencé par la Formation Créative ou la Formation IA, tu peux ajouter l’autre à tout moment : touche « Ajouter à mon pack » sur la formation verrouillée, l’équipe s’en occupe sur WhatsApp.",
+      "en": "Yes. If you started with the Creative Course or the AI Course, you can add the other one at any time: tap “Add to my pack” on the locked course, and the team takes care of it on WhatsApp.",
+      "ar": "نعم. إذا بدأت بالتكوين الإبداعي أو بتكوين الذكاء الاصطناعي، يمكنك إضافة الآخر في أي وقت: اضغط على « أضفه إلى باقتي » في التكوين المقفل، ويتكفّل الفريق بذلك عبر واتساب."
+    },
+    "kw": "ajouter, pack, autre formation, changer, upgrade, add, bundle, other course, باقة, إضافة, التكوين الآخر"
   },
   {
     "id": "certificat",
@@ -99,10 +153,11 @@
       "ar": "هل هناك شهادة؟"
     },
     "a": {
-      "fr": "Oui, un par formation : quand toutes ses leçons sont terminées, les quiz réussis et, pour la Formation IA, ton projet final validé par l’équipe.",
-      "en": "Yes, one per course: once all its lessons are completed, the quizzes passed and, for the AI Course, your final project approved by the team.",
-      "ar": "نعم، شهادة لكل تكوين: عندما تُكمل كل دروسه، وتنجح في الاختبارات، وبالنسبة لتكوين الذكاء الاصطناعي، عندما يعتمد الفريق مشروعك النهائي."
-    }
+      "fr": "Oui, un par formation : quand toutes ses leçons sont terminées, les quiz réussis et ton projet final validé par l’équipe (une pub de 30 secondes pour la Formation Créative, le projet de la Formation IA).",
+      "en": "Yes, one per course: once all its lessons are completed, the quizzes passed and your final project approved by the team (a 30-second ad for the Creative Course, the AI Course project).",
+      "ar": "نعم، شهادة لكل تكوين: عندما تُكمل كل دروسه، وتنجح في الاختبارات، ويعتمد الفريق مشروعك النهائي (إعلان مدته 30 ثانية للتكوين الإبداعي، ومشروع تكوين الذكاء الاصطناعي)."
+    },
+    "kw": "certificat, diplôme, attestation, projet final, certificate, diploma, final project, شهادة, مشروع نهائي"
   },
   {
     "id": "code",
@@ -117,7 +172,24 @@
       "fr": "Il t’est envoyé sur WhatsApp dès que l’équipe valide ton inscription, après le paiement. S’il tarde, écris à l’équipe sur WhatsApp depuis le numéro donné à l’inscription.",
       "en": "It’s sent to you on WhatsApp as soon as the team approves your sign-up, after payment. If it’s late, message the team on WhatsApp from the number you signed up with.",
       "ar": "يُرسَل إليك على واتساب بمجرد أن يقبل الفريق تسجيلك بعد الدفع. إذا تأخر، راسل الفريق على واتساب من الرقم الذي سجّلت به."
-    }
+    },
+    "kw": "code, accès, connexion, connecter, mot de passe, identifiant, login, password, access, sign in, رمز, دخول, كلمة السر, نتكونيكتي, ندخل"
+  },
+  {
+    "id": "commencer",
+    "cat": "plateforme",
+    "landing": false,
+    "q": {
+      "fr": "Par où commencer ?",
+      "en": "Where do I start?",
+      "ar": "من أين أبدأ؟"
+    },
+    "a": {
+      "fr": "Commence par la vidéo de bienvenue puis la prise en main de la plateforme (module 00) : elles t’expliquent comment avancer. Ensuite, une leçon par jour : la vidéo, la to-do de l’onglet Exercice, puis le quiz avant de passer à la suite.",
+      "en": "Start with the welcome video, then the platform tour (module 00): they explain how to move forward. Then one lesson a day: the video, the to-do list in the Exercise tab, then the quiz before moving on.",
+      "ar": "ابدأ بفيديو الترحيب ثم درس التعرّف على المنصة (الوحدة 00): يشرحان لك كيف تتقدّم. بعد ذلك، درس واحد في اليوم: الفيديو، ثم قائمة المهام في تبويب « تمرين »، ثم الاختبار قبل الانتقال إلى ما بعده."
+    },
+    "kw": "commencer, début, débuter, par où, ordre, première leçon, start, begin, where, order, first lesson, البداية, أبدأ, أول درس"
   },
   {
     "id": "terminee",
@@ -132,7 +204,8 @@
       "fr": "Automatiquement quand tu as regardé 90 % de la vidéo, ou avec le bouton « Marquer comme terminée ». Le quiz et l’exercice te rapportent des XP en plus.",
       "en": "Automatically once you’ve watched 90% of the video, or with the “Mark as completed” button. The quiz and the exercise earn you extra XP.",
       "ar": "تلقائيًا عندما تشاهد 90% من الفيديو، أو بزر «وضع علامة مكتمل». ويمنحك الاختبار والتمرين نقاط XP إضافية."
-    }
+    },
+    "kw": "terminée, terminer, valider, cocher, progression, complete, done, finish, progress, مكتمل, إنهاء, تقدم"
   },
   {
     "id": "ressources",
@@ -147,7 +220,8 @@
       "fr": "Dans l’atelier de chaque leçon IA (onglets PDF, Prompts et Ressources), et dans la page Ressources qui rassemble la bibliothèque de prompts.",
       "en": "In the workshop of each AI lesson (PDF, Prompts and Resources tabs), and on the Resources page, which gathers the prompt library.",
       "ar": "في ورشة كل درس من دروس الذكاء الاصطناعي (تبويبات PDF والبرومبتات والموارد)، وفي صفحة الموارد التي تجمع مكتبة البرومبتات."
-    }
+    },
+    "kw": "pdf, prompt, prompts, ressources, fichiers, télécharger, modèle, resources, files, download, template, ملفات, موارد, برومبت"
   },
   {
     "id": "langue",
@@ -162,7 +236,8 @@
       "fr": "Oui : français, anglais ou arabe, avec le sélecteur de langue en haut de l’écran ou dans ton profil. La voix off reste en darija.",
       "en": "Yes: French, English or Arabic, with the language switcher at the top of the screen or in your profile. The voice-over stays in Darija.",
       "ar": "نعم: الفرنسية أو الإنجليزية أو العربية، من مبدّل اللغة أعلى الشاشة أو من ملفك. يبقى التعليق الصوتي بالدارجة."
-    }
+    },
+    "kw": "langue, arabe, anglais, français, darija, language, arabic, english, french, لغة, عربية, إنجليزية, فرنسية"
   },
   {
     "id": "aide",
@@ -177,6 +252,7 @@
       "fr": "Pose ta question à l’équipe sur WhatsApp, au numéro qui t’a envoyé ton accès. Joins une capture d’écran : on te répond plus vite.",
       "en": "Ask the team on WhatsApp, at the number that sent you your access. Attach a screenshot: we can answer faster.",
       "ar": "اطرح سؤالك على الفريق عبر واتساب، على الرقم الذي أرسل إليك دخولك. أرفق لقطة شاشة لنجيبك بسرعة أكبر."
-    }
+    },
+    "kw": "aide, bloqué, problème, bug, question, équipe, help, stuck, problem, team, مساعدة, مشكلة, الفريق"
   }
 ]

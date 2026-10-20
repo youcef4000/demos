@@ -74,6 +74,13 @@ export default {
           ],
           "why": "People don’t scroll past it on reflex."
         }
+      ],
+      "todo": [
+        "On TikTok or Instagram, find 3 UGC-style ads in your niche",
+        "Find 3 studio ads too and note which ones stop you the most",
+        "For each UGC ad, note what makes it feel natural: framing, tone, setting",
+        "Film yourself for 15 seconds facing the camera, talking about your product",
+        "Save the 3 UGC examples in an inspiration folder"
       ]
     },
     "ia5-l2": {
@@ -138,6 +145,14 @@ export default {
           ],
           "why": "Keep the tone of a genuine recommendation."
         }
+      ],
+      "todo": [
+        "Paste the video’s UGC prompt into ChatGPT, with your product instead of [product]",
+        "Check the structure: personal hook, problem, discovery, result, CTA",
+        "Ask for the list of shots to film, with their timing",
+        "Read the script out loud with a timer: between 20 and 30 seconds?",
+        "Rewrite anything that sounds “salesy” in everyday words",
+        "Save the prompt and the script in your library, under Scripts"
       ]
     },
     "ia5-l3": {
@@ -195,6 +210,14 @@ export default {
           ],
           "why": "Lip-sync makes the avatar look natural."
         }
+      ],
+      "todo": [
+        "Create your avatar’s image with Nano Banana, matching your audience",
+        "Break your UGC script into short sentences",
+        "Record your voice, or generate an AI voice in ElevenLabs",
+        "Try lip-sync with a tool’s free credits, Kling for example",
+        "Edit it in CapCut, cutting to real shots of your product",
+        "Add the label “AI-generated content”"
       ]
     },
     "ia5-l4": {
@@ -252,6 +275,13 @@ export default {
           ],
           "why": "Opening the package on camera."
         }
+      ],
+      "todo": [
+        "Write one hook per format for your product (before / after only if it’s real)",
+        "Pick the 2 formats that are easiest to produce with your product",
+        "Ask ChatGPT for a Hook / Body / CTA script for each one",
+        "Film the hook of each one on your phone, in 9:16",
+        "Save both scripts in your library, under Scripts"
       ]
     },
     "ia5-l5": {
@@ -294,6 +324,13 @@ export default {
           ],
           "why": "A fake testimonial misleads customers and breaks platform rules."
         }
+      ],
+      "todo": [
+        "Reread your UGC scripts and remove any “customer review” played by an avatar",
+        "Replace each unverifiable claim with a fact from your product sheet",
+        "Look up how TikTok and Meta ask you to disclose AI content",
+        "Draft a short written consent for anyone filmed or whose voice is cloned",
+        "Add these points to your ethics checklist before delivery"
       ]
     }
   }

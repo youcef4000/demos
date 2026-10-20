@@ -69,6 +69,13 @@ export default {
           ],
           "why": "A face up close conveys emotion."
         }
+      ],
+      "todo": [
+        "Watch a cinematic ad and name each shot: wide, medium, close-up, insert",
+        "Note the light in each shot: soft, high-contrast or backlight",
+        "Write 4 image prompts for your product, one per shot size",
+        "Generate your close-up in soft light, then high-contrast, and compare the emotion",
+        "Add these film terms to your library, ready for your prompts"
       ]
     },
     "ia6-l2": {
@@ -138,6 +145,13 @@ export default {
           ],
           "why": "It stops you from generating at random."
         }
+      ],
+      "todo": [
+        "Write or reuse a 15-second script for your product",
+        "Paste it into ChatGPT with the video’s storyboard prompt: 5 shots",
+        "Check each shot: size, move, light, duration, image prompt",
+        "Check that the total is 15 seconds and the last shot carries the CTA",
+        "Keep this storyboard: you’ll use it for your end-of-module cinematic spot"
       ]
     },
     "ia6-l3": {
@@ -192,6 +206,13 @@ export default {
           ],
           "why": "The style line locks in the mood."
         }
+      ],
+      "todo": [
+        "Choose a 4-color palette for your spot, like night, gold, amber, cream",
+        "Write your style line: palette, light, mood, type of image",
+        "Paste it into every prompt in your storyboard, with your character sheet",
+        "Generate 3 shots and put them side by side: film or collage?",
+        "In CapCut, apply the same color grade to every shot"
       ]
     },
     "ia6-l4": {
@@ -251,6 +272,13 @@ export default {
           ],
           "why": "The visual rhythm follows the rhythm of the sound."
         }
+      ],
+      "todo": [
+        "Pick royalty-free music with clearly marked strong beats",
+        "Line up every cut in your edit on a strong beat",
+        "Add ambience under the whole spot: city, wind, indoor room tone",
+        "Add a sound effect on each movement: whoosh, rush of air, impact",
+        "Do the test: mute the sound and note what the emotion loses"
       ]
     },
     "ia6-l5": {
@@ -310,6 +338,14 @@ export default {
           ],
           "why": "About 3 seconds per shot."
         }
+      ],
+      "todo": [
+        "Write your 15-second script: hook, emotion, product, CTA",
+        "Break it down into a 5-shot storyboard",
+        "Generate and approve one image per shot, with your style line",
+        "Animate each image into a 3- to 5-second shot",
+        "Edit with music, ambience and effects, then export the MP4 in 9:16",
+        "Gather the storyboard, prompts and a short analysis of what you’d change"
       ]
     },
     "ia6-l6": {
@@ -416,6 +452,14 @@ export default {
           "title": "Higgsfield shot sheet",
           "text": "Storyboard shot #[  ] · intention: [desire / luxury / discovery…]\nStarting image: [your approved image, made from your real photo]\nCamera preset: [push-in / orbit / tracking…]\nPrompt: [subject] [one simple action], [lighting], [mood]. The product and its label stay exactly the same.\nModel: [test model] → [final model] · planned credits: [  ]\n\nCheck before delivery:\n• Product shape, label and color identical to the real photo\n• Hands, faces, on-screen text\n• No avatar presented as a real customer · AI disclosure if the platform requires it"
         }
+      ],
+      "todo": [
+        "Fill in the “Higgsfield shot sheet” (Prompts tab) for one shot of your storyboard",
+        "In Cinema Studio, pick a camera preset that fits the shot’s intent",
+        "Add your approved image and test with your free credits, on a cheaper model",
+        "Check the product: shape, label, color, hands, on-screen text",
+        "If you try Marketing Studio, check what’s said and add the AI disclosure",
+        "Note the credits used in your sheet, for your next quote"
       ]
     }
   }

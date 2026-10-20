@@ -67,6 +67,132 @@ export default {
           ],
           "why": "Consistency and practice make the difference."
         }
+      ],
+      "todo": [
+        "Pick a real product to sell: you’ll work on it throughout the course",
+        "Write one sentence on what it does and who it’s for",
+        "Set a fixed time each day for your lesson and add a reminder on your phone",
+        "Open CapCut and Canva on your phone, and install whichever is missing",
+        "Create an album on your phone to keep your course photos and videos"
+      ]
+    },
+    "m0-l2": {
+      "title": "Getting started with the platform",
+      "scenes": [
+        {
+          "sub": "Where to find what, and how to make progress every day"
+        },
+        {
+          "title": "The *course* page",
+          "items": [
+            {
+              "label": "The modules",
+              "sub": "In order, up to the final project"
+            },
+            {
+              "label": "The lesson cards",
+              "sub": "An image and a short intro"
+            },
+            {
+              "label": "The progress bar",
+              "sub": "What’s done, what’s left"
+            }
+          ]
+        },
+        {
+          "title": "A *lesson*, in order",
+          "items": [
+            {
+              "label": "The video",
+              "sub": "Short, one single idea"
+            },
+            {
+              "label": "Key points",
+              "sub": "The 3 things to remember"
+            },
+            {
+              "label": "Exercise",
+              "sub": "The to-do list, ticked after the video"
+            },
+            {
+              "label": "Quiz",
+              "sub": "To check you’ve got it"
+            },
+            {
+              "label": "Resources",
+              "sub": "Templates, prompts and PDFs to copy"
+            }
+          ]
+        },
+        {
+          "title": "Your *motivation*",
+          "items": [
+            "*XP* for every lesson, quiz and exercise",
+            "Your *level* going up",
+            "Your *streak*: days in a row",
+            "*Badges* to unlock"
+          ]
+        },
+        {
+          "title": "The *other pages*",
+          "items": [
+            {
+              "label": "Resources",
+              "sub": "All the templates, in one place"
+            },
+            {
+              "label": "Help",
+              "sub": "FAQ and assistant"
+            },
+            {
+              "label": "Profile",
+              "sub": "Your progress, your certificate"
+            },
+            {
+              "label": "Settings",
+              "sub": "FR, EN, AR · light or dark mode"
+            }
+          ]
+        },
+        {
+          "kicker": "The golden rule",
+          "text": "One lesson *a day*. And its *to-do list*, ticked off.",
+          "sub": "At the end of the path: your final project, a 30-second ad"
+        },
+        {}
+      ],
+      "key": [
+        "The course page: the modules in order, one card per lesson (image, short intro) and your progress bar.",
+        "A lesson: the video, Key points, the Exercise with its to-do list to tick off after the video, the Quiz, then the Resources (templates, prompts, PDFs).",
+        "XP, level, streak and badges track your consistency; Resources, the FAQ, the assistant and your Profile are there to help. The golden rule: one lesson a day and its to-do list."
+      ],
+      "quiz": [
+        {
+          "q": "When do you do the exercise’s to-do list?",
+          "a": [
+            "Right after the lesson video",
+            "At the end of the course",
+            "Never, the video is enough"
+          ],
+          "why": "Practicing right away is what turns the lesson into a skill."
+        },
+        {
+          "q": "You’re stuck on a simple question. Where do you look first?",
+          "a": [
+            "In the FAQ, or you ask the assistant",
+            "You give up on the lesson",
+            "You start the course over"
+          ],
+          "why": "The quick answers are there; for everything else, the team answers on WhatsApp."
+        }
+      ],
+      "todo": [
+        "Open the course page and find the final project module",
+        "Open the next lesson and find its tabs: Key points, Exercise, Quiz",
+        "Choose your language and your mode, light or dark",
+        "Open your profile: look at your progress and your level",
+        "Look up a question in the FAQ, or ask the assistant",
+        "Mark the lesson as completed and take the quiz"
       ]
     }
   }

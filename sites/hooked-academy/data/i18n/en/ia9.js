@@ -68,6 +68,14 @@ export default {
           ],
           "why": "The certificate proves real skills."
         }
+      ],
+      "todo": [
+        "Pick a product from your niche and gather its product sheet and real photos",
+        "Analyse 3 well-performing creatives in your niche with Hooked Lab",
+        "Produce your AI video based on what those analyses taught you",
+        "Produce the image and the carousel, with the same angle",
+        "Write 5 hook variations for your video",
+        "Present it all as you would to a client, then send it to the team for approval"
       ]
     }
   }

@@ -66,6 +66,13 @@ export default {
           ],
           "why": "Clients must instantly see it’s for them."
         }
+      ],
+      "todo": [
+        "Narrow your target in 3 levels: industry, specialty, how they sell",
+        "Find 10 shops in that niche on Instagram or TikTok",
+        "Write your offer: “I help [target] get [result] with [method]”",
+        "Have someone from your target read it: do they get it right away?",
+        "Put that sentence in your Instagram bio and your LinkedIn headline"
       ]
     },
     "ia8-l2": {
@@ -115,6 +122,14 @@ export default {
           ],
           "why": "Honesty protects your reputation."
         }
+      ],
+      "todo": [
+        "Pick 3 products in your niche that you can buy or photograph",
+        "Plan 3 creatives per product: video, image, carousel",
+        "Produce the first image for the first product, using your method",
+        "Write under each creative: “Personal project, not commissioned by the brand”",
+        "Explain your approach in 3 lines: hook, angle, structure",
+        "Create the folder or page that will hold your portfolio"
       ]
     },
     "ia8-l3": {
@@ -185,6 +200,13 @@ export default {
           ],
           "why": "The middle offer becomes the benchmark."
         }
+      ],
+      "todo": [
+        "Define what’s in your 3 offers: Test Pack, Growth Pack, Subscription",
+        "Note how long a creative really takes you, from product sheet to export",
+        "Add up the monthly cost of your tools, using your toolbox",
+        "Work out your prices with the lesson’s calculator: time, tools, margin",
+        "Present your 3 offers as results delivered, never as hours"
       ]
     },
     "ia8-l4": {
@@ -239,6 +261,13 @@ export default {
           ],
           "why": "The prospect can see you’re genuinely interested in them."
         }
+      ],
+      "todo": [
+        "Pick 5 shops from your list and look at their latest posts",
+        "For each one, note a specific observation about its content",
+        "Prepare 3 hook ideas for one product from each shop",
+        "Write one message per shop with the lesson’s tool, ending with a single question",
+        "Send your 5 messages and track the replies in a table"
       ]
     },
     "ia8-l5": {
@@ -292,6 +321,14 @@ export default {
           ],
           "why": "You understand before you propose."
         }
+      ],
+      "todo": [
+        "Write your discovery questions: the client’s products, sales, goals",
+        "Add your diagnosis questions: what’s holding back their creatives?",
+        "Prepare your answer to each objection: price, timing, trust",
+        "Do a practice call with someone close playing the client, following the 5 steps",
+        "Practise closing: a start date and a deposit",
+        "After the practice call, note when you talked more than you listened"
       ]
     },
     "ia8-l6": {
@@ -346,6 +383,14 @@ export default {
           ],
           "why": "Clients refer you when they see results."
         }
+      ],
+      "todo": [
+        "Set your file-naming rule, for example “client-product-format-v1”",
+        "Set up a template delivery folder, with one subfolder per format",
+        "Write your delivery message: what you tested, and why",
+        "Agree on a date with the client to go over their numbers together",
+        "Prepare 2 ideas for new variations to suggest once results are in",
+        "Write the message asking for a referral after measured results"
       ]
     },
     "ia8-l7": {
@@ -460,6 +505,134 @@ export default {
         {
           "title": "Closing message (WhatsApp)",
           "text": "Salam [first name], thanks for the call!\n\nWhat I understood: [their problem, in their words] · goal: [target result]\n\nMy proposals:\n1. Test Pack: [content] · [price] · delivered in [timeframe]\n2. Growth Pack: [content] · [price] · delivered in [timeframe] ← the one I recommend, because [reason]\n3. Subscription: [content] · [price] per month\n\nRevisions included: [number] · This quote is valid until [actual date].\nTo get started: your confirmation here + a deposit of [amount], then you send me [product photos, logo, brief].\nI can start on [date].\n\nAny questions? I’m available."
+        }
+      ],
+      "todo": [
+        "Copy the “Closing message” from the Prompts tab into your notes",
+        "Fill it in for a real or practice prospect: recap, packages, recommendation",
+        "Set a real deadline: “This quote is valid until [date]”",
+        "Write your answer to “it’s expensive”, “it takes too long” and “I’ll think about it”",
+        "Prepare your onboarding message: product photos, brief, delivery date"
+      ]
+    },
+    "ia8-l8": {
+      "title": "Earn your clients’ trust",
+      "scenes": [
+        {
+          "sub": "Before paying, your client wants reassurance"
+        },
+        {
+          "title": "What they *see* before signing",
+          "items": [
+            {
+              "label": "A real portfolio",
+              "sub": "Your real work, or personal projects labeled as such"
+            },
+            {
+              "label": "Your process",
+              "sub": "The steps, from product sheet to delivery"
+            },
+            {
+              "label": "A written quote",
+              "sub": "Content, price, timelines, revisions"
+            }
+          ]
+        },
+        {
+          "title": "Start *small*",
+          "items": [
+            {
+              "label": "The Test Pack",
+              "sub": "A few creatives, a short timeline"
+            },
+            {
+              "label": "The deposit",
+              "sub": "Work starts once it’s received"
+            },
+            {
+              "label": "Deadlines met",
+              "sub": "Or warn them before, never after"
+            },
+            {
+              "label": "What’s next",
+              "sub": "Offered once they’ve seen the result"
+            }
+          ]
+        },
+        {
+          "title": "During the project",
+          "items": [
+            "A *regular* check-in, even short",
+            "A *simple contract*: deliverables, timelines, rights",
+            "Real *testimonials*, with written consent",
+            {
+              "t": "Claiming results you didn’t get"
+            }
+          ]
+        },
+        {
+          "title": "Results: *real or nothing*",
+          "left": {
+            "title": "What destroys trust",
+            "items": [
+              "“My ads sell every single time”",
+              "Borrowed screenshots of results"
+            ]
+          },
+          "right": {
+            "title": "What reassures",
+            "items": [
+              "“Here’s the ad, here’s what I tested”",
+              "The client’s numbers, with their consent"
+            ]
+          }
+        },
+        {
+          "text": "Trust isn’t declared. It’s proven, *one kept promise after another*."
+        },
+        {}
+      ],
+      "key": [
+        "Before signing: a real portfolio (personal projects labeled as such), your process explained, a written quote (content, price, timelines, revisions).",
+        "Start small: Test Pack, a deposit before starting, deadlines met (or warn them beforehand), regular check-ins, a simple contract.",
+        "Real testimonials published with written consent, the client’s numbers with their consent; never made-up results or borrowed screenshots."
+      ],
+      "quiz": [
+        {
+          "q": "Your portfolio includes ads for brands that never ordered anything from you. You…",
+          "a": [
+            "Present them as official commissions",
+            "Present them as personal projects",
+            "Remove the brand name without saying anything"
+          ],
+          "why": "The client needs to know what was commissioned and what wasn’t."
+        },
+        {
+          "q": "You know you’ll deliver a day late. You…",
+          "a": [
+            "Warn the client before the due date",
+            "Wait for them to ask",
+            "Deliver without saying anything"
+          ],
+          "why": "Warning them beforehand shows you’re in control of your project; staying silent costs you their trust."
+        }
+      ],
+      "todo": [
+        "Go through your portfolio and add “personal project” to every piece that wasn’t commissioned",
+        "Write your process in 5 steps, from product sheet to delivery",
+        "Define your Test Pack: content, timeline, price, terms",
+        "Prepare your standard quote and a simple one-page contract",
+        "Write the message asking a satisfied client for a testimonial",
+        "Mark the lesson as completed and take the quiz"
+      ],
+      "res": [
+        {
+          "title": "Simple contract (one page)",
+          "text": "SERVICE AGREEMENT\nBetween: [your name], ad content creator · and: [client / shop name]\n\n1. What is delivered: [number] creatives · formats [9:16 / 4:5 / 1:1] · [AI video, image, carousel]\n2. Timelines: first draft on [date] · final delivery on [date]\n3. Revisions included: [number] · beyond that: [terms]\n4. Price: [amount] · deposit of [amount] before starting · balance on delivery\n5. What the client provides: [product photos, logo, accurate product information]\n6. Usage rights: [platforms] · [duration] · in paid ads: [yes / no]\n7. Use of AI: [tools used] · no fake reviews · no face or voice of a real person without their consent\n8. Portfolio: the creator may show this work: [yes / no / from …]\n\nAgreed by both parties (signature or written confirmation by message), on [date]"
+        },
+        {
+          "title": "Message to ask for a testimonial",
+          "text": "Salam [first name], thank you again for trusting me with [project]!\nIf you’re happy with it, could you write me 2 or 3 sentences about working together: what you liked, how it went?\nWith your consent, I’ll publish it on [my portfolio / my page], [with your name and your shop / with your first name only]. You’ll be able to read it before it goes live.\nThank you!"
         }
       ]
     }

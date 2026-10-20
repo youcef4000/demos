@@ -71,6 +71,13 @@ export default {
           ],
           "why": "They’re persuasion structures."
         }
+      ],
+      "todo": [
+        "Write down the 4 formulas and what each does: AIDA, PAS, CAP, SONCAS",
+        "Pick an ad you like and guess which formula it follows",
+        "Note your customer’s main problem: you’ll use it for PAS",
+        "Note 3 facts about your product that you can prove: you’ll use them for CAP",
+        "Note the real reason your customer buys: you’ll use it for SONCAS"
       ]
     },
     "m3-l2": {
@@ -153,6 +160,13 @@ export default {
           ],
           "why": "Action is the call to act: the CTA."
         }
+      ],
+      "todo": [
+        "Take a video ad and split it into 4 moments: attention, interest, desire, action",
+        "Write one sentence per AIDA step for your product",
+        "Next to each sentence, note the shot to film with it",
+        "In Canva, make a 4-slide carousel, one slide per AIDA step",
+        "Check that the last slide clearly says what to do"
       ]
     },
     "m3-l3": {
@@ -227,6 +241,14 @@ export default {
           ],
           "why": "The product is the cure, after the problem and the agitation."
         }
+      ],
+      "todo": [
+        "Write your customer’s problem in their own words, in one sentence",
+        "Agitate it: describe a real moment when this problem bothers them, no exaggeration",
+        "Write the solution: how your product solves this problem, with a true fact",
+        "Reread the agitation and remove anything that lies or scares",
+        "Read your PAS script aloud and time it",
+        "Record it as a voice-over on your phone and listen back as a customer would"
       ]
     },
     "m3-l4": {
@@ -287,6 +309,13 @@ export default {
           ],
           "why": "Proof reassures people who have doubts."
         }
+      ],
+      "todo": [
+        "List 3 characteristics of your product: facts, not promises",
+        "Turn each into an advantage: what does it do for your customer?",
+        "Find proof for each advantage: a demo, an honest before/after or a real review",
+        "Cross out any advantage you can’t prove",
+        "Film your strongest proof as a demo, in a single shot"
       ]
     },
     "m3-l5": {
@@ -391,6 +420,13 @@ export default {
           ],
           "why": "Security, Orgueil (pride), Novelty, Comfort, Argent (money), Sympathy."
         }
+      ],
+      "todo": [
+        "Write down the 6 buttons: Security, Orgueil (pride), Novelty, Comfort, Argent (money), Sympathy",
+        "For your product, write one angle per button, using only true facts",
+        "Circle the 2 buttons that matter most to your customer",
+        "Turn those 2 angles into 2 different hooks",
+        "Ask a customer or someone close why they would buy, and note the matching button"
       ]
     },
     "m3-l6": {
@@ -476,6 +512,13 @@ export default {
           ],
           "why": "Characteristic, Advantage, Proof."
         }
+      ],
+      "todo": [
+        "Note when to use each formula, AIDA, PAS, CAP, SONCAS, one line each",
+        "Choose the SONCAS button that will set the angle of your next ad",
+        "Write its script with AIDA, with a body built on PAS",
+        "Add CAP proof in the body: a fact, its advantage, its demonstration",
+        "Reread it as your customer: does it talk to a person, or recite a technique?"
       ]
     }
   }

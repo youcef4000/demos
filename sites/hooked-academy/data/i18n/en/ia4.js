@@ -55,6 +55,14 @@ export default {
           ],
           "why": "Close enough for a clear voice, without distortion."
         }
+      ],
+      "todo": [
+        "Settle into a quiet room, with curtains or clothes around you",
+        "Read your script out loud before recording",
+        "Record it on your phone, 20 cm from your mouth, in several takes",
+        "Keep the best take and cut out the hesitations in CapCut",
+        "Generate the same text with an AI voice in ElevenLabs, free version",
+        "Compare the two and note which sounds more natural for your audience"
       ]
     },
     "ia4-l2": {
@@ -115,6 +123,13 @@ export default {
           ],
           "why": "The voice carries the message."
         }
+      ],
+      "todo": [
+        "Open an edit in CapCut that already has your voice-over",
+        "Pick royalty-free music or a track from CapCut’s library",
+        "Lower the music under the voice, to around −20 dB",
+        "Line up your cuts on the beat of the music",
+        "Add one-off effects: a whoosh, a pop on a text, a ding on the CTA"
       ]
     },
     "ia4-l3": {
@@ -186,6 +201,14 @@ export default {
           ],
           "why": "They have to be read at a glance."
         }
+      ],
+      "todo": [
+        "In CapCut, generate auto captions for your video",
+        "Fix every line, especially the words in Darija",
+        "Make them big, centered, high-contrast, 2 to 4 words at a time",
+        "Put the keyword of each sentence in color",
+        "Keep them clear of the areas hidden by TikTok and Reels buttons",
+        "Watch your video with the sound off: is everything clear?"
       ]
     },
     "ia4-l4": {
@@ -307,6 +330,14 @@ export default {
           "title": "ElevenLabs sheet",
           "text": "TEXT → VOICE\nScript: [your script, punctuated to mark the pauses]\nVoice: [voice name] · language [  ] · tone [warm / energetic / calm]\nSettings: stability [  ] · similarity [  ] · style [  ] → only one change between two tries\nTo check: brand names, prices, numbers, Darija words\n\nSOUND EFFECTS (prompts)\n• Glass perfume cap opening, small crisp pop, very short, no echo\n• Quick whoosh for a transition, no echo\n• Small, clear, soft ding for a CTA\n\nCLONING AND LICENSING\nCloned voice: my own / written consent from [name], dated and signed\nCommercial use: plan checked on [date] on the pricing page"
         }
+      ],
+      "todo": [
+        "Open ElevenLabs (free version) and paste your script, punctuated the way you say it",
+        "Pick a voice that fits your audience’s language and tone",
+        "Change only one setting between two tries: stability, similarity or style",
+        "Listen to all of it: brand names, prices, words in Darija",
+        "Generate a sound effect from one sentence: a cap popping open or a whoosh",
+        "Fill in the “ElevenLabs sheet” from the Prompts tab, commercial use included"
       ]
     }
   }

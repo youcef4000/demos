@@ -80,6 +80,13 @@ export default {
           ],
           "why": "The method adapts to every client and every tool."
         }
+      ],
+      "todo": [
+        "Create an “AI Portfolio” folder to keep your best results",
+        "Create a “My prompt library” document to store the prompts that work",
+        "Pick a real product from your niche: it will be your example in the exercises",
+        "Write in one sentence what you want to be able to produce and sell by the end",
+        "Mark the lesson as completed and take the quiz"
       ]
     },
     "ia0-l2": {
@@ -170,6 +177,13 @@ export default {
           ],
           "why": "Otherwise the subscription is charged automatically."
         }
+      ],
+      "todo": [
+        "Ask your bank about the terms of an international card in foreign currency",
+        "Compare it with a prepaid virtual card from a trusted service: fees, top-ups",
+        "Set the maximum balance for your card dedicated to subscriptions",
+        "Make a tracking table: tool, end of free trial, auto-renewal turned off or not",
+        "Before paying for a tool, test its free version on your real product"
       ]
     },
     "ia0-l3": {
@@ -255,6 +269,125 @@ export default {
           "title": "My AI toolbox",
           "text": "Writing: [tool] — free / paid — [price/month]\nImages: [tool] — free / paid — [price/month]\nVideo: [tool] — free / paid — [price/month]\nVoice: [tool] — free / paid — [price/month]\nEditing: CapCut — free\n\nTotal budget per month: [amount]\nRemaining credits (check every Monday): [notes]\nFree trials end: [dates]"
         }
+      ],
+      "todo": [
+        "Copy the “My AI toolbox” sheet from the Prompts tab into your notes",
+        "Pick one tool per step: writing, images, video, voice, editing",
+        "Create your free accounts: ChatGPT or Claude, Gemini and CapCut",
+        "For each tool, note what its free version lets you do",
+        "Choose the one subscription you’d take first, and write down why",
+        "Set a reminder every Monday to check your remaining credits"
+      ]
+    },
+    "ia0-l4": {
+      "title": "Getting started with the platform",
+      "scenes": [
+        {
+          "sub": "Lessons, workshops, tools: where to find what"
+        },
+        {
+          "title": "An AI lesson, *in order*",
+          "items": [
+            {
+              "label": "The video",
+              "sub": "One idea, one method"
+            },
+            {
+              "label": "Key points",
+              "sub": "The points to remember"
+            },
+            {
+              "label": "Exercise",
+              "sub": "The to-do list, ticked after the video"
+            },
+            {
+              "label": "Quiz",
+              "sub": "To check you’ve got it"
+            }
+          ]
+        },
+        {
+          "title": "Each lesson’s *workshop*",
+          "items": [
+            {
+              "label": "PDFs",
+              "sub": "Materials to keep"
+            },
+            {
+              "label": "Prompts",
+              "sub": "Ready to copy, with brackets to fill in"
+            },
+            {
+              "label": "Resources",
+              "sub": "Links, images, sample files"
+            }
+          ]
+        },
+        {
+          "title": "The *AI tools* page",
+          "nodes": [
+            {
+              "label": "The tools",
+              "sub": "One per need"
+            },
+            {
+              "label": "Starting cost",
+              "sub": "Free or paid"
+            },
+            {
+              "label": "The generator",
+              "sub": "It builds your prompt"
+            }
+          ]
+        },
+        {
+          "title": "The *other pages*",
+          "items": [
+            "Resources: the whole prompt *library*",
+            "FAQ and *assistant*",
+            "Profile: your progress and your *certificate*",
+            "Language FR, EN, AR · *light* or *dark* mode"
+          ]
+        },
+        {
+          "kicker": "The golden rule",
+          "text": "One lesson *a day*. Its *workshop*. Its *to-do list*.",
+          "sub": "XP, streak and badges track your consistency · at the end: the IA09 final project"
+        },
+        {}
+      ],
+      "key": [
+        "An AI lesson: the video, Key points, the Exercise (to-do list to tick off after the video), the Quiz, then the workshop with its PDFs, Prompts and Resources tabs.",
+        "The AI tools page: the tools, their starting cost and a prompt generator. The Resources page: the whole library. Your profile: your progress and your certificate.",
+        "XP, streak and badges track your consistency. The golden rule: one lesson a day, its workshop, its to-do list; at the end, the IA09 final project."
+      ],
+      "quiz": [
+        {
+          "q": "Where do you find an AI lesson’s ready-to-copy prompts?",
+          "a": [
+            "In the lesson’s workshop, Prompts tab",
+            "Nowhere, you have to write everything",
+            "In the FAQ"
+          ],
+          "why": "Each lesson has its workshop: PDFs, Prompts and Resources. The Resources page also gathers the whole library."
+        },
+        {
+          "q": "What’s the golden rule for making progress?",
+          "a": [
+            "Watch everything in one weekend",
+            "One lesson a day, with its workshop and its to-do list",
+            "Only do the quizzes"
+          ],
+          "why": "Consistency and practice turn the video into a skill."
+        }
+      ],
+      "todo": [
+        "Open the course page and find module IA09: the final project",
+        "Open the next lesson and go through its workshop: PDFs, Prompts, Resources",
+        "Go to the AI tools page and note the free tools to get started",
+        "Test the prompt generator with a product of your choice",
+        "Choose your language and your mode, then open your profile",
+        "Mark the lesson as completed and take the quiz"
       ]
     }
   }

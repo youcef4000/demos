@@ -66,6 +66,13 @@ const MODULES_1 = [
         ],
         key: ['L’objectif : des pubs qui arrêtent le scroll et qui vendent.', 'Le parcours : comprendre, produire, puis bâtir ta marque.', 'Une leçon par jour, l’exercice à chaque fois, le quiz avant d’avancer.'],
         quiz: [{ q: 'Quelle est la meilleure façon d’avancer dans la formation ?', a: ['Tout regarder en une soirée', 'Une leçon par jour, avec l’exercice et le quiz', 'Sauter les exercices'], ok: 1, why: 'La régularité et la pratique font la différence.' }],
+        todo: [
+          'Choisis un vrai produit à vendre : tu le travailleras pendant toute la formation',
+          'Écris en une phrase ce qu’il fait et à qui il s’adresse',
+          'Choisis une heure fixe chaque jour pour ta leçon et mets un rappel sur ton téléphone',
+          'Ouvre CapCut et Canva sur ton téléphone, et installe ceux qui manquent',
+          'Crée un album sur ton téléphone pour ranger les photos et vidéos de la formation',
+        ],
       },
       {
         id: 'm0-l2',
@@ -251,6 +258,14 @@ const MODULES_1 = [
           { q: 'Une bonne image publicitaire contient…', a: ['Un seul message clair et un bouton d’action', 'Le plus d’informations possible', 'Uniquement le logo'], ok: 0, why: 'Une image se lit en une seconde : un produit, un message, une action.' },
         ],
         widget: 'formats',
+        todo: [
+          'Repère dans ton fil 3 pubs : une vidéo, une image et un carrousel',
+          'Fais une capture de chacune et note le produit vendu',
+          'Pour l’image, note son seul message et son bouton d’action',
+          'Pour la vidéo, note sa durée et la façon dont elle montre le produit',
+          'Pour le carrousel, note ce que chaque slide ajoute jusqu’à la dernière',
+          'Choisis le format qui convient le mieux à ton produit, et écris pourquoi en une phrase',
+        ],
       },
       {
         id: 'm1-l2',
@@ -351,6 +366,13 @@ const MODULES_1 = [
         res: [
           { title: 'Prompt de départ — hooks', text: 'Tu es un créateur de publicités pour les réseaux sociaux en Algérie. Écris 10 hooks (phrases d’accroche de moins de 8 mots) pour une vidéo qui présente [produit] à [cible]. Mélange questions, chiffres et contrastes. Ton direct, en darija écrite en lettres latines.' },
         ],
+        todo: [
+          'Dans CapCut, crée un projet et importe 3 photos ou vidéos de ton produit',
+          'Coupe un plan, change l’ordre des plans et ajoute une musique pour prendre la main',
+          'Filme-toi en train de parler de ton produit, puis ajoute les sous-titres automatiques',
+          'Dans Canva, ouvre un template de publicité et mets-y la photo de ton produit',
+          'Change le titre et le bouton du template, puis télécharge l’image',
+        ],
       },
       {
         id: 'm1-l3',
@@ -370,6 +392,13 @@ const MODULES_1 = [
           { q: 'Où éviter de placer ton texte en 9:16 ?', a: ['Au centre', 'Tout en haut et tout en bas', 'Nulle part'], ok: 1, why: 'Le haut et le bas sont recouverts par les boutons, la légende et le CTA de la plateforme.' },
         ],
         widget: 'ratio',
+        todo: [
+          'Note les 4 formats et leur usage : 9:16, 4:5, 1:1 et 16:9',
+          'Filme un plan court de ton produit à la verticale, en 9:16',
+          'Dans CapCut, ajoute un texte au centre, loin des zones cachées en haut et en bas',
+          'Duplique le projet et passe-le en 4:5, en gardant le produit dans le cadre',
+          'Regarde les deux versions sur ton téléphone et note ce qui est coupé ou caché',
+        ],
       },
       {
         id: 'm1-l4',
@@ -407,6 +436,13 @@ const MODULES_1 = [
         quiz: [
           { q: 'Pour faire acheter, ta créative doit surtout contenir…', a: ['Une offre claire et un CTA', 'Une musique tendance', 'Le plus d’effets possible'], ok: 0, why: 'La conversion se joue sur l’offre et l’appel à l’action.' },
           { q: 'Une créative doit viser…', a: ['Tous les objectifs à la fois', 'Un seul objectif', 'Aucun objectif précis'], ok: 1, why: 'Un objectif clair donne un message clair.' },
+        ],
+        todo: [
+          'Recopie les 4 étapes du client : notoriété, considération, conversion, fidélisation',
+          'Regarde 3 pubs dans ton fil et note l’étape que vise chacune',
+          'Repère celle qui veut tout faire à la fois, et note ce qui la rend floue',
+          'Pour ton produit, écris une idée de créative par étape, en une phrase',
+          'Choisis un seul objectif pour ta prochaine créative et note ce qu’elle doit contenir',
         ],
       },
     ],
@@ -561,6 +597,13 @@ const MODULES_1 = [
           { q: 'Le CTA occupe…', a: ['Les 3 premières secondes', 'Le milieu de la vidéo', 'Les 3 à 5 dernières secondes'], ok: 2, why: 'Le CTA arrive à la fin : il dit quoi faire maintenant que la personne est convaincue.' },
         ],
         widget: 'anatomie',
+        todo: [
+          'Choisis une pub vidéo dans ton fil et repère où finit le hook et où commence le CTA',
+          'Note ce qui se passe dans son hook, pendant les 3 premières secondes',
+          'Note ce que présente son body : le produit, son usage, ses points forts, le problème réglé',
+          'Note son CTA : l’action demandée dans les dernières secondes',
+          'Écris le plan de ta propre pub en 3 lignes : hook, body, CTA',
+        ],
       },
       {
         id: 'm2-l2',
@@ -615,6 +658,13 @@ const MODULES_1 = [
           { q: 'Quel est l’objectif du hook ?', a: ['Présenter toutes les qualités du produit', 'Arrêter le scroll', 'Donner le prix'], ok: 1, why: 'Un seul but : que la personne s’arrête et regarde.' },
           { q: 'Le hook occupe…', a: ['Les 3 premières secondes', 'Le milieu de la vidéo', 'Les dernières secondes'], ok: 0, why: 'C’est dans les toutes premières secondes que l’on décide de rester ou de scroller.' },
           { q: 'Un hook doit se comprendre…', a: ['Uniquement avec le son', 'Même sans le son', 'Seulement après 10 secondes'], ok: 1, why: 'Beaucoup regardent sans le son : texte à l’écran et image doivent suffire.' },
+        ],
+        todo: [
+          'Fais défiler ton fil et note les 3 pubs qui t’ont arrêté',
+          'Pour chacune, décris ce qui t’a arrêté dans les 3 premières secondes',
+          'Revois-les sans le son : le hook se comprend-il encore ?',
+          'Écris 3 hooks pour ton produit, assez courts pour tenir en 3 secondes',
+          'Filme le meilleur, puis regarde-le sans le son : arrête-t-il encore le scroll ?',
         ],
       },
       {
@@ -691,6 +741,14 @@ const MODULES_1 = [
         ],
         widget: 'hooks',
         res: [{ title: 'Prompt — 10 hooks en 3 familles', text: 'Agis comme un copywriter publicitaire. Produit : [produit]. Cible : [cible]. Problème principal : [problème]. Écris 10 hooks de moins de 10 mots : 4 positifs (résultat désiré), 4 négatifs (problème ou erreur), 2 avec un emplacement [chiffre] que je remplirai avec une donnée vraie. Classe-les du plus fort au plus faible.' }],
+        todo: [
+          'Écris en une phrase le résultat que ton produit apporte, puis le problème qu’il règle',
+          'Écris 3 hooks positifs qui partent du résultat, comme « Regarde ce résultat avec moi ! »',
+          'Écris 3 hooks négatifs qui nomment le problème de ton client, sous forme de question',
+          'Lis-les à voix haute dans la langue de ta cible et garde le meilleur de chaque type',
+          'Filme ces 2 hooks face caméra, ton produit en main',
+          'Montre-les à un proche et note celui qui lui donne envie de voir la suite',
+        ],
       },
       {
         id: 'm2-l4',
@@ -738,6 +796,13 @@ const MODULES_1 = [
         quiz: [
           { q: 'Un hook statistique doit utiliser…', a: ['Un chiffre inventé qui impressionne', 'Un chiffre vrai que tu peux prouver', 'Le plus grand chiffre possible'], ok: 1, why: 'Un faux chiffre détruit la confiance — et peut faire refuser la publicité.' },
           { q: 'Où place-t-on la statistique ?', a: ['À la fin', 'Dès la première seconde', 'Dans la description seulement'], ok: 1, why: 'C’est un hook : il doit arrêter le scroll tout de suite.' },
+        ],
+        todo: [
+          'Cherche un chiffre vrai sur le problème de ton client, dans une étude ou une source fiable',
+          'Note la source exacte ; si tu n’en trouves pas, renonce au hook statistique',
+          'Écris 2 hooks statistiques avec ce chiffre, sur le modèle « 1 femme sur 2… »',
+          'Dans CapCut, affiche le chiffre en gros texte dès la première seconde',
+          'Range côte à côte ton meilleur hook positif, négatif et statistique, prêts à tester',
         ],
       },
       {
@@ -831,6 +896,14 @@ const MODULES_1 = [
           { q: 'Dans le body, le produit est présenté comme…', a: ['La solution idéale au problème du client', 'Un objet parmi d’autres', 'Une promotion'], ok: 0, why: 'On développe la valeur : il règle le problème du client.' },
           { q: 'Lequel est un bénéfice ?', a: ['« Flacon de 50 ml »', '« Tu sens bon jusqu’au soir »', '« Fabriqué en 2026 »'], ok: 1, why: 'Le bénéfice décrit ce que gagne le client.' },
         ],
+        todo: [
+          'Écris la définition de ton produit en une phrase : ce que c’est, et pour qui',
+          'Décris comment on l’utilise, en 3 gestes simples',
+          'Liste 3 points forts et transforme chacun en bénéfice pour ton client',
+          'Relie le tout au problème de ton client : ton produit en est la solution',
+          'Filme un plan par section : le produit, son utilisation, un point fort',
+          'Monte-les dans CapCut après ton meilleur hook et regarde si l’attention tient',
+        ],
       },
       {
         id: 'm2-l6',
@@ -902,6 +975,13 @@ const MODULES_1 = [
           { q: 'Où se place le CTA ?', a: ['Au début', 'Dans les dernières secondes', 'Il est facultatif'], ok: 1, why: 'C’est l’instruction finale, une fois la personne convaincue.' },
         ],
         widget: 'cta',
+        todo: [
+          'Relève le CTA de 3 pubs : est-il clair, ou flou comme « Plus d’infos » ?',
+          'Écris 3 CTA pour ton produit, chacun avec un verbe d’action : commande, clique, écris',
+          'Ajoute une réassurance vraie, comme le paiement à la livraison, si tu la proposes',
+          'Garde le meilleur et affiche-le en gros à la fin de ta vidéo dans CapCut',
+          'Montre la fin à un proche : sait-il tout de suite quoi faire ?',
+        ],
       },
       {
         id: 'm2-l7',
@@ -1236,6 +1316,13 @@ const MODULES_1 = [
           { q: 'Combien de formules de vente voit-on dans ce module ?', a: ['2', '4', '10'], ok: 1, why: 'AIDA, PAS, CAP et SONCAS.' },
           { q: 'À quoi servent ces formules ?', a: ['À choisir la musique', 'À convaincre le client', 'À calculer le budget'], ok: 1, why: 'Ce sont des structures de persuasion.' },
         ],
+        todo: [
+          'Recopie les 4 formules et leur rôle : AIDA, PAS, CAP, SONCAS',
+          'Choisis une pub que tu aimes et devine quelle formule elle suit',
+          'Note le problème principal de ton client : il te servira pour PAS',
+          'Note 3 faits sur ton produit que tu peux prouver : ils te serviront pour CAP',
+          'Note la vraie raison pour laquelle ton client achète : elle te servira pour SONCAS',
+        ],
       },
       {
         id: 'm3-l2',
@@ -1282,6 +1369,13 @@ const MODULES_1 = [
           { q: 'Quelle étape correspond au CTA ?', a: ['Attention', 'Intérêt', 'Action'], ok: 2, why: 'L’action est l’appel à agir.' },
         ],
         widget: 'aida',
+        todo: [
+          'Prends une pub vidéo et découpe-la en 4 moments : attention, intérêt, désir, action',
+          'Écris une phrase par étape AIDA pour ton produit',
+          'Note à côté de chaque phrase le plan à filmer qui va avec',
+          'Dans Canva, fais un carrousel de 4 slides, une par étape AIDA',
+          'Vérifie que la dernière slide dit clairement quoi faire',
+        ],
       },
       {
         id: 'm3-l3',
@@ -1328,6 +1422,14 @@ const MODULES_1 = [
           { q: 'Dans PAS, l’agitation sert à…', a: ['Rendre le problème concret', 'Inventer un problème', 'Donner le prix'], ok: 0, why: 'On montre ce que le problème coûte au client, honnêtement.' },
           { q: 'Dans PAS, le produit arrive…', a: ['Au début', 'À l’étape Solution', 'Jamais'], ok: 1, why: 'Le produit est le remède, après le problème et l’agitation.' },
         ],
+        todo: [
+          'Écris le problème de ton client avec ses mots à lui, en une phrase',
+          'Agite-le : décris une situation concrète où ce problème le gêne, sans exagérer',
+          'Écris la solution : comment ton produit règle ce problème, avec un fait vrai',
+          'Relis l’agitation et retire tout ce qui ment ou fait peur',
+          'Lis ton script PAS à voix haute et chronomètre-le',
+          'Enregistre-le en voix off sur ton téléphone et réécoute-le comme un client',
+        ],
       },
       {
         id: 'm3-l4',
@@ -1363,6 +1465,13 @@ const MODULES_1 = [
         quiz: [
           { q: 'Que veut dire le P de CAP ?', a: ['Prix', 'Preuve', 'Promotion'], ok: 1, why: 'Caractéristique, Avantage, Preuve.' },
           { q: 'CAP est surtout utile pour…', a: ['Les clients sceptiques', 'Choisir une musique', 'Écrire un hook'], ok: 0, why: 'Les preuves rassurent ceux qui doutent.' },
+        ],
+        todo: [
+          'Liste 3 caractéristiques de ton produit : des faits, pas des promesses',
+          'Traduis chacune en avantage : à quoi ça sert pour ton client ?',
+          'Trouve une preuve pour chaque avantage : démonstration, avant/après honnête ou avis réel',
+          'Barre tout avantage que tu ne peux pas prouver',
+          'Filme ta preuve la plus forte en démonstration, en un seul plan',
         ],
       },
       {
@@ -1424,6 +1533,13 @@ const MODULES_1 = [
           { q: '« Paiement à la livraison » joue sur quel bouton ?', a: ['Sécurité', 'Orgueil', 'Nouveauté'], ok: 0, why: 'Le client ne prend aucun risque : c’est la sécurité.' },
           { q: 'Que veut dire le A de SONCAS ?', a: ['Attention', 'Argent', 'Action'], ok: 1, why: 'Sécurité, Orgueil, Nouveauté, Confort, Argent, Sympathie.' },
         ],
+        todo: [
+          'Recopie les 6 boutons : Sécurité, Orgueil, Nouveauté, Confort, Argent, Sympathie',
+          'Pour ton produit, écris un angle par bouton, uniquement avec des faits vrais',
+          'Entoure les 2 boutons qui comptent le plus pour ton client',
+          'Transforme ces 2 angles en 2 hooks différents',
+          'Demande à un client ou à un proche pourquoi il achèterait, et note le bouton touché',
+        ],
       },
       {
         id: 'm3-l6',
@@ -1461,6 +1577,13 @@ const MODULES_1 = [
           { q: 'Pour structurer toute une vidéo, on utilise…', a: ['AIDA', 'SONCAS', 'CAP'], ok: 0, why: 'AIDA guide du premier regard jusqu’à l’action.' },
           { q: 'Pour choisir l’angle psychologique, on utilise…', a: ['PAS', 'SONCAS', 'AIDA'], ok: 1, why: 'SONCAS : les 6 boutons psychologiques.' },
           { q: 'Pour donner confiance avec des preuves…', a: ['CAP', 'PAS', 'AIDA'], ok: 0, why: 'Caractéristique, Avantage, Preuve.' },
+        ],
+        todo: [
+          'Note quand utiliser chaque formule, AIDA, PAS, CAP, SONCAS, en une ligne chacune',
+          'Choisis le bouton SONCAS qui donnera l’angle de ta prochaine pub',
+          'Écris son script en AIDA, avec un body construit en PAS',
+          'Ajoute une preuve CAP dans le body : un fait, son avantage, sa démonstration',
+          'Relis-le comme ton client : parle-t-il à une personne, ou récite-t-il une technique ?',
         ],
       },
     ],
@@ -1540,6 +1663,13 @@ const MODULES_1 = [
           { q: 'Que veut dire UGC ?', a: ['User Generated Content', 'Unique Graphic Creation', 'Ultra Good Campaign'], ok: 0, why: 'Du contenu généré par les utilisateurs.' },
           { q: 'Pour faire de l’UGC, il faut surtout…', a: ['Un studio professionnel', 'Un smartphone et de l’authenticité', 'Un script de vendeur'], ok: 1, why: 'La force de l’UGC, c’est son naturel.' },
         ],
+        todo: [
+          'Cherche 3 vidéos UGC dans ta niche : une vraie personne qui parle d’un produit',
+          'Note ce qui les rend crédibles : le lieu, la voix, le ton, les gestes',
+          'Écris 3 points sur ton produit à dire avec tes mots, sans script vendeur',
+          'Filme-toi chez toi au téléphone, en parlant de ton produit comme à un ami',
+          'Revois la vidéo : ça sonne vrai, ou ça sonne pub ? Note ce que tu changerais',
+        ],
       },
       {
         id: 'm4-l2',
@@ -1613,6 +1743,13 @@ const MODULES_1 = [
           { q: 'Comment est perçue une pub classique trop parfaite ?', a: ['Comme un conseil d’ami', 'Comme « fausse »', 'Comme gratuite'], ok: 1, why: 'La mise en scène se voit : on se méfie.' },
           { q: 'L’UGC est perçu comme…', a: ['Un conseil d’ami', 'Une annonce officielle', 'Une promotion'], ok: 0, why: 'Une vraie personne, son vrai avis.' },
         ],
+        todo: [
+          'Trouve une pub classique de studio et une vidéo UGC pour un même type de produit',
+          'Note pour chacune ce qui fait « mise en scène » ou « conseil d’ami »',
+          'Filme ton produit deux fois : une version très posée, une version naturelle en main',
+          'Montre les deux à un proche sans rien expliquer, et demande laquelle il croit le plus',
+          'Note sa réponse et ce qui l’a convaincu',
+        ],
       },
       {
         id: 'm4-l3',
@@ -1646,6 +1783,14 @@ const MODULES_1 = [
         quiz: [
           { q: 'Pourquoi l’UGC crée-t-il la confiance ?', a: ['On achète à des humains, pas à des logos', 'Il est plus long', 'Il est tourné en studio'], ok: 0, why: 'Une vraie personne inspire plus confiance qu’une marque.' },
           { q: '« Si ça marche pour lui, ça marchera pour moi » : c’est…', a: ['La rentabilité', 'L’identification', 'La sécurité'], ok: 1, why: 'Le client se reconnaît dans la personne.' },
+        ],
+        todo: [
+          'Décris ton client type en 3 lignes : qui il est, son problème, sa façon de parler',
+          'Repère autour de toi une personne qui lui ressemble et utilise vraiment ton produit',
+          'Note ce qu’elle peut dire de vrai sur le produit, avec ses propres mots',
+          'Filme un court essai UGC au téléphone, avec elle ou avec toi-même',
+          'Vérifie qu’on voit une vraie personne, pas seulement le produit et ton logo',
+          'Note ce que ce tournage t’a coûté, en temps et en matériel',
         ],
       },
     ],
@@ -1700,6 +1845,13 @@ const MODULES_1 = [
           { q: 'Le Brand Content vend surtout…', a: ['Une promotion du jour', 'Un style de vie', 'Une fiche technique'], ok: 1, why: 'On vend un univers auquel le client veut appartenir.' },
           { q: 'Quel est l’objectif du Brand Content ?', a: ['Augmenter la valeur perçue et fidéliser', 'Vendre le moins cher possible', 'Remplacer le CTA'], ok: 0, why: 'Plus de valeur perçue, et un lien émotionnel qui dure.' },
         ],
+        todo: [
+          'Trouve 2 marques qui publient sans dire « achète » : quel style de vie vendent-elles ?',
+          'Écris en 3 mots ce que tu veux que les gens ressentent devant ton produit',
+          'Décris en une phrase le style de vie de ton client idéal',
+          'Écris 3 idées de publications qui montrent ce style de vie sans vendre directement',
+          'Prends une photo de ton produit dans ce décor de vie, sans texte de vente',
+        ],
       },
       {
         id: 'm6-l2',
@@ -1736,6 +1888,13 @@ const MODULES_1 = [
           { q: '« Voici notre vision du monde, rejoins notre mouvement » : c’est…', a: ['Une créative de conversion', 'Du Brand Content', 'Un CTA'], ok: 1, why: 'On invite à rejoindre un univers, pas à acheter tout de suite.' },
           { q: 'Tu lances un produit et tu veux vendre cette semaine. Tu choisis…', a: ['La créative', 'Le Brand Content', 'Aucune publicité'], ok: 0, why: 'La créative vise la conversion immédiate.' },
         ],
+        todo: [
+          'Classe 5 publications vues aujourd’hui : créative qui vend, ou Brand Content qui bâtit',
+          'Écris une phrase de créative pour ton produit : le problème réglé, puis l’action',
+          'Écris une phrase de Brand Content : ta vision, et le mouvement que le client rejoint',
+          'Décide ta priorité du moment : vendre vite, ou fidéliser et monter en gamme',
+          'Planifie une semaine de publications qui mélange créatives et Brand Content',
+        ],
       },
       {
         id: 'm6-l3',
@@ -1771,6 +1930,14 @@ const MODULES_1 = [
         quiz: [
           { q: 'Raconter les coulisses de fabrication, c’est quel pilier ?', a: ['L’esthétique', 'Le storytelling', 'L’aspiration'], ok: 1, why: 'Le storytelling raconte le « pourquoi » et les coulisses.' },
           { q: 'Le pilier « aspiration » consiste à montrer…', a: ['Le prix barré', 'La personne que le client rêve de devenir', 'La fiche technique'], ok: 1, why: 'On vend une projection, pas seulement un objet.' },
+        ],
+        todo: [
+          'Dans Canva, choisis 2 couleurs et 1 police pour ta marque, et note-les',
+          'Écris le « pourquoi » de ta marque en 3 phrases : ta mission, tes coulisses',
+          'Filme un plan des coulisses : préparation, emballage ou fabrication du produit',
+          'Décris la personne que ton client rêve de devenir en utilisant ton produit',
+          'Crée dans Canva un visuel qui montre ce moment, avec tes couleurs et ta police',
+          'Vérifie-le : image nette, mêmes couleurs, une histoire, un client qui se projette',
         ],
       },
       {
@@ -1812,6 +1979,13 @@ const MODULES_1 = [
           { q: 'Dans l’écosystème créatif, le Body est…', a: ['L’étincelle', 'Le moteur', 'La destination'], ok: 1, why: 'Il convainc, rassure et bâtit le prestige.' },
           { q: 'Une publicité rentable, c’est…', a: ['Une question de chance', 'Une équation : Hook + Body + CTA', 'Uniquement un gros budget'], ok: 1, why: 'Attirer, convaincre, guider : chaque partie a son rôle.' },
         ],
+        todo: [
+          'Choisis une pub de ta niche et nomme ses 3 pièces : étincelle, moteur, destination',
+          'Dans son body, note ce qui vend, ce qui rassure et ce qui valorise la marque',
+          'Écris le plan de ta pub : un hook, un body en AIDA ou PAS, un CTA',
+          'Ajoute au body un moment UGC qui rassure et un détail soigné qui valorise ta marque',
+          'Envoie ce plan à l’équipe sur WhatsApp et note le retour reçu',
+        ],
       },
     ],
   },
@@ -1839,6 +2013,14 @@ const MODULES_1 = [
         ],
         key: ['Importer, couper les temps morts, ordonner du Hook au CTA, sous-titrer, ajouter la musique.', 'Un changement à l’écran toutes les 2 à 3 secondes.', 'Le CTA doit être écrit à l’écran et dit en voix off.'],
         quiz: [{ q: 'À quel rythme change-t-on de plan ?', a: ['Toutes les 2 à 3 secondes', 'Toutes les 15 secondes', 'Jamais'], ok: 0, why: 'Un rythme rapide garde l’attention.' }],
+        todo: [
+          'Importe dans CapCut les rushes de ton produit : hook, démo, détails, CTA',
+          'Coupe tous les temps morts, y compris le début et la fin de chaque prise',
+          'Ordonne les plans du hook au CTA, avec un changement à l’écran toutes les 2 à 3 secondes',
+          'Ajoute les sous-titres automatiques, puis une musique assez basse pour entendre la voix',
+          'Écris le CTA à l’écran et dis-le en voix off à la fin',
+          'Vérifie le hook dès la première image et le produit visible vite, puis exporte',
+        ],
       },
       {
         id: 'm5-l2',
@@ -1854,6 +2036,13 @@ const MODULES_1 = [
         ],
         key: ['Cinq calques : fond, produit, titre, preuve, CTA.', 'Deux couleurs, une police, un seul message.', 'Le test de la seconde : on doit comprendre l’image immédiatement.'],
         quiz: [{ q: 'Combien de messages dans une image publicitaire ?', a: ['Un seul', 'Trois', 'Le plus possible'], ok: 0, why: 'Un message clair se lit en une seconde.' }],
+        todo: [
+          'Prends une photo de ton produit à la lumière du jour, bien éclairé',
+          'Dans Canva, pose-la sur un fond uni, avec 2 couleurs et 1 police au maximum',
+          'Écris un titre de 6 mots maximum, qui porte un seul message',
+          'Ajoute une preuve vraie, comme la livraison ou une garantie, puis un bouton d’action',
+          'Montre l’image une seconde à un proche et demande-lui ce qu’il a compris',
+        ],
       },
       {
         id: 'm5-l3',
@@ -1869,6 +2058,14 @@ const MODULES_1 = [
         key: ['Cinq slides : hook, problème, solution, preuve, CTA.', 'La slide 1 doit donner envie de glisser.', 'Une idée par slide, un style cohérent, le CTA à la fin.'],
         quiz: [{ q: 'Où placer le CTA dans un carrousel ?', a: ['Sur la première slide', 'Sur la dernière slide', 'Nulle part'], ok: 1, why: 'La dernière slide conclut et pousse à l’action.' }],
         widget: 'carrousel',
+        todo: [
+          'Écris le texte de 5 slides pour ton produit : hook, problème, solution, preuve, CTA',
+          'Vérifie qu’il n’y a qu’une idée par slide ; sinon, raccourcis',
+          'Dans Canva, crée la slide 1 en carré 1:1, avec un hook qui donne envie de glisser',
+          'Duplique-la pour garder le même style, puis remplis les 4 autres slides',
+          'Mets le CTA sur la dernière slide et exporte les 5 images',
+          'Fais défiler le carrousel sur ton téléphone et note où l’envie de glisser retombe',
+        ],
       },
       {
         id: 'm5-l4',
@@ -1884,6 +2081,13 @@ const MODULES_1 = [
         ],
         key: ['Vidéo : 1080 × 1920, 30 images/s, MP4 (H.264).', 'Images : 1080 × 1920, 1080 × 1350 ou 1080 × 1080 selon le format.', 'Toujours vérifier sur téléphone, sans le son, et nommer ses versions.'],
         quiz: [{ q: 'Quelle résolution pour une vidéo verticale ?', a: ['1080 × 1920', '640 × 480', '1920 × 1080'], ok: 0, why: '1080 de large, 1920 de haut : vertical HD.' }],
+        todo: [
+          'Exporte ta vidéo depuis CapCut en 1080 × 1920, 30 images par seconde, en MP4',
+          'Télécharge ton image Canva à la bonne taille : 1080 × 1920, 1080 × 1350 ou 1080 × 1080',
+          'Regarde la vidéo en entier sur ton téléphone, puis une seconde fois sans le son',
+          'Relis chaque texte pour l’orthographe et vérifie qu’aucun n’est caché par l’interface',
+          'Nomme chaque fichier avec le produit et la version, par exemple produit-v1',
+        ],
       },
     ],
   },
@@ -1965,6 +2169,13 @@ const MODULES_1 = [
             text: 'Pub n° [  ]\nLien : [lien de la pub]\nPage / marque : [nom]\nPlateforme : [Facebook / Instagram / TikTok]\nEn ligne depuis : [date de début de diffusion]\n\nHook (3 premières secondes) : [ce qu’on voit] / [ce qu’on entend] / [texte à l’écran]\nDurée : [  ] s\nFormat : [UGC / démo / face caméra / avant-après / déballage…]\nAngle : [problème / envie / prix / cadeau / nouveauté…]\nOffre : [prix, pack, livraison, paiement…]\nCTA : [ce qu’on demande de faire]\n\nCe que je reprends (la structure, pas le contenu) : [  ]',
           },
         ],
+        todo: [
+          'Dans la Bibliothèque publicitaire de Meta, choisis l’Algérie et un mot-clé de ta niche',
+          'Garde 3 pubs actives depuis plusieurs semaines, avec leur lien et leur date de début',
+          'Regarde aussi les Top Ads du TikTok Creative Center pour ta catégorie',
+          'Remplis la « Fiche d’analyse d’une pub » des ressources pour chaque pub gardée',
+          'Note la structure que tu reprends pour ton produit, sans copier le contenu',
+        ],
       },
       {
         id: 'm7-l2',
@@ -2013,6 +2224,14 @@ const MODULES_1 = [
         quiz: [
           { q: 'Tu fais la démonstration d’un robot de cuisine. Quelle durée vises-tu plutôt ?', a: ['6 secondes', '30 à 60 secondes', '3 minutes'], ok: 1, why: 'Un produit à expliquer a besoin de temps, mais pas plus que nécessaire.' },
           { q: 'Quelle est la règle de la durée ?', a: ['Toujours 60 secondes', 'Aussi court que possible, aussi long que nécessaire', 'Le plus long possible pour tout montrer'], ok: 1, why: 'La durée dépend du message : on coupe tout ce qui n’apporte rien.' },
+        ],
+        todo: [
+          'Fixe la durée visée de ta pub selon ce que ton produit doit montrer',
+          'Dans CapCut, coupe l’intro de ta dernière vidéo du type « salam, aujourd’hui je vais… »',
+          'Supprime les répétitions et les silences, et commence direct par le hook',
+          'Vérifie qu’un plan, un zoom ou un texte change toutes les 2 à 3 secondes',
+          'Regarde-la en entier, note le moment où tu t’ennuies, et coupe-le',
+          'Compare la durée finale à ta durée visée',
         ],
       },
       {
@@ -2070,6 +2289,14 @@ const MODULES_1 = [
             title: 'Liste de plans (shot list)',
             text: 'Produit : [nom]\nLieu : [pièce calme, près d’une fenêtre] · Moment : [en journée]\nRéglages : vertical 9:16 · objectif nettoyé · téléphone sur trépied ou support · mode avion\n\n1. Produit en main : [on le prend, on le montre à la caméra]\n2. Détails : [gros plans : matière, bouchon, texture, étiquette]\n3. Utilisation : [le vrai geste, du début à la fin]\n4. Résultat : [ce que ça change, sans filtre ni retouche]\n5. Face caméra : [ton avis ou ton explication, phrase par phrase]\n6. Plans de coupe : [mains, emballage, décor, ambiance]\n\nPour chaque plan : 3 prises · 2 secondes de marge avant et après · plus de rushes que nécessaire.',
           },
+        ],
+        todo: [
+          'Remplis la « Liste de plans » des ressources pour ton produit',
+          'Installe-toi face à une fenêtre, en journée, dans un endroit calme',
+          'Nettoie l’objectif, passe en mode avion et cale le téléphone à la verticale',
+          'Filme chaque plan de ta liste 3 fois, avec 2 secondes de marge avant et après',
+          'Ajoute des plans de coupe : tes mains, l’emballage, le décor',
+          'Revois tes rushes et marque la meilleure prise de chaque plan',
         ],
       },
       {
@@ -2129,6 +2356,13 @@ const MODULES_1 = [
             text: 'Produit : [nom] · Durée visée : [  ] s · Langue : [darija / français / arabe]\n\nHOOK (0 à 3 s) : [une phrase qui arrête le scroll]\nBODY : [le problème] → [le produit] → [comment on l’utilise] → [la preuve : démonstration, garantie réelle]\nCTA : [l’action] + [la réassurance, par exemple paiement à la livraison, si c’est vrai]\n\nAvant d’enregistrer : lire à voix haute, chronométrer, raccourcir les phrases où tu bloques.\nPendant : petite pièce, téléphone à 15–20 cm, climatiseur et ventilateur coupés, 3 prises.\nAprès : garder la meilleure prise, réduction de bruit dans CapCut.',
           },
         ],
+        todo: [
+          'Remplis le gabarit « Script de voix off » des ressources : hook, body, CTA',
+          'Lis-le à voix haute en chronométrant, et raccourcis les phrases où tu bloques',
+          'Installe-toi dans une petite pièce pleine de tissus, appareils bruyants coupés',
+          'Enregistre 3 prises, téléphone à 15–20 cm de ta bouche, avec énergie et le sourire',
+          'Importe la meilleure prise dans CapCut et active la réduction de bruit',
+        ],
       },
       {
         id: 'm7-l5',
@@ -2179,6 +2413,14 @@ const MODULES_1 = [
         quiz: [
           { q: 'Combien de lignes de sous-titres à l’écran en même temps ?', a: ['Deux au maximum', 'Quatre', 'Tout le texte d’un coup'], ok: 0, why: 'Deux lignes se lisent d’un coup d’œil, même en scrollant.' },
           { q: 'Où éviter de placer tes sous-titres ?', a: ['Au centre de l’écran', 'Tout en bas et à droite, sous l’interface de l’appli', 'Nulle part, tout reste visible'], ok: 1, why: 'La description, le nom du compte et les boutons cachent ces zones.' },
+        ],
+        todo: [
+          'Dans CapCut, lance les sous-titres automatiques sur ta pub et choisis la langue',
+          'Relis chaque ligne et corrige les noms, les prix et les mots en darija',
+          'Limite-les à 2 lignes, en gros texte avec un contour ou un fond sombre',
+          'Mets en couleur 1 ou 2 mots clés par phrase : le prix, le bénéfice, l’accroche',
+          'Place-les au centre, loin du bas et du bord droit de l’écran',
+          'Regarde ta pub sans le son et note si on comprend le produit et l’offre',
         ],
       },
       {
@@ -2236,6 +2478,14 @@ const MODULES_1 = [
         quiz: [
           { q: 'Combien de temps la carte CTA reste-t-elle à l’écran ?', a: ['Une demi-seconde', '2 à 3 secondes', '15 secondes'], ok: 1, why: 'Assez pour la lire, assez court pour garder le rythme.' },
           { q: 'Quel format pour la carte CTA d’une vidéo verticale ?', a: ['1080 × 1920 (9:16)', '1920 × 1080', 'N’importe lequel'], ok: 0, why: 'Le même format que la vidéo, sinon la carte est rognée ou entourée de bandes.' },
+        ],
+        todo: [
+          'Écris tes 4 éléments : le produit, l’offre si elle est vraie, l’action, la réassurance',
+          'Dans Canva, crée un design 1080 × 1920 avec un fond uni et un gros titre',
+          'Ajoute une photo nette du produit et un bouton d’une couleur qui tranche',
+          'Télécharge-le en PNG et place-le à la fin de ta vidéo dans CapCut, 2 à 3 secondes',
+          'Dis le CTA en voix off au même moment',
+          'Vérifie : lisible en une seconde, dans la zone sûre, une seule action demandée',
         ],
       },
       {
@@ -2296,6 +2546,13 @@ const MODULES_1 = [
             text: 'TEXTE PRINCIPAL\n[Ligne hook : la question ou le problème de ton client]\n[Bénéfice 1]\n[Bénéfice 2]\n[Preuve vraie : démonstration, garantie réelle, avis réel]\n[Appel à l’action] + [réassurance : paiement à la livraison, délai… si c’est vrai]\n\nTITRE (court) : [le bénéfice ou l’offre en quelques mots]\nDESCRIPTION (pas toujours affichée) : [un détail rassurant]\n\n3 versions à tester :\nV1, angle problème : [  ]\nV2, angle bénéfice : [  ]\nV3, angle offre : [  ]\n\nLangue : [darija / français / arabe] · 1 ou 2 emojis maximum · aucune promesse qu’on ne peut pas prouver.',
           },
         ],
+        todo: [
+          'Lis la première ligne du texte de 2 pubs de ta niche, celle avant « Voir plus »',
+          'Remplis le gabarit « Texte d’annonce » des ressources pour ton produit',
+          'Écris 3 versions du texte principal : angle problème, angle bénéfice, angle offre',
+          'Ajoute un titre court, puis une ligne courte pour TikTok',
+          'Retire toute promesse que tu ne peux pas prouver et garde 1 ou 2 emojis au plus',
+        ],
       },
       {
         id: 'm7-l8',
@@ -2354,6 +2611,14 @@ const MODULES_1 = [
             title: 'Plan de variantes',
             text: 'Règle de nom : produit-variable-format-version (ex. : parfum-hookB-9x16-v2)\n\nGagnante : [produit]-hookA-9x16-v1\n\nVariante 1, hook : [nouvelles 3 premières secondes] → [produit]-hookB-9x16-v2\nVariante 2, 1ʳᵉ image : [nouvelle image d’ouverture] → [produit]-imageB-9x16-v3\nVariante 3, musique : [nouvelle musique] → [produit]-musiqueB-9x16-v4\nVariante 4, format : [1:1 ou 4:5] → [produit]-hookA-4x5-v5\nVariante 5, CTA : [nouvelle carte ou nouvelle phrase] → [produit]-ctaB-9x16-v6\n\nUne seule chose change par variante. Publie-les en même temps, avec le même budget, puis compare.',
           },
+        ],
+        todo: [
+          'Choisis ta pub qui a le mieux marché, ou ta version la plus aboutie',
+          'Remplis le « Plan de variantes » des ressources : une seule chose change par variante',
+          'Dans CapCut, duplique le projet et change seulement le hook',
+          'Refais-le pour la première image, la musique, le format et le CTA',
+          'Exporte chaque variante avec un nom clair, comme parfum-hookB-9x16-v2',
+          'Si tu les publies, fais-le en même temps et avec le même budget, puis compare',
         ],
       },
       {
@@ -2418,6 +2683,14 @@ const MODULES_1 = [
             title: 'Brief UGC (gabarit)',
             text: 'BRIEF UGC : [nom du produit]\n\nProduit : [ce qu’il fait, prix, comment l’utiliser] · envoyé le [date]\nCible : [qui, âge, ville, problème ou envie]\nMessage clé : [une seule idée à retenir]\nScript ou points clés : [hook proposé] / [3 points à dire avec tes mots] / [CTA]\nÀ ne pas dire : [promesses interdites, marques concurrentes, prix s’il peut changer]\n\nPlans à filmer : produit en main · détails · utilisation · résultat · face caméra · plans de coupe\nFormat : vertical 9:16 · durée visée [  ] s · lumière du jour · voix claire\nÀ livrer : la vidéo montée + les rushes bruts, sans musique ajoutée\nDate de livraison : [date] · par [WhatsApp / lien de téléchargement]\n\nDroits d’utilisation : plateformes [Facebook, Instagram, TikTok] · durée [  ] mois · en publicité payante : [oui / non]\nRetouches incluses : [nombre]\nRémunération : [montant, modalités de paiement]\n\nÀ la livraison, je vérifie : hook dans les 3 premières secondes · produit visible et bien nommé · vertical, net, voix claire · rien de faux dit sur le produit.',
           },
+        ],
+        todo: [
+          'Remplis le gabarit « Brief UGC » des ressources pour ton produit',
+          'Écris un seul message clé et 3 points à dire, sans texte à réciter mot à mot',
+          'Liste les plans à filmer, le format vertical, la durée visée et la date de livraison',
+          'Fixe par écrit les droits d’utilisation et le nombre de retouches',
+          'Relis le brief comme un créateur : pourrait-il filmer sans te poser de question ?',
+          'Prépare ta check-list de livraison : hook, produit visible, image nette, rien de faux',
         ],
       },
     ],

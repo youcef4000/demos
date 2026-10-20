@@ -108,6 +108,13 @@ export default {
           ],
           "why": "UGC’s strength is how natural it feels."
         }
+      ],
+      "todo": [
+        "Find 3 UGC videos in your niche: a real person talking about a product",
+        "Note what makes them believable: the setting, the voice, the tone, the gestures",
+        "Write 3 points about your product to say in your own words, no salesy script",
+        "Film yourself at home on your phone, talking about your product as if to a friend",
+        "Rewatch it: does it sound real, or like an ad? Note what you’d change"
       ]
     },
     "m4-l2": {
@@ -219,6 +226,13 @@ export default {
           ],
           "why": "A real person, their real opinion."
         }
+      ],
+      "todo": [
+        "Find a classic studio ad and a UGC video for the same kind of product",
+        "For each, note what feels “staged” or like “a friend’s advice”",
+        "Film your product twice: one very polished version, one natural version in hand",
+        "Show both to someone close without explaining, and ask which one they believe more",
+        "Note their answer and what convinced them"
       ]
     },
     "m4-l3": {
@@ -277,6 +291,14 @@ export default {
           ],
           "why": "The customer sees themselves in that person."
         }
+      ],
+      "todo": [
+        "Describe your typical customer in 3 lines: who they are, their problem, how they talk",
+        "Find someone around you who resembles them and really uses your product",
+        "Note what they can truthfully say about the product, in their own words",
+        "Film a short UGC test on your phone, with them or with yourself",
+        "Check that a real person is on screen, not just the product and your logo",
+        "Note what this shoot cost you, in time and equipment"
       ]
     }
   }

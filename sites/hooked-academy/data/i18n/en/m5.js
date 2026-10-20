@@ -88,6 +88,14 @@ export default {
           ],
           "why": "A fast pace holds attention."
         }
+      ],
+      "todo": [
+        "Import your product footage into CapCut: hook, demo, details, CTA",
+        "Cut all the dead air, including the start and end of each take",
+        "Arrange the shots from hook to CTA, with a change on screen every 2 to 3 seconds",
+        "Add auto captions, then music low enough to hear the voice",
+        "Write the CTA on screen and say it in the voice-over at the end",
+        "Check the hook shows from the first frame and the product appears fast, then export"
       ]
     },
     "m5-l2": {
@@ -158,6 +166,13 @@ export default {
           ],
           "why": "A clear message reads in one second."
         }
+      ],
+      "todo": [
+        "Take a well-lit photo of your product in daylight",
+        "In Canva, place it on a solid background, with 2 colors and 1 font at most",
+        "Write a headline of 6 words max that carries a single message",
+        "Add true proof, like delivery or a guarantee, then an action button",
+        "Show the image to someone close for one second and ask what they understood"
       ]
     },
     "m5-l3": {
@@ -222,6 +237,14 @@ export default {
           ],
           "why": "The last slide wraps up and drives action."
         }
+      ],
+      "todo": [
+        "Write the text for 5 slides for your product: hook, problem, solution, proof, CTA",
+        "Check there’s only one idea per slide; if not, cut it down",
+        "In Canva, create slide 1 as a 1:1 square, with a hook that makes people want to swipe",
+        "Duplicate it to keep the same style, then fill in the other 4 slides",
+        "Put the CTA on the last slide and export the 5 images",
+        "Swipe through the carousel on your phone and note where the urge to swipe drops"
       ]
     },
     "m5-l4": {
@@ -286,6 +309,13 @@ export default {
           ],
           "why": "1080 wide, 1920 tall: vertical HD."
         }
+      ],
+      "todo": [
+        "Export your video from CapCut in 1080 × 1920, 30 fps, MP4",
+        "Download your Canva image at the right size: 1080 × 1920, 1080 × 1350 or 1080 × 1080",
+        "Watch the whole video on your phone, then a second time with the sound off",
+        "Proofread every text and check that none is hidden by the interface",
+        "Name each file with the product and the version, for example product-v1"
       ]
     }
   }

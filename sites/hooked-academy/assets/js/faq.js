@@ -2,7 +2,8 @@
 // La liste publiée est data/faq.json (servie avec le site). Les modifications faites dans l'espace
 // équipe restent un brouillon dans ce navigateur (aperçu immédiat) jusqu'à ce que l'équipe publie
 // le fichier sur GitHub : le site se met alors à jour pour tout le monde.
-// Chaque entrée : { id, cat, landing, q: { fr, en, ar }, a: { fr, en, ar } } — seul le français est obligatoire.
+// Chaque entrée : { id, cat, landing, kw, q: { fr, en, ar }, a: { fr, en, ar } } — seul le français est obligatoire.
+// kw : mots-clés de l'assistant (toutes langues, séparés par des virgules), en plus de la question et de la réponse.
 
 const KEY = 'hooked-academy:faq';
 const SRC = new URL('../../data/faq.json', import.meta.url);
@@ -18,6 +19,7 @@ function norm(x, i = 0) {
     id: str(x.id).replace(/[^\w-]/g, '') || `q${i}`,
     cat: CATS.includes(x.cat) ? x.cat : 'formation',
     landing: !!x.landing,
+    kw: str(x.kw).slice(0, 600),
     q: texts(x.q),
     a: texts(x.a),
   };

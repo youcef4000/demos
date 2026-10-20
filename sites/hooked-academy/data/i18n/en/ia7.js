@@ -72,6 +72,13 @@ export default {
           ],
           "why": "It’s the average cost of getting one purchase."
         }
+      ],
+      "todo": [
+        "Write the 4 formulas in your notes: hook rate, hold rate, CTR, CPA",
+        "Get the numbers from a real ad: yours, or one from a seller you know",
+        "Work out its 4 metrics with the lesson’s calculator",
+        "Find on its retention curve where people drop off",
+        "Write your diagnosis: hook, body or CTA to rework?"
       ]
     },
     "ia7-l2": {
@@ -123,6 +130,13 @@ export default {
           ],
           "why": "Structure can be learned; the content belongs to the brand."
         }
+      ],
+      "todo": [
+        "Find a well-performing creative in your niche and save it",
+        "Upload it to Hooked Lab and read the full analysis",
+        "Note its structure: hook, problem, solution, proof, offer, CTA",
+        "Rewrite that structure for your product, without reusing its text or visuals",
+        "Keep the analysis and your adaptation together, ready to test"
       ]
     },
     "ia7-l3": {
@@ -175,6 +189,14 @@ export default {
           ],
           "why": "Otherwise there’s no way to know what made the difference."
         }
+      ],
+      "todo": [
+        "Pick your best creative as your reference winner",
+        "Plan 5 variations: hook, first frame, music, CTA, format",
+        "Make the “new hook” variation in CapCut, leaving everything else as is",
+        "Make the “first frame” variation the same way",
+        "Name each file after what changes, for example “perfume-v2-hook”",
+        "Set up a table to compare each variation with the winner"
       ]
     }
   }

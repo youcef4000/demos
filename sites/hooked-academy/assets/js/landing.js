@@ -7,9 +7,10 @@ import { lang, isRTL, t, has, setLang } from './i18n.js';
 import './i18n/landing.js';
 import { logoInner, markSVG, morphMark } from './brand.js';
 import { TRACKS, MODULES as ALL_MODULES, allLessons, modCode, coreModulesOf, findLesson } from '../../data/programme.js';
-import { addApplication } from './store.js';
+import { addApplication, load as loadStore } from './store.js';
 import * as FAQ from './faq.js';
 import { OFFRES } from '../../data/offres.js';
+import { mountAssistant } from './assistant.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -718,11 +719,33 @@ function animate() {
   addEventListener('load', () => ST.refresh());
 }
 
+// Assistant (bot) : les questions des visiteurs, avec les réponses de la FAQ de l'équipe et les tarifs
+function bot() {
+  let wa = '';
+  try {
+    wa = String(loadStore().settings?.whatsapp || '').replace(/\D/g, '');
+  } catch {}
+  const go = (href, k) => ({ href, label: t(k) });
+  mountAssistant({
+    whatsapp: wa,
+    faqHref: '#faq',
+    filter: (e) => e.landing,
+    links: {
+      _prix: go('#tarifs', 'bot.l.tarifs'),
+      paiement: go('#inscription', 'bot.l.signup'),
+      acces: go('#tarifs', 'bot.l.tarifs'),
+      deux: go('#formations', 'bot.l.courses'),
+      debutant: go('#inscription', 'bot.l.signup'),
+    },
+  });
+}
+
 const start = () => {
   fitBig();
   new ResizeObserver(fitBig).observe($('#formations'));
   animate();
   onScroll();
+  bot();
 };
 if (document.fonts?.ready) document.fonts.ready.then(start);
 else start();

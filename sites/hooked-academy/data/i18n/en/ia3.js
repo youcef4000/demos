@@ -66,6 +66,13 @@ export default {
           ],
           "why": "The starting image locks in how the product looks."
         }
+      ],
+      "todo": [
+        "With Kling’s free credits, generate a text → video shot of your product",
+        "Generate the same shot as image → video, from your approved image",
+        "Compare: in which shot does your product stay true to life?",
+        "List the short shots your next ad would need",
+        "Save the image → video prompt that worked in your library"
       ]
     },
     "ia3-l2": {
@@ -117,6 +124,13 @@ export default {
           ],
           "why": "Circling the product shows it off from every angle."
         }
+      ],
+      "todo": [
+        "Watch 3 ads in your niche and name the camera move in each shot",
+        "Write 4 prompts for your product: push-in, orbit, tracking, crane",
+        "Generate the 2 that suit your product best, from your approved image",
+        "Compare the emotion of each: desire, luxury or discovery?",
+        "Save each prompt in your library, with the exact name of the move"
       ]
     },
     "ia3-l3": {
@@ -155,6 +169,13 @@ export default {
           ],
           "why": "The label must be exactly the one the customer will receive."
         }
+      ],
+      "todo": [
+        "Film a slow close-up of your real product’s label on your phone",
+        "Generate 2 short shots from the same approved image, with slow moves",
+        "Check each shot frame by frame: shape, label, color",
+        "Replace any shot where the label gets distorted with your real footage",
+        "Write the 5 reflexes at the top of your Video shots section"
       ]
     },
     "ia3-l4": {
@@ -212,6 +233,14 @@ export default {
           ],
           "why": "You protect the product before adding movement."
         }
+      ],
+      "todo": [
+        "Pick your best packshot as the starting image",
+        "Adapt the video’s prompt: product lock, gliding reflection, slight push-in, 5 s",
+        "Generate the shot with Kling’s free credits, or in Veo if you have access",
+        "Check that it ends on a sharp shot, with room for the text and the CTA",
+        "Try another detail, a drop or a reflection, and keep the best version",
+        "Save the winning prompt in your library, under Video shots"
       ]
     },
     "ia3-l5": {
@@ -279,6 +308,13 @@ export default {
           ],
           "why": "Customers want to see the real product."
         }
+      ],
+      "todo": [
+        "Gather your AI shots and film 2 or 3 real shots of your product on your phone",
+        "Record the voice-over for your script on your phone",
+        "In CapCut, alternate AI shots for impact and real shots for proof",
+        "Add auto captions, fix them, then put the music under the voice",
+        "Export in 9:16 and watch with the sound off: does the message get through?"
       ]
     },
     "ia3-l6": {
@@ -386,6 +422,14 @@ export default {
           "title": "Veo 3.1 prompts (frames and ingredients)",
           "text": "FRAMES → VIDEO\nStart frame: [description] · End frame: [description]\n(Same framing, same light, prepared from your real photo.)\nPrompt: Camera [static / slow push-in / slow orbit], shot [close-up / medium]. [The action linking the two frames, in one sentence]. The product and its label stay identical. Sound: [ambience, specific effect / no music].\n\nINGREDIENTS → VIDEO\nReferences: [1: your product photo] [2: the character] [3: the setting]\nPrompt: [The character from the reference] [action] with [the product from the reference] in [the setting from the reference]. Camera [movement], lighting [  ]. The product stays exactly the same.\n\nSettings: short duration, format [9:16 / 16:9] depending on what the tool offers.\nCHECK: frame by frame → shape, label, color, hands."
         }
+      ],
+      "todo": [
+        "With Nano Banana, prepare a start frame and an end frame, same framing",
+        "Fill in the “Frames → video” prompt from the Prompts tab for these two frames",
+        "Run it in Flow if you have access; if not, keep it ready for later",
+        "Check the result frame by frame: shape, label, color, hands",
+        "Write an “Ingredients → video” prompt that names each reference",
+        "Save your two Veo prompts in your library, under Video shots"
       ]
     },
     "ia3-l7": {
@@ -503,6 +547,14 @@ export default {
           "title": "Kling prompt (image → video)",
           "text": "Starting image: [your approved image, already in the right format]\n\nPrompt: [Subject] [a single action, slow and simple], [one camera move: slow push-in / slow orbit / static camera], [mood, lighting]. The product and its label stay exactly the same.\n\nNegative prompt (if your version offers it): distortion, product changing shape, changing text, extra fingers, distorted face, blur, flickering.\n\nSettings: short duration · cheapest mode for testing · only one thing changes between two tries.\n\nCheck: shape, label, color, hands → keep or regenerate."
         }
+      ],
+      "todo": [
+        "Open Kling and upload your approved image, already in 9:16",
+        "Fill in the “Kling prompt” from the Prompts tab: one action, one move",
+        "Add the negative prompt, if your version offers it",
+        "Generate a short shot in the cheapest mode, with your free credits",
+        "Check shape, label and hands; if needed, change one thing and regenerate",
+        "Save the prompt that worked in your library, under Video shots"
       ]
     }
   }

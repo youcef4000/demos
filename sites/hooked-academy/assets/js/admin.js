@@ -13,6 +13,7 @@ import * as S from './store.js';
 import { MODULES, allLessons, findLesson, modCode, modulesOf, coreModulesOf, lessonsOf, trackOf } from '../../data/programme.js';
 import { plan, lessonDuration } from '../../motion/engine.js';
 import * as FAQ from './faq.js';
+import { match as botMatch, SURE as BOT_SURE, builtins as botBuiltins } from './assistant.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -1145,6 +1146,11 @@ async function viewFaq() {
       <div><b>${t(dirty ? 'ad.fq.dirty' : 'ad.fq.clean')}</b><p>${t(dirty ? 'ad.fq.dirtyP' : 'ad.fq.cleanP')}</p></div>
       ${dirty ? `<div class="acts"><button class="b b--or b--s" type="button" id="fq-pub">${icon('globe', { size: 15 })} ${t('ad.fq.publish')}</button><button class="b b--s" type="button" id="fq-undo">${t('ad.fq.discard')}</button></div>` : ''}
     </section>
+    <section class="card fq-test">
+      <div><b>${icon('bot', { size: 16 })} ${t('ad.fq.test.t')}</b><p class="muted">${t('ad.fq.test.x')}</p></div>
+      <input class="in" id="fq-try" type="search" placeholder="${esc(t('ad.fq.test.ph'))}" autocomplete="off" dir="auto">
+      <p class="fq-try-r" id="fq-try-r" aria-live="polite"></p>
+    </section>
     <p class="muted fq-n">${t('ad.fq.count', { n: fmtNum(items.length), l: fmtNum(nLand) })}</p>
     ${
       items.length
@@ -1154,7 +1160,7 @@ async function viewFaq() {
               return `<li class="card fq-row" data-id="${esc(x.id)}">
               <span class="fq-i">${fmtNum(i + 1)}</span>
               <div class="fq-m">
-                <p class="fq-tags"><span class="chip">${esc(t(`faq.cat.${x.cat}`))}</span>${x.landing ? `<span class="chip chip--or">${icon('globe', { size: 12 })} ${t('ad.fq.onLanding')}</span>` : ''}${miss.length ? `<span class="chip chip--off" title="${esc(t('ad.fq.missingT'))}">${t('ad.fq.missing', { l: miss.join(' · ') })}</span>` : ''}</p>
+                <p class="fq-tags"><span class="chip">${esc(t(`faq.cat.${x.cat}`))}</span>${x.landing ? `<span class="chip chip--or">${icon('globe', { size: 12 })} ${t('ad.fq.onLanding')}</span>` : ''}${x.kw ? `<span class="chip" title="${esc(x.kw)}">${icon('bot', { size: 12 })} ${t('ad.fq.kwN', { n: fmtNum(x.kw.split(',').filter((k) => k.trim()).length) })}</span>` : ''}${miss.length ? `<span class="chip chip--off" title="${esc(t('ad.fq.missingT'))}">${t('ad.fq.missing', { l: miss.join(' · ') })}</span>` : ''}</p>
                 <b dir="auto">${esc(FAQ.pickLang(x.q, lang))}</b>
                 <p class="fq-a" dir="auto">${esc(FAQ.pickLang(x.a, lang))}</p>
               </div>
@@ -1172,6 +1178,22 @@ async function viewFaq() {
   );
   $('#fq-add').addEventListener('click', () => faqDrawer());
   $('#fq-pub')?.addEventListener('click', faqPublish);
+  // Test de l'assistant : même calcul que le bouton « Une question ? » des étudiants (brouillon compris)
+  $('#fq-try').addEventListener('input', (e) => {
+    const out = $('#fq-try-r');
+    const q = e.target.value.trim();
+    if (!q) return (out.textContent = '');
+    const found = botMatch(q, [...items, ...botBuiltins()]);
+    const best = found[0];
+    if (!best || best.score < BOT_SURE) {
+      out.className = 'fq-try-r is-none';
+      out.textContent = t('ad.fq.test.none');
+      return;
+    }
+    out.className = 'fq-try-r is-ok';
+    const next = found.slice(1, 3).map((x) => `« ${FAQ.pickLang(x.e.q, lang)} » (${fmtNum(x.score, { maximumFractionDigits: 1 })})`);
+    out.textContent = `${t('ad.fq.test.ok', { q: FAQ.pickLang(best.e.q, lang), s: fmtNum(best.score, { maximumFractionDigits: 1 }) })}${next.length ? ` · ${t('ad.fq.test.near', { list: next.join(', ') })}` : ''}`;
+  });
   $('#fq-undo')?.addEventListener('click', () => {
     if (!confirm(t('ad.fq.discardC'))) return;
     FAQ.discard();
@@ -1205,6 +1227,7 @@ function faqDrawer(item = null) {
         <label class="lbl">${t('ad.fq.cat')}<select class="in" name="cat">${FAQ.CATS.map((c) => `<option value="${c}"${c === it.cat ? ' selected' : ''}>${esc(t(`faq.cat.${c}`))}</option>`).join('')}</select></label>
         <label class="rs-only fq-land"><input type="checkbox" name="landing"${it.landing ? ' checked' : ''}><span>${t('ad.fq.landing')}</span></label>
       </div>
+      <label class="lbl">${icon('bot', { size: 14 })} ${t('ad.fq.kw')}<input class="in" name="kw" value="${esc(it.kw || '')}" maxlength="600" placeholder="${esc(t('ad.fq.kw.ph'))}" dir="auto"><small class="muted fq-kw-h">${t('ad.fq.kw.hint')}</small></label>
       ${FQ_LANGS.map(
         (l) => `<fieldset class="fq-lg" lang="${l.code}"${l.dir ? ` dir="${l.dir}"` : ''}>
           <legend><span class="chip">${l.code.toUpperCase()}</span> ${l.label}${l.req ? ` <small>${t('ad.fq.req')}</small>` : ` <small>${t('ad.fq.opt')}</small>`}</legend>
@@ -1235,6 +1258,7 @@ function faqDrawer(item = null) {
       id: item?.id,
       cat: f.elements.cat.value,
       landing: f.elements.landing.checked,
+      kw: v('kw'),
       q: Object.fromEntries(FQ_LANGS.map((l) => [l.code, v(`q-${l.code}`)])),
       a: Object.fromEntries(FQ_LANGS.map((l) => [l.code, v(`a-${l.code}`)])),
     });

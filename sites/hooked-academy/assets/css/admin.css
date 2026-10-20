@@ -2535,3 +2535,38 @@ details[open] > summary .rs-car {
   background: var(--gold-400) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f0f0d' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E") center / 14px no-repeat;
   box-shadow: none;
 }
+
+/* FAQ : test de l'assistant et mots-clés */
+.fq-test {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.fq-test b {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.fq-test p {
+  margin: 4px 0 0;
+  font-size: 13px;
+}
+.fq-try-r {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+.fq-try-r:empty {
+  display: none;
+}
+.fq-try-r.is-ok {
+  color: #7fd6a2;
+}
+.fq-try-r.is-none {
+  color: #e8956b;
+}
+.fq-kw-h {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.45;
+}

@@ -3,6 +3,11 @@
    Mobile d'abord : barre d'onglets en bas sur téléphone, barre latérale dès 980 px.
    ========================================================================== */
 
+/* --fg-rgb : couleur des voiles et des filets (blanc en sombre, encre en clair, voir « Thème clair » en fin de fichier) */
+:root {
+  --fg-rgb: 255 255 255;
+}
+
 body.ap {
   min-height: 100svh;
   font-size: 15px;
@@ -48,9 +53,9 @@ body.ap {
   font-size: 14px;
   text-decoration: none;
   cursor: pointer;
-  background: rgb(255 255 255 / 0.06);
+  background: rgb(var(--fg-rgb) / 0.06);
   color: var(--mist-100);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.1);
   transition: transform 0.25s var(--courbe), box-shadow 0.25s, background 0.2s;
   white-space: nowrap;
 }
@@ -99,8 +104,8 @@ body.ap {
   padding: 11px 14px;
   border: 0;
   border-radius: 14px;
-  background: rgb(255 255 255 / 0.05);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+  background: rgb(var(--fg-rgb) / 0.05);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.1);
   font-size: 16px;
 }
 .in:focus {
@@ -127,8 +132,8 @@ select.in option {
   position: relative;
   border-radius: 22px;
   padding: 18px;
-  background: linear-gradient(170deg, rgb(255 255 255 / 0.045), rgb(255 255 255 / 0.015));
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.07), 0 24px 50px -36px #000;
+  background: linear-gradient(170deg, rgb(var(--fg-rgb) / 0.045), rgb(var(--fg-rgb) / 0.015));
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.07), 0 24px 50px -36px #000;
 }
 .card h3,
 .card h2 {
@@ -159,7 +164,7 @@ select.in option {
   border-radius: 999px;
   font-size: 12px;
   font-weight: 700;
-  background: rgb(255 255 255 / 0.06);
+  background: rgb(var(--fg-rgb) / 0.06);
 }
 .chip--or {
   background: rgb(201 162 39 / 0.16);
@@ -191,7 +196,7 @@ select.in option {
   background: rgb(7 6 10 / 0.8);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 1px 0 rgb(255 255 255 / 0.06);
+  box-shadow: 0 1px 0 rgb(var(--fg-rgb) / 0.06);
 }
 .top .ha-logo {
   font-size: 13px;
@@ -249,7 +254,7 @@ select.in option {
   background: rgb(20 18 24 / 0.86);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08), 0 20px 50px -20px #000;
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.08), 0 20px 50px -20px #000;
 }
 .tabs a {
   position: relative;
@@ -285,7 +290,7 @@ select.in option {
     flex-direction: column;
     gap: 6px;
     padding: 22px 16px;
-    border-inline-end: 1px solid rgb(255 255 255 / 0.06);
+    border-inline-end: 1px solid rgb(var(--fg-rgb) / 0.06);
     background: rgb(13 12 16 / 0.6);
   }
   .side .ha-logo {
@@ -304,7 +309,7 @@ select.in option {
     transition: background 0.2s, color 0.2s;
   }
   .side a.nv:hover {
-    background: rgb(255 255 255 / 0.04);
+    background: rgb(var(--fg-rgb) / 0.04);
     color: var(--mist-100);
   }
   .side a.nv[aria-current='page'] {
@@ -409,7 +414,7 @@ select.in option {
   fill: none;
 }
 .ring .bg {
-  stroke: rgb(255 255 255 / 0.08);
+  stroke: rgb(var(--fg-rgb) / 0.08);
 }
 .ring .fg {
   stroke: url(#ring-or);
@@ -537,7 +542,7 @@ select.in option {
 .lvl-bar {
   height: 10px;
   border-radius: 10px;
-  background: rgb(255 255 255 / 0.08);
+  background: rgb(var(--fg-rgb) / 0.08);
   overflow: hidden;
 }
 .lvl-bar i {
@@ -677,7 +682,7 @@ select.in option {
   max-width: 34px;
   aspect-ratio: 1;
   border-radius: 10px;
-  background: rgb(255 255 255 / 0.06);
+  background: rgb(var(--fg-rgb) / 0.06);
   display: grid;
   place-items: center;
 }
@@ -703,8 +708,8 @@ select.in option {
   border-radius: 18px;
   text-decoration: none;
   color: inherit;
-  background: rgb(255 255 255 / 0.035);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+  background: rgb(var(--fg-rgb) / 0.035);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.06);
   scroll-snap-align: start;
   display: grid;
   gap: 8px;
@@ -751,8 +756,8 @@ select.in option {
   padding: 14px 8px;
   border-radius: 18px;
   text-align: center;
-  background: rgb(255 255 255 / 0.03);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+  background: rgb(var(--fg-rgb) / 0.03);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.06);
   transition: transform 0.6s var(--courbe);
   transform-style: preserve-3d;
 }
@@ -766,7 +771,7 @@ select.in option {
   display: grid;
   place-items: center;
   color: var(--mist-500);
-  background: rgb(255 255 255 / 0.05);
+  background: rgb(var(--fg-rgb) / 0.05);
 }
 .bdg.is-on .bdg-ic {
   color: var(--ink-950);
@@ -794,7 +799,7 @@ select.in option {
   color: inherit;
   background:
     radial-gradient(80% 120% at 0% 0%, rgb(201 162 39 / 0.18), transparent 60%),
-    linear-gradient(170deg, rgb(255 255 255 / 0.045), rgb(255 255 255 / 0.015));
+    linear-gradient(170deg, rgb(var(--fg-rgb) / 0.045), rgb(var(--fg-rgb) / 0.015));
 }
 .lab-card .lc-m {
   width: 60px;
@@ -812,7 +817,7 @@ select.in option {
 .defi {
   background:
     radial-gradient(90% 120% at 100% 100%, rgb(236 122 69 / 0.18), transparent 60%),
-    linear-gradient(170deg, rgb(255 255 255 / 0.045), rgb(255 255 255 / 0.015));
+    linear-gradient(170deg, rgb(var(--fg-rgb) / 0.045), rgb(var(--fg-rgb) / 0.015));
 }
 .defi p {
   margin: 6px 0 12px;
@@ -866,8 +871,8 @@ select.in option {
   position: relative;
   padding: 20px 16px 26px;
   border-radius: 26px;
-  background: linear-gradient(170deg, color-mix(in srgb, var(--c) 10%, transparent), rgb(255 255 255 / 0.015) 40%);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+  background: linear-gradient(170deg, color-mix(in srgb, var(--c) 10%, transparent), rgb(var(--fg-rgb) / 0.015) 40%);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.06);
 }
 .map-head {
   display: flex;
@@ -914,7 +919,7 @@ select.in option {
 }
 .trail-line path {
   fill: none;
-  stroke: rgb(255 255 255 / 0.1);
+  stroke: rgb(var(--fg-rgb) / 0.1);
   stroke-width: 3;
   stroke-dasharray: 2 10;
   stroke-linecap: round;
@@ -947,7 +952,7 @@ select.in option {
   margin-inline-start: 14%;
 }
 .node:hover {
-  background: rgb(255 255 255 / 0.04);
+  background: rgb(var(--fg-rgb) / 0.04);
   transform: translateX(calc(4px * var(--dir, 1)));
 }
 .node-b {
@@ -1043,7 +1048,7 @@ select.in option {
   border-radius: 20px;
   overflow: hidden;
   background: #000;
-  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.08), 0 30px 80px -40px rgb(201 162 39 / 0.45);
+  box-shadow: 0 0 0 1px rgb(var(--fg-rgb) / 0.08), 0 30px 80px -40px rgb(201 162 39 / 0.45);
 }
 .player iframe,
 .player video {
@@ -1073,7 +1078,7 @@ select.in option {
   overflow-x: auto;
   padding: 4px;
   border-radius: 16px;
-  background: rgb(255 255 255 / 0.04);
+  background: rgb(var(--fg-rgb) / 0.04);
 }
 .ls-tabs button {
   flex: 1;
@@ -1108,8 +1113,8 @@ select.in option {
   padding-block: 16px;
   padding-inline: 58px 16px;
   border-radius: 18px;
-  background: rgb(255 255 255 / 0.035);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+  background: rgb(var(--fg-rgb) / 0.035);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.06);
   font-size: 15.5px;
 }
 .keys li::before {
@@ -1161,7 +1166,7 @@ select.in option {
   -webkit-backface-visibility: hidden;
 }
 .fc-f {
-  background: linear-gradient(160deg, rgb(201 162 39 / 0.18), rgb(255 255 255 / 0.03));
+  background: linear-gradient(160deg, rgb(201 162 39 / 0.18), rgb(var(--fg-rgb) / 0.03));
   box-shadow: inset 0 0 0 1px rgb(201 162 39 / 0.35);
 }
 .fc-f b {
@@ -1174,8 +1179,8 @@ select.in option {
 }
 .fc-b {
   transform: rotateY(180deg);
-  background: rgb(255 255 255 / 0.05);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+  background: rgb(var(--fg-rgb) / 0.05);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.1);
   font-size: 14.5px;
 }
 .quiz {
@@ -1199,8 +1204,8 @@ select.in option {
   padding-inline: 44px 14px;
   border: 0;
   border-radius: 14px;
-  background: rgb(255 255 255 / 0.045);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  background: rgb(var(--fg-rgb) / 0.045);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.08);
   font-size: 14.5px;
   cursor: pointer;
   transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
@@ -1219,7 +1224,7 @@ select.in option {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
-  background: rgb(255 255 255 / 0.08);
+  background: rgb(var(--fg-rgb) / 0.08);
 }
 .qz button:hover:not([disabled]) {
   box-shadow: inset 0 0 0 1px var(--gold-400);
@@ -1281,7 +1286,7 @@ select.in option {
   padding: 14px;
   border-radius: 14px;
   background: #0b0a0e;
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.07);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.07);
   font-family: var(--font-mono);
   font-size: 12.5px;
   line-height: 1.6;
@@ -1309,8 +1314,8 @@ select.in option {
   border-radius: 16px;
   text-decoration: none;
   color: inherit;
-  background: rgb(255 255 255 / 0.035);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+  background: rgb(var(--fg-rgb) / 0.035);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.06);
 }
 .ls-next a:last-child {
   text-align: end;
@@ -1395,7 +1400,7 @@ select.in option {
   color: var(--mist-300);
 }
 .ls-list a:hover {
-  background: rgb(255 255 255 / 0.04);
+  background: rgb(var(--fg-rgb) / 0.04);
 }
 .ls-list a[aria-current='page'] {
   background: rgb(201 162 39 / 0.12);
@@ -1410,7 +1415,7 @@ select.in option {
   place-items: center;
   font-style: normal;
   font-size: 11px;
-  background: rgb(255 255 255 / 0.06);
+  background: rgb(var(--fg-rgb) / 0.06);
 }
 .ls-list a.is-done i {
   background: var(--body);
@@ -1443,8 +1448,8 @@ select.in option {
   padding: 0 14px;
   border: 0;
   border-radius: 999px;
-  background: rgb(255 255 255 / 0.05);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+  background: rgb(var(--fg-rgb) / 0.05);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.1);
   font-weight: 700;
   font-size: 13px;
   cursor: pointer;
@@ -1520,7 +1525,7 @@ select.in option {
 .meter {
   height: 10px;
   border-radius: 10px;
-  background: rgb(255 255 255 / 0.08);
+  background: rgb(var(--fg-rgb) / 0.08);
   overflow: hidden;
 }
 .meter i {
@@ -1556,8 +1561,8 @@ select.in option {
   gap: 10px;
   padding: 12px 12px 12px 14px;
   border-radius: 14px;
-  background: rgb(255 255 255 / 0.05);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+  background: rgb(var(--fg-rgb) / 0.05);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.1);
   font-weight: 650;
   touch-action: none;
   cursor: grab;
@@ -1590,8 +1595,8 @@ select.in option {
 .kpi {
   padding: 14px;
   border-radius: 16px;
-  background: rgb(255 255 255 / 0.04);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.07);
+  background: rgb(var(--fg-rgb) / 0.04);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.07);
   display: grid;
   gap: 4px;
 }
@@ -1638,7 +1643,7 @@ select.in option {
   border-radius: 18px;
   overflow: hidden;
   transition: aspect-ratio 0.5s var(--courbe), background 0.5s;
-  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.1), 0 30px 70px -30px #000;
+  box-shadow: 0 0 0 1px rgb(var(--fg-rgb) / 0.1), 0 30px 70px -30px #000;
 }
 .ipreview .art {
   position: absolute;
@@ -1801,7 +1806,7 @@ html[lang='ar'] .card-k {
 }
 .chip--lock {
   color: var(--mist-300);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.1);
 }
 .dot {
   opacity: 0.5;
@@ -1829,8 +1834,8 @@ html[lang='ar'] .card-k {
   gap: 2px;
   padding: 3px;
   border-radius: 999px;
-  background: rgb(255 255 255 / 0.05);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  background: rgb(var(--fg-rgb) / 0.05);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.08);
 }
 .lang-sw button {
   min-width: 38px;
@@ -1873,8 +1878,8 @@ html[lang='ar'] .card-k {
   padding: 0 10px;
   border: 0;
   border-radius: 12px;
-  background: rgb(255 255 255 / 0.05);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.09);
+  background: rgb(var(--fg-rgb) / 0.05);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.09);
   color: var(--mist-200);
   font-family: var(--font-mono);
   font-size: 12px;
@@ -1895,7 +1900,7 @@ html[lang='ar'] .card-k {
   padding: 6px;
   border-radius: 16px;
   background: rgb(20 18 24 / 0.97);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.09), 0 24px 60px -20px #000;
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.09), 0 24px 60px -20px #000;
 }
 .lm-m button {
   display: flex;
@@ -1912,7 +1917,7 @@ html[lang='ar'] .card-k {
 }
 .lm-m button:hover,
 .lm-m button:focus-visible {
-  background: rgb(255 255 255 / 0.06);
+  background: rgb(var(--fg-rgb) / 0.06);
 }
 .lm-m button[aria-checked='true'] {
   color: var(--gold-300);
@@ -1979,7 +1984,7 @@ html[lang='ar'] .card-k {
 }
 .pw-t:hover {
   color: var(--mist-100);
-  background: rgb(255 255 255 / 0.05);
+  background: rgb(var(--fg-rgb) / 0.05);
 }
 .in--ltr {
   direction: ltr;
@@ -2041,7 +2046,7 @@ html[lang='ar'] .card-k {
   background: rgb(7 6 10 / 0.72);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.1);
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.1em;
@@ -2073,7 +2078,7 @@ html[lang='ar'] .card-k {
   background: linear-gradient(90deg, rgb(201 162 39 / 0.2), rgb(200 182 255 / 0.12)), rgb(10 9 13 / 0.92);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 1px 0 rgb(255 255 255 / 0.06);
+  box-shadow: 0 1px 0 rgb(var(--fg-rgb) / 0.06);
 }
 .demo-bar + .top {
   padding-top: 10px;
@@ -2171,7 +2176,7 @@ html[lang='ar'] .card-k {
     grid-column: 2;
     height: 3px;
     border-radius: 3px;
-    background: rgb(255 255 255 / 0.08);
+    background: rgb(var(--fg-rgb) / 0.08);
     overflow: hidden;
   }
   .nv-bar i {
@@ -2365,8 +2370,8 @@ html[lang='ar'] .card-k {
   gap: 6px;
   padding: 8px 8px 9px;
   border-radius: 12px;
-  background: rgb(255 255 255 / 0.04);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+  background: rgb(var(--fg-rgb) / 0.04);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.06);
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
@@ -2376,7 +2381,7 @@ html[lang='ar'] .card-k {
   display: block;
   height: 4px;
   border-radius: 4px;
-  background: linear-gradient(var(--fill-dir), var(--c) calc(var(--p) * 100%), rgb(255 255 255 / 0.1) 0);
+  background: linear-gradient(var(--fill-dir), var(--c) calc(var(--p) * 100%), rgb(var(--fg-rgb) / 0.1) 0);
 }
 .prod-mods li.is-done {
   color: var(--mist-100);
@@ -2433,8 +2438,8 @@ html[lang='ar'] .card-k {
   border-radius: 18px;
   text-decoration: none;
   color: inherit;
-  background: rgb(255 255 255 / 0.04);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  background: rgb(var(--fg-rgb) / 0.04);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.08);
   transition: box-shadow 0.25s, background 0.25s;
 }
 .prod-next:hover {
@@ -2542,8 +2547,8 @@ html[lang='ar'] .card-k {
   gap: 6px;
   padding: 6px;
   border-radius: 22px;
-  background: rgb(255 255 255 / 0.03);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+  background: rgb(var(--fg-rgb) / 0.03);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.06);
 }
 .trk-sw a {
   display: grid;
@@ -2558,7 +2563,7 @@ html[lang='ar'] .card-k {
 }
 .trk-sw a:hover {
   color: var(--mist-100);
-  background: rgb(255 255 255 / 0.03);
+  background: rgb(var(--fg-rgb) / 0.03);
 }
 .trk-sw a[aria-current='page'] {
   color: var(--mist-100);
@@ -2604,7 +2609,7 @@ html[lang='ar'] .card-k {
   grid-column: 1 / -1;
   height: 3px;
   border-radius: 3px;
-  background: rgb(255 255 255 / 0.07);
+  background: rgb(var(--fg-rgb) / 0.07);
   overflow: hidden;
 }
 .trk-sw-bar i {
@@ -2743,7 +2748,7 @@ html[lang='ar'] .card-k {
   background: rgb(7 6 10 / 0.6);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.08);
 }
 .trk-demo-ic {
   width: 42px;
@@ -2775,7 +2780,7 @@ html[lang='ar'] .card-k {
   gap: 14px;
   background:
     radial-gradient(100% 140% at 0% 0%, rgb(var(--acc-rgb) / 0.2), transparent 60%),
-    linear-gradient(170deg, rgb(255 255 255 / 0.045), rgb(255 255 255 / 0.015));
+    linear-gradient(170deg, rgb(var(--fg-rgb) / 0.045), rgb(var(--fg-rgb) / 0.015));
   box-shadow: inset 0 0 0 1px rgb(var(--acc-rgb) / 0.4);
 }
 .trk-end-ic {
@@ -2806,7 +2811,7 @@ html[lang='ar'] .card-k {
   gap: 4px 12px;
   margin: 10px 4px -10px;
   padding-bottom: 10px;
-  border-bottom: 1px solid rgb(255 255 255 / 0.07);
+  border-bottom: 1px solid rgb(var(--fg-rgb) / 0.07);
 }
 .map-part span {
   font-family: var(--font-mono);
@@ -2844,8 +2849,8 @@ html[lang='ar'] .card-k {
   font-size: 11.5px;
   font-weight: 700;
   color: var(--mist-300);
-  background: rgb(255 255 255 / 0.05);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+  background: rgb(var(--fg-rgb) / 0.05);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.1);
 }
 .done-tag {
   flex: none;
@@ -2859,11 +2864,11 @@ html[lang='ar'] .card-k {
 }
 .map-mod.is-locked {
   padding-block: 16px;
-  background: repeating-linear-gradient(135deg, rgb(255 255 255 / 0.018) 0 10px, transparent 10px 20px);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.05);
+  background: repeating-linear-gradient(135deg, rgb(var(--fg-rgb) / 0.018) 0 10px, transparent 10px 20px);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.05);
 }
 .map-mod.is-locked .map-n {
-  -webkit-text-stroke-color: rgb(255 255 255 / 0.2);
+  -webkit-text-stroke-color: rgb(var(--fg-rgb) / 0.2);
 }
 .map-mod.is-locked h2 {
   color: var(--mist-400);
@@ -2872,7 +2877,7 @@ html[lang='ar'] .card-k {
   height: 3px;
   margin-top: 14px;
   border-radius: 3px;
-  background: rgb(255 255 255 / 0.07);
+  background: rgb(var(--fg-rgb) / 0.07);
   overflow: hidden;
 }
 .map-bar i {
@@ -2917,7 +2922,7 @@ html[lang='ar'] .card-k {
   max-width: 50vw;
   height: 7px;
   border-radius: 5px;
-  background: rgb(255 255 255 / 0.07);
+  background: rgb(var(--fg-rgb) / 0.07);
 }
 .node-sk i + i {
   width: 90px;
@@ -2955,7 +2960,7 @@ html[lang='ar'] .card-k {
   opacity: 0.45;
 }
 .player {
-  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.08), 0 30px 80px -40px rgb(var(--acc-rgb) / 0.45);
+  box-shadow: 0 0 0 1px rgb(var(--fg-rgb) / 0.08), 0 30px 80px -40px rgb(var(--acc-rgb) / 0.45);
 }
 .tg {
   display: flex;
@@ -2969,7 +2974,7 @@ html[lang='ar'] .card-k {
   font-size: 10.5px;
   font-style: normal;
   text-align: center;
-  background: rgb(255 255 255 / 0.08);
+  background: rgb(var(--fg-rgb) / 0.08);
   color: var(--mist-300);
 }
 .tg button[aria-selected='true'] em {
@@ -3008,8 +3013,8 @@ html[lang='ar'] .card-k {
   border: 0;
   border-radius: 18px;
   text-align: start;
-  background: rgb(255 255 255 / 0.035);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  background: rgb(var(--fg-rgb) / 0.035);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.08);
   color: var(--mist-300);
   font-weight: 750;
   font-size: 14px;
@@ -3183,8 +3188,8 @@ html[lang='ar'] .card-k {
   gap: 10px 12px;
   padding: 12px;
   border-radius: 16px;
-  background: rgb(255 255 255 / 0.035);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.07);
+  background: rgb(var(--fg-rgb) / 0.035);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.07);
 }
 .file-ic {
   width: 46px;
@@ -3263,8 +3268,8 @@ html[lang='ar'] .card-k {
 .ls-panel .res-i {
   padding: 14px;
   border-radius: 16px;
-  background: rgb(255 255 255 / 0.03);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.07);
+  background: rgb(var(--fg-rgb) / 0.03);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.07);
 }
 .res-i .card-k {
   margin-bottom: 4px;
@@ -3333,7 +3338,7 @@ html[lang='ar'] .card-k {
   display: block;
   height: 66px;
   border-radius: 16px;
-  background: linear-gradient(90deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.02));
+  background: linear-gradient(90deg, rgb(var(--fg-rgb) / 0.06), rgb(var(--fg-rgb) / 0.02));
 }
 .locked-p .empty {
   position: relative;
@@ -3345,7 +3350,7 @@ html[lang='ar'] .card-k {
   background: rgb(13 12 16 / 0.85);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.08);
 }
 
 /* Quiz */
@@ -3404,7 +3409,7 @@ html[lang='ar'] .card-k {
   width: 22px;
   height: 5px;
   border-radius: 5px;
-  background: rgb(255 255 255 / 0.1);
+  background: rgb(var(--fg-rgb) / 0.1);
 }
 .qz-prog i.ok {
   background: var(--body);
@@ -3514,7 +3519,7 @@ html[lang='ar'] .card-k {
   display: block;
   height: 12px;
   border-radius: 6px;
-  background: rgb(255 255 255 / 0.08);
+  background: rgb(var(--fg-rgb) / 0.08);
 }
 .lib-sk i:first-child {
   width: 40%;
@@ -3583,7 +3588,7 @@ html[lang='ar'] .card-k {
   inset-inline-start: 8%;
   height: 10px;
   border-radius: 6px;
-  background: rgb(255 255 255 / 0.06);
+  background: rgb(var(--fg-rgb) / 0.06);
 }
 .lk-art i:nth-of-type(1) {
   top: 14%;
@@ -3771,7 +3776,7 @@ html[lang='ar'] .card-k {
   width: 100%;
   height: 6px;
   border-radius: 6px;
-  background: rgb(255 255 255 / 0.08);
+  background: rgb(var(--fg-rgb) / 0.08);
 }
 .lvl-steps li.is-past i {
   background: var(--gold-600);
@@ -3804,7 +3809,7 @@ html[lang='ar'] .card-k {
 .cert {
   background:
     radial-gradient(100% 120% at 100% 0%, rgb(var(--acc-rgb) / 0.14), transparent 60%),
-    linear-gradient(170deg, rgb(255 255 255 / 0.045), rgb(255 255 255 / 0.015));
+    linear-gradient(170deg, rgb(var(--fg-rgb) / 0.045), rgb(var(--fg-rgb) / 0.015));
   box-shadow: inset 0 0 0 1px rgb(var(--acc-rgb) / 0.25), 0 24px 50px -36px #000;
 }
 .cert .card-k {
@@ -3857,7 +3862,7 @@ html[lang='ar'] .card-k {
   height: 1px;
   margin: 8px 0;
   border: 0;
-  background: rgb(255 255 255 / 0.08);
+  background: rgb(var(--fg-rgb) / 0.08);
 }
 @media (min-width: 980px) {
   .prof {
@@ -3911,7 +3916,7 @@ main[data-track] .lab-card .card-k {
   background: var(--acc-grad);
 }
 .fc-f {
-  background: linear-gradient(160deg, rgb(var(--acc-rgb) / 0.18), rgb(255 255 255 / 0.03));
+  background: linear-gradient(160deg, rgb(var(--acc-rgb) / 0.18), rgb(var(--fg-rgb) / 0.03));
   box-shadow: inset 0 0 0 1px rgb(var(--acc-rgb) / 0.35);
 }
 .qz-why {
@@ -4110,7 +4115,7 @@ html[lang='ar'] .la-sub {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.14);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.14);
 }
 .faq-pm::before,
 .faq-pm::after {
@@ -4245,7 +4250,7 @@ html[lang='ar'] .la-sub {
   height: 6px;
   border-radius: 999px;
   overflow: hidden;
-  background: rgb(255 255 255 / 0.08);
+  background: rgb(var(--fg-rgb) / 0.08);
 }
 .cmod-bar {
   max-width: 420px;
@@ -4273,8 +4278,8 @@ html[lang='ar'] .la-sub {
   border-radius: 18px;
   color: inherit;
   text-decoration: none;
-  background: linear-gradient(170deg, rgb(255 255 255 / 0.05), rgb(255 255 255 / 0.015));
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08), 0 24px 50px -36px #000;
+  background: linear-gradient(170deg, rgb(var(--fg-rgb) / 0.05), rgb(var(--fg-rgb) / 0.015));
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.08), 0 24px 50px -36px #000;
   transition: transform 0.25s var(--courbe), box-shadow 0.25s;
 }
 a.lc:hover {
@@ -4286,7 +4291,7 @@ a.lc:focus-visible {
   outline-offset: 3px;
 }
 .lc.is-cur {
-  box-shadow: inset 0 0 0 1.5px var(--c), 0 0 0 4px rgb(255 255 255 / 0.03), 0 30px 60px -36px #000;
+  box-shadow: inset 0 0 0 1.5px var(--c), 0 0 0 4px rgb(var(--fg-rgb) / 0.03), 0 30px 60px -36px #000;
 }
 .lc-img {
   position: relative;
@@ -4559,7 +4564,7 @@ a.lc:focus-visible .lc-go,
   font-size: 13px;
   font-weight: 700;
   color: var(--mist-400);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.12);
 }
 .pk-chip.is-on {
   color: var(--acc);
@@ -4572,6 +4577,124 @@ a.lc:focus-visible .lc-go,
 }
 .pk-card .b {
   justify-self: start;
+}
+
+/* ==========================================================================
+   Partie pratique : la to-do de la leçon (onglet Exercice)
+   ========================================================================== */
+.todo {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 22px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgb(var(--fg-rgb) / 0.08);
+}
+.todo-hd {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+.todo-hd .card-k {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 4px;
+}
+.todo-hd h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 19px;
+}
+.todo-n {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--acc);
+}
+.todo-bar {
+  position: relative;
+  height: 6px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgb(var(--fg-rgb) / 0.08);
+}
+.todo-bar i {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  border-radius: inherit;
+  background: var(--acc-grad, var(--acc));
+  transition: width 0.4s var(--courbe);
+}
+.todo-l {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.todo-i {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  background: rgb(var(--fg-rgb) / 0.03);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.07);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.todo-i:hover {
+  box-shadow: inset 0 0 0 1px rgb(var(--acc-rgb) / 0.35);
+}
+.todo-i input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.todo-b {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: 7px;
+  color: transparent;
+  box-shadow: inset 0 0 0 1.5px rgb(var(--fg-rgb) / 0.28);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.todo-t {
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+.todo-i input:checked ~ .todo-b {
+  color: var(--ink-950);
+  background: var(--acc);
+  box-shadow: none;
+}
+.todo-i input:checked ~ .todo-t {
+  color: var(--mist-400);
+  text-decoration: line-through;
+  text-decoration-color: rgb(var(--acc-rgb) / 0.6);
+}
+.todo-i input:focus-visible ~ .todo-b {
+  outline: 2px solid var(--acc);
+  outline-offset: 2px;
+}
+.todo-x {
+  margin: 0;
+  font-size: 12.5px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .todo-bar i,
+  .todo-i,
+  .todo-b {
+    transition: none;
+  }
 }
 
 /* ==========================================================================
@@ -4811,4 +4934,147 @@ a.lc:focus-visible .lc-go,
   .tl-gen-g {
     grid-template-columns: 1fr;
   }
+}
+
+/* ==========================================================================
+   Thème clair (choix de l'étudiant : <html data-theme="light">, gardé dans ce navigateur)
+   Le thème sombre reste la référence : ici, seulement des surcharges. Papier chaud, encre,
+   accents assombris pour rester lisibles ; vidéos, miniatures et illustrations restent sombres.
+   ========================================================================== */
+:root[data-theme='light'] {
+  color-scheme: light;
+  --fg-rgb: 38 30 14;
+  --paper: #f7f3ea;
+  --paper-2: #fffdf8;
+  --mist-100: #1f1b14;
+  --mist-200: #2f2a21;
+  --mist-300: #4a4437;
+  --mist-400: #686153;
+  --mist-500: #857d6d;
+  --gold-300: #85620d;
+  --gold-400: #9a7311;
+  --hook: #9a7311;
+  --body: #2a8462;
+  --cta: #c0521a;
+  --ia: #6045c9;
+  --ok: #2a8462;
+  --danger: #c23b26;
+  --acc: #946f10;
+  --acc-2: #7a5b0b;
+  --acc-rgb: 148 111 16;
+  --ombre-pose: 0 1px 2px rgb(60 45 10 / 0.06), 0 12px 30px -18px rgb(60 45 10 / 0.25);
+  --ombre-levee: 0 2px 4px rgb(60 45 10 / 0.06), 0 24px 50px -24px rgb(60 45 10 / 0.3);
+}
+:root[data-theme='light'] [data-track='creative'] {
+  --acc: #946f10;
+  --acc-2: #7a5b0b;
+  --acc-rgb: 148 111 16;
+}
+:root[data-theme='light'] [data-track='ia'] {
+  --acc: #5a40c2;
+  --acc-2: #47319f;
+  --acc-rgb: 90 64 194;
+}
+/* Îlots qui restent sombres : on y remet les voiles blancs et les gris clairs */
+:root[data-theme='light'] :is(.lc-img, .cc-img, .player, .login-art, .mini-ph, .cam3d, .ipreview, .cont-stage, .la-screen, .lab-card .lc-m, .hello-deco) {
+  --fg-rgb: 255 255 255;
+  --mist-100: #f6f2ea;
+  --mist-200: #ddd7dd;
+  --mist-300: #b6afbd;
+  --mist-400: #8b8494;
+}
+:root[data-theme='light'] body {
+  color: var(--mist-100);
+}
+:root[data-theme='light'] body.ap {
+  background:
+    radial-gradient(70vmax 50vmax at 100% -10%, rgb(201 162 39 / 0.14), transparent 60%),
+    radial-gradient(60vmax 40vmax at -10% 110%, rgb(236 122 69 / 0.07), transparent 60%),
+    var(--paper);
+}
+:root[data-theme='light'] .top {
+  background: rgb(247 243 234 / 0.86);
+}
+:root[data-theme='light'] .side {
+  background: rgb(255 253 248 / 0.75);
+}
+:root[data-theme='light'] .tabs {
+  background: rgb(255 253 248 / 0.92);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.1), 0 18px 40px -18px rgb(60 45 10 / 0.35);
+}
+:root[data-theme='light'] .tabs a[aria-current='page'] {
+  background: rgb(201 162 39 / 0.16);
+}
+:root[data-theme='light'] :is(.card, .lc, .tl, .tl-bud, .todo-i, .faq-i) {
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.1), 0 16px 34px -26px rgb(60 45 10 / 0.35);
+}
+:root[data-theme='light'] a.lc:hover {
+  box-shadow: inset 0 0 0 1px var(--c), 0 22px 40px -26px rgb(60 45 10 / 0.4);
+}
+:root[data-theme='light'] .lc.is-cur {
+  box-shadow: inset 0 0 0 1.5px var(--c), 0 22px 40px -26px rgb(60 45 10 / 0.4);
+}
+:root[data-theme='light'] :is(.in, select.in option) {
+  background: #fff;
+}
+:root[data-theme='light'] :is(.toast, .lm-m) {
+  background: rgb(255 253 248 / 0.97);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.12), 0 20px 50px -20px rgb(60 45 10 / 0.35);
+}
+:root[data-theme='light'] :is(.out, .res-i pre) {
+  background: #fbf7ee;
+  box-shadow: inset 0 0 0 1px rgb(154 115 17 / 0.3);
+}
+:root[data-theme='light'] :is(.trk-demo, .atl-panel, .locked-p .empty, .lib-lock-c) {
+  background: rgb(255 253 248 / 0.92);
+}
+:root[data-theme='light'] .cmod-n {
+  -webkit-text-stroke-color: color-mix(in srgb, var(--c) 70%, #000);
+}
+:root[data-theme='light'] .cmod-lv {
+  color: #fff;
+  background: color-mix(in srgb, var(--c) 72%, #000);
+}
+:root[data-theme='light'] .lc-k {
+  color: color-mix(in srgb, var(--c) 62%, #000);
+}
+:root[data-theme='light'] :is(.lc-bar i, .cmod-bar i) {
+  background: color-mix(in srgb, var(--c) 80%, #000);
+}
+
+:root[data-theme='light'] :is(.prod, .trk-h, .atl) {
+  background: radial-gradient(120% 90% at 100% 0%, rgb(var(--acc-rgb) / 0.13), transparent 55%), var(--paper-2);
+  box-shadow: inset 0 0 0 1px rgb(var(--acc-rgb) / 0.28), 0 24px 50px -32px rgb(60 45 10 / 0.35);
+}
+:root[data-theme='light'] :is(.prod[data-track='ia'], [data-track='ia'] .trk-h, .atl) {
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgb(90 64 194 / 0.1), transparent 55%),
+    radial-gradient(rgb(90 64 194 / 0.08) 1px, transparent 1.5px) 0 0 / 18px 18px,
+    var(--paper-2);
+}
+
+/* Choix du thème (barre du haut et profil) */
+.th-btn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  color: var(--mist-300);
+  background: rgb(var(--fg-rgb) / 0.06);
+  box-shadow: inset 0 0 0 1px rgb(var(--fg-rgb) / 0.1);
+}
+.th-btn:hover {
+  color: var(--mist-100);
+}
+.th-btn .i-moon,
+:root[data-theme='light'] .th-btn .i-sun {
+  display: none;
+}
+:root[data-theme='light'] .th-btn .i-moon {
+  display: block;
 }

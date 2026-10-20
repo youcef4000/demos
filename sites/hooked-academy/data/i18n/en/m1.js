@@ -156,6 +156,14 @@ export default {
           ],
           "why": "An image is read in one second: one product, one message, one action."
         }
+      ],
+      "todo": [
+        "Find 3 ads in your feed: one video, one image and one carousel",
+        "Screenshot each one and note the product being sold",
+        "For the image, note its single message and its action button",
+        "For the video, note its length and how it shows the product",
+        "For the carousel, note what each slide adds, right up to the last one",
+        "Choose the format that best suits your product, and write one sentence on why"
       ]
     },
     "m1-l2": {
@@ -320,6 +328,13 @@ export default {
           "title": "Starter prompt — hooks",
           "text": "You are a social media ad creator in Algeria. Write 10 hooks (opening lines under 8 words) for a video that presents [product] to [target audience]. Mix questions, numbers, and contrasts. Direct tone, in Darija written in Latin letters."
         }
+      ],
+      "todo": [
+        "In CapCut, create a project and import 3 photos or videos of your product",
+        "Cut a shot, reorder the shots and add music to get the hang of it",
+        "Film yourself talking about your product, then add auto captions",
+        "In Canva, open an ad template and put your product photo in it",
+        "Change the template’s headline and button, then download the image"
       ]
     },
     "m1-l3": {
@@ -372,6 +387,13 @@ export default {
           ],
           "why": "The top and bottom are covered by the platform’s buttons, caption, and CTA."
         }
+      ],
+      "todo": [
+        "Write down the 4 formats and what each is for: 9:16, 4:5, 1:1 and 16:9",
+        "Film a short shot of your product vertically, in 9:16",
+        "In CapCut, add text in the center, away from the hidden zones at the top and bottom",
+        "Duplicate the project and switch it to 4:5, keeping the product in frame",
+        "Watch both versions on your phone and note what gets cut off or hidden"
       ]
     },
     "m1-l4": {
@@ -447,6 +469,13 @@ export default {
           ],
           "why": "A clear goal gives a clear message."
         }
+      ],
+      "todo": [
+        "Write down the customer’s 4 stages: awareness, consideration, conversion, loyalty",
+        "Watch 3 ads in your feed and note the stage each one targets",
+        "Spot the one that tries to do everything at once, and note what makes it unclear",
+        "For your product, write one creative idea per stage, in one sentence",
+        "Pick a single goal for your next creative and note what it needs to include"
       ]
     }
   }

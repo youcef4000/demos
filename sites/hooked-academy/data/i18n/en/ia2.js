@@ -63,6 +63,13 @@ export default {
           ],
           "why": "Customers must receive what they saw in the ad."
         }
+      ],
+      "todo": [
+        "For each of the 4 uses, note a tool you can try for free",
+        "Open a tool’s terms and check whether it allows commercial use",
+        "Check whether it offers 4:5 and 9:16, and accepts your own photo",
+        "Take a photo of your real product: it’s your starting point for this module",
+        "Note in your toolbox the image tool you’re keeping, and why"
       ]
     },
     "ia2-l2": {
@@ -129,6 +136,14 @@ export default {
           ],
           "why": "An altered product misleads the customer."
         }
+      ],
+      "todo": [
+        "Photograph your product in daylight: sharp, with no reflections",
+        "Remove the background, for example with Nano Banana in Gemini",
+        "Generate a new setting with a prompt: material, studio light, soft shadow",
+        "Put the result next to the real photo: same label, shape and color?",
+        "Try 3 settings and keep the best packshot in your portfolio",
+        "Save your setting prompt in your library, under Packshots"
       ]
     },
     "ia2-l3": {
@@ -197,6 +212,13 @@ export default {
           ],
           "why": "Each setting is a creative angle to test."
         }
+      ],
+      "todo": [
+        "Pick 3 moments in your audience’s life: morning routine, Eid gift, evening out…",
+        "Generate one lifestyle shot per moment, starting from your product photo",
+        "Check each image: product size, hands, fingers, reflections",
+        "Regenerate the ones that fail the check",
+        "Keep the most believable one in your portfolio, with the moment it targets"
       ]
     },
     "ia2-l4": {
@@ -256,6 +278,13 @@ export default {
           ],
           "why": "The reference locks in the face."
         }
+      ],
+      "todo": [
+        "Write your character’s fixed description: age, face, hairstyle, outfit",
+        "Generate the character sheet: front, profile, medium shot, same light",
+        "Using that sheet as a reference, create 3 images of the character with your product",
+        "Compare the face from one image to the next and note what changed",
+        "Save the description and the sheet in your library to reuse them"
       ]
     },
     "ia2-l5": {
@@ -311,6 +340,13 @@ export default {
           ],
           "why": "AI makes up the missing setting around it."
         }
+      ],
+      "todo": [
+        "Pick an almost-perfect image and spot the area to fix",
+        "Fix it with a local edit, without regenerating the whole image",
+        "Expand the frame from square to 4:5, then 9:16, without cutting the product",
+        "Upscale the final version for sharpness before you export",
+        "Save the 1:1, 4:5 and 9:16 versions in your portfolio, named by format"
       ]
     },
     "ia2-l6": {
@@ -361,6 +397,13 @@ export default {
           ],
           "why": "Without a message or a call to action, it’s just an image."
         }
+      ],
+      "todo": [
+        "In Canva, create a 4:5 design (1080 × 1350) for the feed",
+        "Place your best AI visual in the background, then your real product photo",
+        "Add your hook at the top, big and easy to read",
+        "Add a true proof point about your product, then a clear CTA",
+        "Export it and look at it on your phone: can you read it at a glance?"
       ]
     },
     "ia2-l7": {
@@ -471,6 +514,14 @@ export default {
           "title": "Nano Banana prompts (editing)",
           "text": "SETTING EDIT\n[Attach your photo] Keep the product exactly the same: shape, color, label, text. Replace the background with [setting], lighting [direction, softness], shadow [light / crisp]. Format [4:5 / 9:16].\n\nFIX A TEXT\nIn this image, replace the text “[old text]” with “[new text]”, same font, same color, same position. Don’t change anything else.\n\nCHANGE THE ANGLE\nShow exactly the same scene, with the same product, seen [from above / from the front / from a slightly high angle]. Same light, same setting.\n\nCHANGE NICHE\nKeep the product exactly the same. Place it in [new setting: gym, kitchen, party table…], for [new audience]. Lighting [  ], format [  ].\n\nCHECK: next to the real photo → label, shape, color, every letter of the text."
         }
+      ],
+      "todo": [
+        "Attach your real photo in Gemini and paste “Setting edit” (Prompts tab)",
+        "Almost right? Keep the chat going: “keep everything, but more light”",
+        "Try “Change the angle”: the same scene, seen from above",
+        "Try “Change niche”: your product in another setting, for another audience",
+        "Compare each image with the real photo: label, shape, color, every letter",
+        "Save the prompts that worked in your library, with the lock first"
       ]
     }
   }
