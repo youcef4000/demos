@@ -362,6 +362,116 @@ export default {
           "why": "Without a message or a call to action, it’s just an image."
         }
       ]
+    },
+    "ia2-l7": {
+      "title": "Workshop: Nano Banana step by step",
+      "scenes": [
+        {
+          "sub": "Edit your real photo with one sentence"
+        },
+        {
+          "title": "Two *versions*",
+          "items": [
+            {
+              "label": "Nano Banana",
+              "sub": "In the Gemini app · quick for edits"
+            },
+            {
+              "label": "Nano Banana Pro",
+              "sub": "More advanced: text, details · depending on your plan"
+            }
+          ]
+        },
+        {
+          "title": "Edit *your* photo",
+          "segments": [
+            {
+              "text": "[Your bottle photo attached]",
+              "tag": "Your photo"
+            },
+            {
+              "text": "Keep the bottle exactly the same: shape, color, label.",
+              "tag": "Lock"
+            },
+            {
+              "text": "Replace the background with beige marble, soft light coming from the left.",
+              "tag": "Change"
+            },
+            {
+              "text": "4:5 format.",
+              "tag": "Format"
+            }
+          ],
+          "result": {
+            "lines": [
+              "The same bottle, sitting on beige marble",
+              "Soft light from the left, a light shadow",
+              "To check: label, cap, color"
+            ]
+          }
+        },
+        {
+          "title": "Three more *edits*",
+          "items": [
+            {
+              "label": "Fix a text",
+              "sub": "“Replace this word, same font, same color”"
+            },
+            {
+              "label": "Change the angle",
+              "sub": "“The same scene, seen from above”"
+            },
+            {
+              "label": "Change niche",
+              "sub": "“The same product, in a gym”"
+            }
+          ]
+        },
+        {
+          "title": "Before you keep it, *compare*",
+          "items": [
+            "The *label*: same words, same logo",
+            "The *shape* and proportions",
+            "The exact *color*",
+            "Every *letter* of the added text",
+            {
+              "t": "Posting without comparing to the real photo"
+            }
+          ]
+        },
+        {}
+      ],
+      "key": [
+        "Nano Banana, in Gemini, edits your real photo with one sentence; the Pro version goes further on text and details, depending on your plan.",
+        "An edit prompt = your photo + a lock (“keep the product exactly the same”) + a single change + the format.",
+        "Fix a text, change the angle, change niche: always with the lock, and always compared to the real photo (label, shape, color, text)."
+      ],
+      "quiz": [
+        {
+          "q": "What does an edit prompt for your product photo start with?",
+          "a": [
+            "The dream setting",
+            "The lock: keep the product exactly the same",
+            "The product’s price"
+          ],
+          "why": "You protect the product before changing anything around it."
+        },
+        {
+          "q": "The result is almost right, except for the light. You…",
+          "a": [
+            "Start over with a brand-new prompt",
+            "Continue the chat: “keep everything, but more light”",
+            "Post it anyway"
+          ],
+          "why": "A single fix, in the same chat, keeps everything that already works."
+        }
+      ],
+      "res": [
+        {
+          "title": "Nano Banana prompts (editing)",
+          "text": "SETTING EDIT\n[Attach your photo] Keep the product exactly the same: shape, color, label, text. Replace the background with [setting], lighting [direction, softness], shadow [light / crisp]. Format [4:5 / 9:16].\n\nFIX A TEXT\nIn this image, replace the text “[old text]” with “[new text]”, same font, same color, same position. Don’t change anything else.\n\nCHANGE THE ANGLE\nShow exactly the same scene, with the same product, seen [from above / from the front / from a slightly high angle]. Same light, same setting.\n\nCHANGE NICHE\nKeep the product exactly the same. Place it in [new setting: gym, kitchen, party table…], for [new audience]. Lighting [  ], format [  ].\n\nCHECK: next to the real photo → label, shape, color, every letter of the text."
+        }
+      ]
     }
   }
 };

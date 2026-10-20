@@ -187,6 +187,127 @@ export default {
           "why": "They have to be read at a glance."
         }
       ]
+    },
+    "ia4-l4": {
+      "title": "Workshop: ElevenLabs — voice, dubbing and effects",
+      "scenes": [
+        {
+          "sub": "Text, voice and sound effects"
+        },
+        {
+          "title": "Text → voice, *step by step*",
+          "items": [
+            {
+              "label": "Paste your script",
+              "sub": "Punctuated the way you’d say it"
+            },
+            {
+              "label": "Pick a voice",
+              "sub": "Your audience’s language and tone"
+            },
+            {
+              "label": "Tune it",
+              "sub": "Stability · similarity · style"
+            },
+            {
+              "label": "Listen to all of it",
+              "sub": "Brand names, prices, numbers"
+            }
+          ]
+        },
+        {
+          "title": "The *settings*, in plain words",
+          "items": [
+            {
+              "label": "Stability",
+              "sub": "High: steady · low: more expressive"
+            },
+            {
+              "label": "Similarity",
+              "sub": "How closely it sticks to the original voice"
+            },
+            {
+              "label": "Style",
+              "sub": "Boosts the acting · go easy"
+            }
+          ]
+        },
+        {
+          "title": "Voice → voice: *your pacing*, another voice",
+          "nodes": [
+            {
+              "label": "Your take",
+              "sub": "Your pacing, your pauses"
+            },
+            {
+              "label": "Another voice",
+              "sub": "Picked from the library"
+            },
+            {
+              "label": "Or dubbing",
+              "sub": "Your video in another language"
+            }
+          ]
+        },
+        {
+          "title": "A sound effect *in one sentence*",
+          "segments": [
+            {
+              "text": "Glass perfume cap opening: a small crisp pop, then a soft hiss. Very short, no echo."
+            }
+          ],
+          "result": {
+            "lines": [
+              "Several versions offered",
+              "You keep the cleanest one",
+              "Placed on the cut, under the voice"
+            ]
+          }
+        },
+        {
+          "title": "Cloning and licensing: *the rules*",
+          "items": [
+            "Clone *your own* voice",
+            "Someone else’s voice: their *written consent*",
+            "Cloning and commercial use: *check your plan*",
+            {
+              "t": "Cloning a celebrity or an influencer"
+            }
+          ]
+        },
+        {}
+      ],
+      "key": [
+        "Text → voice: punctuated script, a voice chosen for the audience, settings (stability, similarity, style) one at a time, then a full listen.",
+        "Voice → voice to keep your pacing with another voice; dubbing to translate a video; sound effects described in one sentence. Always checked by ear.",
+        "Cloning: your own voice, or written consent. Cloning and commercial use usually require a paid plan: check your plan."
+      ],
+      "quiz": [
+        {
+          "q": "You lower a voice’s stability. The result?",
+          "a": [
+            "A more expressive but less predictable voice",
+            "A more robotic voice",
+            "A louder voice"
+          ],
+          "why": "Less stability allows more variation in intonation: adjust it in small steps."
+        },
+        {
+          "q": "A client wants an ad with the cloned voice of a famous singer. You…",
+          "a": [
+            "Clone the voice, it’s just an ad",
+            "Refuse: no cloning without the person’s written consent",
+            "Clone the voice and slightly change the name"
+          ],
+          "why": "Imitating someone’s voice without their consent deceives them and the public, and makes you liable."
+        }
+      ],
+      "res": [
+        {
+          "title": "ElevenLabs sheet",
+          "text": "TEXT → VOICE\nScript: [your script, punctuated to mark the pauses]\nVoice: [voice name] · language [  ] · tone [warm / energetic / calm]\nSettings: stability [  ] · similarity [  ] · style [  ] → only one change between two tries\nTo check: brand names, prices, numbers, Darija words\n\nSOUND EFFECTS (prompts)\n• Glass perfume cap opening, small crisp pop, very short, no echo\n• Quick whoosh for a transition, no echo\n• Small, clear, soft ding for a CTA\n\nCLONING AND LICENSING\nCloned voice: my own / written consent from [name], dated and signed\nCommercial use: plan checked on [date] on the pricing page"
+        }
+      ]
     }
   }
 };

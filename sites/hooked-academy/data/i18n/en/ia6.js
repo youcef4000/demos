@@ -311,6 +311,112 @@ export default {
           "why": "About 3 seconds per shot."
         }
       ]
+    },
+    "ia6-l6": {
+      "title": "Workshop: Higgsfield — Cinema Studio and Marketing Studio",
+      "scenes": [
+        {
+          "sub": "Cinematic shots and product ads"
+        },
+        {
+          "title": "Three *areas*",
+          "items": [
+            {
+              "label": "Cinema Studio",
+              "sub": "Camera, lens, movement"
+            },
+            {
+              "label": "The apps",
+              "sub": "Ready-to-use effects"
+            },
+            {
+              "label": "Marketing Studio",
+              "sub": "Product ads, UGC style"
+            }
+          ]
+        },
+        {
+          "title": "A *cinematic* shot, step by step",
+          "items": [
+            {
+              "label": "Start from your storyboard",
+              "sub": "One shot, one intention"
+            },
+            {
+              "label": "Pick a preset",
+              "sub": "Push-in, orbit, tracking…"
+            },
+            {
+              "label": "Add your approved image",
+              "sub": "Made from your real photo"
+            },
+            {
+              "label": "Generate and compare",
+              "sub": "One variable at a time"
+            }
+          ]
+        },
+        {
+          "title": "Marketing Studio: a *time-saver*, not autopilot",
+          "left": {
+            "title": "The trap",
+            "items": [
+              "Posting the video as is",
+              "An avatar passed off as a real customer"
+            ]
+          },
+          "right": {
+            "title": "The pro habit",
+            "items": [
+              "Check the product shot by shot",
+              "AI disclosure, no fake reviews"
+            ]
+          }
+        },
+        {
+          "title": "*Credits*",
+          "items": [
+            "Every generation *uses up credits*",
+            "Test with a *cheaper* model",
+            "Premium for the *final version*",
+            {
+              "t": "Running a premium model for a simple test"
+            }
+          ]
+        },
+        {}
+      ],
+      "key": [
+        "Higgsfield brings several models together: Cinema Studio for cinematic shots (camera, lens, movement), ready-to-use apps, Marketing Studio for product ads and UGC — depending on your plan.",
+        "Always start from your approved image and check the product shot by shot; an avatar is never presented as a real customer.",
+        "Credit system: test with a cheaper model, keep premium for the final version, check the pricing page."
+      ],
+      "quiz": [
+        {
+          "q": "Marketing Studio generates a UGC-style video for you. Before delivering it, you…",
+          "a": [
+            "Post it straight away",
+            "Check the product shot by shot and what’s being said",
+            "Add a made-up customer review"
+          ],
+          "why": "The tool saves you time, but you’re the one who guarantees an accurate product and an honest message."
+        },
+        {
+          "q": "To test a shot idea, you use…",
+          "a": [
+            "The most expensive model",
+            "A cheaper model, then premium for the final version",
+            "Every model at once"
+          ],
+          "why": "Your credits go first to validating the idea, then to polishing the look."
+        }
+      ],
+      "res": [
+        {
+          "title": "Higgsfield shot sheet",
+          "text": "Storyboard shot #[  ] · intention: [desire / luxury / discovery…]\nStarting image: [your approved image, made from your real photo]\nCamera preset: [push-in / orbit / tracking…]\nPrompt: [subject] [one simple action], [lighting], [mood]. The product and its label stay exactly the same.\nModel: [test model] → [final model] · planned credits: [  ]\n\nCheck before delivery:\n• Product shape, label and color identical to the real photo\n• Hands, faces, on-screen text\n• No avatar presented as a real customer · AI disclosure if the platform requires it"
+        }
+      ]
     }
   }
 };

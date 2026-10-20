@@ -347,6 +347,121 @@ export default {
           "why": "Clients refer you when they see results."
         }
       ]
+    },
+    "ia8-l7": {
+      "title": "Closing: turning the call into a client",
+      "scenes": [
+        {
+          "sub": "After the call, it all happens in writing"
+        },
+        {
+          "title": "The *message* after the call",
+          "items": [
+            {
+              "label": "The recap",
+              "sub": "Their problem, in their words"
+            },
+            {
+              "label": "The offer",
+              "sub": "2 or 3 packages, clear prices and timelines"
+            },
+            {
+              "label": "Your recommendation",
+              "sub": "The package you recommend, and why"
+            },
+            {
+              "label": "The next step",
+              "sub": "A date, a deposit"
+            }
+          ]
+        },
+        {
+          "title": "*Objections*, without getting defensive",
+          "items": [
+            {
+              "label": "“It’s expensive”",
+              "sub": "The target result, or the Test Pack"
+            },
+            {
+              "label": "“It takes too long”",
+              "sub": "The steps, and what comes first"
+            },
+            {
+              "label": "“I’ll think about it”",
+              "sub": "What’s making you hesitate?"
+            }
+          ]
+        },
+        {
+          "title": "An *honest* deadline",
+          "left": {
+            "title": "Fake urgency",
+            "items": [
+              "“Only 2 spots left!”, when it’s not true",
+              "“The price doubles tomorrow”, made up"
+            ]
+          },
+          "right": {
+            "title": "Real deadline",
+            "items": [
+              "“This quote is valid until [date]”",
+              "“I can start Monday if we confirm this week”"
+            ]
+          }
+        },
+        {
+          "title": "The *yes*, in writing",
+          "nodes": [
+            {
+              "label": "Written confirmation",
+              "sub": "Package, price, timelines, revisions"
+            },
+            {
+              "label": "Deposit",
+              "sub": "Work starts once it’s received"
+            },
+            {
+              "label": "Onboarding",
+              "sub": "Photos, brief, delivery date"
+            }
+          ]
+        },
+        {
+          "text": "Good closing doesn’t pressure anyone. It *helps them decide*."
+        },
+        {}
+      ],
+      "key": [
+        "The same day: a recap of the problem in their words, 2 or 3 clear packages, your recommendation, the next step.",
+        "Objections: price → target result or Test Pack; timing → the steps; “I’ll think about it” → ask what’s holding them back. A real deadline, never fake urgency.",
+        "Written confirmation (on WhatsApp, for example), a deposit before you start, then onboarding: photos, brief, delivery date."
+      ],
+      "quiz": [
+        {
+          "q": "The prospect says “I’ll think about it”. You…",
+          "a": [
+            "Drop your price right away",
+            "Kindly ask what’s making them hesitate",
+            "Make up a promo that ends tonight"
+          ],
+          "why": "The real objection is often hiding behind it: price, timing or trust. You handle it honestly."
+        },
+        {
+          "q": "When do you start the work?",
+          "a": [
+            "As soon as the call ends",
+            "After the written confirmation and the deposit",
+            "After delivering everything"
+          ],
+          "why": "Writing pins down what’s been sold; the deposit confirms the commitment on both sides."
+        }
+      ],
+      "res": [
+        {
+          "title": "Closing message (WhatsApp)",
+          "text": "Salam [first name], thanks for the call!\n\nWhat I understood: [their problem, in their words] · goal: [target result]\n\nMy proposals:\n1. Test Pack: [content] · [price] · delivered in [timeframe]\n2. Growth Pack: [content] · [price] · delivered in [timeframe] ← the one I recommend, because [reason]\n3. Subscription: [content] · [price] per month\n\nRevisions included: [number] · This quote is valid until [actual date].\nTo get started: your confirmation here + a deposit of [amount], then you send me [product photos, logo, brief].\nI can start on [date].\n\nAny questions? I’m available."
+        }
+      ]
     }
   }
 };

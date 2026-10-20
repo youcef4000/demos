@@ -280,6 +280,230 @@ export default {
           "why": "Customers want to see the real product."
         }
       ]
+    },
+    "ia3-l6": {
+      "title": "Workshop: Veo 3.1 — frames and ingredients",
+      "scenes": [
+        {
+          "sub": "Two modes to stay in control"
+        },
+        {
+          "title": "Two modes, *two uses*",
+          "items": [
+            {
+              "label": "Frames → video",
+              "sub": "A start frame, an end frame: Veo creates the transition"
+            },
+            {
+              "label": "Ingredients → video",
+              "sub": "References: product, character, setting"
+            }
+          ]
+        },
+        {
+          "title": "Frames → video, *step by step*",
+          "nodes": [
+            {
+              "label": "Start frame",
+              "sub": "The closed bottle"
+            },
+            {
+              "label": "The movement",
+              "sub": "Described in the prompt"
+            },
+            {
+              "label": "End frame",
+              "sub": "The same bottle, open"
+            }
+          ]
+        },
+        {
+          "title": "The *motion* prompt",
+          "segments": [
+            {
+              "text": "Static camera, close-up.",
+              "tag": "Camera"
+            },
+            {
+              "text": "A hand slowly removes the cap, a fine mist escapes.",
+              "tag": "Action"
+            },
+            {
+              "text": "The bottle and the label stay identical.",
+              "tag": "Lock"
+            },
+            {
+              "text": "Sound: soft click of the cap, no music.",
+              "tag": "Sound"
+            }
+          ],
+          "result": {
+            "lines": [
+              "Short shot: the hand opens the bottle, the mist rises",
+              "Check frame by frame: shape, label, color",
+              "Bottle warped? Simpler action, regenerate"
+            ]
+          }
+        },
+        {
+          "title": "Ingredients → video: *the rules*",
+          "items": [
+            "*Sharp* references, on a plain background",
+            "Your *real product*, never a made-up one",
+            "The prompt *names* each ingredient",
+            "*Short* shots, checked one by one"
+          ]
+        },
+        {}
+      ],
+      "key": [
+        "Frames → video: a start frame and an end frame, Veo creates the transition; prepare them from your real photo, with the same framing.",
+        "Ingredients → video: sharp references (product, character, setting) that Veo keeps consistent; name each ingredient in the prompt.",
+        "The motion prompt: camera, action, product lock, sound (depending on the mode). Short shots, checked frame by frame. Modes and names change from version to version."
+      ],
+      "quiz": [
+        {
+          "q": "You want to show the bottle going from closed to open. Which mode?",
+          "a": [
+            "Frames → video",
+            "Ingredients → video",
+            "Text only, no image"
+          ],
+          "why": "You set the start and the end, Veo creates the transition between them."
+        },
+        {
+          "q": "In ingredients mode, which product image do you use?",
+          "a": [
+            "A product made up by AI",
+            "Your real product photo, sharp, on a plain background",
+            "A blurry screenshot found online"
+          ],
+          "why": "The reference locks in how the product looks: it must be the one the customer will receive."
+        }
+      ],
+      "res": [
+        {
+          "title": "Veo 3.1 prompts (frames and ingredients)",
+          "text": "FRAMES → VIDEO\nStart frame: [description] · End frame: [description]\n(Same framing, same light, prepared from your real photo.)\nPrompt: Camera [static / slow push-in / slow orbit], shot [close-up / medium]. [The action linking the two frames, in one sentence]. The product and its label stay identical. Sound: [ambience, specific effect / no music].\n\nINGREDIENTS → VIDEO\nReferences: [1: your product photo] [2: the character] [3: the setting]\nPrompt: [The character from the reference] [action] with [the product from the reference] in [the setting from the reference]. Camera [movement], lighting [  ]. The product stays exactly the same.\n\nSettings: short duration, format [9:16 / 16:9] depending on what the tool offers.\nCHECK: frame by frame → shape, label, color, hands."
+        }
+      ]
+    },
+    "ia3-l7": {
+      "title": "Workshop: Kling — from image to video",
+      "scenes": [
+        {
+          "sub": "Animate your approved image"
+        },
+        {
+          "title": "Image → video in *4 steps*",
+          "items": [
+            {
+              "label": "Upload your approved image",
+              "sub": "Already in the right format, 9:16 for Reels"
+            },
+            {
+              "label": "Write the movement",
+              "sub": "One action, one camera move"
+            },
+            {
+              "label": "Add a negative prompt",
+              "sub": "What you don’t want to see"
+            },
+            {
+              "label": "Pick a short duration",
+              "sub": "You assemble afterwards"
+            }
+          ]
+        },
+        {
+          "title": "The prompt *and* the negative prompt",
+          "segments": [
+            {
+              "text": "The woman lifts the cream jar toward the camera and smiles,",
+              "tag": "Action"
+            },
+            {
+              "text": "slow push-in, steady camera,",
+              "tag": "Camera"
+            },
+            {
+              "text": "the jar and its label stay identical.",
+              "tag": "Lock"
+            },
+            {
+              "text": "Negative: distortion, changing text, extra fingers, blur.",
+              "tag": "Negative"
+            }
+          ],
+          "result": {
+            "lines": [
+              "Short shot: the jar rises toward the camera, natural smile",
+              "To check: hands, fingers, the jar’s label",
+              "Too much movement? Simpler action, regenerate"
+            ]
+          }
+        },
+        {
+          "title": "One long shot *or* short shots?",
+          "left": {
+            "title": "A single long shot",
+            "items": [
+              "The product may get distorted",
+              "Everything to redo at the slightest flaw"
+            ]
+          },
+          "right": {
+            "title": "Short shots",
+            "items": [
+              "Each shot checked, kept or redone",
+              "Assembled afterwards in CapCut"
+            ]
+          }
+        },
+        {
+          "title": "Save your *credits*",
+          "items": [
+            "Test in the *cheapest* mode",
+            "*Only one* thing changes between two tries",
+            "The prompt that works goes *into your library*",
+            {
+              "t": "Launching ten generations without rereading the prompt"
+            }
+          ]
+        },
+        {}
+      ],
+      "key": [
+        "Kling: approved image (already in the right format) → motion prompt → negative prompt if your version offers it → short duration. Use the latest version.",
+        "The prompt: one action, one camera move, a product lock; the negative prompt lists what you reject (distortion, changing text, extra fingers).",
+        "Short shots, checked one by one, assembled in CapCut; test in the cheapest mode to save your credits."
+      ],
+      "quiz": [
+        {
+          "q": "What’s the negative prompt for?",
+          "a": [
+            "Describing the main action",
+            "Listing what you don’t want to see",
+            "Choosing the music"
+          ],
+          "why": "Naming the flaws to avoid reduces the risk without removing it: you still check."
+        },
+        {
+          "q": "For a 15-second ad, you generate…",
+          "a": [
+            "A single long shot",
+            "Several short shots, assembled in the edit",
+            "A single still image"
+          ],
+          "why": "A short shot can be checked and redone without losing everything else."
+        }
+      ],
+      "res": [
+        {
+          "title": "Kling prompt (image → video)",
+          "text": "Starting image: [your approved image, already in the right format]\n\nPrompt: [Subject] [a single action, slow and simple], [one camera move: slow push-in / slow orbit / static camera], [mood, lighting]. The product and its label stay exactly the same.\n\nNegative prompt (if your version offers it): distortion, product changing shape, changing text, extra fingers, distorted face, blur, flickering.\n\nSettings: short duration · cheapest mode for testing · only one thing changes between two tries.\n\nCheck: shape, label, color, hands → keep or regenerate."
+        }
+      ]
     }
   }
 };
