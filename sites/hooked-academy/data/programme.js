@@ -4219,8 +4219,12 @@ export const coreModulesOf = (track) => modulesOf(track).filter((m) => !m.intro)
 MODULES.forEach((m) =>
   m.lessons.forEach((l) => {
     const v = VOIX[l.id];
-    if (!v || l.audio || v.d.length !== l.scenes.length) return;
+    if (!v || v.d.length !== l.scenes.length) return;
+    // Même voix partout : elle remplace aussi les anciens enregistrements, et l'animation suit la piste
     l.audio = v.audio;
+    l.clone = true;
+    delete l.video;
+    delete l.poster;
     l.scenes.forEach((sc, i) => (sc.d = v.d[i]));
   }),
 );

@@ -1863,8 +1863,9 @@ async function loadVideos() {
     const r = await fetch('../video/manifest.json', { cache: 'no-cache' });
     if (!r.ok) return;
     const m = await r.json();
-    LESSONS.forEach((l) => m[l.id] && Object.assign(l, m[l.id]));
-    MODULES.forEach((mod) => mod.lessons.forEach((l) => m[l.id] && Object.assign(l, m[l.id])));
+    // Une leçon passée à la voix clonée garde le lecteur animé (son ancien MP4 est ignoré)
+    LESSONS.forEach((l) => m[l.id] && !l.clone && Object.assign(l, m[l.id]));
+    MODULES.forEach((mod) => mod.lessons.forEach((l) => m[l.id] && !l.clone && Object.assign(l, m[l.id])));
   } catch {}
 }
 // Fichiers déposés par l'équipe (PDF, prompts, liens…) : ressources/manifest.json, facultatif
