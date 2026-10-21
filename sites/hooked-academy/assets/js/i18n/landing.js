@@ -33,6 +33,8 @@ add({
     'duo.final': 'projet final',
     'duo.lv': 'Avancé',
     'duo.hint': 'Touche un module pour voir ses leçons.',
+    'duo.cov1': 'Couverture de la Formation Créative',
+    'duo.cov2': 'Couverture de la Formation IA',
     'lecon.title': 'Qu’est-ce qu’une créative ?',
     'lecon.sc': ['Titre', 'Définition', 'Son rôle', '3 formats', 'Vidéo', 'Image', 'Carrousel', 'Fin'].join('|'),
     'lecon.mute': 'Couper le son',
@@ -131,6 +133,8 @@ add({
     'duo.final': 'final project',
     'duo.lv': 'Advanced',
     'duo.hint': 'Tap a module to see its lessons.',
+    'duo.cov1': 'Creative Course cover',
+    'duo.cov2': 'AI Course cover',
 
     'lecon.k': 'The course',
     'lecon.h': 'Built to be <span class="um" aria-hidden="true">uh…</span> finished, not <span class="um" aria-hidden="true">not…</span> abandoned.',
@@ -412,6 +416,8 @@ add({
     'duo.final': 'مشروع نهائي',
     'duo.lv': 'متقدّم',
     'duo.hint': 'اضغط على وحدة لترى دروسها.',
+    'duo.cov1': 'غلاف التكوين الإبداعي',
+    'duo.cov2': 'غلاف تكوين الذكاء الاصطناعي',
 
     'lecon.k': 'التكوين',
     'lecon.h': 'صُمِّم <span class="um" aria-hidden="true">إممم…</span> لتُكمله، لا <span class="um" aria-hidden="true">لا…</span> لتتركه.',

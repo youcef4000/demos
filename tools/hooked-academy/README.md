@@ -120,3 +120,16 @@ Forme du manifeste :
   }
 }
 ```
+
+## Images des leçons et couvertures
+
+Chaque leçon a sa propre image, `sites/hooked-academy/assets/img/lecons/<id>.webp` (1280×720),
+générée avec Nano Banana Pro (Higgsfield, 16:9, 2K) puis réduite en WebP. Les images ne contiennent
+aucun texte : la même sert en français, en anglais et en arabe. Les couvertures des deux formations
+sont `assets/img/couv-creative.webp` et `assets/img/couv-ia.webp`.
+
+Les prompts utilisés sont dans `images-lecons-prompts.json` (`{ "<id de leçon>": "<prompt>" }`).
+Pour une nouvelle leçon : écrire un prompt sur le même modèle (une scène propre à la leçon, puis la
+phrase de style de la formation, puis la phrase « Strictly no text… »), générer en 16:9, convertir
+en WebP 1280×720 et l'enregistrer sous l'id de la leçon. Si l'image manque, la plateforme affiche
+la capture de la vidéo animée (`video/vignettes/<id>.jpg`), puis l'icône du module.

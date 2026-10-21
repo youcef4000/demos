@@ -541,7 +541,7 @@ function contCard(P, { demo = false } = {}) {
 /** Carte de formation façon « classroom » : couverture, description, progression, accès. */
 function productCard(tr, P, demo) {
   const own = demo || !notOwned(tr.id);
-  const cover = P.list[0] ? thumb(P.list[0]) : '';
+  const cover = coverOf(tr.id);
   const footer = demo
     ? `<a class="prod-next" href="#/lecon/${P.open[0]?.id || P.next.id}"><span><small>${t('app.demo.openLesson')}</small><b>${bdi(modCode(P.open[0]?.module || P.next.module))} · ${esc((P.open[0] || P.next).title)}</b></span><span class="prod-go">${arrow(18)}</span></a>`
     : !own
@@ -715,10 +715,11 @@ function endCard(trackId) {
 }
 
 /* Cartes de leçon façon « classroom » : miniature, petite intro, progression */
-// Miniature tirée de la vidéo animée, dans la langue de l'interface (FR à la racine, EN et AR dans leur dossier)
-const thumb = (l) => `../video/vignettes/${lang === 'fr' ? '' : `${lang}/`}${l.id}.jpg`;
-// Si la miniature traduite manque, on retombe sur la française, puis sur l'icône du module
-const THUMB_ERR = `onerror="const r=/vignettes\\/(en|ar)\\//;r.test(this.src)?(this.src=this.src.replace(r,'vignettes/')):this.remove()"`;
+// Image de la leçon (sans texte, donc la même en FR, EN et AR) ; couverture propre à chaque formation
+const thumb = (l) => `../assets/img/lecons/${l.id}.webp`;
+const coverOf = (track) => `../assets/img/couv-${track}.webp`;
+// Si l'image manque, on retombe sur la capture de la vidéo animée, puis sur l'icône du module
+const THUMB_ERR = `onerror="this.src.includes('/lecons/')?(this.src=this.src.replace(/assets\\/img\\/lecons\\/(.+)\\.webp$/,'video/vignettes/$1.jpg')):this.remove()"`;
 const introOf = (l) => l.scenes?.[0]?.sub || l.key?.[0] || '';
 const lessonTag = (l, m) => (m.intro && !l.n ? lessonN(0) : `${modCode(m)} · ${lessonN(l.n)}`);
 /** Formation hors du pack de l'étudiant (ou accès d'un an terminé). */
@@ -1050,7 +1051,7 @@ function crumb(f) {
 
 function playerHTML(l) {
   const mp4 = lang === 'fr' && l.video;
-  if (mp4) return `<video id="vid" src="../${esc(l.video)}" ${l.poster ? `poster="../${esc(l.poster)}"` : ''} controls playsinline preload="metadata" aria-label="${esc(t('app.player.label', { title: l.title }))}"></video>`;
+  if (mp4) return `<video id="vid" src="../${esc(l.video)}" poster="${thumb(l)}" controls playsinline preload="metadata" aria-label="${esc(t('app.player.label', { title: l.title }))}"></video>`;
   const q = new URLSearchParams({ id: l.id, lang });
   if (l.audio) q.set('audio', '1');
   return `<iframe id="ifr" src="../motion/player.html?${q}" title="${esc(t('app.player.label', { title: l.title }))}" allow="fullscreen; autoplay" loading="lazy"></iframe>`;
