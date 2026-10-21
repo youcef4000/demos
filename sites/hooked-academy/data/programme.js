@@ -5,6 +5,7 @@
 
 import { MODULES_IA } from './programme-ia.js';
 import { OVERLAY } from './i18n/index.js';
+import { VOIX } from './voix-off.js';
 
 /**
  * Deux formations distinctes :
@@ -4210,6 +4211,19 @@ export const trackOf = (idOrModule) => TRACKS.find((t) => t.id === (typeof idOrM
 export const modulesOf = (track) => MODULES.filter((m) => m.track === track);
 /** Modules du programme sans la bienvenue (module 00) : pour les comptes, les plages M01–M06, la landing. */
 export const coreModulesOf = (track) => modulesOf(track).filter((m) => !m.intro);
+
+/* ------------------------------------------------------------------ */
+/* Voix off clonée (data/voix-off.js) : piste de la leçon et durée de chaque scène */
+/* ------------------------------------------------------------------ */
+
+MODULES.forEach((m) =>
+  m.lessons.forEach((l) => {
+    const v = VOIX[l.id];
+    if (!v || l.audio || v.d.length !== l.scenes.length) return;
+    l.audio = v.audio;
+    l.scenes.forEach((sc, i) => (sc.d = v.d[i]));
+  }),
+);
 
 /* ------------------------------------------------------------------ */
 /* Traduction : la surcouche de la langue choisie (data/i18n/<langue>/) */
