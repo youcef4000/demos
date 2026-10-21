@@ -152,22 +152,21 @@
 
   <!-- PLAN 03 · Le formateur : « réalisé par » ============================= -->
   <section class="sh coach" id="formateur" data-ton="encre" data-plan="03" data-name="plan.formateur" aria-labelledby="coach-h">
-    <figure class="coach-frame" aria-hidden="true">
-      <span class="coach-mono">Y</span>
-      <!-- Photo du formateur : ajouter <img class="coach-ph" src="assets/img/formateur.webp" alt="" width="800" height="1000" loading="lazy" decoding="async"> (portrait 4:5) -->
-      <i class="coach-crop coach-crop--tl"></i><i class="coach-crop coach-crop--tr"></i><i class="coach-crop coach-crop--bl"></i><i class="coach-crop coach-crop--br"></i>
-      <figcaption class="coach-burn"><span class="burn ltr">CAM A · 50 mm</span><span class="burn rec"><i></i>REC</span></figcaption>
+    <figure class="coach-ph">
+      <span class="coach-ring" aria-hidden="true"><i></i><i></i></span>
+      <img src="assets/img/formateur.webp" alt="Youcef N., formateur Hooked Academy" width="480" height="480" loading="lazy" decoding="async" data-i18n-attr="alt:coach.alt">
+      <figcaption class="burn ltr" aria-hidden="true">REC · 50 mm</figcaption>
     </figure>
     <div class="coach-copy">
       <p class="lbl" data-i18n="coach.k">Ton formateur</p>
-      <h2 class="h2" id="coach-h" data-i18n-html="coach.h">Réalisé <span class="nb">par Youcef.</span></h2>
-      <p class="lead" data-i18n="coach.x">Plus de 10 000 étudiants sont passés par mes formations, et j’ai analysé plus de 20 000 créatives publicitaires. Hooked Academy, c’est cette méthode, découpée en leçons de 2 minutes : ce qui fait arrêter le scroll, et ce qui fait acheter.</p>
+      <h2 class="h2" id="coach-h" data-i18n-html="coach.h">Réalisé <span class="nb">par Youcef N.</span></h2>
+      <p class="lead" data-i18n="coach.x">Formateur spécialisé dans les créatives publicitaires pour les réseaux sociaux. Plus de 10&#8239;000 étudiants formés et plus de 20&#8239;000 créatives analysées : Hooked Academy réunit cette expérience en une méthode claire, découpée en leçons de 2 minutes, pour créer des publicités qui arrêtent le scroll et qui vendent.</p>
       <dl class="coach-stats">
         <div><dt class="coach-n ltr">+10 000</dt><dd data-i18n="coach.s1">étudiants formés</dd></div>
         <div><dt class="coach-n ltr">+20 000</dt><dd data-i18n="coach.s2">créatives analysées</dd></div>
         <div><dt class="coach-n ltr" id="coach-lessons">119</dt><dd data-i18n="coach.s3">leçons dans la méthode</dd></div>
       </dl>
-      <p class="coach-sign"><span class="coach-sig" lang="fr">Youcef</span><span data-i18n="coach.role">ton formateur, Hooked Academy</span></p>
+      <p class="coach-sign"><span class="coach-sig" lang="fr">Youcef N.</span><span data-i18n="coach.role">formateur, Hooked Academy</span></p>
     </div>
   </section>
 
@@ -469,7 +468,7 @@
       <p class="lbl" data-i18n="join.k">Inscription</p>
       <h2 class="h2" id="join-h" data-i18n-html="join.h">Réserve ta place. <span class="nb dim">L’équipe te rappelle.</span></h2>
       <ol class="join-steps">
-        <li><b>1</b><div><strong data-i18n="join.s1">Tu remplis le formulaire</strong><span data-i18n="join.s1.x">1 minute, sans paiement en ligne.</span></div></li>
+        <li><b>1</b><div><strong data-i18n="join.s1">Tu remplis le formulaire</strong><span data-i18n="join.s1.x">30 secondes, sans paiement en ligne.</span></div></li>
         <li><b>2</b><div><strong data-i18n="join.s2">L’équipe te contacte sur WhatsApp</strong><span data-i18n="join.s2.x">Formule, session et paiement (CCP, BaridiMob ou espèces).</span></div></li>
         <li><b>3</b><div><strong data-i18n="join.s3">Tu reçois ton accès</strong><span data-i18n="join.s3.x">Ton espace étudiant s’ouvre : module 1, leçon 1.</span></div></li>
       </ol>
@@ -485,17 +484,15 @@
         <dl class="slate-row slate-row--top" aria-hidden="true">
           <div><dt data-i18n="slate.prod">Prod.</dt><dd><span class="tape">Hooked Academy</span></dd></div>
           <div><dt data-i18n="slate.scene">Scène</dt><dd data-i18n="join.scene">Inscription</dd></div>
-          <div><dt data-i18n="slate.take">Prise</dt><dd><span id="f-step">1</span>/3</dd></div>
+          <div><dt data-i18n="slate.take">Prise</dt><dd><span id="f-step">1</span></dd></div>
         </dl>
+        <!-- Une seule prise : l'essentiel pour que l'équipe rappelle (ville, niveau, objectif : demandés sur WhatsApp) -->
         <fieldset class="fs is-on" data-step="0">
-          <legend data-i18n="f.l0">Qui es-tu ?</legend>
-          <label class="fld"><span data-i18n="f.name">Nom et prénom</span><input name="name" autocomplete="name" required minlength="2" placeholder="Ex. : Amina Benali" data-i18n-attr="placeholder:f.name.ph"></label>
-          <label class="fld"><span>WhatsApp</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="05 50 00 00 00" pattern="[\d\s+\(\)\.\-]{8,}" dir="ltr"></label>
-          <label class="fld"><span data-i18n-html="f.email">E-mail <em>(pour ton accès)</em></span><input name="email" type="email" autocomplete="email" required placeholder="toi@mail.com" dir="ltr" data-i18n-attr="placeholder:f.email.ph"></label>
-          <label class="fld"><span data-i18n="f.city">Ville / wilaya</span><input name="city" autocomplete="address-level2" placeholder="Alger" data-i18n-attr="placeholder:f.city.ph"></label>
-        </fieldset>
-        <fieldset class="fs" data-step="1">
-          <legend data-i18n="f.l1">Ton profil</legend>
+          <legend data-i18n="f.l.one">Réserve ta place en 30 secondes</legend>
+          <div class="fld-row">
+            <label class="fld"><span data-i18n="f.name">Nom et prénom</span><input name="name" autocomplete="name" required minlength="2" placeholder="Ex. : Amina Benali" data-i18n-attr="placeholder:f.name.ph"></label>
+            <label class="fld"><span>WhatsApp</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="05 50 00 00 00" pattern="[\d\s+\(\)\.\-]{8,}" dir="ltr"></label>
+          </div>
           <div class="fld">
             <span id="f-trk-l" data-i18n="f.track">Choisis ton pack · accès 1 an</span>
             <div class="seg" role="radiogroup" aria-labelledby="f-trk-l">
@@ -514,18 +511,7 @@
               <label><input type="radio" name="profil" value="agence"><span data-i18n="f.p.agence">Agence / équipe</span></label>
             </div>
           </div>
-          <label class="fld"><span data-i18n="f.level">Ton niveau aujourd’hui</span>
-            <select name="niveau">
-              <option value="Débutant complet" data-i18n="f.lv0">Débutant complet</option>
-              <option value="Je fais déjà un peu de montage" data-i18n="f.lv1">Je fais déjà un peu de montage</option>
-              <option value="Je vends déjà, mes pubs ne marchent pas assez" data-i18n="f.lv2">Je vends déjà, mes pubs ne marchent pas assez</option>
-              <option value="Je crée déjà du contenu régulièrement" data-i18n="f.lv3">Je crée déjà du contenu régulièrement</option>
-            </select>
-          </label>
-        </fieldset>
-        <fieldset class="fs" data-step="2">
-          <legend data-i18n="f.l2">Ton objectif</legend>
-          <label class="fld"><span data-i18n="f.goal">Qu’est-ce que tu veux réussir grâce à la formation ?</span><textarea name="objectif" rows="4" maxlength="500" placeholder="Ex. : faire mes propres vidéos pour ma boutique, proposer des créatives IA à des clients…" data-i18n-attr="placeholder:f.goal.ph"></textarea></label>
+          <label class="fld"><span data-i18n-html="f.email.opt">E-mail <em>(facultatif)</em></span><input name="email" type="email" autocomplete="email" placeholder="toi@mail.com" dir="ltr" data-i18n-attr="placeholder:f.email.ph"></label>
           <label class="check"><input type="checkbox" name="ok" required><span data-i18n="f.ok">J’accepte d’être contacté·e par l’équipe Hooked Academy sur WhatsApp.</span></label>
         </fieldset>
         <div class="form-nav">

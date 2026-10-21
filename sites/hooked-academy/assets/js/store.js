@@ -42,7 +42,7 @@ const ACCOUNTS = [
     salt: '94aad5e8fc81e5d62f36079fe0989450',
     iter: 310000,
     passHash: '18f6257adb0a6762c3c2ccfb879219f0b865880f1137010d4f4a80fd4afdad30',
-    profile: { name: 'Youcef', firstName: 'Youcef', cohort: 'Équipe Hooked', role: 'formateur' },
+    profile: { name: 'Youcef N.', firstName: 'Youcef', cohort: 'Équipe Hooked', role: 'formateur' },
   },
 ];
 
