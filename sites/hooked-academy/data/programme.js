@@ -166,9 +166,7 @@ const MODULES_1 = [
         title: 'Qu’est-ce qu’une créative ?',
         ar: 'وشنو هي لا كرياتيف',
         voice: true,
-        video: 'video/m1-l1.mp4',
         audio: 'video/voix/m1-l1.m4a',
-        poster: 'video/m1-l1.jpg',
         scenes: [
           { type: 'title', d: 3.1, kicker: 'Module 01 · Leçon 01', sub: 'Définition et types de créatives' },
           { type: 'big', d: 3.4, kicker: 'Définition', text: 'La créative, c’est le *contenu visuel* de ta *publicité*.', ar: 'الكرياتيف هي المحتوى البصري للإعلان' },
@@ -274,9 +272,7 @@ const MODULES_1 = [
         title: 'Les outils nécessaires',
         ar: 'الأدوات اللازمة',
         voice: true,
-        video: 'video/m1-l2.mp4',
         audio: 'video/voix/m1-l2.m4a',
-        poster: 'video/m1-l2.jpg',
         scenes: [
           { type: 'title', d: 3.2, kicker: 'Module 01 · Leçon 02', sub: 'CapCut · Canva · l’IA' },
           { type: 'stat', d: 2.7, value: '3', label: 'outils *indispensables*', ar: 'ثلاث أدوات', ring: true, ringDur: 2, countDur: 1 },
@@ -465,9 +461,7 @@ const MODULES_1 = [
         title: 'Hook · Body · CTA',
         ar: 'هيكل الكرياتيف',
         voice: true,
-        video: 'video/m2-l1.mp4',
         audio: 'video/voix/m2-l1.m4a',
-        poster: 'video/m2-l1.jpg',
         scenes: [
           { type: 'title', d: 3.7, fr: 'La structure d’une créative', kicker: 'Module 02 · Leçon 01', sub: 'Hook · Body · CTA' },
           {
@@ -612,9 +606,7 @@ const MODULES_1 = [
         title: 'Le Hook : arrêter le scroll',
         ar: 'الهوك',
         voice: true,
-        video: 'video/m2-l2.mp4',
         audio: 'video/voix/m2-l2.m4a',
-        poster: 'video/m2-l2.jpg',
         scenes: [
           { type: 'title', d: 3.8, kicker: 'Module 02 · Leçon 02', sub: 'Un seul objectif : stop le scroll' },
           {
@@ -674,9 +666,7 @@ const MODULES_1 = [
         title: 'Exemples de hooks : positifs et négatifs',
         ar: 'أمثلة على الهوك',
         voice: true,
-        video: 'video/m2-l3.mp4',
         audio: 'video/voix/m2-l3.m4a',
-        poster: 'video/m2-l3.jpg',
         scenes: [
           { type: 'title', d: 4.6, kicker: 'Module 02 · Leçon 03', sub: 'Des hooks qui marchent en ce moment' },
           {
@@ -757,9 +747,7 @@ const MODULES_1 = [
         title: 'Le hook statistique',
         ar: 'الهوك الإحصائي',
         voice: true,
-        video: 'video/m2-l4.mp4',
         audio: 'video/voix/m2-l4.m4a',
-        poster: 'video/m2-l4.jpg',
         scenes: [
           { type: 'title', d: 4.6, kicker: 'Module 02 · Leçon 04', sub: 'Un chiffre qui interpelle' },
           {
@@ -812,9 +800,7 @@ const MODULES_1 = [
         title: 'Le Body : présenter le produit',
         ar: 'البودي',
         voice: true,
-        video: 'video/m2-l5.mp4',
         audio: 'video/voix/m2-l5.m4a',
-        poster: 'video/m2-l5.jpg',
         scenes: [
           { type: 'title', d: 6.9, kicker: 'Module 02 · Leçon 05', sub: 'Après le hook, le body' },
           {
@@ -912,9 +898,7 @@ const MODULES_1 = [
         title: 'Le CTA : un CTA clair = une vente',
         ar: 'CTA واضح = عملية بيع',
         voice: true,
-        video: 'video/m2-l6.mp4',
         audio: 'video/voix/m2-l6.m4a',
-        poster: 'video/m2-l6.jpg',
         scenes: [
           { type: 'title', d: 6.3, kicker: 'Module 02 · Leçon 06', sub: 'Call to action : l’appel à l’action' },
           {
@@ -1288,9 +1272,7 @@ const MODULES_1 = [
         title: 'Les formules magiques de la vente',
         ar: 'استراتيجيات البيع',
         voice: true,
-        video: 'video/m3-l1.mp4',
         audio: 'video/voix/m3-l1.m4a',
-        poster: 'video/m3-l1.jpg',
         scenes: [
           { type: 'title', d: 5.1, kicker: 'Module 03 · Leçon 01', sub: 'AIDA · PAS · CAP · SONCAS' },
           { type: 'stat', d: 4.2, value: '4', label: 'formules : *les règles d’or* de la persuasion', ar: 'القواعد الذهبية للإقناع', countDur: 0.8 },
@@ -1331,9 +1313,7 @@ const MODULES_1 = [
         title: 'AIDA : l’itinéraire du client',
         ar: 'مسار الزبون',
         voice: true,
-        video: 'video/m3-l2.mp4',
         audio: 'video/voix/m3-l2.m4a',
-        poster: 'video/m3-l2.jpg',
         scenes: [
           { type: 'title', d: 4.6, fr: 'AIDA', kicker: 'Module 03 · Leçon 02', sub: 'L’itinéraire du client' },
           {
@@ -1384,9 +1364,7 @@ const MODULES_1 = [
         title: 'PAS : la force de la douleur',
         ar: 'قوة الألم',
         voice: true,
-        video: 'video/m3-l3.mp4',
         audio: 'video/voix/m3-l3.m4a',
-        poster: 'video/m3-l3.jpg',
         scenes: [
           { type: 'title', d: 3.9, fr: 'PAS', kicker: 'Module 03 · Leçon 03', sub: 'Problème · Agitation · Solution' },
           { type: 'big', d: 11.9, kicker: 'La force de la douleur', text: 'On touche *le problème* du client, et ce qu’il ressent.', ar: 'نهز مشاعر الزبون' },
@@ -1438,9 +1416,7 @@ const MODULES_1 = [
         title: 'CAP : l’art de prouver',
         ar: 'فن الإثبات',
         voice: true,
-        video: 'video/m3-l4.mp4',
         audio: 'video/voix/m3-l4.m4a',
-        poster: 'video/m3-l4.jpg',
         scenes: [
           { type: 'title', d: 4, fr: 'CAP', kicker: 'Module 03 · Leçon 04', sub: 'Caractéristique · Avantage · Preuve' },
           { type: 'big', d: 14, kicker: 'L’art de prouver', text: 'Indispensable pour convaincre *les sceptiques* : des faits, des bénéfices, des *preuves*.', ar: 'فن الإثبات' },
@@ -1481,9 +1457,7 @@ const MODULES_1 = [
         title: 'SONCAS : les 6 boutons psychologiques',
         ar: 'الأزرار النفسية الستة',
         voice: true,
-        video: 'video/m3-l5.mp4',
         audio: 'video/voix/m3-l5.m4a',
-        poster: 'video/m3-l5.jpg',
         scenes: [
           { type: 'title', d: 3.6, fr: 'SONCAS', kicker: 'Module 03 · Leçon 05', sub: 'Les 6 boutons psychologiques' },
           {
@@ -1548,9 +1522,7 @@ const MODULES_1 = [
         title: 'Quelle formule, et quand ?',
         ar: 'أي أسلوب نستعمل ومتى؟',
         voice: true,
-        video: 'video/m3-l6.mp4',
         audio: 'video/voix/m3-l6.m4a',
-        poster: 'video/m3-l6.jpg',
         scenes: [
           { type: 'title', d: 4.3, kicker: 'Module 03 · Leçon 06', sub: 'AIDA · PAS · CAP · SONCAS' },
           {
@@ -1605,9 +1577,7 @@ const MODULES_1 = [
         title: 'C’est quoi l’UGC ?',
         ar: 'شنو هو UGC',
         voice: true,
-        video: 'video/m4-l1.mp4',
         audio: 'video/voix/m4-l1.m4a',
-        poster: 'video/m4-l1.jpg',
         scenes: [
           { type: 'title', d: 9.2, fr: 'La révolution UGC', kicker: 'Module 04 · Leçon 01', sub: 'User Generated Content : le nouveau standard publicitaire' },
           {
@@ -1678,9 +1648,7 @@ const MODULES_1 = [
         title: 'Pub classique vs UGC',
         ar: 'إعلان كلاسيكي أم UGC',
         voice: true,
-        video: 'video/m4-l2.mp4',
         audio: 'video/voix/m4-l2.m4a',
-        poster: 'video/m4-l2.jpg',
         scenes: [
           { type: 'title', d: 4.7, kicker: 'Module 04 · Leçon 02', sub: 'Parfaite… ou vraie ?' },
           {
@@ -1758,9 +1726,7 @@ const MODULES_1 = [
         title: 'Pourquoi l’UGC convertit',
         ar: 'لماذا يبيع UGC',
         voice: true,
-        video: 'video/m4-l3.mp4',
         audio: 'video/voix/m4-l3.m4a',
-        poster: 'video/m4-l3.jpg',
         scenes: [
           { type: 'title', d: 5.3, kicker: 'Module 04 · Leçon 03', sub: 'Confiance · Identification · Rentabilité' },
           {
