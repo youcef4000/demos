@@ -1,2 +1,5 @@
 .wrangler/
 node_modules/
+
+# Données locales du serveur Hooked Academy (node server/index.mjs)
+/data/

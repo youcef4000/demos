@@ -350,7 +350,7 @@ function viewOffline() {
   root.innerHTML = authBox(
     t('ad.off.title'),
     t('ad.off.lead'),
-    `<div class="acts"><button class="b b--or" type="button" id="retry">${icon('repeat', { size: 16 })} ${t('ad.off.retry')}</button><a class="b" href="https://demos.youcef-ny.workers.dev/hooked-academy/admin/">${t('ad.off.main')}</a></div>`,
+    `<div class="acts"><button class="b b--or" type="button" id="retry">${icon('repeat', { size: 16 })} ${t('ad.off.retry')}</button></div>`,
   );
   $('#retry').addEventListener('click', () => route());
 }
@@ -574,14 +574,36 @@ function viewApps() {
         a.exemple ? t('ad.csv.yes') : '',
       ]),
     );
-    download(`${t('ad.csv.file')}-hooked-academy-${S.iso()}.csv`, '﻿' + rows.map((r) => r.map((x) => `"${String(x ?? '').replace(/"/g, '""')}"`).join(';')).join('\n'), 'text/csv');
+    // Une case qui commence par = + - @ (ou tabulation) serait une formule dans Excel : on la neutralise
+    const cell = (x) => {
+      const v = String(x ?? '');
+      return `"${(/^[=+\-@\t\r]/.test(v) ? `'${v}` : v).replace(/"/g, '""')}"`;
+    };
+    download(`${t('ad.csv.file')}-hooked-academy-${S.iso()}.csv`, '﻿' + rows.map((r) => r.map(cell).join(';')).join('\n'), 'text/csv');
   });
   gsap()?.from('.kb-card', { y: 20, autoAlpha: 0, duration: 0.5, stagger: 0.03, ease: 'expo.out', clearProps: 'transform,opacity,visibility' });
 }
 
+/**
+ * Validation. Le serveur ne fusionne jamais en silence avec un étudiant qui a déjà cet e-mail ou ce téléphone
+ * (l'e-mail d'une inscription n'est pas vérifié) : l'équipe voit le compte trouvé et choisit de le prolonger,
+ * sans changer son code ni écrire au numéro de la nouvelle inscription.
+ */
+async function validateApp(id) {
+  try {
+    return await api('POST', `admin/apps/${enc(id)}/validate`);
+  } catch (e) {
+    if (e?.status !== 409 || e.code !== 'exists' || !e.data?.student) throw e;
+    const x = e.data.student;
+    const who = `${x.name} (${[x.email, x.phone].filter(Boolean).join(' · ')})`;
+    if (!confirm(t('ad.renew.c', { who }))) return null;
+    return api('POST', `admin/apps/${enc(id)}/validate`, { renew: x.id });
+  }
+}
+
 async function setStatus(id, st, by) {
   if (!S.STATUS[st]) return;
-  const r = await act(() => (st === 'validee' ? api('POST', `admin/apps/${enc(id)}/validate`) : api('PATCH', `admin/apps/${enc(id)}`, { status: st, ...(by ? { by } : {}) })));
+  const r = await act(() => (st === 'validee' ? validateApp(id) : api('PATCH', `admin/apps/${enc(id)}`, { status: st, ...(by ? { by } : {}) })));
   if (!r) return;
   await reload().catch(() => {});
   toast(t('ad.apps.status', { s: esc(stLabel(st)) }));
@@ -606,7 +628,7 @@ function openApp(id, validation = null) {
       access && code
         ? `<section class="card acc-card"><p class="card-k" style="color:var(--body)">${icon('check', { size: 14 })} ${t('ad.dw.created')}</p><p class="acc-code"><span>${t('ad.dw.code')}</span><span class="code-big" dir="ltr">${esc(code)}</span></p><p class="muted" style="margin:0 0 8px;font-size:13px">${t('ad.code.once')}</p><div class="msg" data-msg="welcome"></div><div class="acts" style="margin-top:10px"><a class="b b--or b--s" data-wa="welcome" href="#" target="_blank" rel="noopener">${icon('whatsapp', { size: 16 })} ${t('ad.dw.sendWa')}</a><button class="b b--s" type="button" data-copy="welcome">${icon('copy', { size: 16 })} ${t('ad.copy')}</button></div></section>`
         : access
-          ? `<section class="card acc-card"><p class="card-k" style="color:var(--body)">${icon('check', { size: 14 })} ${t('ad.dw.active')}</p><p class="muted" style="margin:0 0 10px;font-size:13.5px">${t('ad.code.hidden')}</p><div class="acts"><button class="b b--s" type="button" data-newcode>${icon('key', { size: 15 })} ${t('ad.code.new')}</button></div></section>`
+          ? `<section class="card acc-card"><p class="card-k" style="color:var(--body)">${icon('check', { size: 14 })} ${t(validation?.renewed ? 'ad.renew.done' : 'ad.dw.active')}</p><p class="muted" style="margin:0 0 10px;font-size:13.5px">${t(validation?.renewed ? 'ad.renew.x' : 'ad.code.hidden')}</p><div class="acts"><button class="b b--s" type="button" data-newcode>${icon('key', { size: 15 })} ${t('ad.code.new')}</button></div></section>`
           : ''
     }
     <dl class="dl">

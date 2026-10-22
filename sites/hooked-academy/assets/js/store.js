@@ -135,7 +135,7 @@ addEventListener('pagehide', () => {
     fetch(apiUrl('me/progress'), {
       method: 'PUT',
       keepalive: true,
-      credentials: 'include',
+      credentials: 'same-origin',
       headers: { 'content-type': 'application/json', 'x-ha': '1' },
       body: JSON.stringify({ progress: c.student.progress }),
     });

@@ -12,9 +12,10 @@ Tout est servi par un seul Worker Cloudflare (`demos`) : pousser sur `main` suff
   miroir hors Cloudflare : `https://youcef4000.github.io/demos/<slug>/`, publié par `.github/workflows/pages.yml`). Les balises `canonical`, `og:url` et `og:image` utilisent `https://demos.bornzstudio.com/`.
 - Chemins **relatifs** uniquement dans une démo (`./style.css`, `img/photo.webp`), jamais `/style.css` :
   la démo vit dans un sous-dossier.
-- Le Worker n'exécute du code que pour `/hooked-academy/api/*` et `/hooked-academy/media/*` (`worker/`,
-  voir README). Une erreur dans `worker/` ou `wrangler.jsonc` bloque la mise en ligne de toutes les démos :
-  tester avec `npx wrangler dev` (et `npx wrangler deploy --dry-run`) avant de pousser.
+- Hooked Academy a un serveur (`server/`, voir README et DEPLOIEMENT-VPS.md) : la version VPS se teste avec
+  `node server/index.mjs`. Le Worker n'exécute du code que pour `/hooked-academy/api/*` et
+  `/hooked-academy/media/*` (`worker/`) ; une erreur dans `worker/`, `server/plateforme.js` ou
+  `wrangler.jsonc` bloque la mise en ligne de toutes les démos : tester avec `npx wrangler deploy --dry-run`.
 - Aucune dépendance de build : HTML, CSS et JS. Les librairies se chargent depuis
   `cdn.jsdelivr.net` avec une version fixée, ou sont copiées dans le dossier de la démo.
 - Ajouter l'entrée de la démo dans `sites/demos.json` :

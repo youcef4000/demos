@@ -41,25 +41,22 @@ Si certains réseaux n'arrivent pas à joindre Cloudflare (`ERR_CONNECTION_TIMED
 
 Chaque push sur `main` met ensuite à jour les deux hébergements.
 
-## Serveur de Hooked Academy (`worker/`)
+## Serveur de Hooked Academy (`server/`)
 
-Le Worker sert les fichiers de `sites/` tels quels. Seules `/hooked-academy/api/*` et
-`/hooked-academy/media/*` passent par du code (`worker/index.js` → `worker/academy.js`) : le serveur de la
-plateforme (inscriptions, comptes étudiants, contenus modifiés depuis l'espace équipe, voix off, ressources,
-FAQ). Ses données vivent dans un Durable Object avec base SQLite, créé automatiquement au déploiement
-(`migrations` dans `wrangler.jsonc`) : rien à configurer dans Cloudflare. Les autres démos ne passent jamais
-par ce code.
+La formation a un vrai serveur (inscriptions, comptes étudiants, contenus modifiés depuis l'espace équipe,
+voix off, ressources, FAQ) :
 
-- Tester en local : `npx wrangler dev`, puis http://localhost:8787/hooked-academy/admin/.
-- Compte de l'équipe : créé à la première visite de l'espace équipe avec un code d'installation à usage
-  unique. Seule son empreinte SHA-256 est dans `worker/academy.js` (`SETUP`) ; la remplacer par celle d'un
-  nouveau code désactive le compte existant (procédure « mot de passe perdu »).
-- Domaine principal servi par GitHub Pages : les pages appellent le serveur sur **api.bornzstudio.com**
-  (même site, cookies acceptés). À brancher une fois dans Cloudflare : Worker `demos` → **Settings →
-  Domains & Routes → Add → Custom domain** → `api.bornzstudio.com`. Sans lui, l'espace équipe reste
-  disponible sur `https://demos.youcef-ny.workers.dev/hooked-academy/admin/`.
-- Le miroir `youcef4000.github.io` n'a pas de serveur : la plateforme y garde son contenu de base.
-- En-têtes de sécurité des pages : `sites/_headers`.
+- `server/plateforme.js` : le cœur, indépendant de l'hébergeur ;
+- `server/index.mjs` + `server/Dockerfile` : la version VPS (Hostinger + Coolify), Node seul, base SQLite
+  dans un volume `/data`. Mise en ligne : **DEPLOIEMENT-VPS.md** ;
+- `worker/` : l'ancienne version Cloudflare (Durable Object), qui n'exécute du code que pour
+  `/hooked-academy/api/*` et `/hooked-academy/media/*` ; les autres démos ne passent jamais par ce code.
+
+Compte de l'équipe : créé à la première visite de l'espace équipe avec un code d'installation à usage
+unique (100 bits). Seule son empreinte SHA-256 est dans `server/plateforme.js` (`SETUP`, ou la variable
+`SETUP_HASH` du serveur) ; la remplacer désactive le compte existant (procédure « mot de passe perdu »).
+
+Tester en local : `node server/index.mjs`, puis http://localhost:3000/admin/.
 
 ## Ajouter une démo
 

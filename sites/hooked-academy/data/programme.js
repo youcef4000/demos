@@ -4246,8 +4246,9 @@ function merge(base, ov) {
 /* ------------------------------------------------------------------ */
 
 const TXT = (v) => typeof v === 'string' && v.trim() !== '';
-// Ni le type ni le minutage d'une scène ne changent : l'animation et la voix off sont calées dessus
-const FIXED = new Set(['type', 'd', 'at', 'id', 'icon', 'c']);
+// Seuls les textes affichés changent : ni le type, ni le minutage, ni les couleurs, pictogrammes, cadrages
+// ou repères internes d'une scène (l'animation et la voix off sont calées dessus). Même liste que l'éditeur.
+const FIXED = new Set(['type', 'd', 'at', 'id', 'icon', 'c', 'art', 'bg', 'align', 'mode', 'tone', 'style', 'shot', 'mood', 'kind', 'swatch', 'from', 'moves', 'app', 'k', 'r']);
 /** Textes d'une scène : seules les chaînes changent, la structure reste. */
 function mergeText(base, ov) {
   if (ov == null) return base;

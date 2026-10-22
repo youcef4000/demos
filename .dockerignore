@@ -1,0 +1,5 @@
+# Image Hooked Academy (server/Dockerfile) : seulement le serveur et le site de la formation
+*
+!server/
+!sites/hooked-academy/
+sites/hooked-academy/**/*.psd

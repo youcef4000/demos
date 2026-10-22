@@ -1093,7 +1093,7 @@ export function anatomy(root, sc, d) {
           <div class="an-segs">${parts
             .map(
               (p) =>
-                `<div class="an-seg ${typeof p.at === 'number' ? '' : 'is-off'}" data-k="${p.k}" style="left:${((p.from / total) * 100).toFixed(3)}%;width:${(((p.to - p.from) / total) * 100).toFixed(3)}%;--c:${col(p.c || p.k)}"><b>${esc(p.label || p.k.toUpperCase())}</b></div>`,
+                `<div class="an-seg ${typeof p.at === 'number' ? '' : 'is-off'}" data-k="${esc(p.k)}" style="left:${((p.from / total) * 100).toFixed(3)}%;width:${(((p.to - p.from) / total) * 100).toFixed(3)}%;--c:${col(p.c || p.k)}"><b>${esc(p.label || p.k.toUpperCase())}</b></div>`,
             )
             .join('')}<i class="an-head"></i></div>
           <div class="an-ruler">${ticks.map((s) => `<span style="left:${((s / total) * 100).toFixed(3)}%">${esc(tr('mo.unit.s', { n: s }))}</span>`).join('')}</div>
@@ -1101,7 +1101,7 @@ export function anatomy(root, sc, d) {
         <div class="an-panels">${parts
           .filter((p) => typeof p.at === 'number')
           .map(
-            (p) => `<div class="an-panel" data-k="${p.k}" style="--c:${col(p.c || p.k)}">
+            (p) => `<div class="an-panel" data-k="${esc(p.k)}" style="--c:${col(p.c || p.k)}">
               <h3><span>${icon(p.icon || AN_ICON[p.k] || 'spark', { size: 40 })}</span>${esc(p.label || p.k.toUpperCase())}${p.when ? `<em>${rich(p.when)}</em>` : ''}</h3>
               ${p.fr ? `<p class="an-fr">${rich(p.fr)}</p>` : ''}
               ${p.ar && lang !== 'ar' ? `<p class="an-ar" lang="ar" dir="rtl">${esc(p.ar)}</p>` : ''}
