@@ -129,7 +129,7 @@ def build(job, pre):
     ln = (f"loudnorm=I=-16:TP=-1.5:LRA=7:measured_I={m['input_i']}:measured_TP={m['input_tp']}:"
           f"measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true")
     subprocess.run(src[:2] + ['-v', 'error', '-y'] + src[3:] + ['-af', f'{CHAIN},{ln},aresample={SR}', '-c:a', 'aac',
-                   '-b:a', '128k', '-movflags', '+faststart', str(out)], input=raw, check=True)
+                   '-b:a', '80k', '-movflags', '+faststart', str(out)], input=raw, check=True)
     return {'audio': f"video/voix/{job['id']}.m4a", 'd': ds}
 
 
