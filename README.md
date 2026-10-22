@@ -54,7 +54,11 @@ par ce code.
 - Compte de l'équipe : créé à la première visite de l'espace équipe avec un code d'installation à usage
   unique. Seule son empreinte SHA-256 est dans `worker/academy.js` (`SETUP`) ; la remplacer par celle d'un
   nouveau code désactive le compte existant (procédure « mot de passe perdu »).
-- Le miroir GitHub Pages n'a pas de serveur : la plateforme y garde son contenu de base, sans espace équipe.
+- Domaine principal servi par GitHub Pages : les pages appellent le serveur sur **api.bornzstudio.com**
+  (même site, cookies acceptés). À brancher une fois dans Cloudflare : Worker `demos` → **Settings →
+  Domains & Routes → Add → Custom domain** → `api.bornzstudio.com`. Sans lui, l'espace équipe reste
+  disponible sur `https://demos.youcef-ny.workers.dev/hooked-academy/admin/`.
+- Le miroir `youcef4000.github.io` n'a pas de serveur : la plateforme y garde son contenu de base.
 - En-têtes de sécurité des pages : `sites/_headers`.
 
 ## Ajouter une démo

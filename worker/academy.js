@@ -35,6 +35,9 @@ const CATS = ['inscription', 'formation', 'plateforme', 'ia', 'creation', 'busin
 const AUD = ['public', 'pro', 'both'];
 const KINDS = ['pdf', 'prompt', 'link', 'image', 'file', 'audio', 'video'];
 const DEFAULTS = { whatsapp: '213558678038', cohort: 'Prochaine session' };
+// Pages servies ailleurs que par ce Worker (domaine principal sur GitHub Pages) qui appellent le serveur sur
+// son sous-domaine Cloudflare : même site (bornzstudio.com), donc cookies SameSite acceptés.
+const ORIGINS = ['https://demos.bornzstudio.com'];
 const TRAINER = { id: 'st-trainer', name: 'Youcef N.', firstName: 'Youcef', cohort: 'Équipe Hooked', role: 'formateur', protected: true, active: true, access: TRACKS };
 
 // Types de fichiers acceptés (par extension) et signature attendue en tête de fichier
@@ -475,13 +478,40 @@ export class Academy extends DurableObject {
   /* --------------------------- routeur ----------------------------- */
 
   async fetch(req) {
-    try {
-      return await this.route(req, new URL(req.url));
-    } catch (e) {
-      if (e instanceof Http) return json({ error: e.code, ...e.extra }, e.status, e.status === 429 ? { 'retry-after': '900' } : {});
-      console.error(e);
-      return json({ error: 'server' }, 500);
+    const url = new URL(req.url);
+    const origin = req.headers.get('origin');
+    const cors = origin && origin !== url.origin && ORIGINS.includes(origin);
+    if (req.method === 'OPTIONS') {
+      if (!cors) return new Response(null, { status: 403 });
+      return new Response(null, {
+        status: 204,
+        headers: {
+          'access-control-allow-origin': origin,
+          'access-control-allow-credentials': 'true',
+          'access-control-allow-methods': 'GET, POST, PUT, PATCH, DELETE',
+          'access-control-allow-headers': 'content-type, x-ha',
+          'access-control-max-age': '600',
+          vary: 'Origin',
+        },
+      });
     }
+    let res;
+    try {
+      res = await this.route(req, url);
+    } catch (e) {
+      if (e instanceof Http) res = json({ error: e.code, ...e.extra }, e.status, e.status === 429 ? { 'retry-after': '900' } : {});
+      else {
+        console.error(e);
+        res = json({ error: 'server' }, 500);
+      }
+    }
+    if (!cors) return res;
+    const h = new Headers(res.headers);
+    h.set('access-control-allow-origin', origin);
+    h.set('access-control-allow-credentials', 'true');
+    h.set('access-control-expose-headers', 'content-range, content-length, etag');
+    h.append('vary', 'Origin');
+    return new Response(res.body, { status: res.status, headers: h });
   }
 
   async route(req, url) {
@@ -495,7 +525,7 @@ export class Academy extends DurableObject {
     if (M !== 'GET' && M !== 'HEAD') {
       if (req.headers.get('x-ha') !== '1') fail(403, 'csrf');
       const o = req.headers.get('origin');
-      if (o && o !== url.origin) fail(403, 'origin');
+      if (o && o !== url.origin && !ORIGINS.includes(o)) fail(403, 'origin');
       if (req.headers.get('sec-fetch-site') === 'cross-site') fail(403, 'origin');
     }
     let seg;
@@ -1023,16 +1053,19 @@ export class Academy extends DurableObject {
     const etag = `"${f.id}"`;
     const inline = INLINE.test(f.type);
     const h = {
-      ...SEC,
+      'x-content-type-options': 'nosniff',
+      'referrer-policy': 'same-origin',
       'content-type': f.type,
       'accept-ranges': 'bytes',
       etag,
       'cache-control': f.scope === 'public' ? 'public, max-age=31536000, immutable' : 'private, max-age=3600',
       'content-disposition': `${inline ? 'inline' : 'attachment'}; filename*=UTF-8''${encodeURIComponent(f.name)}`,
-      'cross-origin-resource-policy': 'same-origin',
+      'cross-origin-resource-policy': 'same-site',
     };
+    // Affichable dans un cadre seulement par les pages du site (aperçu des PDF et des images)
+    const ancestors = `frame-ancestors 'self' ${ORIGINS.join(' ')}`;
     // Jamais exécuté comme une page (le lecteur PDF du navigateur ne supporte pas le bac à sable)
-    if (f.type !== 'application/pdf') h['content-security-policy'] = "default-src 'none'; img-src 'self'; media-src 'self'; style-src 'unsafe-inline'; sandbox";
+    h['content-security-policy'] = f.type === 'application/pdf' ? ancestors : `default-src 'none'; img-src 'self'; media-src 'self'; style-src 'unsafe-inline'; sandbox; ${ancestors}`;
     if (req.headers.get('if-none-match') === etag) return new Response(null, { status: 304, headers: h });
     let start = 0;
     let end = f.size - 1;

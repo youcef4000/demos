@@ -4211,7 +4211,7 @@ const VOIX_EQUIPE = PUB?.voix && typeof PUB.voix === 'object' ? PUB.voix : {};
 MODULES.forEach((m) =>
   m.lessons.forEach((l) => {
     const v = VOIX_EQUIPE[l.id];
-    if (!v || typeof v.audio !== 'string' || !/^media\/f[a-z2-7]{20}\.[a-z0-9]{1,5}$/.test(v.audio) || !Array.isArray(v.d) || v.d.length !== l.scenes.length) return;
+    if (!v || typeof v.audio !== 'string' || !/^(https:\/\/[a-z0-9.-]+\/hooked-academy\/)?media\/f[a-z2-7]{20}\.[a-z0-9]{1,5}$/.test(v.audio) || !Array.isArray(v.d) || v.d.length !== l.scenes.length) return;
     l.audio = v.audio;
     l.clone = true;
     l.own = true;

@@ -10,6 +10,7 @@ import './i18n/app.js';
 import { logoInner, markSVG } from './brand.js';
 import { icon } from './icons.js';
 import * as S from './store.js';
+import { siteUrl } from './api.js';
 import { TRACKS, PARTS, MODULES, allLessons, findLesson, modCode, modulesOf, coreModulesOf, lessonsOf } from '../../data/programme.js';
 import { compose, lessonDuration } from '../../motion/engine.js';
 import { renderWidget, flashcards } from './widgets.js';
@@ -895,7 +896,7 @@ function normItem(x, lessonId) {
 }
 function teamItems(lessonId) {
   // Fichiers du dépôt (manifeste) + ressources déposées depuis l'espace équipe (serveur, réservées aux membres)
-  const server = (S.member().res?.[lessonId] || []).map((x) => ({ ...x, file: x.name || '', path: x.kind === 'link' ? undefined : x.url }));
+  const server = (S.member().res?.[lessonId] || []).map((x) => ({ ...x, file: x.name || '', url: x.kind === 'link' ? x.url : siteUrl(x.url) }));
   const list = [...(Array.isArray(TEAM.lessons?.[lessonId]) ? TEAM.lessons[lessonId] : []), ...server];
   return list
     .filter((x) => x && (x.lang == null || x.lang === '' || x.lang === lang))

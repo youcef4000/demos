@@ -4,7 +4,7 @@
 // progression au serveur. Le compte démo vit seulement ici, sans serveur.
 
 import { PUB } from '../../data/serveur.js';
-import { api, proofLogin, ApiError } from './api.js';
+import { api, apiUrl, proofLogin, ApiError } from './api.js';
 
 const ME = 'hooked-academy:me:v2';
 const OLD = ['hooked-academy:data:v1', 'hooked-academy:session:v1', 'hooked-academy:admin:v1'];
@@ -132,10 +132,10 @@ addEventListener('pagehide', () => {
   const c = read();
   if (!c || c.demo || !c.dirty) return;
   try {
-    fetch(new URL('../../api/me/progress', import.meta.url), {
+    fetch(apiUrl('me/progress'), {
       method: 'PUT',
       keepalive: true,
-      credentials: 'same-origin',
+      credentials: 'include',
       headers: { 'content-type': 'application/json', 'x-ha': '1' },
       body: JSON.stringify({ progress: c.student.progress }),
     });

@@ -2,10 +2,18 @@
 // Sans serveur (miroir GitHub Pages, hors ligne), les appels échouent avec ApiError(0, 'network') :
 // chaque page garde alors son contenu de base.
 
-const ROOT = new URL('../../', import.meta.url);
+// Le serveur répond sur la même adresse quand la page est servie par le Worker Cloudflare. Quand le domaine
+// principal est servi par GitHub Pages, il répond sur un sous-domaine Cloudflare du même site (cookies acceptés :
+// même site). data/serveur.js essaie ce sous-domaine puis la même adresse, et retient celle qui répond.
+export const SITE_ROOT = new URL('../../', import.meta.url);
+const API_HOSTS = { 'demos.bornzstudio.com': 'https://api.bornzstudio.com/hooked-academy/' };
+export const ALT_ROOT = API_HOSTS[location.hostname] ? new URL(API_HOSTS[location.hostname]) : null;
+let ROOT = SITE_ROOT;
+export const setRoot = (u) => (ROOT = new URL(u));
+const creds = () => (ROOT.origin === location.origin ? 'same-origin' : 'include');
 export const apiUrl = (path) => new URL(`api/${path}`, ROOT).href;
-/** Adresse d'un fichier du serveur à partir de son chemin publié (« media/f….m4a »). */
-export const siteUrl = (path) => new URL(path, ROOT).href;
+/** Adresse d'un fichier du serveur à partir de son chemin publié (« media/f….m4a ») ; une adresse complète reste telle quelle. */
+export const siteUrl = (path) => (/^https:\/\//.test(path) ? path : new URL(path, ROOT).href);
 
 export class ApiError extends Error {
   constructor(status, code) {
@@ -24,7 +32,7 @@ export async function api(method, path, body, { timeout = 20000 } = {}) {
   const tm = setTimeout(() => ctl.abort(), timeout);
   let r;
   try {
-    r = await fetch(apiUrl(path), { method, headers, body: body === undefined ? undefined : JSON.stringify(body), credentials: 'same-origin', cache: 'no-store', signal: ctl.signal });
+    r = await fetch(apiUrl(path), { method, headers, body: body === undefined ? undefined : JSON.stringify(body), credentials: creds(), cache: 'no-store', signal: ctl.signal });
   } catch {
     throw new ApiError(0, 'network');
   } finally {

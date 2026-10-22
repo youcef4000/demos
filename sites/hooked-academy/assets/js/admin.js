@@ -350,7 +350,7 @@ function viewOffline() {
   root.innerHTML = authBox(
     t('ad.off.title'),
     t('ad.off.lead'),
-    `<div class="acts"><button class="b b--or" type="button" id="retry">${icon('repeat', { size: 16 })} ${t('ad.off.retry')}</button><a class="b" href="https://demos.bornzstudio.com/hooked-academy/admin/">${t('ad.off.main')}</a></div>`,
+    `<div class="acts"><button class="b b--or" type="button" id="retry">${icon('repeat', { size: 16 })} ${t('ad.off.retry')}</button><a class="b" href="https://demos.youcef-ny.workers.dev/hooked-academy/admin/">${t('ad.off.main')}</a></div>`,
   );
   $('#retry').addEventListener('click', () => route());
 }

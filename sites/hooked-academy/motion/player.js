@@ -85,7 +85,7 @@ async function boot() {
   let audio = null;
 
   if (q.has('audio') && lesson.audio) {
-    audio = new Audio(lesson.audio === 'preview' ? PREVIEW : new URL(`../${lesson.audio}`, location.href).href);
+    audio = new Audio(lesson.audio === 'preview' ? PREVIEW : /^https:\/\//.test(lesson.audio) ? lesson.audio : new URL(`../${lesson.audio}`, location.href).href);
     audio.preload = 'auto';
   }
 
