@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hors ligne — Hooked Academy</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07060a">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<style>
+  :root { color-scheme: dark; --bg: #07060a; --fg: #f4efe4; --mute: #a59f92; --gold: #e0be55; }
+  @media (prefers-color-scheme: light) { :root:not([data-theme='dark']) { color-scheme: light; --bg: #f7f3ea; --fg: #1f1a10; --mute: #6b6457; --gold: #9a7414; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100svh; display: grid; place-items: center; padding: 24px 16px; background: var(--bg); color: var(--fg); font: 16px/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif; text-align: center; }
+  main { max-width: 420px; display: grid; gap: 14px; justify-items: center; }
+  img { width: 72px; height: 72px; border-radius: 18px; }
+  h1 { margin: 6px 0 0; font-size: 24px; line-height: 1.2; }
+  p { margin: 0; color: var(--mute); }
+  [lang='ar'] { font-family: 'IBM Plex Sans Arabic', system-ui, sans-serif; }
+  button { margin-top: 8px; padding: 12px 22px; border: 0; border-radius: 999px; background: var(--gold); color: #1a1407; font: inherit; font-weight: 700; cursor: pointer; }
+  button:focus-visible { outline: 3px solid var(--fg); outline-offset: 3px; }
+</style>
+</head>
+<body>
+<main>
+  <img src="assets/img/icon-192.png" alt="" width="72" height="72">
+  <h1>Tu es hors ligne</h1>
+  <p>Reconnecte-toi à Internet pour continuer ta formation. Les pages déjà ouvertes restent disponibles.</p>
+  <p lang="ar" dir="rtl">أنت غير متصل بالإنترنت. أعد الاتصال لمواصلة التكوين.</p>
+  <button type="button" onclick="location.reload()">Réessayer</button>
+</main>
+</body>
+</html>

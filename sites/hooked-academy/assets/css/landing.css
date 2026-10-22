@@ -1117,20 +1117,32 @@ html[lang='ar'] .duo-big {
   font-size: 18px;
   line-height: 1.45;
 }
+/* Couverture de la formation : grande, presque toute la largeur du panneau */
 .duo-cov {
-  margin: 4px 0 0;
-  max-width: 560px;
+  margin: 6px 0 4px;
+  width: 100%;
   aspect-ratio: 16 / 9;
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
   background: var(--ink);
-  box-shadow: 0 0 0 2px var(--ink), 0 22px 40px -22px rgb(0 0 0 / 0.55);
+  box-shadow: 0 0 0 2px var(--ink), 0 34px 60px -30px rgb(0 0 0 / 0.6);
 }
 .duo-cov img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform calc(var(--img) * 6) steps(6);
+}
+@media (hover: hover) {
+  .duo-p:hover .duo-cov img {
+    transform: scale(1.035);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .duo-cov img {
+    transition: none;
+  }
 }
 .duo-mods {
   margin: 0;
@@ -3052,6 +3064,22 @@ html[lang='ar'] .credits dd {
 }
 .foot-nav a:hover {
   color: var(--lime);
+}
+.foot-app {
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-weight: 650;
+  color: var(--lime);
+  background: none;
+  cursor: pointer;
+}
+.foot-app[hidden] {
+  display: none;
+}
+.foot-app:hover {
+  text-decoration: underline;
 }
 .foot-end {
   display: grid;

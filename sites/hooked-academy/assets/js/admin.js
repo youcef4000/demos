@@ -13,6 +13,7 @@ import * as S from './store.js';
 import { MODULES, allLessons, findLesson, modCode, modulesOf, coreModulesOf, lessonsOf, trackOf } from '../../data/programme.js';
 import { plan, lessonDuration } from '../../motion/engine.js';
 import * as FAQ from './faq.js';
+import { initPWA, installable } from './pwa.js';
 import { match as botMatch, SURE as BOT_SURE, builtins as botBuiltins } from './assistant.js';
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -254,7 +255,7 @@ function shell(active, html) {
   const d = S.load();
   const nNew = d.applications.filter((a) => a.status === 'nouvelle').length;
   const more = !TABS.includes(active);
-  const out = `<a class="nv" href="../app/" target="_blank" rel="noopener">${icon('user', { size: 20 })}${t('ad.nav.studentSpace')} <span class="ext" aria-hidden="true">${EXT}</span></a>`;
+  const out = `<a class="nv" href="../app/" target="_blank" rel="noopener">${icon('user', { size: 20 })}${t('ad.nav.studentSpace')} <span class="ext" aria-hidden="true">${EXT}</span></a><button class="nv" type="button" data-pwa-install ${installable() ? '' : 'hidden'}>${icon('download', { size: 20 })}${t('pwa.install')}</button>`;
   root.innerHTML = `<div class="sh">
     <aside class="side">
       <a class="ha-logo" href="../">${logoInner()}</a>
@@ -1318,6 +1319,7 @@ function route() {
   return viewOverview();
 }
 bindSwitchers(document);
+initPWA('../sw.js');
 addEventListener('hashchange', route);
 // Une inscription envoyée depuis la landing (autre onglet) apparaît sans recharger
 addEventListener('storage', (e) => {

@@ -16,6 +16,7 @@ import { renderWidget, flashcards } from './widgets.js';
 import * as FAQ from './faq.js';
 import { mountAssistant } from './assistant.js';
 import { getTheme, setTheme } from './theme.js';
+import { initPWA, installable } from './pwa.js';
 import { OUTILS, CATS as TOOL_CATS, BUDGETS, PROMPTS, PROMPT_TYPES, CHECKED as TOOLS_CHECKED } from '../../data/outils.js';
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -471,6 +472,7 @@ function shell(active, html, { track = '' } = {}) {
       <div class="side-foot">
         ${switcher('lang-sw')}
         <a class="nv" href="https://hooked-lab.com" target="_blank" rel="noopener">${markSVG({ lab: true, cls: 'side-lab' }).replace('<svg', '<svg width="20" height="20"')}<span>Hooked Lab</span>${icon('arrow', { size: 14, cls: 'i-ext' })}</a>
+        <button class="nv nv-app" type="button" data-pwa-install ${installable() ? '' : 'hidden'}>${icon('download', { size: 20 })}<span>${t('pwa.install')}</span></button>
         <a class="nv" href="../">${back(20)}<span>${t('app.nav.site')}</span></a>
       </div>
     </aside>
@@ -1507,6 +1509,7 @@ function prefsCard({ demo = false } = {}) {
     ${switcher('lang-sw lang-sw--l')}
     <hr><p class="card-k">${icon('sun', { size: 14 })} ${t('app.theme.k')}</p><p class="muted">${t('app.theme.text')}</p>
     <div class="seg th-seg" role="group" aria-label="${esc(t('app.theme.k'))}">${['dark', 'light'].map((v) => `<button type="button" data-theme-set="${v}" aria-pressed="${getTheme() === v}">${icon(v === 'light' ? 'sun' : 'moon', { size: 15 })} ${t(`app.theme.${v}`)}</button>`).join('')}</div>
+    <div data-pwa-install ${installable() ? '' : 'hidden'}><hr><p class="card-k">${icon('download', { size: 14 })} ${t('app.pwa.k')}</p><p class="muted">${t('app.pwa.text')}</p><button class="b b--s" type="button">${icon('download', { size: 15 })} ${t('pwa.install')}</button></div>
     ${demo ? `<hr><p class="card-k">${icon('repeat', { size: 14 })} ${t('app.demo.reset.k')}</p><p class="muted">${t('app.demo.reset.text')}</p><button class="b b--s b--danger" id="rst" type="button">${t('app.demo.reset')}</button>` : ''}
   </section>`;
 }
@@ -1927,6 +1930,7 @@ function bot() {
     },
   });
 }
+initPWA('../sw.js');
 const start = () =>
   Promise.all([document.fonts?.ready, loadVideos(), loadTeam()])
     .then(route)

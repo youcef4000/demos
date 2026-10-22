@@ -11,6 +11,7 @@ import { addApplication, load as loadStore } from './store.js';
 import * as FAQ from './faq.js';
 import { OFFRES } from '../../data/offres.js';
 import { mountAssistant } from './assistant.js';
+import { initPWA } from './pwa.js';
 import { OUTILS, BUDGETS, CHECKED } from '../../data/outils.js';
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -774,3 +775,4 @@ const start = () => {
 };
 if (document.fonts?.ready) document.fonts.ready.then(start);
 else start();
+initPWA('sw.js');

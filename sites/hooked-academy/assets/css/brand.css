@@ -179,3 +179,41 @@ a {
   background: rgb(201 162 39 / 0.35);
   color: var(--mist-100);
 }
+
+/* Application installable : fenêtre d'aide iPhone / iPad */
+.pwa-dlg {
+  max-width: min(420px, calc(100vw - 32px));
+  padding: 22px 22px 18px;
+  border: 0;
+  border-radius: 18px;
+  color: #f4efe4;
+  background: #141210;
+  box-shadow: 0 30px 80px -20px rgb(0 0 0 / 0.7);
+}
+.pwa-dlg::backdrop {
+  background: rgb(0 0 0 / 0.6);
+}
+.pwa-dlg h2 {
+  margin: 0 0 8px;
+  font-size: 19px;
+}
+.pwa-dlg p {
+  margin: 0 0 16px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #cfc8ba;
+}
+.pwa-ok {
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 700;
+  color: #1a1407;
+  background: #e0be55;
+  cursor: pointer;
+}
+
+[data-pwa-install][hidden] {
+  display: none !important;
+}
