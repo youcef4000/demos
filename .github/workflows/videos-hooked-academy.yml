@@ -9,9 +9,10 @@
 name: Vidéos hooked-academy
 
 on:
-  push:
-    branches: [main]
-    paths: ['sites/hooked-academy/video/voix/**']
+  # Plus de rendu automatique à chaque voix poussée : la plateforme lit maintenant la voix off avec
+  # l'animation en direct (data/voix-off.js, tools/hooked-academy/voix-off.py). Le rendu MP4 reste
+  # disponible à la demande (Actions → Vidéos hooked-academy → Run workflow), par exemple pour
+  # récupérer les vidéos à publier sur les réseaux (artefact téléchargeable).
   workflow_dispatch:
     inputs:
       lecons:
