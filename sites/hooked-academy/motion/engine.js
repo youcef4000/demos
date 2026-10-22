@@ -11,7 +11,7 @@ import '../assets/js/i18n/motion.js';
 import { modCode } from '../data/programme.js';
 
 /** Durée de base de chaque type de scène (sans voix enregistrée). */
-const BASE = {
+export const BASE = {
   title: 4.2, big: 4.6, quote: 5, stat: 4.6, cards: 6, grid: 6, steps: 7, checklist: 6.5, compare: 7,
   formula: 6, flow: 7, funnel: 6, curve: 7, timeline: 8, prompt: 9, chat: 8, wave: 6, storyboard: 8,
   camera: 10, ratio: 8, layers: 8, scan: 9, price: 7, phone: 7, anatomy: 10, acronym: 8, table: 9, hooks: 8, outro: 4.2,

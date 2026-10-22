@@ -1,23 +1,25 @@
-// Questions fréquentes (espace étudiant, landing), gérées par l'équipe dans l'espace équipe (#/faq).
-// La liste publiée est data/faq.json (servie avec le site). Les modifications faites dans l'espace
-// équipe restent un brouillon dans ce navigateur (aperçu immédiat) jusqu'à ce que l'équipe publie
-// le fichier sur GitHub : le site se met alors à jour pour tout le monde.
-// Chaque entrée : { id, cat, landing, kw, q: { fr, en, ar }, a: { fr, en, ar } } — seul le français est obligatoire.
+// Questions fréquentes (landing, espace étudiant, assistant), gérées par l'équipe dans l'espace équipe (#/faq)
+// et gardées par le serveur. Sans serveur (miroir, hors ligne) : data/faq.json, les questions publiques de base.
+// Chaque question a son public (aud) :
+//   « public » : landing et assistant public · « pro » : membres seulement (espace étudiant, assistant pro) · « both » : partout.
+// Entrée : { id, cat, aud, landing, kw, q: { fr, en, ar }, a: { fr, en, ar } } — seul le français est obligatoire.
 // kw : mots-clés de l'assistant (toutes langues, séparés par des virgules), en plus de la question et de la réponse.
 
-const KEY = 'hooked-academy:faq';
+import { PUB } from '../../data/serveur.js';
+
 const SRC = new URL('../../data/faq.json', import.meta.url);
-export const FILE = 'sites/hooked-academy/data/faq.json';
-export const CATS = ['inscription', 'formation', 'plateforme', 'ia'];
+export const CATS = ['inscription', 'formation', 'plateforme', 'ia', 'creation', 'business'];
+export const AUD = ['public', 'pro', 'both'];
 const LANGS = ['fr', 'en', 'ar'];
 
 const str = (v) => String(v ?? '').trim();
 const texts = (o) => Object.fromEntries(LANGS.map((l) => [l, str(o?.[l])]));
-function norm(x, i = 0) {
+export function norm(x, i = 0) {
   if (!x || typeof x !== 'object') return null;
   const it = {
     id: str(x.id).replace(/[^\w-]/g, '') || `q${i}`,
     cat: CATS.includes(x.cat) ? x.cat : 'formation',
+    aud: AUD.includes(x.aud) ? x.aud : 'public',
     landing: !!x.landing,
     kw: str(x.kw).slice(0, 600),
     q: texts(x.q),
@@ -25,74 +27,36 @@ function norm(x, i = 0) {
   };
   return it.q.fr && it.a.fr ? it : null;
 }
-const normList = (v) => (Array.isArray(v) ? v.map(norm).filter(Boolean) : []);
+export const normList = (v) => (Array.isArray(v) ? v.map(norm).filter(Boolean) : []);
+const clone = (x) => JSON.parse(JSON.stringify(x));
 
 let published = null;
 let loading = null;
-/** Charge la liste publiée (data/faq.json). */
+/** Liste de base (data/faq.json), pour l'espace équipe tant que le serveur n'a pas de liste. */
+export function base() {
+  return fetch(SRC, { cache: 'no-cache' })
+    .then((r) => (r.ok ? r.json() : []))
+    .catch(() => [])
+    .then(normList);
+}
+/** Charge la liste publique : celle du serveur, sinon data/faq.json. */
 export function ready(force = false) {
   if (force) loading = null;
-  if (!loading)
-    loading = fetch(SRC, { cache: 'no-cache' })
-      .then((r) => (r.ok ? r.json() : []))
-      .catch(() => [])
-      .then((j) => (published = normList(j)));
+  if (!loading) loading = (Array.isArray(PUB?.faq) ? Promise.resolve(normList(PUB.faq)) : base()).then((l) => (published = l.filter((x) => x.aud !== 'pro')));
   return loading;
 }
+/** Questions publiques (appeler ready() avant). */
+export const list = () => clone(published || []);
 
-function readDraft() {
-  try {
-    const v = JSON.parse(localStorage.getItem(KEY));
-    if (Array.isArray(v)) return normList(v);
-  } catch {}
-  return null;
-}
-function writeDraft(list) {
-  try {
-    localStorage.setItem(KEY, JSON.stringify(list));
-  } catch {}
-}
-const clone = (x) => JSON.parse(JSON.stringify(x));
+let pro = [];
+/** Questions réservées aux membres, reçues du serveur à la connexion. */
+export const setPro = (l) => (pro = normList(l).filter((x) => x.aud !== 'public'));
+/** Espace étudiant : questions publiques + questions pro. */
+export const memberList = () => {
+  const seen = new Set();
+  return [...list(), ...clone(pro)].filter((x) => !seen.has(x.id) && seen.add(x.id));
+};
+export const hasPro = () => pro.length > 0;
 
-/** Liste à afficher : le brouillon de ce navigateur s'il existe, sinon la liste publiée (appeler ready() avant). */
-export const list = () => readDraft() || clone(published || []);
-export const publishedList = () => clone(published || []);
-/** Le brouillon diffère-t-il de la version publiée ? */
-export function dirty() {
-  const d = readDraft();
-  return !!d && JSON.stringify(d) !== JSON.stringify(published || []);
-}
-
-/** Ajoute (sans id) ou met à jour une question. */
-export function save(item) {
-  const all = list();
-  const clean = norm({ ...item, id: item.id || `q${Date.now().toString(36)}` });
-  if (!clean) return null;
-  const i = all.findIndex((x) => x.id === clean.id);
-  if (i >= 0) all[i] = clean;
-  else all.push(clean);
-  writeDraft(all);
-  return clean;
-}
-export function remove(id) {
-  writeDraft(list().filter((x) => x.id !== id));
-}
-/** Monte (-1) ou descend (+1) une question. */
-export function move(id, dir) {
-  const all = list();
-  const i = all.findIndex((x) => x.id === id);
-  const j = i + dir;
-  if (i < 0 || j < 0 || j >= all.length) return;
-  [all[i], all[j]] = [all[j], all[i]];
-  writeDraft(all);
-}
-/** Abandonne le brouillon : retour à la version publiée. */
-export function discard() {
-  try {
-    localStorage.removeItem(KEY);
-  } catch {}
-}
-/** Contenu de data/faq.json pour la publication. */
-export const toJSON = () => `${JSON.stringify(list(), null, 2)}\n`;
 /** Texte dans la langue demandée, sinon en français. */
 export const pickLang = (o, l) => str(o?.[l]) || str(o?.fr);

@@ -1,13 +1,23 @@
 {
-  // Worker "demos" : sert tout le dossier sites/ tel quel, sans code serveur.
+  // Worker "demos" : sert tout le dossier sites/ tel quel.
   // Chaque demo vit dans sites/<nom-du-client>/ et repond sur /<nom-du-client>/.
   // Le nom doit rester celui du Worker cree dans Cloudflare.
+  // Seules /hooked-academy/api/* et /hooked-academy/media/* passent par le code (worker/) :
+  // le serveur de Hooked Academy, avec sa base SQLite (Durable Object, rien a creer a la main).
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "demos",
+  "main": "worker/index.js",
   "compatibility_date": "2026-09-01",
   "workers_dev": true,
   "assets": {
     "directory": "./sites",
-    "not_found_handling": "404-page"
-  }
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/hooked-academy/api/*", "/hooked-academy/media/*"]
+  },
+  "durable_objects": {
+    "bindings": [{ "name": "ACADEMY", "class_name": "Academy" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Academy"] }],
+  "observability": { "enabled": true }
 }

@@ -2,10 +2,10 @@
 // - Pages, scripts, styles, données : réseau d'abord (toujours la dernière version en ligne),
 //   copie en cache pour rouvrir l'application hors ligne.
 // - Images et polices : cache d'abord, rafraîchi en arrière-plan.
-// - API, voix off et vidéos : jamais en cache (données privées, lectures partielles des médias).
+// - API, fichiers du serveur (media/), voix off et vidéos : jamais en cache (données privées, lectures partielles).
 // Changer VERSION à chaque modification de ce fichier : les anciens caches sont supprimés.
 
-const VERSION = 'ha-2026-10-22';
+const VERSION = 'ha-2026-10-22b';
 const PAGES = `${VERSION}-pages`;
 const FILES = `${VERSION}-fichiers`;
 const PRECACHE = ['offline.html', 'assets/img/icon-192.png', 'assets/img/favicon.svg'];
@@ -63,7 +63,7 @@ self.addEventListener('fetch', (e) => {
   // Polices Google et bibliothèque d'animation (version fixée) : cache d'abord
   if (/^(fonts\.(googleapis|gstatic)\.com|cdn\.jsdelivr\.net)$/.test(url.hostname)) return e.respondWith(cacheFirst(req));
   if (!sameScope) return;
-  if (url.pathname.startsWith(`${s.pathname}api/`) || isMedia(url.pathname) || req.headers.has('range')) return;
+  if (url.pathname.startsWith(`${s.pathname}api/`) || url.pathname.startsWith(`${s.pathname}media/`) || isMedia(url.pathname) || req.headers.has('range')) return;
   if (isStatic(url.pathname)) return e.respondWith(cacheFirst(req));
   e.respondWith(networkFirst(req, req.mode === 'navigate' ? PAGES : FILES));
 });

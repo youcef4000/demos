@@ -357,7 +357,7 @@ function viewLogin() {
     } else if (btn.dataset.label) tx.textContent = btn.dataset.label;
   };
   const fail = (r) => {
-    err.textContent = r?.error === 'suspended' ? t('app.login.err.suspended') : t('app.login.err.bad');
+    err.textContent = t({ suspended: 'app.login.err.suspended', rate: 'app.login.err.rate', offline: 'app.login.err.offline' }[r?.error] || 'app.login.err.bad');
     f.classList.remove('is-shake');
     void f.offsetWidth;
     f.classList.add('is-shake');
@@ -386,6 +386,8 @@ function viewLogin() {
       return;
     }
     me = r.student;
+    FAQ.setPro(S.member().faq);
+    bot();
     if (location.hash !== '#/' && location.hash !== '') location.hash = '#/';
     else route();
   });
@@ -729,7 +731,7 @@ const notOwned = (track) => !S.isDemo(me) && !S.hasTrack(me, track);
 function waUpgrade(track) {
   let wa = '';
   try {
-    wa = String(S.load().settings?.whatsapp || '').replace(/\D/g, '');
+    wa = String(S.settings().whatsapp || '').replace(/\D/g, '');
   } catch {}
   const msg = t(S.isExpired(me) ? 'app.pack.renewMsg' : 'app.pack.addMsg', { track: trName(track) });
   return wa ? `https://wa.me/${wa}?text=${encodeURIComponent(msg)}` : RESERVE;
@@ -892,8 +894,9 @@ function normItem(x, lessonId) {
   return { kind, title: String(x.title || x.file || '').trim() || t('app.file.untitled'), file: x.file || '', href, size: x.size, text: x.text || '', lessonId, team: true };
 }
 function teamItems(lessonId) {
-  const list = TEAM.lessons?.[lessonId];
-  if (!Array.isArray(list)) return [];
+  // Fichiers du dépôt (manifeste) + ressources déposées depuis l'espace équipe (serveur, réservées aux membres)
+  const server = (S.member().res?.[lessonId] || []).map((x) => ({ ...x, file: x.name || '', path: x.kind === 'link' ? undefined : x.url }));
+  const list = [...(Array.isArray(TEAM.lessons?.[lessonId]) ? TEAM.lessons[lessonId] : []), ...server];
   return list
     .filter((x) => x && (x.lang == null || x.lang === '' || x.lang === lang))
     .map((x) => normItem(x, lessonId))
@@ -1303,11 +1306,8 @@ function bindTodo(panel, l) {
 }
 
 function gainXP(n, why) {
-  const d = S.load();
-  const st = d.students.find((s) => s.id === me.id);
-  if (!st) return;
-  st.progress.xp += n;
-  S.save(d);
+  if (!me) return;
+  S.gainXP(n);
   refreshMe();
   const x = $('#xp-v');
   if (x) x.textContent = num(me.progress.xp);
@@ -1597,6 +1597,7 @@ function viewProfile() {
   $('#out').addEventListener('click', () => {
     S.logout();
     me = null;
+    bot();
     const u = new URL(location.href);
     u.searchParams.delete('demo');
     u.hash = '';
@@ -1604,12 +1605,7 @@ function viewProfile() {
     route();
   });
   $('#rst')?.addEventListener('click', () => {
-    const d = S.load();
-    const st = d.students.find((s) => s.id === me.id);
-    if (st) {
-      st.progress = { lessons: {}, last: null, days: [], xp: 0, badges: [] };
-      S.save(d);
-    }
+    S.resetProgress();
     refreshMe();
     toast(`${icon('repeat', { size: 18 })} ${t('app.demo.reset.done')}`);
   });
@@ -1779,12 +1775,12 @@ async function viewHelp() {
   const ticket = routing;
   await FAQ.ready();
   if (ticket !== routing) return;
-  const all = FAQ.list().filter((x) => FAQ.pickLang(x.q, lang) && FAQ.pickLang(x.a, lang));
+  const all = (S.isDemo(me) ? FAQ.list() : FAQ.memberList()).filter((x) => FAQ.pickLang(x.q, lang) && FAQ.pickLang(x.a, lang));
   const cats = ['all', ...FAQ.CATS.filter((c) => all.some((x) => x.cat === c))];
   const catLabel = (c) => t(c === 'all' ? 'app.lib.cat.all' : `faq.cat.${c}`);
   let wa = '';
   try {
-    wa = String(S.load().settings?.whatsapp || '').replace(/\D/g, '');
+    wa = String(S.settings().whatsapp || '').replace(/\D/g, '');
   } catch {}
   shell(
     'help',
@@ -1904,18 +1900,22 @@ async function loadTeam() {
     if (m && typeof m.lessons === 'object' && m.lessons) TEAM = m;
   } catch {}
 }
-// Assistant (bot) : répond à partir de la FAQ de l'équipe ; ses réponses renvoient vers les pages utiles
+// Assistant (bot) : répond à partir de la FAQ de l'équipe ; ses réponses renvoient vers les pages utiles.
+// Membre connecté : assistant pro (questions pro en plus). Remonté à chaque connexion / déconnexion.
 function bot() {
+  document.querySelector('.hb')?.remove();
+  const pro = !!me && !S.isDemo(me) && FAQ.hasPro();
   let wa = '';
   try {
-    wa = String(S.load().settings?.whatsapp || '').replace(/\D/g, '');
+    wa = String(S.settings().whatsapp || '').replace(/\D/g, '');
   } catch {}
   const go = (href, k) => ({ href, label: t(k) });
   mountAssistant({
     whatsapp: wa,
     faqHref: '#/aide',
     bottom: 'var(--hb-app-bottom)',
-    filter: (e) => ['commencer', 'pratique', 'acces', 'outils', 'code', 'certificat'].includes(e.id),
+    pro,
+    filter: pro ? (e) => e.aud !== 'public' || ['commencer', 'pratique'].includes(e.id) : (e) => ['commencer', 'pratique', 'acces', 'outils', 'code', 'certificat'].includes(e.id),
     links: {
       outils: go('#/outils', 'app.nav.tools'),
       partenaires: go('#/outils', 'app.nav.tools'),
@@ -1930,10 +1930,34 @@ function bot() {
     },
   });
 }
+/**
+ * Compte à jour depuis le serveur (accès, date de fin, ressources, FAQ pro). Session fermée ou accès suspendu :
+ * retour à la connexion. Hors ligne : on continue avec la copie de cet appareil.
+ */
+async function syncMe() {
+  if (!me || S.isDemo(me)) return;
+  const before = JSON.stringify([me.access, me.expiresAt, me.active]);
+  const r = await S.refresh();
+  if (r === 'out') {
+    me = null;
+    bot();
+    route();
+    toast(`${icon('lock', { size: 18 })} ${t('app.session.out')}`, 4200);
+    return;
+  }
+  if (r !== 'ok') return;
+  FAQ.setPro(S.member().faq);
+  bot();
+  refreshMe();
+  // Accès changé par l'équipe (formation ajoutée, prolongation…) : la page se met à jour
+  if (JSON.stringify([me.access, me.expiresAt, me.active]) !== before && !location.hash.startsWith('#/lecon/')) route();
+}
+FAQ.setPro(S.member().faq);
 initPWA('../sw.js');
 const start = () =>
   Promise.all([document.fonts?.ready, loadVideos(), loadTeam()])
     .then(route)
-    .then(bot);
+    .then(bot)
+    .then(syncMe);
 if (window.gsap || document.readyState === 'complete') start();
 else addEventListener('load', start, { once: true });

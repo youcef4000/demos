@@ -7,7 +7,7 @@ import { lang, isRTL, t, has, setLang, locale } from './i18n.js';
 import './i18n/landing.js';
 import { logoInner, markSVG, morphMark } from './brand.js';
 import { TRACKS, MODULES as ALL_MODULES, allLessons, modCode, coreModulesOf, findLesson } from '../../data/programme.js';
-import { addApplication, load as loadStore } from './store.js';
+import { addApplication, settings } from './store.js';
 import * as FAQ from './faq.js';
 import { OFFRES } from '../../data/offres.js';
 import { mountAssistant } from './assistant.js';
@@ -621,10 +621,26 @@ function validStep(i) {
 next.addEventListener('click', () => {
   if (!validStep(stepI)) return;
   if (stepI < steps.length - 1) return showStep(stepI + 1, true);
+  if (next.disabled) return;
   const data = Object.fromEntries(new FormData(form).entries());
   data.lang = lang;
-  const app = addApplication(data);
-  const first = app.name.split(/\s+/)[0] || '';
+  next.disabled = true;
+  next.setAttribute('aria-busy', 'true');
+  addApplication(data)
+    .then(() => sent(data))
+    .catch((e) => {
+      // Serveur injoignable ou trop d'envois : l'inscription part sur WhatsApp, rien n'est perdu
+      const wa = settings().whatsapp;
+      const msg = t('f.err.waMsg', { name: data.name || '', phone: data.phone || '', pack: data.formation || '' });
+      err.innerHTML = `${esc(t(e?.status === 429 ? 'f.err.rate' : 'f.err.send'))} <a href="https://wa.me/${wa}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">${esc(t('f.err.wa'))}</a>`;
+    })
+    .finally(() => {
+      next.disabled = false;
+      next.removeAttribute('aria-busy');
+    });
+});
+function sent(data) {
+  const first = String(data.name || '').trim().split(/\s+/)[0] || '';
   $('#done-t').textContent = first ? t('f.done.t', { name: first }) : t('f.done.t0');
   const done = $('#form-done');
   armSound();
@@ -636,7 +652,7 @@ next.addEventListener('click', () => {
       done.focus();
     },
   });
-});
+}
 prev.addEventListener('click', () => showStep(Math.max(0, stepI - 1), true));
 form.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -749,7 +765,7 @@ function animate() {
 function bot() {
   let wa = '';
   try {
-    wa = String(loadStore().settings?.whatsapp || '').replace(/\D/g, '');
+    wa = String(settings().whatsapp || '').replace(/\D/g, '');
   } catch {}
   const go = (href, k) => ({ href, label: t(k) });
   mountAssistant({

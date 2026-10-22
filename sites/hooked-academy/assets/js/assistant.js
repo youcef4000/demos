@@ -14,6 +14,9 @@ add({
     'bot.fab': 'Une question ?',
     'bot.name': 'Assistant Hooked',
     'bot.sub': 'Réponses de l’équipe, en direct',
+    'bot.namePro': 'Assistant Hooked Pro',
+    'bot.subPro': 'Questions sur la formation, réservé aux membres',
+    'bot.helloPro': 'Salam ! Je suis l’assistant pro de Hooked Academy : hooks, vidéos, IA, clients… Pose ta question sur la formation, ou choisis-en une :',
     'bot.close': 'Fermer l’assistant',
     'bot.hello': 'Salam ! Je suis l’assistant de Hooked Academy. Pose ta question, ou choisis-en une :',
     'bot.ph': 'Écris ta question…',
@@ -33,6 +36,9 @@ add({
     'bot.fab': 'Got a question?',
     'bot.name': 'Hooked assistant',
     'bot.sub': 'The team’s answers, instantly',
+    'bot.namePro': 'Hooked Pro assistant',
+    'bot.subPro': 'Course questions, members only',
+    'bot.helloPro': 'Salam! I’m the Hooked Academy pro assistant: hooks, videos, AI, clients… Ask your course question, or pick one:',
     'bot.close': 'Close the assistant',
     'bot.hello': 'Salam! I’m the Hooked Academy assistant. Ask your question, or pick one:',
     'bot.ph': 'Type your question…',
@@ -52,6 +58,9 @@ add({
     'bot.fab': 'لديك سؤال؟',
     'bot.name': 'مساعد Hooked',
     'bot.sub': 'إجابات الفريق، فورًا',
+    'bot.namePro': 'مساعد Hooked Pro',
+    'bot.subPro': 'أسئلة حول التكوين، للأعضاء فقط',
+    'bot.helloPro': 'السلام عليكم! أنا المساعد المحترف لـ Hooked Academy: الهوك، الفيديو، الذكاء الاصطناعي، العملاء… اطرح سؤالك عن التكوين، أو اختر واحدًا:',
     'bot.close': 'إغلاق المساعد',
     'bot.hello': 'السلام عليكم! أنا مساعد Hooked Academy. اطرح سؤالك، أو اختر واحدًا:',
     'bot.ph': 'اكتب سؤالك…',
@@ -182,8 +191,9 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
  * extra    : entrées en plus de la FAQ (même forme que la FAQ, textes { fr, en, ar })
  * filter   : (entrée) => bool, entrées proposées en suggestion à l'ouverture
  * bottom   : décalage du bouton (ex. au-dessus d'une barre d'onglets mobile)
+ * pro      : assistant des membres (questions publiques + questions pro reçues à la connexion)
  */
-export function mountAssistant({ links = {}, whatsapp = '', faqHref = '', extra = [], filter = () => true, bottom = '' } = {}) {
+export function mountAssistant({ links = {}, whatsapp = '', faqHref = '', extra = [], filter = () => true, bottom = '', pro = false } = {}) {
   if (document.getElementById('ha-bot')) return;
   if (!document.querySelector('link[data-hb]')) {
     const css = document.createElement('link');
@@ -196,7 +206,7 @@ export function mountAssistant({ links = {}, whatsapp = '', faqHref = '', extra 
   wrap.className = 'hb';
   if (bottom) wrap.style.setProperty('--hb-bottom', bottom);
   wrap.innerHTML = `<section class="hb-win" id="ha-bot" role="dialog" aria-modal="false" aria-labelledby="hb-name" hidden>
-      <header class="hb-h"><span class="hb-av">${icon('bot', { size: 20 })}</span><div><b id="hb-name">${t('bot.name')}</b><small>${t('bot.sub')}</small></div><button class="hb-x" type="button" aria-label="${esc(t('bot.close'))}">${icon('x', { size: 18 })}</button></header>
+      <header class="hb-h"><span class="hb-av">${icon('bot', { size: 20 })}</span><div><b id="hb-name">${t(pro ? 'bot.namePro' : 'bot.name')}</b><small>${t(pro ? 'bot.subPro' : 'bot.sub')}</small></div><button class="hb-x" type="button" aria-label="${esc(t('bot.close'))}">${icon('x', { size: 18 })}</button></header>
       <div class="hb-log" role="log" aria-live="polite"></div>
       <form class="hb-f"><label class="sr-only" for="hb-in">${t('bot.ph')}</label><input class="hb-in" id="hb-in" type="text" maxlength="200" autocomplete="off" placeholder="${esc(t('bot.ph'))}" dir="auto"><button class="hb-send" type="submit" aria-label="${esc(t('bot.send'))}">${icon('send', { size: 18 })}</button></form>
     </section>
@@ -262,8 +272,11 @@ export function mountAssistant({ links = {}, whatsapp = '', faqHref = '', extra 
     if (started) return;
     started = true;
     await FAQ.ready();
-    entries = [...FAQ.list(), ...extra, ...builtins()].filter((e) => pickL(e.q) && pickL(e.a));
-    say(`<p>${t('bot.hello')}</p>${chips(entries.filter((e) => !e.id.startsWith('_') && filter(e)).slice(0, 4))}`);
+    entries = [...(pro ? FAQ.memberList() : FAQ.list()), ...extra, ...builtins()].filter((e) => pickL(e.q) && pickL(e.a));
+    // Assistant pro : les questions pro d'abord dans les suggestions
+    const sug = entries.filter((e) => !e.id.startsWith('_') && filter(e));
+    if (pro) sug.sort((x, y) => (y.aud !== 'public') - (x.aud !== 'public'));
+    say(`<p>${t(pro ? 'bot.helloPro' : 'bot.hello')}</p>${chips(sug.slice(0, 4))}`);
   };
 
   const open = (v) => {

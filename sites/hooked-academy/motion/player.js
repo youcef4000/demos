@@ -22,6 +22,12 @@ const q = new URLSearchParams(location.search);
 const id = q.get('id') || 'm1-l1';
 const RENDER = q.has('render');
 const found = findLesson(id);
+// Aperçu du studio voix off : une piste locale (blob: de cette origine) et la durée de chaque scène (&d=4.2,6.1,…)
+const PREVIEW = String(q.get('src') || '').startsWith(`blob:${location.origin}/`) ? q.get('src') : '';
+const PD = (q.get('d') || '').split(',').map(Number);
+if (found && PREVIEW && PD.length === found.lesson.scenes.length && PD.every((x) => x > 0 && x < 600)) {
+  found.lesson = { ...found.lesson, audio: 'preview', scenes: found.lesson.scenes.map((sc, i) => ({ ...sc, d: PD[i] })) };
+}
 const pl = document.getElementById('pl');
 const stage = document.getElementById('stage');
 
@@ -79,7 +85,7 @@ async function boot() {
   let audio = null;
 
   if (q.has('audio') && lesson.audio) {
-    audio = new Audio(new URL(`../${lesson.audio}`, location.href).href);
+    audio = new Audio(lesson.audio === 'preview' ? PREVIEW : new URL(`../${lesson.audio}`, location.href).href);
     audio.preload = 'auto';
   }
 

@@ -6,6 +6,9 @@
 import { MODULES_IA } from './programme-ia.js';
 import { OVERLAY } from './i18n/index.js';
 import { VOIX } from './voix-off.js';
+import { NARRATION } from './narration.js';
+import { PUB, pubEdits } from './serveur.js';
+import { lang } from '../assets/js/i18n.js';
 
 /**
  * Deux formations distinctes :
@@ -4182,6 +4185,14 @@ export const coreModulesOf = (track) => modulesOf(track).filter((m) => !m.intro)
 /* Voix off clonée (data/voix-off.js) : piste de la leçon et durée de chaque scène */
 /* ------------------------------------------------------------------ */
 
+// Texte « à dire » des leçons enregistrées (prompteur du studio), quand la scène n'en a pas
+MODULES.forEach((m) =>
+  m.lessons.forEach((l) => {
+    const n = NARRATION[l.id];
+    if (Array.isArray(n) && n.length === l.scenes.length) l.scenes.forEach((sc, i) => !sc.say && n[i] && (sc.say = n[i]));
+  }),
+);
+
 MODULES.forEach((m) =>
   m.lessons.forEach((l) => {
     const v = VOIX[l.id];
@@ -4189,6 +4200,21 @@ MODULES.forEach((m) =>
     // Même voix partout : elle remplace aussi les anciens enregistrements, et l'animation suit la piste
     l.audio = v.audio;
     l.clone = true;
+    delete l.video;
+    delete l.poster;
+    l.scenes.forEach((sc, i) => (sc.d = v.d[i]));
+  }),
+);
+
+// Voix off déposée depuis le studio de l'espace équipe (serveur) : elle passe devant la voix clonée
+const VOIX_EQUIPE = PUB?.voix && typeof PUB.voix === 'object' ? PUB.voix : {};
+MODULES.forEach((m) =>
+  m.lessons.forEach((l) => {
+    const v = VOIX_EQUIPE[l.id];
+    if (!v || typeof v.audio !== 'string' || !/^media\/f[a-z2-7]{20}\.[a-z0-9]{1,5}$/.test(v.audio) || !Array.isArray(v.d) || v.d.length !== l.scenes.length) return;
+    l.audio = v.audio;
+    l.clone = true;
+    l.own = true;
     delete l.video;
     delete l.poster;
     l.scenes.forEach((sc, i) => (sc.d = v.d[i]));
@@ -4214,6 +4240,59 @@ function merge(base, ov) {
   return base;
 }
 
+/* ------------------------------------------------------------------ */
+/* Modifications de l'espace équipe (serveur) : textes, points clés,   */
+/* quiz, atelier (to-do), prompts — par langue                         */
+/* ------------------------------------------------------------------ */
+
+const TXT = (v) => typeof v === 'string' && v.trim() !== '';
+// Ni le type ni le minutage d'une scène ne changent : l'animation et la voix off sont calées dessus
+const FIXED = new Set(['type', 'd', 'at', 'id', 'icon', 'c']);
+/** Textes d'une scène : seules les chaînes changent, la structure reste. */
+function mergeText(base, ov) {
+  if (ov == null) return base;
+  if (Array.isArray(base)) return Array.isArray(ov) ? base.map((b, i) => (i < ov.length ? mergeText(b, ov[i]) : b)) : base;
+  if (isObj(base)) {
+    if (!isObj(ov)) return base;
+    const out = { ...base };
+    for (const k of Object.keys(ov)) if (k in base && !FIXED.has(k)) out[k] = mergeText(base[k], ov[k]);
+    // Narration ajoutée à une scène qui n'en avait pas (prompteur du studio)
+    if (!('say' in base) && TXT(ov.say) && 'type' in base) out.say = ov.say;
+    return out;
+  }
+  if (typeof base === 'string') return TXT(ov) ? ov : base;
+  return base;
+}
+const QUIZ_OK = (q) => isObj(q) && TXT(q.q) && Array.isArray(q.a) && q.a.length >= 2 && q.a.every(TXT) && Number.isInteger(q.ok) && q.ok >= 0 && q.ok < q.a.length;
+/** Applique la modification d'une leçon (une langue). Listes (points clés, quiz, atelier, prompts) : remplacées en entier. */
+function editLesson(l, p) {
+  if (!isObj(p)) return l;
+  const out = { ...l };
+  for (const k of ['title', 'ar']) if (TXT(p[k])) out[k] = p[k];
+  if (Array.isArray(p.scenes)) out.scenes = l.scenes.map((sc, i) => mergeText(sc, p.scenes[i]));
+  const own = new Set(l.own_ || []);
+  for (const k of ['key', 'todo']) if (Array.isArray(p[k])) (out[k] = p[k].filter(TXT)), own.add(k);
+  if (Array.isArray(p.quiz)) (out.quiz = p.quiz.filter(QUIZ_OK)), own.add('quiz');
+  if (Array.isArray(p.res)) (out.res = p.res.filter((r) => isObj(r) && TXT(r.title) && TXT(r.text))), own.add('res');
+  if (own.size) out.own_ = [...own];
+  return out;
+}
+function editModule(m, p) {
+  if (isObj(p)) for (const k of ['title', 'pitch', 'ar']) if (TXT(p[k])) m[k] = p[k];
+}
+const EDITS = pubEdits();
+const editOf = (kind, id, lg) => EDITS[kind]?.[id]?.[lg];
+/** Leçons et modules modifiés depuis l'espace équipe (pour l'éditeur). */
+export const edited = (kind, id) => (isObj(EDITS[kind]?.[id]) ? Object.keys(EDITS[kind][id]) : []);
+
+// 1. Modifications en français : elles changent l'original
+MODULES.forEach((m) => {
+  editModule(m, editOf('modules', m.id, 'fr'));
+  m.lessons = m.lessons.map((l) => editLesson(l, editOf('lessons', l.id, 'fr')));
+});
+
+// 2. Traduction : une liste réécrite en français par l'équipe garde sa version (l'ancienne traduction ne correspond plus)
+const omit = (o, keys) => (isObj(o) && keys?.length ? Object.fromEntries(Object.entries(o).filter(([k]) => !keys.includes(k))) : o);
 if (OVERLAY) {
   const O = OVERLAY;
   TRACKS.forEach((t, i) => (TRACKS[i] = merge(t, O.tracks?.[t.id])));
@@ -4221,9 +4300,16 @@ if (OVERLAY) {
   MODULES.forEach((m) => {
     const mo = O.modules?.[m.id];
     if (mo) for (const k of ['title', 'pitch']) if (typeof mo[k] === 'string' && mo[k].trim()) m[k] = mo[k];
-    m.lessons = m.lessons.map((l) => merge(l, O.lessons?.[l.id]));
+    m.lessons = m.lessons.map((l) => merge(l, omit(O.lessons?.[l.id], l.own_)));
   });
 }
+
+// 3. Modifications dans la langue affichée (anglais, arabe)
+if (lang !== 'fr')
+  MODULES.forEach((m) => {
+    editModule(m, editOf('modules', m.id, lang));
+    m.lessons = m.lessons.map((l) => editLesson(l, editOf('lessons', l.id, lang)));
+  });
 
 /* ------------------------------------------------------------------ */
 

@@ -2876,13 +2876,18 @@ html[lang='ar'] .form-done h3 {
   width: 64px;
   height: 64px;
 }
-.done-demo {
-  font-size: 14px;
-  color: var(--paper-mute);
+/* Champ piège pour les robots : invisible pour les visiteurs */
+.hp {
+  position: absolute;
+  inset-inline-start: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
-.done-demo a {
-  color: var(--ink);
+#form-err a {
+  color: inherit;
   font-weight: 700;
+  text-decoration: underline;
 }
 @media (max-width: 899px) {
   .join {

@@ -1,14 +1,13 @@
-// Hooked Academy — données de la plateforme : inscriptions, étudiants, progression.
-// Démo sans serveur : tout est enregistré dans ce navigateur (localStorage). La landing dépose les
-// inscriptions, l'équipe les traite dans l'admin (contact WhatsApp, paiement, validation) et la
-// validation crée l'accès étudiant (e-mail + code). En production, ces fonctions appelleraient une
-// API (Worker Cloudflare + D1, ou la base de Hooked Lab) avec exactement les mêmes entrées/sorties.
+// Hooked Academy — données de l'espace étudiant.
+// Les inscriptions, les comptes et la progression sont gardés par le serveur (worker/academy.js, via api.js).
+// Ce navigateur garde une copie de l'étudiant connecté (affichage immédiat, hors ligne) et renvoie sa
+// progression au serveur. Le compte démo vit seulement ici, sans serveur.
 
-const KEY = 'hooked-academy:data:v1';
-const SESSION = 'hooked-academy:session:v1';
-const ADMIN = 'hooked-academy:admin:v1';
-export const VERSION = 2;
-export const TEAM_CODE = 'HOOKED-TEAM';
+import { PUB } from '../../data/serveur.js';
+import { api, proofLogin, ApiError } from './api.js';
+
+const ME = 'hooked-academy:me:v2';
+const OLD = ['hooked-academy:data:v1', 'hooked-academy:session:v1', 'hooked-academy:admin:v1'];
 export const DEMO_STUDENT = { email: 'demo@hooked.academy', code: 'DEMO-2026' };
 
 /** Le compte démo ne montre presque rien : une leçon par formation, le reste est verrouillé. */
@@ -23,28 +22,7 @@ export const FREE_OPEN = ['m0-l1', 'm0-l2', 'ia0-l1', 'ia0-l4'];
  */
 export const TRACK_IDS = ['creative', 'ia'];
 export const ACCESS_DAYS = 365;
-export const PACKS = ['creative', 'ia', 'both'];
-export const packTracks = (f) => (f === 'creative' ? ['creative'] : f === 'ia' ? ['ia'] : ['creative', 'ia']);
-export const packOf = (tracks = []) => (tracks.includes('creative') && tracks.includes('ia') ? 'both' : tracks.includes('ia') ? 'ia' : tracks.includes('creative') ? 'creative' : null);
 const lessonTrack = (id) => (String(id).startsWith('ia') ? 'ia' : 'creative');
-const plusDays = (from, days) => new Date(from + days * 864e5).toISOString();
-
-/**
- * Comptes à mot de passe (créés par l'équipe). Ni l'e-mail ni le mot de passe ne sont écrits en clair :
- * on garde l'empreinte SHA-256 de l'e-mail et une dérivation PBKDF2 (SHA-256, 310000 itérations) du mot de passe.
- * Site statique : la vérification se fait dans le navigateur. Ce n'est pas une vraie sécurité serveur,
- * seulement de quoi ne pas publier d'identifiants lisibles. Pour la production : une API d'authentification.
- */
-const ACCOUNTS = [
-  {
-    studentId: 'st-youcef',
-    emailHash: 'db1572b1c8e0b2192074866704364e1acdb42f4284baf23279601b55e5720969',
-    salt: '94aad5e8fc81e5d62f36079fe0989450',
-    iter: 310000,
-    passHash: '18f6257adb0a6762c3c2ccfb879219f0b865880f1137010d4f4a80fd4afdad30',
-    profile: { name: 'Youcef N.', firstName: 'Youcef', cohort: 'Équipe Hooked', role: 'formateur' },
-  },
-];
 
 export const STATUS = {
   nouvelle: { label: 'Nouvelle', c: '#e0be55' },
@@ -61,357 +39,287 @@ export const PROFILS = {
   agence: 'Agence / équipe marketing',
 };
 
-const read = (k) => {
+/** Réglages publiés par l'équipe (WhatsApp, session en cours). */
+export const settings = () => ({ whatsapp: '213558678038', cohort: 'Prochaine session', ...(PUB?.settings || {}) });
+
+const pad = (n) => String(n).padStart(2, '0');
+export const iso = (d = new Date()) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+
+const read = () => {
   try {
-    const raw = localStorage.getItem(k);
-    return raw ? JSON.parse(raw) : null;
+    const v = JSON.parse(localStorage.getItem(ME));
+    return v && v.student && typeof v.student === 'object' ? v : null;
   } catch {
     return null;
   }
 };
-const write = (k, v) => {
+const write = (v) => {
   try {
-    localStorage.setItem(k, JSON.stringify(v));
-    return true;
-  } catch (err) {
-    console.warn('Enregistrement impossible', err);
-    return false;
+    if (v) localStorage.setItem(ME, JSON.stringify(v));
+    else localStorage.removeItem(ME);
+  } catch {}
+};
+// Anciennes données de démonstration (avant le serveur) : la progression du formateur est reprise une fois
+function legacyProgress() {
+  try {
+    const d = JSON.parse(localStorage.getItem(OLD[0]));
+    return d?.students?.find((s) => s.id === 'st-youcef')?.progress || null;
+  } catch {
+    return null;
   }
-};
-
-export const uid = (p = 'x') => `${p}${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`;
-const pad = (n) => String(n).padStart(2, '0');
-export const iso = (d = new Date()) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-const daysAgo = (n, h = 10, m = 0) => {
-  const d = new Date();
-  d.setDate(d.getDate() - n);
-  d.setHours(h, m, 0, 0);
-  return d.toISOString();
-};
-
-function accessCode() {
-  const A = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  const part = () => Array.from({ length: 4 }, () => A[Math.floor(Math.random() * A.length)]).join('');
-  return `HA-${part()}-${part()}`;
+}
+function dropLegacy() {
+  try {
+    OLD.forEach((k) => localStorage.removeItem(k));
+  } catch {}
 }
 
 /* ------------------------------------------------------------------ */
-/* Données d'exemple : clairement marquées, remplacées par les vraies   */
+/* Progression : copie locale, renvoyée au serveur                     */
 /* ------------------------------------------------------------------ */
 
-function seed() {
-  const ex = (o) => ({ exemple: true, notes: [], history: [{ at: o.createdAt, status: 'nouvelle', by: 'Formulaire' }], ...o });
-  const applications = [
-    ex({ id: 'ex-a1', createdAt: daysAgo(0, 9, 14), name: 'Exemple — Amina B.', phone: '0550 00 00 01', email: 'amina.exemple@mail.dz', city: 'Alger', profil: 'ecommercant', niveau: 'Je vends déjà, mes pubs ne marchent pas', objectif: 'Faire mes propres vidéos pour ma boutique de cosmétiques', status: 'nouvelle' }),
-    ex({ id: 'ex-a2', createdAt: daysAgo(0, 11, 2), name: 'Exemple — Yacine K.', phone: '0661 00 00 02', email: 'yacine.exemple@mail.dz', city: 'Oran', profil: 'freelance', niveau: 'Je fais déjà du montage', objectif: 'Proposer des créatives IA à mes clients', status: 'nouvelle' }),
-    ex({ id: 'ex-a3', createdAt: daysAgo(1, 16, 40), name: 'Exemple — Sara M.', phone: '0770 00 00 03', email: 'sara.exemple@mail.dz', city: 'Constantine', profil: 'debutant', niveau: 'Débutante complète', objectif: 'Apprendre un métier et trouver mes premiers clients', status: 'contactee', notes: [{ at: daysAgo(1, 17), by: 'Équipe', text: 'Appel fait, intéressée par la session du mois prochain.' }] }),
-    ex({ id: 'ex-a4', createdAt: daysAgo(2, 10, 5), name: 'Exemple — Walid H.', phone: '0555 00 00 04', email: 'walid.exemple@mail.dz', city: 'Sétif', profil: 'ecommercant', niveau: 'Je vends déjà', objectif: 'Scaler mes pubs avec l’UGC IA', status: 'paiement', notes: [{ at: daysAgo(2, 12), by: 'Équipe', text: 'Paiement BaridiMob annoncé, en attente de reçu.' }] }),
-    ex({ id: 'ex-a5', createdAt: daysAgo(4, 14, 30), name: 'Exemple — Nour E.', phone: '0698 00 00 05', email: 'nour.exemple@mail.dz', city: 'Blida', profil: 'createur', niveau: 'Je crée déjà du contenu', objectif: 'Passer à la vidéo cinématique', status: 'validee' }),
-    ex({ id: 'ex-a6', createdAt: daysAgo(6, 19, 12), name: 'Exemple — Karim D.', phone: '0540 00 00 06', email: 'karim.exemple@mail.dz', city: 'Tizi Ouzou', profil: 'agence', niveau: 'Équipe de 3 personnes', objectif: 'Former l’équipe au prompting', status: 'refusee', notes: [{ at: daysAgo(5, 10), by: 'Équipe', text: 'Préfère une formation en présentiel : orienté vers la prochaine masterclass.' }] }),
-  ];
+const emptyProgress = () => ({ lessons: {}, last: null, days: [], xp: 0, badges: [] });
+/** Deux appareils, une progression : on garde le meilleur de chacun (même règle que le serveur). */
+export function mergeProgress(a = emptyProgress(), b = emptyProgress()) {
+  const o = {
+    lessons: { ...(a.lessons || {}) },
+    last: b.last || a.last || null,
+    days: [...new Set([...(a.days || []), ...(b.days || [])])].sort().slice(-1000),
+    xp: Math.max(a.xp || 0, b.xp || 0),
+    badges: [...new Set([...(a.badges || []), ...(b.badges || [])])],
+  };
+  for (const [k, v] of Object.entries(b.lessons || {})) {
+    const x = o.lessons[k] || {};
+    const m = { ...x, ...v };
+    if (x.done || v.done) m.done = true;
+    if (x.todoDone || v.todoDone) m.todoDone = true;
+    if (x.watched || v.watched) m.watched = Math.max(x.watched || 0, v.watched || 0);
+    if (x.quiz != null || v.quiz != null) m.quiz = Math.max(x.quiz ?? 0, v.quiz ?? 0);
+    if (x.at && v.at) m.at = x.at < v.at ? x.at : v.at;
+    o.lessons[k] = m;
+  }
+  return o;
+}
 
-  // Compte démo : volontairement presque vide (une leçon ouverte par formation)
-  const lessons = { 'm1-l1': { done: false, watched: 12 } };
-  const days = [0].map((n) => iso(new Date(Date.now() - n * 864e5)));
-  const demo = {
+let timer = null;
+/** Envoie la progression au serveur (regroupé : une requête au plus toutes les 2 secondes). */
+function sync(now = false) {
+  const cur = read();
+  if (!cur || cur.demo) return;
+  clearTimeout(timer);
+  const send = async () => {
+    const c = read();
+    if (!c || c.demo || !c.dirty) return;
+    try {
+      const r = await api('PUT', 'me/progress', { progress: c.student.progress });
+      const after = read();
+      if (after?.student.id !== c.student.id) return;
+      after.student.progress = mergeProgress(r.progress, after.student.progress);
+      // D'autres changements sont arrivés pendant l'envoi : ils partiront au prochain tour
+      after.dirty = JSON.stringify(after.student.progress) !== JSON.stringify(r.progress);
+      write(after);
+      if (after.dirty) sync();
+    } catch (e) {
+      if (e instanceof ApiError && (e.status === 401 || e.status === 403)) return;
+      timer = setTimeout(send, 30000);
+    }
+  };
+  if (now) send();
+  else timer = setTimeout(send, 2000);
+}
+// La page se ferme : dernier envoi, même si l'onglet disparaît
+addEventListener('pagehide', () => {
+  const c = read();
+  if (!c || c.demo || !c.dirty) return;
+  try {
+    fetch(new URL('../../api/me/progress', import.meta.url), {
+      method: 'PUT',
+      keepalive: true,
+      credentials: 'same-origin',
+      headers: { 'content-type': 'application/json', 'x-ha': '1' },
+      body: JSON.stringify({ progress: c.student.progress }),
+    });
+  } catch {}
+});
+
+function change(fn) {
+  const c = read();
+  if (!c) return null;
+  const out = fn(c.student);
+  c.dirty = !c.demo;
+  write(c);
+  sync();
+  return out;
+}
+
+/* ------------------------------------------------------------------ */
+/* Connexion                                                           */
+/* ------------------------------------------------------------------ */
+
+function demoAccount() {
+  return {
     id: 'st-demo',
-    appId: 'ex-a5',
-    exemple: true,
+    demo: true,
     name: 'Compte démo',
     firstName: 'Créateur',
     email: DEMO_STUDENT.email,
     phone: '',
-    code: DEMO_STUDENT.code,
-    createdAt: daysAgo(7),
-    active: true,
     cohort: 'Session découverte',
-    demo: true,
-    progress: { lessons, last: 'm1-l1', days, xp: 0, badges: [] },
+    active: true,
+    access: [],
+    progress: { lessons: { 'm1-l1': { done: false, watched: 12 } }, last: 'm1-l1', days: [iso()], xp: 0, badges: [] },
   };
-  return ensureAccounts({ version: VERSION, applications, students: [demo], settings: { whatsapp: '213558678038', cohort: 'Prochaine session' } });
 }
-
-/** Ajoute les comptes à mot de passe qui manquent (sans toucher à leur progression s'ils existent). */
-function ensureAccounts(d) {
-  let changed = false;
-  ACCOUNTS.forEach((a) => {
-    if (d.students.some((s) => s.id === a.studentId)) return;
-    d.students.push({
-      id: a.studentId,
-      appId: null,
-      exemple: false,
-      ...a.profile,
-      email: '',
-      phone: '',
-      code: null,
-      protected: true,
-      createdAt: new Date().toISOString(),
-      active: true,
-      progress: { lessons: {}, last: null, days: [], xp: 0, badges: [] },
-    });
-    changed = true;
-  });
-  d._accountsChanged = changed;
-  return d;
-}
-
-/* ------------------------------------------------------------------ */
-
-export function load() {
-  const d = read(KEY);
-  if (d && d.version === VERSION) {
-    ensureAccounts(d);
-    if (d._accountsChanged) {
-      delete d._accountsChanged;
-      write(KEY, d);
-    }
-    delete d._accountsChanged;
-    return d;
-  }
-  const s = seed();
-  delete s._accountsChanged;
-  write(KEY, s);
-  return s;
-}
-export const save = (d) => write(KEY, d);
-export function reset() {
-  try {
-    localStorage.removeItem(KEY);
-    localStorage.removeItem(SESSION);
-    localStorage.removeItem(ADMIN);
-  } catch {}
-}
-
-/** Inscription envoyée depuis la landing. */
-export function addApplication(form) {
-  const d = load();
-  const app = {
-    id: uid('ins-'),
-    createdAt: new Date().toISOString(),
-    name: String(form.name || '').trim(),
-    phone: String(form.phone || '').trim(),
-    email: String(form.email || '').trim().toLowerCase(),
-    city: String(form.city || '').trim(),
-    profil: form.profil || 'debutant',
-    formation: ['creative', 'ia', 'both'].includes(form.formation) ? form.formation : 'both',
-    lang: ['fr', 'en', 'ar'].includes(form.lang) ? form.lang : 'fr',
-    niveau: String(form.niveau || '').trim(),
-    objectif: String(form.objectif || '').trim(),
-    source: form.source || 'Landing',
-    status: 'nouvelle',
-    notes: [],
-    history: [{ at: new Date().toISOString(), status: 'nouvelle', by: 'Formulaire' }],
-  };
-  d.applications.unshift(app);
-  save(d);
-  return app;
-}
-
-export function updateApplication(id, patch, by = 'Équipe') {
-  const d = load();
-  const a = d.applications.find((x) => x.id === id);
-  if (!a) return null;
-  if (patch.status && patch.status !== a.status) a.history.push({ at: new Date().toISOString(), status: patch.status, by });
-  if (patch.note) a.notes.push({ at: new Date().toISOString(), by, text: patch.note });
-  const { note, ...rest } = patch;
-  Object.assign(a, rest);
-  save(d);
-  return a;
-}
-
-/** Valide une inscription : crée (ou réactive) l'accès étudiant et renvoie le message à envoyer. */
-export function validateApplication(id, by = 'Équipe') {
-  const d = load();
-  const a = d.applications.find((x) => x.id === id);
-  if (!a) return null;
-  let st = d.students.find((s) => s.appId === a.id || (a.email && s.email === a.email));
-  if (!st) {
-    st = {
-      id: uid('st-'),
-      appId: a.id,
-      exemple: !!a.exemple,
-      name: a.name,
-      firstName: a.name.replace(/^Exemple — /, '').split(/\s+/)[0] || 'Créateur',
-      email: a.email,
-      phone: a.phone,
-      code: accessCode(),
-      createdAt: new Date().toISOString(),
-      active: true,
-      cohort: d.settings.cohort,
-      access: packTracks(a.formation),
-      expiresAt: plusDays(Date.now(), ACCESS_DAYS),
-      progress: { lessons: {}, last: null, days: [], xp: 0, badges: [] },
-    };
-    d.students.push(st);
-  } else {
-    // Réinscription : on ajoute les formations du nouveau pack et on repart pour un an
-    st.active = true;
-    st.access = [...new Set([...accessOf(st), ...packTracks(a.formation)])].filter((x) => TRACK_IDS.includes(x));
-    st.expiresAt = plusDays(Math.max(Date.now(), Date.parse(st.expiresAt || 0) || 0), ACCESS_DAYS);
-  }
-  if (a.status !== 'validee') a.history.push({ at: new Date().toISOString(), status: 'validee', by });
-  a.status = 'validee';
-  a.studentId = st.id;
-  save(d);
-  return { app: a, student: st, message: welcomeMessage(st) };
-}
-
-export function welcomeMessage(st) {
-  const url = new URL('app/', location.href.replace(/(admin|app)\/.*$/, '')).href;
-  return `Salam ${st.firstName} ! Ton inscription à Hooked Academy est validée 🎉\n\nTon espace étudiant : ${url}\nIdentifiant : ${st.email || st.phone}\nCode d'accès : ${st.code}\n\nCommence par le module 1 — 2 minutes par leçon. Bonne formation !`;
-}
-
-export function setStudentActive(id, active) {
-  const d = load();
-  const st = d.students.find((s) => s.id === id);
-  if (!st) return null;
-  st.active = active;
-  save(d);
-  return st;
-}
-
-/** Formations ouvertes à un étudiant (le compte formateur et les comptes d'avant les packs ont les deux). */
-export const accessOf = (st) => (!st ? [] : st.protected || !Array.isArray(st.access) ? [...TRACK_IDS] : st.access.filter((x) => TRACK_IDS.includes(x)));
-/** L'accès d'un an est-il terminé ? */
-export const isExpired = (st) => !!st && !st.protected && !!st.expiresAt && Date.now() > Date.parse(st.expiresAt);
-/** L'étudiant a-t-il cette formation dans son pack (et un accès en cours) ? */
-export const hasTrack = (st, track) => !!st && !isDemo(st) && accessOf(st).includes(track) && !isExpired(st);
-
-/** Espace équipe : choisir les formations d'un étudiant (au moins zéro, au plus les deux). */
-export function setStudentAccess(id, tracks) {
-  const d = load();
-  const st = d.students.find((s) => s.id === id);
-  if (!st || st.protected) return null;
-  st.access = TRACK_IDS.filter((x) => tracks.includes(x));
-  if (!st.expiresAt) st.expiresAt = plusDays(Date.now(), ACCESS_DAYS);
-  save(d);
-  return st;
-}
-/** Espace équipe : prolonger l'accès (par défaut d'un an, à partir de la date de fin si elle n'est pas passée). */
-export function extendStudent(id, days = ACCESS_DAYS) {
-  const d = load();
-  const st = d.students.find((s) => s.id === id);
-  if (!st || st.protected) return null;
-  st.expiresAt = plusDays(Math.max(Date.now(), Date.parse(st.expiresAt || 0) || 0), days);
-  save(d);
-  return st;
-}
-/** Espace équipe : fixer la date de fin d'accès (AAAA-MM-JJ). */
-export function setStudentExpiry(id, ymd) {
-  const d = load();
-  const st = d.students.find((s) => s.id === id);
-  if (!st || st.protected || !/^\d{4}-\d{2}-\d{2}$/.test(ymd)) return null;
-  st.expiresAt = new Date(`${ymd}T23:59:59`).toISOString();
-  save(d);
-  return st;
-}
-
-const hex = (buf) => Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, '0')).join('');
-const unhex = (h) => new Uint8Array(h.match(/../g).map((x) => parseInt(x, 16)));
-async function sha256(text) {
-  return hex(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)));
-}
-async function pbkdf2(pass, saltHex, iter) {
-  const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveBits']);
-  return hex(await crypto.subtle.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt: unhex(saltHex), iterations: iter }, key, 256));
+const normCode = (s) => {
+  const c = String(s || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+  return /^HA[A-Z0-9]{8}$/.test(c) ? `HA-${c.slice(2, 6)}-${c.slice(6)}` : '';
+};
+const errOf = (e) => {
+  if (!(e instanceof ApiError)) return { error: 'bad' };
+  if (e.status === 403 && e.code === 'suspended') return { error: 'suspended' };
+  if (e.status === 429) return { error: 'rate' };
+  if (e.status === 0 || e.code === 'no_server' || e.status >= 500) return { error: 'offline' };
+  return { error: 'bad' };
+};
+function opened(data) {
+  const prev = read();
+  const st = data.student;
+  let progress = st.progress || emptyProgress();
+  // Même étudiant déjà connu sur cet appareil : sa progression locale non envoyée est gardée
+  if (prev && !prev.demo && prev.student.id === st.id) progress = mergeProgress(progress, prev.student.progress);
+  if (st.id === 'st-trainer' && legacyProgress()) progress = mergeProgress(progress, legacyProgress());
+  dropLegacy();
+  const dirty = JSON.stringify(progress) !== JSON.stringify(st.progress || emptyProgress());
+  write({ student: { ...st, progress }, member: { faq: data.faq || null, res: data.res || {} }, dirty, at: Date.now() });
+  if (dirty) sync(true);
+  return read().student;
 }
 
 /**
- * Connexion étudiant : e-mail (ou téléphone) + mot de passe ou code d'accès. Asynchrone.
- * Renvoie { student } ou { error: 'bad' | 'suspended', message } (message en français, à traduire côté interface).
+ * Connexion étudiant : e-mail (ou téléphone) + code d'accès (HA-XXXX-XXXX), ou le compte de l'équipe (mot de passe).
+ * Renvoie { student } ou { error: 'bad' | 'suspended' | 'rate' | 'offline' }.
  */
 export async function loginStudent(ident, secret) {
-  const d = load();
-  const id = String(ident || '').trim().toLowerCase().replace(/\s+/g, '');
+  const id = String(ident || '').trim();
   const raw = String(secret || '').trim();
-  const bad = { error: 'bad', message: 'Identifiant ou mot de passe incorrect.' };
-  if (!id || !raw) return bad;
-  // 1. Comptes à mot de passe (empreintes)
-  if (globalThis.crypto?.subtle) {
-    const eh = await sha256(`hooked-academy:${id}`);
-    const acc = ACCOUNTS.find((a) => a.emailHash === eh);
-    if (acc) {
-      if ((await pbkdf2(raw, acc.salt, acc.iter)) !== acc.passHash) return bad;
-      const st = d.students.find((s) => s.id === acc.studentId);
-      if (!st) return bad;
-      if (!st.active) return { error: 'suspended', message: 'Ton accès est suspendu. Contacte l’équipe.' };
-      write(SESSION, { role: 'student', id: st.id, at: Date.now() });
-      return { student: st };
-    }
+  if (!id || !raw) return { error: 'bad' };
+  if (id.toLowerCase() === DEMO_STUDENT.email && raw.toUpperCase() === DEMO_STUDENT.code) {
+    const prev = read();
+    write({ student: prev?.demo ? prev.student : demoAccount(), demo: true, member: { faq: null, res: {} }, at: Date.now() });
+    return { student: read().student };
   }
-  // 2. Codes d'accès remis à la validation (HA-XXXX-XXXX) et compte démo
-  const c = raw.toUpperCase();
-  const st = d.students.find((s) => !s.protected && (s.email === id || (s.phone || '').replace(/\s+/g, '') === id) && s.code === c);
-  if (!st) return bad;
-  if (!st.active) return { error: 'suspended', message: 'Ton accès est suspendu. Contacte l’équipe.' };
-  write(SESSION, { role: 'student', id: st.id, at: Date.now() });
-  return { student: st };
-}
-
-/** Le compte démo (ou ?demo=1) : accès limité à DEMO_OPEN. */
-export const isDemo = (st) => !!st && (st.demo || st.id === 'st-demo');
-/** Une leçon est-elle ouverte pour cet étudiant ? (bienvenue : tout le monde ; démo : DEMO_OPEN ; sinon : son pack) */
-export const canAccess = (st, lessonId) => !!st && (FREE_OPEN.includes(lessonId) || (isDemo(st) ? DEMO_OPEN.includes(lessonId) : hasTrack(st, lessonTrack(lessonId))));
-
-export function loginAdmin(code) {
-  if (String(code || '').trim().toUpperCase() !== TEAM_CODE) return false;
-  write(ADMIN, { role: 'admin', at: Date.now() });
-  return true;
-}
-export const adminSession = () => read(ADMIN);
-export function logoutAdmin() {
   try {
-    localStorage.removeItem(ADMIN);
-  } catch {}
+    const code = normCode(raw);
+    const data = code ? await api('POST', 'login', { ident: id, code }) : await proofLogin('login', id, raw);
+    return { student: opened(data) };
+  } catch (e) {
+    return errOf(e);
+  }
 }
 
-export const session = () => read(SESSION);
+/**
+ * Au chargement de l'espace étudiant : profil, accès et contenus réservés à jour depuis le serveur.
+ * Renvoie 'ok', 'offline' (on garde la copie locale) ou 'out' (session fermée, suspendue ou expirée).
+ */
+export async function refresh() {
+  const c = read();
+  if (!c || c.demo) return 'ok';
+  try {
+    opened(await api('GET', 'me', undefined, { timeout: 8000 }));
+    return 'ok';
+  } catch (e) {
+    if (e instanceof ApiError && (e.status === 401 || e.status === 403)) {
+      write(null);
+      return 'out';
+    }
+    return 'offline';
+  }
+}
+
 export function logout() {
-  try {
-    localStorage.removeItem(SESSION);
-  } catch {}
+  const c = read();
+  write(null);
+  if (c && !c.demo) api('POST', 'logout').catch(() => {});
 }
 
 export function currentStudent() {
-  const s = session();
-  if (!s || s.role !== 'student') return null;
-  return load().students.find((x) => x.id === s.id) || null;
+  return read()?.student || null;
 }
+/** Contenus réservés aux membres : FAQ de l'assistant pro, ressources de leurs formations. */
+export const member = () => read()?.member || { faq: null, res: {} };
+
+/** Inscription envoyée depuis la landing. Renvoie { ok, id } ; lève ApiError si le serveur ne répond pas. */
+export async function addApplication(form) {
+  const pick = (k, max) => String(form[k] || '').trim().slice(0, max);
+  return api('POST', 'apply', {
+    name: pick('name', 80),
+    phone: pick('phone', 30),
+    email: pick('email', 120),
+    city: pick('city', 60),
+    profil: pick('profil', 20),
+    formation: pick('formation', 10),
+    lang: pick('lang', 2),
+    niveau: pick('niveau', 200),
+    objectif: pick('objectif', 500),
+    source: pick('source', 40) || 'Landing',
+    website: pick('website', 200),
+  });
+}
+
+/* ------------------------------------------------------------------ */
+/* Accès                                                               */
+/* ------------------------------------------------------------------ */
+
+/** Formations ouvertes à un étudiant (le compte formateur a les deux). */
+export const accessOf = (st) => (!st ? [] : st.protected ? [...TRACK_IDS] : (Array.isArray(st.access) ? st.access : []).filter((x) => TRACK_IDS.includes(x)));
+/** L'accès d'un an est-il terminé ? */
+export const isExpired = (st) => !!st && !st.protected && !!st.expiresAt && Date.now() > Date.parse(st.expiresAt);
+/** L'étudiant a-t-il cette formation dans son pack (et un accès en cours) ? */
+export const hasTrack = (st, track) => !!st && !isDemo(st) && st.active !== false && accessOf(st).includes(track) && !isExpired(st);
+/** Le compte démo : accès limité à DEMO_OPEN. */
+export const isDemo = (st) => !!st && (st.demo || st.id === 'st-demo');
+/** Une leçon est-elle ouverte pour cet étudiant ? (bienvenue : tout le monde ; démo : DEMO_OPEN ; sinon : son pack) */
+export const canAccess = (st, lessonId) => !!st && (FREE_OPEN.includes(lessonId) || (isDemo(st) ? DEMO_OPEN.includes(lessonId) : hasTrack(st, lessonTrack(lessonId))));
 
 export const TODO_XP = 40;
 
 /** Met à jour la progression d'une leçon et l'XP. */
 export function recordLesson(studentId, lessonId, patch) {
-  const d = load();
-  const st = d.students.find((s) => s.id === studentId);
-  if (!st) return null;
-  const P = st.progress;
-  const prev = P.lessons[lessonId] || {};
-  const next = { ...prev, ...patch };
-  let gained = 0;
-  if (patch.done && !prev.done) {
-    next.at = new Date().toISOString();
-    gained += 100;
-  }
-  if (typeof patch.quiz === 'number' && (prev.quiz ?? -1) < patch.quiz) gained += Math.round(patch.quiz * 50) - Math.round(Math.max(0, prev.quiz || 0) * 50);
-  // Partie pratique : toutes les actions de la to-do cochées (une seule fois par leçon)
-  if (patch.todoDone && !prev.todoDone) gained += TODO_XP;
-  P.lessons[lessonId] = next;
-  P.last = lessonId;
-  P.xp = (P.xp || 0) + Math.max(0, gained);
-  const today = iso();
-  if (!P.days.includes(today)) P.days.push(today);
-  save(d);
-  return { student: st, gained };
+  return change((st) => {
+    if (st.id !== studentId) return null;
+    const P = (st.progress ||= emptyProgress());
+    const prev = P.lessons[lessonId] || {};
+    const next = { ...prev, ...patch };
+    let gained = 0;
+    if (patch.done && !prev.done) {
+      next.at = new Date().toISOString();
+      gained += 100;
+    }
+    if (typeof patch.quiz === 'number' && (prev.quiz ?? -1) < patch.quiz) gained += Math.round(patch.quiz * 50) - Math.round(Math.max(0, prev.quiz || 0) * 50);
+    // Partie pratique : toutes les actions de la to-do cochées (une seule fois par leçon)
+    if (patch.todoDone && !prev.todoDone) gained += TODO_XP;
+    P.lessons[lessonId] = next;
+    P.last = lessonId;
+    P.xp = (P.xp || 0) + Math.max(0, gained);
+    const today = iso();
+    if (!P.days.includes(today)) P.days.push(today);
+    return { student: st, gained };
+  });
 }
 
 export function awardBadge(studentId, badge) {
-  const d = load();
-  const st = d.students.find((s) => s.id === studentId);
-  if (!st || st.progress.badges.includes(badge)) return false;
-  st.progress.badges.push(badge);
-  save(d);
-  return true;
+  return !!change((st) => {
+    if (st.id !== studentId || st.progress.badges.includes(badge)) return false;
+    st.progress.badges.push(badge);
+    return true;
+  });
+}
+export function gainXP(n) {
+  change((st) => (st.progress.xp = (st.progress.xp || 0) + n));
+}
+/** Compte démo : repartir de zéro. */
+export function resetProgress() {
+  change((st) => (st.progress = emptyProgress()));
 }
 
 /** Série de jours consécutifs d'apprentissage. */

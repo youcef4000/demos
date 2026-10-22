@@ -48,6 +48,8 @@ add({
     'faq.cat.formation': 'Formation',
     'faq.cat.plateforme': 'Plateforme',
     'faq.cat.ia': 'Outils IA',
+    'faq.cat.creation': 'Créer des pubs',
+    'faq.cat.business': 'Vendre et clients',
   },
   en: {
     'status.nouvelle': 'New',
@@ -94,6 +96,8 @@ add({
     'faq.cat.formation': 'Course',
     'faq.cat.plateforme': 'Platform',
     'faq.cat.ia': 'AI tools',
+    'faq.cat.creation': 'Making ads',
+    'faq.cat.business': 'Selling and clients',
   },
   ar: {
     'status.nouvelle': 'جديد',
@@ -140,5 +144,7 @@ add({
     'faq.cat.formation': 'التكوين',
     'faq.cat.plateforme': 'المنصة',
     'faq.cat.ia': 'أدوات الذكاء الاصطناعي',
+    'faq.cat.creation': 'صناعة الإعلانات',
+    'faq.cat.business': 'البيع والعملاء',
   },
 });

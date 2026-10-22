@@ -41,6 +41,22 @@ Si certains réseaux n'arrivent pas à joindre Cloudflare (`ERR_CONNECTION_TIMED
 
 Chaque push sur `main` met ensuite à jour les deux hébergements.
 
+## Serveur de Hooked Academy (`worker/`)
+
+Le Worker sert les fichiers de `sites/` tels quels. Seules `/hooked-academy/api/*` et
+`/hooked-academy/media/*` passent par du code (`worker/index.js` → `worker/academy.js`) : le serveur de la
+plateforme (inscriptions, comptes étudiants, contenus modifiés depuis l'espace équipe, voix off, ressources,
+FAQ). Ses données vivent dans un Durable Object avec base SQLite, créé automatiquement au déploiement
+(`migrations` dans `wrangler.jsonc`) : rien à configurer dans Cloudflare. Les autres démos ne passent jamais
+par ce code.
+
+- Tester en local : `npx wrangler dev`, puis http://localhost:8787/hooked-academy/admin/.
+- Compte de l'équipe : créé à la première visite de l'espace équipe avec un code d'installation à usage
+  unique. Seule son empreinte SHA-256 est dans `worker/academy.js` (`SETUP`) ; la remplacer par celle d'un
+  nouveau code désactive le compte existant (procédure « mot de passe perdu »).
+- Le miroir GitHub Pages n'a pas de serveur : la plateforme y garde son contenu de base, sans espace équipe.
+- En-têtes de sécurité des pages : `sites/_headers`.
+
 ## Ajouter une démo
 
 1. Créer `sites/<slug>/index.html` (et ses fichiers, avec des chemins relatifs).
