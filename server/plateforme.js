@@ -1030,6 +1030,12 @@ export class Plateforme {
     this.log('réglages');
     return json({ settings: { ...DEFAULTS, ...o } });
   }
+  /** FAQ initiale (premier démarrage du serveur). */
+  seedFaq(list) {
+    const seen = new Set();
+    this.setKv('faq', list.map(faqItem).filter((x) => x && !seen.has(x.id) && seen.add(x.id)));
+    this.bump();
+  }
   async putFaq(req) {
     // L'équipe, ou (avant la création du compte) le code d'installation : sert à déposer la FAQ pro initiale
     const s = await this.session(req, 'admin');

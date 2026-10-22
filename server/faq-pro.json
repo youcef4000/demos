@@ -1,0 +1,342 @@
+[
+ {
+  "id": "pro-hook-duree",
+  "cat": "creation",
+  "aud": "pro",
+  "landing": false,
+  "kw": "hook, accroche, durée du hook, 3 secondes, secondes, mots, texte à l’écran, début de vidéo, hook visuel, hook length, first seconds, on-screen text, words, هوك, الهوك, ثواني, ثانية, كلمات, البداية, شحال يدوم الهوك, chhal ydoum, kelmat",
+  "q": {
+   "fr": "Combien de temps doit durer mon hook, et combien de mots à l’écran ?",
+   "en": "How long should my hook be, and how many words on screen?",
+   "ar": "كم يجب أن يدوم الهوك، وكم كلمة أكتب على الشاشة؟"
+  },
+  "a": {
+   "fr": "Le hook, ce sont les 3 premières secondes : c’est là qu’on décide de rester ou de scroller (M02). À l’écran, vise 7 mots maximum, en gros, contrasté et au centre, loin du bas et de la droite que l’interface recouvre. Commence au milieu de l’action : pas de logo, pas de « salam », pas la seconde où tu lances l’enregistrement. Fais le test sans le son : si on comprend ce que tu vends, c’est bon. Et ne promets jamais ce que la vidéo ne montre pas : revois « Le hook visuel » en M02.",
+   "en": "The hook is the first 3 seconds: that’s when people decide to stay or scroll (M02). On screen, aim for 7 words maximum, big, high-contrast and centered, away from the bottom and the right edge that the app interface covers. Start in the middle of the action: no logo, no “salam”, no second of you hitting record. Test it with the sound off: if people get what you’re selling, it works. And never promise what the video doesn’t show: rewatch “The visual hook” in M02.",
+   "ar": "الهوك هو أول 3 ثوانٍ: فيها يقرّر المشاهد أن يبقى أو يواصل التمرير (M02). على الشاشة، اكتفِ بـ 7 كلمات كحدّ أقصى، بخط كبير وتباين قوي وفي الوسط، بعيدًا عن أسفل الشاشة وجهتها اليمنى اللتين تغطيهما واجهة التطبيق. ابدأ من وسط الحدث: لا شعار، ولا «سلام»، ولا الثانية التي تضغط فيها على زر التسجيل. اختبره دون صوت: إذا فُهم ما تبيعه فهو ناجح. ولا تَعِد أبدًا بما لا يُظهره الفيديو: راجع درس «الهوك البصري» في M02."
+  }
+ },
+ {
+  "id": "pro-hooks-a-tester",
+  "cat": "creation",
+  "aud": "pro",
+  "landing": false,
+  "kw": "combien de hooks, nombre de hooks, tester, test, test de hooks, a/b test, même body, hooks par produit, how many hooks, hook test, split test, كم هوك, هوكات, اختبار, تجربة, نجرب, شحال من هوك, chhal men hook, njarreb",
+  "q": {
+   "fr": "Combien de hooks dois-je tester pour un même produit ?",
+   "en": "How many hooks should I test for the same product?",
+   "ar": "كم هوكًا يجب أن أختبر للمنتج نفسه؟"
+  },
+  "a": {
+   "fr": "La règle du cours : 3 à 5 hooks sur le même body, publiés en même temps avec le même budget, et tu gardes celui qui apporte des commandes (M02, « Trouver les hooks et formats gagnants »). Pour avoir de quoi choisir, écris-en une dizaine (l’IA peut t’en proposer 10, classés : IA01), varie les familles (question qui pique, avant / après honnête, démonstration, interpellation…), puis garde les 3 à 5 plus forts. Au tournage, filme au moins 3 ouvertures différentes. Seules les 3 premières secondes changent : le reste de la pub reste identique, sinon le test ne t’apprend rien.",
+   "en": "The course rule: 3 to 5 hooks on the same body, published at the same time with the same budget, and you keep the one that brings in orders (M02, “Find winning hooks and formats”). To have enough to choose from, write about ten (AI can suggest 10, ranked: IA01), mix the families (pointed question, honest before/after, demo, call-out…), then keep the 3 to 5 strongest. On set, film at least 3 different openings. Only the first 3 seconds change: the rest of the ad stays identical, otherwise the test teaches you nothing.",
+   "ar": "قاعدة التكوين: من 3 إلى 5 هوكات على البودي نفسه، تُنشر في الوقت نفسه وبالميزانية نفسها، وتحتفظ بالهوك الذي يجلب الطلبات (M02، درس «العثور على الهوكات والصيغ الناجحة»). ولكي تجد ما تختار منه، اكتب حوالي عشرة (يمكن للذكاء الاصطناعي أن يقترح عليك 10 مرتّبة: IA01)، ونوّع العائلات (سؤال يلمس المشكلة، قبل/بعد صادق، عرض توضيحي، نداء مباشر للجمهور…)، ثم احتفظ بأقوى 3 إلى 5. وعند التصوير، صوّر 3 بدايات مختلفة على الأقل. لا يتغيّر إلا أول 3 ثوانٍ: يبقى باقي الإعلان كما هو، وإلا فلن يعلّمك الاختبار شيئًا."
+  }
+ },
+ {
+  "id": "pro-duree-video",
+  "cat": "creation",
+  "aud": "pro",
+  "landing": false,
+  "kw": "durée, longueur, secondes, combien de secondes, durée vidéo, tiktok, reels, stories, facebook, instagram, length, duration, how long, seconds, video length, مدة, طول الفيديو, ثانية, ثواني, مدة الإعلان, شحال يدوم, قداه, chhal, 9adech",
+  "q": {
+   "fr": "Quelle durée viser pour ma vidéo selon la plateforme ?",
+   "en": "What length should I aim for, depending on the platform?",
+   "ar": "ما المدة التي أستهدفها لفيديو الإعلان حسب المنصة؟"
+  },
+  "a": {
+   "fr": "Les repères du cours (M07, « La bonne durée d’une créative ») : 6 à 15 secondes pour les stories et les Reels avec un message et une offre, 15 à 30 secondes pour la plupart des pubs TikTok et Reels, 30 à 60 secondes pour l’UGC, les démonstrations et les produits à expliquer. La règle qui tranche : aussi court que possible, aussi long que nécessaire. Change quelque chose à l’écran toutes les 2 à 3 secondes et coupe tout ce qui n’apporte rien, comme « salam, aujourd’hui je vais vous présenter… ». Pour le projet final, c’est 30 secondes maximum, carte CTA comprise (M12).",
+   "en": "The course benchmarks (M07, “The right length for a creative”): 6 to 15 seconds for Stories and Reels with one message and one offer, 15 to 30 seconds for most TikTok and Reels ads, 30 to 60 seconds for UGC, demos and products that need explaining. The deciding rule: as short as possible, as long as necessary. Change something on screen every 2 to 3 seconds and cut anything that adds nothing, like “salam, today I’m going to show you…”. For the final project, it’s 30 seconds maximum, CTA card included (M12).",
+   "ar": "المدد المرجعية في التكوين (M07، درس «المدة المناسبة للكرياتيف»): من 6 إلى 15 ثانية لـ Stories وReels برسالة واحدة وعرض واحد، ومن 15 إلى 30 ثانية لمعظم إعلانات TikTok وReels، ومن 30 إلى 60 ثانية لـ UGC والعروض التوضيحية والمنتجات التي تحتاج إلى شرح. والقاعدة الحاسمة: قصير قدر الإمكان، وطويل بقدر الحاجة. غيّر شيئًا على الشاشة كل 2 إلى 3 ثوانٍ، واحذف كل ما لا يضيف شيئًا، مثل «سلام، اليوم سأقدّم لكم…». أما المشروع النهائي فمدته 30 ثانية كحدّ أقصى، مع بطاقة CTA (M12)."
+  }
+ },
+ {
+  "id": "pro-formats-export",
+  "cat": "creation",
+  "aud": "pro",
+  "landing": false,
+  "kw": "format, ratio, 9:16, 4:5, 1:1, 16:9, résolution, export, exporter, 1080x1920, mp4, taille, dimensions, zone de sécurité, aspect ratio, resolution, size, safe zone, مقاس, مقاسات, تصدير, دقة, حجم, نسبة, الفورما, الأبعاد, forma, export capcut",
+  "q": {
+   "fr": "Quel format et quels réglages d’export pour chaque plateforme ?",
+   "en": "Which format and export settings for each platform?",
+   "ar": "ما المقاس وإعدادات التصدير المناسبة لكل منصة؟"
+  },
+  "a": {
+   "fr": "Tourne et monte en 9:16 (Reels, TikTok, Stories), puis décline : 4:5 pour le fil, 1:1 pour les carrousels, 16:9 pour YouTube (M01). À l’export vidéo : 1080 × 1920, 30 images/s, MP4 (H.264) ; pour les images : 1080 × 1920, 1080 × 1350 ou 1080 × 1080 selon le format (M06, « Exporter sans perdre la qualité »). Garde le texte au centre : le haut, le bas et le bord droit sont cachés par l’interface de l’appli. Avant de publier, regarde la vidéo en entier sur ton téléphone, une fois sans le son, et nomme le fichier clairement (parfum-hookB-9x16-v2).",
+   "en": "Shoot and edit in 9:16 (Reels, TikTok, Stories), then adapt: 4:5 for the feed, 1:1 for carousels, 16:9 for YouTube (M01). Video export: 1080 × 1920, 30 fps, MP4 (H.264); images: 1080 × 1920, 1080 × 1350 or 1080 × 1080 depending on the format (M06, “Export without losing quality”). Keep text in the center: the top, the bottom and the right edge are hidden by the app interface. Before posting, watch the whole video on your phone, once with the sound off, and give the file a clear name (perfume-hookB-9x16-v2).",
+   "ar": "صوّر وركّب بمقاس 9:16 (Reels وTikTok وStories)، ثم اصنع منه نسخًا: 4:5 للفيد (Feed)، و1:1 للكاروسيل، و16:9 لـ YouTube (M01). عند تصدير الفيديو: 1080 × 1920، و30 صورة في الثانية، بصيغة MP4 (H.264)؛ وللصور: 1080 × 1920 أو 1080 × 1350 أو 1080 × 1080 حسب المقاس (M06، درس «التصدير دون فقدان الجودة»). أبقِ النص في الوسط: فواجهة التطبيق تحجب الأعلى والأسفل والجهة اليمنى. وقبل النشر، شاهد الفيديو كاملًا على هاتفك، ومرة دون صوت، وسمِّ الملف باسم واضح (parfum-hookB-9x16-v2)."
+  }
+ },
+ {
+  "id": "pro-formule-script",
+  "cat": "creation",
+  "aud": "pro",
+  "landing": false,
+  "kw": "aida, pas, cap, soncas, formule, formules de vente, structure du script, persuasion, copywriting, angle, sales formula, framework, script structure, أسلوب, صيغة, صيغ البيع, السكريبت, الإقناع, فورمول, formule magique, script pub",
+  "q": {
+   "fr": "AIDA, PAS, CAP ou SONCAS : quelle formule prendre pour mon script ?",
+   "en": "AIDA, PAS, CAP or SONCAS: which formula should I use for my script?",
+   "ar": "AIDA أم PAS أم CAP أم SONCAS: أيّ أسلوب أعتمد في السكريبت؟"
+  },
+  "a": {
+   "fr": "Elles ne s’excluent pas, elles se combinent (M03, « Quelle formule, et quand ? »). AIDA structure toute la vidéo (Attention = hook, Action = CTA) ; PAS construit le body quand ton produit règle un problème ; CAP ajoute des preuves pour les clients sceptiques ; SONCAS t’aide à choisir l’angle, le « bouton » qui fait vraiment acheter ton client. Méthode simple : choisis le bouton SONCAS, écris le script en AIDA avec un body en PAS, puis glisse une preuve CAP vraie (démonstration, garantie réelle). Relis-le à voix haute : il doit parler à une personne, pas réciter une technique.",
+   "en": "They don’t exclude each other, they combine (M03, “Which formula, and when?”). AIDA structures the whole video (Attention = hook, Action = CTA); PAS builds the body when your product solves a problem; CAP adds proof for sceptical buyers; SONCAS helps you pick the angle, the “button” that really makes your customer buy. Simple method: pick the SONCAS button, write the script in AIDA with a PAS body, then slip in a real CAP proof (demo, actual guarantee). Read it out loud: it should talk to a person, not recite a technique.",
+   "ar": "لا يُلغي أحدها الآخر، بل تُجمع معًا (M03، درس «أيّ أسلوب، ومتى؟»). AIDA يبني الفيديو كله (Attention = الهوك، Action = CTA)؛ وPAS يبني البودي عندما يحلّ منتجك مشكلة؛ وCAP يضيف أدلة للزبائن المتشكّكين؛ وSONCAS يساعدك على اختيار الزاوية، أي «الزرّ» الذي يدفع زبونك فعلًا إلى الشراء. طريقة بسيطة: اختر زرّ SONCAS، واكتب السكريبت بأسلوب AIDA مع بودي بأسلوب PAS، ثم أضف دليلًا حقيقيًا بأسلوب CAP (عرض توضيحي، ضمان فعلي). اقرأه بصوت عالٍ: يجب أن يخاطب إنسانًا، لا أن يردّد تقنية."
+  }
+ },
+ {
+  "id": "pro-script-ugc",
+  "cat": "creation",
+  "aud": "pro",
+  "landing": false,
+  "kw": "ugc, script ugc, structure ugc, face caméra, naturel, brief, créateur, brief ugc, ugc script, structure, creator, face cam, natural, سكريبت, UGC, يو جي سي, محتوى المستخدمين, صانع محتوى, بريف, سيناريو, script ugc darija",
+  "q": {
+   "fr": "Comment structurer un script UGC qui sonne vrai ?",
+   "en": "How do I structure a UGC script that sounds genuine?",
+   "ar": "كيف أبني سكريبت UGC يبدو طبيعيًا وصادقًا؟"
+  },
+  "a": {
+   "fr": "Cinq temps, 20 à 30 secondes : un hook personnel (« J’en avais marre de… »), le problème vécu, la découverte du produit en main, le résultat montré (pas seulement dit), puis un CTA naturel (IA05, « Écrire un script UGC »). Demande aussi la liste des plans à filmer avec leur minutage, pas seulement le texte. Si un créateur tourne pour toi, donne-lui un message clé et 3 points à dire plutôt qu’un texte à réciter mot à mot : c’est ce qui garde le naturel (M07, « Le brief UGC »). Lis le script à voix haute en chronométrant et réécris tout ce qui sonne « pub ». Jamais d’avis inventé : seule une vraie personne qui utilise vraiment le produit raconte son expérience.",
+   "en": "Five beats, 20 to 30 seconds: a personal hook (“I was so tired of…”), the problem as lived, discovering the product in hand, the result shown (not just told), then a natural CTA (IA05, “Writing a UGC script”). Also ask for the list of shots to film with their timing, not just the text. If a creator films for you, give them one key message and 3 points to say rather than a script to recite word for word: that’s what keeps it natural (M07, “The UGC brief”). Read the script aloud with a timer and rewrite anything that sounds like an ad. Never an invented review: only a real person who really uses the product tells their experience.",
+   "ar": "خمس مراحل في 20 إلى 30 ثانية: هوك شخصي («تعبت من…»)، ثم المشكلة كما عاشها الشخص، ثم اكتشاف المنتج وهو في اليد، ثم النتيجة معروضة (لا مجرد كلام)، ثم CTA طبيعي (IA05، درس «كتابة سكريبت UGC»). واطلب أيضًا قائمة اللقطات المطلوب تصويرها مع توقيتها، لا النص وحده. وإذا صوّر لك صانع محتوى، فأعطه رسالة أساسية واحدة و3 نقاط يقولها بدل نص يحفظه كلمة بكلمة: هذا ما يحافظ على العفوية (M07، درس «بريف UGC»). اقرأ السكريبت بصوت عالٍ مع حساب الوقت، وأعد كتابة كل ما يبدو «إعلانًا». ولا رأي مخترَعًا أبدًا: وحده شخص حقيقي يستعمل المنتج فعلًا يروي تجربته."
+  }
+ },
+ {
+  "id": "pro-tournage-telephone",
+  "cat": "creation",
+  "aud": "pro",
+  "landing": false,
+  "kw": "filmer, tournage, téléphone, smartphone, lumière, éclairage, fenêtre, trépied, cadrage, réglages, mise au point, 4k, 60 fps, plans, shoot, filming, phone, lighting, tripod, settings, shot list, تصوير, هاتف, تيليفون, إضاءة, ضوء, نصور, نافذة, حامل, لقطات, tsawer, nsawer",
+  "q": {
+   "fr": "Comment filmer un produit proprement avec seulement mon téléphone ?",
+   "en": "How do I film a product properly with just my phone?",
+   "ar": "كيف أصوّر منتجًا بشكل احترافي بهاتفي فقط؟"
+  },
+  "a": {
+   "fr": "La lumière d’abord : en journée, face à une fenêtre ou de côté, sans soleil direct, avec un carton blanc pour éclaircir les ombres ; évite le contre-jour et le néon du plafond (M09). Objectif nettoyé, mode avion, téléphone vertical sur un trépied ou un support, mise au point et exposition verrouillées (souvent un appui long sur le sujet). Écris ta liste de plans avant : produit en main, détails, utilisation, résultat, face caméra, plans de coupe (M07, « Préparer le tournage au téléphone »). Filme chaque plan 3 fois avec 2 secondes de marge ; 1080p suffit, la 4K laisse de la marge pour zoomer, et 60 images/s pour les plans à ralentir.",
+   "en": "Light first: during the day, facing a window or side-on, no direct sun, with a white card to brighten the shadows; avoid backlight and ceiling neon (M09). Clean lens, airplane mode, phone vertical on a tripod or stand, focus and exposure locked (often a long press on the subject). Write your shot list beforehand: product in hand, details, use, result, talking to camera, cutaways (M07, “Prepare a phone shoot”). Film each shot 3 times with 2 seconds of margin; 1080p is enough, 4K leaves room to zoom, and 60 fps for shots you’ll slow down.",
+   "ar": "الإضاءة أولًا: في النهار، مقابل نافذة أو من الجانب، دون شمس مباشرة، مع ورق مقوّى أبيض يعكس الضوء على الظلال؛ وتجنّب الإضاءة الخلفية ومصباح النيون في السقف (M09). عدسة نظيفة، ووضع الطيران، والهاتف عموديًّا على حامل ثلاثي أو سند، مع قفل التركيز والتعريض (غالبًا بضغطة مطوّلة على الموضوع). اكتب قائمة لقطاتك مسبقًا: المنتج في اليد، والتفاصيل، والاستعمال، والنتيجة، والحديث أمام الكاميرا، ولقطات القطع (M07، درس «التحضير للتصوير بالهاتف»). صوّر كل لقطة 3 مرات مع ثانيتين من الهامش؛ دقة 1080p تكفي، و4K تترك هامشًا للتكبير، و60 صورة في الثانية للّقطات التي ستبطئها."
+  }
+ },
+ {
+  "id": "pro-prompt-packshot",
+  "cat": "ia",
+  "aud": "pro",
+  "landing": false,
+  "kw": "prompt image, packshot, photo produit, image produit, nano banana, gemini, décor, lumière, studio, verrou, retouche, image prompt, product photo, product shot, برومبت, برومبت الصورة, صورة المنتج, باكشوت, تصوير المنتج, صورة, نانو بنانا, tswira, prompt tswira",
+  "q": {
+   "fr": "Comment écrire un prompt image pour une photo produit (packshot) ?",
+   "en": "How do I write an image prompt for a product shot (packshot)?",
+   "ar": "كيف أكتب برومبت صورة لصورة منتج (packshot)؟"
+  },
+  "a": {
+   "fr": "Pars de ta vraie photo produit, nette, prise à la lumière du jour : l’IA embellit le décor, jamais le produit (IA02). Ton prompt commence par le verrou « Garde le produit exactement identique : forme, couleur, étiquette », puis décrit le sujet, le décor, la lumière (direction, douceur, moment de la journée), le cadrage, le style et le format, par exemple : « posé sur du marbre noir, lumière douce venant de la gauche, plan rapproché, légère contre-plongée, photo produit de luxe, format 4:5 » (IA01, « Le prompt image »). Bannis « belle image de qualité » : décris ce qu’on voit. Résultat presque bon ? Continue la conversation avec une seule correction (« garde tout, mais plus de lumière »), puis compare à la vraie photo : étiquette, forme, couleur, chaque lettre.",
+   "en": "Start from your real product photo, sharp, taken in daylight: AI improves the setting, never the product (IA02). Your prompt opens with the lock “Keep the product exactly identical: shape, color, label”, then describes the subject, the setting, the light (direction, softness, time of day), the framing, the style and the format, for example: “on black marble, soft light from the left, close shot, slight low angle, luxury product photo, 4:5 format” (IA01, “The image prompt”). Ban “beautiful quality image”: describe what we see. Almost right? Continue the conversation with a single fix (“keep everything, but more light”), then compare with the real photo: label, shape, color, every letter.",
+   "ar": "انطلق من صورة حقيقية لمنتجك، واضحة وملتقطة في ضوء النهار: الذكاء الاصطناعي يجمّل الديكور، لا المنتج أبدًا (IA02). يبدأ البرومبت بالقفل «احتفظ بالمنتج كما هو تمامًا: الشكل واللون والملصق»، ثم يصف الموضوع والديكور والإضاءة (الاتجاه، والنعومة، ووقت اليوم) والتأطير والأسلوب والمقاس، مثلًا: «موضوع على رخام أسود، ضوء ناعم من اليسار، لقطة قريبة، زاوية منخفضة قليلًا، صورة منتج فاخرة، مقاس 4:5» (IA01، درس «برومبت الصورة»). تجنّب عبارة «صورة جميلة بجودة عالية»: صِف ما يُرى. النتيجة شبه جيدة؟ واصل المحادثة بتصحيح واحد («احتفظ بكل شيء، لكن مع إضاءة أكثر»)، ثم قارن بالصورة الحقيقية: الملصق والشكل واللون وكل حرف."
+  }
+ },
+ {
+  "id": "pro-personnage-coherent",
+  "cat": "ia",
+  "aud": "pro",
+  "landing": false,
+  "kw": "personnage, cohérent, cohérence, même visage, même personne, avatar, fiche personnage, image de référence, character, consistent, consistency, same face, reference image, شخصية, شخصية ثابتة, نفس الوجه, نفس الشخص, أفاتار, صورة مرجعية, nefs el wjeh",
+  "q": {
+   "fr": "Comment garder le même personnage d’une image IA à l’autre ?",
+   "en": "How do I keep the same character from one AI image to the next?",
+   "ar": "كيف أحافظ على الشخصية نفسها من صورة مولَّدة إلى أخرى؟"
+  },
+  "a": {
+   "fr": "Crée d’abord sa fiche personnage : de face, de profil et en plan moyen, avec la même lumière, puis envoie-la comme image de référence à chaque génération (IA02, « Un personnage cohérent »). Écris une description fixe (âge, visage, coiffure, tenue) et copie-la à l’identique dans chaque prompt, avec les mêmes vêtements. Pour un spot entier, ajoute la même phrase de style (palette, lumière, ambiance) dans chaque prompt et un seul étalonnage au montage (IA06) ; en vidéo, le mode Ingrédients de Veo garde produit, personnage et décor cohérents (IA03). Compare les visages côte à côte et régénère ce qui dérive, et ne présente jamais ce personnage comme un vrai client.",
+   "en": "First create a character sheet: front, profile and medium shot, under the same light, then send it as the reference image with every generation (IA02, “A consistent character”). Write a fixed description (age, face, hairstyle, outfit) and paste it word for word into every prompt, with the same clothes. For a whole spot, add the same style sentence (palette, light, mood) to every prompt and a single color grade in the edit (IA06); for video, Veo’s Ingredients mode keeps product, character and setting consistent (IA03). Compare the faces side by side and regenerate whatever drifts, and never present this character as a real customer.",
+   "ar": "أنشئ أولًا بطاقة الشخصية: من الأمام، ومن الجانب، وفي لقطة متوسطة، بالإضاءة نفسها، ثم أرسلها كصورة مرجعية مع كل عملية توليد (IA02، درس «شخصية ثابتة»). اكتب وصفًا ثابتًا (العمر، والوجه، وتسريحة الشعر، والملابس) وانسخه حرفيًّا في كل برومبت، بالملابس نفسها. ولإعلان كامل، أضف جملة الأسلوب نفسها (الألوان، والإضاءة، والأجواء) في كل برومبت، وطبّق تصحيح ألوان واحدًا في المونتاج (IA06)؛ وفي الفيديو، يحافظ وضع المكوّنات (Ingredients) في Veo على انسجام المنتج والشخصية والديكور (IA03). قارن الوجوه جنبًا إلى جنب وأعد توليد ما يتغيّر، ولا تقدّم هذه الشخصية أبدًا على أنها زبون حقيقي."
+  }
+ },
+ {
+  "id": "pro-outil-video",
+  "cat": "ia",
+  "aud": "pro",
+  "landing": false,
+  "kw": "outil vidéo, vidéo ia, quel outil, veo, flow, kling, higgsfield, image vers vidéo, texte vers vidéo, animer, plan, frames, ingrédients, cinema studio, marketing studio, ai video tool, image to video, text to video, which tool, فيديو, أداة, فيديو بالذكاء الاصطناعي, كلينغ, فيو, تحريك الصورة, wach men outil, video ia",
+  "q": {
+   "fr": "Quel outil vidéo IA utiliser pour quel type de plan ?",
+   "en": "Which AI video tool should I use for which kind of shot?",
+   "ar": "أيّ أداة فيديو بالذكاء الاصطناعي أستعمل لكل نوع من اللقطات؟"
+  },
+  "a": {
+   "fr": "Pour un produit, privilégie l’image → vidéo : tu valides d’abord l’image, puis tu l’animes en plan court (IA03) ; le texte → vidéo sert surtout à explorer. Veo 3.1 (Flow) : le mode Frames quand tu connais le début et la fin du plan (flacon fermé → ouvert), le mode Ingrédients pour réunir produit, personnage et décor. Kling : l’image → vidéo classique, avec une action, un mouvement de caméra et un negative prompt ; Higgsfield : Cinema Studio pour des plans au rendu cinéma (préréglages de caméra), Marketing Studio pour des pubs produit style UGC, à vérifier plan par plan (IA06). Les outils changent vite, la méthode reste : teste sur le mode ou le modèle le moins cher, et garde le premium pour la version finale.",
+   "en": "For a product, favor image → video: you approve the image first, then animate it as a short shot (IA03); text → video is mostly for exploring. Veo 3.1 (Flow): Frames mode when you know the start and end of the shot (closed bottle → open), Ingredients mode to bring product, character and setting together. Kling: classic image → video, with one action, one camera move and a negative prompt; Higgsfield: Cinema Studio for cinematic-looking shots (camera presets), Marketing Studio for UGC-style product ads, to be checked shot by shot (IA06). Tools change fast, the method stays: test on the cheapest mode or model, and keep premium for the final version.",
+   "ar": "بالنسبة للمنتج، فضّل طريقة «من صورة إلى فيديو»: تعتمد الصورة أولًا، ثم تحرّكها في لقطة قصيرة (IA03)؛ أما «من نص إلى فيديو» فيصلح أساسًا للاستكشاف. في Veo 3.1 (عبر Flow): وضع Frames عندما تعرف بداية اللقطة ونهايتها (قارورة مغلقة ← مفتوحة)، ووضع المكوّنات (Ingredients) لجمع المنتج والشخصية والديكور. وفي Kling: الطريقة الكلاسيكية من صورة إلى فيديو، بحركة واحدة وحركة كاميرا واحدة وnegative prompt؛ وفي Higgsfield: استعمل Cinema Studio للّقطات ذات الطابع السينمائي (إعدادات كاميرا جاهزة) وMarketing Studio لإعلانات منتجات بأسلوب UGC، مع التحقّق لقطة بلقطة (IA06). الأدوات تتغيّر بسرعة، والطريقة تبقى: جرّب على الوضع أو النموذج الأرخص، واحتفظ بالنموذج المتميّز (premium) للنسخة النهائية."
+  }
+ },
+ {
+  "id": "pro-produit-deforme",
+  "cat": "ia",
+  "aud": "pro",
+  "landing": false,
+  "kw": "déformé, déformation, produit déformé, produit qui change, étiquette, cohérence produit, negative prompt, verrou, plans courts, distortion, warped, product changes, label changes, تشوه, يتشوه, المنتج يتبدل, الملصق, يتغير, negative prompt, tetbeddel, yetchewah",
+  "q": {
+   "fr": "Mon produit se déforme dans la vidéo IA : comment l’éviter ?",
+   "en": "My product gets distorted in the AI video: how do I avoid it?",
+   "ar": "منتجي يتشوّه في فيديو الذكاء الاصطناعي: كيف أتجنّب ذلك؟"
+  },
+  "a": {
+   "fr": "Applique les 5 réflexes d’IA03 (« Garder le produit identique ») : toujours la même image validée au départ, des plans courts (autour de 5 secondes), des mouvements lents, pas d’étiquette qui tourne face caméra, et ta vraie vidéo pour les gros plans d’étiquette. Commence chaque prompt par le verrou (« le produit et son étiquette restent identiques »), une seule action, un seul mouvement de caméra, et ajoute un negative prompt si l’outil le propose : déformation, texte qui change, doigts en trop, flou. Si ça déforme encore, simplifie l’action et ne change qu’une chose avant de régénérer. Contrôle image par image et monte en hybride : plans IA pour l’effet, vraies images pour la preuve.",
+   "en": "Apply the 5 reflexes from IA03 (“Keeping the product identical”): always the same approved starting image, short shots (around 5 seconds), slow moves, no label turning toward the camera, and your real video for label close-ups. Start every prompt with the lock (“the product and its label stay identical”), one action, one camera move, and add a negative prompt if the tool offers it: distortion, changing text, extra fingers, blur. If it still warps, simplify the action and change only one thing before regenerating. Check frame by frame and edit hybrid: AI shots for impact, real footage for proof.",
+   "ar": "طبّق القواعد الخمس في IA03 (درس «الحفاظ على المنتج كما هو»): الصورة المعتمدة نفسها دائمًا كنقطة انطلاق، ولقطات قصيرة (حوالي 5 ثوانٍ)، وحركات بطيئة، ولا ملصق يدور أمام الكاميرا، وفيديو حقيقي لمنتجك في اللقطات القريبة للملصق. ابدأ كل برومبت بالقفل («المنتج وملصقه يبقيان كما هما»)، مع حركة واحدة وحركة كاميرا واحدة، وأضف negative prompt إن كانت الأداة توفّره: تشوّه، نص يتغيّر، أصابع زائدة، ضبابية. وإذا استمرّ التشوّه، بسّط الحركة ولا تغيّر إلا شيئًا واحدًا قبل إعادة التوليد. راقب النتيجة صورةً بصورة، وركّب مونتاجًا هجينًا: لقطات الذكاء الاصطناعي للإبهار، واللقطات الحقيقية للإثبات."
+  }
+ },
+ {
+  "id": "pro-voix-off",
+  "cat": "ia",
+  "aud": "pro",
+  "landing": false,
+  "kw": "voix off, voix, voix ia, elevenlabs, cloner, clonage, clone, enregistrer, micro, darija, réglages, stabilité, voice-over, voice, ai voice, cloning, record, صوت, تعليق صوتي, فويس, استنساخ, إيليفن لابس, نسجل, صوتي, الدارجة, voix darija, nsajel",
+  "q": {
+   "fr": "Ma voix, une voix IA ou un clone : comment choisir ma voix off ?",
+   "en": "My voice, an AI voice or a clone: how do I choose my voice-over?",
+   "ar": "صوتي أم صوت اصطناعي أم صوت مستنسخ: كيف أختار التعليق الصوتي؟"
+  },
+  "a": {
+   "fr": "En français et en anglais, les voix IA sont très bonnes ; en darija, une vraie voix reste souvent plus naturelle et plus crédible (IA04). Pour enregistrer la tienne : une petite pièce calme pleine de tissus, le téléphone à 15–20 cm de la bouche, de l’énergie, 3 prises, puis la réduction de bruit dans CapCut (M07). Dans ElevenLabs, colle un script ponctué comme tu le dis, choisis une voix selon la langue et le ton de ta cible, change un seul réglage à la fois (stabilité, similarité, style) et écoute tout : marque, prix, chiffres. Le clonage, c’est ta propre voix ou l’accord écrit de la personne, jamais une célébrité ; et vérifie l’offre : d’après la page Outils IA, la version gratuite d’ElevenLabs est réservée à un usage non commercial.",
+   "en": "In French and English, AI voices are very good; in Darija, a real voice is often more natural and more credible (IA04). To record your own: a small quiet room full of fabric, the phone 15–20 cm from your mouth, energy, 3 takes, then noise reduction in CapCut (M07). In ElevenLabs, paste a script punctuated the way you’d say it, pick a voice for your audience’s language and tone, change one setting at a time (stability, similarity, style) and listen to everything: brand names, prices, numbers. Cloning means your own voice or the person’s written consent, never a celebrity; and check the plan: according to the AI tools page, ElevenLabs’ free version is for non-commercial use only.",
+   "ar": "الأصوات الاصطناعية جيدة جدًا بالفرنسية والإنجليزية؛ أما بالدارجة فيبقى الصوت الحقيقي غالبًا أكثر طبيعية وإقناعًا (IA04). لتسجيل صوتك: غرفة صغيرة هادئة مليئة بالأقمشة، والهاتف على بعد 15–20 سم من فمك، وطاقة في الأداء، و3 تسجيلات، ثم تقليل الضجيج في CapCut (M07). في ElevenLabs، الصق سكريبتًا بعلامات ترقيم كما تنطقه، واختر صوتًا يناسب لغة جمهورك ونبرته، وغيّر إعدادًا واحدًا في كل مرة (الثبات، التشابه، الأسلوب)، واستمع إلى كل شيء: اسم العلامة، والأسعار، والأرقام. الاستنساخ يكون لصوتك أنت أو بموافقة مكتوبة من صاحب الصوت، ولا يكون أبدًا لشخص مشهور؛ وتحقّق من الاشتراك: حسب صفحة «أدوات الذكاء الاصطناعي»، النسخة المجانية من ElevenLabs مخصّصة للاستعمال غير التجاري."
+  }
+ },
+ {
+  "id": "pro-avatar-ugc",
+  "cat": "ia",
+  "aud": "pro",
+  "landing": false,
+  "kw": "avatar, avatar ia, ugc ia, lip-sync, lipsync, faux avis, avis client, témoignage, éthique, mention ia, ai avatar, fake review, testimonial, disclosure, أفاتار, رأي زبون, شهادة, مزيف, أخلاقيات, محتوى مولد, avatar yahder",
+  "q": {
+   "fr": "Puis-je faire une pub UGC avec un avatar IA ?",
+   "en": "Can I make a UGC ad with an AI avatar?",
+   "ar": "هل يمكنني صنع إعلان UGC بأفاتار مولَّد بالذكاء الاصطناعي؟"
+  },
+  "a": {
+   "fr": "Oui, comme format : avatar → script → voix → lip-sync → montage, avec des phrases courtes et des coupes sur de vrais plans de ton produit (IA05, « Créer un avatar et le faire parler »). Ajoute la mention « contenu généré par IA » et signale-le comme la plateforme le demande. La limite est nette : un avatar ne joue jamais un « avis client » ni un faux témoignage, et on n’utilise ni le visage ni la voix d’une vraie personne sans son accord écrit (IA05, « Éthique et règles des plateformes »). Si un client te le demande, refuse et propose une démonstration honnête du produit.",
+   "en": "Yes, as a format: avatar → script → voice → lip-sync → edit, with short sentences and cuts to real shots of your product (IA05, “Create an avatar and make it talk”). Add the “AI-generated content” label and disclose it the way the platform asks. The line is clear: an avatar never plays a “customer review” or a fake testimonial, and you never use a real person’s face or voice without their written consent (IA05, “Ethics and platform rules”). If a client asks for it, decline and offer an honest product demo instead.",
+   "ar": "نعم، كصيغة إعلانية: أفاتار ← سكريبت ← صوت ← مزامنة الشفاه (lip-sync) ← مونتاج، بجمل قصيرة وقطع نحو لقطات حقيقية لمنتجك (IA05، درس «إنشاء أفاتار وجعله يتكلم»). أضف عبارة «محتوى مولَّد بالذكاء الاصطناعي» وصرّح بذلك كما تطلب المنصة. والحدّ واضح: الأفاتار لا يؤدي أبدًا «رأي زبون» ولا شهادة مزيّفة، ولا يُستعمل وجه شخص حقيقي أو صوته دون موافقته المكتوبة (IA05، درس «الأخلاقيات وقواعد المنصات»). وإذا طلب منك زبون ذلك، فارفض واقترح عرضًا توضيحيًا صادقًا للمنتج."
+  }
+ },
+ {
+  "id": "pro-pub-ne-vend-pas",
+  "cat": "business",
+  "aud": "pro",
+  "landing": false,
+  "kw": "pub ne vend pas, pas de ventes, pas de commandes, métriques, analyser, analyse, hook rate, hold rate, ctr, cpa, thruplay, rétention, statistiques, performance, ad not selling, no sales, metrics, analytics, retention, ما تبيعش, لا يبيع, مؤشرات, تحليل, إحصائيات, مبيعات, ma tbi3ch, ma bi3etch",
+  "q": {
+   "fr": "Ma pub ne vend pas : comment savoir ce qui cloche ?",
+   "en": "My ad isn’t selling: how do I find out what’s wrong?",
+   "ar": "إعلاني لا يبيع: كيف أعرف أين الخلل؟"
+  },
+  "a": {
+   "fr": "Lis les 4 métriques d’IA07 (« Les métriques d’une créative ») ; chacune juge une partie : hook rate = vues de 3 s ÷ impressions (le hook), hold rate = vues longues (ThruPlay) ÷ vues de 3 s (le body), CTR = clics ÷ impressions (le CTA), CPA = dépense ÷ achats (la rentabilité). Il n’y a pas de seuil universel : compare avec tes autres créatives et regarde sur la courbe de rétention où les gens décrochent. Hook faible → teste 3 nouvelles premières secondes ; body faible → coupe là où la courbe chute et montre le produit plus tôt ; CTA faible → rends l’action plus claire et lève un frein (livraison, paiement). Si tout est faible, teste un autre angle avant d’abandonner le produit (M10) ; et si les clics arrivent sans commandes, vérifie aussi le parcours WhatsApp jusqu’à la confirmation.",
+   "en": "Read the 4 metrics from IA07 (“Ad creative metrics”); each one judges one part: hook rate = 3-second views ÷ impressions (the hook), hold rate = long views (ThruPlay) ÷ 3-second views (the body), CTR = clicks ÷ impressions (the CTA), CPA = spend ÷ purchases (profitability). There’s no universal threshold: compare with your other creatives and look at the retention curve to see where people drop off. Weak hook → test 3 new opening seconds; weak body → cut where the curve drops and show the product sooner; weak CTA → make the action clearer and remove a blocker (delivery, payment). If everything is weak, test another angle before dropping the product (M10); and if clicks come in without orders, also check the WhatsApp journey through to confirmation.",
+   "ar": "اقرأ المؤشرات الأربعة في IA07 (درس «مؤشرات أداء الكرياتيف»)، فكلّ واحد منها يقيّم جزءًا: Hook rate = مشاهدات 3 ثوانٍ ÷ مرات الظهور (الهوك)، وHold rate = المشاهدات الطويلة (ThruPlay) ÷ مشاهدات 3 ثوانٍ (البودي)، وCTR = النقرات ÷ مرات الظهور (CTA)، وCPA = الإنفاق ÷ عمليات الشراء (الربحية). لا توجد عتبة صالحة لكل الحالات: قارن بكرياتيفاتك الأخرى، وانظر في منحنى الاحتفاظ أين ينسحب المشاهدون. هوك ضعيف ← اختبر 3 بدايات جديدة؛ بودي ضعيف ← احذف المقطع الذي ينخفض عنده المنحنى وأظهر المنتج أبكر؛ CTA ضعيف ← اجعل الفعل المطلوب أوضح وأزِل عائقًا (التوصيل، الدفع). وإذا كان كل شيء ضعيفًا، فجرّب زاوية أخرى قبل التخلّي عن المنتج (M10)؛ وإذا جاءت النقرات دون طلبات، فراجع أيضًا المسار عبر WhatsApp حتى تأكيد الطلب."
+  }
+ },
+ {
+  "id": "pro-variantes",
+  "cat": "business",
+  "aud": "pro",
+  "landing": false,
+  "kw": "variantes, variations, déclinaison, décliner, pub gagnante, gagnante, itérer, scaler, combien de variantes, a/b test, winner, iterate, scale, versions, نسخ, نسخة, إعلان ناجح, تجربة, اختبار, تطوير, variante, nbeddel",
+  "q": {
+   "fr": "J’ai une pub gagnante : combien de variantes faire, et comment ?",
+   "en": "I have a winning ad: how many variations should I make, and how?",
+   "ar": "عندي إعلان ناجح: كم نسخة أصنع منه، وكيف؟"
+  },
+  "a": {
+   "fr": "Décline-la en 5 variantes : nouveau hook, nouvelle première image, autre musique, autre format (9:16, 4:5 ou 1:1), autre CTA (M07, « Décliner une gagnante », et IA07). Une seule chose change par variante, sinon tu ne sauras pas ce qui a fait la différence. Dans CapCut, duplique le projet gagnant, change une chose, exporte avec un nom clair : produit-variable-format-version (parfum-hookB-9x16-v2). Publie les variantes en même temps et avec le même budget, compare-les à la gagnante dans un tableau, garde celle qui la bat, et recommence.",
+   "en": "Turn it into 5 variations: new hook, new first frame, different music, different format (9:16, 4:5 or 1:1), different CTA (M07, “Turn a winner into 5 variations”, and IA07). Only one thing changes per variation, otherwise you won’t know what made the difference. In CapCut, duplicate the winning project, change one thing, export with a clear name: product-variable-format-version (perfume-hookB-9x16-v2). Publish the variations at the same time with the same budget, compare them with the winner in a table, keep whichever beats it, and repeat.",
+   "ar": "اشتقّ منه 5 نسخ: هوك جديد، وصورة أولى جديدة، وموسيقى أخرى، ومقاس آخر (9:16 أو 4:5 أو 1:1)، وCTA آخر (M07، درس «من الإعلان الناجح إلى 5 نسخ»، وIA07). لا يتغيّر إلا شيء واحد في كل نسخة، وإلا فلن تعرف ما الذي صنع الفرق. في CapCut، انسخ المشروع الناجح، وغيّر شيئًا واحدًا، وصدّر باسم واضح: produit-variable-format-version (مثل parfum-hookB-9x16-v2). انشر النسخ في الوقت نفسه وبالميزانية نفسها، وقارنها بالإعلان الناجح في جدول، واحتفظ بالنسخة التي تتفوّق عليه، ثم أعد الكرّة."
+  }
+ },
+ {
+  "id": "pro-prix-pack",
+  "cat": "business",
+  "aud": "pro",
+  "landing": false,
+  "kw": "prix client, tarif client, facturer, combien facturer, devis, pack créatives, pack test, pack croissance, abonnement, marge, taux horaire, pricing, quote, package, rate, retainer, charge a client, تسعير, أسعاري, باقة, عرض سعر, زبون, هامش الربح, شحال نخلص, شحال نطلب, chhal nedi, devis client",
+  "q": {
+   "fr": "Comment fixer le prix d’un pack de créatives pour un client ?",
+   "en": "How do I price a creative pack for a client?",
+   "ar": "كيف أحدّد سعر باقة كرياتيفات لزبون؟"
+  },
+  "a": {
+   "fr": "Vends des packs (des résultats), pas des heures, en 3 offres : un Pack Test (3 créatives, 1 format, 1 aller-retour), un Pack Croissance (8 créatives, 3 formats, variantes de hooks) et un Abonnement (créatives chaque semaine, analyse Hooked Lab, rapport mensuel) (IA08, « Fixer ses prix »). Ton prix = ton temps + tes outils + ta marge : chronomètre une créative de la fiche produit à l’export, divise tes abonnements par le nombre de créatives livrées par mois, puis ajoute ta marge. Le calculateur de la leçon fait ce calcul et applique une remise de volume au Pack Croissance et à l’Abonnement. Aucun tarif n’est imposé, c’est ton marché qui décide ; écris dans le devis le contenu, les délais, le nombre de retouches et l’acompte.",
+   "en": "Sell packs (results), not hours, as 3 offers: a Test Pack (3 creatives, 1 format, 1 revision round), a Growth Pack (8 creatives, 3 formats, hook variations) and a Subscription (creatives every week, Hooked Lab analysis, monthly report) (IA08, “Setting your prices”). Your price = your time + your tools + your margin: time one creative from product sheet to export, divide your subscriptions by the number of creatives you deliver per month, then add your margin. The lesson’s calculator does the math and applies a volume discount to the Growth Pack and the Subscription. No rate is imposed, your market decides; put the content, deadlines, number of revisions and deposit in writing in the quote.",
+   "ar": "بِع باقات (نتائج) لا ساعات، في 3 عروض: باقة التجربة (3 كرياتيفات، مقاس واحد، جولة تعديل واحدة)، وباقة النمو (8 كرياتيفات، 3 مقاسات، نسخ مختلفة من الهوك)، والاشتراك (كرياتيفات كل أسبوع، تحليل بـ Hooked Lab، تقرير شهري) (IA08، درس «تحديد أسعارك»). سعرك = وقتك + أدواتك + هامش ربحك: احسب الوقت الذي تأخذه كرياتيف واحدة من بطاقة المنتج إلى التصدير، واقسم اشتراكاتك على عدد الكرياتيفات التي تسلّمها في الشهر، ثم أضف هامشك. حاسبة الدرس تقوم بهذا الحساب وتطبّق تخفيضًا على الكمية في باقة النمو والاشتراك. لا يوجد سعر مفروض، فسوقك هو الذي يقرّر؛ واكتب في عرض السعر المحتوى والآجال وعدد التعديلات والعربون."
+  }
+ },
+ {
+  "id": "pro-premiers-clients",
+  "cat": "business",
+  "aud": "pro",
+  "landing": false,
+  "kw": "clients, premiers clients, trouver des clients, prospecter, prospection, niche, offre, message, dm, instagram, linkedin, whatsapp, find clients, first clients, prospecting, outreach, زبائن, زبون, البحث عن زبائن, تخصص, رسالة, كليان, نلقى كليان, nal9a clients",
+  "q": {
+   "fr": "Comment trouver mes premiers clients ?",
+   "en": "How do I find my first clients?",
+   "ar": "كيف أجد زبائني الأوائل؟"
+  },
+  "a": {
+   "fr": "Resserre ta niche (secteur, spécialité, mode de vente : par exemple les e-commerçants beauté en Algérie qui vendent en paiement à la livraison) et résume ton offre en une phrase, « J’aide [cible] à [résultat] grâce à [méthode] », dans ta bio Instagram et ton titre LinkedIn (IA08). Liste une dizaine de boutiques de cette niche, puis écris à chacune un message personnalisé qui offre de la valeur avant de vendre, par exemple 3 idées de hooks sur un de ses produits, et termine par une seule question. Pas de copier-coller à 100 comptes ; suis tes réponses dans un tableau. Ensuite viennent l’appel en 5 étapes (découverte, diagnostic, proposition, objections, engagement) et un pack test pour commencer petit.",
+   "en": "Narrow your niche (sector, specialty, way of selling: for example beauty e-commerce sellers in Algeria who sell cash on delivery) and sum up your offer in one sentence, “I help [target] get [result] through [method]”, in your Instagram bio and LinkedIn headline (IA08). List about ten shops in that niche, then send each one a personalized message that gives value before selling, for example 3 hook ideas for one of their products, and end with a single question. No copy-paste to 100 accounts; track replies in a spreadsheet. Then comes the 5-step call (discovery, diagnosis, proposal, objections, commitment) and a test pack to start small.",
+   "ar": "ضيّق تخصّصك (القطاع، والاختصاص، وطريقة البيع: مثلًا أصحاب المتاجر الإلكترونية في مجال التجميل بالجزائر الذين يبيعون بالدفع عند الاستلام)، ولخّص عرضك في جملة واحدة، «أساعد [الجمهور] على [النتيجة] بفضل [الطريقة]»، في نبذة Instagram وعنوان LinkedIn (IA08). اجمع قائمة بحوالي عشرة متاجر في هذا التخصّص، ثم أرسل لكلّ منها رسالة شخصية تقدّم قيمة قبل البيع، مثل 3 أفكار هوك لأحد منتجاتها، واختمها بسؤال واحد. لا تنسخ الرسالة نفسها إلى 100 حساب؛ وتابع الردود في جدول. بعد ذلك تأتي المكالمة بخطواتها الخمس (الاكتشاف، والتشخيص، والعرض، والاعتراضات، والالتزام)، وباقة تجربة لتبدأ بخطوة صغيرة."
+  }
+ },
+ {
+  "id": "pro-portfolio",
+  "cat": "business",
+  "aud": "pro",
+  "landing": false,
+  "kw": "portfolio, portefeuille, book, sans clients, sans expérience, exemples, projets, réalisations, projet personnel, showcase, no clients, no experience, examples, work samples, بورتفوليو, أعمال, نماذج, بلا زبائن, دون خبرة, سابقة أعمال, مشروع شخصي, portfolio vide",
+  "q": {
+   "fr": "Que mettre dans mon portfolio si je n’ai pas encore de clients ?",
+   "en": "What should I put in my portfolio if I don’t have clients yet?",
+   "ar": "ماذا أضع في البورتفوليو إذا لم يكن لديّ زبائن بعد؟"
+  },
+  "a": {
+   "fr": "Choisis 3 produits de ta niche que tu peux acheter ou photographier, et crée 3 créatives par produit : une vidéo, une image, un carrousel (IA08, « Un portfolio, même sans clients »). Sous chaque travail non commandé, écris « Projet personnel, non commandé par la marque », et explique ta démarche en 3 lignes : hook, angle, structure. Ajoute ton projet final (M12 ou IA09) et, plus tard, de vrais travaux clients avec leur accord. Jamais de résultats inventés ni de captures empruntées, et ne prétends jamais avoir travaillé pour une marque qui ne t’a rien commandé.",
+   "en": "Pick 3 products in your niche that you can buy or photograph, and create 3 creatives per product: a video, an image, a carousel (IA08, “A portfolio, even with no clients”). Under every uncommissioned piece, write “Personal project, not commissioned by the brand”, and explain your approach in 3 lines: hook, angle, structure. Add your final project (M12 or IA09) and, later, real client work with their consent. Never invented results or borrowed screenshots, and never claim you worked for a brand that didn’t hire you.",
+   "ar": "اختر 3 منتجات من تخصّصك يمكنك شراؤها أو تصويرها، وأنشئ 3 كرياتيفات لكل منتج: فيديو، وصورة، وكاروسيل (IA08، درس «بورتفوليو حتى من دون زبائن»). تحت كل عمل لم يطلبه أحد، اكتب «مشروع شخصي، لم تطلبه العلامة التجارية»، واشرح طريقتك في 3 أسطر: الهوك، والزاوية، والهيكل. أضف مشروعك النهائي (M12 أو IA09)، ولاحقًا أعمالًا حقيقية لزبائنك بموافقتهم. لا نتائج مخترَعة ولا لقطات شاشة مستعارة أبدًا، ولا تدّعِ أبدًا أنك عملت لعلامة لم تطلب منك شيئًا."
+  }
+ },
+ {
+  "id": "pro-livraison",
+  "cat": "business",
+  "aud": "pro",
+  "landing": false,
+  "kw": "livrer, livraison client, livrer les fichiers, fichiers, envoyer, rendu, dossier, nommage, lien de téléchargement, client, deliver, delivery, files, send, handover, naming, تسليم, ملفات, نرسل, نبعث, مجلد, الزبون, تسليم العمل, nsellem, nab3at",
+  "q": {
+   "fr": "Comment livrer les fichiers à un client de façon pro ?",
+   "en": "How do I deliver files to a client professionally?",
+   "ar": "كيف أسلّم الملفات لزبون بطريقة احترافية؟"
+  },
+  "a": {
+   "fr": "Exporte dans les formats demandés (vidéo 1080 × 1920, 30 images/s, MP4, et 4:5 ou 1:1 si c’est prévu), avec une règle de nommage claire comme client-produit-format-v1 (IA08, « Livrer, fidéliser, se faire recommander »). Range tout dans un dossier de livraison, un sous-dossier par format, envoyé par WhatsApp ou par un lien de téléchargement, avec un court message : ce que tu as testé, et pourquoi. Avant d’envoyer, passe la check-list : produit identique au vrai, aucun texte déformé, sous-titres relus, rien de faux, usage de l’IA indiqué. Fixe avec le client une date pour relire ses chiffres, propose ensuite de nouvelles variantes, et demande une recommandation une fois les résultats mesurés.",
+   "en": "Export in the formats requested (video 1080 × 1920, 30 fps, MP4, plus 4:5 or 1:1 if agreed), with a clear naming rule like client-product-format-v1 (IA08, “Deliver, retain, get referred”). Put everything in a delivery folder, one subfolder per format, sent via WhatsApp or a download link, with a short message: what you tested, and why. Before sending, run the checklist: product identical to the real one, no distorted text, captions proofread, nothing false, AI use disclosed. Set a date with the client to review their numbers, then propose new variations, and ask for a referral once results are measured.",
+   "ar": "صدّر بالمقاسات المطلوبة (فيديو 1080 × 1920، و30 صورة في الثانية، بصيغة MP4، و4:5 أو 1:1 إن اتُّفق على ذلك)، مع قاعدة تسمية واضحة مثل client-produit-format-v1 (IA08، درس «التسليم، وكسب الولاء، والتوصيات»). رتّب كل شيء في مجلد تسليم، بمجلد فرعي لكل مقاس، وأرسله عبر WhatsApp أو برابط تحميل، مع رسالة قصيرة: ما الذي اختبرته، ولماذا. وقبل الإرسال، راجع قائمة التحقّق: المنتج مطابق للحقيقي، ولا نص مشوّه، والترجمة المكتوبة مُراجَعة، ولا شيء كاذب، واستعمال الذكاء الاصطناعي مُصرَّح به. حدّد مع الزبون موعدًا لمراجعة أرقامه، ثم اقترح نسخًا جديدة، واطلب توصية بعد قياس النتائج."
+  }
+ },
+ {
+  "id": "pro-projet-final",
+  "cat": "formation",
+  "aud": "pro",
+  "landing": false,
+  "kw": "projet final, réussir le projet final, rendre, valider, grille, relecture, 30 secondes, m12, ia09, certificat, final project, submit, review, checklist, المشروع النهائي, مشروع التخرج, تسليم المشروع, شبكة المراجعة, شهادة, projet final ia",
+  "q": {
+   "fr": "Comment réussir mon projet final ?",
+   "en": "How do I succeed at my final project?",
+   "ar": "كيف أنجح في مشروعي النهائي؟"
+  },
+  "a": {
+   "fr": "Formation Créative (M12) : une pub de 30 secondes maximum, carte CTA comprise, pour un vrai produit, avec uniquement tes images et ta voix. Décortique d’abord une pub gagnante de ta niche, importe-la dans CapCut sans le son comme guide de rythme scène par scène, prépare 3 hooks pour garder le meilleur, puis supprime le guide avant d’exporter en 1080 × 1920 avec un nom clair (prenom-produit-projet-final). L’équipe relit le hook, la clarté, le rythme, le son, les sous-titres, le CTA et la durée : passe cette grille toi-même avant d’envoyer. Formation IA (IA09) : analyse 3 créatives de ta niche avec Hooked Lab, produis une vidéo IA, une image et un carrousel sur le même angle, ajoute 5 variantes de hooks, et présente le tout comme à un client.",
+   "en": "Creative Course (M12): an ad of 30 seconds maximum, CTA card included, for a real product, using only your own footage and your voice. First break down a winning ad in your niche, import it into CapCut with the sound off as a scene-by-scene pacing guide, prepare 3 hooks to keep the best one, then delete the guide before exporting at 1080 × 1920 with a clear name (firstname-product-final-project). The team reviews the hook, clarity, pace, sound, subtitles, CTA and length: run that checklist yourself before sending. AI Course (IA09): analyse 3 creatives from your niche with Hooked Lab, produce an AI video, an image and a carousel on the same angle, add 5 hook variations, and present it all as you would to a client.",
+   "ar": "في التكوين الإبداعي (M12): إعلان مدته 30 ثانية كحدّ أقصى، مع بطاقة CTA، لمنتج حقيقي، بلقطاتك وصوتك فقط. فكّك أولًا إعلانًا ناجحًا من تخصّصك، واستورده في CapCut دون صوت ليكون دليلًا للإيقاع مشهدًا بمشهد، وحضّر 3 هوكات لتحتفظ بأفضلها، ثم احذف الدليل قبل التصدير بمقاس 1080 × 1920 باسم واضح (prenom-produit-projet-final). يراجع الفريق الهوك، والوضوح، والإيقاع، والصوت، والترجمة المكتوبة، وCTA، والمدة: طبّق هذه الشبكة بنفسك قبل الإرسال. وفي تكوين الذكاء الاصطناعي (IA09): حلّل 3 كرياتيفات من تخصّصك بـ Hooked Lab، وأنتج فيديو بالذكاء الاصطناعي وصورة وكاروسيل بالزاوية نفسها، وأضف 5 نسخ من الهوك، وقدّم كل ذلك كما لو كنت أمام زبون."
+  }
+ }
+]

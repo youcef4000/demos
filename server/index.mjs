@@ -75,6 +75,18 @@ const clientIp = (req) => {
 };
 const app = new Plateforme({ sql, transactionSync }, { base: BASE, ip: (r) => r.headers.get('x-ha-ip') || '' });
 
+// Premier démarrage : la FAQ du site (publique) et les questions pro (server/faq-pro.json, réservées aux membres)
+if (!app.kv('faq')) {
+  try {
+    const pub = JSON.parse(await readFile(path.join(SITE, 'data/faq.json'), 'utf8')).map((x) => ({ aud: 'public', ...x }));
+    const pro = JSON.parse(await readFile(path.join(HERE, 'faq-pro.json'), 'utf8')).map((x) => ({ ...x, aud: 'pro', landing: false }));
+    app.seedFaq([...pub, ...pro]);
+    console.log(`FAQ initiale : ${pub.length} publiques, ${pro.length} pro`);
+  } catch (e) {
+    console.error('FAQ initiale impossible', e);
+  }
+}
+
 /* ------------------------------------------------------------------ */
 /* Sauvegarde quotidienne                                              */
 /* ------------------------------------------------------------------ */
