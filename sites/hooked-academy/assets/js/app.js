@@ -1184,6 +1184,7 @@ function viewLesson(id) {
             )
             .join('')}</div>
         </section>
+        ${demo ? '' : partnerCard(l)}
         <a class="card lab-card lab-card--s" href="https://hooked-lab.com" target="_blank" rel="noopener"><span class="lc-m">${markSVG({ lab: true })}</span><div><h3>${t('app.lab.apply')}</h3><p class="muted">${t('app.lab.apply.text')}</p></div></a>
       </aside>
     </div>`,
@@ -1620,6 +1621,27 @@ function viewProfile() {
 const pickT = (o) => (o && typeof o === 'object' ? o[lang] || o.fr : o || '');
 const usd = (n) => t('app.tools.usd', { n: num(n) });
 
+/** Lien vers un outil : le lien partenaire du formateur quand il existe (mention claire), sinon le site. */
+const toolLink = (o, cls = 'b b--s') =>
+  o.ref
+    ? `<a class="${cls} b--ref" href="${esc(o.ref)}" target="_blank" rel="noopener sponsored">${t('app.tools.ref')}${icon('arrow', { size: 14, cls: 'i-ext' })}</a>`
+    : `<a class="${cls}" href="${esc(o.url)}" target="_blank" rel="noopener">${t('app.tools.open')}${icon('arrow', { size: 14, cls: 'i-ext' })}</a>`;
+
+/** Outils à lien partenaire utilisés dans une leçon (cités dans son titre ou ses scènes), deux au plus. */
+function lessonPartners(l) {
+  const txt = `${l.title} ${JSON.stringify(l.scenes || [])} ${(l.todo || []).join(' ')}`.toLowerCase();
+  return OUTILS.filter((o) => o.ref && (o.lesson === l.id || txt.includes(o.name.toLowerCase()))).slice(0, 2);
+}
+function partnerCard(l) {
+  const list = lessonPartners(l);
+  if (!list.length) return '';
+  return `<section class="card ptn" aria-labelledby="ptn-h">
+    <p class="card-k" id="ptn-h">${icon('gift', { size: 14 })} ${t('app.ptn.k')}</p>
+    ${list.map((o) => `<div class="ptn-i"><div><b>${esc(o.name)}</b><small>${esc(o.perk ? pickT(o.perk) : pickT(o.use))}</small></div>${toolLink(o, 'b b--s')}</div>`).join('')}
+    <p class="ptn-x muted">${t('app.ptn.x')}</p>
+  </section>`;
+}
+
 function viewTools() {
   setTitle(t('app.title.tools'));
   const byId = Object.fromEntries(OUTILS.map((o) => [o.id, o]));
@@ -1655,12 +1677,14 @@ function viewTools() {
         <div class="tl-sec-h"><h2 class="tl-h" id="tl-l-h">${t('app.tools.list.title')}</h2>
           <div class="seg" id="tcats" role="group" aria-label="${esc(t('app.lib.cats'))}">${cats.map((c, i) => `<button type="button" aria-pressed="${i === 0}" data-c="${c}">${esc(c === 'all' ? t('app.lib.cat.all') : pickT(TOOL_CATS[c]))}</button>`).join('')}</div>
         </div>
+        <p class="tl-note muted">${icon('gift', { size: 14 })} ${t('app.tools.partners')}</p>
         <div class="tl-grid" id="tl-grid">${OUTILS.map(
           (o) => `<article class="card tl" data-cat="${o.cat}">
             <header class="tl-hd"><span class="tl-ic" aria-hidden="true">${esc(o.name.slice(0, 1))}</span><div><h3>${esc(o.name)}</h3><span class="chip">${esc(pickT(TOOL_CATS[o.cat]))}</span></div><span class="tl-pr">${o.price ? usd(o.price) : t('app.tools.free')}</span></header>
             <p class="tl-use">${esc(pickT(o.use))}</p>
             <dl class="tl-dl"><div><dt>${t('app.tools.freeL')}</dt><dd>${esc(pickT(o.free))}</dd></div><div><dt>${t('app.tools.paidL')}</dt><dd>${esc(pickT(o.paid))}</dd></div></dl>
-            <footer class="tl-ft">${lessonLink(o)}<a class="b b--s" href="${esc(o.url)}" target="_blank" rel="noopener">${t('app.tools.open')}${icon('arrow', { size: 14, cls: 'i-ext' })}</a></footer>
+            ${o.ref ? `<p class="tl-perk">${icon('gift', { size: 14 })}<span>${esc(o.perk ? pickT(o.perk) : t('app.tools.refChip'))}</span></p>` : ''}
+            <footer class="tl-ft">${lessonLink(o)}${toolLink(o)}</footer>
           </article>`,
         ).join('')}</div>
       </section>
@@ -1891,6 +1915,7 @@ function bot() {
     filter: (e) => ['commencer', 'pratique', 'acces', 'outils', 'code', 'certificat'].includes(e.id),
     links: {
       outils: go('#/outils', 'app.nav.tools'),
+      partenaires: go('#/outils', 'app.nav.tools'),
       ressources: go('#/ressources', 'app.nav.resources'),
       certificat: go('#/profil', 'app.nav.profile'),
       acces: go('#/profil', 'app.nav.profile'),

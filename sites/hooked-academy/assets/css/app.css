@@ -4884,6 +4884,55 @@ a.lc:focus-visible .lc-go,
 .tl-ls:hover span {
   text-decoration: underline;
 }
+.tl-perk {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 650;
+  color: var(--acc);
+  background: rgb(var(--acc-rgb) / 0.08);
+}
+.tl-perk svg {
+  flex: none;
+  margin-top: 1px;
+}
+.b--ref {
+  border-color: rgb(var(--acc-rgb) / 0.55);
+}
+.ptn {
+  display: grid;
+  gap: 12px;
+}
+.ptn .card-k,
+.ptn-x {
+  margin: 0;
+}
+.ptn-i {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.ptn-i > div {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.ptn-i small {
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: var(--mist-300);
+}
+.ptn-x {
+  font-size: 12px;
+  line-height: 1.45;
+}
 .tl-gen {
   display: grid;
   gap: 14px;
