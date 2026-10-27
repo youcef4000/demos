@@ -6,6 +6,14 @@
   },
   "demos": [
     {
+      "slug": "sarraf",
+      "title": "Sarraf — le carnet vocal du cambiste",
+      "sector": "Change de devises",
+      "city": "Algérie",
+      "color": "#e8bd4f",
+      "public": false
+    },
+    {
       "slug": "hooked-academy",
       "title": "Hooked Academy — une pub qui vend, ça se monte",
       "sector": "Formation créatives & IA",

@@ -4,6 +4,8 @@
   // Le nom doit rester celui du Worker cree dans Cloudflare.
   // Seules /hooked-academy/api/* et /hooked-academy/media/* passent par le code (worker/) :
   // le serveur de Hooked Academy, avec sa base SQLite (Durable Object, rien a creer a la main).
+  // /sarraf/api/* : transcription et lecture des memos du cambiste (worker/sarraf.js, secrets SARRAF_CODE,
+  // ELEVENLABS_API_KEY, ANTHROPIC_API_KEY a ajouter dans Settings -> Variables and Secrets du Worker).
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "demos",
   "main": "worker/index.js",
@@ -13,7 +15,7 @@
     "directory": "./sites",
     "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "run_worker_first": ["/hooked-academy/api/*", "/hooked-academy/media/*"]
+    "run_worker_first": ["/hooked-academy/api/*", "/hooked-academy/media/*", "/sarraf/api/*"]
   },
   "durable_objects": {
     "bindings": [{ "name": "ACADEMY", "class_name": "Academy" }]

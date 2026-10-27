@@ -1,8 +1,10 @@
 // Worker « demos » : sert le dossier sites/ tel quel (fichiers statiques).
-// Seules les adresses du serveur de Hooked Academy passent par ce code (wrangler.jsonc, run_worker_first) :
-// /hooked-academy/api/* et /hooked-academy/media/* sont confiées au Durable Object de la plateforme.
+// Seules les adresses des serveurs passent par ce code (wrangler.jsonc, run_worker_first) :
+// /hooked-academy/api/* et /hooked-academy/media/* sont confiées au Durable Object de la plateforme ;
+// /sarraf/api/* transcrit et décortique les mémos du carnet du cambiste (worker/sarraf.js, sans stockage).
 
 import { Academy } from './academy.js';
+import { sarraf } from './sarraf.js';
 
 export { Academy };
 
@@ -11,6 +13,7 @@ const SERVER = /^\/hooked-academy\/(api|media)\//;
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (url.pathname.startsWith('/sarraf/api/')) return sarraf(request, env);
     if (!SERVER.test(url.pathname)) return env.ASSETS.fetch(request);
     // L'adresse IP vient de Cloudflare : l'en-tête envoyé par le visiteur est écrasé
     const headers = new Headers(request.headers);

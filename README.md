@@ -58,6 +58,31 @@ unique (100 bits). Seule son empreinte SHA-256 est dans `server/plateforme.js` (
 
 Tester en local : `node server/index.mjs`, puis http://localhost:3000/admin/.
 
+## Sarraf — carnet vocal du cambiste (`sites/sarraf/`)
+
+Application installable (PWA) pour un cambiste : après chaque appel, il enregistre un mémo vocal ; l'application le
+garde, le fait transcrire et décortiquer, puis affiche une fiche à vérifier (sommes, taux, par qui, à qui, bénéfice
+net, reste à régler). Elle tient aussi la caisse (devises en stock, prix moyen), les soldes de chaque contact, les
+échéances et le bilan. Adresse : `https://demos.bornzstudio.com/sarraf/` (privée, hors galerie).
+
+- Les mémos, audios, fiches et règlements restent **dans le téléphone** (IndexedDB) ; sauvegarde complète en un fichier
+  JSON et export CSV depuis **Réglages**.
+- `worker/sarraf.js` (`/sarraf/api/*`) ne stocke rien : il transcrit l'audio avec ElevenLabs (`scribe_v2`) et le fait lire
+  par Claude (`claude-opus-5-5`, réponse au format JSON imposé, relance automatique sur un modèle de secours si un filtre
+  refuse). Sans serveur, l'application marche quand même : fiche à remplir à la main, lecture simple des mémos écrits.
+
+Mise en service (une seule fois) : Cloudflare → Worker `demos` → **Settings → Variables and Secrets** → ajouter en
+**Secret** :
+
+| Nom | Valeur |
+|---|---|
+| `SARRAF_CODE` | un code d'accès long, saisi ensuite une fois dans **Réglages** de l'application |
+| `ELEVENLABS_API_KEY` | clé API ElevenLabs (droit Speech to Text) |
+| `ANTHROPIC_API_KEY` | clé API Anthropic |
+| `SARRAF_MODELE` | facultatif : autre modèle Claude |
+
+Sur le miroir GitHub Pages, l'application appelle l'adresse de secours `https://demos.youcef-ny.workers.dev/sarraf/api/`.
+
 ## Ajouter une démo
 
 1. Créer `sites/<slug>/index.html` (et ses fichiers, avec des chemins relatifs).
