@@ -1,6 +1,6 @@
 # Hooked Academy — notice
 
-Site : `sites/hooked-academy/` → https://demos.bornzstudio.com/hooked-academy/
+Site : `sites/hooked-academy/` → https://hooked-academy.tech/
 
 | Adresse | Contenu |
 |---|---|

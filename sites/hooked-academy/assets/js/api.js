@@ -1,4 +1,4 @@
-// Hooked Academy — appels au serveur de la plateforme (worker/academy.js, sous /hooked-academy/api/).
+// Hooked Academy — appels au serveur de la plateforme (server/plateforme.js, sous api/).
 // Sans serveur (miroir GitHub Pages, hors ligne), les appels échouent avec ApiError(0, 'network') :
 // chaque page garde alors son contenu de base.
 

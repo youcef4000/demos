@@ -1,4 +1,4 @@
-// Hooked Academy — espace équipe (français, anglais, arabe), branché sur le serveur (worker/academy.js).
+// Hooked Academy — espace équipe (français, anglais, arabe), branché sur le serveur (server/plateforme.js).
 // Routes : #/ (vue d'ensemble) · #/inscriptions · #/etudiants · #/ressources · #/studio[/leçon] · #/programme
 //          · #/edition/<leçon> · #/faq · #/reglages
 // Connexion : compte de l'équipe (identifiant + mot de passe, créé une fois avec le code d'installation).

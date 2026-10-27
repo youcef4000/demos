@@ -1,5 +1,5 @@
 // Hooked Academy — données de l'espace étudiant.
-// Les inscriptions, les comptes et la progression sont gardés par le serveur (worker/academy.js, via api.js).
+// Les inscriptions, les comptes et la progression sont gardés par le serveur (server/plateforme.js, via api.js).
 // Ce navigateur garde une copie de l'étudiant connecté (affichage immédiat, hors ligne) et renvoie sa
 // progression au serveur. Le compte démo vit seulement ici, sans serveur.
 

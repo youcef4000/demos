@@ -189,7 +189,7 @@ strong { font-weight: 800; }
   <h1>${esc(title)}</h1>
   ${subtitle ? `<p class="sub">${inline(subtitle)}</p>` : ''}
   <div class="bar"></div>
-  <footer><span>hooked-academy</span><span>demos.bornzstudio.com/hooked-academy</span></footer>
+  <footer><span>hooked-academy</span><span>hooked-academy.tech</span></footer>
 </section>
 <main>${html.replaceAll('{{PROMPT}}', esc(L.prompt))}</main>
 </body></html>`;
