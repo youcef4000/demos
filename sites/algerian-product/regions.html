@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Les régions et leurs savoir-faire — Algerian Product</title>
+<meta name="description" content="De Tlemcen à Tamanrasset, dix régions d’Algérie et le produit qui les fait connaître.">
+<meta name="theme-color" content="#0c1110">
+<link rel="canonical" href="https://demos.bornzstudio.com/algerian-product/regions.html">
+<link rel="alternate" hreflang="fr" href="https://demos.bornzstudio.com/algerian-product/regions.html?lang=fr">
+<link rel="alternate" hreflang="en" href="https://demos.bornzstudio.com/algerian-product/regions.html?lang=en">
+<link rel="alternate" hreflang="ar" href="https://demos.bornzstudio.com/algerian-product/regions.html?lang=ar">
+<link rel="alternate" hreflang="es" href="https://demos.bornzstudio.com/algerian-product/regions.html?lang=es">
+<link rel="alternate" hreflang="x-default" href="https://demos.bornzstudio.com/algerian-product/regions.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Algerian Product">
+<meta property="og:url" content="https://demos.bornzstudio.com/algerian-product/regions.html">
+<meta property="og:title" content="Algerian Product — le meilleur de l’Algérie, présenté au monde">
+<meta property="og:description" content="Un survol de l’Algérie région par région, et les produits qui en viennent : terroir, artisanat, textile, matériaux, industrie. Catalogue, marchés et demande de devis en 4 langues.">
+<meta property="og:image" content="https://demos.bornzstudio.com/algerian-product/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Le relief de l’Algérie vu du ciel, avec le sceau Algerian Product">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Algerian Product — le meilleur de l’Algérie, présenté au monde">
+<meta name="twitter:description" content="Un survol de l’Algérie région par région, et les produits qui en viennent.">
+<meta name="twitter:image" content="https://demos.bornzstudio.com/algerian-product/img/og.jpg">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter+Tight:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="./style.css">
+<script src="./boot.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
+<script type="module" src="./home.js"></script>
+</head>
+<body class="page-inner" data-page="regions">
+<a class="skip" href="#main" data-t="common.skip">Aller au contenu</a>
+<header class="hdr" id="hdr"></header>
+
+<main id="main">
+  <header class="phero" data-hdr="dark">
+    <figure class="phero__media"><img class="phero__img" data-media="heroes.regions" alt=""></figure>
+    <div class="wrap phero__inner">
+      <nav class="crumbs crumbs--light" aria-label="Fil d’Ariane"><a href="./" data-link="./" data-t="nav.home">Accueil</a><span>/</span><span data-t="nav.regions"></span></nav>
+      <p class="kicker" data-t="atlas.kicker"></p>
+      <h1 class="phero__title" data-t-rich="page.regions.title"></h1>
+      <p class="lead" data-t="page.regions.lead"></p>
+    </div>
+  </header>
+  <!-- ============ ATLAS ============ -->
+  <section class="sec sec--paper atlas" id="regions">
+    <div class="wrap atlas__grid">
+      <div class="atlas__text">
+        <p class="kicker" data-t="atlas.kicker">L’atlas</p>
+        <h2 class="h2" data-t-rich="atlas.title" data-split>Chaque région, <em>son savoir-faire</em>.</h2>
+        <p class="lead" data-t="atlas.lead" data-reveal></p>
+        <ol class="atlas__list" id="atlas-list"></ol>
+        <button class="btn btn--dark" id="atlas-replay" type="button"><span data-icon="play"></span><span data-t="atlas.replay">Revoir le survol</span></button>
+      </div>
+      <div class="atlas__map" id="atlas-map"></div>
+    </div>
+  </section>
+
+  <section class="sec sec--paper rcards-sec" id="detail">
+    <div class="wrap"><div class="rcards" id="region-cards"></div></div>
+  </section>
+
+  <!-- ============ APPEL FINAL ============ -->
+  <section class="sec sec--ink final" id="contact">
+    <div class="final__seal" id="final-seal" aria-hidden="true"></div>
+    <div class="wrap final__inner">
+      <p class="kicker" data-t="cta.kicker">Parlons-en</p>
+      <h2 class="final__title" data-t-rich="cta.title" data-split>Votre prochain conteneur <em>commence ici</em>.</h2>
+      <p class="lead" data-t="cta.text" data-reveal></p>
+      <div class="final__ctas" id="final-ctas"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="ftr" id="ftr"></footer>
+<a class="basket" id="basket" href="devis.html" hidden></a>
+</body>
+</html>

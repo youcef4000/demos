@@ -1,0 +1,73 @@
+{
+  "studio": {
+    "name": "Bornz Studio",
+    "portfolio": "https://bornzstudio.com",
+    "whatsapp": "213558678038"
+  },
+  "demos": [
+    {
+      "slug": "sarraf",
+      "title": "Sarraf — le carnet vocal du cambiste",
+      "sector": "Change de devises",
+      "city": "Algérie",
+      "color": "#e8bd4f",
+      "public": false
+    },
+    {
+      "slug": "insag-business-school",
+      "title": "INSAG Business School — gagnez en hauteur de vue",
+      "sector": "Enseignement supérieur · MBA",
+      "city": "Alger · Constantine",
+      "color": "#3d6ef5",
+      "public": false
+    },
+    {
+      "slug": "algerian-product",
+      "title": "Algerian Product — l’Algérie vue du ciel, ses produits pour le monde",
+      "sector": "Export & marque pays",
+      "city": "Canada · Algérie",
+      "color": "#0d5a45",
+      "public": false
+    },
+    {
+      "slug": "melissa-atelier",
+      "title": "Melissa Atelier — du croquis à la pièce",
+      "sector": "Mode féminine",
+      "city": "Alger",
+      "color": "#9a6f75",
+      "public": false
+    },
+    {
+      "slug": "tlemceni",
+      "title": "Tlemceni — la basket, pièce par pièce",
+      "sector": "Chaussures & mode",
+      "city": "Alger",
+      "color": "#d21f2b",
+      "public": false
+    },
+    {
+      "slug": "stickprod",
+      "title": "Stickprod — la spirale des réalisations",
+      "sector": "Production audiovisuelle",
+      "city": "Alger",
+      "color": "#ff4a1c",
+      "public": false
+    },
+    {
+      "slug": "villa-lumen-dubai",
+      "title": "Villa Lumen — Palm Jumeirah",
+      "sector": "Promotion immobilière",
+      "city": "Dubaï",
+      "color": "#d9b77c",
+      "public": true
+    },
+    {
+      "slug": "dar-nour-alger",
+      "title": "Dar Nour — penthouses face à la baie",
+      "sector": "Promotion immobilière",
+      "city": "Alger",
+      "color": "#c7a15f",
+      "public": false
+    }
+  ]
+}

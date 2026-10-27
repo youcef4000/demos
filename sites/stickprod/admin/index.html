@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stickprod — espace admin</title>
+<meta name="description" content="Espace d'administration du site Stickprod : réalisations, textes, contact et apparence.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0e0e0f">
+<meta property="og:title" content="Stickprod — espace admin">
+<meta property="og:description" content="Ajouter une réalisation, changer un texte, publier : l'espace d'administration du site Stickprod.">
+<meta property="og:image" content="https://images.pexels.com/photos/30773261/pexels-photo-30773261.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200&amp;h=630&amp;fit=crop">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23efe9df'/%3E%3Cpath d='M32 32a2 2 0 0 1-4 0a4 4 0 0 1 8 0a6 6 0 0 1-12 0a8 8 0 0 1 16 0a10 10 0 0 1-20 0a12 12 0 0 1 24 0' fill='none' stroke='%23ff4a1c' stroke-width='3.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..800;1,62..125,300..800&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="./admin.css">
+<script type="module" src="./admin.js"></script>
+</head>
+<body>
+
+<!-- ============ CONNEXION ============ -->
+<section class="login" id="login" hidden>
+  <form class="login__card" id="login-form">
+    <svg class="login__logo" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 16a1 1 0 0 1-2 0a2 2 0 0 1 4 0a3 3 0 0 1-6 0a4 4 0 0 1 8 0a5 5 0 0 1-10 0a6 6 0 0 1 12 0a7 7 0 0 1-14 0"/></svg>
+    <p class="mono login__kicker">Espace admin</p>
+    <h1 class="login__title">Stickprod</h1>
+    <label class="f">
+      <span class="f__label">Mot de passe</span>
+      <input type="password" id="login-pass" autocomplete="current-password" required>
+    </label>
+    <p class="login__err" id="login-err" role="alert"></p>
+    <button class="b b--accent b--block" type="submit">Entrer</button>
+    <p class="login__hint">Démo : le mot de passe est <b>stickprod</b>. En production, chaque membre de l'équipe a son propre compte.</p>
+  </form>
+  <a class="login__back" href="../">← Retour au site</a>
+</section>
+
+<!-- ============ ADMIN ============ -->
+<div class="app" id="app" hidden>
+  <aside class="side" id="side">
+    <a class="side__brand" href="../" target="_blank" rel="noopener">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 16a1 1 0 0 1-2 0a2 2 0 0 1 4 0a3 3 0 0 1-6 0a4 4 0 0 1 8 0a5 5 0 0 1-10 0a6 6 0 0 1 12 0a7 7 0 0 1-14 0"/></svg>
+      <span><b id="side-name">Stickprod</b><small class="mono">Admin</small></span>
+    </a>
+    <nav class="side__nav" id="side-nav" aria-label="Rubriques">
+      <button type="button" data-view="projects"><i>01</i>Réalisations<em id="count-projects"></em></button>
+      <button type="button" data-view="texts"><i>02</i>Textes d'accueil</button>
+      <button type="button" data-view="services"><i>03</i>Savoir-faire</button>
+      <button type="button" data-view="process"><i>04</i>Méthode</button>
+      <button type="button" data-view="studio"><i>05</i>Studio</button>
+      <button type="button" data-view="contact"><i>06</i>Contact</button>
+      <button type="button" data-view="look"><i>07</i>Apparence</button>
+      <button type="button" data-view="backup"><i>08</i>Sauvegarde</button>
+    </nav>
+    <div class="side__foot">
+      <a class="side__link" href="../" target="_blank" rel="noopener">Voir le site ↗</a>
+      <button class="side__link" type="button" id="logout">Se déconnecter</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="top">
+      <div class="top__title">
+        <p class="mono top__crumb" id="crumb">Contenu</p>
+        <h1 id="view-title">Réalisations</h1>
+      </div>
+      <p class="status" id="status" role="status"><i></i><span>À jour</span></p>
+      <div class="top__actions">
+        <button class="b b--ghost top__preview-btn" type="button" id="toggle-preview">Aperçu</button>
+        <button class="b b--accent" type="button" id="publish">Publier</button>
+      </div>
+    </header>
+    <div class="view" id="view"></div>
+  </main>
+
+  <aside class="preview" id="preview" aria-label="Aperçu du site">
+    <div class="preview__bar">
+      <p class="mono">Aperçu en direct</p>
+      <div class="seg" role="group" aria-label="Taille de l'aperçu">
+        <button type="button" data-device="mobile" aria-pressed="true">Mobile</button>
+        <button type="button" data-device="desktop" aria-pressed="false">Ordinateur</button>
+      </div>
+      <button class="preview__close" type="button" id="close-preview" aria-label="Fermer l'aperçu">×</button>
+    </div>
+    <div class="preview__stage" id="preview-stage">
+      <div class="preview__frame" id="preview-frame">
+        <iframe id="frame" title="Aperçu du site" src="about:blank"></iframe>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<dialog class="confirm" id="confirm">
+  <form method="dialog">
+    <p id="confirm-text"></p>
+    <div class="confirm__actions">
+      <button class="b b--ghost" value="cancel">Annuler</button>
+      <button class="b b--danger" value="ok" id="confirm-ok">Confirmer</button>
+    </div>
+  </form>
+</dialog>
+</body>
+</html>

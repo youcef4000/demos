@@ -1,40 +1,53 @@
-# Dépôt privé `demos` — Hooked Academy et démos retirées
+# Dépôt `demos` — sites de démonstration pour prospects
 
-**Les démos pour prospects ne sont plus ici** : elles vivent dans le dépôt public `youcef4000/bornz-demos`,
-publié par GitHub Pages sur `https://demos.bornzstudio.com/<slug>/` (consignes dans son `CLAUDE.md`).
-Une nouvelle démo, une correction de démo ou Sarraf (le carnet du cambiste) : travailler dans `bornz-demos`.
+Chaque démo est un site vitrine statique, montré à un prospect (souvent avant qu'il achète son nom de domaine)
+ou publié sur LinkedIn. Les démos sont publiées par **GitHub Pages** : pousser sur `main` suffit à mettre en ligne
+(1 à 2 minutes, workflow `.github/workflows/pages.yml`). Aucun serveur, aucun autre hébergeur pour les démos.
 
-Ce dépôt reste privé et garde :
-
-- **Hooked Academy** : le site (`sites/hooked-academy/`), son serveur (`server/index.mjs`, `server/plateforme.js`)
-  et ses outils (`tools/hooked-academy/`, workflows des vidéos et des ressources). En ligne sur
-  https://hooked-academy.tech, servi par le VPS Hostinger (voir `DEPLOIEMENT-VPS.md`) ;
-- l'installation du VPS (`server/installer-vps.sh`, `server/installer-hooked-lab.sh`) ;
-- les démos retirées (`hors-ligne/`), publiées nulle part.
+> **Dépôt public** : tout ce qui est ici est visible par tous. Jamais de clé d'API, de mot de passe, de données
+> de clients réels dans le dépôt.
 
 ## Règles de travail
 
-- Travailler directement sur `main` et pousser (`git push origin main`) : le VPS récupère `main` toutes les
-  5 minutes et reconstruit Hooked Academy.
-- Une erreur dans `server/` met Hooked Academy hors ligne : tester avec `node server/index.mjs` avant de pousser.
-- Chemins **relatifs** dans le site (`./style.css`, `img/photo.webp`), jamais `/style.css`.
+- Travailler directement sur `main` et pousser (`git push origin main`). Pas de branche par démo.
+- Une démo = un dossier `sites/<slug>/` avec son `index.html`. Le slug est en minuscules,
+  sans accents, avec des tirets : `agence-immo-oran`, `cafe-el-bahdja`.
+- Adresse publique : `https://demos.bornzstudio.com/<slug>/`. Les balises `canonical`, `og:url` et `og:image` utilisent
+  `https://demos.bornzstudio.com/`.
+- Chemins **relatifs** uniquement dans une démo (`./style.css`, `img/photo.webp`), jamais `/style.css` :
+  la démo vit dans un sous-dossier.
+- Démos 100 % statiques : pas de code serveur, pas de clé secrète dans le navigateur. GitHub Pages n'envoie pas
+  d'en-têtes personnalisés : une politique de sécurité se met dans la page (`<meta http-equiv="Content-Security-Policy">`).
+- Fichiers de moins de 100 Mo (limite de GitHub) ; site publié sous 1 Go.
 - Aucune dépendance de build : HTML, CSS et JS. Les librairies se chargent depuis
-  `cdn.jsdelivr.net` avec une version fixée, ou sont copiées dans le dossier du site.
-- Jamais de clé, de mot de passe ou de secret dans le dépôt : ils se tapent dans le terminal du VPS.
+  `cdn.jsdelivr.net` avec une version fixée, ou sont copiées dans le dossier de la démo.
+- Ajouter l'entrée de la démo dans `sites/demos.json` :
+  `{ "slug", "title", "sector", "city", "color", "public" }`.
+  `public: false` garde la démo hors de la galerie d'accueil (lien partagé en privé).
 - Pas de faux avis, de faux chiffres ni de faux logos de clients : les contenus d'exemple sont
   présentés comme tels.
+- `sites/404.html` : page des liens cassés ; elle renvoie aussi les anciens liens `/hooked-academy/…` vers
+  https://hooked-academy.tech.
+- Démos retirées : dans `hors-ligne/` (jamais publié).
+
+## Hooked Academy (à part)
+
+`sites/hooked-academy/` n'est pas publié par GitHub Pages : la formation a son propre site, https://hooked-academy.tech,
+servi par le VPS Hostinger avec son serveur (`server/index.mjs`, `server/plateforme.js`, voir README et
+DEPLOIEMENT-VPS.md). Le VPS récupère `main` toutes les 5 minutes. Une erreur dans `server/` met Hooked Academy
+hors ligne : tester avec `node server/index.mjs` avant de pousser.
 
 ## Qualité attendue
 
-- Mobile d'abord.
-- Français par défaut ; arabe (RTL) et anglais quand le site les propose.
-- Balises `<title>`, `description` et Open Graph renseignées.
+- Mobile d'abord : la plupart des visiteurs arrivent depuis LinkedIn, Instagram ou WhatsApp.
+- Français par défaut ; arabe (RTL) et anglais si le prospect le demande.
+- Balises `<title>`, `description` et Open Graph renseignées : le lien partagé doit afficher un aperçu.
 - Respecter `prefers-reduced-motion`.
 
 ## Tester en local
 
 ```bash
-node server/index.mjs
+python3 -m http.server 8000 -d sites
 ```
 
-puis ouvrir http://localhost:3000/ (espace équipe : http://localhost:3000/admin/).
+puis ouvrir http://localhost:8000/<slug>/ (Hooked Academy : `node server/index.mjs`, puis http://localhost:3000/).

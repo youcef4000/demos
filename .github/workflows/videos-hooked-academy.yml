@@ -25,7 +25,6 @@ on:
 
 permissions:
   contents: write
-  actions: write
 
 concurrency:
   group: videos-hooked-academy
@@ -92,7 +91,4 @@ jobs:
           git commit -m "Hooked Academy : vidéos avec voix off ($(jq -r 'keys | join(", ")' out/manifest.json))"
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push origin "HEAD:${GITHUB_REF_NAME}"
-          # Un commit du bot ne relance pas les déploiements : on relance le miroir GitHub Pages
-          gh workflow run static.yml --ref "${GITHUB_REF_NAME}" || true
-        env:
-          GH_TOKEN: ${{ github.token }}
+          # Le VPS de Hooked Academy récupère main tout seul (toutes les 5 minutes) : rien d'autre à relancer

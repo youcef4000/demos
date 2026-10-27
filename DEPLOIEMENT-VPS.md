@@ -2,7 +2,7 @@
 
 Le VPS sert https://hooked-academy.tech et https://hooked-lab.com. Docker fait tourner un conteneur par site,
 Caddy s'occupe du HTTPS. Les sites ne s'endorment jamais et leurs données restent sur le disque du VPS.
-Les démos pour prospects ne passent pas par le VPS : elles sont publiées par GitHub Pages (dépôt `bornz-demos`).
+Les démos pour prospects ne passent pas par le VPS : elles sont publiées par GitHub Pages depuis ce dépôt.
 
 > **Sécurité** — mots de passe et clés se tapent **uniquement** dans le terminal du VPS ou chez Hostinger.
 > Jamais dans un chat, jamais dans une capture d'écran, jamais dans le dépôt GitHub.

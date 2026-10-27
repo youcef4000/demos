@@ -1,0 +1,263 @@
+{
+  "version": 1,
+  "brand": {
+    "name": "Stickprod",
+    "accent": "#ff4a1c",
+    "grain": true
+  },
+  "hero": {
+    "kicker": "Production audiovisuelle · Alger · depuis 2018",
+    "title": "Retenir le regard",
+    "titleEnd": "dès la première image.",
+    "lead": "Spots TV, radio et web, films institutionnels, motion design 3D et photo produit. On écrit, on tourne, on monte et on livre, de l'idée jusqu'à l'antenne.",
+    "cta": "Entrer dans la spirale"
+  },
+  "work": {
+    "kicker": "Réalisations",
+    "title": "Chaque film, avec ce qu'il a livré."
+  },
+  "projects": [
+    {
+      "id": "gout-du-matin",
+      "visible": true,
+      "example": true,
+      "title": "Le goût du matin",
+      "client": "Torréfacteur algérois",
+      "year": "2025",
+      "category": "Spot TV",
+      "format": "30 s · 16:9 · 4K",
+      "cover": "https://images.pexels.com/photos/28948802/pexels-photo-28948802.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "alt": "Éclaboussure de café figée dans un verre",
+      "video": "",
+      "brief": "Relancer une marque de café historique auprès des 25-40 ans sans trahir ceux qui la boivent depuis toujours.",
+      "approach": "Un seul geste filmé en très haute vitesse, le café qui tombe dans le verre, monté sur le rythme d'un réveil algérois : la cafetière, le premier bus, la lumière sur la baie.",
+      "delivered": ["Spot TV 30 s", "2 déclinaisons 15 s", "6 formats verticaux", "Habillage sonore"],
+      "results": [
+        { "value": "2", "label": "jours de tournage" },
+        { "value": "1 000", "label": "images / seconde" },
+        { "value": "9", "label": "films livrés" }
+      ],
+      "credits": "Écriture, réalisation, image, montage, étalonnage : Stickprod"
+    },
+    {
+      "id": "nuit-noire",
+      "visible": true,
+      "example": true,
+      "title": "Nuit noire",
+      "client": "Maison de parfum",
+      "year": "2025",
+      "category": "Film produit",
+      "format": "20 s · 9:16 et 1:1",
+      "cover": "https://images.pexels.com/photos/29805437/pexels-photo-29805437.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "alt": "Flacon de parfum noir sur fond sombre",
+      "video": "",
+      "brief": "Faire exister un flacon noir sur des écrans de téléphone, là où tout le monde fait défiler.",
+      "approach": "Studio en lumière rasante, un seul projecteur qui tourne autour du flacon. Chaque plan dure le temps d'un pouce qui hésite.",
+      "delivered": ["Film 20 s", "Série photo produit", "Boucles pour stories", "Visuels e-commerce"],
+      "results": [
+        { "value": "1", "label": "journée studio" },
+        { "value": "24", "label": "photos retouchées" },
+        { "value": "3", "label": "formats d'écran" }
+      ],
+      "credits": "Direction artistique, image, photo, retouche : Stickprod"
+    },
+    {
+      "id": "lignes-de-lumiere",
+      "visible": true,
+      "example": true,
+      "title": "Lignes de lumière",
+      "client": "Concessionnaire automobile",
+      "year": "2024",
+      "category": "Lancement",
+      "format": "45 s · cinéma 2.39",
+      "cover": "https://images.pexels.com/photos/37739094/pexels-photo-37739094.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "alt": "Feu arrière d'une voiture de sport au crépuscule",
+      "video": "",
+      "brief": "Présenter un nouveau modèle à la presse et aux réseaux le même soir, sans l'avoir en showroom.",
+      "approach": "Tournage de nuit sur la route côtière, voiture travelling et drone. Le film a été projeté à la soirée de lancement puis découpé pour le web.",
+      "delivered": ["Film de lancement 45 s", "Teaser 10 s", "Photos presse", "Montage soirée"],
+      "results": [
+        { "value": "1", "label": "nuit de tournage" },
+        { "value": "2", "label": "caméras + drone" },
+        { "value": "4", "label": "livrables" }
+      ],
+      "credits": "Réalisation, image, drone, montage : Stickprod"
+    },
+    {
+      "id": "la-ou-le-sable-parle",
+      "visible": true,
+      "example": true,
+      "title": "Là où le sable parle",
+      "client": "Office de tourisme",
+      "year": "2024",
+      "category": "Documentaire",
+      "format": "12 min · 16:9",
+      "cover": "https://images.pexels.com/photos/2092453/pexels-photo-2092453.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "alt": "Un marcheur seul sur les dunes du Sahara à Béni Abbès",
+      "video": "",
+      "brief": "Raconter la Saoura autrement que par la carte postale, avec ceux qui y vivent.",
+      "approach": "Une équipe légère, cinq jours sur place, des entretiens à hauteur d'habitant. Le son du vent sert de fil au montage.",
+      "delivered": ["Documentaire 12 min", "Version courte 3 min", "Sous-titres FR / AR / EN", "Banque d'images"],
+      "results": [
+        { "value": "5", "label": "jours sur place" },
+        { "value": "3", "label": "langues" },
+        { "value": "12", "label": "minutes de film" }
+      ],
+      "credits": "Réalisation, image, son, montage : Stickprod"
+    },
+    {
+      "id": "alger-en-mouvement",
+      "visible": true,
+      "example": true,
+      "title": "Alger, en mouvement",
+      "client": "Groupe de services",
+      "year": "2023",
+      "category": "Film institutionnel",
+      "format": "2 min 30 · 16:9",
+      "cover": "https://images.pexels.com/photos/30976821/pexels-photo-30976821.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "alt": "Rue animée d'Alger",
+      "video": "",
+      "brief": "Montrer à des partenaires étrangers une entreprise de 400 personnes en moins de trois minutes.",
+      "approach": "Portraits de salariés tournés sur leur poste, reliés par la ville qui s'éveille. Voix off bilingue enregistrée en studio.",
+      "delivered": ["Film 2 min 30", "Version 60 s", "Voix off FR / EN", "8 portraits vidéo"],
+      "results": [
+        { "value": "3", "label": "sites filmés" },
+        { "value": "8", "label": "portraits" },
+        { "value": "2", "label": "langues" }
+      ],
+      "credits": "Écriture, réalisation, image, montage, mixage : Stickprod"
+    },
+    {
+      "id": "forme-libre",
+      "visible": true,
+      "example": true,
+      "title": "Forme libre",
+      "client": "Opérateur numérique",
+      "year": "2023",
+      "category": "Motion design 3D",
+      "format": "15 s · boucle",
+      "cover": "https://images.pexels.com/photos/31032751/pexels-photo-31032751.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "alt": "Sculpture abstraite lumineuse en 3D sur fond noir",
+      "video": "",
+      "brief": "Donner un corps à une offre qui n'en a pas : un service 100 % en ligne.",
+      "approach": "Une forme 3D qui se plie et se déplie au rythme du logo sonore. Elle devient l'habillage de toutes les prises de parole de la marque.",
+      "delivered": ["Animation 3D 15 s", "Logo animé", "Habillage réseaux", "Kit de transitions"],
+      "results": [
+        { "value": "15", "label": "secondes de 3D" },
+        { "value": "4", "label": "déclinaisons" },
+        { "value": "1", "label": "identité animée" }
+      ],
+      "credits": "Direction artistique, 3D, motion design, sound design : Stickprod"
+    },
+    {
+      "id": "silhouette",
+      "visible": true,
+      "example": true,
+      "title": "Silhouette",
+      "client": "Marque de prêt-à-porter",
+      "year": "2022",
+      "category": "Campagne photo",
+      "format": "Photo + vidéo 9:16",
+      "cover": "https://images.pexels.com/photos/29749742/pexels-photo-29749742.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "alt": "Silhouette en contre-jour dans un studio éclairé en bleu",
+      "video": "",
+      "brief": "Lancer une collection capsule sur Instagram avec une image qui ne ressemble à aucune autre.",
+      "approach": "Contre-jours colorés, fumée, poses lentes. Photo et vidéo réalisées dans la même lumière pour que le fil reste cohérent.",
+      "delivered": ["Série de 30 photos", "4 films verticaux", "Making-of", "Calendrier de publication"],
+      "results": [
+        { "value": "30", "label": "photos" },
+        { "value": "4", "label": "films verticaux" },
+        { "value": "6", "label": "semaines de contenu" }
+      ],
+      "credits": "Photo, image, stylisme lumière, gestion de page : Stickprod"
+    },
+    {
+      "id": "sur-le-plateau",
+      "visible": true,
+      "example": true,
+      "title": "Sur le plateau",
+      "client": "Chaîne de télévision",
+      "year": "2021",
+      "category": "Émission",
+      "format": "Série · 6 × 8 min",
+      "cover": "https://images.pexels.com/photos/19224452/pexels-photo-19224452.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "alt": "Équipe de tournage en extérieur avec caméra et perche",
+      "video": "",
+      "brief": "Produire une série courte pour la télévision et le web, avec un calendrier de diffusion fixe.",
+      "approach": "Une équipe complète, un plan de tournage serré, et le montage lancé pendant le tournage pour tenir la date d'antenne.",
+      "delivered": ["6 épisodes de 8 min", "Génériques animés", "Bandes-annonces", "Masters TV"],
+      "results": [
+        { "value": "6", "label": "épisodes" },
+        { "value": "10", "label": "jours de tournage" },
+        { "value": "0", "label": "jour de retard" }
+      ],
+      "credits": "Production, réalisation, image, montage, post-production : Stickprod"
+    }
+  ],
+  "services": {
+    "kicker": "Savoir-faire",
+    "title": "Tout se fait sous le même toit.",
+    "items": [
+      {
+        "title": "Spots publicitaires",
+        "text": "TV, radio et web. Écriture, casting, tournage et diffusion, sur tous les formats d'écran.",
+        "image": "https://images.pexels.com/photos/30773261/pexels-photo-30773261.jpeg?auto=compress&cs=tinysrgb&w=900"
+      },
+      {
+        "title": "Films institutionnels & documentaires",
+        "text": "Raconter une entreprise, un lieu ou un savoir-faire avec les gens qui le portent.",
+        "image": "https://images.pexels.com/photos/12109978/pexels-photo-12109978.jpeg?auto=compress&cs=tinysrgb&w=900"
+      },
+      {
+        "title": "Motion design & 3D",
+        "text": "Logos animés, habillages, explications et formes 3D pour les marques qui n'ont rien à filmer.",
+        "image": "https://images.pexels.com/photos/29612113/pexels-photo-29612113.jpeg?auto=compress&cs=tinysrgb&w=900"
+      },
+      {
+        "title": "Photo produit & campagne",
+        "text": "Studio, packshot et mise en scène, retouche comprise, prêts pour le e-commerce et l'affichage.",
+        "image": "https://images.pexels.com/photos/4616749/pexels-photo-4616749.jpeg?auto=compress&cs=tinysrgb&w=900"
+      },
+      {
+        "title": "Montage & post-production",
+        "text": "Montage, étalonnage, mixage et sous-titres. On reprend aussi vos images existantes.",
+        "image": "https://images.pexels.com/photos/3616964/pexels-photo-3616964.jpeg?auto=compress&cs=tinysrgb&w=900"
+      },
+      {
+        "title": "Gestion des pages",
+        "text": "Calendrier, contenus et publication sur vos réseaux, avec des images faites pour eux.",
+        "image": "https://images.pexels.com/photos/8798170/pexels-photo-8798170.jpeg?auto=compress&cs=tinysrgb&w=900"
+      }
+    ]
+  },
+  "process": {
+    "kicker": "Méthode",
+    "title": "De l'idée à l'antenne, en cinq temps.",
+    "steps": [
+      { "title": "Écouter", "text": "Un rendez-vous pour comprendre la marque, le public et la date de diffusion.", "deliverable": "Note d'intention" },
+      { "title": "Écrire", "text": "Script, découpage et références visuelles, validés avant de tourner.", "deliverable": "Script + moodboard" },
+      { "title": "Tourner", "text": "Équipe, matériel, lieux et autorisations : tout est géré par nos soins.", "deliverable": "Rushes du jour" },
+      { "title": "Finir", "text": "Montage, étalonnage, son et motion design, avec deux allers-retours inclus.", "deliverable": "Version de validation" },
+      { "title": "Diffuser", "text": "Masters TV, fichiers web et formats réseaux, prêts à publier.", "deliverable": "Tous les masters" }
+    ]
+  },
+  "studio": {
+    "kicker": "Le studio",
+    "statement": "Une image qui ne retient pas le regard est une image qu'on paie pour rien. Depuis 2018, on fabrique celles qu'on regarde jusqu'au bout.",
+    "facts": [
+      { "value": "2018", "label": "création de la SARL Stickprod" },
+      { "value": "3", "label": "écrans : TV, radio, web" },
+      { "value": "Alger", "label": "studio à Ouled Fayet" }
+    ]
+  },
+  "contact": {
+    "kicker": "Contact",
+    "title": "Votre prochain film commence par un message.",
+    "text": "Dites-nous ce que vous voulez montrer, à qui, et pour quand. On revient vers vous sous 48 heures avec une première idée.",
+    "email": "contact@stickprod.dz",
+    "phone": "",
+    "whatsapp": "",
+    "address": "Cité El Wouroud, Villa 131, Ouled Fayet, Alger",
+    "instagram": "https://www.instagram.com/stick.prod/"
+  }
+}

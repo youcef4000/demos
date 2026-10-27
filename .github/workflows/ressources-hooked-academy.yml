@@ -48,4 +48,4 @@ jobs:
           git commit -m "Hooked Academy : ressources de l'équipe ($(jq '[.lessons[] | length] | add // 0' "$M") fichiers ou liens, $(jq '.lessons | length' "$M") leçons)"
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push origin "HEAD:${GITHUB_REF_NAME}"
-          # Le VPS récupère main tout seul (toutes les 2 minutes) : rien d'autre à relancer
+          # Le VPS de Hooked Academy récupère main tout seul (toutes les 5 minutes) : rien d'autre à relancer

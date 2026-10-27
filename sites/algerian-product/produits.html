@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Catalogue des produits algériens — Algerian Product</title>
+<meta name="description" content="Six filières, des dizaines de produits algériens prêts pour l’export : terroir, artisanat, textile, matériaux, industrie, beauté.">
+<meta name="theme-color" content="#f3eee4">
+<link rel="canonical" href="https://demos.bornzstudio.com/algerian-product/produits.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Algerian Product">
+<meta property="og:url" content="https://demos.bornzstudio.com/algerian-product/produits.html">
+<meta property="og:title" content="Catalogue des produits algériens — Algerian Product">
+<meta property="og:description" content="Six filières, des dizaines de produits algériens prêts pour l’export : terroir, artisanat, textile, matériaux, industrie, beauté.">
+<meta property="og:image" content="https://demos.bornzstudio.com/algerian-product/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://demos.bornzstudio.com/algerian-product/img/og.jpg">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter+Tight:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="./style.css">
+<script src="./boot.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/Flip.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
+<script type="module" src="./catalogue.js"></script>
+</head>
+<body class="page-light page-catalogue">
+<a class="skip" href="#main" data-t="common.skip">Aller au contenu</a>
+<header class="hdr hdr--dark" id="hdr"></header>
+<main id="main">
+  <section class="cat-hero" data-hdr="light">
+    <div class="wrap">
+      <p class="kicker" data-t="catalogue.kicker">Catalogue</p>
+      <h1 class="h1" data-t-rich="catalogue.title" data-split>Le catalogue <em>Algerian Product</em>.</h1>
+      <p class="lead" data-t="catalogue.lead">Filtrez par filière ou par région, ouvrez une fiche et ajoutez les produits qui vous intéressent à votre demande de devis.</p>
+    </div>
+  </section>
+  <section class="cat" data-hdr="light">
+    <div class="wrap">
+      <div class="cat__bar" id="cat-bar">
+        <label class="search"><span data-icon="search"></span><input type="search" id="cat-q" data-t-attr="placeholder:catalogue.search;aria-label:catalogue.search" autocomplete="off"></label>
+        <select class="select" id="cat-region" data-t-attr="aria-label:nav.regions"></select>
+      </div>
+      <div class="chips" id="cat-chips" role="toolbar"></div>
+      <p class="cat__count" id="cat-count" aria-live="polite"></p>
+      <div class="cards cat__grid" id="cat-grid"></div>
+      <p class="cat__empty" id="cat-empty" data-t="catalogue.empty" hidden></p>
+      <p class="cat__note" data-t="catalogue.note"></p>
+    </div>
+  </section>
+</main>
+<footer class="ftr" id="ftr"></footer>
+<a class="basket" id="basket" href="devis.html" hidden></a>
+</body>
+</html>
