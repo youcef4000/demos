@@ -52,6 +52,8 @@ www.$DOMAIN {
   redir https://$DOMAIN{uri} permanent
 }
 EOF
+# Hooked Lab installé sur ce VPS (installer-hooked-lab.sh) : son site reste servi
+[ -f "$DIR/Caddyfile.lab" ] && cat "$DIR/Caddyfile.lab" >> "$DIR/Caddyfile"
 
 cat > "$DIR/docker-compose.yml" <<'EOF'
 services:
