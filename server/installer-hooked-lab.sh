@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# Installe Hooked Lab sur le VPS, à côté de Hooked Academy (installer-vps.sh doit avoir tourné avant), en root :
-#   curl -fsSL https://raw.githubusercontent.com/youcef4000/demos/main/server/installer-hooked-lab.sh -o lab.sh && bash lab.sh
+# Installe Hooked Lab sur le VPS, à côté de Hooked Academy (installer-vps.sh doit avoir tourné avant), en root.
+# Les dépôts sont privés : /opt/hooked/demos se met à jour avec sa propre clé de déploiement, puis :
+#   bash /opt/hooked/demos/server/installer-hooked-lab.sh
 #
 #  1. clé de déploiement GitHub (lecture seule) pour le dépôt privé hooked-lab ;
 #  2. réglages et clés secrètes saisis ici, dans le terminal (fichier /opt/hooked/hooked-lab.env, lisible par root seul) ;
