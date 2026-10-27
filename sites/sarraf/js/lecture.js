@@ -1,6 +1,6 @@
 // Sarraf — lecture simple d'un mémo écrit, sans serveur (secours quand l'analyse n'est pas joignable).
 // Comprend les phrases courtes du type « acheté 5000 € à 258 chez Karim, vendu à Samir à 261, reste 30 millions ».
-// Le résultat est toujours présenté « à vérifier » : l'analyse par Claude (worker/sarraf.js) reste la référence.
+// Le résultat est toujours présenté « à vérifier » : l'analyse par Claude (server/sarraf.js) reste la référence.
 
 import { cle } from './calcul.js';
 
@@ -11,8 +11,10 @@ const DEVISE = [
   [/(\$|\bdollars?\b|\busd\b|دولار)/i, 'USD'],
   [/(£|\blivres?\b|\bgbp\b)/i, 'GBP'],
 ];
+const MOT_DEVISE = /€|euro|eur|\$|dollar|usd|£|livre|gbp/;
+const MOT_MONNAIE = /^(da|dinars?|dzd|dt|tnd|dh|dirhams?|mad|tl|lires?)$/;
 const MOTS = new Set(
-  'je j ai et puis le la les un une des du de à a au aux chez avec pour par m3a l b taux prix reste doit il elle lui moi mon ma mes son sa ses ce cette euro euros dinars da millions million mille alf ba9i credit crédit tout payé paye réglé regle demain ghodwa aujourd hui'.split(
+  'je j ai et puis le la les un une des du de à a au aux chez avec pour par m3a l b taux prix reste doit il elle lui moi mon ma mes son sa ses ce cette euro euros dinars da dt dh millions million mille alf ba9i credit crédit tout payé paye réglé regle demain ghodwa aujourd hui'.split(
     ' ',
   ),
 );
@@ -27,7 +29,7 @@ const nombre = (s) => {
 /** Nombres d'un segment, avec le mot qui suit (unité). */
 function nombres(seg) {
   const out = [];
-  const re = /(\d+(?:[\s  ]\d{3})*(?:[.,]\d+)?)\s*(k\b|mille\b|millions?\b|melyoun\b|mlayen\b|milliards?\b|€|euros?\b|eur\b|\$|dollars?\b|da\b|dinars?\b|dzd\b)?/gi;
+  const re = /(\d+(?:[\s  ]\d{3})*(?:[.,]\d+)?)\s*(k\b|mille\b|millions?\b|melyoun\b|mlayen\b|milliards?\b|€|euros?\b|eur\b|\$|dollars?\b|£|da\b|dinars?\b|dzd\b|dt\b|tnd\b|dh\b|dirhams?\b|mad\b)?/gi;
   let m;
   while ((m = re.exec(seg))) {
     let v = nombre(m[1]);
@@ -39,8 +41,13 @@ function nombres(seg) {
   return out;
 }
 
-const enDinars = (n) =>
-  /^milliard/.test(n.u) ? n.v * 10_000_000 : /^(million|melyoun|mlayen)/.test(n.u) ? n.v * 10_000 : n.v;
+/** « 30 millions » : centimes en Algérie et au Maroc (10 000 DA ou DH), millimes en Tunisie (1 000 DT). */
+function enMonnaie(n, monnaie) {
+  const parMillion = monnaie === 'TND' ? 1000 : monnaie === 'DZD' || monnaie === 'MAD' ? 10_000 : 1_000_000;
+  if (/^milliard/.test(n.u)) return n.v * parMillion * 1000;
+  if (/^(million|melyoun|mlayen)/.test(n.u)) return n.v * parMillion;
+  return n.v;
+}
 
 function trouverContact(seg, connus) {
   const bas = cle(seg);
@@ -56,9 +63,10 @@ function trouverContact(seg, connus) {
 /**
  * @param {string} texte
  * @param {string[]} connus noms des contacts déjà dans le carnet
+ * @param {string} monnaie monnaie des prix du mémo (DZD, TND, EUR…)
  * @returns analyse au même format que le serveur
  */
-export function lireTexte(texte, connus = []) {
+export function lireTexte(texte, connus = [], monnaie = 'DZD') {
   const doutes = ['Lecture automatique simple (sans serveur) : vérifie chaque ligne.'];
   const ops = [];
   let frais = null;
@@ -68,43 +76,45 @@ export function lireTexte(texte, connus = []) {
     .filter(Boolean);
 
   for (const seg of segments) {
-    const fm = seg.match(/(frais|commission|samsar|transport)\D{0,20}(\d[\d\s.,]*)\s*(millions?|melyoun|da|dinars?)?/i);
+    const fm = seg.match(/(frais|commission|samsar|transport)\D{0,20}(\d[\d\s.,]*)\s*(millions?|melyoun|da|dinars?|dt|dh)?/i);
     if (fm) {
       const n = nombres(fm[0]).at(0);
-      if (n) frais = (frais || 0) + enDinars(n);
+      if (n) frais = (frais || 0) + enMonnaie(n, monnaie);
     }
     const sens = ACHAT.test(seg) ? 'achat' : VENTE.test(seg) ? 'vente' : null;
     if (!sens) continue;
-    const devise = (DEVISE.find(([re]) => re.test(seg)) || [, null])[1];
+    const prec = ops.at(-1);
+    const devise = (DEVISE.find(([re, code]) => code !== monnaie && re.test(seg)) || [, null])[1];
     const ns = nombres(seg);
     let montant = null;
     let taux = null;
     let reste = null;
     let resteUnite = null;
     const rm = seg.match(/(reste|ba9i|baqi|doit|cr[ée]dit|avance)/i);
-    const prec = ops.at(-1);
     for (const n of ns) {
       const avant = seg.slice(Math.max(0, n.i - 14), n.i).toLowerCase();
       if (rm && n.i > rm.index) {
         if (reste == null) {
-          const dev = /€|euro|eur|\$|dollar/.test(n.u);
-          reste = dev ? n.v : enDinars(n);
-          resteUnite = dev ? 'DEVISE' : 'DA';
+          const enDevise = MOT_DEVISE.test(n.u);
+          reste = enDevise ? n.v : enMonnaie(n, monnaie);
+          resteUnite = enDevise ? 'DEVISE' : 'MONNAIE';
         }
         continue;
       }
-      if (montant == null && /€|euro|eur|\$|dollar/.test(n.u)) {
+      if (montant == null && MOT_DEVISE.test(n.u)) {
         montant = n.v;
         continue;
       }
-      const sansUnite = !n.u || /da|dinar/.test(n.u);
-      const plausible = (n.v >= 80 && n.v <= 1000) || (n.v >= 5000 && n.v <= 100000);
-      if (taux == null && sansUnite && plausible && (/(^|\s)(à|a|b|au|taux|prix|@)\s*$/.test(avant) || montant != null || prec?.montant)) {
-        taux = n.v >= 5000 && n.v <= 100000 ? n.v / 100 : n.v;
-        if (n.v >= 5000) doutes.push(`Taux ${n.brut} compris comme le prix de 100 unités : ${String(taux).replace('.', ',')} DA l’unité.`);
+      const sansUnite = !n.u || MOT_MONNAIE.test(n.u);
+      const marque = /(^|\s)(à|a|b|au|taux|prix|@)\s*$/.test(avant);
+      // En dinars algériens, un taux se dit pour 1 € (≈ 100 à 1 000) ou pour 100 € (≈ 5 000 à 100 000)
+      const plausible = monnaie !== 'DZD' || (n.v >= 80 && n.v <= 1000) || (n.v >= 5000 && n.v <= 100000);
+      if (taux == null && sansUnite && plausible && (marque || montant != null || prec?.montant)) {
+        taux = monnaie === 'DZD' && n.v >= 5000 ? n.v / 100 : n.v;
+        if (taux !== n.v) doutes.push(`Taux ${n.brut} compris comme le prix de 100 unités : ${String(taux).replace('.', ',')} pour 1.`);
         continue;
       }
-      if (montant == null && n.v >= 10 && !/da|dinar|million|melyoun/.test(n.u)) montant = n.v;
+      if (montant == null && n.v >= 10 && !/da|dinar|dt|dh|dirham|million|melyoun/.test(n.u)) montant = n.v;
     }
     if (montant == null && prec && prec.sens !== sens) {
       montant = prec.montant;
@@ -112,7 +122,7 @@ export function lireTexte(texte, connus = []) {
     }
     ops.push({
       sens,
-      devise: devise || prec?.devise || 'EUR',
+      devise: devise || prec?.devise || (monnaie === 'EUR' ? 'DZD' : 'EUR'),
       montant,
       taux,
       contact: trouverContact(seg, connus),
@@ -125,7 +135,7 @@ export function lireTexte(texte, connus = []) {
   if (!ops.length) doutes.push('Aucune opération reconnue : remplis la fiche à la main.');
   return {
     operations: ops,
-    frais_da: frais,
+    frais,
     frais_note: null,
     echeance: /\b(demain|ghodwa|ghedwa)\b|غدوة/i.test(texte) ? demain() : null,
     resume: '',

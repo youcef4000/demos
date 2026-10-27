@@ -1,6 +1,5 @@
 // Hooked Academy — cœur du serveur de la plateforme, indépendant de l'hébergeur :
-//  - sur un VPS : server/index.mjs (Node) le fait tourner avec une base SQLite dans un fichier ;
-//  - sur Cloudflare : worker/academy.js l'enveloppe dans un Durable Object.
+// sur le VPS, server/index.mjs (Node) le fait tourner avec une base SQLite dans un fichier.
 // Il reçoit des requêtes standard (Request) et renvoie des réponses standard (Response).
 //
 // Ce qu'il garde : inscriptions, étudiants (codes d'accès en empreinte), progression, sessions, compte de l'équipe,

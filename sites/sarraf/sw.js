@@ -4,7 +4,7 @@
 // - API (api/) : jamais en cache. Les mémos, eux, sont dans IndexedDB, pas ici.
 // Changer VERSION à chaque modification de ce fichier : les anciens caches sont supprimés.
 
-const VERSION = 'sarraf-2026-10-27a';
+const VERSION = 'sarraf-2026-10-27b';
 const COQUILLE = ['./', 'app.css', 'js/app.js', 'js/calcul.js', 'js/lecture.js', 'js/base.js', 'manifest.webmanifest', 'img/icone.svg', 'img/icone-192.png'];
 
 self.addEventListener('install', (e) => {

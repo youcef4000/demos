@@ -1,6 +1,6 @@
-# Image de Hooked Academy pour le VPS (Coolify) : Node seul, aucune dépendance à installer.
-# Construite depuis la racine du dépôt (contexte « / », Dockerfile « /server/Dockerfile »).
-# Données (base SQLite, sauvegardes) dans /data : à monter comme volume persistant dans Coolify.
+# Image de Hooked Academy pour le VPS (installer-vps.sh) : Node seul, aucune dépendance à installer.
+# Construite depuis la racine du dépôt (contexte « / », Dockerfile « server/Dockerfile »).
+# Données (base SQLite, sauvegardes) dans /data : le volume « academy-data ».
 FROM node:24-bookworm-slim
 
 WORKDIR /app

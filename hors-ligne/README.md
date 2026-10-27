@@ -1,7 +1,7 @@
 # Démos mises hors ligne
 
-Les dossiers ici ne sont servis ni par le Worker Cloudflare ni par GitHub Pages
-(les deux ne publient que `sites/`). Pour remettre une démo en ligne :
+Les dossiers ici ne sont pas servis par le VPS (le serveur des démos ne publie que `sites/`).
+Pour remettre une démo en ligne :
 
 ```bash
 git mv hors-ligne/<slug> sites/<slug>

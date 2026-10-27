@@ -1,16 +1,18 @@
 // Sarraf — le carnet vocal du cambiste.
 // Après chaque appel : un mémo vocal. Il est gardé dans le téléphone, envoyé au serveur pour être transcrit et
-// décortiqué (worker/sarraf.js), puis présenté comme une fiche à vérifier : sommes, taux, par qui, à qui,
-// bénéfice net, reste à régler. Les calculs (caisse, prix moyen, soldes) sont dans calcul.js.
+// décortiqué (server/sarraf.js), puis présenté comme une fiche à vérifier : sommes, taux, par qui, à qui,
+// bénéfice net, reste à régler. Il travaille dans plusieurs pays : chaque mémo a son pays et la monnaie de ses prix.
+// Les calculs (caisse, prix moyen, soldes, par monnaie) sont dans calcul.js.
 
-import { calculer, bilan, cle, compte, complete, ordre, dette, jourLocal, DEVISES } from './calcul.js';
+import { calculer, bilan, cle, compte, complete, ordre, dette, jourLocal, normaliser, normaliserPaiement, MONNAIES, PAYS } from './calcul.js';
 import { lireTexte } from './lecture.js';
 import * as db from './base.js';
 
 /* =============================== réglages =============================== */
 
 const CLE_REGLAGES = 'sarraf.reglages';
-const DEFAUT = { code: '', api: '', theme: 'auto', millions: true, devise: 'EUR', pin: null, sel: null, sauvegarde: null, discret: false };
+// pays : pays principal (ses totaux en premier) ; paysMemo : pays des nouveaux mémos (le dernier choisi)
+const DEFAUT = { code: '', theme: 'auto', millions: true, devise: 'EUR', pays: 'DZ', paysMemo: null, pin: null, sel: null, sauvegarde: null, discret: false };
 let reglages = { ...DEFAUT };
 try {
   reglages = { ...DEFAUT, ...JSON.parse(localStorage.getItem(CLE_REGLAGES) || '{}') };
@@ -29,6 +31,7 @@ const etat = {
   calcul: calculer([], []),
   vue: 'journal',
   periode: '7j',
+  paysBilan: null, // null : tous les pays
   recherche: '',
   feuille: null, // { type: 'memo' | 'contact', id }
   serveur: null, // réponse de /api/etat
@@ -45,16 +48,22 @@ const format = (options) => {
 const nf0 = format({ maximumFractionDigits: 0 });
 const nf2 = format({ minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const nfx = format({ maximumFractionDigits: 2 });
-const sym = (dev) => DEVISES[dev] || dev;
-const da = (n) => `${nf0.format(Math.round(n || 0))} DA`;
-const signe = (n) => `${n > 0.5 ? '+' : n < -0.5 ? '−' : ''}${nf0.format(Math.abs(Math.round(n || 0)))} DA`;
+const sym = (code) => MONNAIES[code]?.sym || code;
+/** Montant dans une monnaie : « 1 290 000 DA » (le dinar algérien sans centimes), « 3 400,5 DT », « 5 000 € ». */
+const argent = (n, code = 'DZD') => `${code === 'DZD' ? nf0.format(Math.round(n || 0)) : nfx.format(n || 0)} ${sym(code)}`;
+const signe = (n, code = 'DZD') => `${n > 0.005 ? '+' : n < -0.005 ? '−' : ''}${argent(Math.abs(n || 0), code)}`;
 const taux = (n) => nf2.format(n || 0);
-const dev = (n, d = 'EUR') => `${nfx.format(n || 0)} ${sym(d)}`;
-const classeSigne = (n) => (n > 0.5 ? 'plus' : n < -0.5 ? 'moins' : '');
+const classeSigne = (n) => (n > 0.005 ? 'plus' : n < -0.005 ? 'moins' : '');
+/** Monnaie du pays principal : celle des grands totaux. */
+const monnaiePrincipale = () => PAYS[reglages.pays]?.monnaie || 'DZD';
+const paysDuMemo = () => (PAYS[reglages.paysMemo] ? reglages.paysMemo : PAYS[reglages.pays] ? reglages.pays : 'DZ');
+/** Devise échangée par défaut : la devise principale, sauf si c'est la monnaie des prix (en France, le dinar). */
+const deviseParDefaut = (monnaie) => (reglages.devise !== monnaie ? reglages.devise || 'EUR' : monnaie === 'EUR' ? 'DZD' : 'EUR');
+const nomPays = (code) => (PAYS[code] ? `${PAYS[code].drapeau} ${PAYS[code].nom}` : code);
 
-/** Les Algériens comptent en centimes : 1 290 000 DA = « 129 millions ». */
-function millions(montantDa) {
-  if (!reglages.millions) return '';
+/** Les Algériens comptent en centimes : 1 290 000 DA = « 129 millions ». Rien pour les autres monnaies. */
+function millions(montantDa, monnaie = 'DZD') {
+  if (!reglages.millions || monnaie !== 'DZD') return '';
   const m = Math.abs(montantDa) / 10000;
   if (m < 1) return '';
   const ent = Math.floor(m / 1000);
@@ -148,7 +157,10 @@ function toast(texte, ms = 2600) {
 /* =============================== données =============================== */
 
 async function charger() {
-  [etat.memos, etat.paiements] = await Promise.all([db.tous('memos'), db.tous('paiements')]);
+  const [memos, paiements] = await Promise.all([db.tous('memos'), db.tous('paiements')]);
+  // Les mémos d'avant les pays sont en Algérie, en dinars
+  etat.memos = memos.map(normaliser);
+  etat.paiements = paiements.map(normaliserPaiement);
   recalculer();
 }
 function recalculer() {
@@ -178,9 +190,6 @@ async function demanderPersistance() {
 
 /* =============================== serveur =============================== */
 
-const SECOURS = 'https://demos.youcef-ny.workers.dev/sarraf/api/';
-let baseOk = null;
-
 class ErreurApi extends Error {
   constructor(status, code) {
     super(code);
@@ -188,37 +197,22 @@ class ErreurApi extends Error {
     this.code = code;
   }
 }
-function bases() {
-  if (reglages.api) return [reglages.api.replace(/\/?$/, '/')];
-  const local = new URL('api/', location.href).href;
-  if (/workers\.dev$|^localhost$|^127\./.test(location.hostname)) return [local];
-  return [local, SECOURS];
-}
-/** Appel au serveur ; sur le miroir GitHub Pages (pas d'API), bascule sur l'adresse de secours du Worker. */
+/** Appel au serveur des démos (même adresse que l'application : /sarraf/api/). */
 async function api(chemin, { method = 'GET', body, delai = 20000 } = {}) {
-  let derniere = new ErreurApi(0, 'reseau');
-  for (const base of baseOk ? [baseOk] : bases()) {
-    const ctl = new AbortController();
-    const t = setTimeout(() => ctl.abort(), delai);
-    let r;
-    try {
-      r = await fetch(base + chemin, { method, body, headers: { 'x-sarraf-code': reglages.code }, signal: ctl.signal, cache: 'no-store' });
-    } catch {
-      derniere = new ErreurApi(0, ctl.signal.aborted ? 'delai' : 'reseau');
-      continue;
-    } finally {
-      clearTimeout(t);
-    }
-    if (!(r.headers.get('content-type') || '').includes('application/json')) {
-      derniere = new ErreurApi(r.status, 'absent');
-      continue;
-    }
-    const d = await r.json();
-    baseOk = base;
-    if (!r.ok) throw Object.assign(new ErreurApi(r.status, d.error || 'serveur'), { donnees: d });
-    return d;
+  const ctl = new AbortController();
+  const t = setTimeout(() => ctl.abort(), delai);
+  let r;
+  try {
+    r = await fetch(new URL(`api/${chemin}`, location.href), { method, body, headers: { 'x-sarraf-code': reglages.code }, signal: ctl.signal, cache: 'no-store' });
+  } catch {
+    throw new ErreurApi(0, ctl.signal.aborted ? 'delai' : 'reseau');
+  } finally {
+    clearTimeout(t);
   }
-  throw derniere;
+  if (!(r.headers.get('content-type') || '').includes('application/json')) throw new ErreurApi(r.status, 'absent');
+  const d = await r.json();
+  if (!r.ok) throw Object.assign(new ErreurApi(r.status, d.error || 'serveur'), { donnees: d });
+  return d;
 }
 
 const MESSAGES = {
@@ -263,29 +257,33 @@ async function testerServeur() {
 
 function appliquer(m, a, doutesEnPlus = []) {
   const doutes = [...(a.a_verifier || []), ...doutesEnPlus];
+  // Pays et monnaie : ceux que le mémo dit, sinon ceux choisis à l'enregistrement
+  if (PAYS[a.pays]) m.pays = a.pays;
+  if (MONNAIES[a.monnaie]) m.monnaie = a.monnaie;
+  const mon = m.monnaie;
   m.operations = (a.operations || []).map((op) => {
     const o = {
       id: db.nouvelId('o'),
       sens: op.sens === 'vente' ? 'vente' : 'achat',
-      devise: op.devise || reglages.devise || 'EUR',
+      devise: MONNAIES[op.devise] && op.devise !== mon ? op.devise : deviseParDefaut(mon),
       montant: op.montant ?? null,
       taux: op.taux ?? null,
       contact: op.contact ? capitale(op.contact.trim()) : null,
       reste: op.reste > 0 ? op.reste : null,
-      reste_unite: op.reste > 0 ? op.reste_unite || 'DA' : null,
+      reste_unite: op.reste > 0 ? (op.reste_unite === 'DEVISE' ? 'DEVISE' : 'MONNAIE') : null,
       entendu: op.entendu || '',
       remarque: op.remarque || null,
     };
-    // Garde-fous : un taux pour 100 unités est ramené à l'unité ; un taux hors normes est signalé
-    if (o.taux >= 5000 && o.taux <= 100000) {
+    // Garde-fous en dinars algériens : un taux pour 100 unités est ramené à l'unité ; un taux hors normes est signalé
+    if (mon === 'DZD' && o.taux >= 5000 && o.taux <= 100000) {
       doutes.push(`Taux ${nf0.format(o.taux)} ramené à ${taux(o.taux / 100)} DA pour 1 ${sym(o.devise)} (prix des 100).`);
       o.taux /= 100;
-    } else if (o.taux != null && (o.taux < 50 || o.taux > 1000)) {
+    } else if (mon === 'DZD' && o.devise !== 'DZD' && o.taux != null && (o.taux < 50 || o.taux > 1000)) {
       doutes.push(`Taux de ${taux(o.taux)} DA inhabituel : vérifie-le.`);
     }
     return o;
   });
-  m.frais_da = a.frais_da || null;
+  m.frais = a.frais ?? a.frais_da ?? null;
   m.frais_note = a.frais_note || null;
   m.echeance = a.echeance || null;
   m.resume = a.resume || '';
@@ -297,7 +295,7 @@ async function analyser(m, { texteSeul = false } = {}) {
   if (enCours.has(m.id)) return;
   if (!reglages.code) {
     // Pas de serveur : lecture simple du texte, ou fiche à remplir en écoutant le mémo
-    if (m.transcription) appliquer(m, lireTexte(m.transcription, nomsContacts()));
+    if (m.transcription) appliquer(m, lireTexte(m.transcription, nomsContacts(), m.monnaie));
     else m.a_verifier = ['Transcription automatique non configurée (Réglages) : écoute le mémo et remplis la fiche.'];
     m.statut = 'a_verifier';
     await garderMemo(m);
@@ -317,6 +315,8 @@ async function analyser(m, { texteSeul = false } = {}) {
   if (audio) fd.append('audio', audio, `memo.${(m.mime || '').includes('mp4') ? 'm4a' : (m.mime || '').includes('ogg') ? 'ogg' : 'webm'}`);
   else fd.append('texte', m.transcription || '');
   fd.append('date', m.date);
+  fd.append('pays', m.pays);
+  fd.append('monnaie', m.monnaie);
   fd.append('contacts', JSON.stringify(nomsContacts().slice(0, 300)));
   try {
     const r = await api('analyse', { method: 'POST', body: fd, delai: 150000 });
@@ -325,7 +325,7 @@ async function analyser(m, { texteSeul = false } = {}) {
       m.langue = r.langue || null;
     }
     if (r.analyse) appliquer(m, r.analyse);
-    else appliquer(m, lireTexte(m.transcription || '', nomsContacts()), [message(r.erreur_analyse)]);
+    else appliquer(m, lireTexte(m.transcription || '', nomsContacts(), m.monnaie), [message(r.erreur_analyse)]);
     m.statut = 'a_verifier';
   } catch (e) {
     if (e.code === 'reseau' || e.code === 'delai' || e.code === 'transcription_occupee') {
@@ -384,43 +384,59 @@ function route() {
 /* ------------------------------- caisse ------------------------------- */
 
 function totauxSoldes() {
-  const t = { doit: 0, dois: 0, nDoit: 0, nDois: 0, devises: {} };
+  const mon = monnaiePrincipale();
+  const t = { doit: 0, dois: 0, nDoit: 0, nDois: 0, autres: {} };
   for (const c of etat.calcul.contacts.values()) {
     for (const [u, v] of Object.entries(c.soldes)) {
-      if (Math.abs(v) < 0.5) continue;
-      if (u === 'DA') {
+      if (Math.abs(v) < 0.005) continue;
+      if (u === mon) {
         if (v > 0) (t.doit += v), t.nDoit++;
         else (t.dois -= v), t.nDois++;
-      } else t.devises[u] = (t.devises[u] || 0) + v;
+      } else {
+        const x = (t.autres[u] ||= { doit: 0, dois: 0 });
+        if (v > 0) x.doit += v;
+        else x.dois -= v;
+      }
     }
   }
   return t;
 }
 
+/** Chiffre signé sans son unité (l'unité est écrite à côté, en petit). */
+const sansUnite = (n, code) => signe(n, code).slice(0, -(sym(code).length + 1));
+
 function rendreCaisse() {
   const j = aujourdhui();
+  const mon = monnaiePrincipale();
   const b = bilan(etat.memos, etat.calcul, j, decaler(j, 1));
+  const profit = b.profits[mon] || 0;
+  const autresProfits = Object.entries(b.profits).filter(([u, v]) => u !== mon && Math.abs(v) >= 0.005);
   const t = totauxSoldes();
-  const pos = Object.entries(etat.calcul.positions).filter(([, p]) => Math.abs(p.q) >= 0.01);
-  const principale = pos.find(([d]) => d === (reglages.devise || 'EUR')) || pos[0];
+  const pos = Object.values(etat.calcul.positions).filter((p) => Math.abs(p.q) >= 0.01);
+  const principale =
+    pos.find((p) => p.monnaie === mon && p.devise === reglages.devise) || pos.find((p) => p.monnaie === mon) || pos[0];
   const sous = b.memos
-    ? `${b.ops} opération${b.ops > 1 ? 's' : ''} aujourd’hui${b.nonVerifies ? ` · ${b.nonVerifies} fiche${b.nonVerifies > 1 ? 's' : ''} à vérifier` : ''}`
+    ? `${pluriel(b.ops, 'opération')} aujourd’hui${b.nonVerifies ? ` · ${pluriel(b.nonVerifies, 'fiche')} à vérifier` : ''}`
     : 'Aucune opération aujourd’hui pour l’instant.';
   const caisse = principale
     ? h(
         'div',
         { class: 'tuile' },
-        h('span', { class: 'tuile-l', text: principale[1].q < 0 ? 'À couvrir' : 'En caisse' }),
-        h('span', { class: 'tuile-v' }, mt(dev(Math.abs(principale[1].q), principale[0]))),
-        h('span', { class: 'tuile-s' }, 'moy. ', mt(taux(principale[1].p))),
+        h('span', { class: 'tuile-l', text: principale.q < 0 ? 'À couvrir' : 'En caisse' }),
+        h('span', { class: 'tuile-v' }, mt(argent(Math.abs(principale.q), principale.devise))),
+        h('span', { class: 'tuile-s' }, 'moy. ', mt(taux(principale.p)), principale.monnaie !== mon ? ` ${sym(principale.monnaie)}` : ''),
       )
     : h('div', { class: 'tuile' }, h('span', { class: 'tuile-l', text: 'En caisse' }), h('span', { class: 'tuile-v', text: '—' }), h('span', { class: 'tuile-s', text: 'aucune devise' }));
   const versCarnet = () => (location.hash = '#carnet');
-  const autres = Object.entries(t.devises).filter(([, v]) => Math.abs(v) >= 0.01);
-  remplir($('#caisse'),
+  const autres = Object.entries(t.autres);
+  remplir(
+    $('#caisse'),
     h('p', { class: 'caisse-titre', text: 'Bénéfice net · aujourd’hui' }),
-    h('p', { class: `caisse-chiffre ${classeSigne(b.profit)}` }, mt(signe(b.profit).replace(' DA', '')), h('small', { text: 'DA' })),
+    h('p', { class: `caisse-chiffre ${classeSigne(profit)}` }, mt(sansUnite(profit, mon)), h('small', { text: sym(mon) })),
     h('p', { class: 'caisse-sous', text: sous }),
+    autresProfits.length
+      ? h('p', { class: 'caisse-autres' }, 'Aussi : ', autresProfits.map(([u, v], i) => [i ? ' · ' : '', mt(signe(v, u), classeSigne(v))]))
+      : null,
     h(
       'div',
       { class: 'tuiles' },
@@ -428,24 +444,29 @@ function rendreCaisse() {
       h(
         'button',
         { class: 'tuile', type: 'button', onclick: versCarnet },
-        h('span', { class: 'tuile-l', text: 'On te doit · DA' }),
-        h('span', { class: `tuile-v ${t.doit ? 'plus' : ''}` }, mt(nf0.format(Math.round(t.doit)))),
-        h('span', { class: 'tuile-s', text: t.nDoit ? `${t.nDoit} personne${t.nDoit > 1 ? 's' : ''}` : autres.length ? 'en devises ↓' : 'personne' }),
+        h('span', { class: 'tuile-l', text: `On te doit · ${sym(mon)}` }),
+        h('span', { class: `tuile-v ${t.doit ? 'plus' : ''}` }, mt(argent(t.doit, mon).slice(0, -(sym(mon).length + 1)))),
+        h('span', { class: 'tuile-s', text: t.nDoit ? pluriel(t.nDoit, 'personne') : autres.length ? 'autres monnaies ↓' : 'personne' }),
       ),
       h(
         'button',
         { class: 'tuile', type: 'button', onclick: versCarnet },
-        h('span', { class: 'tuile-l', text: 'Tu dois · DA' }),
-        h('span', { class: `tuile-v ${t.dois ? 'moins' : ''}` }, mt(nf0.format(Math.round(t.dois)))),
-        h('span', { class: 'tuile-s', text: t.nDois ? `à ${t.nDois} personne${t.nDois > 1 ? 's' : ''}` : 'rien' }),
+        h('span', { class: 'tuile-l', text: `Tu dois · ${sym(mon)}` }),
+        h('span', { class: `tuile-v ${t.dois ? 'moins' : ''}` }, mt(argent(t.dois, mon).slice(0, -(sym(mon).length + 1)))),
+        h('span', { class: 'tuile-s', text: t.nDois ? `à ${pluriel(t.nDois, 'personne')}` : 'rien' }),
       ),
     ),
     autres.length
       ? h(
           'p',
           { class: 'note' },
-          'En devises : ',
-          autres.map(([u, v], i) => [i ? ' · ' : '', v > 0 ? 'on te doit ' : 'tu dois ', mt(dev(Math.abs(v), u))]),
+          'Autres monnaies : ',
+          autres.map(([u, x], i) => [
+            i ? ' · ' : '',
+            x.doit ? ['on te doit ', mt(argent(x.doit, u))] : '',
+            x.doit && x.dois ? ', ' : '',
+            x.dois ? ['tu dois ', mt(argent(x.dois, u))] : '',
+          ]),
         )
       : null,
   );
@@ -505,7 +526,7 @@ function rendreAlertes() {
         'button',
         { class: 'alerte alerte-rouge', type: 'button', onclick: () => ouvrirContact(e.cle) },
         icone('horloge'),
-        h('span', {}, h('b', { text: e.nom }), e.montant > 0 ? ' te doit ' : ', tu lui dois ', mt(e.unite === 'DA' ? da(Math.abs(e.montant)) : dev(Math.abs(e.montant), e.unite)), ` — échéance ${e.jour === aujourdhui() ? 'aujourd’hui' : `du ${jourCourt(e.jour)}`}`),
+        h('span', {}, h('b', { text: e.nom }), e.montant > 0 ? ' te doit ' : ', tu lui dois ', mt(argent(Math.abs(e.montant), e.unite)), ` — échéance ${e.jour === aujourdhui() ? 'aujourd’hui' : `du ${jourCourt(e.jour)}`}`),
         h('span', { class: 'fl' }, icone('fleche')),
       ),
     );
@@ -530,11 +551,11 @@ function echeances() {
   for (const m of etat.memos.filter(compte)) {
     if (!m.echeance || m.echeance > j) continue;
     for (const op of m.operations || []) {
-      const d = dette(op);
+      const d = dette(op, m.monnaie);
       if (!d || !op.contact) continue;
       const c = etat.calcul.contacts.get(cle(op.contact));
       const solde = c?.soldes[d.unite] || 0;
-      if (!c || Math.sign(solde) !== Math.sign(d.montant) || Math.abs(solde) < 0.5 || vus.has(c.cle + d.unite)) continue;
+      if (!c || Math.sign(solde) !== Math.sign(d.montant) || Math.abs(solde) < 0.005 || vus.has(c.cle + d.unite)) continue;
       vus.add(c.cle + d.unite);
       out.push({ cle: c.cle, nom: c.nom, unite: d.unite, montant: solde, jour: m.echeance });
     }
@@ -568,8 +589,18 @@ function rendreJournal() {
   }
   const blocs = [];
   for (const [j, liste] of jours) {
-    const total = liste.reduce((s, m) => s + (etat.calcul.memos.get(m.id)?.profit || 0), 0);
-    blocs.push(h('h2', { class: 'jour' }, h('span', { text: jourTitre(j) }), liste.some(compte) ? mt(signe(total), classeSigne(total)) : null));
+    // Total du jour, monnaie par monnaie (dinars et dirhams ne s'additionnent pas)
+    const totaux = {};
+    for (const m of liste) {
+      const r = etat.calcul.memos.get(m.id);
+      if (r) totaux[r.monnaie] = (totaux[r.monnaie] || 0) + r.profit;
+    }
+    const mon = monnaiePrincipale();
+    const lignes = Object.entries(totaux)
+      .filter(([, v], _, t) => Math.abs(v) >= 0.005 || t.length === 1)
+      .sort(([a], [b]) => (a === mon ? -1 : b === mon ? 1 : 0))
+      .map(([u, v], i) => [i ? ' · ' : '', mt(signe(v, u), classeSigne(v))]);
+    blocs.push(h('h2', { class: 'jour' }, h('span', { text: jourTitre(j) }), lignes.length ? h('span', {}, lignes) : null));
     for (const m of liste) blocs.push(bordereau(m));
   }
   remplir(el, blocs);
@@ -584,6 +615,7 @@ function bordereau(m) {
     { class: 'b-tete' },
     h('span', { class: 'b-heure', text: heure(m.date) }),
     m.source === 'voix' ? lecteur(m, true) : h('span', { class: 'b-resume', text: m.resume || m.transcription || 'Mémo écrit' }),
+    m.pays !== reglages.pays ? h('span', { class: 'drapeau', title: PAYS[m.pays]?.nom, text: PAYS[m.pays]?.drapeau || m.pays }) : null,
     m.exemple ? h('span', { class: 'exemple-badge', text: 'EXEMPLE' }) : null,
     m.statut !== 'verifie' ? h('span', { class: `statut s-${m.statut}`, text: STATUTS[m.statut] }) : h('span', { class: 'tampon', text: 'VÉRIFIÉ' }),
   );
@@ -606,17 +638,17 @@ function bordereau(m) {
         'div',
         { class: 'b-lignes' },
         ops.length
-          ? ops.map(ligneOp)
+          ? ops.map((op) => ligneOp(op, m.monnaie))
           : h('p', { class: 'note', text: m.source === 'voix' ? 'Fiche vide : touche pour la remplir en écoutant le mémo.' : 'Aucune opération reconnue : touche pour remplir.' }),
       ),
     );
     corps.push(h('div', { class: 'perfo' }));
     const puces = [];
     for (const op of ops) {
-      const d = dette(op);
+      const d = dette(op, m.monnaie);
       if (!d) continue;
       const qui = op.contact || 'Quelqu’un';
-      const montant = d.unite === 'DA' ? da(Math.abs(d.montant)) : dev(Math.abs(d.montant), d.unite);
+      const montant = argent(Math.abs(d.montant), d.unite);
       puces.push(h('span', { class: `puce ${d.montant > 0 ? 'puce-doit' : 'puce-dois'}` }, d.montant > 0 ? `${qui} te doit ` : `Tu dois à ${qui} `, mt(montant)));
     }
     if (m.echeance) puces.push(h('span', { class: 'puce' }, icone('horloge'), `Échéance ${m.echeance === aujourdhui() ? 'aujourd’hui' : jourCourt(`${m.echeance}T12:00:00`)}`));
@@ -624,7 +656,7 @@ function bordereau(m) {
       h(
         'div',
         { class: 'b-pied' },
-        h('div', { class: 'b-benef' }, h('span', { text: 'Bénéfice net' }), mt(r ? signe(r.profit) : '—', r ? classeSigne(r.profit) : '')),
+        h('div', { class: 'b-benef' }, h('span', { text: 'Bénéfice net' }), mt(r ? signe(r.profit, r.monnaie) : '—', r ? classeSigne(r.profit) : '')),
         puces,
       ),
     );
@@ -637,16 +669,16 @@ function bordereau(m) {
   );
 }
 
-function ligneOp(op) {
+function ligneOp(op, monnaie) {
   const total = op.montant > 0 && op.taux > 0 ? op.montant * op.taux : null;
   return h(
     'div',
     { class: 'ligne' },
     h('span', { class: `tag tag-${op.sens}` }, icone(op.sens === 'achat' ? 'entree' : 'sortie'), op.sens === 'achat' ? 'Achat' : 'Vente'),
     h('span', { class: `qui ${op.contact ? '' : 'vide'}`, text: op.contact || (op.sens === 'achat' ? 'acheté à ?' : 'vendu à ?') }),
-    h('span', { class: 'calc' }, mt(`${op.montant ? dev(op.montant, op.devise) : '? ' + sym(op.devise)} × ${op.taux ? taux(op.taux) : '?'}`)),
-    h('span', { class: 'total' }, mt(total != null ? da(total) : '—')),
-    h('span', { class: 'mil' }, total != null ? mt(millions(total)) : null),
+    h('span', { class: 'calc' }, mt(`${op.montant ? argent(op.montant, op.devise) : '? ' + sym(op.devise)} × ${op.taux ? taux(op.taux) : '?'}`)),
+    h('span', { class: 'total' }, mt(total != null ? argent(total, monnaie) : '—')),
+    h('span', { class: 'mil' }, total != null ? mt(millions(total, monnaie)) : null),
   );
 }
 
@@ -723,8 +755,16 @@ function choisirFormat() {
   return '';
 }
 
+/** Liste des pays (drapeau + nom) pour un <select> ; la valeur choisie est le code du pays. */
+function optionsPays(select, valeur) {
+  remplir(select, Object.entries(PAYS).map(([code, p]) => h('option', { value: code, text: `${p.drapeau} ${p.nom} · ${sym(p.monnaie)}` })));
+  select.value = valeur;
+  return select;
+}
+
 async function ouvrirEnreg(texte = false) {
   arreterLecture();
+  optionsPays($('#enreg-pays'), paysDuMemo());
   const ecran = $('#enreg');
   ecran.hidden = false;
   pousserCouche('enreg');
@@ -851,10 +891,13 @@ function resumerOnde(pics, n = 48) {
 
 async function envoyerMemo() {
   const maintenant = new Date().toISOString();
+  const pays = paysDuMemo();
   const m = {
     id: db.nouvelId('m'),
     cree: maintenant,
     date: maintenant,
+    pays,
+    monnaie: PAYS[pays].monnaie,
     statut: 'attente',
     source: enr.texte ? 'texte' : 'voix',
     duree: 0,
@@ -1034,14 +1077,14 @@ async function ouvrirFiche(id) {
     const resteNote = h('p', { class: 'note' });
     const majTotal = () => {
       const t = op.montant > 0 && op.taux > 0 ? op.montant * op.taux : null;
-      totalEl.textContent = t != null ? da(t) : '—';
-      milEl.textContent = t != null ? millions(t) : '';
-      const d = dette(op);
+      totalEl.textContent = t != null ? argent(t, b.monnaie) : '—';
+      milEl.textContent = t != null ? millions(t, b.monnaie) : '';
+      const d = dette(op, b.monnaie);
       const qui = op.contact || (vente ? 'l’acheteur' : 'le vendeur');
       resteNote.textContent = d
         ? d.montant > 0
-          ? `${qui} te doit encore ${d.unite === 'DA' ? da(d.montant) : dev(d.montant, d.unite)}.`
-          : `Tu dois encore ${d.unite === 'DA' ? da(-d.montant) : dev(-d.montant, d.unite)} à ${qui}.`
+          ? `${qui} te doit encore ${argent(d.montant, d.unite)}.`
+          : `Tu dois encore ${argent(-d.montant, d.unite)} à ${qui}.`
         : '';
     };
     const champNombre = (cleChamp, placeholder, unite) =>
@@ -1074,9 +1117,12 @@ async function ouvrirFiche(id) {
           changer();
         },
       },
-      Object.keys(DEVISES).map((d) => h('option', { value: d, text: sym(d) })),
+      // La devise échangée n'est jamais la monnaie des prix
+      Object.keys(MONNAIES)
+        .filter((d) => d !== b.monnaie || d === op.devise)
+        .map((d) => h('option', { value: d, text: sym(d) })),
     );
-    choixDevise.value = op.devise || 'EUR';
+    choixDevise.value = op.devise || deviseParDefaut(b.monnaie);
     const aReste = op.reste > 0 || op._reste;
     const carte = h(
       'div',
@@ -1111,7 +1157,7 @@ async function ouvrirFiche(id) {
         'div',
         { class: 'grille' },
         h('label', { class: 'champ' }, h('span', { text: 'Somme' }), h('span', { class: 'saisie' }, champNombre('montant', '0', null).firstChild, choixDevise)),
-        h('label', { class: 'champ' }, h('span', { text: vente ? 'Prix de vente' : 'Prix d’achat' }), champNombre('taux', '0,00', h('span', { class: 'unite', text: `DA/${sym(op.devise)}` }))),
+        h('label', { class: 'champ' }, h('span', { text: vente ? 'Prix de vente' : 'Prix d’achat' }), champNombre('taux', '0,00', h('span', { class: 'unite', text: `${sym(b.monnaie)}/${sym(op.devise)}` }))),
         h(
           'label',
           { class: 'champ large' },
@@ -1147,7 +1193,7 @@ async function ouvrirFiche(id) {
           } }),
           h('button', { type: 'button', 'aria-pressed': String(Boolean(aReste)), text: 'Il reste', onclick: () => {
             op._reste = true;
-            op.reste_unite ||= 'DA';
+            op.reste_unite ||= 'MONNAIE';
             dessinerOps();
           } }),
         ),
@@ -1172,8 +1218,8 @@ async function ouvrirFiche(id) {
                   op.reste_unite = e.target.value;
                   majTotal();
                   changer();
-                } }, h('option', { value: 'DA', text: 'DA' }), h('option', { value: 'DEVISE', text: sym(op.devise) }));
-                s.value = op.reste_unite || 'DA';
+                } }, h('option', { value: 'MONNAIE', text: sym(b.monnaie) }), h('option', { value: 'DEVISE', text: sym(op.devise) }));
+                s.value = op.reste_unite === 'DEVISE' ? 'DEVISE' : 'MONNAIE';
                 return s;
               })(),
             )
@@ -1198,19 +1244,19 @@ async function ouvrirFiche(id) {
     const r = calculer([...autres, essai], etat.paiements).memos.get(b.id);
     const lignes = [];
     for (const l of r?.lignes || []) {
-      const s = sym(l.devise);
-      if (l.type === 'adosse') lignes.push(`${dev(l.qte, l.devise)} achetés à ${taux(l.achat)} et vendus à ${taux(l.vente)} : ${signe(l.profit)}`);
-      if (l.type === 'stock') lignes.push(`${dev(l.qte, l.devise)} sortis de ta caisse (prix moyen ${taux(l.pmp)}) vendus à ${taux(l.vente)} : ${signe(l.profit)}`);
-      if (l.type === 'caisse') lignes.push(`${dev(l.qte, l.devise)} entrent en caisse à ${taux(l.achat)} DA/${s} : le bénéfice viendra à la vente.`);
-      if (l.type === 'decouvert') lignes.push(`${dev(l.qte, l.devise)} vendus sans stock : le bénéfice sera compté au rachat.`);
-      if (l.type === 'rachat') lignes.push(`${dev(l.qte, l.devise)} rachetés à ${taux(l.achat)} pour couvrir une vente faite avant : ${signe(l.profit)}`);
+      const u = `${sym(b.monnaie)}/${sym(l.devise)}`;
+      if (l.type === 'adosse') lignes.push(`${argent(l.qte, l.devise)} achetés à ${taux(l.achat)} et vendus à ${taux(l.vente)} ${u} : ${signe(l.profit, b.monnaie)}`);
+      if (l.type === 'stock') lignes.push(`${argent(l.qte, l.devise)} sortis de ta caisse (prix moyen ${taux(l.pmp)}) vendus à ${taux(l.vente)} ${u} : ${signe(l.profit, b.monnaie)}`);
+      if (l.type === 'caisse') lignes.push(`${argent(l.qte, l.devise)} entrent en caisse à ${taux(l.achat)} ${u} : le bénéfice viendra à la vente.`);
+      if (l.type === 'decouvert') lignes.push(`${argent(l.qte, l.devise)} vendus sans stock : le bénéfice sera compté au rachat.`);
+      if (l.type === 'rachat') lignes.push(`${argent(l.qte, l.devise)} rachetés à ${taux(l.achat)} ${u} pour couvrir une vente faite avant : ${signe(l.profit, b.monnaie)}`);
     }
-    if (r?.frais) lignes.push(`Frais : ${signe(-r.frais)}`);
+    if (r?.frais) lignes.push(`Frais : ${signe(-r.frais, b.monnaie)}`);
     if (r?.incomplet) lignes.push('Une ligne sans somme ou sans prix n’est pas comptée.');
     if (!b.operations.length) lignes.push('Ajoute au moins une ligne.');
     remplir(
       resultat,
-      h('div', { class: 'resultat-ligne' }, h('b', { text: 'Bénéfice net' }), mt(r ? signe(r.profit) : '—', r ? classeSigne(r.profit) : '')),
+      h('div', { class: 'resultat-ligne' }, h('b', { text: 'Bénéfice net' }), mt(r ? signe(r.profit, b.monnaie) : '—', r ? classeSigne(r.profit) : '')),
       h('ul', {}, lignes.map((t) => h('li', { text: t }))),
     );
   }
@@ -1288,6 +1334,30 @@ async function ouvrirFiche(id) {
     ? h('div', { class: 'doutes' }, h('p', {}, icone('alerte'), 'À vérifier'), h('ul', {}, b.a_verifier.map((t) => h('li', { text: t }))))
     : null;
 
+  // Pays et monnaie des prix : changer de pays prend sa monnaie (modifiable : en France, il peut compter en dinars)
+  const fraisUnite = h('span', { class: 'unite', text: sym(b.monnaie) });
+  const changerMonnaie = (mon) => {
+    b.monnaie = mon;
+    for (const op of b.operations) if (op.devise === mon) op.devise = deviseParDefaut(mon);
+    fraisUnite.textContent = sym(mon);
+    dessinerOps();
+    changer();
+  };
+  const choixMonnaie = h('select', { class: 'seul', 'aria-label': 'Monnaie des prix', onchange: (e) => changerMonnaie(e.target.value) },
+    Object.entries(MONNAIES).map(([code, x]) => h('option', { value: code, text: `${x.sym} · ${x.nom}` })));
+  choixMonnaie.value = b.monnaie;
+  const choixPays = optionsPays(h('select', { class: 'seul', 'aria-label': 'Pays de l’opération', onchange: (e) => {
+    b.pays = e.target.value;
+    choixMonnaie.value = PAYS[b.pays].monnaie;
+    changerMonnaie(PAYS[b.pays].monnaie);
+  } }), b.pays);
+  const blocPays = h(
+    'div',
+    { class: 'bloc' },
+    h('p', { class: 'bloc-titre', text: 'Pays et monnaie' }),
+    h('div', { class: 'grille' }, h('label', { class: 'champ' }, h('span', { text: 'Pays' }), choixPays), h('label', { class: 'champ' }, h('span', { text: 'Prix en' }), choixMonnaie)),
+  );
+
   const frais = h(
     'div',
     { class: 'bloc' },
@@ -1295,10 +1365,10 @@ async function ouvrirFiche(id) {
     h(
       'div',
       { class: 'grille' },
-      h('label', { class: 'champ' }, h('span', { text: 'Frais (samsar, transport)' }), h('span', { class: 'saisie' }, h('input', { class: 'mono', inputmode: 'decimal', placeholder: '0', value: saisieNombre(b.frais_da), oninput: (e) => {
-        b.frais_da = nombre(e.target.value);
+      h('label', { class: 'champ' }, h('span', { text: 'Frais (samsar, transport)' }), h('span', { class: 'saisie' }, h('input', { class: 'mono', inputmode: 'decimal', placeholder: '0', value: saisieNombre(b.frais), oninput: (e) => {
+        b.frais = nombre(e.target.value);
         changer();
-      } }), h('span', { class: 'unite', text: 'DA' }))),
+      } }), fraisUnite)),
       h('label', { class: 'champ' }, h('span', { text: 'Échéance' }), h('input', { class: 'seul', type: 'date', value: b.echeance || '', onchange: (e) => {
         b.echeance = e.target.value || null;
         changer();
@@ -1325,7 +1395,7 @@ async function ouvrirFiche(id) {
         await garder();
         const r = etat.calcul.memos.get(b.id);
         await fermerFeuille();
-        toast(`Fiche validée ✓  Bénéfice ${signe(r?.profit || 0)}`);
+        toast(`Fiche validée ✓  Bénéfice ${signe(r?.profit || 0, b.monnaie)}`);
       },
     },
     icone('envoyer'),
@@ -1341,6 +1411,7 @@ async function ouvrirFiche(id) {
     ),
     blocMemo,
     doutes,
+    blocPays,
     h('p', { class: 'bloc-titre', text: 'Opérations' }),
     zoneOps,
     h(
@@ -1351,7 +1422,7 @@ async function ouvrirFiche(id) {
         disabled: enAnalyse || undefined,
         onclick: () => {
           const der = b.operations.at(-1);
-          b.operations.push({ id: db.nouvelId('o'), sens: der ? (der.sens === 'achat' ? 'vente' : 'achat') : 'achat', devise: der?.devise || reglages.devise || 'EUR', montant: der?.montant ?? null, taux: null, contact: null, reste: null, reste_unite: null, entendu: '' });
+          b.operations.push({ id: db.nouvelId('o'), sens: der ? (der.sens === 'achat' ? 'vente' : 'achat') : 'achat', devise: der?.devise || deviseParDefaut(b.monnaie), montant: der?.montant ?? null, taux: null, contact: null, reste: null, reste_unite: null, entendu: '' });
           dessinerOps();
           changer();
         },
@@ -1383,24 +1454,26 @@ async function ouvrirFiche(id) {
   ouvrirFeuille(contenu, { type: 'memo', id });
 }
 
-function texteOp(op) {
+function texteOp(op, mon) {
   const t = op.montant > 0 && op.taux > 0 ? op.montant * op.taux : null;
-  const mil = t != null ? millions(t) : '';
-  return `${op.sens === 'achat' ? 'Achat' : 'Vente'} de ${op.montant ? dev(op.montant, op.devise) : '?'} à ${op.taux ? taux(op.taux) : '?'} DA${t != null ? ` = ${da(t)}${mil ? ` (${mil})` : ''}` : ''}`;
+  const mil = t != null ? millions(t, mon) : '';
+  return `${op.sens === 'achat' ? 'Achat' : 'Vente'} de ${op.montant ? argent(op.montant, op.devise) : '?'} à ${op.taux ? taux(op.taux) : '?'} ${sym(mon)}${t != null ? ` = ${argent(t, mon)}${mil ? ` (${mil})` : ''}` : ''}`;
 }
-function texteReste(op) {
-  const d = dette(op);
+function texteReste(op, mon) {
+  const d = dette(op, mon);
   if (!d) return 'Tout est réglé.';
-  return `Reste à régler : ${d.unite === 'DA' ? da(Math.abs(d.montant)) : dev(Math.abs(d.montant), d.unite)}.`;
+  return `Reste à régler : ${argent(Math.abs(d.montant), d.unite)}.`;
 }
 /** Message pour la personne en face : la confirmation écrite qui évite les « je n'ai jamais dit ça ». Jamais le bénéfice. */
 function texteConfirmation(op, m) {
   const quand = `${new Date(m.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })} à ${heure(m.date)}`;
   const quoi = op.sens === 'achat' ? 'tu me vends' : 'je te vends';
+  const t = op.montant > 0 && op.taux > 0 ? op.montant * op.taux : null;
+  const mil = t != null ? millions(t, m.monnaie) : '';
   return [
-    `Salam${op.contact ? ` ${op.contact}` : ''}, je confirme notre accord du ${quand} :`,
-    `${quoi} ${op.montant ? dev(op.montant, op.devise) : '?'} à ${op.taux ? taux(op.taux) : '?'} DA${op.montant > 0 && op.taux > 0 ? `, soit ${da(op.montant * op.taux)}${millions(op.montant * op.taux) ? ` (${millions(op.montant * op.taux)})` : ''}` : ''}.`,
-    texteReste(op),
+    `Salam${op.contact ? ` ${op.contact}` : ''}, je confirme notre accord du ${quand}${m.pays !== reglages.pays ? ` (${PAYS[m.pays]?.nom || m.pays})` : ''} :`,
+    `${quoi} ${op.montant ? argent(op.montant, op.devise) : '?'} à ${op.taux ? taux(op.taux) : '?'} ${sym(m.monnaie)}${t != null ? `, soit ${argent(t, m.monnaie)}${mil ? ` (${mil})` : ''}` : ''}.`,
+    texteReste(op, m.monnaie),
     m.echeance ? `Échéance : ${new Date(`${m.echeance}T12:00:00`).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}.` : '',
     'Merci de confirmer 👍',
   ]
@@ -1410,10 +1483,10 @@ function texteConfirmation(op, m) {
 function texteFiche(m) {
   const r = etat.calcul.memos.get(m.id);
   return [
-    `Fiche Sarraf · ${new Date(m.date).toLocaleDateString('fr-FR')} ${heure(m.date)}`,
-    ...(m.operations || []).map((op) => `• ${texteOp(op)}${op.contact ? ` — ${op.contact}` : ''}${dette(op) ? ` (${texteReste(op).replace('.', '')})` : ''}`),
-    m.frais_da ? `Frais : ${da(m.frais_da)}` : '',
-    r ? `Bénéfice net : ${signe(r.profit)}` : '',
+    `Fiche Sarraf · ${new Date(m.date).toLocaleDateString('fr-FR')} ${heure(m.date)} · ${PAYS[m.pays]?.nom || m.pays}`,
+    ...(m.operations || []).map((op) => `• ${texteOp(op, m.monnaie)}${op.contact ? ` — ${op.contact}` : ''}${dette(op, m.monnaie) ? ` (${texteReste(op, m.monnaie).replace('.', '')})` : ''}`),
+    m.frais ? `Frais : ${argent(m.frais, m.monnaie)}` : '',
+    r ? `Bénéfice net : ${signe(r.profit, m.monnaie)}` : '',
     m.note ? `Note : ${m.note}` : '',
   ]
     .filter(Boolean)
@@ -1436,9 +1509,9 @@ function rendreCarnet() {
   const liste = [...etat.calcul.contacts.values()]
     .filter((c) => !q || c.cle.includes(q))
     .sort((a, b) => {
-      const da_ = Math.abs(a.soldes.DA || 0);
-      const db_ = Math.abs(b.soldes.DA || 0);
-      if ((da_ > 0.5) !== (db_ > 0.5)) return da_ > 0.5 ? -1 : 1;
+      const da_ = Object.values(a.soldes).some((v) => Math.abs(v) >= 0.005);
+      const db_ = Object.values(b.soldes).some((v) => Math.abs(v) >= 0.005);
+      if (da_ !== db_) return da_ ? -1 : 1;
       return a.dernier < b.dernier ? 1 : -1;
     });
   const el = $('#carnet');
@@ -1448,8 +1521,10 @@ function rendreCarnet() {
   }
   el.replaceChildren(
     ...liste.map((c) => {
-      const s = c.soldes.DA || 0;
-      const autres = Object.entries(c.soldes).filter(([u, v]) => u !== 'DA' && Math.abs(v) >= 0.01);
+      // Solde mis en avant : celui de la monnaie principale, sinon le premier qui n'est pas soldé
+      const mon = monnaiePrincipale();
+      const s = c.soldes[mon] || 0;
+      const autres = Object.entries(c.soldes).filter(([u, v]) => u !== mon && Math.abs(v) >= 0.005);
       return h(
         'button',
         { class: 'personne', type: 'button', onclick: () => ouvrirContact(c.cle) },
@@ -1458,8 +1533,8 @@ function rendreCarnet() {
         h(
           'span',
           { class: 'personne-solde' },
-          Math.abs(s) >= 0.5 ? mt(da(Math.abs(s)), s > 0 ? 'plus' : 'moins') : autres.length ? mt(dev(Math.abs(autres[0][1]), autres[0][0]), autres[0][1] > 0 ? 'plus' : 'moins') : h('span', { text: '—' }),
-          h('small', { text: Math.abs(s) >= 0.5 ? (s > 0 ? 'te doit' : 'tu lui dois') : autres.length ? (autres[0][1] > 0 ? 'te doit' : 'tu lui dois') : 'à jour' }),
+          Math.abs(s) >= 0.005 ? mt(argent(Math.abs(s), mon), s > 0 ? 'plus' : 'moins') : autres.length ? mt(argent(Math.abs(autres[0][1]), autres[0][0]), autres[0][1] > 0 ? 'plus' : 'moins') : h('span', { text: '—' }),
+          h('small', { text: Math.abs(s) >= 0.005 ? (s > 0 ? 'te doit' : 'tu lui dois') : autres.length ? (autres[0][1] > 0 ? 'te doit' : 'tu lui dois') : 'à jour' }),
         ),
       );
     }),
@@ -1474,11 +1549,11 @@ async function ouvrirContact(k) {
   await viderFiche();
   const c = etat.calcul.contacts.get(k);
   if (!c) return;
-  const soldes = Object.entries(c.soldes).filter(([, v]) => Math.abs(v) >= 0.01);
-  const fmt = (u, v) => (u === 'DA' ? da(Math.abs(v)) : dev(Math.abs(v), u));
+  const soldes = Object.entries(c.soldes).filter(([, v]) => Math.abs(v) >= 0.005);
+  const fmt = (u, v) => argent(Math.abs(v), u);
 
   const formulaire = h('div', { class: 'bloc', hidden: true });
-  const paiement = { sens: soldes[0]?.[1] < 0 ? 'donne' : 'recu', unite: soldes[0]?.[0] || 'DA', montant: soldes[0] ? Math.abs(soldes[0][1]) : null, date: aujourdhui(), note: '' };
+  const paiement = { sens: soldes[0]?.[1] < 0 ? 'donne' : 'recu', unite: soldes[0]?.[0] || monnaiePrincipale(), montant: soldes[0] ? Math.abs(soldes[0][1]) : null, date: aujourdhui(), note: '' };
   function dessinerFormulaire() {
     remplir(
       formulaire,
@@ -1491,7 +1566,7 @@ async function ouvrirContact(k) {
         h('label', { class: 'champ large' }, h('span', { text: 'Montant' }), h('span', { class: 'saisie' },
           h('input', { class: 'mono', inputmode: 'decimal', value: saisieNombre(paiement.montant), oninput: (e) => (paiement.montant = nombre(e.target.value)) }),
           (() => {
-            const s = h('select', { class: 'unite-choix', 'aria-label': 'Unité', onchange: (e) => (paiement.unite = e.target.value) }, ['DA', ...Object.keys(DEVISES)].map((u) => h('option', { value: u, text: u === 'DA' ? 'DA' : sym(u) })));
+            const s = h('select', { class: 'unite-choix', 'aria-label': 'Unité', onchange: (e) => (paiement.unite = e.target.value) }, Object.keys(MONNAIES).map((u) => h('option', { value: u, text: sym(u) })));
             s.value = paiement.unite;
             return s;
           })(),
@@ -1509,8 +1584,12 @@ async function ouvrirContact(k) {
   }
   dessinerFormulaire();
 
+  // Volumes par caisse (« EUR/DZD » : euros achetés ou vendus contre des dinars)
   const resume = (t, sens) =>
-    Object.entries(t).map(([d, x]) => h('div', { class: 'reg-ligne' }, h('p', {}, sens, h('small', { text: `${x.n} opération${x.n > 1 ? 's' : ''} · prix moyen ${taux(x.da / x.qte)}` })), mt(dev(x.qte, d))));
+    Object.entries(t).map(([k, x]) => {
+      const [d, mon] = k.split('/');
+      return h('div', { class: 'reg-ligne' }, h('p', {}, sens, h('small', { text: `${pluriel(x.n, 'opération')} · prix moyen ${taux(x.total / x.qte)} ${sym(mon)}` })), mt(argent(x.qte, d)));
+    });
 
   const histo = [
     ...c.ops.map(({ memo, op }) => ({ date: memo.date, memo, op })),
@@ -1558,15 +1637,15 @@ async function ouvrirContact(k) {
                 'button',
                 { class: 'histo-ligne', type: 'button', style: null, onclick: () => ouvrirFiche(x.memo.id) },
                 h('span', { class: 'd', text: jourCourt(x.date) }),
-                h('span', { class: 'q' }, h('span', { class: `tag tag-${x.op.sens}` }, x.op.sens === 'achat' ? 'Achat' : 'Vente'), mt(`${x.op.montant ? dev(x.op.montant, x.op.devise) : '?'} × ${x.op.taux ? taux(x.op.taux) : '?'}`)),
-                h('span', { class: 'v' }, mt(x.op.montant > 0 && x.op.taux > 0 ? da(x.op.montant * x.op.taux) : '—')),
+                h('span', { class: 'q' }, h('span', { class: `tag tag-${x.op.sens}` }, x.op.sens === 'achat' ? 'Achat' : 'Vente'), mt(`${x.op.montant ? argent(x.op.montant, x.op.devise) : '?'} × ${x.op.taux ? taux(x.op.taux) : '?'}`)),
+                h('span', { class: 'v' }, mt(x.op.montant > 0 && x.op.taux > 0 ? argent(x.op.montant * x.op.taux, x.memo.monnaie) : '—')),
               )
             : h(
                 'div',
                 { class: 'histo-ligne' },
                 h('span', { class: 'd', text: jourCourt(x.date) }),
                 h('span', { class: 'q', text: `${x.p.sens === 'recu' ? 'Il t’a payé' : 'Tu lui as payé'}${x.p.note ? ` · ${x.p.note}` : ''}` }),
-                h('span', { class: 'v' }, mt(x.p.unite === 'DA' ? da(x.p.montant) : dev(x.p.montant, x.p.unite))),
+                h('span', { class: 'v' }, mt(argent(x.p.montant, x.p.unite))),
                 h('button', { class: 'icone-btn', type: 'button', 'aria-label': 'Supprimer ce règlement', onclick: async () => {
                   if (!confirm('Supprimer ce règlement ?')) return;
                   await db.effacer('paiements', x.p.id);
@@ -1625,40 +1704,67 @@ function bornes(p) {
   return [premiers[0] || j, fin];
 }
 
-function rendrePeriodes() {
-  $('#periodes').replaceChildren(
-    ...PERIODES.map(([k, t]) =>
+function rendrePeriodes(paysUtilises) {
+  remplir(
+    $('#periodes'),
+    PERIODES.map(([k, t]) =>
       h('button', { type: 'button', role: 'radio', 'aria-checked': String(etat.periode === k), text: t, onclick: () => ((etat.periode = k), rendreBilan()) }),
+    ),
+  );
+  // Choix du pays : seulement s'il a travaillé dans plusieurs pays
+  const el = $('#pays-bilan');
+  el.hidden = paysUtilises.length < 2;
+  remplir(
+    el,
+    [null, ...paysUtilises].map((code) =>
+      h('button', {
+        type: 'button',
+        role: 'radio',
+        'aria-checked': String(etat.paysBilan === code),
+        text: code ? nomPays(code) : 'Tous les pays',
+        onclick: () => ((etat.paysBilan = code), rendreBilan()),
+      }),
     ),
   );
 }
 
 function rendreBilan() {
-  rendrePeriodes();
+  const paysUtilises = [...new Set(etat.memos.filter(compte).map((m) => m.pays))].sort((a, b) => (a === reglages.pays ? -1 : b === reglages.pays ? 1 : 0));
+  if (!paysUtilises.includes(etat.paysBilan)) etat.paysBilan = null;
+  rendrePeriodes(paysUtilises);
   const [debut, fin] = bornes(etat.periode);
-  const b = bilan(etat.memos, etat.calcul, debut, fin);
+  const b = bilan(etat.memos, etat.calcul, debut, fin, etat.paysBilan);
+  // Monnaie mise en avant : celle du pays choisi (ou du pays principal), si elle a servi sur la période
+  const voulue = etat.paysBilan ? PAYS[etat.paysBilan].monnaie : monnaiePrincipale();
+  const mon = b.profits[voulue] != null || !Object.keys(b.profits).length ? voulue : Object.keys(b.profits)[0];
+  const profit = b.profits[mon] || 0;
+  const autresProfits = Object.entries(b.profits).filter(([u, v]) => u !== mon && Math.abs(v) >= 0.005);
+  const plusieurs = new Set([...Object.keys(b.achats), ...Object.keys(b.ventes)].map((k) => k.split('/')[1])).size > 1;
   const blocs = [];
   blocs.push(
     h(
       'div',
       { class: 'caisse' },
-      h('p', { class: 'caisse-titre', text: `Bénéfice net · ${PERIODES.find(([k]) => k === etat.periode)[1].toLowerCase()}` }),
-      h('p', { class: `caisse-chiffre ${classeSigne(b.profit)}` }, mt(signe(b.profit).replace(' DA', '')), h('small', { text: 'DA' })),
-      h('p', { class: 'caisse-sous', text: b.memos ? `${b.ops} opération${b.ops > 1 ? 's' : ''} sur ${b.memos} mémo${b.memos > 1 ? 's' : ''}${b.nonVerifies ? ` · dont ${b.nonVerifies} non vérifié${b.nonVerifies > 1 ? 's' : ''}` : ''}` : 'Aucune opération sur la période.' }),
+      h('p', { class: 'caisse-titre', text: `Bénéfice net · ${PERIODES.find(([k]) => k === etat.periode)[1].toLowerCase()}${etat.paysBilan ? ` · ${PAYS[etat.paysBilan].nom}` : ''}` }),
+      h('p', { class: `caisse-chiffre ${classeSigne(profit)}` }, mt(sansUnite(profit, mon)), h('small', { text: sym(mon) })),
+      h('p', { class: 'caisse-sous', text: b.memos ? `${pluriel(b.ops, 'opération')} sur ${pluriel(b.memos, 'mémo')}${b.nonVerifies ? ` · dont ${pluriel(b.nonVerifies, 'non vérifié', 'non vérifiés')}` : ''}` : 'Aucune opération sur la période.' }),
+      autresProfits.length ? h('p', { class: 'caisse-autres' }, 'Aussi : ', autresProfits.map(([u, v], i) => [i ? ' · ' : '', mt(signe(v, u), classeSigne(v))])) : null,
     ),
   );
-  const devs = [...new Set([...Object.keys(b.achats), ...Object.keys(b.ventes)])];
+  const caisses = [...new Set([...Object.keys(b.achats), ...Object.keys(b.ventes)])];
   const stats = [];
-  for (const d of devs) {
-    const a = b.achats[d];
-    const v = b.ventes[d];
+  for (const k of caisses) {
+    const [d, m] = k.split('/');
+    const a = b.achats[k];
+    const v = b.ventes[k];
+    const contre = plusieurs ? ` · en ${sym(m)}` : '';
     stats.push(
-      h('div', { class: 'stat' }, h('span', { class: 'tuile-l', text: `Acheté ${sym(d)}` }), h('span', { class: 'tuile-v' }, mt(a ? dev(a.qte, d) : '—')), h('span', { class: 'tuile-s' }, a ? ['prix moyen ', mt(taux(a.da / a.qte))] : 'aucun achat')),
-      h('div', { class: 'stat' }, h('span', { class: 'tuile-l', text: `Vendu ${sym(d)}` }), h('span', { class: 'tuile-v' }, mt(v ? dev(v.qte, d) : '—')), h('span', { class: 'tuile-s' }, v ? ['prix moyen ', mt(taux(v.da / v.qte))] : 'aucune vente')),
+      h('div', { class: 'stat' }, h('span', { class: 'tuile-l', text: `Acheté ${sym(d)}${contre}` }), h('span', { class: 'tuile-v' }, mt(a ? argent(a.qte, d) : '—')), h('span', { class: 'tuile-s' }, a ? ['prix moyen ', mt(`${taux(a.total / a.qte)} ${sym(m)}`)] : 'aucun achat')),
+      h('div', { class: 'stat' }, h('span', { class: 'tuile-l', text: `Vendu ${sym(d)}${contre}` }), h('span', { class: 'tuile-v' }, mt(v ? argent(v.qte, d) : '—')), h('span', { class: 'tuile-s' }, v ? ['prix moyen ', mt(`${taux(v.total / v.qte)} ${sym(m)}`)] : 'aucune vente')),
     );
-    if (a && v) stats.push(h('div', { class: 'stat' }, h('span', { class: 'tuile-l', text: `Écart moyen ${sym(d)}` }), h('span', { class: 'tuile-v' }, mt(`${taux(v.da / v.qte - a.da / a.qte)} DA`)), h('span', { class: 'tuile-s', text: `par ${sym(d)}, vente − achat` })));
+    if (a && v) stats.push(h('div', { class: 'stat' }, h('span', { class: 'tuile-l', text: `Écart moyen ${sym(d)}${contre}` }), h('span', { class: 'tuile-v' }, mt(`${taux(v.total / v.qte - a.total / a.qte)} ${sym(m)}`)), h('span', { class: 'tuile-s', text: `par ${sym(d)}, vente − achat` })));
   }
-  if (b.frais) stats.push(h('div', { class: 'stat' }, h('span', { class: 'tuile-l', text: 'Frais' }), h('span', { class: 'tuile-v moins' }, mt(da(b.frais))), h('span', { class: 'tuile-s', text: 'samsar, transport…' })));
+  for (const [u, f] of Object.entries(b.frais)) stats.push(h('div', { class: 'stat' }, h('span', { class: 'tuile-l', text: 'Frais' }), h('span', { class: 'tuile-v moins' }, mt(argent(f, u))), h('span', { class: 'tuile-s', text: 'samsar, transport…' })));
   if (stats.length) blocs.push(h('div', { class: 'stats' }, stats));
 
   if (etat.periode !== 'jour') {
@@ -1666,31 +1772,38 @@ function rendreBilan() {
     const jours = [];
     for (let i = nJours - 1; i >= 0; i--) {
       const j = decaler(fin, -1 - i);
-      jours.push({ j, v: b.jours.get(j) || 0 });
+      jours.push({ j, v: (b.jours.get(j) || {})[mon] || 0 });
     }
-    blocs.push(h('div', { class: 'bloc' }, h('p', { class: 'bloc-titre', text: 'Bénéfice net par jour' }), graphe(jours), tableJours(jours)));
+    blocs.push(h('div', { class: 'bloc' }, h('p', { class: 'bloc-titre', text: `Bénéfice net par jour (${sym(mon)})` }), graphe(jours, mon), tableJours(jours, mon)));
   }
 
-  const pos = Object.entries(etat.calcul.positions).filter(([, p]) => Math.abs(p.q) >= 0.01);
+  const pos = Object.values(etat.calcul.positions).filter((p) => Math.abs(p.q) >= 0.01);
+  const plusieursCaisses = new Set(pos.map((p) => p.monnaie)).size > 1;
   blocs.push(
     h(
       'div',
       { class: 'bloc' },
       h('p', { class: 'bloc-titre', text: 'Ta caisse maintenant' }),
       pos.length
-        ? pos.map(([d, p]) =>
-            h('div', { class: 'reg-ligne' }, h('p', {}, p.q < 0 ? `Vendu à découvert (${sym(d)})` : `En caisse (${sym(d)})`, h('small', {}, 'prix moyen ', mt(taux(p.p)), ' · valeur ', mt(da(Math.abs(p.q) * p.p)))), mt(dev(Math.abs(p.q), d), p.q < 0 ? 'moins' : '')),
+        ? pos.map((p) =>
+            h(
+              'div',
+              { class: 'reg-ligne' },
+              h('p', {}, `${p.q < 0 ? 'Vendu à découvert' : 'En caisse'} (${sym(p.devise)}${plusieursCaisses ? ` contre ${sym(p.monnaie)}` : ''})`, h('small', {}, 'prix moyen ', mt(`${taux(p.p)} ${sym(p.monnaie)}`), ' · valeur ', mt(argent(Math.abs(p.q) * p.p, p.monnaie)))),
+              mt(argent(Math.abs(p.q), p.devise), p.q < 0 ? 'moins' : ''),
+            ),
           )
         : h('p', { class: 'note', text: 'Aucune devise en caisse.' }),
     ),
   );
 
+  const devise = reglages.devise || 'EUR';
   const volumes = [];
   for (const c of etat.calcul.contacts.values()) {
     let qte = 0;
     for (const { memo, op } of c.ops) {
       const j = jourLocal(memo.date);
-      if (j >= debut && j < fin && complete(op) && op.devise === (reglages.devise || 'EUR')) qte += op.montant;
+      if (j >= debut && j < fin && complete(op) && op.devise === devise && (!etat.paysBilan || memo.pays === etat.paysBilan)) qte += op.montant;
     }
     if (qte) volumes.push([c, qte]);
   }
@@ -1700,11 +1813,11 @@ function rendreBilan() {
       h(
         'div',
         { class: 'bloc' },
-        h('p', { class: 'bloc-titre', text: `Avec qui tu travailles le plus (${sym(reglages.devise || 'EUR')})` }),
-        h('table', { class: 'tableau' }, h('thead', {}, h('tr', {}, h('th', { text: 'Nom' }), h('th', { text: 'Volume' }))), h('tbody', {}, volumes.slice(0, 8).map(([c, q]) => h('tr', {}, h('td', { text: c.nom }), h('td', {}, mt(dev(q, reglages.devise || 'EUR'))))))),
+        h('p', { class: 'bloc-titre', text: `Avec qui tu travailles le plus (${sym(devise)})` }),
+        h('table', { class: 'tableau' }, h('thead', {}, h('tr', {}, h('th', { text: 'Nom' }), h('th', { text: 'Volume' }))), h('tbody', {}, volumes.slice(0, 8).map(([c, q]) => h('tr', {}, h('td', { text: c.nom }), h('td', {}, mt(argent(q, devise))))))),
       ),
     );
-  blocs.push(h('div', { class: 'actions' }, h('button', { class: 'btn', type: 'button', onclick: () => exporterCsv(debut, fin) }, icone('partage'), 'Exporter la période pour Excel')));
+  blocs.push(h('div', { class: 'actions' }, h('button', { class: 'btn', type: 'button', onclick: () => exporterCsv(debut, fin, etat.paysBilan) }, icone('partage'), 'Exporter la période pour Excel')));
   remplir($('#bilan'), blocs);
 }
 
@@ -1717,7 +1830,7 @@ const compact = (v) => {
 };
 
 /** Barres du bénéfice par jour : une seule série, vert au-dessus de zéro, rouge en dessous ; bulle au survol et au clavier. */
-function graphe(jours) {
+function graphe(jours, mon) {
   const W = 340;
   const H = 168;
   const haut = 14;
@@ -1757,7 +1870,7 @@ function graphe(jours) {
     const x = gauche + i * slot + (slot - l) / 2;
     const y0 = y(0);
     const y1 = y(d.v);
-    const g = el('g', { class: 'barre-j', tabindex: '0', role: 'img', 'aria-label': `${jourCourt(`${d.j}T12:00:00`)} : ${signe(d.v)}` });
+    const g = el('g', { class: 'barre-j', tabindex: '0', role: 'img', 'aria-label': `${jourCourt(`${d.j}T12:00:00`)} : ${signe(d.v, mon)}` });
     g.append(el('rect', { x: gauche + i * slot, y: haut, width: slot, height: H - haut - bas, fill: 'transparent' }));
     if (Math.abs(y1 - y0) >= 0.5) {
       const r = Math.min(4, l / 2, Math.abs(y1 - y0));
@@ -1768,7 +1881,7 @@ function graphe(jours) {
       g.append(el('path', { d: p, fill: d.v > 0 ? 'var(--graphe-gain)' : 'var(--graphe-perte)', class: 'm' }));
     }
     const montrer = () => {
-      bulle.replaceChildren(h('b', { text: signe(d.v) }), jourTitre(d.j));
+      bulle.replaceChildren(h('b', { text: signe(d.v, mon) }), jourTitre(d.j));
       bulle.hidden = false;
       bulle.style.left = `${((x + l / 2) / W) * 100}%`;
       bulle.style.top = `${(Math.min(y0, y1) / H) * 100}%`;
@@ -1789,14 +1902,14 @@ function graphe(jours) {
   return conteneur;
 }
 
-function tableJours(jours) {
+function tableJours(jours, mon) {
   const avec = jours.filter((x) => x.v);
   if (!avec.length) return null;
   return h(
     'details',
     {},
     h('summary', { text: 'Voir le détail par jour' }),
-    h('table', { class: 'tableau' }, h('thead', {}, h('tr', {}, h('th', { text: 'Jour' }), h('th', { text: 'Bénéfice net' }))), h('tbody', {}, [...avec].reverse().map((x) => h('tr', {}, h('td', { text: jourTitre(x.j) }), h('td', {}, mt(signe(x.v), classeSigne(x.v))))))),
+    h('table', { class: 'tableau' }, h('thead', {}, h('tr', {}, h('th', { text: 'Jour' }), h('th', { text: 'Bénéfice net' }))), h('tbody', {}, [...avec].reverse().map((x) => h('tr', {}, h('td', { text: jourTitre(x.j) }), h('td', {}, mt(signe(x.v, mon), classeSigne(x.v))))))),
   );
 }
 
@@ -1809,7 +1922,6 @@ function interrupteur(actif, libelle, onclick) {
 function rendreReglages() {
   const s = etat.serveur;
   const code = h('input', { class: 'seul', type: 'password', autocomplete: 'off', placeholder: 'Code d’accès', value: reglages.code });
-  const adresse = h('input', { class: 'seul', type: 'url', placeholder: 'Automatique', value: reglages.api });
   const etatServeur = !reglages.code
     ? h('p', { class: 'note', text: 'Sans code, les mémos sont gardés et tu remplis les fiches toi-même (les mémos écrits sont lus automatiquement, en simple).' })
     : !s
@@ -1841,9 +1953,7 @@ function rendreReglages() {
       h('label', { class: 'champ' }, h('span', { text: 'Code d’accès du serveur' }), code),
       h('div', { class: 'actions' }, h('button', { class: 'btn btn-or', type: 'button', onclick: async () => {
         reglages.code = code.value.trim();
-        reglages.api = adresse.value.trim();
         garderReglages();
-        baseOk = null;
         etat.serveur = null;
         rendreReglages();
         await testerServeur();
@@ -1851,7 +1961,6 @@ function rendreReglages() {
         if (etat.serveur?.ok) reprendreAnalyses();
       } }, 'Enregistrer et tester')),
       etatServeur,
-      h('details', {}, h('summary', { text: 'Adresse du serveur (avancé)' }), h('label', { class: 'champ' }, h('span', { text: 'Laisser vide pour l’adresse automatique' }), adresse)),
       h('p', { class: 'note', text: 'Chaque mémo est envoyé pour être transcrit (ElevenLabs) et lu (Claude), puis revient ici. Le serveur de Sarraf ne garde rien : tes mémos, fiches et soldes restent dans ce téléphone.' }),
     ),
     h(
@@ -1864,15 +1973,27 @@ function rendreReglages() {
     h(
       'div',
       { class: 'bloc' },
-      h('p', { class: 'bloc-titre', text: 'Affichage' }),
-      h('div', { class: 'reg-ligne' }, h('p', {}, 'Thème'), h('div', { class: 'seg', role: 'group', 'aria-label': 'Thème' }, [['auto', 'Auto'], ['light', 'Papier'], ['dark', 'Nuit']].map(([v, t]) => h('button', { type: 'button', 'aria-pressed': String(reglages.theme === v), text: t, onclick: () => ((reglages.theme = v), garderReglages(), appliquerTheme(), rendreReglages()) })))),
-      h('div', { class: 'reg-ligne' }, h('p', {}, 'Montants aussi en millions', h('small', { text: '1 290 000 DA = 129 millions (en centimes).' })), interrupteur(reglages.millions, 'Montants aussi en millions', () => ((reglages.millions = !reglages.millions), garderReglages(), rendre()))),
-      h('div', { class: 'reg-ligne' }, h('p', {}, 'Devise principale'), (() => {
-        const sel = h('select', { class: 'seul', style: null, 'aria-label': 'Devise principale', onchange: (e) => ((reglages.devise = e.target.value), garderReglages(), rendre()) }, Object.keys(DEVISES).map((d) => h('option', { value: d, text: `${d} (${sym(d)})` })));
-        sel.value = reglages.devise || 'EUR';
+      h('p', { class: 'bloc-titre', text: 'Pays et monnaies' }),
+      h('div', { class: 'reg-ligne' }, h('p', {}, 'Pays principal', h('small', { text: 'Ses totaux passent en premier. Le pays de chaque mémo se choisit en l’enregistrant.' })), (() => {
+        const sel = optionsPays(h('select', { class: 'seul', 'aria-label': 'Pays principal', onchange: (e) => ((reglages.pays = e.target.value), garderReglages(), rendre()) }), reglages.pays);
         sel.style.width = 'auto';
+        sel.style.maxWidth = '55%';
         return sel;
       })()),
+      h('div', { class: 'reg-ligne' }, h('p', {}, 'Devise principale', h('small', { text: 'Celle qu’il achète et vend le plus.' })), (() => {
+        const sel = h('select', { class: 'seul', 'aria-label': 'Devise principale', onchange: (e) => ((reglages.devise = e.target.value), garderReglages(), rendre()) }, Object.entries(MONNAIES).map(([d, x]) => h('option', { value: d, text: `${x.sym} · ${x.nom}` })));
+        sel.value = reglages.devise || 'EUR';
+        sel.style.width = 'auto';
+        sel.style.maxWidth = '55%';
+        return sel;
+      })()),
+      h('div', { class: 'reg-ligne' }, h('p', {}, 'Dinars aussi en millions', h('small', { text: '1 290 000 DA = 129 millions (en centimes).' })), interrupteur(reglages.millions, 'Dinars aussi en millions', () => ((reglages.millions = !reglages.millions), garderReglages(), rendre()))),
+    ),
+    h(
+      'div',
+      { class: 'bloc' },
+      h('p', { class: 'bloc-titre', text: 'Affichage' }),
+      h('div', { class: 'reg-ligne' }, h('p', {}, 'Thème'), h('div', { class: 'seg', role: 'group', 'aria-label': 'Thème' }, [['auto', 'Auto'], ['light', 'Papier'], ['dark', 'Nuit']].map(([v, t]) => h('button', { type: 'button', 'aria-pressed': String(reglages.theme === v), text: t, onclick: () => ((reglages.theme = v), garderReglages(), appliquerTheme(), rendreReglages()) })))),
     ),
     h(
       'div',
@@ -1992,19 +2113,21 @@ async function restaurer(fichier) {
   toast('Sauvegarde restaurée ✓');
 }
 
-function exporterCsv(debut, fin) {
+function exporterCsv(debut, fin, pays = null) {
   const nb = (n) => (n == null || n === '' ? '' : String(Math.round(n * 100) / 100).replace('.', ','));
   const champ = (t) => `"${String(t ?? '').replace(/"/g, '""')}"`;
-  const lignes = [['Date', 'Heure', 'Statut', 'Sens', 'Devise', 'Somme', 'Prix (DA)', 'Total (DA)', 'Par qui / à qui', 'Reste', 'Unité du reste', 'Bénéfice net du mémo (DA)', 'Frais (DA)', 'Échéance', 'Note', 'Mémo'].map(champ).join(';')];
+  const lignes = [['Date', 'Heure', 'Pays', 'Monnaie', 'Statut', 'Sens', 'Devise', 'Somme', 'Prix', 'Total', 'Par qui / à qui', 'Reste', 'Unité du reste', 'Bénéfice net du mémo', 'Frais', 'Échéance', 'Note', 'Mémo'].map(champ).join(';')];
   for (const m of [...etat.memos].filter(compte).sort(ordre)) {
     const j = jourLocal(m.date);
-    if ((debut && j < debut) || (fin && j >= fin)) continue;
+    if ((debut && j < debut) || (fin && j >= fin) || (pays && m.pays !== pays)) continue;
     const r = etat.calcul.memos.get(m.id);
     (m.operations || []).forEach((op, i) => {
       lignes.push(
         [
           champ(new Date(m.date).toLocaleDateString('fr-FR')),
           champ(heure(m.date)),
+          champ(PAYS[m.pays]?.nom || m.pays),
+          champ(m.monnaie),
           champ(STATUTS[m.statut]),
           champ(op.sens),
           champ(op.devise),
@@ -2013,9 +2136,9 @@ function exporterCsv(debut, fin) {
           nb(complete(op) ? op.montant * op.taux : ''),
           champ(op.contact),
           nb(op.reste),
-          champ(op.reste ? (op.reste_unite === 'DEVISE' ? op.devise : 'DA') : ''),
+          champ(op.reste ? (op.reste_unite === 'DEVISE' ? op.devise : m.monnaie) : ''),
           i === 0 ? nb(r?.profit) : '',
-          i === 0 ? nb(m.frais_da) : '',
+          i === 0 ? nb(m.frais) : '',
           champ(m.echeance),
           champ(m.note),
           i === 0 ? champ(m.transcription) : '""',
@@ -2032,11 +2155,13 @@ async function chargerExemples() {
   const j = aujourdhui();
   const a = (jour, h_) => new Date(`${decaler(j, jour)}T${h_}:00`).toISOString();
   const op = (sens, montant, taux_, contact, extra = {}) => ({ id: db.nouvelId('o'), sens, devise: 'EUR', montant, taux: taux_, contact, reste: null, reste_unite: null, entendu: '', ...extra });
-  const base = (date, texte, ops, extra = {}) => ({ id: db.nouvelId('m'), cree: date, date, statut: 'verifie', source: 'texte', duree: 0, ondes: [], transcription: texte, operations: ops, a_verifier: [], note: '', exemple: true, ...extra });
+  const base = (date, texte, ops, extra = {}) => ({ id: db.nouvelId('m'), cree: date, date, pays: 'DZ', monnaie: 'DZD', statut: 'verifie', source: 'texte', duree: 0, ondes: [], transcription: texte, operations: ops, a_verifier: [], note: '', exemple: true, ...extra });
   const memos = [
     base(a(-2, '10:12'), 'Exemple : acheté 4 000 euros à Nadia à 257,50, tout payé.', [op('achat', 4000, 257.5, 'Nadia')]),
     base(a(-2, '16:40'), 'Exemple : vendu 2 500 euros à Rachid à 260, payé cash.', [op('vente', 2500, 260, 'Rachid')]),
-    base(a(-1, '11:05'), 'Exemple : acheté 5 000 euros à Karim à 258 et revendu à Samir à 261. Samir me doit encore 30 millions, il paie demain.', [op('achat', 5000, 258, 'Karim'), op('vente', 5000, 261, 'Samir', { reste: 300000, reste_unite: 'DA' })], { echeance: j, frais_da: 2000, frais_note: 'samsar' }),
+    base(a(-1, '11:05'), 'Exemple : acheté 5 000 euros à Karim à 258 et revendu à Samir à 261. Samir me doit encore 30 millions, il paie demain.', [op('achat', 5000, 258, 'Karim'), op('vente', 5000, 261, 'Samir', { reste: 300000, reste_unite: 'MONNAIE' })], { echeance: j, frais: 2000, frais_note: 'samsar' }),
+    base(a(-1, '17:20'), 'Exemple : à Tunis, vendu 1 500 euros à Sami à 3,42 dinars tunisiens, payé.', [op('vente', 1500, 3.42, 'Sami')], { pays: 'TN', monnaie: 'TND' }),
+    base(a(-1, '17:45'), 'Exemple : à Tunis, acheté 1 500 euros à Walid à 3,38 dinars tunisiens.', [op('achat', 1500, 3.38, 'Walid')], { pays: 'TN', monnaie: 'TND' }),
     base(a(0, '09:30'), 'Exemple : vendu 1 000 euros à Hocine à 261,50.', [op('vente', 1000, 261.5, 'Hocine')]),
     base(a(0, '12:15'), 'Exemple : acheté 3 000 euros à Karim à 258,50, il reste 1 000 euros qu’il me donne ce soir.', [op('achat', 3000, 258.5, 'Karim', { reste: 1000, reste_unite: 'DEVISE' })], { statut: 'a_verifier', a_verifier: ['Exemple de doute : « ce soir » — échéance non datée.'] }),
   ];
@@ -2187,6 +2312,11 @@ async function demarrer() {
   window.addEventListener('hashchange', route);
   $('#btn-micro').addEventListener('click', () => ouvrirEnreg());
   $('#btn-discret').addEventListener('click', basculerDiscret);
+  // Pays du mémo : gardé pour les suivants (il change rarement de pays dans la journée)
+  $('#enreg-pays').addEventListener('change', (e) => {
+    reglages.paysMemo = e.target.value;
+    garderReglages();
+  });
   $('#enreg-envoyer').addEventListener('click', envoyerMemo);
   $('#enreg-annuler').addEventListener('click', annulerEnreg);
   $('#enreg-clavier').addEventListener('click', () => {

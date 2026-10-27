@@ -2,7 +2,7 @@
 // Sans serveur (miroir GitHub Pages, hors ligne), les appels échouent avec ApiError(0, 'network') :
 // chaque page garde alors son contenu de base.
 
-// Le serveur répond à la même adresse que le site (VPS : server/index.mjs ; Cloudflare : worker/).
+// Le serveur répond à la même adresse que le site (VPS : server/index.mjs).
 const ROOT = new URL('../../', import.meta.url);
 export const apiUrl = (path) => new URL(`api/${path}`, ROOT).href;
 /** Adresse d'un fichier du serveur à partir de son chemin publié (« media/f….m4a ») ; une adresse complète reste telle quelle. */

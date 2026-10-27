@@ -1,21 +1,23 @@
 # Dépôt `demos` — sites de démonstration pour prospects
 
 Chaque démo est un site vitrine statique, montré à un prospect ou publié sur LinkedIn.
-Tout est servi par un seul Worker Cloudflare (`demos`) : pousser sur `main` suffit à mettre en ligne.
+Tout est servi par le VPS Hostinger (`server/demos.mjs`, voir README) : pousser sur `main` suffit à mettre en ligne
+(le VPS récupère `main` toutes les 2 minutes). Plus de Cloudflare ni de GitHub Pages.
 
 ## Règles de travail
 
 - Travailler directement sur `main` et pousser (`git push origin main`). Pas de branche par démo.
 - Une démo = un dossier `sites/<slug>/` avec son `index.html`. Le slug est en minuscules,
   sans accents, avec des tirets : `agence-immo-oran`, `cafe-el-bahdja`.
-- Adresse publique : `https://demos.bornzstudio.com/<slug>/` (secours : `https://demos.youcef-ny.workers.dev/<slug>/` ;
-  miroir hors Cloudflare : `https://youcef4000.github.io/demos/<slug>/`, publié par `.github/workflows/pages.yml`). Les balises `canonical`, `og:url` et `og:image` utilisent `https://demos.bornzstudio.com/`.
+- Adresse publique : `https://demos.bornzstudio.com/<slug>/`. Les balises `canonical`, `og:url` et `og:image` utilisent
+  `https://demos.bornzstudio.com/`.
 - Chemins **relatifs** uniquement dans une démo (`./style.css`, `img/photo.webp`), jamais `/style.css` :
   la démo vit dans un sous-dossier.
-- Hooked Academy a un serveur (`server/`, voir README et DEPLOIEMENT-VPS.md) : la version VPS se teste avec
-  `node server/index.mjs`. Le Worker n'exécute du code que pour `/hooked-academy/api/*`,
-  `/hooked-academy/media/*` et `/sarraf/api/*` (`worker/`) ; une erreur dans `worker/`, `server/plateforme.js` ou
-  `wrangler.jsonc` bloque la mise en ligne de toutes les démos : tester avec `npx wrangler deploy --dry-run`.
+- Serveurs (`server/`, voir README et DEPLOIEMENT-VPS.md) : `server/demos.mjs` sert toutes les démos et l'API de
+  Sarraf (`/sarraf/api/*`, `server/sarraf.js`) ; Hooked Academy a son propre site (https://hooked-academy.tech,
+  `server/index.mjs`). Une erreur dans `server/` bloque toutes les démos : tester avec `node server/demos.mjs`
+  (et `node server/index.mjs` pour Hooked Academy) avant de pousser.
+- En-têtes HTTP (CSP, micro…) : dans `sites/_headers`, lus par `server/demos.mjs`.
 - Aucune dépendance de build : HTML, CSS et JS. Les librairies se chargent depuis
   `cdn.jsdelivr.net` avec une version fixée, ou sont copiées dans le dossier de la démo.
 - Ajouter l'entrée de la démo dans `sites/demos.json` :
@@ -34,7 +36,7 @@ Tout est servi par un seul Worker Cloudflare (`demos`) : pousser sur `main` suff
 ## Tester en local
 
 ```bash
-npx wrangler dev
+node server/demos.mjs
 ```
 
-puis ouvrir http://localhost:8787/<slug>/.
+puis ouvrir http://localhost:3000/<slug>/.

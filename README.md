@@ -1,45 +1,42 @@
 # demos
 
-Sites de démonstration pour prospects. Un dossier par démo dans `sites/`, un seul Worker Cloudflare pour tout servir.
+Sites de démonstration pour prospects. Un dossier par démo dans `sites/`, tout est servi par le VPS Hostinger
+(le même que Hooked Academy et Hooked Lab).
 
-En ligne sur **https://demos.bornzstudio.com** (domaine branché dans l'onglet **Domains** du Worker `demos`).
-
-Miroir hors Cloudflare : **https://youcef4000.github.io/demos/** (GitHub Pages, même dossier `sites/`, publié à chaque push sur `main`). Utile quand un réseau n'arrive pas à joindre Cloudflare. Activation unique : **Settings → Pages → Source : GitHub Actions**.
+En ligne sur **https://demos.bornzstudio.com**.
 
 | Adresse | Contenu |
 |---|---|
 | `/` | Galerie des démos marquées `public` dans `sites/demos.json` |
 | `/<slug>/` | La démo du dossier `sites/<slug>/` |
+| `/sarraf/api/*` | Le serveur de Sarraf (transcription et lecture des mémos, voir plus bas) |
+| `/hooked-academy/*` | Renvoie vers https://hooked-academy.tech (la formation a son propre site) |
 
-## Mise en ligne (une seule fois)
+## Comment c'est servi
 
-Dans Cloudflare : **Workers & Pages → Create → Import a repository** → `youcef4000/demos`.
+Sur le VPS, tout vit dans `/opt/hooked` (installé par `server/installer-vps.sh`) :
 
-- Nom du Worker : `demos` (doit correspondre à `wrangler.jsonc`)
-- Build command : vide
-- Deploy command : `npx wrangler deploy`
-- Root directory : `/`
-- Branche de production : `main`
+| Conteneur | Rôle |
+|---|---|
+| `demos` | `server/demos.mjs` : sert le dossier `sites/` du dépôt, avec les en-têtes de `sites/_headers`, et l'API de Sarraf |
+| `academy` | `server/index.mjs` : Hooked Academy (comptes, inscriptions, base SQLite) |
+| `hooked-lab` | Hooked Lab (dépôt séparé, `server/installer-hooked-lab.sh`) |
+| `caddy` | Le HTTPS (certificats automatiques) pour chaque domaine |
 
-Ensuite, chaque push sur `main` met en ligne les nouvelles démos en une à deux minutes.
+Toutes les 2 minutes, le VPS récupère `main` sur GitHub : une démo poussée est en ligne aussitôt (le dossier
+`sites/` est lu directement dans le dépôt), les serveurs ne sont reconstruits que si leur code change.
 
-## Servir demos.bornzstudio.com par GitHub Pages plutôt que par Cloudflare
+Mise en place, une seule fois, depuis le terminal du VPS (hPanel → VPS → **Terminal du navigateur**, ou `ssh root@…`) :
 
-Si certains réseaux n'arrivent pas à joindre Cloudflare (`ERR_CONNECTION_TIMED_OUT`), on fait pointer
-`demos.bornzstudio.com` vers GitHub Pages. L'adresse ne change pas, le Worker reste en secours sur
-`demos.youcef-ny.workers.dev`.
+```bash
+bash /opt/hooked/demos/server/installer-vps.sh
+```
 
-1. **GitHub** → dépôt `demos` → **Settings → Pages** : Source **GitHub Actions** ; **Custom domain** :
-   `demos.bornzstudio.com` → **Save**.
-2. **Cloudflare** → Worker `demos` → **Domains** : retirer `demos.bornzstudio.com`
-   (**⋯ → Remove**).
-3. **Cloudflare** → `bornzstudio.com` → **DNS → Records → Add record** : type `CNAME`, nom `demos`,
-   cible `youcef4000.github.io`, **Proxy status : DNS only** (nuage gris, obligatoire pour que
-   GitHub crée le certificat HTTPS).
-4. **GitHub → Settings → Pages** : attendre « DNS check successful », puis cocher **Enforce HTTPS**
-   (certificat prêt en 15 à 60 minutes).
+Le script demande les clés de Sarraf (voir plus bas), relance les conteneurs, puis affiche ce qu'il reste à faire
+dans le DNS : l'enregistrement `demos` de `bornzstudio.com` doit être de type **A** et pointer vers l'adresse IP du
+VPS (à la place de l'ancien `CNAME` vers GitHub Pages), sans proxy. Le certificat HTTPS arrive quelques minutes après.
 
-Chaque push sur `main` met ensuite à jour les deux hébergements.
+Tester sur son ordinateur : `node server/demos.mjs`, puis http://localhost:3000/<slug>/.
 
 ## Serveur de Hooked Academy (`server/`)
 
@@ -47,10 +44,8 @@ La formation a un vrai serveur (inscriptions, comptes étudiants, contenus modif
 voix off, ressources, FAQ) :
 
 - `server/plateforme.js` : le cœur, indépendant de l'hébergeur ;
-- `server/index.mjs` + `server/Dockerfile` : la version VPS (Hostinger + Coolify), Node seul, base SQLite
-  dans un volume `/data`. Mise en ligne : **DEPLOIEMENT-VPS.md** ;
-- `worker/` : l'ancienne version Cloudflare (Durable Object), qui n'exécute du code que pour
-  `/hooked-academy/api/*` et `/hooked-academy/media/*` ; les autres démos ne passent jamais par ce code.
+- `server/index.mjs` + `server/Dockerfile` : Node seul, base SQLite dans le volume `academy-data`, en ligne sur
+  https://hooked-academy.tech. Détails : **DEPLOIEMENT-VPS.md**.
 
 Compte de l'équipe : créé à la première visite de l'espace équipe avec un code d'installation à usage
 unique (100 bits). Seule son empreinte SHA-256 est dans `server/plateforme.js` (`SETUP`, ou la variable
@@ -65,23 +60,24 @@ garde, le fait transcrire et décortiquer, puis affiche une fiche à vérifier (
 net, reste à régler). Elle tient aussi la caisse (devises en stock, prix moyen), les soldes de chaque contact, les
 échéances et le bilan. Adresse : `https://demos.bornzstudio.com/sarraf/` (privée, hors galerie).
 
+- **Plusieurs pays** : chaque mémo a son pays (choisi à l'enregistrement, gardé pour les suivants) et la monnaie de
+  ses prix (DA, DT, DH, €, TL, AED…). Caisse, prix moyen et bénéfice sont tenus par paire devise / monnaie ; le bilan
+  se filtre par pays.
 - Les mémos, audios, fiches et règlements restent **dans le téléphone** (IndexedDB) ; sauvegarde complète en un fichier
   JSON et export CSV depuis **Réglages**.
-- `worker/sarraf.js` (`/sarraf/api/*`) ne stocke rien : il transcrit l'audio avec ElevenLabs (`scribe_v2`) et le fait lire
+- `server/sarraf.js` (`/sarraf/api/*`) ne stocke rien : il transcrit l'audio avec ElevenLabs (`scribe_v2`) et le fait lire
   par Claude (`claude-opus-5-5`, réponse au format JSON imposé, relance automatique sur un modèle de secours si un filtre
   refuse). Sans serveur, l'application marche quand même : fiche à remplir à la main, lecture simple des mémos écrits.
 
-Mise en service (une seule fois) : Cloudflare → Worker `demos` → **Settings → Variables and Secrets** → ajouter en
-**Secret** :
+Clés, dans `/opt/hooked/demos.env` sur le VPS (demandées par `installer-vps.sh` la première fois ; pour en changer :
+`nano /opt/hooked/demos.env`, puis relancer le script) :
 
 | Nom | Valeur |
 |---|---|
-| `SARRAF_CODE` | un code d'accès long, saisi ensuite une fois dans **Réglages** de l'application |
+| `SARRAF_CODE` | le code d'accès, saisi une fois dans **Réglages** de l'application (créé par le script si on n'en donne pas) |
 | `ELEVENLABS_API_KEY` | clé API ElevenLabs (droit Speech to Text) |
-| `ANTHROPIC_API_KEY` | clé API Anthropic |
+| `ANTHROPIC_API_KEY` | clé API Anthropic (reprise de Hooked Lab si on la laisse vide) |
 | `SARRAF_MODELE` | facultatif : autre modèle Claude |
-
-Sur le miroir GitHub Pages, l'application appelle l'adresse de secours `https://demos.youcef-ny.workers.dev/sarraf/api/`.
 
 ## Ajouter une démo
 

@@ -72,6 +72,7 @@
       <p>Ce que tes opérations ont rapporté, sur la période choisie.</p>
     </div>
     <div class="puces" id="periodes" role="radiogroup" aria-label="Période"></div>
+    <div class="puces" id="pays-bilan" role="radiogroup" aria-label="Pays" hidden></div>
     <div id="bilan"></div>
   </section>
 
@@ -97,6 +98,10 @@
 <!-- Enregistrement d'un mémo -->
 <div class="voile" id="enreg" role="dialog" aria-modal="true" aria-labelledby="t-enreg" hidden>
   <div class="enreg">
+    <label class="enreg-pays">
+      <span class="sr">Pays du mémo</span>
+      <select id="enreg-pays" aria-label="Pays du mémo"></select>
+    </label>
     <p class="enreg-etat" id="t-enreg">Je t'écoute…</p>
     <p class="enreg-temps" id="enreg-temps">0:00</p>
     <canvas class="enreg-onde" id="enreg-onde" width="600" height="120" aria-hidden="true"></canvas>
