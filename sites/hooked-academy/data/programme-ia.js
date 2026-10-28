@@ -4,6 +4,8 @@
 // Tester & analyser avec Hooked Lab (avant de vendre, on mesure) et un projet final.
 // Les outils cités sont des exemples : ils changent vite, la méthode reste.
 
+import { leconEcran } from './videos-ecran.js';
+
 export const MODULES_IA = [
   // Bienvenue (leçon 00) : ouverte à tous, même en démo. « say » en darija (prompteur ou voix clonée).
   {
@@ -131,9 +133,12 @@ export const MODULES_IA = [
           'Coche la leçon et passe le quiz',
         ],
       },
+      // Visite de la plateforme, filmée à l'écran (communes aux deux formations)
+      leconEcran('formations', 'ia0-l5', 2),
+      leconEcran('projet', 'ia0-l6', 3),
       {
         id: 'ia0-l2',
-        n: 2,
+        n: 4,
         title: 'Payer tes outils IA depuis l’Algérie',
         ar: 'كيف تدفع ثمن أدوات الذكاء الاصطناعي من الجزائر',
         scenes: [
@@ -184,7 +189,7 @@ export const MODULES_IA = [
       },
       {
         id: 'ia0-l3',
-        n: 3,
+        n: 5,
         title: 'Ta boîte à outils IA (et ton budget)',
         ar: 'أدواتك في الذكاء الاصطناعي وميزانيتك',
         scenes: [

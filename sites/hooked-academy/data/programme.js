@@ -4,6 +4,7 @@
 // que l'animation tourne, pour enregistrer la voix off en darija parfaitement synchronisée.
 
 import { MODULES_IA } from './programme-ia.js';
+import { leconEcran } from './videos-ecran.js';
 import { OVERLAY } from './i18n/index.js';
 import { VOIX } from './voix-off.js';
 import { NARRATION } from './narration.js';
@@ -151,6 +152,9 @@ const MODULES_1 = [
           'Coche la leçon et passe le quiz',
         ],
       },
+      // Visite de la plateforme, filmée à l'écran (communes aux deux formations)
+      leconEcran('formations', 'm0-l3', 2),
+      leconEcran('projet', 'm0-l4', 3),
     ],
   },
   {
@@ -2147,9 +2151,12 @@ const MODULES_1 = [
           'Note la structure que tu reprends pour ton produit, sans copier le contenu',
         ],
       },
+      // Pratique filmée à l'écran : le produit et ses vidéos, puis CapCut
+      leconEcran('produit', 'm7-l10', 2),
+      leconEcran('capcut', 'm7-l11', 3),
       {
         id: 'm7-l2',
-        n: 2,
+        n: 4,
         title: 'La bonne durée d’une créative',
         ar: 'المدة المناسبة للإعلان',
         scenes: [
@@ -2206,7 +2213,7 @@ const MODULES_1 = [
       },
       {
         id: 'm7-l3',
-        n: 3,
+        n: 5,
         title: 'Préparer le tournage au téléphone',
         ar: 'التحضير للتصوير بالهاتف',
         scenes: [
@@ -2271,7 +2278,7 @@ const MODULES_1 = [
       },
       {
         id: 'm7-l4',
-        n: 4,
+        n: 6,
         title: 'La voix off au téléphone',
         ar: 'التعليق الصوتي بالهاتف',
         scenes: [
@@ -2336,7 +2343,7 @@ const MODULES_1 = [
       },
       {
         id: 'm7-l5',
-        n: 5,
+        n: 7,
         title: 'Des sous-titres qui retiennent',
         ar: 'ترجمة نصية تشدّ المشاهد',
         scenes: [
@@ -2395,7 +2402,7 @@ const MODULES_1 = [
       },
       {
         id: 'm7-l6',
-        n: 6,
+        n: 8,
         title: 'La carte CTA dans Canva',
         ar: 'بطاقة CTA في Canva',
         scenes: [
@@ -2460,7 +2467,7 @@ const MODULES_1 = [
       },
       {
         id: 'm7-l7',
-        n: 7,
+        n: 9,
         title: 'Le texte de l’annonce',
         ar: 'نص الإعلان',
         scenes: [
@@ -2526,7 +2533,7 @@ const MODULES_1 = [
       },
       {
         id: 'm7-l8',
-        n: 8,
+        n: 10,
         title: 'Décliner une gagnante : 5 variantes',
         ar: 'من إعلان ناجح إلى 5 نسخ',
         scenes: [
@@ -2593,7 +2600,7 @@ const MODULES_1 = [
       },
       {
         id: 'm7-l9',
-        n: 9,
+        n: 11,
         title: 'Le brief UGC : ce que tu envoies au créateur',
         ar: 'موجز الطلب لصانع المحتوى',
         scenes: [

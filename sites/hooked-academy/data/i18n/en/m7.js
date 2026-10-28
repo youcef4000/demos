@@ -930,6 +930,65 @@ export default {
         "Reread the brief as a creator: could they film without asking you anything?",
         "Prepare your delivery checklist: hook, visible product, sharp picture, nothing false"
       ]
+    },
+    "m7-l10": {
+      "title": "Practice: find the product and its videos",
+      "scenes": [
+        {
+          "sub": "Image search on AliExpress, product videos on TikTok, download with SnapTik"
+        }
+      ],
+      "key": [
+        "Start from a screenshot of the product: AliExpress image search finds the product and its name.",
+        "Copy the product name and search for it on TikTok to find videos that show it.",
+        "Copy the link of each video you pick and download it with SnapTik."
+      ],
+      "quiz": [
+        {
+          "q": "What is AliExpress image search for?",
+          "a": [
+            "Finding the product and its name from a screenshot",
+            "Publishing the ad",
+            "Editing the video"
+          ],
+          "why": "From a simple screenshot, AliExpress finds the product: you get its name to search for its videos on TikTok."
+        }
+      ],
+      "todo": [
+        "Take a screenshot of your product and run an image search on AliExpress",
+        "Copy the product name",
+        "Search for that name on TikTok and pick 5 videos that show the product well",
+        "Download them with SnapTik and keep them in one folder"
+      ]
+    },
+    "m7-l11": {
+      "title": "Practice: install CapCut and import your videos",
+      "scenes": [
+        {
+          "sub": "CapCut for PC, a new project and importing the downloaded videos"
+        }
+      ],
+      "key": [
+        "Download CapCut from capcut.com and choose the PC version: it has more editing options.",
+        "From the CapCut home screen, create a new project.",
+        "Import the downloaded videos: editing starts in the next video."
+      ],
+      "quiz": [
+        {
+          "q": "Which version of CapCut is recommended for editing?",
+          "a": [
+            "The PC version",
+            "None: you need other software",
+            "It doesn’t matter, they’re identical"
+          ],
+          "why": "The PC version has more editing options."
+        }
+      ],
+      "todo": [
+        "Download CapCut for PC from capcut.com and install it",
+        "Create a new project",
+        "Import the videos you downloaded in the previous lesson"
+      ]
     }
   }
 };

@@ -28,7 +28,7 @@ const STUDENT_TTL = 30 * 864e5;
 const YEAR = 365 * 864e5;
 const LANGS = ['fr', 'en', 'ar'];
 const TRACKS = ['creative', 'ia'];
-const FREE_OPEN = ['m0-l1', 'm0-l2', 'ia0-l1', 'ia0-l4'];
+const FREE_OPEN = ['m0-l1', 'm0-l2', 'm0-l3', 'm0-l4', 'ia0-l1', 'ia0-l4', 'ia0-l5', 'ia0-l6'];
 // Leçons ouvertes au compte démo (landing, « essayer la plateforme ») : leur voix off reste publique
 const DEMO_OPEN = ['m1-l1', 'ia1-l1'];
 const STATUS = ['nouvelle', 'contactee', 'paiement', 'validee', 'refusee'];

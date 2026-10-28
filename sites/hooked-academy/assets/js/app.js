@@ -525,7 +525,7 @@ function greet() {
 
 function voiceChip(l) {
   if (lang === 'fr') return l.voice || l.audio ? `<span class="chip chip--ok">${icon('mic', { size: 13 })} ${t('app.voice.darija')}</span>` : '';
-  return l.audio ? `<span class="chip chip--ok">${icon('mic', { size: 13 })} ${t('app.voice.darija')}</span>` : '';
+  return l.audio || l.screen ? `<span class="chip chip--ok">${icon('mic', { size: 13 })} ${t('app.voice.darija')}</span>` : '';
 }
 
 function contCard(P, { demo = false } = {}) {
@@ -762,7 +762,7 @@ function lessonCard(l, m, P) {
       ${cur ? `<span class="lc-here">${t('app.map.here')}</span>` : ''}
     </span>
     <span class="lc-b">
-      <small class="lc-k">${bdi(lessonTag(l, m))}${(lang === 'fr' && l.voice) || l.audio ? ` · ${t('app.map.voice')}` : ''}</small>
+      <small class="lc-k">${bdi(lessonTag(l, m))}${(lang === 'fr' && l.voice) || l.audio || l.screen ? ` · ${t('app.map.voice')}` : ''}</small>
       <b class="lc-t">${esc(l.title)}</b>
       <span class="lc-x">${esc(introOf(l))}</span>
       <span class="lc-bar" aria-hidden="true"><i style="width:${(seen * 100).toFixed(0)}%"></i></span>
@@ -1056,7 +1056,8 @@ function crumb(f) {
 }
 
 function playerHTML(l) {
-  const mp4 = lang === 'fr' && l.video;
+  // Vidéo filmée à l'écran (screen) : la même dans toutes les langues ; sinon le MP4 ne sert qu'en français
+  const mp4 = l.video && (lang === 'fr' || l.screen);
   if (mp4) return `<video id="vid" src="../${esc(l.video)}" poster="${thumb(l)}" controls playsinline preload="metadata" aria-label="${esc(t('app.player.label', { title: l.title }))}"></video>`;
   const q = new URLSearchParams({ id: l.id, lang });
   if (l.audio) q.set('audio', '1');
@@ -1064,6 +1065,7 @@ function playerHTML(l) {
 }
 
 function playerNote(l) {
+  if (l.screen) return '';
   if (lang === 'fr') {
     if (l.video) return '';
     return l.audio ? '' : `<span class="ls-note">${t('app.voice.soon')}</span>`;

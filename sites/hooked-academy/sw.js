@@ -5,7 +5,7 @@
 // - API, fichiers du serveur (media/), voix off et vidéos : jamais en cache (données privées, lectures partielles).
 // Changer VERSION à chaque modification de ce fichier : les anciens caches sont supprimés.
 
-const VERSION = 'ha-2026-10-22b';
+const VERSION = 'ha-2026-10-28a';
 const PAGES = `${VERSION}-pages`;
 const FILES = `${VERSION}-fichiers`;
 const PRECACHE = ['offline.html', 'assets/img/icon-192.png', 'assets/img/favicon.svg'];

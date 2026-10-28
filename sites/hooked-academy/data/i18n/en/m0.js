@@ -194,6 +194,65 @@ export default {
         "Look up a question in the FAQ, or ask the assistant",
         "Mark the lesson as completed and take the quiz"
       ]
+    },
+    "m0-l3": {
+      "title": "Platform tour: the courses",
+      "scenes": [
+        {
+          "sub": "Modules, the video lesson, key points, flashcards, the exercise and the quiz"
+        }
+      ],
+      "key": [
+        "Each course is split into modules, and each module into short video lessons.",
+        "Under each video: the key points to remember and flashcards to review in seconds.",
+        "Each lesson ends with an exercise on your product and a quiz, with an explanation for every answer."
+      ],
+      "quiz": [
+        {
+          "q": "What do you find under a lesson video?",
+          "a": [
+            "Nothing, just the video",
+            "Key points, flashcards, an exercise and a quiz",
+            "An ad"
+          ],
+          "why": "Each lesson combines the video, the key points, flashcards, an exercise and a quiz."
+        }
+      ],
+      "todo": [
+        "Open your course and find the module you’re on",
+        "Start a lesson and read the key points under the video",
+        "Flip a flashcard after answering from memory",
+        "Do the lesson’s exercise, then pass its quiz"
+      ]
+    },
+    "m0-l4": {
+      "title": "Platform tour: the final project and the certificate",
+      "scenes": [
+        {
+          "sub": "The final project brief, submitting it, the team’s feedback and your certificate"
+        }
+      ],
+      "key": [
+        "At the end of the course, the final project puts everything you’ve learned into practice.",
+        "The final project brief explains what to produce and how to submit it.",
+        "The team reviews your project and gives you feedback; your certificate comes next."
+      ],
+      "quiz": [
+        {
+          "q": "How do you get your certificate?",
+          "a": [
+            "By watching a single video",
+            "By submitting your final project, reviewed by the team",
+            "By skipping the exercises"
+          ],
+          "why": "The certificate comes after the final project: the team reviews it and gives you feedback."
+        }
+      ],
+      "todo": [
+        "Open the last module of your course and read the final project brief",
+        "Write down now the product you’ll use for your project",
+        "Keep your best exercises: they’ll help with the final project"
+      ]
     }
   }
 };
