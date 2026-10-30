@@ -10,7 +10,7 @@ import './i18n/app.js';
 import { logoInner, markSVG } from './brand.js';
 import { icon } from './icons.js';
 import * as S from './store.js';
-import { siteUrl } from './api.js';
+import { api, siteUrl } from './api.js';
 import { TRACKS, PARTS, MODULES, allLessons, findLesson, modCode, modulesOf, coreModulesOf, lessonsOf } from '../../data/programme.js';
 import { compose, lessonDuration } from '../../motion/engine.js';
 import { renderWidget, flashcards } from './widgets.js';
@@ -61,6 +61,16 @@ function fmtSize(size) {
 }
 
 let me = null;
+// Espace équipe : visible pour le compte du formateur, ou quand une session équipe est ouverte sur cet appareil
+let teamSession = false;
+const isTeam = () => !!me?.protected || teamSession;
+async function checkTeam() {
+  try {
+    await api('GET', 'admin/me');
+    teamSession = true;
+    $$('[data-team]').forEach((x) => (x.hidden = false));
+  } catch {}
+}
 let stop = []; // nettoyages de la vue courante (animations, écouteurs)
 let TEAM = { lessons: {} }; // ressources/manifest.json
 
@@ -471,6 +481,7 @@ function shell(active, html, { track = '' } = {}) {
         <a class="nv" href="#/outils" ${isOn('tools')}>${icon('sparkles', { size: 20 })}<span>${t('app.nav.tools')}</span></a>
         <a class="nv" href="#/aide" ${isOn('help')}>${icon('help', { size: 20 })}<span>${t('app.nav.faq')}</span></a>
         <a class="nv" href="#/profil" ${isOn('profile')}>${icon('user', { size: 20 })}<span>${t('app.nav.profile')}</span></a>
+        <a class="nv" href="../admin/" data-team ${isTeam() ? '' : 'hidden'}>${icon('shield', { size: 20 })}<span>${t('app.nav.team')}</span></a>
       </nav>
       <div class="side-foot">
         ${switcher('lang-sw')}
@@ -1512,8 +1523,17 @@ function prefsCard({ demo = false } = {}) {
     ${switcher('lang-sw lang-sw--l')}
     <hr><p class="card-k">${icon('sun', { size: 14 })} ${t('app.theme.k')}</p><p class="muted">${t('app.theme.text')}</p>
     <div class="seg th-seg" role="group" aria-label="${esc(t('app.theme.k'))}">${['dark', 'light'].map((v) => `<button type="button" data-theme-set="${v}" aria-pressed="${getTheme() === v}">${icon(v === 'light' ? 'sun' : 'moon', { size: 15 })} ${t(`app.theme.${v}`)}</button>`).join('')}</div>
-    <div data-pwa-install ${installable() ? '' : 'hidden'}><hr><p class="card-k">${icon('download', { size: 14 })} ${t('app.pwa.k')}</p><p class="muted">${t('app.pwa.text')}</p><button class="b b--s" type="button">${icon('download', { size: 15 })} ${t('pwa.install')}</button></div>
+    <div data-pwa-install ${installable() ? '' : 'hidden'}><hr><p class="card-k">${icon('download', { size: 14 })} ${t('app.pwa.k')}</p><p class="muted">${t('app.pwa.text')}</p><button class="b b--or" type="button">${icon('download', { size: 16 })} ${t('pwa.install')}</button></div>
     ${demo ? `<hr><p class="card-k">${icon('repeat', { size: 14 })} ${t('app.demo.reset.k')}</p><p class="muted">${t('app.demo.reset.text')}</p><button class="b b--s b--danger" id="rst" type="button">${t('app.demo.reset')}</button>` : ''}
+  </section>`;
+}
+
+/** Profil : accès à l'espace équipe, pour le formateur ou une session équipe ouverte sur cet appareil. */
+function teamCard() {
+  return `<section class="card team-card" data-team ${isTeam() ? '' : 'hidden'}>
+    <p class="card-k">${icon('shield', { size: 14 })} ${t('app.team.k')}</p>
+    <p class="muted">${t('app.team.text')}</p>
+    <a class="b b--or" href="../admin/">${icon('shield', { size: 16 })} ${t('app.team.open')}${arrow(16)}</a>
   </section>`;
 }
 
@@ -1555,6 +1575,7 @@ function viewProfile() {
           </ul>
           <a class="b b--or" href="${RESERVE}">${t('app.cta.reserve')}</a>
         </section>
+        ${teamCard()}
         ${prefsCard({ demo: true })}
       </div>`,
     );
@@ -1565,6 +1586,7 @@ function viewProfile() {
       'profile',
       `<div class="prof">
         ${head}
+        ${teamCard()}
         ${me.protected ? '' : packCard()}
         <section class="card lvl-card">
           <p class="card-k">${icon('bolt', { size: 14 })} ${t('app.level.k')}</p>
@@ -1961,6 +1983,7 @@ const start = () =>
   Promise.all([document.fonts?.ready, loadVideos(), loadTeam()])
     .then(route)
     .then(bot)
-    .then(syncMe);
+    .then(syncMe)
+    .then(checkTeam);
 if (window.gsap || document.readyState === 'complete') start();
 else addEventListener('load', start, { once: true });

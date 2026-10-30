@@ -250,6 +250,10 @@ add({
 
     'app.player.label': 'Vidéo de la leçon : {title}',
     'app.voice.darija': 'Voix off en darija',
+    'app.nav.team': 'Espace équipe',
+    'app.team.k': 'Espace équipe',
+    'app.team.text': 'Inscriptions, élèves, contenus des leçons, voix off, ressources et FAQ : tout se gère ici, aussi depuis ton téléphone.',
+    'app.team.open': 'Ouvrir l’espace équipe',
     'app.voice.soon': 'Vidéo animée · voix off en darija en cours d’enregistrement',
     'app.voice.translated': 'Textes traduits · voix off en darija',
     'app.voice.translated.soon': 'Textes traduits · voix off en darija bientôt',
@@ -587,6 +591,10 @@ add({
 
     'app.player.label': 'Lesson video: {title}',
     'app.voice.darija': 'Voice-over in Darija',
+    'app.nav.team': 'Team area',
+    'app.team.k': 'Team area',
+    'app.team.text': 'Sign-ups, students, lesson content, voice-overs, resources and FAQ: manage it all here, from your phone too.',
+    'app.team.open': 'Open the team area',
     'app.voice.soon': 'Animated video · Darija voice-over being recorded',
     'app.voice.translated': 'Translated text · voice-over in Darija',
     'app.voice.translated.soon': 'Translated text · Darija voice-over coming soon',
@@ -924,6 +932,10 @@ add({
 
     'app.player.label': 'فيديو الدرس: {title}',
     'app.voice.darija': 'تعليق صوتي بالدارجة',
+    'app.nav.team': 'فضاء الفريق',
+    'app.team.k': 'فضاء الفريق',
+    'app.team.text': 'التسجيلات والطلبة ومحتوى الدروس والتعليقات الصوتية والموارد والأسئلة الشائعة: تُدار كلها من هنا، حتى من هاتفك.',
+    'app.team.open': 'فتح فضاء الفريق',
     'app.voice.soon': 'فيديو متحرك · التعليق الصوتي بالدارجة قيد التسجيل',
     'app.voice.translated': 'نصوص مترجمة · تعليق صوتي بالدارجة',
     'app.voice.translated.soon': 'نصوص مترجمة · التعليق الصوتي بالدارجة قريبًا',

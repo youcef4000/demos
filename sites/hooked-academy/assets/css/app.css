@@ -332,6 +332,34 @@ select.in option {
     display: grid;
     gap: 8px;
   }
+  /* Installer l'application : bouton doré, comme le bouton de l'assistant */
+  .side .nv-app {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 46px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 999px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    text-align: start;
+    cursor: pointer;
+    color: var(--ink-950);
+    background: var(--gold-grad);
+    box-shadow: 0 14px 30px -14px rgb(224 190 85 / 0.7), inset 0 1px 0 rgb(255 255 255 / 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .side .nv-app:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 5px rgb(201 162 39 / 0.14), 0 16px 34px -14px rgb(224 190 85 / 0.85), inset 0 1px 0 rgb(255 255 255 / 0.4);
+  }
+  .side .nv-app:focus-visible {
+    outline: 2px solid var(--gold-300);
+    outline-offset: 3px;
+  }
   .tabs {
     display: none;
   }
@@ -5129,4 +5157,9 @@ a.lc:focus-visible .lc-go,
 }
 :root[data-theme='light'] .th-btn .i-moon {
   display: block;
+}
+
+/* Espace équipe (profil du formateur) */
+.team-card .b {
+  margin-top: 14px;
 }

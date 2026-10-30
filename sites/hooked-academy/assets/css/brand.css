@@ -214,6 +214,7 @@ a {
   cursor: pointer;
 }
 
+[data-team][hidden],
 [data-pwa-install][hidden] {
   display: none !important;
 }
