@@ -1,0 +1,13 @@
+{
+  "_note": "Profil du fichier de stock Cuistance. Les colonnes sont aussi reconnues automatiquement par leur nom ; ce profil force celles qui comptent. À ajuster sur un vrai envoi.",
+  "fournisseur": "cuistance",
+  "marqueParDefaut": "Cuistance",
+  "colonnes": {
+    "ref": "Référence",
+    "designation": "Désignation",
+    "stock": "Qté dispo",
+    "prixAchat": "Prix net HT",
+    "delai": "Date dispo"
+  },
+  "confianceMinimale": 0.67
+}

@@ -29,6 +29,8 @@ ou publié sur LinkedIn. Les démos sont publiées par **GitHub Pages** : pousse
 - `sites/404.html` : page des liens cassés ; elle renvoie aussi les anciens liens `/hooked-academy/…` vers
   https://hooked-academy.tech.
 - Démos retirées : dans `hors-ligne/` (jamais publié).
+- Code serveur d'un projet client (hors démo) : dans `projets/<client>/` (jamais publié, ne tourne pas sur le VPS).
+  Ex. `projets/maxi-gastro/` : moteur Node de synchro fournisseurs → Shopify, tests avec `npm test`.
 
 ## Hooked Academy (à part)
 

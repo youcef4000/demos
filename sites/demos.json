@@ -6,6 +6,14 @@
   },
   "demos": [
     {
+      "slug": "maxi-gastro-le-passe",
+      "title": "Le Passe — le catalogue Maxi Gastro qui se met à jour tout seul",
+      "sector": "Matériel CHR · e-commerce & marketplaces",
+      "city": "France",
+      "color": "#e8640a",
+      "public": false
+    },
+    {
       "slug": "sarraf",
       "title": "Sarraf — le carnet vocal du cambiste",
       "sector": "Change de devises",

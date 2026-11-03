@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Le Passe — tour de contrôle Maxi Gastro</title>
+<meta name="description" content="Démo de la tour de contrôle Maxi Gastro : fournisseurs connectés, import CSV, catalogue sans doublon, règles de marge, validation des fiches rédigées par Claude, METRO et simulateur de Buy Box.">
+<meta name="theme-color" content="#15181a">
+<meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<link rel="canonical" href="https://demos.bornzstudio.com/maxi-gastro-le-passe/app/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Le Passe · Maxi Gastro">
+<meta property="og:url" content="https://demos.bornzstudio.com/maxi-gastro-le-passe/app/">
+<meta property="og:title" content="Le Passe — la tour de contrôle du catalogue Maxi Gastro">
+<meta property="og:description" content="Fournisseurs, Shopify et METRO synchronisés, vos marges appliquées, chaque changement contrôlé. Démo interactive.">
+<meta property="og:image" content="https://demos.bornzstudio.com/maxi-gastro-le-passe/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Tour de contrôle Le Passe : rail de bons de mise à jour et file de validation">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://demos.bornzstudio.com/maxi-gastro-le-passe/img/og.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315181a'/%3E%3Crect x='8' y='14' width='48' height='6' rx='3' fill='%23c9cfd3'/%3E%3Cpath d='M20 22h24v26l-4-3-4 3-4-3-4 3-4-3-4 3z' fill='%23fffdf6'/%3E%3Crect x='25' y='29' width='14' height='3' fill='%23e8640a'/%3E%3Crect x='25' y='35' width='10' height='3' fill='%2315181a'/%3E%3C/svg%3E">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="../commun.css">
+<link rel="stylesheet" href="./app.css">
+<script type="module" src="./app.js"></script>
+</head>
+<body>
+<a class="sr" href="#vue">Aller au contenu</a>
+<div class="coque">
+  <header class="entete inox-sombre">
+    <a class="logo" href="#/" aria-label="Le Passe, tableau de bord">
+      <span class="logo-icone" aria-hidden="true"></span>
+      <span class="logo-texte"><strong>Le Passe</strong><small>Maxi Gastro</small></span>
+    </a>
+    <span class="badge b-attente demo-badge" title="Prix d'achat, stocks et délais simulés ; titres, références et prix de vente réels">Démo · données en partie simulées</span>
+    <a class="retour" href="../">← L'étude</a>
+  </header>
+
+  <nav class="nav" aria-label="Sections de la tour de contrôle">
+    <a href="#/" data-vue="tableau"><span class="nav-ico" aria-hidden="true">◉</span>Service</a>
+    <a href="#/fournisseurs" data-vue="fournisseurs"><span class="nav-ico" aria-hidden="true">⇄</span>Fournisseurs</a>
+    <a href="#/catalogue" data-vue="catalogue"><span class="nav-ico" aria-hidden="true">▤</span>Catalogue</a>
+    <a href="#/passe" data-vue="passe"><span class="nav-ico" aria-hidden="true">✓</span>Au passe <span class="compteur" id="compteur-passe">0</span></a>
+    <a href="#/regles" data-vue="regles"><span class="nav-ico" aria-hidden="true">%</span>Règles</a>
+    <a href="#/marketplaces" data-vue="marketplaces"><span class="nav-ico" aria-hidden="true">⌂</span>Marketplaces</a>
+    <a href="#/journal" data-vue="journal"><span class="nav-ico" aria-hidden="true">≡</span>Journal</a>
+  </nav>
+
+  <main id="vue" class="vue" tabindex="-1"></main>
+</div>
+
+<dialog id="fiche" class="tiroir" aria-labelledby="fiche-titre">
+  <div class="tiroir-corps" id="fiche-corps"></div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

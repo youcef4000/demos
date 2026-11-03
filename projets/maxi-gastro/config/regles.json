@@ -1,0 +1,20 @@
+{
+  "_note": "Valeurs d'exemple. Coefficient : prix de vente HT = prix d'achat HT × coefficient. Priorité : produit > fournisseur|catégorie > catégorie > fournisseur > défaut.",
+  "defaut": { "type": "coef", "valeur": 1.4, "arrondi": "x90" },
+  "fournisseurs": {
+    "tefcold": { "type": "coef", "valeur": 1.38, "arrondi": "x90" },
+    "combisteel": { "type": "coef", "valeur": 1.42, "arrondi": "x90" },
+    "cuistance": { "type": "coef", "valeur": 1.35, "arrondi": "x90" },
+    "equipme": { "type": "coef", "valeur": 1.45, "arrondi": "x90" },
+    "diamond": { "type": "coef", "valeur": 1.4, "arrondi": "x90" }
+  },
+  "categories": {
+    "ventilation": { "type": "coef", "valeur": 1.45, "arrondi": "x90" }
+  },
+  "croisees": {},
+  "produits": {},
+  "seuilAutoPct": 0.05,
+  "exclusions": ["pieces-detachees"],
+  "margeMinMarketplace": 0.12,
+  "publierEnBrouillon": true
+}

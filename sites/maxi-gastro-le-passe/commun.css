@@ -1,0 +1,185 @@
+/* Le Passe — styles communs (page d'explication + application). Inox brossé, lampe chauffante orange. */
+:root {
+  --fond: #eef0f1;
+  --fond-2: #e4e7e9;
+  --surface: #ffffff;
+  --surface-2: #f6f7f8;
+  --encre: #15181a;
+  --encre-2: #4f5558;
+  --encre-3: #737a7f;
+  --ligne: #d5d9dc;
+  --ligne-2: #c3c8cc;
+  --orange: #e8640a;
+  --orange-texte: #b04a05;
+  --orange-doux: #fde9db;
+  --ok: #1d7a45;
+  --ok-doux: #dff1e6;
+  --alerte: #b3261e;
+  --alerte-doux: #fbe3e1;
+  --attente: #8a5a00;
+  --attente-doux: #fbefd2;
+  --info: #235d80;
+  --info-doux: #e0edf5;
+  --papier: #fffdf6;
+  --papier-encre: #22201c;
+  --acier-1: #f3f5f6;
+  --acier-2: #cfd5d9;
+  --ombre: 0 1px 2px rgba(18, 22, 25, .06), 0 8px 24px -12px rgba(18, 22, 25, .18);
+  --rayon: 14px;
+  --rayon-s: 9px;
+  --police: 'Archivo', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --fond: #0e1012;
+    --fond-2: #14171a;
+    --surface: #181b1f;
+    --surface-2: #1e2226;
+    --encre: #eef0f1;
+    --encre-2: #b2b8bd;
+    --encre-3: #8b9297;
+    --ligne: #2b3035;
+    --ligne-2: #3a4046;
+    --orange: #ff7a24;
+    --orange-texte: #ff9a52;
+    --orange-doux: #3a2212;
+    --ok: #4cc27f;
+    --ok-doux: #15301f;
+    --alerte: #ff6b5e;
+    --alerte-doux: #3a1a17;
+    --attente: #f1b544;
+    --attente-doux: #352a12;
+    --info: #6fb3dd;
+    --info-doux: #142837;
+    --papier: #f4efe2;
+    --papier-encre: #22201c;
+    --acier-1: #2a2f34;
+    --acier-2: #15181b;
+    --ombre: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 30px -14px rgba(0, 0, 0, .7);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --fond: #0e1012;
+  --fond-2: #14171a;
+  --surface: #181b1f;
+  --surface-2: #1e2226;
+  --encre: #eef0f1;
+  --encre-2: #b2b8bd;
+  --encre-3: #8b9297;
+  --ligne: #2b3035;
+  --ligne-2: #3a4046;
+  --orange: #ff7a24;
+  --orange-texte: #ff9a52;
+  --orange-doux: #3a2212;
+  --ok: #4cc27f;
+  --ok-doux: #15301f;
+  --alerte: #ff6b5e;
+  --alerte-doux: #3a1a17;
+  --attente: #f1b544;
+  --attente-doux: #352a12;
+  --info: #6fb3dd;
+  --info-doux: #142837;
+  --papier: #f4efe2;
+  --papier-encre: #22201c;
+  --acier-1: #2a2f34;
+  --acier-2: #15181b;
+  --ombre: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 30px -14px rgba(0, 0, 0, .7);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--fond);
+  color: var(--encre);
+  font-family: var(--police);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img, svg { max-width: 100%; display: block; }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; border-radius: 4px; }
+.sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.mono { font-family: var(--mono); font-size: .92em; letter-spacing: -.01em; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* Inox brossé */
+.inox {
+  background-color: var(--acier-2);
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .07) 0 1px, transparent 1px 3px, rgba(0, 0, 0, .025) 3px 4px),
+    linear-gradient(180deg, var(--acier-1), var(--acier-2));
+}
+
+/* Boutons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5em;
+  min-height: 44px; padding: .65em 1.15em; border-radius: 999px; border: 1px solid var(--ligne-2);
+  background: var(--surface); color: var(--encre); font-weight: 600; font-size: .95rem; text-decoration: none;
+  cursor: pointer; transition: transform .15s ease, background-color .15s ease, border-color .15s ease;
+}
+.btn:hover { border-color: var(--encre-3); }
+.btn:active { transform: translateY(1px); }
+.btn-chaud { background: var(--orange); border-color: var(--orange); color: #fff; }
+.btn-chaud:hover { background: #d25607; border-color: #d25607; }
+.btn-discret { background: transparent; border-color: transparent; }
+.btn-petit { min-height: 36px; padding: .4em .85em; font-size: .85rem; }
+
+/* Badges */
+.badge {
+  display: inline-flex; align-items: center; gap: .35em; padding: .18em .6em; border-radius: 999px;
+  font-size: .75rem; font-weight: 600; line-height: 1.4; white-space: nowrap; border: 1px solid transparent;
+}
+.badge::before { content: ''; width: .5em; height: .5em; border-radius: 50%; background: currentColor; }
+.badge.sans-point::before { display: none; }
+.b-ok { background: var(--ok-doux); color: var(--ok); }
+.b-alerte { background: var(--alerte-doux); color: var(--alerte); }
+.b-attente { background: var(--attente-doux); color: var(--attente); }
+.b-info { background: var(--info-doux); color: var(--info); }
+.b-neutre { background: var(--surface-2); color: var(--encre-2); border-color: var(--ligne); }
+.b-chaud { background: var(--orange-doux); color: var(--orange-texte); }
+
+/* Le bon de commande (ticket du rail) */
+.rail {
+  position: relative; display: flex; align-items: flex-start; gap: 14px; overflow: hidden; padding: 22px 4px 18px; min-height: 150px;
+}
+.rail::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 6px; height: 10px; border-radius: 6px;
+  background: linear-gradient(180deg, #f7f9fa, #9aa3a9 55%, #6d757b);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .25);
+}
+.ticket {
+  --r: 0deg;
+  position: relative; flex: 0 0 auto; width: 188px; padding: 14px 12px 12px; margin-top: 0;
+  background: var(--papier); color: var(--papier-encre); font-family: var(--mono); font-size: 11.5px; line-height: 1.45;
+  transform: rotate(var(--r)); transform-origin: 50% -16px;
+  box-shadow: 0 6px 14px -6px rgba(0, 0, 0, .35);
+  -webkit-mask: radial-gradient(circle 4px at 8px 100%, transparent 98%, #000) 0 0 / 16px 100% repeat-x;
+  mask: radial-gradient(circle 4px at 8px 100%, transparent 98%, #000) 0 0 / 16px 100% repeat-x;
+  padding-bottom: 46px;
+}
+.ticket::before {
+  content: ''; position: absolute; top: -14px; left: 50%; width: 22px; height: 18px; margin-left: -11px;
+  border-radius: 3px 3px 6px 6px; background: linear-gradient(180deg, #c9cfd3, #8b949a); box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+}
+.ticket .t-entete { display: flex; justify-content: space-between; gap: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; border-bottom: 1px dashed rgba(0, 0, 0, .35); padding-bottom: 6px; margin-bottom: 6px; }
+.ticket .t-titre { font-weight: 700; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.ticket .t-ligne { display: flex; justify-content: space-between; gap: 8px; }
+.ticket .t-etapes { margin-top: 6px; padding-top: 6px; border-top: 1px dashed rgba(0, 0, 0, .35); }
+.ticket .t-tampon { position: absolute; right: 8px; bottom: 10px; transform: rotate(-12deg); border: 2px solid currentColor; padding: 0 5px; border-radius: 4px; font-weight: 800; letter-spacing: .06em; opacity: .85; }
+.ticket.ok .t-tampon { color: #1d7a45; }
+.ticket.passe .t-tampon { color: #b04a05; }
+.ticket.verrou .t-tampon { color: #235d80; }
+.ticket.entre { animation: arrive .55s cubic-bezier(.2, .9, .3, 1.2) both; }
+@keyframes arrive { from { transform: translateX(60px) rotate(8deg); opacity: 0; } to { transform: rotate(var(--r)); opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}

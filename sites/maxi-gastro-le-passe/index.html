@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Le Passe — Maxi Gastro : fournisseurs, Shopify et METRO synchronisés</title>
+<meta name="description" content="Étude et démo pour Maxi Gastro : relier Tefcold, Combisteel, equip.me, Diamond et Cuistance à Shopify puis à METRO, avec vos marges, vos prix verrouillés et des fiches rédigées par Claude sans rien inventer.">
+<meta name="theme-color" content="#15181a">
+<meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<link rel="canonical" href="https://demos.bornzstudio.com/maxi-gastro-le-passe/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Le Passe · Maxi Gastro">
+<meta property="og:url" content="https://demos.bornzstudio.com/maxi-gastro-le-passe/">
+<meta property="og:title" content="Le Passe — le catalogue Maxi Gastro qui se met à jour tout seul">
+<meta property="og:description" content="Tefcold change un stock : Shopify et METRO suivent, seuls. Étude de faisabilité et tour de contrôle interactive.">
+<meta property="og:image" content="https://demos.bornzstudio.com/maxi-gastro-le-passe/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Un rail de cuisine où pendent des bons : chaque bon est une mise à jour de stock ou de prix envoyée à Shopify et METRO">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Le Passe — le catalogue Maxi Gastro qui se met à jour tout seul">
+<meta name="twitter:description" content="Fournisseurs → Shopify → METRO, sans export-import. Étude + démo.">
+<meta name="twitter:image" content="https://demos.bornzstudio.com/maxi-gastro-le-passe/img/og.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315181a'/%3E%3Crect x='8' y='14' width='48' height='6' rx='3' fill='%23c9cfd3'/%3E%3Cpath d='M20 22h24v26l-4-3-4 3-4-3-4 3-4-3-4 3z' fill='%23fffdf6'/%3E%3Crect x='25' y='29' width='14' height='3' fill='%23e8640a'/%3E%3Crect x='25' y='35' width='10' height='3' fill='%2315181a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="./commun.css">
+<link rel="stylesheet" href="./index.css">
+<script type="module" src="./index.js"></script>
+</head>
+<body>
+<a class="sr" href="#etude">Aller à l'étude</a>
+
+<header class="barre">
+  <a class="marque" href="./" aria-label="Le Passe, accueil">
+    <span class="marque-icone" aria-hidden="true"></span>
+    <span><strong>Le Passe</strong><small>pour Maxi Gastro</small></span>
+  </a>
+  <nav class="barre-liens" aria-label="Sommaire">
+    <a href="#demande">La demande</a>
+    <a href="#constat">Le constat</a>
+    <a href="#api">Les API</a>
+    <a href="#schema">Le schéma</a>
+    <a href="#plan">Le plan</a>
+  </nav>
+  <a class="btn btn-chaud btn-petit" href="./app/">Tour de contrôle</a>
+</header>
+
+<main>
+  <!-- ===== Accroche ===== -->
+  <section class="hero">
+    <div class="hero-texte">
+      <p class="surtitre">Étude de faisabilité + démo · Maxi Gastro · novembre 2026</p>
+      <h1>Tefcold change un stock.<br><span>Shopify et METRO suivent, seuls.</span></h1>
+      <p class="chapo">Le Passe relie vos fournisseurs à maxigastro.fr, puis aux marketplaces. Comme le passe en cuisine : <strong>rien ne sort sans être contrôlé</strong> — prix, marges, fiches, stocks. Fini l'export-import.</p>
+      <div class="hero-actions">
+        <a class="btn btn-chaud" href="./app/">Ouvrir la tour de contrôle</a>
+        <a class="btn" href="#etude">Lire l'étude (8 min)</a>
+      </div>
+    </div>
+
+    <figure class="chaine" aria-labelledby="chaine-legende">
+      <ol class="chaine-etapes" id="chaine">
+        <li class="station" data-etape="0">
+          <span class="station-num">1</span>
+          <strong>Fournisseurs</strong>
+          <span class="station-detail">Tefcold · Combisteel · equip.me · Diamond · Cuistance</span>
+        </li>
+        <li class="lien"><span>API, flux XML, CSV par mail</span></li>
+        <li class="station" data-etape="1">
+          <span class="station-num">2</span>
+          <strong>Le Passe</strong>
+          <span class="station-detail">base centrale · règles · Claude</span>
+        </li>
+        <li class="lien"><span>fiche validée, prix calculé</span></li>
+        <li class="station" data-etape="2">
+          <span class="station-num">3</span>
+          <strong>Shopify</strong>
+          <span class="station-detail">maxigastro.fr</span>
+        </li>
+        <li class="lien"><span>stock + prix plancher</span></li>
+        <li class="station" data-etape="3">
+          <span class="station-num">4</span>
+          <strong>Marketplaces</strong>
+          <span class="station-detail">METRO · Amazon · autres</span>
+        </li>
+      </ol>
+      <div class="rail" id="rail-hero" aria-live="polite" aria-label="Derniers bons de mise à jour"></div>
+      <figcaption id="chaine-legende">Chaque bon qui tombe sur le rail est une mise à jour réelle du système : il part du fournisseur, passe par vos règles, puis arrive dans Shopify et sur METRO. Ici, une simulation sur de vrais produits de maxigastro.fr.</figcaption>
+    </figure>
+  </section>
+
+  <div id="etude"></div>
+
+  <!-- ===== La demande ===== -->
+  <section class="bloc" id="demande">
+    <header class="bloc-tete">
+      <p class="surtitre">01 · La demande, dite simplement</p>
+      <h2>Ne plus jamais faire d'export-import.</h2>
+      <p class="chapo">Chaque fournisseur alimente Maxi Gastro tout seul, Maxi Gastro alimente METRO tout seul — avec <em>vos</em> marges, <em>vos</em> exceptions et des fiches qui se classent sur Google. Vous n'intervenez que quand une décision le mérite.</p>
+    </header>
+    <ol class="bons">
+      <li class="bon">
+        <span class="bon-num">N° 1</span>
+        <h3>Brancher les fournisseurs</h3>
+        <p>En direct quand il y a une API (Tefcold, Combisteel, equip.me, Diamond). Quand il n'y en a pas, comme Cuistance qui envoie un fichier de stock CSV une à deux fois par semaine, un agent lit le fichier à votre place.</p>
+      </li>
+      <li class="bon">
+        <span class="bon-num">N° 2</span>
+        <h3>Tout récupérer, sans doublon</h3>
+        <p>Références, prix d'achat, stocks, délais, descriptions, photos, caractéristiques, dimensions, poids, EAN, notices PDF. Un même article chez deux fournisseurs ne crée qu'une fiche.</p>
+      </li>
+      <li class="bon">
+        <span class="bon-num">N° 3</span>
+        <h3>Vos règles, pas celles du fournisseur</h3>
+        <p>Une marge par fournisseur et par catégorie. Les prix que vous avez verrouillés à la main ne bougent pas. Des familles entières restent dehors, par exemple les pièces détachées.</p>
+      </li>
+      <li class="bon">
+        <span class="bon-num">N° 4</span>
+        <h3>Des fiches qui se classent</h3>
+        <p>Claude rédige titres et descriptions avec les mots-clés que vos clients tapent vraiment, range les catégories et repère ce qui manque — sans inventer une seule caractéristique.</p>
+      </li>
+      <li class="bon">
+        <span class="bon-num">N° 5</span>
+        <h3>Redistribuer partout</h3>
+        <p>METRO d'abord, puis Amazon et les autres : vous choisissez les produits publiés, stocks et prix suivent, et les commandes reviennent dans Shopify.</p>
+      </li>
+      <li class="bon">
+        <span class="bon-num">N° 6</span>
+        <h3>Gagner la Buy Box sans brader</h3>
+        <p>Une marge plancher calculée produit par produit, qu'on ne franchit jamais. Et le délai de livraison comme argument quand le prix ne suffit pas.</p>
+      </li>
+    </ol>
+    <p class="note">Plus tard, comme vous l'avez dit : vidéos et podcasts produits. Pour l'instant, la priorité est un test réel sur une API.</p>
+  </section>
+
+  <!-- ===== Le constat ===== -->
+  <section class="bloc" id="constat">
+    <header class="bloc-tete">
+      <p class="surtitre">02 · Le constat sur maxigastro.fr</p>
+      <h2>2 131 produits en ligne. Aucun n'a de code EAN.</h2>
+      <p class="chapo">Relevé public du catalogue Shopify le 3 novembre 2026. Rien de grave : c'est exactement ce que l'automatisation corrige. Mais il faut le savoir avant de brancher METRO.</p>
+    </header>
+    <div class="constats">
+      <article class="constat grave">
+        <p class="constat-chiffre num">0 <small>/ 2 131</small></p>
+        <h3>codes EAN renseignés</h3>
+        <p>METRO rattache une offre à son catalogue par l'EAN, Amazon et Google Shopping le demandent aussi. Aujourd'hui, aucun produit n'est publiable tel quel.</p>
+      </article>
+      <article class="constat grave">
+        <p class="constat-chiffre num">1 456</p>
+        <h3>« types de produit » remplis avec la référence</h3>
+        <p>Exemple : type « 7223.0505 » au lieu de « Filtre à air ». Collections automatiques, filtres et Google Shopping s'appuient sur ce champ.</p>
+      </article>
+      <article class="constat">
+        <p class="constat-chiffre num">636</p>
+        <h3>produits pesant 0 g</h3>
+        <p>Frais de port calculés faux, et les marketplaces exigent le poids. Le fournisseur le donne souvent (113 kg pour l'arrière-bar BA30S-3).</p>
+      </article>
+      <article class="constat">
+        <p class="constat-chiffre num">539</p>
+        <h3>références qui finissent par « .0 »</h3>
+        <p>« 15844.0 » au lieu de « 15844 » : la trace d'un passage par Excel. Le rapprochement automatique la corrige, sinon chaque synchro créerait des doublons.</p>
+      </article>
+      <article class="constat">
+        <p class="constat-chiffre num">816</p>
+        <h3>fiches avec une seule photo</h3>
+        <p>Les flux fournisseurs livrent souvent la galerie complète : equip.me, par exemple, renvoie toutes les images à la demande.</p>
+      </article>
+      <article class="constat">
+        <p class="constat-chiffre num">17</p>
+        <h3>références en double</h3>
+        <p>Et des marques écrites de plusieurs façons : « Cuistance » et « CUISTANCE », « Maxi Gastro », « MAXIGASTRO » et « Maxi gastro ».</p>
+      </article>
+      <article class="constat bonne">
+        <p class="constat-chiffre num">27</p>
+        <h3>EAN cachés dans les références</h3>
+        <p>Chez Bartscher, la référence est déjà un EAN valide (4015613671123). Le Passe le détecte, vérifie la clé de contrôle et remplit le code-barres tout seul.</p>
+      </article>
+      <article class="constat">
+        <p class="constat-chiffre num">1 556</p>
+        <h3>prix barrés</h3>
+        <p>Si vous vendez aussi aux particuliers, la réglementation française encadre le prix de référence d'une promotion (le plus bas des 30 derniers jours). Le Passe garde l'historique des prix : on pourra le calculer. À valider avec votre conseil.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== Les API ===== -->
+  <section class="bloc" id="api">
+    <header class="bloc-tete">
+      <p class="surtitre">03 · Ce que permettent réellement les API</p>
+      <h2>Une seule documentation est publique aujourd'hui : equip.me. Elle est excellente.</h2>
+      <p class="chapo">J'ai lu la spécification complète de l'API equip.me (Dealers API 1.0.4). Pour les autres, voici ce qui est confirmé, ce qui est annoncé, et ce qu'il faut demander.</p>
+    </header>
+
+    <div class="matrice-cadre" role="region" aria-label="Tableau des données fournies par chaque fournisseur" tabindex="0">
+      <table class="matrice" id="matrice"></table>
+    </div>
+    <p class="legende-matrice"><span class="m m-oui">✓</span> vérifié dans la documentation <span class="m m-annonce">◐</span> annoncé, à confirmer <span class="m m-non">✕</span> absent <span class="m m-inconnu">?</span> à demander</p>
+
+    <div class="fiches-sources">
+      <article class="source">
+        <h3>equip.me <span class="badge b-ok">documentation vérifiée</span></h3>
+        <ul>
+          <li><strong>Synchro légère</strong> : le catalogue se filtre par date de modification (<code>change_from</code>), on ne récupère que ce qui a bougé.</li>
+          <li><strong>Pièces détachées exclues à la source</strong> : le paramètre <code>catalog_type</code> sépare l'assortiment principal (1) des pièces détachées (2).</li>
+          <li><strong>Prix en euros</strong> + prix public conseillé, <strong>stock libre par entrepôt</strong>, photos, PDF, caractéristiques.</li>
+          <li><strong>Commandes</strong> : l'API crée la commande chez le fournisseur (<code>POST /dealer/order</code>). Une vente METRO peut partir chez equip.me sans ressaisie.</li>
+          <li><strong>À surveiller</strong> : la clé exige un compte « Superviseur » ; pas de champ EAN ; le délai est exprimé vers l'entrepôt de Moscou ; demander les dimensions en métrique (<code>unit=metric</code>), sinon elles arrivent en pouces et en livres.</li>
+        </ul>
+      </article>
+      <article class="source">
+        <h3>Tefcold <span class="badge b-attente">flux XML sur demande</span></h3>
+        <p>Tefcold propose à ses revendeurs un lien de flux XML « live » depuis son espace client : informations produits, données techniques, images et stock, en choisissant les produits. Les prix et l'EAN ne sont pas mentionnés : à demander, avec la documentation de la clé API dont vous parlez. C'est le fournisseur le plus important : 903 de vos fiches (Tefcold, G-Line, Serrco).</p>
+      </article>
+      <article class="source">
+        <h3>Combisteel · Diamond <span class="badge b-neutre">documentation à récupérer</span></h3>
+        <p>Aucune documentation publique. Il faut la télécharger dans vos espaces pros (Combisteel) ou la demander au commercial (Diamond). On vérifiera en priorité : prix net, stock, délai, EAN, et la limite d'appels par minute.</p>
+      </article>
+      <article class="source">
+        <h3>Cuistance <span class="badge b-info">fichier CSV</span></h3>
+        <p>Pas d'API : un état de stock en CSV, une à deux fois par semaine. Un agent récupère la pièce jointe dès son arrivée dans la boîte mail, reconnaît les colonnes (même si l'ordre change), et prépare les changements. La tour de contrôle lit déjà les CSV : <a href="./app/#/fournisseurs">essayez avec le fichier réel</a>.</p>
+      </article>
+      <article class="source">
+        <h3>METRO <span class="badge b-attente">EAN obligatoire</span></h3>
+        <p>Les offres se rattachent au catalogue METRO par l'EAN. Un produit absent du catalogue se crée par fichier, avec une validation qui peut prendre jusqu'à 7 jours selon les intégrateurs. Connexion par clé client et secret, un pays par connexion. Des connecteurs existent déjà (ChannelEngine, Shoppingfeed, e-tailize…).</p>
+      </article>
+      <article class="source">
+        <h3>Amazon et les autres <span class="badge b-neutre">via Shopify</span></h3>
+        <p>L'application Shopify Marketplace Connect couvre Amazon, eBay, Walmart et Target+ (couverture française à confirmer). Pour ManoMano, Cdiscount ou Leroy Merlin, un agrégateur de flux branché sur Shopify évite de coder chaque marketplace.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== Le schéma ===== -->
+  <section class="bloc" id="schema">
+    <header class="bloc-tete">
+      <p class="surtitre">04 · Votre schéma, en mieux</p>
+      <h2>Faut-il quitter Shopify ? Non. Il manque un cerveau, pas une vitrine.</h2>
+      <p class="chapo">Shopify fait très bien la vitrine, le paiement et le référencement que vous avez déjà construit. Ce qui manque, c'est la mémoire entre les fournisseurs et la boutique. On la construit à côté : Shopify devient un canal parmi d'autres, et mcfrancechr.fr pourra se brancher sur le même cerveau.</p>
+    </header>
+
+    <figure class="schema">
+      <span class="glisser" aria-hidden="true">← Faites glisser le schéma →</span>
+      <div class="schema-cadre" tabindex="0" role="region" aria-label="Schéma de l'architecture">
+      <svg viewBox="0 0 920 420" role="img" aria-label="Schéma : les fournisseurs envoient leurs données au Passe par API, flux XML ou CSV ; n8n déclenche, le moteur garde la base et applique les règles, Claude rédige ; le Passe publie vers Shopify qui alimente METRO et les autres marketplaces ; les commandes remontent jusqu'au fournisseur.">
+        <defs>
+          <marker id="fl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
+          <marker id="fl-o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#e8640a"/></marker>
+        </defs>
+        <g fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="10" y="40" width="170" height="264" rx="12" opacity=".5"/>
+          <rect x="250" y="20" width="370" height="290" rx="16" stroke="#e8640a" stroke-width="2.5"/>
+          <rect x="690" y="40" width="220" height="100" rx="12"/>
+          <rect x="690" y="190" width="220" height="100" rx="12" opacity=".7"/>
+        </g>
+        <g font-family="Archivo, sans-serif" fill="currentColor">
+          <text x="95" y="30" text-anchor="middle" font-size="13" font-weight="700" letter-spacing="1">FOURNISSEURS</text>
+          <text x="30" y="80" font-size="14" font-weight="600">Tefcold</text><text x="30" y="96" font-size="11" opacity=".7">flux XML / clé API</text>
+          <text x="30" y="128" font-size="14" font-weight="600">Combisteel</text><text x="30" y="144" font-size="11" opacity=".7">clé API</text>
+          <text x="30" y="176" font-size="14" font-weight="600">equip.me</text><text x="30" y="192" font-size="11" opacity=".7">API REST documentée</text>
+          <text x="30" y="224" font-size="14" font-weight="600">Diamond</text><text x="30" y="240" font-size="11" opacity=".7">à vérifier</text>
+          <text x="30" y="272" font-size="14" font-weight="600">Cuistance</text><text x="30" y="288" font-size="11" opacity=".7">CSV par mail</text>
+
+          <text x="435" y="50" text-anchor="middle" font-size="15" font-weight="800" letter-spacing="1.5" fill="#e8640a">LE PASSE</text>
+          <text x="270" y="86" font-size="13" font-weight="700">n8n</text><text x="270" y="102" font-size="11" opacity=".75">l'horloge et les tuyaux : toutes les 30 min,</text><text x="270" y="116" font-size="11" opacity=".75">à l'arrivée d'un mail, alertes</text>
+          <text x="270" y="152" font-size="13" font-weight="700">Moteur + base de données</text><text x="270" y="168" font-size="11" opacity=".75">correspondances, prix d'achat, historiques,</text><text x="270" y="182" font-size="11" opacity=".75">marges, verrous, exclusions, zéro doublon</text>
+          <text x="270" y="218" font-size="13" font-weight="700">Claude (API)</text><text x="270" y="234" font-size="11" opacity=".75">fiches SEO, catégories, données manquantes,</text><text x="270" y="248" font-size="11" opacity=".75">lecture des CSV inconnus</text>
+          <text x="270" y="284" font-size="13" font-weight="700">File de validation</text><text x="270" y="299" font-size="11" opacity=".75">vous tranchez ce qui dépasse vos seuils</text>
+
+          <text x="800" y="82" text-anchor="middle" font-size="15" font-weight="700">Shopify</text>
+          <text x="800" y="100" text-anchor="middle" font-size="11" opacity=".75">maxigastro.fr · SEO · paiement</text>
+          <text x="800" y="118" text-anchor="middle" font-size="11" opacity=".75">(mcfrancechr.fr plus tard)</text>
+          <text x="800" y="232" text-anchor="middle" font-size="15" font-weight="700">Marketplaces</text>
+          <text x="800" y="250" text-anchor="middle" font-size="11" opacity=".75">METRO · Amazon · ManoMano…</text>
+        </g>
+        <g stroke="currentColor" stroke-width="1.6" fill="none">
+          <line x1="180" y1="165" x2="246" y2="165" marker-end="url(#fl)"/>
+          <line x1="620" y1="90" x2="686" y2="90" stroke="#e8640a" stroke-width="2.4" marker-end="url(#fl-o)"/>
+          <line x1="800" y1="140" x2="800" y2="186" marker-end="url(#fl)"/>
+          <path d="M690 270 C 640 390, 160 390, 95 310" stroke-dasharray="5 5" marker-end="url(#fl)" opacity=".8"/>
+        </g>
+        <g font-family="Archivo, sans-serif" font-size="11" fill="currentColor">
+          <text x="213" y="157" text-anchor="middle">données</text>
+          <text x="653" y="82" text-anchor="middle" fill="#e8640a" font-weight="700">publie</text>
+          <text x="812" y="168">stock + prix</text>
+          <text x="430" y="392" text-anchor="middle" font-weight="600">commandes : marketplace → Shopify → commande fournisseur (equip.me le permet par API)</text>
+        </g>
+      </svg>
+      </div>
+      <figcaption>Le cadre orange est ce qui se construit. À gauche et à droite, vous avez déjà tout. Le retour en pointillé est le bonus : une vente sur METRO peut devenir une commande fournisseur sans ressaisie.</figcaption>
+    </figure>
+
+    <div class="pourquoi">
+      <article>
+        <h3>Pourquoi pas tout dans n8n ?</h3>
+        <p>n8n est parfait pour déclencher et transporter : « toutes les 30 minutes », « quand un mail de Cuistance arrive », « préviens-moi sur WhatsApp ». Il est moins bon pour garder l'historique de milliers de prix et appliquer des règles fines. La logique vit donc dans un moteur testé, que n8n appelle.</p>
+      </article>
+      <article>
+        <h3>Pourquoi une base intermédiaire ?</h3>
+        <p>Vous l'aviez pressenti : c'est le cœur. Elle retient quel produit Shopify correspond à quelle référence fournisseur, le dernier prix d'achat, ce qui est verrouillé, ce qui a été envoyé et quand. Sans elle, chaque synchro repart de zéro et crée des doublons.</p>
+      </article>
+      <article>
+        <h3>Et si on refaisait le site ?</h3>
+        <p>Possible un jour, mais ce n'est pas le problème à résoudre. Vous le dites vous-même : la boutique est bien référencée. Changer de plateforme, c'est changer les adresses de 2 131 fiches et risquer ce travail pendant des mois. Mieux vaut d'abord fiabiliser les données : c'est ce qui fera monter les fiches.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== Exemple vivant ===== -->
+  <section class="bloc" id="exemple">
+    <header class="bloc-tete">
+      <p class="surtitre">05 · Votre exemple, en vrai</p>
+      <h2>« Si TEFCOLD modifie le stock d'un produit… »</h2>
+      <p class="chapo">Choisissez ce qui arrive chez le fournisseur. Les décisions ci-dessous sont prises par le vrai code du moteur, exécuté dans votre navigateur.</p>
+    </header>
+    <div class="labo">
+      <div class="labo-choix" role="group" aria-label="Événement fournisseur">
+        <button class="btn" data-cas="stock">Le stock passe de 12 à 3</button>
+        <button class="btn" data-cas="hausse">Le prix d'achat monte de 3 %</button>
+        <button class="btn" data-cas="grosse">Le prix d'achat monte de 9 %</button>
+        <button class="btn" data-cas="verrou">Prix verrouillé à la main</button>
+        <button class="btn" data-cas="rupture">Rupture totale</button>
+      </div>
+      <ol class="labo-trace" id="labo-trace" aria-live="polite"></ol>
+    </div>
+  </section>
+
+  <!-- ===== Claude ===== -->
+  <section class="bloc" id="claude">
+    <header class="bloc-tete">
+      <p class="surtitre">06 · Claude : écrire mieux, sans inventer</p>
+      <h2>Chaque caractéristique cite sa source. Chaque chiffre est vérifié.</h2>
+      <p class="chapo">Le risque d'une IA sur une fiche technique, c'est l'invention : une garantie, un poids, une norme. Trois verrous l'empêchent.</p>
+    </header>
+    <div class="avant-apres">
+      <div class="aa aa-avant">
+        <p class="aa-label">Aujourd'hui sur maxigastro.fr</p>
+        <p class="aa-titre">Arrière bar vitré - TEFCOLD - BA30S-3-15844</p>
+        <p class="aa-meta">Référence 15844.0 · 0 g · pas d'EAN</p>
+      </div>
+      <div class="aa aa-apres">
+        <p class="aa-label">Proposé par Claude, validé au passe</p>
+        <p class="aa-titre">Arrière-bar vitré 3 portes coulissantes 288 L noir – Tefcold BA30S-3</p>
+        <p class="aa-meta">Référence 15844 · 113 kg emballé · EAN à demander à Tefcold</p>
+      </div>
+    </div>
+    <ol class="verrous">
+      <li><strong>Source obligatoire.</strong> La réponse de Claude suit un format imposé : chaque caractéristique et chaque réponse de FAQ indique le champ fournisseur d'où elle vient.</li>
+      <li><strong>Contrôle des chiffres.</strong> Le moteur relit la fiche : un nombre absent des données fournisseur bloque la publication.</li>
+      <li><strong>Validation au passe.</strong> Les nouvelles fiches attendent votre feu vert. Les mots-clés qui ne décrivent pas le produit sont écartés, avec la raison (« arrière bar inox » : ce modèle n'est pas en inox).</li>
+    </ol>
+    <div class="encadre">
+      <h3>Les mots-clés « les plus recherchés », d'où viennent-ils ?</h3>
+      <p>Claude ne connaît pas les volumes de recherche. On lui donne les requêtes réelles de votre <strong>Google Search Console</strong> (gratuite, ce que les gens tapent avant d'arriver chez vous) ou d'un outil de mots-clés. Et un texte unique vaut mieux qu'un texte bourré de mots-clés : la description Tefcold est publiée à l'identique par des dizaines de revendeurs, Google n'en garde qu'une.</p>
+      <p class="petit"><strong>Coût estimé</strong> : environ 3 centimes de dollar par fiche avec Claude Opus 5.5 en traitement par lot (2 $ / 10 $ le million de jetons, ≈ 4 000 jetons lus et 2 000 écrits par fiche), soit autour de 60 $ pour réécrire 2 000 fiches. Une estimation, à mesurer sur le pilote.</p>
+    </div>
+    <p><a class="btn" href="./app/#/passe">Voir la fiche complète, la consigne et les contrôles</a></p>
+  </section>
+
+  <!-- ===== Difficultés ===== -->
+  <section class="bloc" id="difficultes">
+    <header class="bloc-tete">
+      <p class="surtitre">07 · Les difficultés, honnêtement</p>
+      <h2>Ce qui peut coincer, et la parade.</h2>
+    </header>
+    <dl class="difficultes">
+      <div><dt>Les EAN manquants</dt><dd>Bloquant pour METRO. On les récupère chez chaque fournisseur ; à défaut, METRO ne pourra recevoir que les produits déjà présents dans son catalogue.</dd></div>
+      <div><dt>Chaque API est différente</dt><dd>Un connecteur par fournisseur, qui traduit tout vers un format unique. Ajouter un fournisseur = écrire un traducteur, pas refaire le système.</dd></div>
+      <div><dt>La qualité des données fournisseur</dt><dd>Unités en pouces, textes en anglais, catégories exotiques. Le contrôle qualité les signale avant publication, jamais après.</dd></div>
+      <div><dt>Les limites d'appels</dt><dd>Shopify et les fournisseurs limitent le nombre de requêtes. On ne récupère que ce qui a changé, et les grosses mises à jour passent la nuit.</dd></div>
+      <div><dt>Écraser une modification manuelle</dt><dd>Le moteur ne touche qu'aux champs qu'il gère. Prix verrouillé, titre retouché à la main : il garde la trace et n'écrase pas.</dd></div>
+      <div><dt>Les délais de validation METRO</dt><dd>Jusqu'à 7 jours pour créer une fiche absente du catalogue METRO. On commence par les produits que METRO connaît déjà.</dd></div>
+      <div><dt>Le format du CSV Cuistance change</dt><dd>Les colonnes sont reconnues par leur nom, pas par leur position. Si un fichier ne ressemble à rien de connu, il part en validation au lieu d'être importé.</dd></div>
+      <div><dt>La sécurité des clés</dt><dd>Les clés API restent sur le serveur, chiffrées, jamais dans un navigateur ni dans un fichier partagé. Chaque fournisseur a sa clé, révocable.</dd></div>
+    </dl>
+  </section>
+
+  <!-- ===== Plan ===== -->
+  <section class="bloc" id="plan">
+    <header class="bloc-tete">
+      <p class="surtitre">08 · Le plan</p>
+      <h2>Commencer avec un fournisseur et quelques produits, comme vous le proposez.</h2>
+    </header>
+    <ol class="plan">
+      <li><span class="plan-etape">Étape 0</span><h3>Les accès</h3><p>Compte collaborateur Shopify, clés API, Search Console, Seller Office METRO. Inventaire complet des données manquantes.</p></li>
+      <li><span class="plan-etape">Étape 1</span><h3>Le pilote</h3><p><strong>Tefcold</strong> : 903 fiches déjà en ligne, l'effet est immédiat sur les stocks et les poids. Si l'accès Tefcold tarde, <strong>equip.me</strong>, dont la documentation est déjà vérifiée. 50 produits, en brouillon dans Shopify, vous validez au passe.</p></li>
+      <li><span class="plan-etape">Étape 2</span><h3>Les autres API</h3><p>Combisteel et Diamond, avec le rapprochement des produits déjà en ligne (références « .0 », doublons).</p></li>
+      <li><span class="plan-etape">Étape 3</span><h3>Cuistance</h3><p>L'agent CSV branché sur la boîte mail. Plus d'export-import.</p></li>
+      <li><span class="plan-etape">Étape 4</span><h3>METRO</h3><p>Dès que les EAN sont là : sélection des produits, prix plancher, stocks, commandes rapatriées.</p></li>
+      <li><span class="plan-etape">Étape 5</span><h3>Croissance</h3><p>Fiches SEO en masse, Buy Box, autres marketplaces, puis vidéos et podcasts.</p></li>
+    </ol>
+
+    <div class="checklist">
+      <h3>Ce qu'il nous faut pour démarrer</h3>
+      <ul id="checklist">
+        <li><label><input type="checkbox" data-cle="shopify"> Accès collaborateur Shopify (maxigastro.fr)</label></li>
+        <li><label><input type="checkbox" data-cle="tefcold"> Tefcold : lien du flux XML et/ou documentation de la clé API</label></li>
+        <li><label><input type="checkbox" data-cle="equipme"> equip.me : une clé API créée par le compte « Superviseur »</label></li>
+        <li><label><input type="checkbox" data-cle="combisteel"> Combisteel : documentation de l'API (espace pro)</label></li>
+        <li><label><input type="checkbox" data-cle="diamond"> Diamond : contact technique ou documentation</label></li>
+        <li><label><input type="checkbox" data-cle="cuistance"> Cuistance : le fichier CSV (pas reçu avec les mémos) et l'adresse mail qui le reçoit</label></li>
+        <li><label><input type="checkbox" data-cle="metro"> METRO : accès au Seller Office</label></li>
+        <li><label><input type="checkbox" data-cle="gsc"> Google Search Console de maxigastro.fr</label></li>
+        <li><label><input type="checkbox" data-cle="marges"> Vos règles de marge par fournisseur et par catégorie</label></li>
+      </ul>
+      <p class="petit">Les cases se souviennent de vous sur cet appareil uniquement.</p>
+    </div>
+  </section>
+
+  <section class="fin">
+    <h2>La démo tourne déjà sur vos produits.</h2>
+    <p>Tableau de bord, fournisseurs, import CSV, catalogue, règles de marge, file de validation, simulateur de Buy Box.</p>
+    <a class="btn btn-chaud" href="./app/">Ouvrir la tour de contrôle</a>
+  </section>
+</main>
+
+<footer class="pied">
+  <p>Étude et démo réalisées par <a href="https://bornzstudio.com">Bornz Studio</a> pour Maxi Gastro. Constat : relevé du catalogue public de maxigastro.fr le 3 novembre 2026. Dans la tour de contrôle, les prix d'achat, stocks et délais sont simulés ; titres, références, prix de vente et poids sont ceux de la boutique.</p>
+  <p>Marques citées : propriété de leurs détenteurs. Aucune connexion réelle à Shopify, aux fournisseurs ou à METRO depuis cette page.</p>
+</footer>
+</body>
+</html>

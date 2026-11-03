@@ -1,0 +1,89 @@
+{
+  "name": "Le Passe · 02 · Fichier Cuistance par mail",
+  "nodes": [
+    {
+      "parameters": {
+        "format": "resolved",
+        "options": {
+          "customEmailConfig": "[\"UNSEEN\", [\"FROM\", \"cuistance\"]]"
+        }
+      },
+      "id": "c8e9294c-2c0d-4f1a-8a97-d1ae9a66780f",
+      "name": "Mail Cuistance reçu",
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "credentials": {
+        "imap": {
+          "id": "A_RELIER",
+          "name": "Boîte mail Maxi Gastro"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8787/import/cuistance",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 900000
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "attachment_0"
+      },
+      "id": "a6826aac-55b7-43ee-ab30-24d065220b9a",
+      "name": "Envoyer le fichier au Passe",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_RELIER",
+          "name": "Le Passe (jeton)"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "content": "## Le Passe · fichier Cuistance\nDès qu'un mail non lu de Cuistance arrive, la pièce jointe (CSV) part au Passe.\n\nLe Passe reconnaît les colonnes par leur nom. Si le fichier ne ressemble à rien de connu, il répond 422 et n'importe rien : prévoir une alerte sur cette sortie.\n\nÀ régler : l'adresse d'expéditeur réelle dans le filtre (`FROM`).",
+        "width": 640,
+        "height": 280
+      },
+      "id": "434a49b1-8b7e-42e3-8536-d4ab7876ad07",
+      "name": "Note 0",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -320
+      ]
+    }
+  ],
+  "connections": {
+    "Mail Cuistance reçu": {
+      "main": [
+        [
+          {
+            "node": "Envoyer le fichier au Passe",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

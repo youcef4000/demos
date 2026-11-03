@@ -1,0 +1,181 @@
+{
+  "name": "Le Passe · 03 · Fiches Claude de nuit",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 2 * * *"
+            }
+          ]
+        }
+      },
+      "id": "a1d5645d-33b7-40ff-a689-5a4d1760499f",
+      "name": "Chaque nuit à 2 h",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 6 * * *"
+            }
+          ]
+        }
+      },
+      "id": "b83d3c22-bdaa-45f4-8117-2c95acb229e9",
+      "name": "Chaque matin à 6 h",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8787/fiches/lancer",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 900000
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"limite\": 300}"
+      },
+      "id": "a13656bb-1243-4233-9963-178081744507",
+      "name": "Lancer le lot de fiches",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_RELIER",
+          "name": "Le Passe (jeton)"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8787/fiches/recuperer",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 900000
+        }
+      },
+      "id": "2aa9e007-79da-4788-b0b2-cf369abbe2e1",
+      "name": "Ranger les fiches au passe",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        220
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_RELIER",
+          "name": "Le Passe (jeton)"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "http://127.0.0.1:8787/rapport",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 900000
+        }
+      },
+      "id": "09bc4690-9af3-4b59-9def-8d9f20c9f83c",
+      "name": "Rapport du matin",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        520,
+        220
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_RELIER",
+          "name": "Le Passe (jeton)"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "content": "## Le Passe · fiches Claude\nLa nuit : les nouveaux produits en attente partent en lot à l'API Claude (moitié prix, résultat en général en moins d'une heure).\n\nLe matin : les fiches sont rangées au passe avec leurs contrôles (chiffres sans source, longueurs SEO). Rien n'est publié sans validation.",
+        "width": 640,
+        "height": 280
+      },
+      "id": "2a5b270f-e4a9-4603-bab6-aa67f17373b4",
+      "name": "Note 0",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -320
+      ]
+    }
+  ],
+  "connections": {
+    "Chaque nuit à 2 h": {
+      "main": [
+        [
+          {
+            "node": "Lancer le lot de fiches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chaque matin à 6 h": {
+      "main": [
+        [
+          {
+            "node": "Ranger les fiches au passe",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ranger les fiches au passe": {
+      "main": [
+        [
+          {
+            "node": "Rapport du matin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

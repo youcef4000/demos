@@ -1,0 +1,164 @@
+{
+  "name": "Le Passe · 01 · Synchro fournisseurs",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 30
+            }
+          ]
+        }
+      },
+      "id": "ede61be3-0b1b-4563-82e4-0abbc4344378",
+      "name": "Toutes les 30 minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8787/synchro/equipme",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 900000
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"envoyer\": true}"
+      },
+      "id": "1bd93122-0ce5-4cbc-b864-cb232961e8b5",
+      "name": "Synchro equip.me",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_RELIER",
+          "name": "Le Passe (jeton)"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8787/synchro/tefcold",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 900000
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"envoyer\": true}"
+      },
+      "id": "b1be1e30-c2e0-4937-b0a8-db414aad3bb5",
+      "name": "Synchro Tefcold",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_RELIER",
+          "name": "Le Passe (jeton)"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "http://127.0.0.1:8787/rapport",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 900000
+        }
+      },
+      "id": "6351a6e5-98b3-4bd6-a25a-dfb49c1f22a9",
+      "name": "Rapport",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_RELIER",
+          "name": "Le Passe (jeton)"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "content": "## Le Passe · synchro fournisseurs\nChaque appel lit le fournisseur, applique vos règles (marges, verrous, exclusions), met en file ce qui doit partir et l'envoie à Shopify.\n\nAjouter Combisteel et Diamond quand leurs connecteurs seront écrits.\n\nIdentifiant à créer une fois : **Header Auth** nommé « Le Passe (jeton) », nom `Authorization`, valeur `Bearer <PASSE_JETON>`.",
+        "width": 720,
+        "height": 280
+      },
+      "id": "aed18b9e-9df0-4475-8846-3cc95926f59a",
+      "name": "Note 0",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -320
+      ]
+    }
+  ],
+  "connections": {
+    "Toutes les 30 minutes": {
+      "main": [
+        [
+          {
+            "node": "Synchro equip.me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Synchro equip.me": {
+      "main": [
+        [
+          {
+            "node": "Synchro Tefcold",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Synchro Tefcold": {
+      "main": [
+        [
+          {
+            "node": "Rapport",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

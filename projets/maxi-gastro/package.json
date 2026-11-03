@@ -1,0 +1,19 @@
+{
+  "name": "maxi-gastro-le-passe-moteur",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Le Passe : synchronisation fournisseurs → base centrale → Shopify → marketplaces pour Maxi Gastro.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "test": "node --disable-warning=ExperimentalWarning --test \"test/*.test.js\"",
+    "passe": "node --disable-warning=ExperimentalWarning src/cli.js",
+    "serveur": "node --disable-warning=ExperimentalWarning src/serveur.js",
+    "noyau": "node outils/copier-noyau.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.4.0"
+  }
+}
