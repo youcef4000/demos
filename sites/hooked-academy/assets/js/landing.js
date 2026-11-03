@@ -192,7 +192,9 @@ document.addEventListener('click', (e) => {
   history.replaceState(null, '', id);
 });
 
-const SECTIONS = $$('[data-plan]');
+// Plans visibles seulement (une section masquée avec hidden ne compte pas), numérotés dans l'ordre
+const SECTIONS = $$('[data-plan]').filter((s) => !s.hidden);
+SECTIONS.forEach((s, i) => (s.dataset.plan = String(i + 1).padStart(2, '0')));
 const nav = $('#nav');
 const tcBox = $('#tc');
 const dock = $('#dock');

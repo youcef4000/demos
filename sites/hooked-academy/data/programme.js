@@ -82,6 +82,7 @@ const MODULES_1 = [
       {
         id: 'm0-l2',
         n: 1,
+        off: true, // retirée : la visite de la plateforme filmée à l'écran la remplace
         title: 'Prise en main de la plateforme',
         ar: 'التعرّف على المنصة',
         scenes: [
@@ -153,8 +154,8 @@ const MODULES_1 = [
         ],
       },
       // Visite de la plateforme, filmée à l'écran (communes aux deux formations)
-      leconEcran('formations', 'm0-l3', 2),
-      leconEcran('projet', 'm0-l4', 3),
+      leconEcran('formations', 'm0-l3', 1),
+      leconEcran('projet', 'm0-l4', 2),
     ],
   },
   {
@@ -4170,6 +4171,9 @@ const MODULES_1 = [
   },
 ];
 
+// Leçons retirées du parcours (off: true) : gardées dans ce fichier pour pouvoir les remettre
+export const RETIREES = [...MODULES_1, ...MODULES_IA].flatMap((m) => m.lessons.filter((l) => l.off).map((l) => l.id));
+[...MODULES_1, ...MODULES_IA].forEach((m) => (m.lessons = m.lessons.filter((l) => !l.off)));
 export const MODULES = [...MODULES_1, ...MODULES_IA];
 
 /* ------------------------------------------------------------------ */

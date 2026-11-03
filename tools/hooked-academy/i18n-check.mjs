@@ -10,7 +10,7 @@ import { existsSync } from 'node:fs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../sites/hooked-academy');
 globalThis.localStorage = { getItem: () => null, setItem: () => {} }; // le français : programme d'origine
-const { MODULES } = await import(pathToFileURL(path.join(ROOT, 'data/programme.js')).href);
+const { MODULES, RETIREES = [] } = await import(pathToFileURL(path.join(ROOT, 'data/programme.js')).href);
 
 /** Clés jamais traduites (structure, temps, prompteur du formateur, ligne arabe secondaire, médias). */
 export const SKIP = new Set(['id', 'n', 'type', 'd', 'at', 'say', 'ar', 'c', 'icon', 'bg', 'art', 'mode', 'align', 'tone', 'kind', 'widget', 'voice', 'video', 'audio', 'poster', 'ok', 'color', 'handle', 'app', 'k', 'w', 'x', 'y', 'from', 'to', 'cps', 'part', 'track', 'dim', 'safe', 'explode', 'hookBg', 'bodyBg', 'ctaBg', 'hookIndex', 'flick', 'scrollAt', 'scrollDur', 'swipeAt', 'swipe', 'stampAt', 'noteAt', 'barAt', 'frAt', 'arAt', 'resultAt', 'ringDur', 'countDur', 'ring', 'clipsAt', 'clipStep', 'playEnd', 'step', 'cols', 'pick', 'pickAt', 'posterAt', 'pts', 'value', 'decimals', 'suffix', 'from', 'speed', 'total', 'lang', 'dir', 'ringReverse', 'count', 'shot', 'r']);
@@ -80,7 +80,7 @@ for (const lang of langs.length ? langs : ['en', 'ar']) {
     for (const k of Object.keys(mo)) if (!['title', 'pitch'].includes(k)) out.err.push(`modules.${m.id}.${k} : seuls title et pitch`);
     let total = countStrings({ title: m.title, pitch: m.pitch });
     out.done += ['title', 'pitch'].filter((k) => typeof mo[k] === 'string' && mo[k].trim()).length;
-    for (const k of Object.keys(ov.lessons || {})) if (!m.lessons.some((l) => l.id === k)) out.err.push(`lessons.${k} : leçon inconnue dans ${m.id}`);
+    for (const k of Object.keys(ov.lessons || {})) if (!RETIREES.includes(k) && !m.lessons.some((l) => l.id === k)) out.err.push(`lessons.${k} : leçon inconnue dans ${m.id}`);
     for (const l of m.lessons) {
       total += countStrings(l);
       walk(l, ov.lessons?.[l.id], l.id, out);

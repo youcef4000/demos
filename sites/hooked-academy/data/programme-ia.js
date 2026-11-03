@@ -65,6 +65,7 @@ export const MODULES_IA = [
       {
         id: 'ia0-l4',
         n: 1,
+        off: true, // retirée : la visite de la plateforme filmée à l'écran la remplace
         title: 'Prise en main de la plateforme',
         ar: 'التعرّف على المنصة',
         scenes: [
@@ -134,11 +135,11 @@ export const MODULES_IA = [
         ],
       },
       // Visite de la plateforme, filmée à l'écran (communes aux deux formations)
-      leconEcran('formations', 'ia0-l5', 2),
-      leconEcran('projet', 'ia0-l6', 3),
+      leconEcran('formations', 'ia0-l5', 1),
+      leconEcran('projet', 'ia0-l6', 2),
       {
         id: 'ia0-l2',
-        n: 4,
+        n: 3,
         title: 'Payer tes outils IA depuis l’Algérie',
         ar: 'كيف تدفع ثمن أدوات الذكاء الاصطناعي من الجزائر',
         scenes: [
@@ -189,7 +190,7 @@ export const MODULES_IA = [
       },
       {
         id: 'ia0-l3',
-        n: 5,
+        n: 4,
         title: 'Ta boîte à outils IA (et ton budget)',
         ar: 'أدواتك في الذكاء الاصطناعي وميزانيتك',
         scenes: [
