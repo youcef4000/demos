@@ -1,4 +1,5 @@
 // Noyau « Le Passe » — lecture des fichiers fournisseurs (CSV / export Excel).
+import { normaliserRef } from './rapprochement.js';
 // Partagé entre la démo (navigateur) et le moteur (Node). Aucune dépendance.
 // Pensé pour les fichiers de stock envoyés par mail (Cuistance, etc.) :
 // séparateur deviné, guillemets, nombres « à la française », colonnes reconnues par leur nom.
@@ -7,6 +8,7 @@
 export const CHAMPS = {
   ref: ['ref', 'reference', 'référence', 'ref fournisseur', 'code article', 'article', 'code', 'sku', 'item', 'item number', 'item no', 'art nr', 'artikel', 'code produit', 'modele', 'modèle', 'model'],
   ean: ['ean', 'ean13', 'gtin', 'code barre', 'code-barre', 'code barres', 'barcode', 'upc'],
+  codeFournisseur: ['code', 'code fournisseur', 'code interne', 'code ebp', 'code erp'],
   designation: ['designation', 'désignation', 'libelle', 'libellé', 'nom', 'nom produit', 'produit', 'description courte', 'name', 'title', 'titre'],
   marque: ['marque', 'brand', 'fabricant', 'manufacturer'],
   prixAchat: ['prix achat', "prix d'achat", 'prix net', 'prix revendeur', 'prix ht', 'tarif', 'tarif net', 'net price', 'dealer price', 'cost', 'prix', 'price', 'pa ht', 'prix achat ht'],
@@ -19,7 +21,12 @@ export const CHAMPS = {
   categorie: ['categorie', 'catégorie', 'famille', 'gamme', 'category', 'rayon', 'sous famille', 'sous-famille'],
   image: ['image', 'photo', 'url image', 'image url', 'visuel', 'picture'],
   notice: ['notice', 'fiche technique', 'pdf', 'documentation', 'datasheet', 'manuel'],
+  observation: ['observation', 'obsevation', 'observations', 'commentaire', 'remarque', 'remarques', 'note'],
 };
+
+// Reconnus aussi grâce au titre placé au-dessus de l'en-tête (cellules fusionnées d'Excel).
+const ANCIEN = /\b(ancien|ancienne|precedent|precedente|old|previous)\b/;
+const PRIX = /\b(prix|tarif|price|net)\b/;
 
 const sansAccent = (s) => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '');
 const cleNom = (s) => sansAccent(s).toLowerCase().replace(/[_\-.:/()]+/g, ' ').replace(/\s+/g, ' ').trim();
@@ -106,7 +113,7 @@ export function lireCSV(texte, separateur) {
  * Renvoie { mapping: { ref: 0, stock: 3, … }, inconnues: ['Colonne X'], confiance: 0..1 }.
  * Un profil enregistré (ex. cuistance.json) peut forcer certaines colonnes.
  */
-export function detecterColonnes(entetes, profil = {}) {
+export function detecterColonnes(entetes, profil = {}, { titres = [] } = {}) {
   const mapping = {};
   const pris = new Set();
   for (const [champ, nomColonne] of Object.entries(profil)) {
@@ -132,7 +139,32 @@ export function detecterColonnes(entetes, profil = {}) {
       }
     }
   }
-  const inconnues = entetes.filter((_, i) => !pris.has(i));
+  // Ancien tarif placé à côté du nouveau (deux blocs) : sa propre colonne référence, sous un titre « ancien… ».
+  if (!('refPrecedente' in mapping)) {
+    const syn = CHAMPS.ref.map(cleNom);
+    const idx = entetes.findIndex((h, i) => !pris.has(i) && ANCIEN.test(cleNom(`${titres[i] || ''} ${h}`)) && syn.includes(cleNom(h)));
+    if (idx >= 0) {
+      mapping.refPrecedente = idx;
+      pris.add(idx);
+    }
+  }
+  // Ancien prix : titre ou en-tête « ancien… », et l'en-tête lui-même parle de prix.
+  if (!('prixAchatPrecedent' in mapping)) {
+    const idx = entetes.findIndex((h, i) => !pris.has(i) && ANCIEN.test(cleNom(`${titres[i] || ''} ${h}`)) && PRIX.test(cleNom(h)));
+    if (idx >= 0) {
+      mapping.prixAchatPrecedent = idx;
+      pris.add(idx);
+    }
+  }
+  if (!('observation' in mapping)) {
+    const syn = CHAMPS.observation.map(cleNom);
+    const idx = entetes.findIndex((h, i) => !pris.has(i) && !cleNom(h) && syn.includes(cleNom(titres[i] || '')));
+    if (idx >= 0) {
+      mapping.observation = idx;
+      pris.add(idx);
+    }
+  }
+  const inconnues = entetes.filter((h, i) => h && !pris.has(i));
   const essentiels = ['ref', 'stock', 'prixAchat'];
   const confiance = essentiels.filter((c) => c in mapping).length / essentiels.length;
   return { mapping, inconnues, confiance };
@@ -163,9 +195,20 @@ export function lireStock(quantite, disponibilite) {
 
 /** Transforme les lignes en offres fournisseur normalisées. */
 export function lignesVersOffres({ entetes, lignes }, mapping, { fournisseur, marqueParDefaut } = {}) {
-  const get = (l, champ) => (champ in mapping ? (l[mapping[champ]] ?? '').trim() : '');
+  const get = (l, champ) => (champ in mapping ? String(l[mapping[champ]] ?? '').trim() : '');
   const offres = [];
   const erreurs = [];
+  // Deux blocs côte à côte (ancien / nouveau tarif) ne sont pas forcément alignés ligne à ligne :
+  // l'ancien prix se retrouve par sa référence, jamais par sa position.
+  let anciens = null;
+  if ('refPrecedente' in mapping && 'prixAchatPrecedent' in mapping) {
+    anciens = new Map();
+    for (const l of lignes) {
+      const r = normaliserRef(get(l, 'refPrecedente'));
+      const prix = lireNombre(get(l, 'prixAchatPrecedent'));
+      if (r && prix !== null && !anciens.has(r)) anciens.set(r, prix);
+    }
+  }
   lignes.forEach((l, i) => {
     const ref = get(l, 'ref');
     if (!ref) {
@@ -181,6 +224,9 @@ export function lignesVersOffres({ entetes, lignes }, mapping, { fournisseur, ma
       marque: get(l, 'marque') || marqueParDefaut || null,
       prixAchatHT: lireNombre(get(l, 'prixAchat')),
       prixConseilleHT: lireNombre(get(l, 'prixConseille')),
+      prixAchatPrecedentHT: anciens ? anciens.get(normaliserRef(ref)) ?? null : lireNombre(get(l, 'prixAchatPrecedent')),
+      codeFournisseur: get(l, 'codeFournisseur') || null,
+      observation: get(l, 'observation') || null,
       stock: stock.quantite,
       statutStock: stock.statut,
       delai: get(l, 'delai') || null,

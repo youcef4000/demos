@@ -16,11 +16,19 @@ export function eanValide(code) {
 }
 
 /**
- * Référence comparable : majuscules, espaces retirés, et la trace d'Excel « 15844.0 » → « 15844 ».
+ * Référence comparable : majuscules, espaces retirés, annotation retirée (« VRX1500380 vitré »),
+ * et la trace d'Excel « 15844.0 » → « 15844 ».
  * On garde les points significatifs (« 7223.0505 » chez Combisteel reste tel quel).
  */
 export function normaliserRef(ref) {
-  let s = String(ref ?? '').trim().toUpperCase().replace(/\s+/g, '');
+  let s = String(ref ?? '').trim();
+  // Annotation en minuscules après la référence (« VRX1500380 vitré ») : on la retire.
+  const mots = s.split(/\s+/);
+  if (mots.length > 1 && !/[a-zà-ÿ]/.test(mots[0])) {
+    const i = mots.findIndex((m, k) => k > 0 && /[a-zà-ÿ]/.test(m));
+    if (i > 0) s = mots.slice(0, i).join(' ');
+  }
+  s = s.toUpperCase().replace(/\s+/g, '');
   if (/^\d+\.0+$/.test(s)) s = s.replace(/\.0+$/, '');
   return s;
 }

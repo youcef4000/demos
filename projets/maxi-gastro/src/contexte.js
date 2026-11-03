@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { ouvrirBase } from './base.js';
 import { connecteur } from './connecteurs/index.js';
-import { creerConnecteurFichier, decoderFichier } from './connecteurs/csv.js';
+import { creerConnecteurFichier } from './connecteurs/csv.js';
 import { creerShopify } from './shopify.js';
 
 export const RACINE = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -31,7 +31,7 @@ export function contexte({ aBlanc = false } = {}) {
     base: ouvrirBase(process.env.PASSE_BASE || join(RACINE, 'donnees/passe.sqlite')),
     regles: chargerRegles(),
     connecteur,
-    fichier: (profil, { texte, chemin, octets }) => creerConnecteurFichier({ profil: chargerProfil(profil), texte: texte ?? (octets ? decoderFichier(octets) : undefined), chemin }),
+    fichier: (profil, { texte, chemin, octets }) => creerConnecteurFichier({ profil: chargerProfil(profil), texte, chemin, octets }),
     shopify: () => creerShopify({ aBlanc, sortie: join(RACINE, 'sortie') }),
   };
 }

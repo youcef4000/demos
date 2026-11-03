@@ -221,8 +221,8 @@
         <p>Aucune documentation publique. Il faut la télécharger dans vos espaces pros (Combisteel) ou la demander au commercial (Diamond). On vérifiera en priorité : prix net, stock, délai, EAN, et la limite d'appels par minute.</p>
       </article>
       <article class="source">
-        <h3>Cuistance <span class="badge b-info">fichier CSV</span></h3>
-        <p>Pas d'API : un état de stock en CSV, une à deux fois par semaine. Un agent récupère la pièce jointe dès son arrivée dans la boîte mail, reconnaît les colonnes (même si l'ordre change), et prépare les changements. La tour de contrôle lit déjà les CSV : <a href="./app/#/fournisseurs">essayez avec le fichier réel</a>.</p>
+        <h3>Cuistance <span class="badge b-info">CSV + liste de prix Excel</span></h3>
+        <p>Pas d'API : un état de stock en CSV, une à deux fois par semaine, et une liste de prix Excel à chaque changement de tarif. Un agent récupère la pièce jointe dès son arrivée, reconnaît la feuille et les colonnes (même si l'ordre change), retrouve l'ancien tarif placé à côté, et prépare les changements. <strong>Votre liste de prix du 4 mars 2026 est déjà prise en charge</strong> : <a href="./app/#/fournisseurs">glissez-la dans la tour de contrôle</a>. Elle est lue dans votre navigateur, rien n'est envoyé ni publié.</p>
       </article>
       <article class="source">
         <h3>METRO <span class="badge b-attente">EAN obligatoire</span></h3>
@@ -263,7 +263,7 @@
           <text x="30" y="128" font-size="14" font-weight="600">Combisteel</text><text x="30" y="144" font-size="11" opacity=".7">clé API</text>
           <text x="30" y="176" font-size="14" font-weight="600">equip.me</text><text x="30" y="192" font-size="11" opacity=".7">API REST documentée</text>
           <text x="30" y="224" font-size="14" font-weight="600">Diamond</text><text x="30" y="240" font-size="11" opacity=".7">à vérifier</text>
-          <text x="30" y="272" font-size="14" font-weight="600">Cuistance</text><text x="30" y="288" font-size="11" opacity=".7">CSV par mail</text>
+          <text x="30" y="272" font-size="14" font-weight="600">Cuistance</text><text x="30" y="288" font-size="11" opacity=".7">CSV + tarif Excel par mail</text>
 
           <text x="435" y="50" text-anchor="middle" font-size="15" font-weight="800" letter-spacing="1.5" fill="#e8640a">LE PASSE</text>
           <text x="270" y="86" font-size="13" font-weight="700">n8n</text><text x="270" y="102" font-size="11" opacity=".75">l'horloge et les tuyaux : toutes les 30 min,</text><text x="270" y="116" font-size="11" opacity=".75">à l'arrivée d'un mail, alertes</text>
@@ -374,7 +374,7 @@
       <div><dt>Les limites d'appels</dt><dd>Shopify et les fournisseurs limitent le nombre de requêtes. On ne récupère que ce qui a changé, et les grosses mises à jour passent la nuit.</dd></div>
       <div><dt>Écraser une modification manuelle</dt><dd>Le moteur ne touche qu'aux champs qu'il gère. Prix verrouillé, titre retouché à la main : il garde la trace et n'écrase pas.</dd></div>
       <div><dt>Les délais de validation METRO</dt><dd>Jusqu'à 7 jours pour créer une fiche absente du catalogue METRO. On commence par les produits que METRO connaît déjà.</dd></div>
-      <div><dt>Le format du CSV Cuistance change</dt><dd>Les colonnes sont reconnues par leur nom, pas par leur position. Si un fichier ne ressemble à rien de connu, il part en validation au lieu d'être importé.</dd></div>
+      <div><dt>Le format du fichier Cuistance change</dt><dd>Les colonnes sont reconnues par leur nom, pas par leur position, et l'ancien tarif par sa référence, pas par sa ligne. Si un fichier ne ressemble à rien de connu, il part en validation au lieu d'être importé.</dd></div>
       <div><dt>La sécurité des clés</dt><dd>Les clés API restent sur le serveur, chiffrées, jamais dans un navigateur ni dans un fichier partagé. Chaque fournisseur a sa clé, révocable.</dd></div>
     </dl>
   </section>
@@ -402,7 +402,7 @@
         <li><label><input type="checkbox" data-cle="equipme"> equip.me : une clé API créée par le compte « Superviseur »</label></li>
         <li><label><input type="checkbox" data-cle="combisteel"> Combisteel : documentation de l'API (espace pro)</label></li>
         <li><label><input type="checkbox" data-cle="diamond"> Diamond : contact technique ou documentation</label></li>
-        <li><label><input type="checkbox" data-cle="cuistance"> Cuistance : le fichier CSV (pas reçu avec les mémos) et l'adresse mail qui le reçoit</label></li>
+        <li><label><input type="checkbox" data-cle="cuistance"> Cuistance : un exemple du fichier de stock et l'adresse mail qui le reçoit (la liste de prix Excel est reçue et lue)</label></li>
         <li><label><input type="checkbox" data-cle="metro"> METRO : accès au Seller Office</label></li>
         <li><label><input type="checkbox" data-cle="gsc"> Google Search Console de maxigastro.fr</label></li>
         <li><label><input type="checkbox" data-cle="marges"> Vos règles de marge par fournisseur et par catégorie</label></li>

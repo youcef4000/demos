@@ -120,11 +120,11 @@ test('exclusions : les pièces détachées n\'entrent jamais dans le catalogue',
 test('fichier Cuistance : import complet, puis fichier méconnaissable refusé', async () => {
   const base = ouvrirBase(':memory:');
   const profil = JSON.parse(readFileSync(join(ici, '../config/profils-csv/cuistance.json'), 'utf8'));
-  const c = creerConnecteurFichier({ profil, chemin: join(ici, 'fixtures/exemple-cuistance.csv') });
+  const c = await creerConnecteurFichier({ profil, chemin: join(ici, 'fixtures/exemple-cuistance.csv') });
   const r = await synchroniser({ base, connecteur: c, regles: REGLES, depuis: null });
   assert.equal(r.lues, 10);
   assert.equal(r.erreurs.length, 0);
-  const inconnu = creerConnecteurFichier({ profil, texte: 'a;b;c\n1;2;3\n' });
+  const inconnu = await creerConnecteurFichier({ profil, texte: 'a;b;c\n1;2;3\n' });
   const r2 = await synchroniser({ base, connecteur: inconnu, regles: REGLES, depuis: null });
   assert.match(r2.erreurs[0], /non reconnu/);
   base.fermer();

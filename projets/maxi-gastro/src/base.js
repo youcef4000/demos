@@ -111,7 +111,8 @@ export class Base {
         designation = COALESCE(excluded.designation, offres.designation), marque = COALESCE(excluded.marque, offres.marque),
         categorie = COALESCE(excluded.categorie, offres.categorie), famille = COALESCE(excluded.famille, offres.famille),
         prix_achat = COALESCE(excluded.prix_achat, offres.prix_achat), prix_conseille = COALESCE(excluded.prix_conseille, offres.prix_conseille),
-        stock = excluded.stock, statut_stock = excluded.statut_stock, delai_jours = COALESCE(excluded.delai_jours, offres.delai_jours),
+        stock = CASE WHEN excluded.statut_stock IS NULL OR excluded.statut_stock = 'inconnu' THEN offres.stock ELSE excluded.stock END,
+        statut_stock = CASE WHEN excluded.statut_stock IS NULL OR excluded.statut_stock = 'inconnu' THEN offres.statut_stock ELSE excluded.statut_stock END, delai_jours = COALESCE(excluded.delai_jours, offres.delai_jours),
         poids_kg = COALESCE(excluded.poids_kg, offres.poids_kg), dimensions = COALESCE(excluded.dimensions, offres.dimensions),
         images = COALESCE(excluded.images, offres.images), notice = COALESCE(excluded.notice, offres.notice),
         brut = COALESCE(excluded.brut, offres.brut), exclue = excluded.exclue, vue_le = excluded.vue_le`)

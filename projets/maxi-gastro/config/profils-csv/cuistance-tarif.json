@@ -1,0 +1,12 @@
+{
+  "_note": "Liste de prix Cuistance (classeur Excel envoyé à chaque changement de tarif). Ligne d'en-tête et feuille trouvées automatiquement ; l'ancien tarif placé à côté est retrouvé par sa référence. Pas de stock dans ce fichier : le stock connu est conservé.",
+  "fournisseur": "cuistance",
+  "type": "tarif",
+  "marqueParDefaut": "Cuistance",
+  "colonnes": {
+    "ref": "RÉFÉRENCE",
+    "codeFournisseur": "CODE",
+    "prixAchat": "TARIF HT"
+  },
+  "confianceMinimale": 1
+}

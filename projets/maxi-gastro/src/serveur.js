@@ -2,7 +2,7 @@
 // Toutes les routes exigent l'en-tête « Authorization: Bearer <PASSE_JETON> ».
 //   GET  /sante
 //   POST /synchro/:fournisseur        { "envoyer": true }
-//   POST /import/:profil              corps = le fichier CSV brut (Content-Type: text/csv ou application/octet-stream)
+//   POST /import/:profil              corps = le fichier brut, CSV ou .xlsx (profils : cuistance, cuistance-tarif…)
 //   GET  /passe                       file de validation
 //   POST /passe/:id/valider | /passe/:id/refuser
 //   POST /envoyer
@@ -84,7 +84,7 @@ const serveur = createServer(async (req, res) => {
     }
     if (req.method === 'POST' && a === 'import' && b) {
       const octets = await lireCorps(req);
-      const fichier = ctx.fichier(b, { octets });
+      const fichier = await ctx.fichier(b, { octets });
       const r = await exclusif(() => synchroniser({ base: ctx.base, connecteur: fichier, regles: ctx.regles, depuis: null }));
       return repondre(res, r.erreurs.length && !r.lues ? 422 : 200, { analyse: fichier.analyse, ...r });
     }

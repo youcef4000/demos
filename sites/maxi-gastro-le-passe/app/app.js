@@ -3,7 +3,9 @@ import { PRODUITS } from './data/catalogue.js';
 import { SOURCES, CHAMPS_SOURCE, MARKETPLACES } from './data/sources.js';
 import { REGLES_DEFAUT, FOURNISSEURS_NOMS, FAMILLES, ARRONDIS } from './data/regles.js';
 import { EXEMPLE } from './data/atelier.js';
-import { decisionPrix, prixPlancher, margeNette, strategieBuyBox } from './noyau/prix.js';
+import { decisionPrix, prixPlancher, margeNette, strategieBuyBox, arrondir } from './noyau/prix.js';
+import { lireXlsx, choisirTableau, estXlsx } from './noyau/xlsx.js';
+import { CUISTANCE_EN_LIGNE } from './data/cuistance-en-ligne.js';
 import { lireCSV, detecterColonnes, lignesVersOffres, CHAMPS } from './noyau/csv.js';
 import { eanValide, normaliserRef } from './noyau/rapprochement.js';
 import { evaluerFiche, bilanCatalogue } from './noyau/qualite.js';
@@ -319,13 +321,13 @@ function vueFournisseurs() {
       <h2 id="t-csv">Lecteur de fichiers — Cuistance et tous les fournisseurs sans API</h2>
       <p class="sous">Le fichier est lu dans votre navigateur, rien n'est envoyé. En production, la même lecture se déclenche quand le mail de Cuistance arrive.</p>
       <div class="depot" id="depot">
-        <strong>Glissez ici le CSV de Cuistance</strong>
-        <span class="petit">ou un export Excel en .csv — séparateur et encodage devinés</span>
+        <strong>Glissez ici un fichier Cuistance : stock (.csv) ou liste de prix (.xlsx)</strong>
+        <span class="petit">Excel ou CSV — feuille, ligne d'en-tête, séparateur et encodage devinés</span>
         <div class="actions" style="justify-content:center">
-          <label class="btn btn-petit">Choisir un fichier<input type="file" id="fichier" accept=".csv,.txt,text/csv" class="sr"></label>
+          <label class="btn btn-petit">Choisir un fichier<input type="file" id="fichier" accept=".csv,.txt,.xlsx,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" class="sr"></label>
           <button class="btn btn-petit btn-chaud" id="exemple-csv">Essayer avec un fichier d'exemple</button>
         </div>
-        <span class="petit">Le fichier d'exemple est fabriqué pour la démo (vraies références Cuistance, quantités et prix inventés).</span>
+        <span class="petit">Le fichier d'exemple est fabriqué pour la démo (vraies références Cuistance, quantités et prix inventés). Votre propre fichier est lu dans ce navigateur : rien n'est envoyé ni enregistré.</span>
       </div>
       <div id="resultat-csv"></div>
     </section>`;
@@ -353,9 +355,19 @@ function decoder(buffer) {
     return { texte: new TextDecoder('windows-1252').decode(buffer), encodage: 'Windows-1252 (export Excel)' };
   }
 }
+const inflateNavigateur = async (u8) => new Uint8Array(await new Response(new Blob([u8]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer());
+
 async function lireFichier(f) {
   if (f.size > 15 * 1024 * 1024) return toast('Fichier trop lourd pour la démo (15 Mo maximum).');
-  analyserCSV(decoder(await f.arrayBuffer()), f.name);
+  const octets = new Uint8Array(await f.arrayBuffer());
+  if (!estXlsx(octets)) return analyserCSV(decoder(octets), f.name);
+  try {
+    const t = choisirTableau(await lireXlsx(octets, inflateNavigateur));
+    etat.csv = { nom: f.name, encodage: `Excel · feuille « ${t.feuille} », en-tête ligne ${t.ligneEntete}`, lu: { separateur: null, entetes: t.entetes, lignes: t.lignes }, mapping: t.mapping, confiance: t.confiance };
+    afficherCSV();
+  } catch (err) {
+    toast(`Classeur illisible : ${err.message}`);
+  }
 }
 
 function analyserCSV({ texte, encodage }, nom) {
@@ -388,30 +400,46 @@ function calculerDiff() {
 function afficherCSV() {
   const { nom, encodage, lu, mapping, confiance } = etat.csv;
   const choix = ['', ...Object.keys(CHAMPS)];
-  const libelles = { '': '— ignorer —', ref: 'Référence', ean: 'EAN', designation: 'Désignation', marque: 'Marque', prixAchat: "Prix d'achat", prixConseille: 'Prix conseillé', stock: 'Stock', disponibilite: 'Disponibilité', delai: 'Délai', poids: 'Poids', dimensions: 'Dimensions', categorie: 'Catégorie', image: 'Image', notice: 'Notice' };
+  const libelles = { '': '— ignorer —', ref: 'Référence', ean: 'EAN', codeFournisseur: 'Code fournisseur', designation: 'Désignation', marque: 'Marque', prixAchat: "Prix d'achat", prixConseille: 'Prix conseillé', prixAchatPrecedent: "Ancien prix d'achat", refPrecedente: 'Ancienne référence', stock: 'Stock', disponibilite: 'Disponibilité', delai: 'Délai', poids: 'Poids', dimensions: 'Dimensions', categorie: 'Catégorie', image: 'Image', notice: 'Notice', observation: 'Observation' };
+  for (const c of ['prixAchatPrecedent', 'refPrecedente']) if (!choix.includes(c)) choix.push(c);
   const champDe = (i) => Object.entries(mapping).find(([, idx]) => idx === i)?.[0] || '';
-  const { lignes, erreurs } = calculerDiff();
-  const n = { nouveau: 0, change: 0, identique: 0 };
-  lignes.forEach((l) => n[l.type]++);
-  const auPasse = lignes.flatMap((l) => l.changements || []).filter((c) => c.decision?.action === 'valider').length;
-
-  $('#resultat-csv').innerHTML = `
+  const tarif = 'prixAchat' in mapping && !('stock' in mapping) && !('disponibilite' in mapping);
+  const colonnesVisibles = lu.entetes.map((h, i) => [h, i]).filter(([h, i]) => h || champDe(i));
+  const lecture = `
     <div class="etape-import">
       <h3>1. Lecture</h3>
       <div class="resume">
         <span class="badge b-neutre">${e(nom)}</span>
-        <span class="badge b-neutre">séparateur « ${lu.separateur === '\t' ? 'tabulation' : e(lu.separateur)} »</span>
+        ${lu.separateur ? `<span class="badge b-neutre">séparateur « ${lu.separateur === '\t' ? 'tabulation' : e(lu.separateur)} »</span>` : ''}
         <span class="badge b-neutre">${e(encodage)}</span>
         <span class="badge b-neutre">${lu.lignes.length} lignes</span>
-        <span class="badge ${confiance === 1 ? 'b-ok' : 'b-attente'}">colonnes essentielles reconnues : ${Math.round(confiance * 100)} %</span>
+        <span class="badge ${tarif ? 'b-info' : confiance === 1 ? 'b-ok' : 'b-attente'}">${tarif ? 'liste de prix (sans stock)' : `colonnes essentielles reconnues : ${Math.round(confiance * 100)} %`}</span>
       </div>
     </div>
     <div class="etape-import">
       <h3>2. Colonnes reconnues (modifiables)</h3>
       <div class="cadre-defile"><table class="donnees"><thead><tr><th>Colonne du fichier</th><th>Devient</th><th>Exemples</th></tr></thead><tbody>
-        ${lu.entetes.map((h, i) => `<tr><td><strong>${e(h)}</strong></td><td><select data-col="${i}" aria-label="Champ pour la colonne ${e(h)}">${choix.map((c) => `<option value="${c}" ${champDe(i) === c ? 'selected' : ''}>${libelles[c]}</option>`).join('')}</select></td><td class="petit">${lu.lignes.slice(0, 3).map((l) => e(l[i] || '∅')).join(' · ')}</td></tr>`).join('')}
+        ${colonnesVisibles.map(([h, i]) => `<tr><td><strong>${e(h || '(sans titre)')}</strong></td><td><select data-col="${i}" aria-label="Champ pour la colonne ${e(h)}">${choix.map((c) => `<option value="${c}" ${champDe(i) === c ? 'selected' : ''}>${libelles[c] || c}</option>`).join('')}</select></td><td class="petit">${lu.lignes.slice(0, 3).map((l) => e(l[i] || '∅')).join(' · ')}</td></tr>`).join('')}
       </tbody></table></div>
-    </div>
+    </div>`;
+  const brancherColonnes = () => $$('#resultat-csv select[data-col]').forEach((s) => s.addEventListener('change', () => {
+    const col = Number(s.dataset.col);
+    for (const [k, v] of Object.entries(mapping)) if (v === col) delete mapping[k];
+    if (s.value) mapping[s.value] = col;
+    afficherCSV();
+  }));
+  if (tarif) {
+    $('#resultat-csv').innerHTML = lecture + '<div id="tarif"></div>';
+    brancherColonnes();
+    afficherTarif();
+    return;
+  }
+  const { lignes, erreurs } = calculerDiff();
+  const n = { nouveau: 0, change: 0, identique: 0 };
+  lignes.forEach((l) => n[l.type]++);
+  const auPasse = lignes.flatMap((l) => l.changements || []).filter((c) => c.decision?.action === 'valider').length;
+
+  $('#resultat-csv').innerHTML = lecture + `
     <div class="etape-import">
       <h3>3. Ce qui change dans le catalogue</h3>
       <div class="resume">
@@ -432,12 +460,7 @@ function afficherCSV() {
       <div class="actions" style="margin-top:12px"><button class="btn btn-chaud" id="appliquer-csv">Appliquer : ${n.change + n.nouveau} lignes</button><button class="btn" id="oublier-csv">Annuler</button></div>
     </div>`;
 
-  $$('#resultat-csv select').forEach((s) => s.addEventListener('change', () => {
-    const col = Number(s.dataset.col);
-    for (const [k, v] of Object.entries(mapping)) if (v === col) delete mapping[k];
-    if (s.value) mapping[s.value] = col;
-    afficherCSV();
-  }));
+  brancherColonnes();
   $('#oublier-csv').addEventListener('click', () => { etat.csv = null; $('#resultat-csv').innerHTML = ''; });
   $('#appliquer-csv').addEventListener('click', () => {
     let auto = 0;
@@ -467,6 +490,131 @@ function afficherCSV() {
   });
 }
 const court = (t) => t.split(/\s+[-—–]\s+/)[0].slice(0, 60);
+
+/* ---------- Liste de prix fournisseur : rapprochement avec les fiches en ligne ---------- */
+const mediane = (xs) => {
+  const t = [...xs].sort((a, b) => a - b);
+  return t.length ? (t.length % 2 ? t[(t.length - 1) / 2] : (t[t.length / 2 - 1] + t[t.length / 2]) / 2) : NaN;
+};
+const tarifReglages = { coef: null, seuil: 0.05 };
+
+function analyserTarif() {
+  const { lu, mapping } = etat.csv;
+  const { offres, erreurs } = lignesVersOffres(lu, mapping, { fournisseur: 'cuistance', marqueParDefaut: 'Cuistance' });
+  const parRef = new Map();
+  let doublons = 0;
+  for (const o of offres) {
+    const k = normaliserRef(o.ref);
+    if (parRef.has(k)) doublons++;
+    else parRef.set(k, o);
+  }
+  const enLigne = new Map(CUISTANCE_EN_LIGNE.map((p) => [normaliserRef(p.ref), p]));
+  const rapproches = [];
+  const aAjouter = [];
+  for (const [k, o] of parRef) {
+    const p = enLigne.get(k);
+    if (p && o.prixAchatHT > 0) rapproches.push({ o, p, coef: p.prix / o.prixAchatHT });
+    else if (!p) aAjouter.push(o);
+  }
+  const horsListe = CUISTANCE_EN_LIGNE.filter((p) => !parRef.has(normaliserRef(p.ref)));
+  const variations = [...parRef.values()].filter((o) => o.prixAchatHT > 0 && o.prixAchatPrecedentHT > 0 && Math.abs(o.prixAchatHT - o.prixAchatPrecedentHT) >= 0.005)
+    .map((o) => ({ o, v: (o.prixAchatHT - o.prixAchatPrecedentHT) / o.prixAchatPrecedentHT }));
+  return { offres, erreurs, doublons, parRef, rapproches, aAjouter, horsListe, variations, avecAncien: [...parRef.values()].filter((o) => o.prixAchatPrecedentHT > 0).length, observations: [...parRef.values()].filter((o) => o.observation) };
+}
+
+function afficherTarif() {
+  const a = analyserTarif();
+  const coefConstate = mediane(a.rapproches.map((r) => r.coef));
+  if (!tarifReglages.coef && Number.isFinite(coefConstate)) tarifReglages.coef = Math.round(coefConstate * 100) / 100;
+  const coef = tarifReglages.coef || 2;
+  const lignes = a.rapproches.map((r) => {
+    const calcule = arrondir(r.o.prixAchatHT * coef, 'centime');
+    return { ...r, calcule, ecart: (r.p.prix - calcule) / calcule };
+  });
+  const sous = lignes.filter((l) => l.ecart < -tarifReglages.seuil).sort((x, y) => x.ecart - y.ecart);
+  const dessus = lignes.filter((l) => l.ecart > tarifReglages.seuil);
+  const conformes = lignes.length - sous.length - dessus.length;
+  const hausses = a.variations.filter((x) => x.v > 0);
+  const baisses = a.variations.filter((x) => x.v < 0);
+  const touchesEnLigne = lignes.filter((l) => l.o.prixAchatPrecedentHT > 0 && Math.abs(l.o.prixAchatHT - l.o.prixAchatPrecedentHT) >= 0.005);
+  const fmtPct = (x) => `${x > 0 ? '+' : ''}${pct(x)}`;
+  const liste = (items, rendu, max = 12) => `${items.slice(0, max).map(rendu).join('')}${items.length > max ? `<li class="petit">… et ${items.length - max} autres (dans le fichier téléchargé)</li>` : ''}`;
+  $('#tarif').innerHTML = `
+    <div class="etape-import">
+      <h3>3. Ce qui a changé depuis l'ancien tarif</h3>
+      ${a.avecAncien ? `<div class="resume">
+        <span class="badge b-chaud">${a.variations.length} prix d'achat changés sur ${a.avecAncien}</span>
+        <span class="badge b-alerte">${hausses.length} hausses</span>
+        <span class="badge b-ok">${baisses.length} baisses</span>
+        <span class="badge b-neutre">variation médiane ${a.variations.length ? fmtPct(mediane(a.variations.map((x) => x.v))) : '—'}</span>
+        ${a.parRef.size - a.avecAncien > 0 ? `<span class="badge b-info">${a.parRef.size - a.avecAncien} références sans ancien prix (nouveautés ?)</span>` : ''}
+      </div>
+      ${hausses.length ? `<p class="petit">Plus fortes hausses : ${hausses.sort((x, y) => y.v - x.v).slice(0, 5).map((x) => `<span class="mono">${e(x.o.ref)}</span> ${fmtPct(x.v)}`).join(' · ')}</p>` : ''}` : '<p class="petit">Pas de colonne « ancien prix » reconnue : choisissez-la à l\'étape 2 pour voir les variations.</p>'}
+      ${a.observations.length ? `<p class="petit">${a.observations.length} observations dans le fichier (ex. <em>${e(a.observations[0].ref)} : ${e(a.observations[0].observation)}</em>) : paliers de quantité à garder pour les achats, pas pour le prix de vente.</p>` : ''}
+    </div>
+    <div class="etape-import">
+      <h3>4. Rapprochement avec maxigastro.fr <span class="petit">(${CUISTANCE_EN_LIGNE.length} fiches Cuistance en ligne, relevé public du 3 novembre 2026)</span></h3>
+      <div class="impact-chiffres" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+        <div><strong>${a.rapproches.length}</strong><span>références du fichier déjà en ligne</span></div>
+        <div><strong>${a.aAjouter.length}</strong><span>pas encore sur le site</span></div>
+        <div><strong>${a.horsListe.length}</strong><span>fiches en ligne absentes du fichier</span></div>
+        <div><strong>${touchesEnLigne.length}</strong><span>fiches en ligne dont le prix d'achat a bougé</span></div>
+      </div>
+      <details class="endpoints"><summary>Fiches en ligne absentes du fichier (${a.horsListe.length}) : arrêtées, renommées, ou d'une autre liste ?</summary><ul>${liste(a.horsListe, (p) => `<li><span class="mono">${e(p.ref)}</span> · <a href="${e(p.url)}" target="_blank" rel="noopener">${e(court(p.titre))}</a></li>`, 30)}</ul></details>
+      <details class="endpoints"><summary>Références à ajouter au site (${a.aAjouter.length})</summary><ul>${liste(a.aAjouter, (o) => `<li><span class="mono">${e(o.ref)}</span> · ${euro(o.prixAchatHT)} HT${o.observation ? ` · ${e(o.observation)}` : ''}</li>`, 30)}</ul></details>
+    </div>
+    <div class="etape-import">
+      <h3>5. Vos prix en ligne face au nouveau tarif</h3>
+      <p class="petit">Coefficient constaté aujourd'hui (médiane prix affiché ÷ nouveau prix d'achat) : <strong>× ${Number.isFinite(coefConstate) ? coefFr(coefConstate) : '—'}</strong>. Mettez votre vraie règle pour voir les fiches qui s'en écartent.</p>
+      <div class="formulaire-bb">
+        <div class="champ"><label for="t-coef">Coefficient de vente</label><input type="number" id="t-coef" min="1" max="5" step="0.01" value="${coef}"></div>
+        <div class="champ"><label for="t-seuil">Tolérance (%)</label><input type="number" id="t-seuil" min="0" max="50" step="1" value="${Math.round(tarifReglages.seuil * 100)}"></div>
+      </div>
+      <div class="resume">
+        <span class="badge b-alerte">${sous.length} sous la règle (marge rognée)</span>
+        <span class="badge b-attente">${dessus.length} au-dessus</span>
+        <span class="badge b-ok">${conformes} conformes</span>
+      </div>
+      ${sous.length ? `<div class="cadre-defile"><table class="donnees"><thead><tr><th>Réf.</th><th>Fiche</th><th>Achat HT</th><th>Prix en ligne</th><th>Avec la règle</th><th>Écart</th></tr></thead><tbody>
+        ${sous.slice(0, 12).map((l) => `<tr><td class="mono">${e(l.p.ref)}</td><td><a href="${e(l.p.url)}" target="_blank" rel="noopener">${e(court(l.p.titre))}</a></td><td class="n">${euro(l.o.prixAchatHT)}</td><td class="n">${euro(l.p.prix)}</td><td class="n">${euro(l.calcule)}</td><td class="n">${fmtPct(l.ecart)}</td></tr>`).join('')}
+      </tbody></table></div>` : ''}
+      <div class="actions" style="margin-top:12px">
+        <button class="btn btn-chaud" id="t-exporter">Télécharger le rapprochement (.csv)</button>
+        <button class="btn" id="t-passe">Envoyer au passe</button>
+        <button class="btn" id="oublier-csv">Fermer</button>
+      </div>
+      <p class="petit">Calculé dans ce navigateur. Le fichier n'est ni envoyé, ni enregistré, ni publié.</p>
+    </div>`;
+
+  $('#t-coef').addEventListener('change', (ev) => { tarifReglages.coef = Math.max(1, Number(ev.target.value) || coef); afficherTarif(); });
+  $('#t-seuil').addEventListener('change', (ev) => { tarifReglages.seuil = Math.max(0, Number(ev.target.value) || 0) / 100; afficherTarif(); });
+  $('#oublier-csv').addEventListener('click', () => { etat.csv = null; tarifReglages.coef = null; $('#resultat-csv').innerHTML = ''; });
+  $('#t-passe').addEventListener('click', () => {
+    ajouterAuPasse({ type: 'lot', titre: `Liste de prix ${etat.csv.nom}`, raison: `${touchesEnLigne.length} fiches en ligne à repricer, ${sous.length} sous la règle × ${coefFr(coef)}, ${a.aAjouter.length} références à créer, ${a.horsListe.length} fiches en ligne absentes du tarif à vérifier.` });
+    toast('Envoyé au passe');
+  });
+  $('#t-exporter').addEventListener('click', () => {
+    const csv = [['Référence', 'Code fournisseur', 'Statut', 'Ancien achat HT', 'Nouvel achat HT', 'Variation', 'Prix en ligne', `Prix avec × ${coefFr(coef)}`, 'Écart', 'Fiche', 'Observation']];
+    const num = (x) => (Number.isFinite(x) ? x.toFixed(2).replace('.', ',') : '');
+    const enLigneParRef = new Map(lignes.map((l) => [normaliserRef(l.o.ref), l]));
+    for (const [k, o] of a.parRef) {
+      const l = enLigneParRef.get(k);
+      const v = o.prixAchatPrecedentHT > 0 && o.prixAchatHT > 0 ? (o.prixAchatHT - o.prixAchatPrecedentHT) / o.prixAchatPrecedentHT : null;
+      const statut = !l ? 'à ajouter au site' : l.ecart < -tarifReglages.seuil ? 'sous la règle' : l.ecart > tarifReglages.seuil ? 'au-dessus de la règle' : 'conforme';
+      csv.push([o.ref, o.codeFournisseur || '', statut, num(o.prixAchatPrecedentHT), num(o.prixAchatHT), v === null ? '' : `${(v * 100).toFixed(1).replace('.', ',')} %`, l ? num(l.p.prix) : '', l ? num(l.calcule) : '', l ? `${(l.ecart * 100).toFixed(1).replace('.', ',')} %` : '', l ? l.p.url : '', o.observation || '']);
+    }
+    for (const p of a.horsListe) csv.push([p.ref, '', 'en ligne, absente du fichier', '', '', '', num(p.prix), '', '', p.url, '']);
+    const texte = '﻿' + csv.map((r) => r.map((c) => (/[;"\n]/.test(String(c)) ? `"${String(c).replace(/"/g, '""')}"` : c)).join(';')).join('\r\n');
+    const url = URL.createObjectURL(new Blob([texte], { type: 'text/csv;charset=utf-8' }));
+    const lien = document.createElement('a');
+    lien.href = url;
+    lien.download = `rapprochement-${etat.csv.nom.replace(/\.[^.]+$/, '')}.csv`;
+    document.body.append(lien);
+    lien.click();
+    lien.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  });
+}
 
 /* =========================================================
    Vue : Catalogue + fiche produit
@@ -592,7 +740,7 @@ function ouvrirFiche(id) {
 /* =========================================================
    Vue : Au passe (validation) + atelier IA
    ========================================================= */
-const TYPES_PASSE = { prix: ['b-chaud', 'Prix'], fiche: ['b-info', 'Fiche Claude'], ean: ['b-ok', 'EAN trouvé'], categories: ['b-attente', 'Catégories'], nouveau: ['b-info', 'Nouveau produit'] };
+const TYPES_PASSE = { prix: ['b-chaud', 'Prix'], fiche: ['b-info', 'Fiche Claude'], ean: ['b-ok', 'EAN trouvé'], categories: ['b-attente', 'Catégories'], nouveau: ['b-info', 'Nouveau produit'], lot: ['b-attente', 'Liste de prix'] };
 function itemPasseHTML(i) {
   const [cls, lib] = TYPES_PASSE[i.type];
   let corps = '';

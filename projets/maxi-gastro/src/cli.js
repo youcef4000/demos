@@ -3,7 +3,8 @@
 //   npm run passe -- synchro tefcold --lecture-seule   1re fois : remplit la base sans rien décider (puis « relier »)
 //   npm run passe -- synchro equipme            lit equip.me, décide, met les envois en file
 //   npm run passe -- synchro equipme --envoyer   … puis les envoie à Shopify
-//   npm run passe -- import cuistance stock.csv  lit un fichier fournisseur
+//   npm run passe -- import cuistance stock.csv  lit un fichier de stock fournisseur
+//   npm run passe -- import cuistance-tarif LISTE_DE_PRIX.xlsx   lit une liste de prix Excel (le stock connu est gardé)
 //   npm run passe -- relier                      relie les produits Shopify existants aux références fournisseurs
 //   npm run passe -- envoyer [--a-blanc]         exécute les envois en attente (à blanc : écrit sortie/shopify-a-blanc.jsonl)
 //   npm run passe -- passe                       liste ce qui attend une décision
@@ -34,8 +35,8 @@ try {
     }
     case 'import': {
       const [profil, chemin] = positionnels;
-      if (!profil || !chemin) throw new Error('Usage : import <profil> <fichier.csv>');
-      const c = ctx.fichier(profil, { chemin });
+      if (!profil || !chemin) throw new Error('Usage : import <profil> <fichier.csv|.xlsx>  (profils : config/profils-csv/)');
+      const c = await ctx.fichier(profil, { chemin });
       console.error(`Colonnes reconnues : ${JSON.stringify(c.analyse.mapping)} (confiance ${Math.round(c.analyse.confiance * 100)} %)`);
       afficher(await synchroniser({ base: ctx.base, connecteur: c, regles: ctx.regles, depuis: null }));
       if (drapeau('--envoyer')) afficher(await envoyer({ base: ctx.base, shopify: ctx.shopify() }));

@@ -3,7 +3,7 @@
 // equip.me : spécification OpenAPI publique « Dealers API 1.0.4 » (https://equip.me/api/).
 // Tefcold : annonce du flux XML revendeur (https://www.tefcold.com/news/new-feature-a-live-xml-feed-for-your-website).
 // Combisteel, Diamond : clé API annoncée par Maxi Gastro, documentation non publique.
-// Cuistance : fichier de stock CSV envoyé une à deux fois par semaine (mémo vocal).
+// Cuistance : fichier de stock CSV (mémo vocal, pas encore reçu) et liste de prix Excel du 4 mars 2026 (reçue, jamais publiée).
 
 export const CHAMPS_SOURCE = [
   ['ref', 'Référence'],
@@ -79,13 +79,13 @@ export const SOURCES = [
   {
     id: 'cuistance',
     nom: 'Cuistance',
-    mode: 'Fichier CSV par mail',
-    detail: '1 à 2 fois par semaine',
+    mode: 'CSV de stock + liste de prix Excel',
+    detail: 'stock 1 à 2 fois par semaine, tarif à chaque changement',
     statut: 'pret',
-    statutTexte: 'Lecteur CSV prêt : glissez un fichier',
+    statutTexte: 'Lecteur prêt : glissez le CSV de stock ou la liste de prix .xlsx',
     rythme: 'à chaque mail reçu',
-    champs: { ref: 'oui', prixAchat: 'inconnu', stock: 'oui', delai: 'inconnu', description: 'non', photos: 'non', caracteristiques: 'non', dimensions: 'non', ean: 'inconnu', pdf: 'non', commandes: 'non' },
-    notes: { prixAchat: 'Selon les colonnes du fichier : à voir sur un vrai envoi.' },
+    champs: { ref: 'oui', prixAchat: 'oui', stock: 'annonce', delai: 'inconnu', description: 'non', photos: 'non', caracteristiques: 'non', dimensions: 'non', ean: 'non', pdf: 'non', commandes: 'non' },
+    notes: { prixAchat: 'Liste de prix du 4 mars 2026 reçue : référence, code, tarif HT, ancien tarif, paliers de quantité.', stock: 'Fichier de stock pas encore reçu.', ean: 'Pas d\'EAN dans la liste de prix.' },
   },
 ];
 

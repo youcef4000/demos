@@ -26,6 +26,7 @@ function estExclue(o, regles) {
 }
 
 const versOffre = (r) => ({
+  // stock et statut relus depuis la base : une liste de prix ne les a pas effacés
   fournisseur: r.fournisseur, ref: r.ref, ean: r.ean, marque: r.marque, designation: r.designation, famille: r.famille,
   prixAchatHT: r.prix_achat, stock: r.stock, statutStock: r.statut_stock, delaiJours: r.delai_jours,
 });
@@ -53,7 +54,8 @@ export async function synchroniser({ base, connecteur, regles, depuis = base.der
         continue;
       }
       if (!avant) rapport.nouvelles++;
-      if (!avant || avant.stock !== (o.stock ?? null) || avant.statut_stock !== (o.statutStock ?? null) || (o.prixAchatHT && avant.prix_achat !== o.prixAchatHT)) touchees.add(o.cle);
+      const stockConnu = o.statutStock && o.statutStock !== 'inconnu';
+      if (!avant || (stockConnu && (avant.stock !== (o.stock ?? null) || avant.statut_stock !== o.statutStock)) || (o.prixAchatHT && avant.prix_achat !== o.prixAchatHT)) touchees.add(o.cle);
     }
   } catch (err) {
     rapport.erreurs.push(err.message);
