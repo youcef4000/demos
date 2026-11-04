@@ -4,7 +4,7 @@
 // progression au serveur. Le compte démo vit seulement ici, sans serveur.
 
 import { PUB } from '../../data/serveur.js';
-import { api, apiUrl, proofLogin, ApiError } from './api.js';
+import { api, apiUrl, proofLogin, ApiError, derive, randomSalt } from './api.js';
 
 const ME = 'hooked-academy:me:v2';
 const OLD = ['hooked-academy:data:v1', 'hooked-academy:session:v1', 'hooked-academy:admin:v1'];
@@ -199,6 +199,29 @@ function opened(data) {
  * Connexion étudiant : e-mail (ou téléphone) + code d'accès (HA-XXXX-XXXX), ou le compte de l'équipe (mot de passe).
  * Renvoie { student } ou { error: 'bad' | 'suspended' | 'rate' | 'offline' }.
  */
+/**
+ * Choisir (avec le code d'accès) ou changer (avec le mot de passe actuel) son mot de passe.
+ * Renvoie { ok } ou { error: 'bad' | 'rate' | 'offline' | 'suspended' }.
+ */
+export async function setPassword(current, next) {
+  const c = read();
+  if (!c || c.demo || c.student.protected) return { error: 'bad' };
+  const st = c.student;
+  try {
+    const salt = randomSalt();
+    const body = { salt, newProof: await derive(String(next).trim(), salt) };
+    if (st.hasPassword) {
+      const s = await api('POST', 'salt', { ident: st.email || st.phone });
+      body.proof = await derive(String(current).trim(), s.salt, s.iter);
+    } else body.code = String(current).trim();
+    await api('PUT', 'me/password', body);
+    write({ ...read(), student: { ...read().student, hasPassword: true } });
+    return { ok: true };
+  } catch (e) {
+    return errOf(e);
+  }
+}
+
 export async function loginStudent(ident, secret) {
   const id = String(ident || '').trim();
   const raw = String(secret || '').trim();

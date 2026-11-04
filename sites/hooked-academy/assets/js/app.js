@@ -1537,6 +1537,53 @@ function teamCard() {
   </section>`;
 }
 
+/** Profil : choisir son mot de passe (avec le code d'accès reçu), puis le changer (avec l'actuel). */
+function pwCard() {
+  const has = !!me.hasPassword;
+  const f = (id, label, ac) => `<div class="fld"><label class="lbl" for="${id}">${label}</label><input class="in in--ltr" id="${id}" type="password" autocomplete="${ac}" autocapitalize="off" spellcheck="false" required></div>`;
+  return `<section class="card pw-card">
+    <p class="card-k">${icon('key', { size: 14 })} ${t(has ? 'app.pw.k.change' : 'app.pw.k.create')}</p>
+    <p class="muted">${t(has ? 'app.pw.text.change' : 'app.pw.text.create')}</p>
+    <form class="pw-f" id="pwf" novalidate>
+      ${f('pw-cur', t(has ? 'app.pw.current' : 'app.pw.code'), has ? 'current-password' : 'one-time-code')}
+      ${f('pw-new', t('app.pw.new'), 'new-password')}
+      ${f('pw-new2', t('app.pw.new2'), 'new-password')}
+      <p class="fld-h">${t('app.pw.rule')}</p>
+      <p class="login-err" id="pw-err" role="alert" aria-live="assertive"></p>
+      <button class="b b--or" id="pw-sub" type="submit"><span class="spin" aria-hidden="true"></span><span class="b-t">${t(has ? 'app.pw.save.change' : 'app.pw.save.create')}</span></button>
+    </form>
+  </section>`;
+}
+function bindPw() {
+  const f = $('#pwf');
+  if (!f) return;
+  f.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const err = $('#pw-err');
+    const [cur, a, b] = ['#pw-cur', '#pw-new', '#pw-new2'].map((q) => $(q).value.trim());
+    err.textContent = '';
+    if (!cur) return (err.textContent = t(me.hasPassword ? 'app.pw.err.current' : 'app.pw.err.code'));
+    if (a.length < 8) return (err.textContent = t('app.pw.err.short'));
+    if (a !== b) return (err.textContent = t('app.pw.err.same'));
+    const btn = $('#pw-sub');
+    const busy = (on) => {
+      btn.disabled = on;
+      btn.classList.toggle('is-busy', on);
+      btn.setAttribute('aria-busy', String(on));
+    };
+    busy(true);
+    const r = await S.setPassword(cur, a);
+    busy(false);
+    if (r.error) {
+      err.textContent = t(r.error === 'bad' ? (me.hasPassword ? 'app.pw.err.current' : 'app.pw.err.code') : r.error === 'rate' ? 'app.pw.err.rate' : 'app.pw.err.offline');
+      return;
+    }
+    refreshMe();
+    toast(`${icon('check', { size: 18 })} ${t('app.pw.ok')}`, 3600);
+    route();
+  });
+}
+
 /** Profil : formations du pack et date de fin d'accès. */
 function packCard() {
   const tr = S.accessOf(me);
@@ -1588,6 +1635,7 @@ function viewProfile() {
         ${head}
         ${teamCard()}
         ${me.protected ? '' : packCard()}
+        ${me.protected ? '' : pwCard()}
         <section class="card lvl-card">
           <p class="card-k">${icon('bolt', { size: 14 })} ${t('app.level.k')}</p>
           <h2>${t(`level.${lv.i}`)} <span class="lvl-xp"><bdi>${num(me.progress.xp)} XP</bdi></span></h2>
@@ -1619,6 +1667,7 @@ function viewProfile() {
       </div>`,
     );
   }
+  bindPw();
   $('#out').addEventListener('click', () => {
     S.logout();
     me = null;

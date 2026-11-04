@@ -5163,3 +5163,14 @@ a.lc:focus-visible .lc-go,
 .team-card .b {
   margin-top: 14px;
 }
+
+/* Mot de passe de l'étudiant (profil) */
+.pw-f {
+  display: grid;
+  gap: 14px;
+  max-width: 440px;
+  margin-top: 14px;
+}
+.pw-f .b {
+  justify-self: start;
+}

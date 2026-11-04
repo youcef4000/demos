@@ -392,6 +392,14 @@ export class Plateforme {
     this.sql.exec('INSERT INTO audit (at, who, act, info) VALUES (?, ?, ?, ?)', Date.now(), who, act, String(info).slice(0, 300));
   }
 
+  /** Colonne du mot de passe des étudiants (sel:vérificateur), ajoutée aux bases créées avant elle. */
+  pwColumn() {
+    if (this._pwCol) return;
+    try {
+      this.sql.exec('ALTER TABLE students ADD COLUMN pw TEXT');
+    } catch {}
+    this._pwCol = true;
+  }
   async key() {
     if (!this._key) {
       let s = this.kv('secret');
@@ -500,6 +508,20 @@ export class Plateforme {
       );
     else this.sql.exec('UPDATE students SET email = ?, phone = ?, v = ? WHERE id = ?', st.email || null, st.phone || null, v, st.id);
   }
+  /** L'étudiant a-t-il choisi un mot de passe ? (il remplace alors son code d'accès) */
+  hasPw(id) {
+    if (id === TRAINER.id) return true;
+    this.pwColumn();
+    return !!this.sql.exec('SELECT pw FROM students WHERE id = ?', id).toArray()[0]?.pw;
+  }
+  /** Étudiants qui ont cet identifiant (e-mail ou téléphone, sous toutes ses écritures). */
+  studentsByIdent(ident) {
+    const email = normEmail(ident);
+    const phone = email ? '' : normPhone(ident);
+    if (!email && !phone) return [];
+    this.pwColumn();
+    return this.sql.exec('SELECT id, code, pw FROM students WHERE ' + (email ? 'email = ?' : 'phone = ?'), email || phone).toArray();
+  }
   /** Accès en cours d'un étudiant (formations ouvertes, non expiré, actif). */
   tracksOf(st) {
     if (!st || !st.active) return [];
@@ -515,7 +537,7 @@ export class Plateforme {
     for (const r of this.docs('res')) if (open(r.id)) res[r.id] = JSON.parse(r.v);
     const faq = this.kv('faq');
     // Accès terminé ou sans formation : plus de questions pro
-    return { student: st, faq: tracks.length && Array.isArray(faq) ? faq.filter((x) => x.aud !== 'public') : null, res };
+    return { student: { ...st, hasPassword: this.hasPw(st.id) }, faq: tracks.length && Array.isArray(faq) ? faq.filter((x) => x.aud !== 'public') : null, res };
   }
   /** Session étudiante en cours et ses formations ouvertes (null : pas de session valable). */
   async studentAccess(req) {
@@ -655,6 +677,7 @@ export class Plateforme {
       }
       return json(this.member(st));
     }
+    if (is('PUT', 'me', 'password')) return this.studentPassword(req);
     if (is('PUT', 'me', 'progress')) {
       const s = await this.session(req, 'student');
       const st = s && this.student(s.sub);
@@ -869,7 +892,8 @@ export class Plateforme {
     const st = id === TRAINER.id ? null : this.student(id);
     if (!st) fail(404, 'not_found');
     const code = accessCode();
-    this.sql.exec('UPDATE students SET code = ? WHERE id = ?', await this.mac(`code:${code}`), id);
+    this.pwColumn();
+    this.sql.exec('UPDATE students SET code = ?, pw = NULL WHERE id = ?', await this.mac(`code:${code}`), id);
     // Quelqu'un qui aurait volé l'ancien code est déconnecté tout de suite
     this.sql.exec("DELETE FROM sessions WHERE role = 'student' AND sub = ?", id);
     this.log('nouveau code', id);
@@ -889,11 +913,12 @@ export class Plateforme {
   async salt(req) {
     if (!this.take(`salt:${this.ipKey(req)}`, 60, 900e3)) fail(429, 'rate');
     const v = await readJSON(req, 4096);
-    const ad = this.kv('admin');
-    if (!this.setupOk) return json({ setup: true });
+    const ad = this.kv('admin') || {};
+    if (!this.setupOk && !this.studentsByIdent(S(v.ident, 120)).some((r) => r.pw)) return json({ setup: true });
     const id = S(v.ident, 120).toLowerCase();
-    const real = same(await this.mac(`ident:${id}`), ad.ident);
-    return json({ salt: real ? ad.salt : (await this.mac(`salt:${id}`)).slice(0, 32), iter: ITER });
+    if (same(await this.mac(`ident:${id}`), ad.ident)) return json({ salt: ad.salt, iter: ITER });
+    const pw = this.studentsByIdent(id).find((r) => r.pw)?.pw;
+    return json({ salt: pw ? pw.split(':')[0] : (await this.mac(`salt:${id}`)).slice(0, 32), iter: ITER });
   }
   /** Vérifie identifiant + preuve (mot de passe dérivé) de l'équipe. */
   async checkAdmin(ident, proof) {
@@ -975,15 +1000,18 @@ export class Plateforme {
     if (!this.take(idk, 15, 3600e3)) fail(429, 'rate');
     let st = null;
     if (v.proof) {
-      // Le formateur entre dans l'espace étudiant avec le compte de l'équipe
-      if (!(await this.checkAdmin(ident, v.proof))) fail(401, 'bad');
-      st = this.student(TRAINER.id);
+      // Le formateur entre dans l'espace étudiant avec le compte de l'équipe ; un étudiant, avec son mot de passe
+      if (await this.checkAdmin(ident, v.proof)) st = this.student(TRAINER.id);
+      else {
+        const row = await this.pwMatch(this.studentsByIdent(ident), v.proof);
+        if (!row) fail(401, 'bad');
+        st = this.student(row.id);
+      }
     } else {
       const code = normCode(v.code);
       if (!code || (!email && !phone)) fail(401, 'bad');
       const h = await this.mac(`code:${code}`);
-      const rows = this.sql.exec('SELECT id, code FROM students WHERE ' + (email ? 'email = ?' : 'phone = ?'), email || phone).toArray();
-      const row = rows.find((r) => same(r.code || '', h));
+      const row = this.studentsByIdent(ident).find((r) => !r.pw && same(r.code || '', h));
       if (!row) fail(401, 'bad');
       st = this.student(row.id);
     }
@@ -992,6 +1020,34 @@ export class Plateforme {
     this.give(`lf:${ipk}`);
     this.give(idk);
     return json(this.member(st), 200, { 'set-cookie': await this.openSession('student', st.id) });
+  }
+  /** Ligne dont le mot de passe correspond à la preuve (dérivation PBKDF2 faite dans le navigateur). */
+  async pwMatch(rows, proof) {
+    if (typeof proof !== 'string' || !/^[0-9a-f]{64}$/.test(proof)) return null;
+    const ver = await this.mac(`spw:${proof}`);
+    return rows.find((r) => r.pw && same(r.pw.split(':')[1] || '', ver)) || null;
+  }
+  /**
+   * L'étudiant choisit ou change son mot de passe. Il prouve qu'il est bien lui : son code d'accès (premier
+   * mot de passe) ou son mot de passe actuel. Le code d'accès ne sert plus ensuite ; ses autres sessions se ferment.
+   */
+  async studentPassword(req) {
+    const s = await this.session(req, 'student');
+    const st = s && this.student(s.sub);
+    if (!st || st.id === TRAINER.id) fail(401, 'auth');
+    if (!st.active) fail(403, 'suspended');
+    if (!this.take(`spw:${st.id}`, 8, 900e3)) fail(429, 'rate');
+    const v = await readJSON(req, 4096);
+    if (!/^[0-9a-f]{32}$/.test(v.salt || '') || !/^[0-9a-f]{64}$/.test(v.newProof || '')) fail(400, 'fields');
+    this.pwColumn();
+    const row = this.sql.exec('SELECT id, code, pw FROM students WHERE id = ?', st.id).toArray()[0];
+    const ok = row.pw ? !!(await this.pwMatch([row], v.proof)) : !!normCode(v.code) && same(row.code || '', await this.mac(`code:${normCode(v.code)}`));
+    if (!ok) fail(401, 'bad');
+    this.give(`spw:${st.id}`);
+    this.sql.exec('UPDATE students SET pw = ? WHERE id = ?', `${v.salt}:${await this.mac(`spw:${v.newProof}`)}`, st.id);
+    this.sql.exec("DELETE FROM sessions WHERE role = 'student' AND sub = ? AND h != ?", st.id, s.h);
+    this.log('mot de passe étudiant', st.id);
+    return json({ ok: true });
   }
   async logout(req, role) {
     const s = await this.session(req, role);

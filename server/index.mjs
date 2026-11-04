@@ -73,7 +73,8 @@ const clientIp = (req) => {
   }
   return req.socket.remoteAddress || '';
 };
-const app = new Plateforme({ sql, transactionSync }, { base: BASE, ip: (r) => r.headers.get('x-ha-ip') || '' });
+const SETUP_HASH = /^[0-9a-f]{64}$/.test(process.env.SETUP_HASH || '') ? process.env.SETUP_HASH : undefined;
+const app = new Plateforme({ sql, transactionSync }, { base: BASE, setupHash: SETUP_HASH, ip: (r) => r.headers.get('x-ha-ip') || '' });
 
 // Premier démarrage : la FAQ du site (publique) et les questions pro (server/faq-pro.json, réservées aux membres)
 if (!app.kv('faq')) {
