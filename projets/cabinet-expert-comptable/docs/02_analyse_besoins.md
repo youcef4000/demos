@@ -61,7 +61,7 @@ reste dans un autre logiciel ou chez l'administration.
 | I6 | TVA des prestations et travaux exigible à l'encaissement | Article 14 du code des taxes sur le chiffre d'affaires |
 | I7 | Précompte reporté automatiquement de mois en mois | Évite les reports oubliés d'une G50 à l'autre |
 | I8 | Montant de la G50 communiqué au client avant la date limite | Le client paie ; il doit connaître le montant à temps |
-| I9 | Conservation et traçabilité des pièces et des validations | Conservation des documents comptables dix ans (code de commerce, art. 12) ; contrôle fiscal |
+| I9 | Conservation et traçabilité des pièces et des validations | Durée légale de conservation des pièces comptables (dix ans, à confirmer par le cabinet) ; contrôle fiscal |
 | I10 | Format d'export réglable | Le modèle Excel exact de PC Compta n'a pas été transmis |
 | I11 | Validation humaine avant tout envoi, toute écriture, toute déclaration | Responsabilité professionnelle ; erreur coûteuse |
 | I12 | Déclarations préparées « prêtes à saisir », sans transmission automatique | Aucune API officielle vérifiée pour Jibaya'tic, CNAS ou CASNOS |
