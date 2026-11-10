@@ -1,0 +1,68 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["typeDoc", "numero", "date", "emetteur", "destinataire", "nature", "lignes", "totalHT", "totalTVA", "timbre", "totalTTC", "modePaiement", "datePaiement", "paie", "confiance", "incertains", "remarques"],
+  "properties": {
+    "typeDoc": { "type": "string", "enum": ["facture_achat", "facture_vente", "avoir", "etat_paie", "releve_bancaire", "piece_caisse", "autre"] },
+    "numero": { "type": ["string", "null"] },
+    "date": { "type": ["string", "null"], "description": "AAAA-MM-JJ" },
+    "emetteur": { "$ref": "#/$defs/tiers" },
+    "destinataire": { "$ref": "#/$defs/tiers" },
+    "nature": { "type": ["string", "null"], "enum": ["marchandises", "production", "prestation", "travaux", "immobilisation", "frais", null] },
+    "lignes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["libelle", "montantHT", "tauxTVA"],
+        "properties": {
+          "libelle": { "type": "string" },
+          "montantHT": { "type": "integer", "description": "centimes de DA" },
+          "tauxTVA": { "type": "integer", "enum": [19, 9, 0] }
+        }
+      }
+    },
+    "totalHT": { "type": ["integer", "null"] },
+    "totalTVA": { "type": ["integer", "null"] },
+    "timbre": { "type": ["integer", "null"] },
+    "totalTTC": { "type": ["integer", "null"] },
+    "modePaiement": { "type": ["string", "null"], "enum": ["especes", "cheque", "virement", "carte", "a_terme", null] },
+    "datePaiement": { "type": ["string", "null"] },
+    "paie": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["effectif", "brut", "cotisationsSalariales", "irg", "net", "cotisationsPatronales"],
+          "properties": {
+            "effectif": { "type": ["integer", "null"] },
+            "brut": { "type": ["integer", "null"] },
+            "cotisationsSalariales": { "type": ["integer", "null"] },
+            "irg": { "type": ["integer", "null"] },
+            "net": { "type": ["integer", "null"] },
+            "cotisationsPatronales": { "type": ["integer", "null"] }
+          }
+        }
+      ]
+    },
+    "confiance": { "type": "number" },
+    "incertains": { "type": "array", "items": { "type": "string" } },
+    "remarques": { "type": "array", "items": { "type": "string" } }
+  },
+  "$defs": {
+    "tiers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nom", "nif", "rc", "nis", "ai", "adresse"],
+      "properties": {
+        "nom": { "type": ["string", "null"] },
+        "nif": { "type": ["string", "null"] },
+        "rc": { "type": ["string", "null"] },
+        "nis": { "type": ["string", "null"] },
+        "ai": { "type": ["string", "null"] },
+        "adresse": { "type": ["string", "null"] }
+      }
+    }
+  }
+}
