@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["compte", "justification", "confiance"],
+  "properties": {
+    "compte": { "type": "string" },
+    "justification": { "type": "string" },
+    "confiance": { "type": "number" }
+  }
+}
