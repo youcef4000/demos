@@ -1,0 +1,12 @@
+# /etc/caddy/Caddyfile — HTTPS automatique (Let's Encrypt) devant le serveur du cabinet
+# Remplacer cabinet-exemple.dz par le domaine du cabinet (enregistrement DNS A vers l'IP du serveur).
+cabinet-exemple.dz, www.cabinet-exemple.dz {
+	encode zstd gzip
+	request_body {
+		max_size 20MB
+	}
+	reverse_proxy 127.0.0.1:8790
+	log {
+		output file /var/log/caddy/cabinet.log
+	}
+}

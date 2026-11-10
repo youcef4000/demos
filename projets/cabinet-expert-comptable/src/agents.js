@@ -5,7 +5,6 @@
 // - Les agents ne reçoivent que la pièce et l'identité du dossier : ni historique, ni autres clients.
 // - Ils ne font que proposer : la validation et toute action sortante restent dans les routes réservées au cabinet.
 import { readFileSync } from 'node:fs';
-import { readFile } from 'node:fs/promises';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -123,8 +122,4 @@ export function infosAgents() {
     { id: 'lecteur_pieces', nom: 'Lecture des pièces', prompt: LECTEUR.prompt },
     { id: 'imputation_scf', nom: 'Imputation SCF', prompt: IMPUTATION.prompt },
   ];
-}
-
-export async function lireFichierTexte(chemin) {
-  return readFile(chemin, 'utf8');
 }
