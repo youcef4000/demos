@@ -50,6 +50,11 @@ export function dateDansLeMois(regle, mois) {
 /** Période concernée par l'échéance (ex. G50 du 20/11 → octobre). */
 export function periodeConcernee(regle, mois) {
   if (regle.decalage === -12) return String(Number(mois.slice(0, 4)) - 1);
+  if (regle.frequence === 'annuelle' && Number(regle.decalage) === 0) {
+    const liste = (regle.mois || []).map(Number).sort((a, b) => a - b);
+    const rang = liste.indexOf(Number(mois.slice(5, 7))) + 1;
+    return liste.length > 1 ? `${rang === 1 ? '1er' : `${rang}e`} acompte ${mois.slice(0, 4)}` : mois.slice(0, 4);
+  }
   if (regle.frequence === 'annuelle' && regle.decalage === -1 && (regle.mois || []).length === 4) {
     const fin = decalerPeriode(mois, -1);
     return `T${Math.ceil(Number(fin.slice(5, 7)) / 3)} ${fin.slice(0, 4)}`;

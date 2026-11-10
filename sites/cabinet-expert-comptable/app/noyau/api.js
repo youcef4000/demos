@@ -217,6 +217,21 @@ export function creerApi({ base, moteurs, securite = {}, horloge = () => new Dat
 
   route('GET', '/moi', [], ({ u }) => ({ utilisateur: publicUtilisateur(u), roleLibelle: ROLES[u.role], cabinet: param('cabinet'), periodeTravail: periodeTravail(), aujourdhui: aujourdhui(), dossier: u.role === 'client' ? base.lire('dossiers', u.dossierId) : null }));
 
+  // Compteurs du menu (pièces, écritures, messages en attente)
+  route('GET', '/compteurs', [], ({ u }) => {
+    const ids = new Set(dossiersVisibles(u).map((d) => d.id));
+    const dans = (col, f) => base.tous(col).filter((x) => ids.has(x.dossierId) && f(x)).length;
+    if (u.role === 'client') return { messagesNonLus: dans('messages', (m) => m.de === 'cabinet' && !m.lu) };
+    return {
+      piecesAValider: dans('pieces', (p) => p.statut === 'a_valider'),
+      ecrituresProposees: dans('ecritures', (e) => e.statut === 'proposee'),
+      envoisAValider: dans('envois', (e) => e.statut === 'a_valider'),
+      messagesNonLus: dans('messages', (m) => m.de === 'client' && !m.lu),
+      contactsNonTraites: u.role === 'associe' ? base.tous('contacts').filter((c) => !c.traite).length : 0,
+      g50AValider: u.role === 'associe' ? dans('declarations', (d) => d.statut === 'preparee') : 0,
+    };
+  });
+
   // Tableau de bord du cabinet
   route('GET', '/tableau', PERSONNEL, ({ u, q }) => {
     const periode = periodeOuDefaut(q.periode);
@@ -254,7 +269,9 @@ export function creerApi({ base, moteurs, securite = {}, horloge = () => new Dat
     const d = dossier(u, p.id);
     const periode = periodeOuDefaut(q.periode);
     const r = u.role === 'client' ? { ...d, periode } : resumeDossier(d, periode);
-    return { dossier: r, attendues: attendues(d, periode), declaration: declarationDe(d.id, periode), resultat: resultatPeriode(ecrituresDossier(d.id), periode) };
+    const dec = declarationDe(d.id, periode);
+    const visible = dec && (u.role !== 'client' || ['validee', 'deposee'].includes(dec.statut));
+    return { dossier: r, attendues: attendues(d, periode), declaration: visible ? { ...dec, preparePar: nomUtilisateur(dec.preparePar), validePar: nomUtilisateur(dec.validePar) } : null, resultat: u.role === 'client' && !base.lire('publications', `${d.id}|${periode}`) ? null : resultatPeriode(ecrituresDossier(d.id), periode) };
   });
   const CHAMPS_DOSSIER = ['raisonSociale', 'forme', 'activite', 'nature', 'wilaya', 'adresse', 'nif', 'nis', 'rc', 'ai', 'regime', 'impot', 'centreImpots', 'salaries', 'caisse', 'banque', 'casnos', 'tvaSurEncaissements', 'creditTvaInitial', 'collaborateurId', 'contact', 'debutExercice', 'archive'];
   route('POST', '/dossiers', ['associe'], ({ u, corps }) => {

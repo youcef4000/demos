@@ -22,7 +22,7 @@ export function imputerLigne(ligne, fiche, { schemas = SCHEMAS_DEFAUT, historiqu
     const n = nif(tiersDe(fiche).nif);
     const deja = n && historique.find((h) => h.nif === n && h.nature === nature && h.compte);
     if (deja) return { compte: deja.compte, source: 'historique', justification: `Même fournisseur déjà imputé en ${deja.compte}.` };
-    if (nature === 'frais' || !nature) {
+    if (nature === 'frais' || nature === 'prestation' || !nature) {
       const texte = `${ligne.libelle || ''} ${tiersDe(fiche).nom || ''}`.toLowerCase();
       for (const r of schemas.motsCles || []) {
         if (new RegExp(r.motif, 'i').test(texte)) return { compte: r.compte, source: 'regle', justification: `Mot-clé « ${r.motif.split('|')[0]} ».` };
@@ -82,6 +82,21 @@ export function genererEcritures(piece, dossier, { schemas = SCHEMAS_DEFAUT, his
       C(s.paie.cnas, 'Charges patronales CNAS', p.cotisationsPatronales || 0),
     ];
     out.push({ ...base, journal: 'PA', date: f.date || `${piece.periode}-28`, libelle: `Paie ${f.libellePeriode || piece.periode}`, lignes: regrouper(lignes), source: 'regle' });
+    return { ecritures: out, manquantes };
+  }
+  if (f.typeDoc === 'piece_caisse') {
+    // Bon de caisse : dépense payée en espèces, sans TVA récupérable → charge au débit, caisse au crédit
+    const lignes = [];
+    let total = 0;
+    (f.lignes || []).forEach((l, i) => {
+      const imp = imputations[i] || imputerLigne(l, { ...f, sens: 'achat', nature: f.nature || 'frais' }, { schemas: s, historique });
+      if (!imp.compte) return manquantes.push(i);
+      lignes.push(L(imp.compte, l.libelle || libelleCompte(imp.compte), l.montantHT));
+      total += l.montantHT;
+    });
+    if (manquantes.length || !total) return { ecritures: [], manquantes };
+    lignes.push(C(s.tresorerie.caisse, `Bon de caisse ${f.numero || ''}`.trim(), total));
+    out.push({ ...base, journal: 'CA', date: f.date || `${piece.periode}-28`, libelle: `Bon de caisse ${f.numero || ''}`.trim(), lignes: regrouper(lignes), source: 'regle' });
     return { ecritures: out, manquantes };
   }
   if (!['facture_achat', 'facture_vente', 'avoir'].includes(f.typeDoc)) return { ecritures: out, manquantes };

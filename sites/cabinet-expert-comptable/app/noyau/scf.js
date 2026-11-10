@@ -28,13 +28,20 @@ export const PLAN_COMPTES = {
   '604': "Achats d'études et de prestations de services",
   '605': 'Achats de matériels, équipements et travaux',
   '607': 'Achats non stockés de matières et fournitures',
+  '611': 'Sous-traitance générale',
   '613': 'Locations',
   '615': 'Entretien, réparations et maintenance',
   '616': "Primes d'assurances",
+  '617': 'Études et recherches',
+  '618': 'Documentation et divers',
+  '621': "Personnel extérieur à l'entreprise",
   '622': "Rémunérations d'intermédiaires et honoraires",
+  '623': 'Publicité, publications, relations publiques',
   '624': 'Transports de biens et transport collectif du personnel',
+  '625': 'Déplacements, missions et réceptions',
   '626': 'Frais postaux et de télécommunications',
   '627': 'Services bancaires et assimilés',
+  '628': 'Cotisations et divers',
   '631': 'Rémunérations du personnel',
   '635': 'Cotisations aux organismes sociaux',
   '645': 'Autres impôts et taxes',
@@ -82,8 +89,8 @@ export const SCHEMAS_DEFAUT = {
     production: '601',
     prestation: '604',
     travaux: '605',
-    immobilisation: '2183',
-    // « frais » sans mot-clé reconnu : pas de compte par défaut, l'agent imputation_scf propose (jugement)
+    // immobilisation (215, 2182, 2183, 2184…) et « frais » sans mot-clé reconnu : pas de compte par défaut,
+    // l'agent imputation_scf propose (jugement), le collaborateur valide
   },
   ventes: {
     marchandises: '700',
@@ -102,9 +109,9 @@ export const SCHEMAS_DEFAUT = {
     { motif: 'assurance', compte: '616' },
     { motif: 'honoraire|commission|avocat|notaire', compte: '622' },
     { motif: 'transport|fret|livraison', compte: '624' },
-    { motif: 'téléphone|telephone|internet|mobilis|forfait|poste', compte: '626' },
+    { motif: 'téléphone|telephone|internet|fibre|adsl|forfait|poste', compte: '626' },
     { motif: 'frais bancaires|agios|tenue de compte|commission bancaire', compte: '627' },
-    { motif: 'carburant|fourniture|papeterie|consommable', compte: '607' },
+    { motif: 'carburant|gasoil|gazole|essence|fourniture|papeterie|consommable', compte: '607' },
   ],
 };
 
