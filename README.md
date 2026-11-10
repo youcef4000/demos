@@ -36,6 +36,14 @@ taux, par qui, à qui, bénéfice net, reste à régler — dans plusieurs pays 
 téléphone (IndexedDB), sans serveur : un mémo écrit remplit la fiche tout seul, un mémo vocal se réécoute pour la
 remplir. Sauvegarde et export Excel depuis **Réglages**. Lien privé : https://demos.bornzstudio.com/sarraf/
 
+## Cabinet d'expertise comptable (`sites/cabinet-expert-comptable/`, `projets/cabinet-expert-comptable/`)
+
+Site public, application associé / collaborateur / client et agents IA (lecture des pièces, imputation SCF) pour un
+cabinet algérien : pièces déposées en photo, écritures validées puis exportées vers PC Compta, G50 prête à saisir,
+résultat du mois, échéancier, relances validées avant envoi. Démo (données fictives, tout dans le navigateur) :
+https://demos.bornzstudio.com/cabinet-expert-comptable/ — version réelle (serveur Node, SQLite) et documents (mémos
+transcrits, besoins, architecture, abonnements, guide, livraison) dans `projets/cabinet-expert-comptable/`.
+
 ## Hooked Academy (`sites/hooked-academy/`, `server/`)
 
 La formation a un vrai serveur (inscriptions, comptes étudiants, contenus modifiés depuis l'espace équipe,
