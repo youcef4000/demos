@@ -1,0 +1,21 @@
+{
+  "name": "cabinet-expert-comptable",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cabinet d'expertise comptable (Algérie) : site public, application associé / collaborateur / client, agents IA de lecture et d'imputation, G50 prête à saisir, export PC Compta.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/serveur.js",
+    "demo": "node --disable-warning=ExperimentalWarning src/outils-cli.js demo",
+    "compte": "node --disable-warning=ExperimentalWarning src/outils-cli.js compte",
+    "test": "node --disable-warning=ExperimentalWarning --test \"test/*.test.js\"",
+    "front": "node outils/copier-front.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.4.0",
+    "nodemailer": "^7.0.0"
+  }
+}
