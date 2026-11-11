@@ -1,0 +1,25 @@
+{
+  "id": "./",
+  "name": "Benna — la cuisine pas à pas",
+  "short_name": "Benna",
+  "description": "Des recettes d’Algérie et du monde pas à pas, les mesures en verres, la liste de courses, le coût de chaque plat et le SOS quand ça rate.",
+  "lang": "fr",
+  "dir": "auto",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fbf6ee",
+  "theme_color": "#fbf6ee",
+  "categories": ["food", "lifestyle", "education"],
+  "icons": [
+    { "src": "img/icone-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "img/icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "img/icone-masque-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "img/icone.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "Ce soir, on mange quoi ?", "short_name": "Ce soir", "url": "./#/cesoir", "icons": [{ "src": "img/icone-192.png", "sizes": "192x192" }] },
+    { "name": "Liste de courses", "short_name": "Courses", "url": "./#/courses", "icons": [{ "src": "img/icone-192.png", "sizes": "192x192" }] }
+  ]
+}
