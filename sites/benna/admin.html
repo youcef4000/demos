@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr" dir="ltr" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Benna · liens d’activation</title>
+<meta name="description" content="Outil du propriétaire : créer les liens d’activation des abonnements Benna.">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="img/icone.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="module" src="js/admin.js"></script>
+</head>
+<body>
+<main class="page" style="padding-bottom:60px">
+  <header class="barre"><span></span><h1>Liens d’activation</h1><span></span></header>
+  <p class="intro">Cette page crée les liens qui activent Benna+ et Benna Pro. Elle fonctionne avec votre clé privée, qui reste sur cet appareil : rien n’est envoyé.</p>
+
+  <section class="bloc" id="bloc-cle">
+    <h2>1. Votre clé</h2>
+    <p id="etat-cle" class="note">Aucune clé chargée.</p>
+    <label class="bouton contour large" style="cursor:pointer">Charger ma clé privée (fichier .json)<input type="file" id="fichier-cle" accept="application/json,.json" hidden></label>
+    <label class="bascule" style="margin-top:12px"><input type="checkbox" id="retenir"><span>Garder la clé sur cet appareil</span></label>
+    <p class="note">Ne cochez cette case que sur votre téléphone ou votre ordinateur personnel.</p>
+  </section>
+
+  <section class="bloc">
+    <h2>2. L’abonnement</h2>
+    <p class="label">Formule</p>
+    <div class="segment" id="plan"><button data-v="plus" class="actif">Benna+</button><button data-v="pro">Benna Pro</button></div>
+    <p class="label">Durée</p>
+    <div class="segment" id="duree"><button data-v="1">1 mois</button><button data-v="12" class="actif">12 mois</button><button data-v="0">Essai 15 jours</button></div>
+    <label class="champ large" style="margin-top:16px"><span>Nom du client</span><small>Il s’affiche dans l’application : cela décourage le partage du lien.</small><input type="text" id="nom" maxlength="40" autocomplete="off"></label>
+    <button class="bouton large" id="creer">Créer le lien</button>
+  </section>
+
+  <section class="bloc" id="resultat" hidden>
+    <h2>3. Le lien</h2>
+    <textarea id="lien" rows="5" readonly></textarea>
+    <button class="bouton large" id="copier">Copier le lien</button>
+    <a class="bouton contour large" id="envoyer" target="_blank" rel="noopener noreferrer">Envoyer sur WhatsApp</a>
+  </section>
+
+  <section class="bloc">
+    <h2>Liens créés sur cet appareil</h2>
+    <ul class="fiches" id="journal"></ul>
+    <p class="note" id="journal-vide">Aucun lien pour l’instant.</p>
+  </section>
+
+  <section class="bloc">
+    <h2>Changer de clé</h2>
+    <p class="note">À faire seulement si la clé privée a été perdue ou divulguée. Tous les liens déjà envoyés cesseront de fonctionner.</p>
+    <button class="bouton contour large" id="nouvelle-cle">Créer une nouvelle paire de clés</button>
+    <div id="cle-publique" hidden>
+      <p class="note">Le fichier de la clé privée vient d’être téléchargé : rangez-le en lieu sûr. Remplacez ensuite la ligne <code>cleLicence</code> de <code>js/config.js</code> par celle-ci :</p>
+      <textarea id="ligne-config" rows="4" readonly></textarea>
+    </div>
+  </section>
+</main>
+<div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

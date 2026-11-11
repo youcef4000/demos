@@ -123,6 +123,8 @@ export function decouper(texte) {
   for (const brute of String(texte || '').split(/\r?\n/)) {
     const ligne = brute.replace(/^[\s•*\-–—·✓✔▪◦]+/, '').trim();
     if (!ligne || /^https?:\/\//i.test(ligne)) continue;
+    // Les intertitres (« Ingrédients : », « Préparation ») ne sont ni un ingrédient ni une étape.
+    if (/^(ingr[ée]dients?|pr[ée]paration|[ée]tapes?|recette|ingredients?|method|steps?|instructions?|directions?|المكونات|المقادير|طريقة التحضير|التحضير)\s*:?$/i.test(ligne)) continue;
     const numerotee = /^\d+\s*[.)\]:-]\s+/.test(ligne);
     const quantite = /^(\d+([.,/]\d+)?|½|¼|¾|un|une|deux|trois|quelques|a|an|one|two)\b/i.test(ligne) || /^[٠-٩\d]+\s/.test(ligne);
     if (!numerotee && quantite && ligne.length < 70) ingredients.push(ligne);
@@ -143,7 +145,7 @@ export function mesRecettes(sous) {
       <p class="intro">${esc(t('persoIntro'))}</p>
       <label class="champ large"><span>${esc(t('persoTitre'))}</span><input type="text" id="perso-titre" maxlength="80"></label>
       <label class="champ large"><span>${esc(t('persoLien'))}</span><input type="url" id="perso-lien" inputmode="url" placeholder="https://"></label>
-      <label class="champ large"><span>${esc(t('personnes'))}</span><input type="number" id="perso-parts" min="1" max="60" value="4" inputmode="numeric"></label>
+      <label class="champ large"><span>${esc(t('persoParts'))}</span><input type="number" id="perso-parts" min="1" max="60" value="4" inputmode="numeric"></label>
       <button class="bouton contour large" data-a="persoColler">${ico('liste')}${esc(t('persoColler'))}</button>
       <label class="champ large"><span>${esc(t('ingredients'))}</span><small>${esc(t('persoUneParLigne'))}</small><textarea id="perso-ingredients" rows="6"></textarea></label>
       <label class="champ large"><span>${esc(t('preparation'))}</span><small>${esc(t('persoUneParLigne'))}</small><textarea id="perso-etapes" rows="7"></textarea></label>

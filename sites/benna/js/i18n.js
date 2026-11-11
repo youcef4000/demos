@@ -431,6 +431,7 @@ const T = {
   nouvelleRecette: ['Nouvelle recette', 'وصفة جديدة', 'New recipe'],
   persoIntro: ['Rangez ici la recette d’une vidéo ou d’un cahier. Vous la retrouverez avec le mode cuisine et les portions ajustables.', 'احفظ هنا وصفة من فيديو أو من دفتر، وستجدها مع وضع الطبخ والحصص القابلة للتعديل.', 'Keep a recipe from a video or a notebook here. You get cooking mode and adjustable portions with it.'],
   persoTitre: ['Nom de la recette', 'اسم الوصفة', 'Recipe name'],
+  persoParts: ['Nombre de personnes', 'عدد الأشخاص', 'Number of people'],
   persoLien: ['Lien de la vidéo (facultatif)', 'رابط الفيديو (اختياري)', 'Video link (optional)'],
   persoColler: ['Coller la description copiée', 'ألصق الوصف المنسوخ', 'Paste the copied description'],
   persoUneParLigne: ['Une ligne par élément', 'كل عنصر في سطر', 'One item per line'],
