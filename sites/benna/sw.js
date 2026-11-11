@@ -3,7 +3,7 @@
 // - Images, polices, vidéos : cache d'abord, rafraîchi en arrière-plan.
 // Changer VERSION à chaque modification de ce fichier : les anciens caches sont supprimés.
 
-const VERSION = 'benna-2026-11-11a';
+const VERSION = 'benna-2026-11-11b';
 const COQUILLE = [
   './', 'style.css', 'manifest.webmanifest', 'img/icone.svg', 'img/icone-192.png',
   'fonts/dm-sans-latin-wght-normal.woff2', 'fonts/fraunces-latin-wght-normal.woff2',

@@ -36,6 +36,20 @@ taux, par qui, à qui, bénéfice net, reste à régler — dans plusieurs pays 
 téléphone (IndexedDB), sans serveur : un mémo écrit remplit la fiche tout seul, un mémo vocal se réécoute pour la
 remplir. Sauvegarde et export Excel depuis **Réglages**. Lien privé : https://demos.bornzstudio.com/sarraf/
 
+## Benna — la cuisine pas à pas (`sites/benna/`)
+
+Application installable (PWA), en français, en arabe et en anglais : 38 recettes d'Algérie et du monde, mode cuisine
+pas à pas (minuteurs, lecture à voix haute, commande vocale), portions et mesures ajustables (grammes, verres, cups),
+coût par part, liste de courses envoyée sur WhatsApp, frigo, « Ce soir on mange quoi ? », SOS cuisine, gestes en
+boucle, parcours, carnet d'essais. Abonnés : planificateur (semaine, Ramadan) et atelier Pro (prix de revient, devis,
+commandes). Tout reste dans le téléphone, sans serveur. Lien privé : https://demos.bornzstudio.com/benna/
+
+- Réglages (prix des offres, numéro WhatsApp, date du Ramadan, clé publique) : `sites/benna/js/config.js`.
+- Liens d'activation des abonnements : `sites/benna/admin.html`, avec la clé privée, qui n'est **pas** dans le dépôt.
+- Ajouter une recette : un objet dans `sites/benna/js/data/recettes-*.js`, sa photo dans `img/r/<id>.webp`.
+- Vérifier les données et les calculs : `node tools/benna/test.mjs`.
+- Photos des plats et boucles de gestes : illustrations générées par ordinateur, à remplacer par des prises de vue.
+
 ## Cabinet d'expertise comptable (`sites/cabinet-expert-comptable/`, `projets/cabinet-expert-comptable/`)
 
 Site public, application associé / collaborateur / client et agents IA (lecture des pièces, imputation SCF) pour un

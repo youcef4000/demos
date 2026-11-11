@@ -6,6 +6,14 @@
   },
   "demos": [
     {
+      "slug": "benna",
+      "title": "Benna — la cuisine pas à pas, en français, en arabe et en anglais",
+      "sector": "Application de recettes",
+      "city": "Algérie",
+      "color": "#c2512b",
+      "public": false
+    },
+    {
       "slug": "cabinet-expert-comptable",
       "title": "Cabinet Mizane — comptabilité SCF, G50 et agents IA",
       "sector": "Expertise comptable",
