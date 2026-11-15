@@ -73,6 +73,14 @@ const P = {
   cup: '<path d="M4 8h13v5a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17M8 2v3M12 2v3"/>',
   drop: '<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>',
   table: '<path d="M3 8h18M5 8v12M19 8v12M5 14h14"/><path d="M3 8l2-4h14l2 4"/>',
+  home: '<path d="M3 11 12 4l9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/>',
+  lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+  unlock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 7.5-2"/>',
+  pallet: '<rect x="4" y="4" width="7" height="6" rx="1"/><rect x="13" y="4" width="7" height="6" rx="1"/><rect x="4" y="11" width="16" height="5" rx="1"/><path d="M3 19h18M6 16v3M12 16v3M18 16v3"/>',
+  globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/>',
+  label: '<path d="M4 4h10l6 6v10H4z"/><path d="M8 12h8M8 16h5"/>',
+  trend: '<path d="M3 17 9 11l4 4 8-8"/><path d="M15 7h6v6"/>',
+  sparkle: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
   fan: '<circle cx="12" cy="12" r="2"/><path d="M12 10c0-4 1-7 4-7s3 4 0 6M14 12c4 0 7 1 7 4s-4 3-6 0M12 14c0 4-1 7-4 7s-3-4 0-6M10 12c-4 0-7-1-7-4s4-3 6 0"/>',
 };
 export function ic(nom, cls = '') {
@@ -121,10 +129,10 @@ export function modale({ titre, corps, actions = [{ id: 'ok', libelle: 'OK', cla
 export function documentCommercial(type, o) {
   const r = S.reglages();
   const titres = { devis: 'Devis', facture: 'Facture', bon: 'Bon de préparation' };
-  const retrait = o.livraison?.mode === 'retrait';
+  const retrait = o.livraison?.mode === 'enlevement';
   const lignes = o.lignes.map((l) => `<tr>
       <td>${esc(l.ref)}</td><td>${esc(l.nom)}</td><td class="num">${l.qte}</td>
-      ${type === 'bon' ? '<td class="num">☐</td>' : `<td class="num">${eur(l.unit)}${l.unit < l.base ? `<br><small>au lieu de ${eur(l.base)}</small>` : ''}</td><td class="num">${eur(l.total)}</td>`}
+      ${type === 'bon' ? '<td class="num">☐</td>' : `<td class="num">${eur(l.unit)}${l.unit < l.base ? `<br><small>au lieu de ${eur(l.base)}</small>` : ''}${l.ppc ? `<br><small>PPC ${eur(l.ppc)}</small>` : ''}</td><td class="num">${eur(l.total)}</td>`}
     </tr>`).join('');
   return `<article class="doc">
     <header class="doc-tete">
@@ -134,12 +142,12 @@ export function documentCommercial(type, o) {
       </div>
       <div class="doc-titre">
         <h1>${titres[type]}</h1>
-        <p><strong>N° ${esc(o.num)}</strong><br>du ${dateLongue(o.date)}${type === 'devis' ? `<br>valable jusqu'au ${dateLongue(o.validite)}` : ''}</p>
+        <p><strong>N° ${esc(o.num)}</strong><br>du ${dateLongue(o.date)}${type === 'devis' ? `<br>valable jusqu'au ${dateLongue(o.validite)}` : ''}${o.refClient ? `<br>Votre référence : ${esc(o.refClient)}` : ''}</p>
       </div>
     </header>
     <section class="doc-parties">
       <div><h2>Client</h2><p><strong>${esc(o.client.societe)}</strong><br>${esc(o.client.contact || '')}<br>${esc(o.client.email || '')} · ${esc(o.client.tel || '')}<br>SIRET ${esc(o.client.siret || '—')}<br>TVA ${esc(o.client.tva || '—')}</p></div>
-      ${o.livraison ? `<div><h2>${retrait ? 'Retrait' : 'Livraison'}</h2><p>${retrait ? 'Showroom MC France, ' + esc(r.adresse) : `${esc(o.livraison.adresse)}<br>${esc(o.livraison.cp)} ${esc(o.livraison.ville)}<br>${esc(o.livraison.pays || 'France')}`}<br><em>${esc(S.LIVRAISONS[o.livraison.mode] || '')}</em></p></div>` : ''}
+      ${o.livraison ? `<div><h2>${retrait ? 'Enlèvement' : 'Livraison'}</h2><p>${retrait ? 'Entrepôt MC France, ' + esc(r.adresse) : `${o.livraison.destinataire ? esc(o.livraison.destinataire) + '<br>' : ''}${esc(o.livraison.adresse)}<br>${esc(o.livraison.cp)} ${esc(o.livraison.ville)}<br>${esc(o.livraison.pays || 'France')}`}<br><em>${esc(S.LIVRAISONS[o.livraison.mode] || '')}</em></p></div>` : ''}
       ${o.paiement ? `<div><h2>Paiement</h2><p>${esc(S.PAIEMENTS[o.paiement] || '')}</p></div>` : ''}
     </section>
     <table class="doc-lignes">
@@ -154,7 +162,7 @@ export function documentCommercial(type, o) {
     </table>`}
     ${o.message ? `<p class="doc-note"><strong>Message du client :</strong> ${esc(o.message)}</p>` : ''}
     <footer class="doc-pied">
-      ${type === 'devis' ? 'Devis valable 30 jours. Bon pour accord : date, cachet et signature.' : type === 'facture' ? 'Document de démonstration : la vraie facture est numérotée et émise par le logiciel de facturation de MC France.' : 'Contrôler chaque article et cocher avant expédition.'}
+      ${type === 'devis' ? 'Devis valable 30 jours, prix revendeur HT. Bon pour accord : date, cachet et signature.' : type === 'facture' ? 'Document de démonstration : la vraie facture est numérotée et émise par le logiciel de facturation de MC France.' : 'Contrôler chaque article et cocher avant expédition.'}
       <br>Démo réalisée par Bornz Studio — document sans valeur commerciale.
     </footer>
   </article>`;

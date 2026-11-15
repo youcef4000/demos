@@ -123,7 +123,8 @@ def libelle(n):
             break
     n = n.replace('_', ' ').replace('lxpxh', 'L × P × H').replace('lxp', 'L × P').replace(' ltr', ' (L)')
     n = re.sub(r'\s+', ' ', n).strip()
-    return n[:1].upper() + n[1:].lower() if n.isupper() or n.islower() or '_' in n else n
+    n = n.lower() if n.isupper() else n
+    return n[:1].upper() + n[1:]
 
 def specs_features(feats):
     groupes = {'Dimensions et poids': [], 'Alimentation': [], 'Caractéristiques': []}
@@ -213,7 +214,7 @@ for d in data:
     pts = points(d.get('short'))
     pts = [x for x in pts if len(x) < 140]
     if not pts:
-        pts = [f"{k} : {v}" for g, lignes in grp for k, v in lignes if g != 'Dimensions et poids'][:5]
+        pts = [f"{k[:1].upper() + k[1:]} : {v}" for g, lignes in grp for k, v in lignes if g != 'Dimensions et poids'][:5]
         dims = {k.split(' (')[0].lower(): v for g, lignes in grp for k, v in lignes if g == 'Dimensions et poids'}
         if all(x in dims for x in ('largeur', 'profondeur', 'hauteur')):
             pts.insert(0, f"Dimensions (L × P × H) : {dims['largeur']} × {dims['profondeur']} × {dims['hauteur']} mm")

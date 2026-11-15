@@ -35,7 +35,7 @@ const MENU = [
   ['commandes', 'box', 'Commandes'],
   ['produits', 'tag', 'Produits'],
   ['categories', 'layers', 'Catégories'],
-  ['clients', 'users', 'Clients pros'],
+  ['clients', 'users', 'Revendeurs'],
   ['devis', 'file', 'Devis'],
   ['reglages', 'settings', 'Réglages'],
 ];
@@ -105,8 +105,8 @@ function vueTableau() {
     </div>
     <div class="trois">
       <section class="panneau">
-        <div class="panneau-tete"><h2>Comptes pros à valider</h2><a href="#/clients">Clients</a></div>
-        <div class="liste-simple">${comptes.length ? comptes.map((c) => `<a href="#/clients"><span class="pastille p-jaune">À valider</span><span><strong>${esc(c.societe)}</strong><small>${[c.metier, c.ville].filter(Boolean).map(esc).join(' · ')}</small></span>${ic('right')}</a>`).join('') : '<p class="muet">Aucun compte en attente.</p>'}</div>
+        <div class="panneau-tete"><h2>Revendeurs à valider</h2><a href="#/clients">Revendeurs</a></div>
+        <div class="liste-simple">${comptes.length ? comptes.map((c) => `<a href="#/clients"><span class="pastille p-jaune">À valider</span><span><strong>${esc(c.societe)}</strong><small>${[c.activite, c.ville].filter(Boolean).map(esc).join(' · ')}</small></span>${ic('right')}</a>`).join('') : '<p class="muet">Aucun compte en attente.</p>'}</div>
       </section>
       <section class="panneau">
         <div class="panneau-tete"><h2>Stock bas (≤ 2)</h2><a href="#/produits?stock=bas">Produits</a></div>
@@ -185,10 +185,10 @@ function vueCommandes(params) {
       ${liste.map((c) => `<tr data-lien="#/commandes/${c.num}" style="cursor:pointer">
         <td class="nom"><a href="#/commandes/${c.num}">${esc(c.num)}</a><small>${heure(c.date)}</small></td>
         <td class="nom">${esc(c.client.societe)}<small>${esc(c.client.contact || '')}${c.exemple ? ' · exemple' : ''}</small></td>
-        <td>${{ standard: 'Standard', hayon: 'Hayon + RDV', retrait: 'Retrait Roubaix' }[c.livraison?.mode] || ''}<br><small class="muet">${esc(c.livraison?.cp || '')} ${esc(c.livraison?.ville || '')}</small></td>
+        <td>${{ palette: 'Palette', hayon: 'Hayon + RDV', direct: 'Directe client', enlevement: 'Enlèvement' }[c.livraison?.mode] || ''}<br><small class="muet">${esc(c.livraison?.cp || '')} ${esc(c.livraison?.ville || '')}</small></td>
         <td>${esc({ cb: 'Carte', virement: 'Virement', '4x': '4× sans frais', '30j': '30 jours' }[c.paiement] || '')}</td>
         <td class="num"><strong>${eur(c.totaux.ht)}</strong></td>
-        <td><span class="pastille ${couleurStatut(c.statut)}">${S.statut(c.statut, c.livraison?.mode === 'retrait').court}</span></td>
+        <td><span class="pastille ${couleurStatut(c.statut)}">${S.statut(c.statut, c.livraison?.mode === 'enlevement').court}</span></td>
       </tr>`).join('') || '<tr><td colspan="6" class="muet">Aucune commande.</td></tr>'}
       </tbody></table></div>
     </section>`);
@@ -199,7 +199,7 @@ function vueCommandes(params) {
 function vueCommande(num) {
   const c = S.commande(num);
   if (!c) return introuvable('Commande');
-  const retrait = c.livraison?.mode === 'retrait';
+  const retrait = c.livraison?.mode === 'enlevement';
   const ordre = ['attente', 'validee', 'preparation', 'expediee', 'livree'];
   const etapes = c.paiement === 'virement' || c.historique.some((h) => h.statut === 'attente') ? ordre : ordre.slice(1);
   const idx = etapes.indexOf(c.statut);
@@ -207,8 +207,8 @@ function vueCommande(num) {
   const suivant = {
     attente: ['validee', `${ic('euro')}Paiement reçu`],
     validee: ['preparation', `${ic('box')}Passer en préparation`],
-    preparation: ['expediee', retrait ? `${ic('store')}Prête au showroom` : `${ic('truck')}Marquer expédiée`],
-    expediee: ['livree', retrait ? `${ic('check')}Marquer retirée` : `${ic('check')}Marquer livrée`],
+    preparation: ['expediee', retrait ? `${ic('store')}Prête à l’entrepôt` : `${ic('truck')}Marquer expédiée`],
+    expediee: ['livree', retrait ? `${ic('check')}Marquer enlevée` : `${ic('check')}Marquer livrée`],
   }[c.statut];
   const client = c.client.id ? S.client(c.client.id) : null;
   cadre('commandes', `Commande ${esc(c.num)}`, `
@@ -237,8 +237,8 @@ function vueCommande(num) {
         ${c.note ? `<p class="petit"><strong>Instructions du client :</strong> ${esc(c.note)}</p>` : ''}
       </section>
       <div style="display:grid;gap:18px">
-        <section class="panneau"><h2>Client</h2><div class="fiche-client"><strong>${esc(c.client.societe)}</strong><span>${esc(c.client.contact || '')}</span><span>${esc(c.client.email || '')} · ${esc(c.client.tel || '')}</span><span class="muet">SIRET ${esc(c.client.siret || '—')} · TVA ${esc(c.client.tva || '—')}</span>${client ? `<span>${client.statut === 'valide' ? '<span class="pastille p-vert">Compte validé</span>' : '<span class="pastille p-jaune">Compte à valider</span>'} ${client.conditions === '30j' ? '<span class="pastille p-bleu">30 jours</span>' : ''}</span>` : '<span class="muet">Sans compte</span>'}</div></section>
-        <section class="panneau"><h2>${retrait ? 'Retrait' : 'Livraison'}</h2><div class="fiche-client"><strong>${esc(S.LIVRAISONS[c.livraison?.mode] || '')}</strong>${retrait ? `<span>Showroom, ${esc(S.reglages().adresse)}</span>` : `<span>${esc(c.livraison.adresse)}</span><span>${esc(c.livraison.cp)} ${esc(c.livraison.ville)} · ${esc(c.livraison.pays || 'France')}</span>`}</div></section>
+        <section class="panneau"><h2>Client</h2><div class="fiche-client"><strong>${esc(c.client.societe)}</strong><span>${esc(c.client.contact || '')}</span><span>${esc(c.client.email || '')} · ${esc(c.client.tel || '')}</span><span class="muet">SIRET ${esc(c.client.siret || '—')} · TVA ${esc(c.client.tva || '—')}</span>${client ? `<span>${client.statut === 'valide' ? '<span class="pastille p-vert">Compte validé</span>' : '<span class="pastille p-jaune">Compte à valider</span>'} <span class="pastille p-bleu">${esc(S.niveau(client).nom)}</span> ${['30j', '45j'].includes(client.conditions) ? `<span class="pastille p-gris">${client.conditions === '30j' ? '30 jours' : 'LCR 45 j'}</span>` : ''}</span>` : '<span class="muet">Sans compte</span>'}</div></section>
+        <section class="panneau"><h2>${retrait ? 'Enlèvement' : 'Livraison'}</h2><div class="fiche-client"><strong>${esc(S.LIVRAISONS[c.livraison?.mode] || '')}</strong>${retrait ? `<span>Entrepôt, ${esc(S.reglages().adresse)}</span>` : `${c.livraison.destinataire ? `<span>Client final : <strong>${esc(c.livraison.destinataire)}</strong>${c.livraison.telDest ? ' · ' + esc(c.livraison.telDest) : ''}</span><span class="pastille p-orange" style="justify-self:start">Étiquette neutre, sans prix</span>` : ''}<span>${esc(c.livraison.adresse)}</span><span>${esc(c.livraison.cp)} ${esc(c.livraison.ville)} · ${esc(c.livraison.pays || 'France')}</span>`}${c.refClient ? `<span class="muet">Bon de commande client : ${esc(c.refClient)}</span>` : ''}</div></section>
         <section class="panneau"><h2>Historique</h2><ul class="historique">${c.historique.map((h) => `<li><span>${S.statut(h.statut, retrait).nom}<br><small>${heure(h.date)}${h.note ? ' · ' + esc(h.note) : ''}</small></span></li>`).join('')}</ul></section>
       </div>
     </div>`, `<a class="btn btn-petit" href="#/commandes">${ic('left')}Commandes</a>`);
@@ -300,18 +300,19 @@ function vueProduits(params) {
         <button class="btn btn-petit" type="button" data-lot="supprimer">Supprimer</button>
       </div>
       <div class="table-scroll"><table class="table-admin"><thead><tr>
-        <th><input type="checkbox" id="tout-cocher" aria-label="Tout sélectionner"></th><th></th><th>Produit</th><th>Catégorie</th><th class="num">Prix HT</th><th class="num">Stock</th><th>En ligne</th><th></th>
+        <th><input type="checkbox" id="tout-cocher" aria-label="Tout sélectionner"></th><th></th><th>Produit</th><th>Catégorie</th><th class="num">PPC HT</th><th class="num">Revendeur HT</th><th class="num">Stock</th><th>En ligne</th><th></th>
       </tr></thead><tbody>
       ${vus.map((p) => `<tr>
         <td><input type="checkbox" data-sel="${p.id}" ${selection.has(p.id) ? 'checked' : ''} aria-label="Sélectionner"></td>
         <td><img src="${src(p.images[0])}" alt="" width="44" height="44" loading="lazy"></td>
         <td class="nom"><a href="#/produits/${p.id}">${esc(p.nom)}</a><small>Réf. ${esc(p.ref)} · ${esc(p.marque || '—')} ${p.etat === 'second-choix' ? '· <span class="pastille p-sc">Second choix</span>' : ''} ${p.prixBarreHT ? `· <s>${eur(p.prixBarreHT)}</s>` : ''}</small></td>
         <td><small>${esc(S.famille(p.famille)?.court || '')}<br><span class="muet">${esc(S.sousFamille(p.famille, p.sous)?.nom || '')}</span></small></td>
-        <td class="num"><input class="mini" type="number" step="0.01" min="0" value="${p.prixHT}" data-champ="prixHT" data-id="${p.id}" aria-label="Prix HT"></td>
+        <td class="num"><input class="mini" type="number" step="0.01" min="0" value="${p.prixHT}" data-champ="prixHT" data-id="${p.id}" aria-label="Prix public conseillé HT"></td>
+        <td class="num"><small><strong>${eur(S.prixRevendeur(p))}</strong>${p.prixRevendeur ? ' <span class="pastille p-jaune">fixé</span>' : ''}<br><span class="muet">${S.colisage(p) > 1 ? 'lot de ' + S.colisage(p) : 'à l’unité'} · pal. ${S.parPalette(p)}</span></small></td>
         <td class="num"><input class="mini" type="number" step="1" min="0" value="${p.stock}" data-champ="stock" data-id="${p.id}" aria-label="Stock" style="width:70px"></td>
         <td><label class="inter"><input type="checkbox" data-enligne="${p.id}" ${p.enLigne !== false ? 'checked' : ''} aria-label="En ligne"><span></span></label></td>
         <td><div class="table-actions"><a class="btn-icone" href="#/produits/${p.id}" aria-label="Modifier">${ic('edit')}</a><a class="btn-icone" href="../#/p/${p.id}" target="_blank" rel="noopener" aria-label="Voir dans la boutique">${ic('eye')}</a><button class="btn-icone" type="button" data-dupliquer="${p.id}" aria-label="Dupliquer">${ic('copy')}</button><button class="btn-icone" type="button" data-supprimer="${p.id}" aria-label="Supprimer">${ic('trash')}</button></div></td>
-      </tr>`).join('') || '<tr><td colspan="8" class="muet">Aucun produit.</td></tr>'}
+      </tr>`).join('') || '<tr><td colspan="9" class="muet">Aucun produit.</td></tr>'}
       </tbody></table></div>
       <div class="pagination">${page > 1 ? `<a class="btn btn-petit" href="${lienAvec('page', page - 1)}">${ic('left')}</a>` : ''}<span>${liste.length} produit${liste.length > 1 ? 's' : ''} · page ${page} / ${pages}</span>${page < pages ? `<a class="btn btn-petit" href="${lienAvec('page', page + 1)}">${ic('right')}</a>` : ''}</div>
     </section>`, `<a class="btn btn-plein btn-petit" href="#/produits/nouveau">${ic('plus')}Nouveau produit</a>`);
@@ -360,8 +361,8 @@ function vueProduits(params) {
     router();
   }));
   $('[data-export]').addEventListener('click', () => {
-    const lignes = [['reference', 'nom', 'marque', 'famille', 'sous_categorie', 'prix_ht', 'prix_barre_ht', 'stock', 'en_ligne', 'etat']];
-    S.tousProduits().forEach((p) => lignes.push([p.ref, p.nom, p.marque || '', S.famille(p.famille)?.nom || '', S.sousFamille(p.famille, p.sous)?.nom || '', String(p.prixHT).replace('.', ','), p.prixBarreHT ? String(p.prixBarreHT).replace('.', ',') : '', p.stock, p.enLigne === false ? 'non' : 'oui', p.etat]));
+    const lignes = [['reference', 'nom', 'marque', 'famille', 'sous_categorie', 'prix_public_conseille_ht', 'prix_revendeur_ht', 'prix_public_barre_ht', 'colisage', 'palette', 'stock', 'en_ligne', 'etat']];
+    S.tousProduits().forEach((p) => lignes.push([p.ref, p.nom, p.marque || '', S.famille(p.famille)?.nom || '', S.sousFamille(p.famille, p.sous)?.nom || '', String(p.prixHT).replace('.', ','), String(S.prixRevendeur(p)).replace('.', ','), p.prixBarreHT ? String(p.prixBarreHT).replace('.', ',') : '', S.colisage(p), S.parPalette(p), p.stock, p.enLigne === false ? 'non' : 'oui', p.etat]));
     const csv = '﻿' + lignes.map((l) => l.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(';')).join('\r\n');
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
@@ -384,7 +385,7 @@ async function importerPrix() {
   const r = await modale({
     titre: 'Mettre à jour les prix et stocks',
     large: true,
-    corps: `<p class="muet">Collez les lignes du tarif fournisseur ou d'un export Excel : <strong>référence ; prix HT ; stock</strong> (le stock est facultatif).</p>
+    corps: `<p class="muet">Collez les lignes du tarif ou d'un export Excel : <strong>référence ; prix public conseillé HT ; stock</strong> (le stock est facultatif). Le prix revendeur suit (PPC − remise revendeur), sauf s'il est fixé sur la fiche.</p>
       <label class="champ"><span>Lignes</span><textarea name="csv" rows="8" style="font-family:ui-monospace,monospace" placeholder="${esc(S.tousProduits().slice(0, 3).map((p) => `${p.ref};${String(S.arrondi(p.prixHT * 1.03)).replace('.', ',')};${p.stock + 5}`).join('\n'))}"></textarea></label>`,
     actions: [{ id: 'annuler', libelle: 'Annuler' }, { id: 'ok', libelle: 'Mettre à jour', classe: 'btn-plein' }],
   });
@@ -451,17 +452,23 @@ function vueEditeur(id) {
           <p class="petit muet">Glissez des photos ou touchez « Ajouter ». Elles sont redimensionnées (800 px, WebP) avant l'enregistrement. La première est la photo principale.</p>
         </section>
         <section class="panneau section-form">
-          <h2>Prix et stock</h2>
+          <h2>Prix revendeur et prix public</h2>
           <div class="grille-champs">
-            <label class="champ"><span>Prix de vente HT *</span><input name="prixHT" type="number" step="0.01" min="0" required value="${p.prixHT || ''}"><small id="aide-ttc"></small></label>
-            <label class="champ"><span>Prix barré HT (promo)</span><input name="prixBarreHT" type="number" step="0.01" min="0" value="${p.prixBarreHT || ''}"><small>Laisser vide sans promotion</small></label>
-            <label class="champ"><span>Stock</span><input name="stock" type="number" step="1" min="0" value="${p.stock}"></label>
+            <label class="champ"><span>Prix public conseillé HT (PPC) *</span><input name="prixHT" type="number" step="0.01" min="0" required value="${p.prixHT || ''}"><small id="aide-ttc"></small></label>
+            <label class="champ"><span>Prix revendeur HT</span><input name="prixRevendeur" type="number" step="0.01" min="0" value="${p.prixRevendeur || ''}" placeholder="Auto : PPC − ${r.remiseRevendeur} %"><small id="aide-revendeur"></small></label>
+            <label class="champ"><span>Prix public barré HT</span><input name="prixBarreHT" type="number" step="0.01" min="0" value="${p.prixBarreHT || ''}"><small>Déstockage si la baisse atteint ${S.SEUIL_DESTOCKAGE} %</small></label>
+          </div>
+        </section>
+        <section class="panneau section-form">
+          <h2>Conditionnement et stock</h2>
+          <div class="grille-champs">
+            <label class="champ"><span>Colisage (unités par lot)</span><input name="colisage" type="number" step="1" min="1" value="${p.colisage || ''}" placeholder="Auto : ${S.colisage({ ...p, colisage: 0 })}"></label>
+            <label class="champ"><span>Unités par palette</span><input name="palette" type="number" step="1" min="1" value="${p.palette || ''}" placeholder="Auto : ${S.parPalette({ ...p, palette: 0 })}"></label>
+            <label class="champ"><span>Stock entrepôt</span><input name="stock" type="number" step="1" min="0" value="${p.stock}"></label>
             <label class="champ"><span>Délai si en stock</span><input name="delai" value="${esc(p.delai || '')}"></label>
+            <label class="champ"><span>Arrivage prévu (si rupture)</span><input name="arrivage" type="date" value="${esc(p.arrivage || '')}"></label>
           </div>
-          <div class="champ"><span>Prix dégressifs</span>
-            <label class="case"><input type="checkbox" name="paliersPerso" ${p.paliers?.length ? 'checked' : ''}><span>Paliers propres à ce produit (sinon : ${r.paliers.map((x) => `−${x.remise} % dès ${x.min}`).join(', ')})</span></label>
-            <div class="paliers-edit" id="paliers-edit" ${p.paliers?.length ? '' : 'hidden'}>${[0, 1, 2].map((i) => { const x = (p.paliers || r.paliers)[i] || {}; return `<div><input class="saisie" name="pmin${i}" type="number" min="2" placeholder="Dès … pièces" value="${x.min || ''}" aria-label="Quantité minimum"><input class="saisie" name="prem${i}" type="number" step="0.5" min="0" max="90" placeholder="Remise %" value="${x.remise || ''}" aria-label="Remise en %"><span class="muet petit">%</span></div>`; }).join('')}</div>
-          </div>
+          <p class="petit muet">Prix dégressifs appliqués à tous les produits (réglages) : −${r.remise3lots} % dès 3 lots, −${r.remisePalette} % à la palette.</p>
         </section>
         <section class="panneau section-form">
           <h2>État</h2>
@@ -495,13 +502,14 @@ function vueEditeur(id) {
   majSous();
   form.famille.addEventListener('change', () => { p.sous = null; majSous(); apercu(); });
   form.etat.addEventListener('change', () => { $('#champ-defaut').hidden = form.etat.value !== 'second-choix'; });
-  form.paliersPerso.addEventListener('change', () => { $('#paliers-edit').hidden = !form.paliersPerso.checked; });
 
   const apercu = () => {
     const ht = parseFloat(form.prixHT.value) || 0;
     const barre = parseFloat(form.prixBarreHT.value) || 0;
     $('#aide-ttc').textContent = `${eur(S.ttc(ht))} TTC`;
-    $('#apercu').innerHTML = `<div class="apercu-img"><img src="${src(p.images[0])}" alt="" width="280" height="280"><div class="badges">${form.etat.value === 'second-choix' ? '<span class="pastille p-sc">Second choix</span>' : ''}${barre > ht && ht ? `<span class="pastille p-promo">−${Math.round((1 - ht / barre) * 100)} %</span>` : ''}${form.nouveau.checked ? '<span class="pastille p-nouveau">Nouveau</span>' : ''}</div></div>
+    const pr = parseFloat(form.prixRevendeur.value) || S.arrondi(ht * (1 - r.remiseRevendeur / 100));
+    $('#aide-revendeur').textContent = ht ? `${eur(pr)} HT · marge ${eur(ht - pr)} (${Math.round(((ht - pr) / ht) * 100)} %)` : '';
+    $('#apercu').innerHTML = `<div class="apercu-img"><img src="${src(p.images[0])}" alt="" width="280" height="280"><div class="badges">${form.etat.value === 'second-choix' ? '<span class="pastille p-sc">Second choix</span>' : ''}${barre > ht && ht && (1 - ht / barre) * 100 >= S.SEUIL_DESTOCKAGE ? `<span class="pastille p-promo">Déstockage −${Math.round((1 - ht / barre) * 100)} %</span>` : ''}${form.nouveau.checked ? '<span class="pastille p-nouveau">Nouveau</span>' : ''}</div></div>
       <div class="apercu-corps"><span class="marque">${esc(form.marque.value)}</span><span class="nom">${esc(form.nom.value || 'Nom du produit')}</span><span class="ref">Réf. ${esc(form.ref.value || '—')}</span><span class="prix">${eur(ht)} <small class="muet" style="font-size:12px">HT</small>${barre > ht ? `<s>${eur(barre)}</s>` : ''}</span>${form.enLigne.checked ? '' : '<span class="pastille p-gris">Hors ligne</span>'}</div>`;
   };
   form.addEventListener('input', apercu);
@@ -545,15 +553,17 @@ function vueEditeur(id) {
       toast(doublon ? `La référence ${esc(d.ref)} existe déjà (${esc(doublon.nom)}).` : 'Nom, référence et prix HT sont obligatoires.', 'erreur');
       return;
     }
-    const paliers = d.paliersPerso ? [0, 1, 2].map((i) => ({ min: parseInt(d['pmin' + i], 10), remise: parseFloat(d['prem' + i]) })).filter((x) => x.min > 1 && x.remise > 0).sort((a, b) => a.min - b.min) : null;
     Object.assign(p, {
       nom: d.nom.trim(), ref: d.ref.trim().toUpperCase(), marque: d.marque.trim(), famille: d.famille, sous: d.sous,
       prixHT: S.arrondi(parseFloat(d.prixHT)), prixBarreHT: parseFloat(d.prixBarreHT) > parseFloat(d.prixHT) ? S.arrondi(parseFloat(d.prixBarreHT)) : null,
+      prixRevendeur: parseFloat(d.prixRevendeur) > 0 ? S.arrondi(parseFloat(d.prixRevendeur)) : undefined,
+      colisage: parseInt(d.colisage, 10) > 0 ? parseInt(d.colisage, 10) : undefined, palette: parseInt(d.palette, 10) > 0 ? parseInt(d.palette, 10) : undefined,
+      arrivage: d.arrivage || undefined,
       stock: Math.max(0, parseInt(d.stock, 10) || 0), delai: d.delai.trim() || '1 à 3 jours ouvrés',
       etat: d.etat, defaut: d.etat === 'second-choix' ? d.defaut.trim() : undefined, nouveau: !!d.nouveau, enLigne: !!d.enLigne,
       points: d.points.split(/\r?\n/).map((x) => x.trim()).filter(Boolean),
       texte: d.texte.split(/\r?\n/).map((x) => x.trim()).filter(Boolean),
-      specs: depuisTexteSpecs(d.specs), paliers: paliers && paliers.length ? paliers : undefined,
+      specs: depuisTexteSpecs(d.specs),
     });
     if (nouveau) p.id = S.nouvelId(p.ref || p.nom);
     if (!S.enregistrerProduit(p)) { toast('Enregistrement impossible : stockage du navigateur plein (photos trop lourdes ?).', 'erreur', 6000); return; }
@@ -637,15 +647,15 @@ function vueClients(params) {
   const tous = S.clients();
   const liste = tous.filter((c) => f === 'tout' || c.statut === f);
   const cmd = S.commandes();
-  cadre('clients', 'Clients pros', `
+  cadre('clients', 'Revendeurs', `
     <div class="onglets">${[['tout', 'Tous'], ['en-attente', 'À valider'], ['valide', 'Validés'], ['refuse', 'Refusés']].map(([k, t]) => `<a href="#/clients?f=${k}" ${k === f ? 'aria-current="page"' : ''}>${t} <b>${k === 'tout' ? tous.length : tous.filter((c) => c.statut === k).length}</b></a>`).join('')}</div>
-    <section class="panneau"><div class="table-scroll"><table class="table-admin"><thead><tr><th>Société</th><th>SIRET · TVA</th><th>Ville</th><th class="num">Achats HT</th><th>Conditions</th><th>Statut</th><th></th></tr></thead><tbody>
-    ${liste.map((c) => { const achats = cmd.filter((x) => x.client.id === c.id && x.statut !== 'annulee').reduce((s, x) => s + x.totaux.ht, 0); return `<tr>
+    <section class="panneau"><div class="table-scroll"><table class="table-admin"><thead><tr><th>Société</th><th>SIRET · TVA</th><th>Activité</th><th class="num">Achats 12 mois</th><th>Niveau · paiement</th><th>Statut</th><th></th></tr></thead><tbody>
+    ${liste.map((c) => { const achats = S.volumeAnnuel(c.id); return `<tr>
       <td class="nom"><strong>${esc(c.societe)}</strong><small>${esc(c.contact || '')} · ${esc(c.email || '')}${c.exemple ? ' · exemple' : ''}</small></td>
       <td><small>${esc(c.siret || '—')}<br>${esc(c.tva || '—')}</small></td>
-      <td>${esc(c.ville || '—')}<br><small class="muet">${esc(c.metier || '')}</small></td>
+      <td>${esc(c.activite || '—')}<br><small class="muet">${esc(c.ville || '')}${c.volume ? ' · ' + esc(c.volume) : ''}</small></td>
       <td class="num">${eur(achats)}</td>
-      <td><small>${c.conditions === '30j' ? '30 jours fin de mois' : 'Comptant'}${c.remise ? `<br>Remise −${c.remise} %` : ''}</small></td>
+      <td><small><strong>${esc(S.niveau(c).nom)}</strong>${S.niveau(c).remise ? ` (−${S.niveau(c).remise} %)` : ''}<br>${esc({ comptant: 'Comptant', '30j': '30 jours fin de mois', '45j': 'LCR 45 jours' }[c.conditions] || 'Comptant')}</small></td>
       <td><span class="pastille ${c.statut === 'valide' ? 'p-vert' : c.statut === 'refuse' ? 'p-rouge' : 'p-jaune'}">${{ valide: 'Validé', refuse: 'Refusé', 'en-attente': 'À valider' }[c.statut]}</span></td>
       <td><div class="table-actions">${c.statut === 'en-attente' ? `<button class="btn btn-plein btn-petit" type="button" data-valider="${c.id}">Valider</button>` : ''}<button class="btn-icone" type="button" data-editer-client="${c.id}" aria-label="Modifier">${ic('edit')}</button></div></td>
     </tr>`; }).join('') || '<tr><td colspan="7" class="muet">Aucun client.</td></tr>'}
@@ -657,14 +667,15 @@ function vueClients(params) {
       corps: `<p class="petit muet">SIRET ${esc(c.siret)} ${S.siretValide(c.siret) ? '<span class="pastille p-vert">clé valide</span>' : '<span class="pastille p-rouge">clé invalide</span>'} · TVA ${esc(c.tva || '—')}</p>
         <div class="grille-champs">
           <label class="champ"><span>Statut</span><select name="statut">${[['valide', 'Validé'], ['en-attente', 'À valider'], ['refuse', 'Refusé']].map(([k, t]) => `<option value="${k}" ${(valider ? 'valide' : c.statut) === k ? 'selected' : ''}>${t}</option>`).join('')}</select></label>
-          <label class="champ"><span>Conditions de paiement</span><select name="conditions"><option value="comptant" ${c.conditions !== '30j' ? 'selected' : ''}>Comptant</option><option value="30j" ${c.conditions === '30j' ? 'selected' : ''}>30 jours fin de mois</option></select></label>
-          <label class="champ"><span>Remise client (%)</span><input name="remise" type="number" min="0" max="30" step="0.5" value="${c.remise || 0}"></label>
+          <label class="champ"><span>Paiement</span><select name="conditions">${[['comptant', 'Comptant (virement, carte)'], ['30j', '30 jours fin de mois'], ['45j', 'LCR 45 jours fin de mois']].map(([k, t]) => `<option value="${k}" ${c.conditions === k ? 'selected' : ''}>${t}</option>`).join('')}</select></label>
+          <label class="champ"><span>Niveau revendeur</span><select name="niveau">${S.NIVEAUX.map((n) => `<option value="${n.id}" ${S.niveau(c).id === n.id ? 'selected' : ''}>${n.nom}${n.remise ? ` (−${n.remise} %)` : ''}</option>`).join('')}</select></label>
         </div>
-        <p class="petit muet">La remise s'ajoute aux prix dégressifs, sur tout le catalogue, dès la prochaine visite du client.</p>`,
+        <p class="petit muet">${esc(c.activite || '')}${c.volume ? ' · volume annoncé : ' + esc(c.volume) : ''}${c.site ? ' · ' + esc(c.site) : ''}${c.kbis ? ' · Kbis : ' + esc(c.kbis) : ''}</p>
+        <p class="petit muet">Achats sur 12 mois : ${eur(S.volumeAnnuel(c.id))} HT. La remise de niveau s'ajoute au prix revendeur et aux paliers, sur tout le catalogue.</p>`,
       actions: [{ id: 'annuler', libelle: 'Annuler' }, { id: 'ok', libelle: 'Enregistrer', classe: 'btn-plein' }],
     });
     if (r.action !== 'ok') return;
-    S.majClient(id, { statut: r.donnees.statut, conditions: r.donnees.conditions, remise: Math.max(0, Math.min(30, parseFloat(r.donnees.remise) || 0)) });
+    S.majClient(id, { statut: r.donnees.statut, conditions: r.donnees.conditions, niveau: r.donnees.niveau });
     toast(`${ic('check')} ${esc(c.societe)} : ${r.donnees.statut === 'valide' ? 'compte validé' : 'mis à jour'}`);
     router();
   };
@@ -717,16 +728,22 @@ function vueReglages() {
   const r = S.reglages();
   cadre('reglages', 'Réglages', `
     <form class="panneau section-form" id="form-reglages" style="max-width:820px">
+      <h2>Prix revendeur et volume</h2>
+      <div class="grille-champs">
+        <label class="champ"><span>Remise revendeur sur le PPC (%)</span><input name="remiseRevendeur" type="number" min="0" max="80" step="0.5" value="${r.remiseRevendeur}"></label>
+        <label class="champ"><span>Remise dès 3 lots (%)</span><input name="remise3lots" type="number" min="0" max="50" step="0.5" value="${r.remise3lots}"></label>
+        <label class="champ"><span>Remise à la palette (%)</span><input name="remisePalette" type="number" min="0" max="50" step="0.5" value="${r.remisePalette}"></label>
+        <label class="champ"><span>Minimum de commande (€ HT)</span><input name="minimumCommande" type="number" min="0" step="50" value="${r.minimumCommande}"></label>
+      </div>
       <h2>Livraison</h2>
       <div class="grille-champs">
-        <label class="champ"><span>Franco de port (€ HT)</span><input name="franco" type="number" min="0" step="10" value="${r.franco}"></label>
-        <label class="champ"><span>Forfait sous le franco (€ HT)</span><input name="forfait" type="number" min="0" step="1" value="${r.forfait}"></label>
+        <label class="champ"><span>Franco de port (€ HT)</span><input name="francoPalette" type="number" min="0" step="50" value="${r.francoPalette}"></label>
+        <label class="champ"><span>Port sous le franco (€ HT)</span><input name="fraisPort" type="number" min="0" step="1" value="${r.fraisPort}"></label>
         <label class="champ"><span>Supplément hayon + RDV (€ HT)</span><input name="hayon" type="number" min="0" step="1" value="${r.hayon}"></label>
+        <label class="champ"><span>Supplément livraison directe (€ HT)</span><input name="fraisDirect" type="number" min="0" step="1" value="${r.fraisDirect}"></label>
         <label class="champ"><span>TVA (%)</span><input name="tva" type="number" min="0" step="0.1" value="${r.tva}"></label>
       </div>
-      <h2>Prix dégressifs par défaut</h2>
-      <div class="paliers-edit">${[0, 1, 2].map((i) => `<div><input class="saisie" name="pmin${i}" type="number" min="2" placeholder="Dès … pièces" value="${r.paliers[i]?.min || ''}" aria-label="Quantité minimum"><input class="saisie" name="prem${i}" type="number" step="0.5" min="0" max="90" placeholder="Remise %" value="${r.paliers[i]?.remise || ''}" aria-label="Remise %"><span class="muet petit">%</span></div>`).join('')}</div>
-      <p class="petit muet">Ils s'appliquent à tous les produits sans paliers propres. Laissez une ligne vide pour la retirer.</p>
+      <p class="petit muet">Niveaux revendeurs : ${S.NIVEAUX.map((n) => `${n.nom} ${n.remise ? `−${n.remise} %` : ''}${n.seuil ? ` dès ${nombre(n.seuil)} €` : ''}`).join(' · ')} (achats sur 12 mois).</p>
       <h2>Boutique</h2>
       <label class="champ"><span>Bandeau en haut de page</span><input name="bandeau" value="${esc(r.bandeau)}"></label>
       <div class="grille-champs">
@@ -743,8 +760,8 @@ function vueReglages() {
   $('#form-reglages').addEventListener('submit', (e) => {
     e.preventDefault();
     const d = Object.fromEntries(new FormData(e.target));
-    const paliers = [0, 1, 2].map((i) => ({ min: parseInt(d['pmin' + i], 10), remise: parseFloat(d['prem' + i]) })).filter((x) => x.min > 1 && x.remise > 0).sort((a, b) => a.min - b.min);
-    S.enregistrerReglages({ ...S.reglages(), franco: +d.franco || 0, forfait: +d.forfait || 0, hayon: +d.hayon || 0, tva: +d.tva || 0, paliers, bandeau: d.bandeau.trim(), validiteDevis: +d.validiteDevis || 30, email: d.email.trim() });
+    const n = (k) => Math.max(0, +d[k] || 0);
+    S.enregistrerReglages({ ...S.reglages(), remiseRevendeur: n('remiseRevendeur'), remise3lots: n('remise3lots'), remisePalette: n('remisePalette'), minimumCommande: n('minimumCommande'), francoPalette: n('francoPalette'), fraisPort: n('fraisPort'), hayon: n('hayon'), fraisDirect: n('fraisDirect'), tva: n('tva'), bandeau: d.bandeau.trim(), validiteDevis: +d.validiteDevis || 30, email: d.email.trim() });
     toast(`${ic('check')} Réglages enregistrés — la boutique est à jour`);
   });
   $('[data-reinit]').addEventListener('click', async () => {
