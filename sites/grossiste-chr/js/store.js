@@ -1,12 +1,12 @@
-// Données de la démo MC France CHR — plateforme de vente en gros pour revendeurs, partagée entre boutique et admin.
+// Données de la démo Stockinox (grossiste CHR fictif) — plateforme de vente en gros pour revendeurs, partagée entre boutique et admin.
 // Tout reste dans le navigateur (localStorage) : l'admin et la boutique ouverts dans le même navigateur se répondent.
 // La vraie version s'appuie sur un serveur (base de données, comptes, paiement, e-mails).
 //
-// Prix : `prixHT` d'un produit = prix public conseillé HT (PPC), relevé sur mcfrancechr.fr.
+// Prix : `prixHT` d'un produit = prix public conseillé HT (PPC), relevé sur un vrai catalogue public.
 // Le prix revendeur = PPC − remise revendeur (réglage, exemple 30 %), sauf prix revendeur fixé produit par produit.
 import { FAMILLES, PRODUITS, RELEVE } from './catalogue.js';
 
-const K = 'mcf.v2.';
+const K = 'stx.v1.';
 const auditeurs = new Set();
 
 function lire(cle, defaut) {
@@ -61,11 +61,11 @@ export const REGLAGES_DEFAUT = {
   remise3lots: 3,         // exemple : dès 3 lots d'une même référence
   remisePalette: 7,       // exemple : à la palette complète
   tva: 20,
-  bandeau: 'Grossiste français depuis 2013 · Showroom et entrepôt à Roubaix · Livraison France, Belgique et export',
-  telephone: '03 20 77 59 04',
-  mobile: '06 44 89 80 00',
-  email: 'contact@mcfrancechr.fr',
-  adresse: '139 rue des Arts, 59100 Roubaix',
+  bandeau: 'Grossiste français du matériel CHR · Showroom et entrepôt · Livraison France, Belgique et export',
+  telephone: '',
+  mobile: '',
+  email: 'contact@example.com',
+  adresse: 'Adresse de l’entrepôt (exemple)',
   validiteDevis: 30,
 };
 export function reglages() { return { ...REGLAGES_DEFAUT, ...lire('reglages', {}) }; }
@@ -337,7 +337,7 @@ export const LIVRAISONS = {
   palette: 'Messagerie / palette (1 à 3 jours ouvrés)',
   hayon: 'Camion avec hayon + rendez-vous',
   direct: 'Livraison directe chez votre client (étiquette neutre)',
-  enlevement: 'Enlèvement à l’entrepôt de Roubaix',
+  enlevement: 'Enlèvement à l’entrepôt',
 };
 
 export function commandes() { return lire('commandes', null) || initialiserExemples().commandes; }
@@ -355,7 +355,7 @@ export function passerCommande({ client: cli, livraison, paiement, note, refClie
   const t = calculer(lignes, livraison.mode, cli.id ? client(cli.id) : null);
   const statutInitial = paiement === 'virement' ? 'attente' : 'validee';
   const c = {
-    num: prochainNumero('MCF', 'compteurCommande', 10480),
+    num: prochainNumero('STX', 'compteurCommande', 10480),
     date: new Date().toISOString(),
     client: cli, livraison, paiement, note: note || '', refClient: refClient || '',
     lignes: figerLignes(t),
@@ -502,7 +502,7 @@ function initialiserExemples() {
       ? { mode, adresse: '5 place du Marché', cp: '59300', ville: 'Valenciennes', pays: 'France', destinataire: 'Client final (exemple)' }
       : { mode, adresse: c.adresse, cp: c.cp, ville: c.ville, pays: c.pays };
     return {
-      num: `MCF-${new Date(date).getFullYear()}-${String(10480 - i).padStart(5, '0')}`,
+      num: `STX-${new Date(date).getFullYear()}-${String(10480 - i).padStart(5, '0')}`,
       date: new Date(date).toISOString(),
       client: { id: c.id, societe: c.societe, contact: c.contact, email: c.email, tel: c.tel, siret: c.siret, tva: c.tva },
       livraison, paiement: paiements[i], note: '', refClient: i % 3 === 0 ? `BC-${2400 + i}` : '',
@@ -513,7 +513,7 @@ function initialiserExemples() {
     };
   });
   const dv = [
-    { cid: 'c6', items: [['fours-a-pizza', 3, 'palette'], ['petrins', 3, 'palette'], ['saladettes-a-pizza', 1, 'palette']], statut: 'demande', j: 1, message: 'Conteneur 40 pieds pour l’export : possible de regrouper avec du froid ? Merci de chiffrer départ entrepôt Roubaix.' },
+    { cid: 'c6', items: [['fours-a-pizza', 3, 'palette'], ['petrins', 3, 'palette'], ['saladettes-a-pizza', 1, 'palette']], statut: 'demande', j: 1, message: 'Conteneur 40 pieds pour l’export : possible de regrouper avec du froid ? Merci de chiffrer départ entrepôt.' },
     { cid: 'c2', items: [['lave-vaisselle', 0, 3], ['tables-inox', 0, 'palette']], statut: 'envoye', j: 4, message: '' },
     { cid: 'demo', items: [['hottes', 1, 3], ['moteurs', 0, 3]], statut: 'envoye', j: 9, message: '' },
   ].map((d, i) => {

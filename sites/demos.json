@@ -6,10 +6,10 @@
   },
   "demos": [
     {
-      "slug": "mc-france-chr",
-      "title": "MC France CHR — le grossiste du matériel CHR pour les revendeurs",
+      "slug": "grossiste-chr",
+      "title": "Stockinox — le grossiste du matériel CHR pour les revendeurs",
       "sector": "Matériel CHR · plateforme de vente en gros (B2B)",
-      "city": "Roubaix",
+      "city": "France",
       "color": "#1c8bcf",
       "public": false
     },

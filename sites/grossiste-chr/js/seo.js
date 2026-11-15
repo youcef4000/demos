@@ -5,7 +5,7 @@ const MOTS = [
   ['prix revendeur', 0, 0, 180, 50], ['prix public conseillé', 0, 0, 334, 49], ['palette(s)', 0, 0, 483, 50],
   ['marge', 0, 0, 159, 50], ['déstockage', 0, 0, 214, 50], ['export', 0, 0, 212, 50], ['matériel CHR', 14, 12, 100, 50],
   ['professionnel(le)(s)', 2378, 54, 264, 50], ['restauration', 231, 54, 66, 50], ['petit prix', 3, 1, 0, 0], ['occasion', 3, 1, 0, 0],
-  ['Picardie', 13, 3, 0, 0], ['Roubaix', 70, 54, 311, 50], ['Lille', 58, 54, 0, 0], ['favorite / border (texte d’icône)', 3042, 54, 0, 0],
+  ['Picardie', 13, 3, 0, 0], ['ville du siège', 70, 54, 0, 0], ['Lille', 58, 54, 0, 0], ['favorite / border (texte d’icône)', 3042, 54, 0, 0],
 ];
 const fr = (n) => new Intl.NumberFormat('fr-FR').format(n);
 const pct = (n, t) => Math.round((n / t) * 100);

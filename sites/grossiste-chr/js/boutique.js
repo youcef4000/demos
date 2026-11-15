@@ -1,4 +1,4 @@
-// MC France CHR — plateforme de vente en gros pour revendeurs (application d'une page, routes #/…).
+// Stockinox — plateforme de vente en gros pour revendeurs (application d'une page, routes #/…).
 import * as S from './store.js';
 import { UNIVERS, FAQ_GROS, ETAPES_GROS } from './univers.js';
 import { eur, esc, ic, src, toast, modale, documentCommercial, dateCourte, dateLongue, nombre } from './ui.js';
@@ -6,14 +6,14 @@ import { eur, esc, ic, src, toast, modale, documentCommercial, dateCourte, dateL
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const vue = $('#vue');
-const BASE = 'https://demos.bornzstudio.com/mc-france-chr/';
+const BASE = 'https://demos.bornzstudio.com/grossiste-chr/';
 const ANIM = 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (ANIM) document.documentElement.classList.add('anim');
 
 function pref(cle, valeur) {
   try {
-    if (valeur === undefined) return localStorage.getItem('mcf.v2.pref.' + cle);
-    localStorage.setItem('mcf.v2.pref.' + cle, valeur);
+    if (valeur === undefined) return localStorage.getItem('stx.v1.pref.' + cle);
+    localStorage.setItem('stx.v1.pref.' + cle, valeur);
   } catch { /* stockage indisponible */ }
   return valeur;
 }
@@ -51,7 +51,7 @@ const faqLd = (liste) => ({ '@type': 'FAQPage', mainEntity: liste.map(([q, r]) =
 /* ---------- Petits morceaux d'interface ---------- */
 function dispo(p) {
   const arr = S.arrivage(p);
-  if (p.stock >= S.colisage(p) * 3) return `<span class="stock stock-ok">En stock · ${p.stock} u. à Roubaix</span>`;
+  if (p.stock >= S.colisage(p) * 3) return `<span class="stock stock-ok">En stock · ${p.stock} u. à l’entrepôt</span>`;
   if (p.stock > 0) return `<span class="stock stock-bas">Stock limité · ${p.stock} u.</span>`;
   return `<span class="stock stock-non">Arrivage le ${dateCourte(arr).slice(0, 5)} · réservable</span>`;
 }
@@ -204,7 +204,7 @@ function majEntete() {
 }
 function majOnglets(chemin) {
   const seg = chemin.split('/')[0];
-  const actif = { '': '', catalogue: 'catalogue', c: 'catalogue', p: 'catalogue', compte: 'compte', panier: 'panier', commande: 'panier' }[seg];
+  const actif = { '': '', catalogue: 'catalogue', c: 'catalogue', p: 'catalogue', compte: 'compte', panier: 'panier', commande: 'panier', infos: 'infos' }[seg];
   $$('#barre-onglets [data-onglet]').forEach((a) => (a.dataset.onglet === actif ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current')));
 }
 
@@ -237,7 +237,7 @@ function suggestions(q, boite) {
   const vis = S.prixVisibles();
   boite.innerHTML = (cats.length ? `<p class="sugg-titre">Catégories</p><div class="sugg-cat">${cats.slice(0, 6).map(([t, h]) => `<a href="${h}">${esc(t)}</a>`).join('')}</div>` : '')
     + (res.length ? `<p class="sugg-titre">Produits</p>${res.map((p) => `<a class="sugg-prod" href="#/p/${p.id}"><img src="${src(p.images[0])}" alt="" width="52" height="52"><span>${esc(p.nom)}<small>Réf. ${esc(p.ref)} · ${esc(p.marque || '')}</small></span><strong>${vis ? eur(S.prixUnitaire(p).unit) : 'PPC ' + eur(S.ppc(p))}</strong></a>`).join('')}<a class="sugg-tout" href="#/recherche/${encodeURIComponent(q)}">Voir tous les résultats pour « ${esc(q)} »</a>`
-      : `<p class="sugg-vide">Aucun produit pour « ${esc(q)} ». Essayez une référence ou appelez le 03 20 77 59 04.</p>`);
+      : `<p class="sugg-vide">Aucun produit pour « ${esc(q)} ». Essayez une référence ou <a href="#/infos/contact">contactez-nous</a>.</p>`);
   boite.hidden = false;
   suggActif = -1;
 }
@@ -302,8 +302,8 @@ function vueAccueil() {
   const simuListe = simu.length >= 4 ? simu : ps.filter((p) => p.stock > 0 && p.etat === 'neuf').slice(0, 8);
   const pv = vedette ? S.prixUnitaire(vedette, S.colisage(vedette)) : null;
   seo({
-    titre: 'Grossiste matériel CHR pour revendeurs | MC France CHR',
-    description: 'Grossiste en matériel CHR depuis 2013 : froid, cuisson, pizza, inox, laverie. Prix revendeur, prix public conseillé, lots et palettes, France et export.',
+    titre: 'Grossiste matériel CHR pour revendeurs | Stockinox',
+    description: 'Grossiste en matériel CHR pour les pros : froid, cuisson, pizza, inox, laverie. Prix revendeur, prix public conseillé, lots et palettes, France et export.',
     ld: { '@graph': [faqLd(FAQ_GROS)] },
   });
   rendre(`
@@ -331,7 +331,7 @@ function vueAccueil() {
         <div class="stat rv"><strong data-compte="${ps.length}">${ps.length}</strong><span>Références en vente en gros</span></div>
         <div class="stat rv" style="--i:1;--c:#1a8cd8"><strong data-compte="${nbSous}">${nbSous}</strong><span>Catégories, 9 univers</span></div>
         <div class="stat rv" style="--i:2;--c:#138a4f"><strong data-compte="${marques.length}">${marques.length}</strong><span>Marques professionnelles</span></div>
-        <div class="stat rv" style="--i:3;--c:#7a5af8"><strong>2013</strong><span>Au service des pros du CHR</span></div>
+        <div class="stat rv" style="--i:3;--c:#7a5af8"><strong>B2B</strong><span>Vente réservée aux pros</span></div>
       </div>
     </div>
   </section>
@@ -349,11 +349,11 @@ function vueAccueil() {
   </section>
 
   <section class="section conteneur" style="padding-top:0">
-    <div class="section-titre"><div><span class="pill rv">Pourquoi MC France CHR</span><h2 class="rv" style="margin-top:14px">Pensé pour <span class="surligne" style="--c:var(--orange)">ceux qui revendent</span></h2></div></div>
+    <div class="section-titre"><div><span class="pill rv">Pourquoi Stockinox</span><h2 class="rv" style="margin-top:14px">Pensé pour <span class="surligne" style="--c:var(--orange)">ceux qui revendent</span></h2></div></div>
     <div class="atouts">
       ${[['euro', '#1a8cd8', '#e8f3fc', 'Prix revendeur et PPC', `Le prix revendeur, le prix public conseillé et votre marge sur chaque fiche. Base : ${r.remiseRevendeur} % sous le prix public, plus la remise de votre niveau.`],
     ['pallet', '#f0612a', '#fdeee6', 'Lots, palettes, conteneurs', `Colisage clair par référence, −${r.remise3lots} % dès 3 lots et −${r.remisePalette} % à la palette. Conteneurs export sur devis.`],
-    ['label', '#138a4f', '#e2f5ea', 'Livraison chez votre client', 'Expédition directe sous étiquette neutre, sans prix ni document MC France : vous gardez la relation client.'],
+    ['label', '#138a4f', '#e2f5ea', 'Livraison chez votre client', 'Expédition directe sous étiquette neutre, sans prix ni document à notre nom : vous gardez la relation client.'],
     ['download', '#7a5af8', '#efebfe', 'Fiches et photos à reprendre', 'Exportez références, caractéristiques et photos pour alimenter votre boutique en ligne en quelques minutes.']]
     .map(([i, c, p, t, d], k) => `<div class="atout rv" style="--c:${c};--p:${p};--i:${k}">${ic(i)}<h3>${t}</h3><p>${d}</p></div>`).join('')}
     </div>
@@ -405,13 +405,13 @@ function vueAccueil() {
 
   <section class="engagement">
     <div class="conteneur engagement-l">
-      <figure class="engagement-photo rv-zoom"><img src="img/univers/entrepot.webp" alt="Chariot élévateur chargeant une palette de matériel de cuisine dans un camion" loading="lazy" width="896" height="1120"><figcaption>Entrepôt de Roubaix</figcaption></figure>
+      <figure class="engagement-photo rv-zoom"><img src="img/univers/entrepot.webp" alt="Chariot élévateur chargeant une palette de matériel de cuisine dans un camion" loading="lazy" width="896" height="1120"><figcaption>Illustration · entrepôt</figcaption></figure>
       <div>
         <div class="guillemets rv" aria-hidden="true">”</div>
-        <blockquote class="rv">Choisir MC France CHR, c’est opter pour <em>la qualité et l’expertise</em> : des marques reconnues, une équipe qui vous conseille et un service après-vente réactif.</blockquote>
-        <cite class="rv">MC France CHR, Roubaix — extrait de la présentation de l’entreprise</cite>
+        <blockquote class="rv">Notre métier : <em>vous faire gagner de la marge</em>. Des marques reconnues, du stock prêt à partir et un service après-vente qui suit vos clients.</blockquote>
+        <cite class="rv">Notre engagement envers les revendeurs (texte d’exemple)</cite>
         <div class="stats">
-          <div class="stat rv"><strong>2013</strong><span>Création</span></div>
+          <div class="stat rv"><strong>B2B</strong><span>Pros uniquement</span></div>
           <div class="stat rv" style="--i:1;--c:var(--jaune)"><strong>1–3 j</strong><span>Expédition du stock</span></div>
           <div class="stat rv" style="--i:2;--c:#7ff0b3"><strong>FR · BE</strong><span>+ export sur devis</span></div>
           <div class="stat rv" style="--i:3;--c:#9cc9ff"><strong>SAV</strong><span>Pièces et réparation</span></div>
@@ -428,9 +428,9 @@ function vueAccueil() {
   <section class="section conteneur">
     <div class="texte-seo">
       <div class="texte-seo-corps rv">
-        <span class="pill" style="--c:var(--bleu)">Grossiste CHR à Roubaix</span>
+        <span class="pill" style="--c:var(--bleu)">Grossiste CHR en France</span>
         <h2>Grossiste en matériel CHR pour les revendeurs, installateurs et distributeurs</h2>
-        <p>MC France CHR est un grossiste en matériel de restauration professionnelle installé à Roubaix depuis 2013. Nous fournissons en gros les revendeurs en magasin, les e-commerçants, les cuisinistes et installateurs, les centrales d’achat et les clients export : froid commercial, cuisson, pizza et boulangerie, préparation et boucherie, snack, café et bar, laverie, mobilier inox et ventilation.</p>
+        <p>Stockinox est un grossiste en matériel de restauration professionnelle, avec showroom et entrepôt en France. Nous fournissons en gros les revendeurs en magasin, les e-commerçants, les cuisinistes et installateurs, les centrales d’achat et les clients export : froid commercial, cuisson, pizza et boulangerie, préparation et boucherie, snack, café et bar, laverie, mobilier inox et ventilation.</p>
         <p>Chaque référence est proposée au <strong>prix revendeur HT</strong>, avec le <strong>prix public conseillé</strong> pour calculer votre marge, un colisage par lot et un prix dégressif à la palette. La livraison se fait en France, en Belgique et à l’export, chez vous ou directement chez votre client final sous étiquette neutre.</p>
       </div>
       <div class="faq rv">${FAQ_GROS.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>
@@ -438,7 +438,7 @@ function vueAccueil() {
   </section>
 
   <section class="conteneur" style="padding-bottom:20px">
-    <div class="appel rv-zoom"><div><h2>Prêt à revendre le catalogue MC France ?</h2><p>Compte revendeur en deux minutes, validation sous 24 h ouvrées, prix revendeur sur tout le catalogue.</p></div><a class="btn btn-jaune btn-grand" href="#/compte?inscription=1">Ouvrir mon compte ${ic('arrow')}</a></div>
+    <div class="appel rv-zoom"><div><h2>Prêt à revendre le catalogue Stockinox ?</h2><p>Compte revendeur en deux minutes, validation sous 24 h ouvrées, prix revendeur sur tout le catalogue.</p></div><a class="btn btn-jaune btn-grand" href="#/compte?inscription=1">Ouvrir mon compte ${ic('arrow')}</a></div>
   </section>`);
   brancherSimulateur();
 }
@@ -475,7 +475,7 @@ function brancherSimulateur() {
 function vueCatalogue() {
   const fams = S.familles();
   const f0 = fil([['Catalogue']]);
-  seo({ titre: 'Catalogue matériel CHR en gros | MC France CHR', description: `Tout le catalogue en gros : ${fams.map((f) => f.nom.toLowerCase()).join(', ')}. Prix revendeur HT, lots et palettes.`, ld: f0.ld });
+  seo({ titre: 'Catalogue matériel CHR en gros | Stockinox', description: `Tout le catalogue en gros : ${fams.map((f) => f.nom.toLowerCase()).join(', ')}. Prix revendeur HT, lots et palettes.`, ld: f0.ld });
   rendre(`<div class="conteneur">${f0.html}
     <header class="section-titre" style="margin-top:8px"><div><span class="pill rv">Tout le catalogue</span><h1 class="page-titre rv" style="margin:14px 0 0">Le catalogue <span class="surligne">en gros</span></h1><p class="rv">${S.produits().length} références dans ${fams.reduce((s, f) => s + f.sous.length, 0)} catégories, au prix revendeur.</p></div></header>
     <div class="cat-liste">${fams.map((f, i) => { const pf = produitsDe(f.slug); return `<section class="cat-carte rv" style="${styleU(f.slug)};--i:${i % 2}">
@@ -501,7 +501,7 @@ function monterListe(el, { cle, base, sousFamilles = null, titre = '' }) {
       <div class="filtres-tete"><h2>Filtrer</h2><button class="btn-icone" type="button" data-fermer-filtres aria-label="Fermer">${ic('x')}</button></div>
       ${sousFamilles && sousFamilles.length > 1 ? `<div class="filtre"><h3>Catégorie</h3>${sousFamilles.map((s) => `<label class="case"><input type="checkbox" name="sous" value="${s.slug}" ${filtres.sous.has(s.slug) ? 'checked' : ''}><span>${esc(s.nom)}</span><small>${compte((p) => p.sous === s.slug)}</small></label>`).join('')}</div>` : ''}
       <div class="filtre"><h3>Disponibilité et offres</h3>
-        <label class="case"><input type="checkbox" name="stock" ${filtres.stock ? 'checked' : ''}><span>En stock à Roubaix</span><small>${compte((p) => p.stock > 0)}</small></label>
+        <label class="case"><input type="checkbox" name="stock" ${filtres.stock ? 'checked' : ''}><span>En stock à l’entrepôt</span><small>${compte((p) => p.stock > 0)}</small></label>
         <label class="case"><input type="checkbox" name="destock" ${filtres.destock ? 'checked' : ''}><span>Déstockage</span><small>${compte((p) => S.remiseDestockage(p) > 0)}</small></label>
         <label class="case"><input type="checkbox" name="sc" ${filtres.sc ? 'checked' : ''}><span>Second choix</span><small>${compte((p) => p.etat === 'second-choix')}</small></label>
       </div>
@@ -585,7 +585,7 @@ function vueUnivers(fam) {
   const ps = produitsDe(fam);
   const f0 = fil([['Catalogue', '#/catalogue'], [f.nom]]);
   seo({
-    titre: titreSeo(`${f.nom} en gros pour revendeurs | MC France CHR`, `${f.nom} en gros | MC France CHR`, `${f.court} en gros | MC France CHR`),
+    titre: titreSeo(`${f.nom} en gros pour revendeurs | Stockinox`, `${f.nom} en gros | Stockinox`, `${f.court} en gros | Stockinox`),
     description: u.intro,
     ld: { '@graph': [f0.ld, { '@type': 'CollectionPage', name: `${f.nom} en gros`, description: u.intro, url: `${BASE}#/c/${fam}` }, ...(u.faq.length ? [faqLd(u.faq)] : [])] },
   });
@@ -633,7 +633,7 @@ function vueSous(fam, sous) {
   const f0 = fil([['Catalogue', '#/catalogue'], [f.nom, `#/c/${fam}`], [sf.nom]]);
   const vitrine = ps.slice().sort((a, b) => b.images.length - a.images.length || b.prixHT - a.prixHT)[0];
   seo({
-    titre: titreSeo(`${sf.nom} en gros, prix revendeur | MC France CHR`, `${sf.nom} en gros | MC France CHR`, `${sf.nom} | Grossiste MC France CHR`),
+    titre: titreSeo(`${sf.nom} en gros, prix revendeur | Stockinox`, `${sf.nom} en gros | Stockinox`, `${sf.nom} | Grossiste Stockinox`),
     description: texte,
     ld: { '@graph': [f0.ld, { '@type': 'CollectionPage', name: `${sf.nom} en gros`, description: texte, url: `${BASE}#/c/${fam}/${sous}`, mainEntity: { '@type': 'ItemList', numberOfItems: ps.length, itemListElement: ps.slice(0, 20).map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: `${BASE}#/p/${p.id}`, name: p.nom })) } }] },
   });
@@ -648,7 +648,7 @@ function vueSous(fam, sous) {
             <div class="stat rv" style="--c:${u.couleur}"><strong data-compte="${ps.length}">${ps.length}</strong><span>Références</span></div>
             <div class="stat rv" style="--c:${u.couleur};--i:1"><strong data-compte="${nbMarques(ps)}">${nbMarques(ps)}</strong><span>Marques</span></div>
             <div class="stat rv" style="--c:${u.couleur};--i:2"><strong>${eur(prixMin(ps)).replace(/,00\s€/, ' €')}</strong><span>Dès, ${libellePrixMin()}</span></div>
-            <div class="stat rv" style="--c:${u.couleur};--i:3"><strong data-compte="${ps.filter((p) => p.stock > 0).length}">${ps.filter((p) => p.stock > 0).length}</strong><span>En stock à Roubaix</span></div>
+            <div class="stat rv" style="--c:${u.couleur};--i:3"><strong data-compte="${ps.filter((p) => p.stock > 0).length}">${ps.filter((p) => p.stock > 0).length}</strong><span>En stock à l’entrepôt</span></div>
           </div>
         </div>
         ${vitrine ? `<div class="hero-sous-photo rv-zoom"><img src="${src(vitrine.images[0])}" alt="${esc(sf.nom)} professionnel en gros" width="520" height="520"></div>` : ''}
@@ -668,17 +668,17 @@ function vueRecherche(q) {
   const res = S.rechercher(q, 500);
   $('#q').value = q;
   const fams = [...new Set(res.map((p) => p.famille))];
-  seo({ titre: `« ${q} » en gros | MC France CHR`, description: `Résultats pour ${q} : prix revendeur, colisage et stock.` });
+  seo({ titre: `« ${q} » en gros | Stockinox`, description: `Résultats pour ${q} : prix revendeur, colisage et stock.` });
   rendre(`<div class="conteneur">${fil([['Recherche'], [q]]).html}<h1 class="page-titre">« ${esc(q)} » <span class="muet" style="font-size:.5em">${res.length} résultat${res.length > 1 ? 's' : ''}</span></h1></div><section class="conteneur" id="zone-liste"></section>`);
   monterListe($('#zone-liste'), { cle: 'r/' + q, base: res, sousFamilles: fams.length === 1 ? S.famille(fams[0]).sous : null });
 }
 function vueDestockage() {
   const base = S.produits().filter((p) => S.remiseDestockage(p) > 0 || p.etat === 'second-choix');
-  seo({ titre: 'Déstockage matériel CHR en gros | MC France CHR', description: 'Fins de série, prix publics en baisse et second choix contrôlé : le déstockage de matériel CHR au prix revendeur.' });
+  seo({ titre: 'Déstockage matériel CHR en gros | Stockinox', description: 'Fins de série, prix publics en baisse et second choix contrôlé : le déstockage de matériel CHR au prix revendeur.' });
   rendre(`<section class="hero-univers" style="--c:#f0612a;--p:#fdeee6"><div class="conteneur">${fil([['Déstockage']]).html}</div>
     <div class="conteneur" style="padding-bottom:36px"><span class="pill rv">Tout l’univers du déstockage</span>
       <h1 class="rv" style="--i:1">Revendez malin avec le <span class="surligne" style="--c:#f0612a">déstockage</span></h1>
-      <p class="hero-univers-intro rv" style="--i:2">Fins de série et prix publics en baisse (relevés sur la boutique actuelle de MC France), et second choix contrôlé : matériel neuf déclassé pour un défaut d’aspect, même garantie. <em>Les articles second choix et leurs défauts sont des exemples.</em></p>
+      <p class="hero-univers-intro rv" style="--i:2">Fins de série et prix publics en baisse (relevés sur un vrai catalogue public), et second choix contrôlé : matériel neuf déclassé pour un défaut d’aspect, même garantie. <em>Les articles second choix et leurs défauts sont des exemples.</em></p>
     </div></section><section class="conteneur" id="zone-liste" style="padding-top:28px"></section>`);
   monterListe($('#zone-liste'), { cle: 'destock', base });
 }
@@ -695,11 +695,11 @@ function vueProduit(id) {
   const arr = S.arrivage(p);
   const f0 = fil([[f?.nom || '', `#/c/${p.famille}`], [sf?.nom || '', `#/c/${p.famille}/${p.sous}`], [p.nom]]);
   seo({
-    titre: titreSeo(`${p.nom} – prix revendeur | MC France CHR`, `${p.nom.slice(0, 38)}… | Grossiste MC France CHR`),
+    titre: titreSeo(`${p.nom} – prix revendeur | Stockinox`, `${p.nom.slice(0, 38)}… | Grossiste Stockinox`),
     description: `${p.nom}${p.marque ? ' ' + p.marque : ''}, réf. ${p.ref} : en vente en gros au prix revendeur, ${c > 1 ? 'par lot de ' + c : 'à l’unité'}, palette de ${S.parPalette(p)}. ${(p.points || []).slice(0, 2).join('. ')}`,
     ld: { '@graph': [f0.ld, { '@type': 'Product', name: p.nom, sku: p.ref, ...(p.marque ? { brand: { '@type': 'Brand', name: p.marque } } : {}), image: p.images.filter((i) => !i.startsWith('data:')).map((i) => BASE + i), description: (p.points || []).join('. ') || p.nom, category: `${f?.nom} > ${sf?.nom}` }] },
   });
-  const condHtml = `<div class="conditionnement"><div>${ic('box')}<p><span>Colisage</span><strong>${c > 1 ? `Lot de ${c}` : 'À l’unité'}</strong></p></div><div>${ic('pallet')}<p><span>Palette</span><strong>${S.parPalette(p)} unités</strong></p></div><div>${ic('clock')}<p><span>${p.stock > 0 ? 'Stock Roubaix' : 'Arrivage'}</span><strong>${p.stock > 0 ? `${p.stock} u.` : dateCourte(arr).slice(0, 5)}</strong></p></div></div>`;
+  const condHtml = `<div class="conditionnement"><div>${ic('box')}<p><span>Colisage</span><strong>${c > 1 ? `Lot de ${c}` : 'À l’unité'}</strong></p></div><div>${ic('pallet')}<p><span>Palette</span><strong>${S.parPalette(p)} unités</strong></p></div><div>${ic('clock')}<p><span>${p.stock > 0 ? 'Stock entrepôt' : 'Arrivage'}</span><strong>${p.stock > 0 ? `${p.stock} u.` : dateCourte(arr).slice(0, 5)}</strong></p></div></div>`;
   let bloc;
   if (vis) {
     const pu = S.prixUnitaire(p, c);
@@ -744,7 +744,7 @@ function vueProduit(id) {
           <li>${ic('truck')}<p><strong>${p.stock > 0 ? `Expédié en ${esc(p.delai)}` : `Arrivage prévu le ${dateLongue(arr)}`}</strong><span>Messagerie, palette ou camion avec hayon</span></p></li>
           <li>${ic('label')}<p><strong>Livraison directe possible</strong><span>Chez votre client, sous étiquette neutre</span></p></li>
           <li>${ic('card')}<p><strong>Virement, carte, 30 ou 45 jours</strong><span>Encours selon votre compte revendeur</span></p></li>
-          <li>${ic('shield')}<p><strong>Garantie 1 à 2 ans selon la marque</strong><span>SAV et pièces par MC France</span></p></li>
+          <li>${ic('shield')}<p><strong>Garantie 1 à 2 ans selon la marque</strong><span>SAV et pièces assurés par nos soins</span></p></li>
         </ul>
       </div>
     </div>
@@ -808,7 +808,7 @@ function vueMetier(slug) {
   const pk = packDe(m);
   const vis = S.prixVisibles();
   const tot = pk.reduce((s, p) => s + (vis ? S.prixUnitaire(p).unit * S.colisage(p) : S.ppc(p)), 0);
-  seo({ titre: `${m.nom} en gros | MC France CHR`, description: `${m.nom} prêt à revendre : ${m.desc}` });
+  seo({ titre: `${m.nom} en gros | Stockinox`, description: `${m.nom} prêt à revendre : ${m.desc}` });
   rendre(`<div class="conteneur">${fil([['Packs'], [m.nom]]).html}
     <h1 class="page-titre">${esc(m.nom)} <span class="surligne" style="--c:var(--orange)">prêt à revendre</span></h1>
     <p class="hero-univers-intro" style="margin:-8px 0 22px">Une pièce par poste, la moins chère en stock : ajoutez le pack d’un coup (un lot par référence), puis ajustez les quantités ou remplacez un modèle.</p>
@@ -836,7 +836,7 @@ function vueEnValidation(titre) {
     <div class="info-bulle jaune" style="text-align:left">${ic('info')}<span><strong>Démo :</strong> validez ce compte depuis l’<a href="admin/#/clients" target="_blank" rel="noopener"><strong>espace admin → Clients</strong></a>, puis revenez ici : les prix apparaissent tout seuls.</span></div></div></div>`);
 }
 function vuePanier() {
-  seo({ titre: 'Panier | MC France CHR', description: 'Votre panier revendeur.' });
+  seo({ titre: 'Panier | Stockinox', description: 'Votre panier revendeur.' });
   if (!S.prixVisibles()) return S.clientConnecte() ? vueEnValidation('Panier') : verrouPage('Panier');
   const lignes = S.panier();
   if (!lignes.length) {
@@ -894,7 +894,7 @@ async function demanderDevis(lignes) {
   if (!c) return ouvrirAcces();
   const r = await modale({
     titre: 'Demande de devis volume',
-    corps: `<p class="muet">Un devis à votre nom, valable ${S.reglages().validiteDevis} jours, imprimable en PDF. Pour un conteneur ou des quantités hors palette, précisez vos besoins : MC France vous répond avec un prix confirmé.</p>
+    corps: `<p class="muet">Un devis à votre nom, valable ${S.reglages().validiteDevis} jours, imprimable en PDF. Pour un conteneur ou des quantités hors palette, précisez vos besoins : nous vous répondons avec un prix confirmé.</p>
       <div class="carte-societe"><span><strong>${esc(c.societe)}</strong><br>${esc(c.contact)} · ${esc(c.email)}</span></div>
       <label class="champ"><span>Votre message (quantités, destination, délai, conteneur 20’ / 40’…)</span><textarea name="message" rows="3"></textarea></label>`,
     actions: [{ id: 'annuler', libelle: 'Annuler' }, { id: 'ok', libelle: 'Créer le devis', classe: 'btn-plein' }],
@@ -907,7 +907,7 @@ async function demanderDevis(lignes) {
 
 /* ---------- Commande ---------- */
 function vueCommande() {
-  seo({ titre: 'Commande | MC France CHR', description: 'Validation de la commande revendeur.' });
+  seo({ titre: 'Commande | Stockinox', description: 'Validation de la commande revendeur.' });
   if (!S.prixVisibles()) return S.clientConnecte() ? vueEnValidation('Commande') : verrouPage('Commande');
   const lignes = S.panier();
   if (!lignes.length) { location.hash = '#/panier'; return; }
@@ -924,7 +924,7 @@ function vueCommande() {
         <section class="etape">
           <div class="etape-titre"><span>2</span><h2>Livraison</h2></div>
           <div class="choix" id="choix-livraison">
-            ${[['palette', 'Messagerie / palette', `1 à 3 jours ouvrés · offerte dès ${eur(r.francoPalette)} HT`], ['hayon', 'Camion avec hayon + rendez-vous', 'Pour le matériel lourd, déchargé au sol à l’heure convenue'], ['direct', 'Livraison directe chez votre client', 'Étiquette neutre, aucun prix ni document MC France dans le colis'], ['enlevement', 'Enlèvement à l’entrepôt de Roubaix', 'Prêt sous 24 à 48 h · gratuit']].map(([v, tt, d], i) => `<label><input type="radio" name="mode" value="${v}" ${i === 0 ? 'checked' : ''}><span><strong>${tt}</strong><small>${d}</small></span><em data-prix-mode="${v}"></em></label>`).join('')}
+            ${[['palette', 'Messagerie / palette', `1 à 3 jours ouvrés · offerte dès ${eur(r.francoPalette)} HT`], ['hayon', 'Camion avec hayon + rendez-vous', 'Pour le matériel lourd, déchargé au sol à l’heure convenue'], ['direct', 'Livraison directe chez votre client', 'Étiquette neutre, aucun prix ni document à notre nom dans le colis'], ['enlevement', 'Enlèvement à l’entrepôt', 'Prêt sous 24 à 48 h · gratuit']].map(([v, tt, d], i) => `<label><input type="radio" name="mode" value="${v}" ${i === 0 ? 'checked' : ''}><span><strong>${tt}</strong><small>${d}</small></span><em data-prix-mode="${v}"></em></label>`).join('')}
           </div>
           <div class="grille-champs" id="destinataire" hidden>
             <label class="champ"><span>Nom du client final *</span><input name="destinataire" placeholder="Restaurant, société…"></label>
@@ -996,7 +996,7 @@ function vueCommande() {
       paiement: d.paiement, note: d.note, refClient: d.refClient, lignes,
     });
     S.viderPanier();
-    try { sessionStorage.setItem('mcf-suivi-' + cmd.num, '1'); } catch { /* rien */ }
+    try { sessionStorage.setItem('stx-suivi-' + cmd.num, '1'); } catch { /* rien */ }
     location.hash = `#/merci/${cmd.num}`;
   });
 }
@@ -1037,7 +1037,7 @@ function detailCommande(c) {
 function vueMerci(num) {
   const c = S.commande(num);
   if (!c) return vueIntrouvable();
-  seo({ titre: 'Commande confirmée | MC France CHR', description: '' });
+  seo({ titre: 'Commande confirmée | Stockinox', description: '' });
   rendre(`<div class="conteneur merci">
     <div class="merci-tete">${ic('check')}<h1>Merci, votre commande est enregistrée</h1>
       <p>Commande <strong>${esc(c.num)}</strong> · ${eur(c.totaux.ht)} HT. Un récapitulatif part à <strong>${esc(c.client.email)}</strong>.</p>
@@ -1051,8 +1051,8 @@ function vueSuivi(num) {
   const cli = S.clientConnecte();
   const c = num ? S.commande(num) : null;
   let ok = false;
-  try { ok = !!(c && (sessionStorage.getItem('mcf-suivi-' + num) || (cli && c.client.id === cli.id))); } catch { ok = !!(c && cli && c.client.id === cli.id); }
-  seo({ titre: 'Suivi de commande | MC France CHR', description: 'Suivez votre commande revendeur : préparation, expédition, livraison.' });
+  try { ok = !!(c && (sessionStorage.getItem('stx-suivi-' + num) || (cli && c.client.id === cli.id))); } catch { ok = !!(c && cli && c.client.id === cli.id); }
+  seo({ titre: 'Suivi de commande | Stockinox', description: 'Suivez votre commande revendeur : préparation, expédition, livraison.' });
   if (c && ok) { rendre(`<div class="conteneur merci">${fil([['Suivi de commande', '#/suivi'], [c.num]]).html}${detailCommande(c)}</div>`); return; }
   const miennes = cli ? S.commandes().filter((x) => x.client.id === cli.id).slice(0, 6) : [];
   const ex = S.commandes().find((x) => x.statut === 'expediee');
@@ -1060,7 +1060,7 @@ function vueSuivi(num) {
     <h1 class="page-titre" style="margin-bottom:0">Suivre une commande</h1>
     <form class="carte-blanche" id="form-suivi">
       <p class="muet">Numéro de commande et code postal de livraison (ou e-mail du compte).</p>
-      <div class="grille-champs"><label class="champ"><span>N° de commande</span><input name="num" required placeholder="MCF-2026-10481" value="${esc(num || '')}"></label><label class="champ"><span>Code postal ou e-mail</span><input name="verif" required placeholder="59000"></label></div>
+      <div class="grille-champs"><label class="champ"><span>N° de commande</span><input name="num" required placeholder="STX-2026-10481" value="${esc(num || '')}"></label><label class="champ"><span>Code postal ou e-mail</span><input name="verif" required placeholder="59000"></label></div>
       <button class="btn btn-plein" type="submit">${ic('search')}Afficher le suivi</button>
       ${ex ? `<p class="petit muet">Exemple : ${esc(ex.num)} avec le code postal ${esc(ex.livraison.cp)}.</p>` : ''}
     </form>
@@ -1072,7 +1072,7 @@ function vueSuivi(num) {
     const v = S.norm(e.target.verif.value).replace(/\s/g, '');
     const cmd = S.commande(n);
     if (!cmd || !(S.norm(cmd.livraison?.cp).replace(/\s/g, '') === v || S.norm(cmd.client.email) === v)) { toast('Aucune commande ne correspond.', 'erreur'); return; }
-    try { sessionStorage.setItem('mcf-suivi-' + n, '1'); } catch { /* rien */ }
+    try { sessionStorage.setItem('stx-suivi-' + n, '1'); } catch { /* rien */ }
     location.hash = `#/suivi/${n}`;
   });
 }
@@ -1080,7 +1080,7 @@ function vueSuivi(num) {
 /* ---------- Compte revendeur ---------- */
 function vueCompte(onglet, params) {
   const c = S.clientConnecte();
-  seo({ titre: 'Espace revendeur | MC France CHR', description: 'Espace revendeur : commandes, devis, niveau de remise, export du catalogue.' });
+  seo({ titre: 'Espace revendeur | Stockinox', description: 'Espace revendeur : commandes, devis, niveau de remise, export du catalogue.' });
   if (!c || params?.get('inscription')) return vueConnexion(params);
   onglet = onglet || 'tableau';
   const mes = S.commandes().filter((x) => x.client.id === c.id);
@@ -1104,7 +1104,7 @@ function vueCompte(onglet, params) {
       <section class="carte-blanche"><h2>Votre niveau revendeur : ${esc(niv.nom)}</h2>
         <div class="niveau-etapes">${S.NIVEAUX.map((n) => `<div class="${n.id === niv.id ? 'actif' : ''}"><strong>${n.nom}</strong>${n.remise ? `−${n.remise} %` : 'Base'}<br>${n.seuil ? `dès ${nombre(n.seuil / 1000)} k€` : ''}</div>`).join('')}</div>
         ${suivant ? `<div class="jauge"><p>Encore <strong>${eur(suivant.seuil - vol)} HT</strong> d’achats sur 12 mois pour passer ${esc(suivant.nom)} (−${suivant.remise} %).</p><div class="jauge-barre"><i style="width:${Math.min(100, (vol / suivant.seuil) * 100).toFixed(1)}%"></i></div></div>` : ''}
-        <p class="petit muet">Seuils et remises d’exemple, réglés par MC France.</p>
+        <p class="petit muet">Seuils et remises d’exemple, réglés par le grossiste.</p>
       </section>
       <section class="carte-blanche"><div class="section-titre" style="margin:0"><h2>Dernières commandes</h2><a href="#/compte/commandes">Tout voir ${ic('arrow')}</a></div>
         ${mes.length ? `<div class="tableau-scroll"><table class="tableau"><tbody>${mes.slice(0, 4).map(ligneCmd).join('')}</tbody></table></div>` : '<p class="muet">Aucune commande pour l’instant.</p>'}</section>`;
@@ -1138,7 +1138,7 @@ function vueCompte(onglet, params) {
   $('[data-export]')?.addEventListener('click', () => {
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([S.exportCatalogueCsv()], { type: 'text/csv;charset=utf-8' }));
-    a.download = `catalogue-mc-france-${S.slug(c.societe)}.csv`;
+    a.download = `catalogue-stockinox-${S.slug(c.societe)}.csv`;
     document.body.append(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 2000);
     toast(`${ic('download')} Catalogue exporté`);
@@ -1219,7 +1219,7 @@ function vueConnexion(params) {
 
 /* ---------- Commande rapide ---------- */
 function vueRapide() {
-  seo({ titre: 'Commande rapide par référence | MC France CHR', description: 'Collez votre liste de références et quantités : tout part au panier.' });
+  seo({ titre: 'Commande rapide par référence | Stockinox', description: 'Collez votre liste de références et quantités : tout part au panier.' });
   if (!S.prixVisibles()) return S.clientConnecte() ? vueEnValidation('Commande rapide') : verrouPage('Commande rapide');
   const ex = S.produits().filter((p) => p.stock > 2 && p.etat === 'neuf');
   const exemple = [ex[3], ex[20], ex[45], ex[70]].filter(Boolean).map((p, i) => `${p.ref} ${S.colisage(p) * [2, 1, 3, 1][i]}`).join('\n');
@@ -1264,7 +1264,7 @@ function vueDocument(type, num) {
   const o = type === 'devis' ? S.devis().find((d) => d.num === num) : S.commande(num);
   if (!o) return vueIntrouvable();
   const html = documentCommercial(type, o);
-  seo({ titre: `${type === 'devis' ? 'Devis' : 'Facture'} ${num} | MC France CHR`, description: '' });
+  seo({ titre: `${type === 'devis' ? 'Devis' : 'Facture'} ${num} | Stockinox`, description: '' });
   rendre(`<div class="conteneur" style="padding-bottom:40px">${fil([[type === 'devis' ? 'Devis' : 'Facture'], [num]]).html}
     <div class="hero-actions" style="margin:4px 0 16px"><button class="btn btn-plein" type="button" data-imprimer>${ic('print')}Imprimer / PDF</button>
       ${type === 'devis' ? `<button class="btn" type="button" data-devis-panier>${ic('cart')}Commander ce devis</button>` : `<a class="btn" href="#/suivi/${num}">${ic('truck')}Suivi</a>`}
@@ -1276,7 +1276,7 @@ function vueDocument(type, num) {
 /* ---------- Devenir revendeur ---------- */
 function vueRevendeurs() {
   const r = S.reglages();
-  seo({ titre: 'Devenir revendeur de matériel CHR | MC France CHR', description: `Conditions revendeurs : prix revendeur (PPC −${r.remiseRevendeur} %), paliers par lot et palette, niveaux Silver, Gold, Distributeur, livraison directe sous étiquette neutre.`, ld: faqLd(FAQ_GROS) });
+  seo({ titre: 'Devenir revendeur de matériel CHR | Stockinox', description: `Conditions revendeurs : prix revendeur (PPC −${r.remiseRevendeur} %), paliers par lot et palette, niveaux Silver, Gold, Distributeur, livraison directe sous étiquette neutre.`, ld: faqLd(FAQ_GROS) });
   rendre(`<section class="hero-univers" style="--c:#f0612a;--p:#fdeee6"><div class="conteneur">${fil([['Devenir revendeur']]).html}</div>
     <div class="conteneur hero-univers-l">
       <div><span class="pill rv">Programme revendeurs</span>
@@ -1294,29 +1294,29 @@ function vueRevendeurs() {
     </div></section>
   <section class="section conteneur">
     <div class="section-titre"><div><span class="pill rv" style="--c:var(--bleu)">Niveaux revendeurs</span><h2 class="rv" style="margin-top:14px">Plus vous achetez, plus votre remise grimpe</h2><p class="rv">Calculée sur vos achats des 12 derniers mois, elle s’ajoute au prix revendeur et aux paliers de volume.</p></div></div>
-    <div class="carte-blanche rv"><div class="tableau-scroll"><table class="tableau niveaux-table"><thead><tr><th>Niveau</th><th>Achats sur 12 mois</th><th class="num">Remise en plus</th></tr></thead><tbody>${S.NIVEAUX.map((n) => `<tr><td><strong>${n.nom}</strong></td><td>${n.seuil ? `dès ${eur(n.seuil)} HT` : 'Dès l’ouverture du compte'}</td><td class="num"><strong>${n.remise ? `−${n.remise} %` : '—'}</strong></td></tr>`).join('')}</tbody></table></div><p class="petit muet">Seuils, remises, minimum et franco : valeurs d’exemple, réglées par MC France dans l’admin.</p></div>
+    <div class="carte-blanche rv"><div class="tableau-scroll"><table class="tableau niveaux-table"><thead><tr><th>Niveau</th><th>Achats sur 12 mois</th><th class="num">Remise en plus</th></tr></thead><tbody>${S.NIVEAUX.map((n) => `<tr><td><strong>${n.nom}</strong></td><td>${n.seuil ? `dès ${eur(n.seuil)} HT` : 'Dès l’ouverture du compte'}</td><td class="num"><strong>${n.remise ? `−${n.remise} %` : '—'}</strong></td></tr>`).join('')}</tbody></table></div><p class="petit muet">Seuils, remises, minimum et franco : valeurs d’exemple, réglées par le grossiste dans l’admin.</p></div>
   </section>
   <section class="section conteneur" style="padding-top:0"><div class="etapes">${ETAPES_GROS.map(([t, d], i) => `<div class="etape-gros rv" style="--i:${i};--c:${['#1a8cd8', '#138a4f', '#f0612a', '#7a5af8'][i]}"><h3>${t}</h3><p>${d}</p></div>`).join('')}</div></section>
-  <section class="section conteneur" style="padding-top:0"><div class="texte-seo"><div class="texte-seo-corps rv"><h2>Devenir revendeur de matériel de restauration professionnelle</h2><p>Revendre du matériel CHR demande trois choses : des prix d’achat qui laissent une marge, un stock disponible et une logistique fiable. MC France CHR vous donne les trois, avec un catalogue de grandes marques professionnelles, un entrepôt à Roubaix et la livraison directe chez vos clients.</p><p>Vos fiches produits sont prêtes : caractéristiques techniques, points clés et photos s’exportent pour votre site. Les prix publics conseillés vous aident à rester cohérent avec le marché.</p></div><div class="faq rv">${FAQ_GROS.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div></div></section>`);
+  <section class="section conteneur" style="padding-top:0"><div class="texte-seo"><div class="texte-seo-corps rv"><h2>Devenir revendeur de matériel de restauration professionnelle</h2><p>Revendre du matériel CHR demande trois choses : des prix d’achat qui laissent une marge, un stock disponible et une logistique fiable. Stockinox vous donne les trois, avec un catalogue de grandes marques professionnelles, un entrepôt en France et la livraison directe chez vos clients.</p><p>Vos fiches produits sont prêtes : caractéristiques techniques, points clés et photos s’exportent pour votre site. Les prix publics conseillés vous aident à rester cohérent avec le marché.</p></div><div class="faq rv">${FAQ_GROS.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div></div></section>`);
 }
 
 /* ---------- Infos pratiques ---------- */
 function vueInfos(page = 'conditions') {
   const r = S.reglages();
   const pages = {
-    conditions: ['Conditions de vente en gros', `<p>Vente réservée aux professionnels (SIRET ou n° de TVA intracommunautaire). Prix en euros hors taxes, départ entrepôt de Roubaix.</p><ul><li>Prix revendeur : prix public conseillé − ${r.remiseRevendeur} %, plus la remise de votre niveau.</li><li>Paliers : −${r.remise3lots} % dès 3 lots d’une même référence, −${r.remisePalette} % à la palette complète.</li><li>Minimum de commande : ${eur(r.minimumCommande)} HT. Franco de port : ${eur(r.francoPalette)} HT.</li><li>Colisage indiqué sur chaque fiche ; quantités arrondies au lot.</li></ul><p class="petit muet">Valeurs d’exemple pour la démo, modifiables dans l’admin.</p>`],
-    livraison: ['Livraison, palettes, export', `<ul><li>Messagerie ou palette : 1 à 3 jours ouvrés pour le stock ; ${eur(r.fraisPort)} HT sous le franco.</li><li>Camion avec hayon et rendez-vous : + ${eur(r.hayon)} HT.</li><li>Livraison directe chez votre client, sous étiquette neutre : + ${eur(r.fraisDirect)} HT.</li><li>Enlèvement gratuit à l’entrepôt de Roubaix.</li><li>Export et conteneurs 20’ / 40’ : sur devis, prix départ entrepôt.</li></ul>`],
+    conditions: ['Conditions de vente en gros', `<p>Vente réservée aux professionnels (SIRET ou n° de TVA intracommunautaire). Prix en euros hors taxes, départ entrepôt.</p><ul><li>Prix revendeur : prix public conseillé − ${r.remiseRevendeur} %, plus la remise de votre niveau.</li><li>Paliers : −${r.remise3lots} % dès 3 lots d’une même référence, −${r.remisePalette} % à la palette complète.</li><li>Minimum de commande : ${eur(r.minimumCommande)} HT. Franco de port : ${eur(r.francoPalette)} HT.</li><li>Colisage indiqué sur chaque fiche ; quantités arrondies au lot.</li></ul><p class="petit muet">Valeurs d’exemple pour la démo, modifiables dans l’admin.</p>`],
+    livraison: ['Livraison, palettes, export', `<ul><li>Messagerie ou palette : 1 à 3 jours ouvrés pour le stock ; ${eur(r.fraisPort)} HT sous le franco.</li><li>Camion avec hayon et rendez-vous : + ${eur(r.hayon)} HT.</li><li>Livraison directe chez votre client, sous étiquette neutre : + ${eur(r.fraisDirect)} HT.</li><li>Enlèvement gratuit à l’entrepôt.</li><li>Export et conteneurs 20’ / 40’ : sur devis, prix départ entrepôt.</li></ul>`],
     paiement: ['Paiement et encours', '<p>Virement (préparation à réception), carte bancaire, ou à 30 / 45 jours fin de mois (LCR) pour les comptes validés selon l’encours accordé. Sociétés de l’Union européenne avec n° de TVA valide : autoliquidation.</p>'],
-    garantie: ['Garantie et SAV', '<p>Garantie de 1 à 2 ans selon les marques, pièces et main-d’œuvre. Le service après-vente de MC France accompagne vos clients pour la réparation, l’entretien et les pièces détachées.</p>'],
-    showroom: ['Showroom et entrepôt', `<p><strong>MC France CHR</strong><br>139 rue des Arts, rez-de-chaussée<br>59100 Roubaix</p><p>Téléphone : <a href="tel:+33320775904">03 20 77 59 04</a> · <a href="tel:+33644898000">06 44 89 80 00</a></p><p>Venez voir le matériel, comparer les modèles et repartir avec votre palette.</p>`],
+    garantie: ['Garantie et SAV', '<p>Garantie de 1 à 2 ans selon les marques, pièces et main-d’œuvre. Notre service après-vente accompagne vos clients pour la réparation, l’entretien et les pièces détachées.</p>'],
+    contact: ['Contact et showroom', `<p><strong>Stockinox</strong><br>${esc(r.adresse)}</p><p>E-mail : <a href="mailto:${esc(r.email)}">${esc(r.email)}</a>${r.telephone ? ` · Téléphone : ${esc(r.telephone)}` : ''}</p><p>Venez voir le matériel, comparer les modèles et repartir avec votre palette.</p><p class="petit muet">Nom, adresse et e-mail d’exemple : les vraies coordonnées se règlent dans l’admin (Réglages).</p>`],
   };
   const [titre, corps] = pages[page] || pages.conditions;
-  seo({ titre: `${titre} | MC France CHR`, description: titre });
+  seo({ titre: `${titre} | Stockinox`, description: titre });
   rendre(`<div class="conteneur">${fil([['Infos pratiques'], [titre]]).html}<h1 class="page-titre">${titre}</h1>
     <div class="infos"><nav class="compte-menu" aria-label="Infos pratiques">${Object.entries(pages).map(([k, [t]]) => `<a href="#/infos/${k}" ${k === page ? 'aria-current="page"' : ''}>${t}</a>`).join('')}</nav><div class="infos-texte">${corps}</div></div></div>`);
 }
 function vueIntrouvable() {
-  seo({ titre: 'Page introuvable | MC France CHR', description: '' });
+  seo({ titre: 'Page introuvable | Stockinox', description: '' });
   rendre(`<div class="conteneur" style="padding:40px 16px"><div class="vide">${ic('search')}<h2>Page introuvable</h2><p class="muet">Ce produit ou cette page n’existe plus.</p><a class="btn btn-plein" href="#/">Retour à l’accueil</a></div></div>`);
 }
 
@@ -1400,7 +1400,7 @@ document.addEventListener('click', (e) => {
   if (t.hasAttribute('data-ouvrir-recherche')) return ouvrirRecherche();
   if (t.hasAttribute('data-fermer-recherche')) return fermerRecherche();
   if (t.hasAttribute('data-fermer-volant')) return fermerVolant();
-  if (t.hasAttribute('data-fermer-ruban')) { $('#ruban-demo').hidden = true; try { sessionStorage.setItem('mcf-ruban', '1'); } catch { /* rien */ } return; }
+  if (t.hasAttribute('data-fermer-ruban')) { $('#ruban-demo').hidden = true; try { sessionStorage.setItem('stx-ruban', '1'); } catch { /* rien */ } return; }
   if (!t.closest('#recherche')) $('#suggestions').hidden = true;
 });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { fermerVolant(); fermerTiroir(); fermerRecherche(); $('#suggestions').hidden = true; $('#filtres')?.classList.remove('ouvert'); } });
@@ -1441,7 +1441,7 @@ S.ecouter((cle, externe) => {
 /* ---------- Démarrage ---------- */
 $$('[data-ic]').forEach((el) => { el.innerHTML = ic(el.dataset.ic); });
 $$('[data-ic-avant]').forEach((el) => el.insertAdjacentHTML('afterbegin', ic(el.dataset.icAvant)));
-try { if (sessionStorage.getItem('mcf-ruban')) $('#ruban-demo').hidden = true; } catch { /* rien */ }
+try { if (sessionStorage.getItem('stx-ruban')) $('#ruban-demo').hidden = true; } catch { /* rien */ }
 construireNavigation();
 majEntete();
 window.addEventListener('hashchange', router);

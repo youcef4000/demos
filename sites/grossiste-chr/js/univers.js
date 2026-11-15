@@ -7,9 +7,9 @@ export const UNIVERS = {
     couleur: '#1a8cd8', pastel: '#e6f2fc',
     pastille: 'Tout l’univers du froid professionnel',
     titre: ['Le froid professionnel', 'au prix revendeur'],
-    intro: 'Armoires réfrigérées, congélateurs, vitrines, saladettes et tables réfrigérées : le froid commercial en vente en gros pour les revendeurs, cuisinistes et distributeurs CHR. Prix revendeur HT, lots et palettes complètes, stock à Roubaix.',
+    intro: 'Armoires réfrigérées, congélateurs, vitrines, saladettes et tables réfrigérées : le froid commercial en vente en gros pour les revendeurs, cuisinistes et distributeurs CHR. Prix revendeur HT, lots et palettes complètes, stock en entrepôt.',
     seo: [
-      'Grossiste en froid professionnel depuis 2013, MC France CHR fournit les revendeurs de matériel de restauration en France, en Belgique et à l’export. Chaque référence est vendue au prix revendeur, avec un prix public conseillé pour calculer votre marge, un colisage clair et un prix dégressif à la palette.',
+      'Grossiste en froid professionnel, Stockinox fournit les revendeurs de matériel de restauration en France, en Belgique et à l’export. Chaque référence est vendue au prix revendeur, avec un prix public conseillé pour calculer votre marge, un colisage clair et un prix dégressif à la palette.',
       'Armoires positives et négatives, armoires à boissons, vitrines pâtissières, saladettes, dessertes réfrigérées et machines à glaçons : les modèles les plus demandés par les restaurants, snacks, boulangeries et collectivités, pour réassortir votre magasin ou équiper les cuisines de vos clients.',
     ],
     faq: [
@@ -31,7 +31,7 @@ export const UNIVERS = {
     titre: ['La cuisson pro,', 'en lots et palettes'],
     intro: 'Fours mixtes et à convection, friteuses, planchas, salamandres, cuisinières et rôtissoires : le matériel de cuisson professionnel en vente en gros pour les revendeurs CHR, au prix revendeur HT.',
     seo: [
-      'Le poste cuisson est le cœur d’une cuisine professionnelle et le premier poste de dépense de vos clients. MC France CHR vous approvisionne en fours, friteuses gaz et électriques, planchas, salamandres, cuisinières et rôtissoires, au prix grossiste, avec un prix public conseillé pour garder votre marge.',
+      'Le poste cuisson est le cœur d’une cuisine professionnelle et le premier poste de dépense de vos clients. Stockinox vous approvisionne en fours, friteuses gaz et électriques, planchas, salamandres, cuisinières et rôtissoires, au prix grossiste, avec un prix public conseillé pour garder votre marge.',
       'Les modèles gaz sont livrés avec leur kit de conversion quand le fabricant le prévoit : vérifiez la fiche technique (puissance, alimentation, dimensions) avant de commander pour vos clients.',
     ],
     faq: [
@@ -53,7 +53,7 @@ export const UNIVERS = {
     titre: ['Pizza & boulangerie,', 'prix grossiste'],
     intro: 'Fours à pizza électriques et gaz, pétrins spirale, façonneuses et saladettes à pizza : l’équipement des pizzerias et boulangeries en vente en gros pour les revendeurs.',
     seo: [
-      'Les pizzerias et les points chauds ouvrent chaque année par milliers : un marché régulier pour les revendeurs. MC France CHR fournit fours à pizza, pétrins à spirale, laminoirs et saladettes au prix revendeur, avec des packs d’ouverture faciles à proposer à vos clients.',
+      'Les pizzerias et les points chauds ouvrent chaque année par milliers : un marché régulier pour les revendeurs. Stockinox fournit fours à pizza, pétrins à spirale, laminoirs et saladettes au prix revendeur, avec des packs d’ouverture faciles à proposer à vos clients.',
       'Chaque fiche indique la capacité (nombre et diamètre des pizzas, litres de cuve, kilos de pâte), l’alimentation et les dimensions, pour conseiller vos clients sans erreur.',
     ],
     faq: [
@@ -72,7 +72,7 @@ export const UNIVERS = {
     titre: ['Préparation & boucherie,', 'en vente en gros'],
     intro: 'Trancheuses, hachoirs à viande, coupe-légumes, batteurs mélangeurs et machines sous vide : le matériel de préparation professionnel au prix revendeur.',
     seo: [
-      'Boucheries, traiteurs, restaurants et collectivités renouvellent régulièrement leur matériel de préparation. Trancheuses à jambon, hachoirs, coupe-légumes, batteurs planétaires et machines sous vide : MC France CHR vous fournit en gros, avec fiches techniques détaillées et prix public conseillé.',
+      'Boucheries, traiteurs, restaurants et collectivités renouvellent régulièrement leur matériel de préparation. Trancheuses à jambon, hachoirs, coupe-légumes, batteurs planétaires et machines sous vide : Stockinox vous fournit en gros, avec fiches techniques détaillées et prix public conseillé.',
     ],
     faq: [
       ['Vendez-vous les accessoires (disques, couteaux) ?', 'Oui, les accessoires et pièces sont disponibles sur demande et seront ajoutés au catalogue en ligne.'],
@@ -91,7 +91,7 @@ export const UNIVERS = {
     titre: ['Snack & maintien au chaud,', 'pour vos clients pros'],
     intro: 'Machines à kebab, chauffe-frites, bains-marie, vitrines chauffantes, crêpières et gaufriers : l’équipement de la restauration rapide en vente en gros.',
     seo: [
-      'La restauration rapide est le premier marché des revendeurs CHR : snacks, kebabs, friteries et food trucks s’équipent vite et renouvellent souvent. MC France CHR vous fournit en gros les appareils les plus vendus, du grill à kebab au chauffe-frites, au prix revendeur HT.',
+      'La restauration rapide est le premier marché des revendeurs CHR : snacks, kebabs, friteries et food trucks s’équipent vite et renouvellent souvent. Stockinox vous fournit en gros les appareils les plus vendus, du grill à kebab au chauffe-frites, au prix revendeur HT.',
     ],
     faq: [
       ['Avez-vous des machines à kebab gaz et électriques ?', 'Oui, les deux, avec des broches de différentes capacités ; la fiche précise la puissance et le nombre de brûleurs.'],
@@ -110,7 +110,7 @@ export const UNIVERS = {
     titre: ['Café & bar,', 'au prix revendeur'],
     intro: 'Machines à granita, machines à café frappé, distributeurs de boissons et presse-agrumes : le matériel de bar en vente en gros pour les revendeurs.',
     seo: [
-      'Bars, cafés, glaciers et parcs de loisirs : les machines à boissons sont des produits à forte rotation pour un revendeur. MC France CHR vous fournit machines à granita, distributeurs de boissons réfrigérées et machines à café frappé au prix grossiste.',
+      'Bars, cafés, glaciers et parcs de loisirs : les machines à boissons sont des produits à forte rotation pour un revendeur. Stockinox vous fournit machines à granita, distributeurs de boissons réfrigérées et machines à café frappé au prix grossiste.',
     ],
     faq: [
       ['Les machines à granita sont-elles livrées montées ?', 'Oui, prêtes à brancher ; la fiche indique le nombre de bacs et leur contenance.'],
@@ -127,7 +127,7 @@ export const UNIVERS = {
     titre: ['Laverie professionnelle,', 'prix grossiste'],
     intro: 'Lave-vaisselle frontaux et lave-verres professionnels, avec ou sans pompe de vidange : la plonge en vente en gros pour les revendeurs CHR.',
     seo: [
-      'Le lave-vaisselle et le lave-verres sont indispensables dans chaque restaurant et chaque bar. MC France CHR vous fournit en gros des modèles frontaux 35×35 à 50×50 cm, avec ou sans pompe de vidange, au prix revendeur et avec fiche technique complète.',
+      'Le lave-vaisselle et le lave-verres sont indispensables dans chaque restaurant et chaque bar. Stockinox vous fournit en gros des modèles frontaux 35×35 à 50×50 cm, avec ou sans pompe de vidange, au prix revendeur et avec fiche technique complète.',
     ],
     faq: [
       ['Quelle différence entre lave-verres et lave-vaisselle ?', 'Le lave-verres a un panier plus petit (35 à 40 cm) et une hauteur utile adaptée aux verres ; le lave-vaisselle accepte assiettes et plateaux (paniers de 50 cm).'],
@@ -143,7 +143,7 @@ export const UNIVERS = {
     titre: ['Inox & hygiène,', 'à la palette'],
     intro: 'Tables inox, plonges, étagères murales et lave-mains : le mobilier inox professionnel en vente en gros, idéal pour les commandes à la palette.',
     seo: [
-      'Le mobilier inox est le produit idéal pour la palette : léger, empilable, demandé dans chaque cuisine professionnelle. MC France CHR vous fournit tables de travail, plonges, étagères murales et lave-mains à commande fémorale au prix grossiste, en profondeur 600 ou 700 mm.',
+      'Le mobilier inox est le produit idéal pour la palette : léger, empilable, demandé dans chaque cuisine professionnelle. Stockinox vous fournit tables de travail, plonges, étagères murales et lave-mains à commande fémorale au prix grossiste, en profondeur 600 ou 700 mm.',
     ],
     faq: [
       ['Les tables inox sont-elles livrées démontées ?', 'Oui pour la plupart : elles voyagent à plat, ce qui permet d’en charger davantage par palette.'],
@@ -161,10 +161,10 @@ export const UNIVERS = {
     titre: ['Ventilation & extraction,', 'pour les installateurs'],
     intro: 'Hottes professionnelles et moteurs d’extraction avec ou sans caisson : la ventilation de cuisine en vente en gros pour revendeurs et installateurs.',
     seo: [
-      'Une cuisine professionnelle doit être correctement ventilée. MC France CHR fournit aux installateurs et revendeurs des hottes déflecteurs et des moteurs d’extraction (caissons et ventilateurs) au prix grossiste, avec les débits et dimensions indiqués sur chaque fiche.',
+      'Une cuisine professionnelle doit être correctement ventilée. Stockinox fournit aux installateurs et revendeurs des hottes déflecteurs et des moteurs d’extraction (caissons et ventilateurs) au prix grossiste, avec les débits et dimensions indiqués sur chaque fiche.',
     ],
     faq: [
-      ['Fournissez-vous le dimensionnement ?', 'Notre équipe vous aide à choisir le moteur adapté à la hotte et au volume de la cuisine : appelez le 03 20 77 59 04.'],
+      ['Fournissez-vous le dimensionnement ?', 'Notre équipe vous aide à choisir le moteur adapté à la hotte et au volume de la cuisine : écrivez-nous depuis la page Contact.'],
     ],
     sous: {
       hottes: 'Hottes professionnelles à déflecteurs de 51 à 100 cm en vente en gros.',
@@ -174,11 +174,11 @@ export const UNIVERS = {
 };
 
 export const FAQ_GROS = [
-  ['Qui peut acheter sur MC France CHR ?', 'Les professionnels qui revendent ou installent du matériel CHR : grossistes, revendeurs en magasin, e-commerçants, cuisinistes et installateurs, centrales d’achat et clients export. Un SIRET (ou un numéro de TVA pour l’Union européenne) est demandé à l’ouverture du compte.'],
+  ['Qui peut acheter sur Stockinox ?', 'Les professionnels qui revendent ou installent du matériel CHR : grossistes, revendeurs en magasin, e-commerçants, cuisinistes et installateurs, centrales d’achat et clients export. Un SIRET (ou un numéro de TVA pour l’Union européenne) est demandé à l’ouverture du compte.'],
   ['Comment voir les prix revendeur ?', 'Les prix revendeur sont réservés aux comptes validés. Ouvrez votre compte en deux minutes : nous le validons sous 24 h ouvrées et vos prix, votre niveau de remise et vos conditions de paiement s’affichent sur tout le catalogue.'],
   ['Y a-t-il un minimum de commande ?', 'Oui, un montant minimum par commande et un colisage par référence (à l’unité, par lot ou à la palette). Les deux sont affichés clairement avant l’ajout au panier.'],
   ['Comment marchent les prix dégressifs ?', 'Le prix baisse dès 3 lots d’une même référence, puis à la palette complète. S’y ajoute la remise de votre niveau (Silver, Gold, Distributeur), calculée sur votre volume d’achat annuel.'],
-  ['Livrez-vous directement chez mes clients ?', 'Oui : la livraison directe se fait sous étiquette neutre, sans prix ni document MC France dans le colis. Vous gardez la relation avec votre client.'],
+  ['Livrez-vous directement chez mes clients ?', 'Oui : la livraison directe se fait sous étiquette neutre, sans prix ni document à notre nom dans le colis. Vous gardez la relation avec votre client.'],
   ['Puis-je récupérer les fiches et photos pour mon site ?', 'Oui : depuis votre compte, exportez le catalogue (références, prix revendeur, prix public conseillé, descriptions, caractéristiques et photos) pour l’importer sur votre boutique.'],
   ['Quels délais et quels moyens de paiement ?', 'Expédition sous 1 à 3 jours ouvrés pour le stock, par messagerie ou palette. Paiement par virement, carte, ou à 30 / 45 jours fin de mois pour les comptes validés.'],
 ];
@@ -187,5 +187,5 @@ export const ETAPES_GROS = [
   ['Ouvrez votre compte revendeur', 'SIRET ou n° de TVA, activité, volume estimé : deux minutes en ligne.'],
   ['Validation sous 24 h ouvrées', 'Nous vérifions votre société et activons votre niveau de remise et vos conditions de paiement.'],
   ['Commandez en lots ou en palettes', 'Prix revendeur, prix public conseillé et marge affichés sur chaque fiche. Prix dégressifs automatiques.'],
-  ['Livraison chez vous ou chez votre client', 'Palette, camion avec hayon, enlèvement à Roubaix ou livraison directe sous étiquette neutre.'],
+  ['Livraison chez vous ou chez votre client', 'Palette, camion avec hayon, enlèvement à l’entrepôt ou livraison directe sous étiquette neutre.'],
 ];

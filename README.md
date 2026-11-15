@@ -29,29 +29,32 @@ Les consignes détaillées sont dans `CLAUDE.md`.
 
 Le dépôt doit rester **public** : avec le plan GitHub gratuit, un dépôt privé ne peut pas être publié.
 
-## MC France CHR — plateforme de vente en gros (`sites/mc-france-chr/`)
+## Stockinox — plateforme de vente en gros (`sites/grossiste-chr/`)
 
-Site B2B pour que MC France CHR (Roubaix) vende son matériel de restauration **aux revendeurs** (grossistes, magasins,
+Site B2B d’un grossiste en matériel CHR qui vend **aux revendeurs** (grossistes, magasins,
 e-commerçants, cuisinistes, export), dans le style de FourniResto : univers avec pastille, compteurs et photo
 d'ambiance, sous-catégories numérotées avec image, catalogue, fiches, barre d'onglets mobile, animations au défilement.
 Prix revendeur réservés aux comptes validés ; prix public conseillé (PPC) et marge sur chaque fiche ; colisage par lot,
 prix dégressifs (3 lots, palette), niveaux revendeurs (Silver, Gold, Distributeur), minimum de commande, franco,
 livraison directe chez le client final sous étiquette neutre, devis volume / conteneur, commande rapide par référence,
-export du catalogue en CSV pour le site du revendeur, suivi de commande. Espace admin (`/mc-france-chr/admin/`) :
+export du catalogue en CSV pour le site du revendeur, suivi de commande. Espace admin (`/grossiste-chr/admin/`) :
 produits (PPC, prix revendeur, colisage, palette, arrivage, photos), catégories, commandes et statuts, validation des
-revendeurs et niveau, devis, réglages. Analyse SEO : `/mc-france-chr/analyse-seo.html`.
-Lien privé : https://demos.bornzstudio.com/mc-france-chr/
+revendeurs et niveau, devis, réglages. Analyse SEO : `/grossiste-chr/analyse-seo.html`.
+Lien privé : https://demos.bornzstudio.com/grossiste-chr/
 
-- **Réel** (relevé public sur mcfrancechr.fr le 15/11/2026) : 129 produits, références, marques, prix publics HT,
-  stocks, délais, fiches et photos ; adresse, téléphones.
+Nom « Stockinox », logo, adresse, téléphone et e-mail sont **fictifs** (`img/logo.svg`, réglages dans l’admin) :
+la démo ne montre ni le nom ni les coordonnées du client.
+
+- **Réel** (relevé public sur le site du client le 15/11/2026) : 129 produits, références, marques, prix publics HT,
+  stocks, délais, fiches et photos.
 - **Exemples** : remise revendeur (30 % du PPC), colisage, palettes, arrivages, paliers, niveaux, minimum, franco,
   articles « second choix », revendeurs, commandes et devis (présentés comme tels). Photos d'ambiance des univers :
   illustrations générées par ordinateur, à remplacer par des photos du showroom et de l'entrepôt.
 - Tout reste dans le navigateur (localStorage) : l'admin et la boutique ouverts dans le même navigateur se répondent.
   La vraie version demande un serveur (base de données, comptes, paiement, e-mails) et de vraies adresses par page.
-- Textes éditoriaux et SEO des univers : `sites/mc-france-chr/js/univers.js`.
-- Rafraîchir le catalogue : `python3 tools/mc-france-chr/scrape.py /tmp/mcf` puis
-  `python3 tools/mc-france-chr/generer.py /tmp/mcf sites/mc-france-chr`.
+- Textes éditoriaux et SEO des univers : `sites/grossiste-chr/js/univers.js`.
+- Rafraîchir le catalogue : `python3 tools/grossiste-chr/scrape.py /tmp/mcf` puis
+  `python3 tools/grossiste-chr/generer.py /tmp/mcf sites/grossiste-chr`.
 
 ## Sarraf — carnet du cambiste (`sites/sarraf/`)
 

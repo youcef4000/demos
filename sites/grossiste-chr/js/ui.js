@@ -137,8 +137,8 @@ export function documentCommercial(type, o) {
   return `<article class="doc">
     <header class="doc-tete">
       <div class="doc-emetteur">
-        <img src="${src('img/logo-mc-france.webp')}" alt="MC France CHR" width="190" height="46">
-        <p>MC FRANCE CHR<br>${esc(r.adresse)}<br>${esc(r.telephone)} · ${esc(r.email)}</p>
+        <img src="${src('img/logo.svg')}" alt="Stockinox" width="190" height="41">
+        <p>STOCKINOX<br>${esc(r.adresse)}<br>${[r.telephone, r.email].filter(Boolean).map(esc).join(' · ')}</p>
       </div>
       <div class="doc-titre">
         <h1>${titres[type]}</h1>
@@ -147,7 +147,7 @@ export function documentCommercial(type, o) {
     </header>
     <section class="doc-parties">
       <div><h2>Client</h2><p><strong>${esc(o.client.societe)}</strong><br>${esc(o.client.contact || '')}<br>${esc(o.client.email || '')} · ${esc(o.client.tel || '')}<br>SIRET ${esc(o.client.siret || '—')}<br>TVA ${esc(o.client.tva || '—')}</p></div>
-      ${o.livraison ? `<div><h2>${retrait ? 'Enlèvement' : 'Livraison'}</h2><p>${retrait ? 'Entrepôt MC France, ' + esc(r.adresse) : `${o.livraison.destinataire ? esc(o.livraison.destinataire) + '<br>' : ''}${esc(o.livraison.adresse)}<br>${esc(o.livraison.cp)} ${esc(o.livraison.ville)}<br>${esc(o.livraison.pays || 'France')}`}<br><em>${esc(S.LIVRAISONS[o.livraison.mode] || '')}</em></p></div>` : ''}
+      ${o.livraison ? `<div><h2>${retrait ? 'Enlèvement' : 'Livraison'}</h2><p>${retrait ? 'Entrepôt Stockinox, ' + esc(r.adresse) : `${o.livraison.destinataire ? esc(o.livraison.destinataire) + '<br>' : ''}${esc(o.livraison.adresse)}<br>${esc(o.livraison.cp)} ${esc(o.livraison.ville)}<br>${esc(o.livraison.pays || 'France')}`}<br><em>${esc(S.LIVRAISONS[o.livraison.mode] || '')}</em></p></div>` : ''}
       ${o.paiement ? `<div><h2>Paiement</h2><p>${esc(S.PAIEMENTS[o.paiement] || '')}</p></div>` : ''}
     </section>
     <table class="doc-lignes">
@@ -162,7 +162,7 @@ export function documentCommercial(type, o) {
     </table>`}
     ${o.message ? `<p class="doc-note"><strong>Message du client :</strong> ${esc(o.message)}</p>` : ''}
     <footer class="doc-pied">
-      ${type === 'devis' ? 'Devis valable 30 jours, prix revendeur HT. Bon pour accord : date, cachet et signature.' : type === 'facture' ? 'Document de démonstration : la vraie facture est numérotée et émise par le logiciel de facturation de MC France.' : 'Contrôler chaque article et cocher avant expédition.'}
+      ${type === 'devis' ? 'Devis valable 30 jours, prix revendeur HT. Bon pour accord : date, cachet et signature.' : type === 'facture' ? 'Document de démonstration : la vraie facture est numérotée et émise par le logiciel de facturation de Stockinox.' : 'Contrôler chaque article et cocher avant expédition.'}
       <br>Démo réalisée par Bornz Studio — document sans valeur commerciale.
     </footer>
   </article>`;

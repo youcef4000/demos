@@ -1,10 +1,10 @@
-# Transforme le relevé (products.json de scrape.py) en js/catalogue.js + photos webp pour la démo MC France CHR.
-# Usage : python3 tools/mc-france-chr/generer.py <dossier-de-travail> sites/mc-france-chr
+# Transforme le relevé (products.json de scrape.py) en js/catalogue.js + photos webp pour la démo Stockinox (nom, logo et coordonnées fictifs).
+# Usage : python3 tools/grossiste-chr/generer.py <dossier-de-travail> sites/grossiste-chr
 import json, re, html, os, sys, subprocess, io, datetime, hashlib
 from PIL import Image
 
 REF = sys.argv[1]          # dossier du relevé
-SITE = sys.argv[2]         # sites/mc-france-chr
+SITE = sys.argv[2]         # sites/grossiste-chr
 os.makedirs(SITE + '/img/p', exist_ok=True)
 os.makedirs(REF + '/img', exist_ok=True)
 UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36'
@@ -175,7 +175,7 @@ for d in data:
         m = re.search(r'\|\s*([A-Z][A-Z0-9 &]+?)\s*-', d.get('name') or '')
         marque = m.group(1).strip() if m else ''
     marque = marque.title() if marque.isupper() and len(marque) > 3 else marque
-    marque = {'Mcfrance Chr': 'MC France', 'Rm Gastro': 'RM Gastro'}.get(marque, marque)
+    marque = {'Mcfrance Chr': 'Stockinox', 'Rm Gastro': 'RM Gastro'}.get(marque, marque)
     ref = (d.get('ref') or '').strip()
     nom = nettoyer_nom(d['name'], marque, ref)
     if re.match(r'(?i)(espresso waste|accroche|disque|lame|grille|co[uû]teau|ng co|p[ée]dale|douchette|volet|suma|epb|couvercle|kit |support|pied|accessoire|plaque pour|dessus|joint|filtre|tête|cône|peigne|rouleau|panier|bac )', nom):
@@ -205,7 +205,7 @@ for d in data:
     texte = texte[:4]
     imgs = []
     for k, u in enumerate(d.get('imgs') or []):
-        dest = f"{SITE}/img/p/{pid}-{k + 1}.webp"
+        dest = f"{SITE}/img/p/{pid.replace('mcf-', 'stx-')}-{k + 1}.webp"
         if os.path.exists(dest) or image(u, dest):
             imgs.append(f"img/p/{pid}-{k + 1}.webp")
     if not imgs:
@@ -231,7 +231,7 @@ for d in data:
         'delai': (d.get('delivery') or 'Délai de livraison 1 à 3 jours ouvrés').replace('Délai de livraison ', ''),
         'etat': 'neuf', 'nouveau': (datetime.date.fromisoformat(DATE) - ajout).days < 75,
         'points': pts, 'texte': texte, 'specs': grp,
-        'images': imgs, 'source': d['url'], 'ajoute': ajout.isoformat(),
+        'images': imgs, 'ajoute': ajout.isoformat(),
     })
     produits[-1]['stock'] = max(0, produits[-1]['stock'])
 
@@ -241,7 +241,7 @@ DEFAUTS = [
     "Carton d'origine abîmé pendant le transport : appareil neuf, jamais utilisé.",
     "Petit enfoncement sur le panneau arrière, invisible une fois installé.",
     "Retour client sous 14 jours : testé et contrôlé par notre atelier.",
-    "Ancien modèle d'exposition du showroom de Roubaix, complet avec notice.",
+    "Ancien modèle d'exposition du showroom, complet avec notice.",
     "Micro-rayures sur la façade inox, garantie identique au neuf.",
 ]
 sc, k = [], 0
@@ -264,13 +264,15 @@ for slugf, nom, court, icone, desc, subs in FAMILLES:
                  'image': ([p for p in ps if p['sous'] == PREF[slugf][0]][PREF[slugf][1]:] or ps)[0]['images'][0] if ps else '',
                  'sous': [{'slug': s, 'nom': n, 'image': next((p['images'][0] for p in sorted(ps, key=lambda x: -x['prixHT']) if p['sous'] == s), '')} for s, n in subs]})
 
-entete = f"""// Catalogue de la démo MC France CHR — généré par le relevé du {DATE}.
-// RÉEL (relevé public sur mcfrancechr.fr) : noms, références, marques, prix HT, prix barrés, stocks affichés,
+entete = f"""// Catalogue de la démo Stockinox (grossiste CHR fictif) — généré par le relevé du {DATE}.
+// RÉEL (relevé public sur le site d’un grossiste CHR) : noms, références, marques, prix HT, prix barrés, stocks affichés,
 // délais, points clés, fiches techniques et photos des produits.
 // EXEMPLES (présentés comme tels dans la démo) : les articles « second choix » (suffixe -SC) et leurs défauts.
 """
-js = entete + 'export const RELEVE = ' + json.dumps({'date': DATE, 'source': 'https://www.mcfrancechr.fr/', 'produits': len(produits) - len(sc), 'secondChoix': len(sc)}, ensure_ascii=False) + ';\n'
+js = entete + 'export const RELEVE = ' + json.dumps({'date': DATE, 'produits': len(produits) - len(sc), 'secondChoix': len(sc)}, ensure_ascii=False) + ';\n'
 js += 'export const FAMILLES = ' + json.dumps(fams, ensure_ascii=False, indent=1) + ';\n'
 js += 'export const PRODUITS = [\n' + ',\n'.join(json.dumps(p, ensure_ascii=False, separators=(',', ':')) for p in produits) + '\n];\n'
+# La démo ne nomme pas la source : références et fichiers « MCF » deviennent « STX ».
+js = js.replace('mcf-', 'stx-').replace('MCF', 'STX')
 open(SITE + '/js/catalogue.js', 'w', encoding='utf-8').write(js)
 print('produits', len(produits), 'dont second choix', len(sc))

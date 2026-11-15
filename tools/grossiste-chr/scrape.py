@@ -1,6 +1,6 @@
-# Relevé public du catalogue mcfrancechr.fr pour la démo MC France CHR.
-# Usage : python3 tools/mc-france-chr/scrape.py <dossier-de-travail>   (hors du dépôt, ex. /tmp/mcf)
-# puis    python3 tools/mc-france-chr/generer.py <dossier-de-travail> sites/mc-france-chr
+# Relevé public du catalogue mcfrancechr.fr pour la démo Stockinox (grossiste CHR, nom fictif).
+# Usage : python3 tools/grossiste-chr/scrape.py <dossier-de-travail>   (hors du dépôt, ex. /tmp/mcf)
+# puis    python3 tools/grossiste-chr/generer.py <dossier-de-travail> sites/grossiste-chr
 # tree.json : familles de la démo -> catégories du site (ids), nombre de produits, prix minimum.
 import re, html, json, time, sys, os, subprocess, urllib.request, ssl
 

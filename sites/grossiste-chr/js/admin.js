@@ -1,4 +1,4 @@
-// Espace admin MC France CHR (démo) : mêmes données que la boutique, dans le navigateur.
+// Espace admin Stockinox (démo) : mêmes données que la boutique, dans le navigateur.
 // La vraie version : comptes administrateurs côté serveur, base de données, photos stockées en ligne.
 import * as S from './store.js';
 import { eur, esc, ic, src, toast, modale, documentCommercial, dateCourte, heure, definirRacine, nombre } from './ui.js';
@@ -8,15 +8,15 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const app = $('#app');
 
-function entre() { try { return sessionStorage.getItem('mcf-admin') === '1'; } catch { return true; } }
+function entre() { try { return sessionStorage.getItem('stx-admin') === '1'; } catch { return true; } }
 
 /* ---------- Écran d'entrée ---------- */
 function ecranEntree() {
   app.innerHTML = `<div class="entree"><form class="entree-boite" id="form-entree">
-    <img src="../img/logo-mc-france.webp" alt="MC France CHR" width="200" height="48">
+    <img src="../img/logo.svg" alt="Stockinox" width="200" height="43">
     <h1>Espace admin</h1>
     <p>Gérez le catalogue, les commandes, les comptes pros et les devis de la boutique.</p>
-    <label class="champ"><span>E-mail</span><input name="email" type="email" value="admin@mcfrancechr.fr" autocomplete="username"></label>
+    <label class="champ"><span>E-mail</span><input name="email" type="email" value="admin@example.com" autocomplete="username"></label>
     <label class="champ"><span>Mot de passe</span><input name="mdp" type="password" value="demo-demo" autocomplete="current-password"></label>
     <button class="btn btn-plein btn-grand" type="submit">Entrer</button>
     <div class="info-bulle" style="display:flex;gap:10px;padding:12px;border-radius:10px;background:var(--bleu-c);font-size:13px">${ic('info')}<span><strong>Démo :</strong> accès libre, les données restent dans ce navigateur. La vraie version a des comptes administrateurs sécurisés côté serveur.</span></div>
@@ -24,7 +24,7 @@ function ecranEntree() {
   </form></div>`;
   $('#form-entree').addEventListener('submit', (e) => {
     e.preventDefault();
-    try { sessionStorage.setItem('mcf-admin', '1'); } catch { /* rien */ }
+    try { sessionStorage.setItem('stx-admin', '1'); } catch { /* rien */ }
     demarrer();
   });
 }
@@ -51,7 +51,7 @@ function cadre(section, titre, contenu, actions = '') {
   const n = compteurs();
   app.innerHTML = `<div class="cadre">
     <aside class="lateral" id="lateral">
-      <div class="lateral-tete"><img src="../img/logo-mc-france.webp" alt="MC France CHR" width="150" height="36"><span>Espace admin</span></div>
+      <div class="lateral-tete"><img src="../img/logo-blanc.svg" alt="Stockinox" width="150" height="33"><span>Espace admin</span></div>
       <nav aria-label="Administration">${MENU.map(([k, i, t]) => `<a href="#/${k}" ${section === k ? 'aria-current="page"' : ''}>${ic(i)}${t}${n[k] ? `<span class="compteur">${n[k]}</span>` : ''}</a>`).join('')}</nav>
       <div class="lateral-pied">
         <a href="../" target="_blank" rel="noopener">${ic('eye')}Voir la boutique</a>
@@ -59,11 +59,11 @@ function cadre(section, titre, contenu, actions = '') {
       </div>
     </aside>
     <div class="principal">
-      <header class="barre-haut"><button class="btn-icone burger" type="button" data-burger aria-label="Menu">${ic('menu')}</button><h1>${titre}</h1>${actions}<span class="chip-exemple" title="Clients, commandes et devis d'exemple ; produits et prix relevés sur mcfrancechr.fr">Démo · clients et commandes d'exemple</span></header>
+      <header class="barre-haut"><button class="btn-icone burger" type="button" data-burger aria-label="Menu">${ic('menu')}</button><h1>${titre}</h1>${actions}<span class="chip-exemple" title="Clients, commandes et devis d'exemple ; produits et prix relevés sur un vrai catalogue public">Démo · clients et commandes d'exemple</span></header>
       <main class="contenu" id="contenu">${contenu}</main>
     </div>
   </div>`;
-  document.title = `${titre} — Admin MC France CHR`;
+  document.title = `${titre} — Admin Stockinox`;
 }
 
 /* ---------- Tableau de bord ---------- */
@@ -248,7 +248,7 @@ function vueCommande(num) {
     if (nouveau === 'expediee' && !retrait) {
       const r = await modale({
         titre: 'Expédier la commande',
-        corps: `<label class="champ"><span>Transporteur</span><select name="transporteur">${['Geodis', 'DB Schenker', 'Kuehne + Nagel', 'DPD', 'Chronopost', 'Livraison MC France'].map((t) => `<option>${t}</option>`).join('')}</select></label>
+        corps: `<label class="champ"><span>Transporteur</span><select name="transporteur">${['Geodis', 'DB Schenker', 'Kuehne + Nagel', 'DPD', 'Chronopost', 'Livraison Stockinox'].map((t) => `<option>${t}</option>`).join('')}</select></label>
           <label class="champ"><span>N° de suivi</span><input name="suivi" value="EX${Math.floor(10000000 + Math.random() * 89999999)}FR"></label>
           <p class="petit muet">Le client voit le transporteur et le numéro dans son suivi de commande.</p>`,
         actions: [{ id: 'annuler', libelle: 'Annuler' }, { id: 'ok', libelle: 'Marquer expédiée', classe: 'btn-plein' }],
@@ -366,7 +366,7 @@ function vueProduits(params) {
     const csv = '﻿' + lignes.map((l) => l.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(';')).join('\r\n');
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
-    a.download = `mc-france-produits-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.download = `stockinox-produits-${new Date().toISOString().slice(0, 10)}.csv`;
     document.body.append(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 2000);
   });
@@ -490,7 +490,7 @@ function vueEditeur(id) {
         <section class="panneau"><h2>Aperçu</h2><div class="apercu" id="apercu"></div></section>
         <button class="btn btn-plein btn-grand" type="submit">${ic('check')}Enregistrer</button>
         ${nouveau ? '' : `<a class="btn" href="../#/p/${p.id}" target="_blank" rel="noopener">${ic('eye')}Voir dans la boutique</a><button class="btn btn-danger" type="button" data-supprimer-fiche>${ic('trash')}Supprimer</button>`}
-        ${p.source ? `<p class="petit muet">Fiche relevée sur <a class="btn-lien" style="padding:0" href="${esc(p.source)}" target="_blank" rel="noopener">mcfrancechr.fr</a></p>` : ''}
+        
       </aside>
     </form>`, `<a class="btn btn-petit" href="#/produits">${ic('left')}Produits</a>`);
 
@@ -768,7 +768,7 @@ function vueReglages() {
     const r2 = await modale({ titre: 'Réinitialiser la démo ?', corps: '<p>Vos produits ajoutés ou modifiés, commandes et comptes créés dans ce navigateur seront effacés.</p>', actions: [{ id: 'annuler', libelle: 'Annuler' }, { id: 'ok', libelle: 'Réinitialiser', classe: 'btn-sombre' }] });
     if (r2.action !== 'ok') return;
     S.reinitialiser();
-    try { sessionStorage.setItem('mcf-admin', '1'); } catch { /* rien */ }
+    try { sessionStorage.setItem('stx-admin', '1'); } catch { /* rien */ }
     toast('Démo réinitialisée');
     location.hash = '#/';
     router();
@@ -804,7 +804,7 @@ function router() {
 document.addEventListener('click', (e) => {
   const t = e.target.closest('[data-burger], [data-sortir]');
   if (t?.hasAttribute('data-burger')) { $('#lateral').classList.toggle('ouvert'); return; }
-  if (t?.hasAttribute('data-sortir')) { e.preventDefault(); try { sessionStorage.removeItem('mcf-admin'); } catch { /* rien */ } ecranEntree(); return; }
+  if (t?.hasAttribute('data-sortir')) { e.preventDefault(); try { sessionStorage.removeItem('stx-admin'); } catch { /* rien */ } ecranEntree(); return; }
   if (!e.target.closest('#lateral') && $('#lateral')?.classList.contains('ouvert')) $('#lateral').classList.remove('ouvert');
 });
 /* Une commande passée dans la boutique (autre onglet) apparaît sans recharger. */
