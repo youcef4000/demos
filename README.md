@@ -29,6 +29,25 @@ Les consignes détaillées sont dans `CLAUDE.md`.
 
 Le dépôt doit rester **public** : avec le plan GitHub gratuit, un dépôt privé ne peut pas être publié.
 
+## MC France CHR — boutique en gros (`sites/mc-france-chr/`)
+
+Boutique de matériel de restauration pour les pros (marché de gros), inspirée de FourniResto, pour MC France CHR
+(Roubaix) : catégories et sous-catégories avec méga-menu, filtres, fiches produit (photos, points clés,
+caractéristiques), prix HT/TTC, prix dégressifs par quantité, panier, commande (SIRET vérifié, TVA calculée, livraison
+standard / hayon / retrait, carte, virement, 4×, 30 jours pour les comptes validés), suivi de commande, compte pro
+(commandes, recommande, devis, favoris), commande rapide par référence, devis PDF, packs métier, promotions, second
+choix. Espace admin (`/mc-france-chr/admin/`) : tableau de bord, produits (ajout, modification, suppression, photos,
+prix et stocks en ligne, import CSV), catégories, commandes et statuts (le suivi client suit), clients pros, devis,
+réglages. Lien privé : https://demos.bornzstudio.com/mc-france-chr/
+
+- **Réel** (relevé public sur mcfrancechr.fr le 15/11/2026) : 129 produits, références, marques, prix HT, prix barrés,
+  stocks, délais, fiches et photos ; adresse, téléphones, franco de 750 € HT.
+- **Exemples** : paliers de prix, articles « second choix », clients, commandes et devis (marqués comme tels).
+- Tout reste dans le navigateur (localStorage) : l'admin et la boutique ouverts dans le même navigateur se répondent.
+  La vraie version demande un serveur (base de données, comptes, paiement, e-mails).
+- Rafraîchir le catalogue : `python3 tools/mc-france-chr/scrape.py /tmp/mcf` puis
+  `python3 tools/mc-france-chr/generer.py /tmp/mcf sites/mc-france-chr`.
+
 ## Sarraf — carnet du cambiste (`sites/sarraf/`)
 
 Application installable (PWA) : après chaque appel, un mémo (vocal ou écrit) devient une fiche à vérifier — sommes,

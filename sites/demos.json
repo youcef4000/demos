@@ -6,6 +6,14 @@
   },
   "demos": [
     {
+      "slug": "mc-france-chr",
+      "title": "MC France CHR — le matériel CHR au prix de gros",
+      "sector": "Matériel CHR · e-commerce en gros",
+      "city": "Roubaix",
+      "color": "#1c8bcf",
+      "public": false
+    },
+    {
       "slug": "benna",
       "title": "Benna — la cuisine pas à pas, en français, en arabe et en anglais",
       "sector": "Application de recettes",

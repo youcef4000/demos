@@ -1,0 +1,334 @@
+[
+ {
+  "slug": "froid",
+  "subs": [
+   {
+    "slug": "armoires-refrigerees",
+    "ids": [
+     60,
+     59
+    ],
+    "n": 6
+   },
+   {
+    "slug": "congelateurs",
+    "ids": [
+     31,
+     564
+    ],
+    "n": 4
+   },
+   {
+    "slug": "vitrines-refrigerees",
+    "ids": [
+     389,
+     78
+    ],
+    "n": 4
+   },
+   {
+    "slug": "saladettes",
+    "ids": [
+     500,
+     76
+    ],
+    "n": 4
+   },
+   {
+    "slug": "tables-refrigerees",
+    "ids": [
+     63,
+     199
+    ],
+    "n": 4
+   },
+   {
+    "slug": "machines-a-glacons",
+    "ids": [
+     34
+    ],
+    "n": 3
+   }
+  ]
+ },
+ {
+  "slug": "cuisson",
+  "subs": [
+   {
+    "slug": "fours",
+    "ids": [
+     40,
+     601
+    ],
+    "n": 4,
+    "min": 300
+   },
+   {
+    "slug": "friteuses",
+    "ids": [
+     45,
+     46
+    ],
+    "n": 5
+   },
+   {
+    "slug": "planchas",
+    "ids": [
+     54,
+     265
+    ],
+    "n": 4
+   },
+   {
+    "slug": "grills-salamandres",
+    "ids": [
+     122,
+     47
+    ],
+    "n": 4
+   },
+   {
+    "slug": "cuisinieres",
+    "ids": [
+     418,
+     419
+    ],
+    "n": 3,
+    "min": 200
+   },
+   {
+    "slug": "rotissoires",
+    "ids": [
+     56,
+     57
+    ],
+    "n": 3
+   }
+  ]
+ },
+ {
+  "slug": "pizza-boulangerie",
+  "subs": [
+   {
+    "slug": "fours-a-pizza",
+    "ids": [
+     16,
+     23
+    ],
+    "n": 5
+   },
+   {
+    "slug": "petrins",
+    "ids": [
+     24,
+     25
+    ],
+    "n": 4
+   },
+   {
+    "slug": "faconneuses",
+    "ids": [
+     22
+    ],
+    "n": 3,
+    "min": 300
+   },
+   {
+    "slug": "saladettes-a-pizza",
+    "ids": [
+     26
+    ],
+    "n": 3
+   }
+  ]
+ },
+ {
+  "slug": "preparation",
+  "subs": [
+   {
+    "slug": "trancheuses",
+    "ids": [
+     191
+    ],
+    "n": 3,
+    "min": 380
+   },
+   {
+    "slug": "hachoirs",
+    "ids": [
+     190
+    ],
+    "n": 3,
+    "min": 300
+   },
+   {
+    "slug": "coupe-legumes",
+    "ids": [
+     258
+    ],
+    "n": 3,
+    "min": 200
+   },
+   {
+    "slug": "batteurs-blenders",
+    "ids": [
+     108,
+     193
+    ],
+    "n": 4,
+    "min": 200
+   },
+   {
+    "slug": "sous-vide",
+    "ids": [
+     230
+    ],
+    "n": 3
+   }
+  ]
+ },
+ {
+  "slug": "snack",
+  "subs": [
+   {
+    "slug": "kebab",
+    "ids": [
+     146
+    ],
+    "n": 3,
+    "min": 300
+   },
+   {
+    "slug": "chauffe-frites",
+    "ids": [
+     197
+    ],
+    "n": 3,
+    "min": 150
+   },
+   {
+    "slug": "bain-marie",
+    "ids": [
+     228
+    ],
+    "n": 3
+   },
+   {
+    "slug": "vitrines-chauffantes",
+    "ids": [
+     58
+    ],
+    "n": 3
+   },
+   {
+    "slug": "crepieres-gaufriers",
+    "ids": [
+     110,
+     116
+    ],
+    "n": 4
+   }
+  ]
+ },
+ {
+  "slug": "bar",
+  "subs": [
+   {
+    "slug": "machines-a-granita",
+    "ids": [
+     247
+    ],
+    "n": 3
+   },
+   {
+    "slug": "machines-a-cafe",
+    "ids": [
+     482
+    ],
+    "n": 3,
+    "min": 300
+   },
+   {
+    "slug": "distributeurs-boissons",
+    "ids": [
+     365
+    ],
+    "n": 3,
+    "min": 100
+   }
+  ]
+ },
+ {
+  "slug": "laverie",
+  "subs": [
+   {
+    "slug": "lave-vaisselle",
+    "ids": [
+     105
+    ],
+    "n": 4
+   },
+   {
+    "slug": "lave-verres",
+    "ids": [
+     106
+    ],
+    "n": 3
+   }
+  ]
+ },
+ {
+  "slug": "inox",
+  "subs": [
+   {
+    "slug": "tables-inox",
+    "ids": [
+     97
+    ],
+    "n": 4
+   },
+   {
+    "slug": "plonges",
+    "ids": [
+     93
+    ],
+    "n": 3
+   },
+   {
+    "slug": "etageres",
+    "ids": [
+     137
+    ],
+    "n": 3,
+    "min": 50
+   },
+   {
+    "slug": "lave-mains",
+    "ids": [
+     92
+    ],
+    "n": 3
+   }
+  ]
+ },
+ {
+  "slug": "ventilation",
+  "subs": [
+   {
+    "slug": "hottes",
+    "ids": [
+     88
+    ],
+    "n": 4
+   },
+   {
+    "slug": "moteurs",
+    "ids": [
+     103,
+     104
+    ],
+    "n": 3
+   }
+  ]
+ }
+]
