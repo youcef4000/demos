@@ -29,6 +29,26 @@ Les consignes détaillées sont dans `CLAUDE.md`.
 
 Le dépôt doit rester **public** : avec le plan GitHub gratuit, un dépôt privé ne peut pas être publié.
 
+## Discount Horeca — nouvelle boutique (`sites/discount-horeca/`)
+
+Proposition de refonte de https://www.discounthoreca.be (HF Concept SRL, showroom à Sint-Pieters-Leeuw), sur le thème de
+la démo grossiste CHR : 9 univers (dont « Friterie & snack ») et 60 catégories avec photos, prix **HTVA et TVAC**,
+promotions et économie, bonnes affaires et modèles d’exposition, packs d’ouverture et simulateur de budget, commande
+**sans compte** ou avec un compte pro (numéro d’entreprise BCE contrôlé, TVA calculée), comptes revendeurs validés avec
+remise, livraison en Belgique gratuite dès 1 200 € HTVA, retrait au showroom, installation sur devis, paiement
+Bancontact / Payconiq / carte / virement / acompte de 30 % (simulés), devis PDF, suivi de commande, bouton WhatsApp.
+Espace admin (`/discount-horeca/admin/`) : produits, promotions, catégories, commandes, clients, devis, réglages.
+Analyse du site actuel : `/discount-horeca/analyse-seo.html`. Lien privé : https://demos.bornzstudio.com/discount-horeca/
+
+- **Réel** (relevé public du 21/11/2026, 1 355 produits, 214 catégories) : 325 produits de la démo avec noms (casse et
+  fautes corrigées), références, marques, prix HTVA, prix avant promotion, stocks, descriptions, caractéristiques et
+  photos ; coordonnées, horaires et conditions de vente (franco, acompte, garantie) publiés sur le site.
+- **Exemples** : clients, commandes, devis, 6 modèles d’exposition (`-EXPO`), remise revendeur (10 %), frais de
+  livraison sous le franco (65 € HTVA). Photos d’ambiance : illustrations générées, à remplacer par le showroom.
+- Textes éditoriaux et SEO : `sites/discount-horeca/js/univers.js`. Logo redessiné (texte vectorisé) : `img/logo.svg`.
+- Rafraîchir le catalogue : `python3 tools/discount-horeca/scrape.py /tmp/dh` puis
+  `python3 tools/discount-horeca/generer.py /tmp/dh sites/discount-horeca`.
+
 ## Stockinox — plateforme de vente en gros (`sites/grossiste-chr/`)
 
 Site B2B d’un grossiste en matériel CHR qui vend **aux revendeurs** (grossistes, magasins,

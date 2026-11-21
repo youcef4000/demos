@@ -6,6 +6,14 @@
   },
   "demos": [
     {
+      "slug": "discount-horeca",
+      "title": "Discount Horeca — le matériel horeca à prix discount, nouvelle boutique",
+      "sector": "Matériel horeca · e-commerce B2B et B2C",
+      "city": "Sint-Pieters-Leeuw · Belgique",
+      "color": "#0f97d8",
+      "public": false
+    },
+    {
       "slug": "grossiste-chr",
       "title": "Stockinox — le grossiste du matériel CHR pour les revendeurs",
       "sector": "Matériel CHR · plateforme de vente en gros (B2B)",
