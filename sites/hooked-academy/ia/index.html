@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Formation IA — Hooked Academy · du prompt à la pub qui vend</title>
+<meta name="description" content="La Formation IA de Hooked Academy : prompting, images, vidéos, voix, UGC et cinématique, puis vendre ce savoir-faire. Des leçons de 2 minutes, expliquées en darija, sur ton téléphone.">
+<!-- Page B du test A/B des landings (la page A est /) : pas d'indexation, pour ne pas concurrencer la landing principale -->
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#07060b">
+<link rel="canonical" href="https://hooked-academy.tech/ia/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Hooked Academy">
+<meta property="og:url" content="https://hooked-academy.tech/ia/">
+<meta property="og:title" content="Formation IA — du prompt à la pub qui vend">
+<meta property="og:description" content="Prompting, images, vidéos, voix, UGC, cinématique : des leçons de 2 minutes en darija, puis vendre ce savoir-faire.">
+<meta property="og:image" content="https://hooked-academy.tech/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<script src="early.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Figtree:wght@400..800&family=Doto:wght@700..900&family=JetBrains+Mono:wght@400..700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="ia.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrambleTextPlugin.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
+<script type="module" src="ia.js"></script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="g-or" gradientUnits="userSpaceOnUse" x1="0" y1="9" x2="0" y2="39"><stop offset="0" stop-color="#f2dfa0"/><stop offset="1" stop-color="#b08a24"/></linearGradient>
+  </defs>
+  <symbol id="i-mark" viewBox="0 0 48 48"><g fill="url(#g-or)"><rect x="8.5" y="9" width="5.5" height="30" rx="2.75"/><rect x="34" y="9" width="5.5" height="30" rx="2.75"/></g><path d="M19.4 29.2 24 18.8 28.6 29.2" fill="none" stroke="url(#g-or)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5c.5 4 1.5 6.2 3.2 7.6 1.5 1.2 3.6 1.9 6.3 2.2-2.7.3-4.8 1-6.3 2.2-1.7 1.4-2.7 3.6-3.2 7.6-.5-4-1.5-6.2-3.2-7.6-1.5-1.2-3.6-1.9-6.3-2.2 2.7-.3 4.8-1 6.3-2.2C10.5 8.7 11.5 6.5 12 2.5Z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4.5 12h15M13.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.2v13.6c0 .8.9 1.3 1.6.9l10.7-6.8c.6-.4.6-1.3 0-1.7L9.6 4.3C8.9 3.9 8 4.4 8 5.2Z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 14.5a2 2 0 0 1-2 2H8.5L4 20.5V5.5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 9h8M8 12.5h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="10" r="1.8" fill="currentColor"/><path d="m4 17 5-4.5 3.5 3 3-2.5L20 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="2.5" y="6" width="13" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m15.5 10.5 6-3.5v10l-6-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14a6 6 0 0 1 3.5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-film" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7.5 4v16M16.5 4v16M3 9h4.5M3 15h4.5M16.5 9H21M16.5 15H21" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V11M10 20V5M16 20v-6M2.5 20.5h19" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-deal" viewBox="0 0 24 24"><path d="M3 12.5 7 8l3.5 1 2.5-2 4 1.5 4 4.5-6.5 6.5a2 2 0 0 1-2.8 0L3 12.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m9.5 13 2 2M12 11.5l2.5 2.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7 4h10v5a5 5 0 0 1-10 0V4ZM7 6H4.5a3 3 0 0 0 3 4.5M17 6h2.5a3 3 0 0 1-3 4.5M12 14v4M8 20.5h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2.5 4.5 14H11l-1 7.5L19.5 10H13l0-7.5Z" fill="currentColor"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8L12 3.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M9.5 6.5H20M9.5 12H20M9.5 17.5H20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="m3.5 6.5 1.3 1.3 2.2-2.6M3.5 12l1.3 1.3 2.2-2.6M3.5 17.5l1.3 1.3 2.2-2.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-wand" viewBox="0 0 24 24"><path d="m4 20 10.5-10.5M14 3.5v3M19.5 9h-3M18 5.5l-2 2M11 6.5l1 1M17 12.5l-1-1" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 18.5h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M20.5 3.5 3.5 10.5l7 2.5 2.5 7 7.5-16.5ZM10.5 13l4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+</svg>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><i></i></div>
+
+<header class="nav" id="nav">
+  <a class="logo" href="#top" aria-label="Hooked Academy, retour en haut" data-ka="aria-label:ia.top">
+    <span class="logo-p"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-mark"/></svg></span>
+    <span class="logo-n"><b>HOOKED</b><span>ACADEMY</span></span>
+  </a>
+  <nav class="nav-l" aria-label="Sections">
+    <a href="#pipeline" data-k="ia.nav.action">En action</a>
+    <a href="#programme" data-k="ia.nav.prog">Programme</a>
+    <a href="#plateforme" data-k="ia.nav.plat">Plateforme</a>
+    <a href="#tarifs" data-k="ia.nav.price">Tarifs</a>
+    <a href="#faq" data-k="ia.nav.faq">Questions</a>
+  </nav>
+  <div class="nav-r">
+    <div class="lsw" id="lsw" role="group" aria-label="Langue" data-ka="aria-label:ia.lang">
+      <button type="button" data-lang="fr" lang="fr" title="Français">FR</button>
+      <button type="button" data-lang="en" lang="en" title="English">EN</button>
+      <button type="button" data-lang="ar" lang="ar" title="العربية">ع</button>
+    </div>
+    <a class="nav-space" href="../app/" data-k="ia.nav.space">Espace étudiant</a>
+    <a class="bt bt--lime bt--s" href="#inscription" data-magnet data-k="ia.nav.join">Réserver</a>
+  </div>
+</header>
+
+<a class="dock bt bt--lime" id="dock" href="#inscription"><span data-k="ia.cta">Réserver ma place</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+
+<main id="top">
+
+  <!-- 1 · HÉRO : mur de pubs, titre « tapé », générateur prompt → image ======================= -->
+  <section class="hero" id="hero" aria-labelledby="hero-t">
+    <div class="hero-bg" aria-hidden="true"><div class="wall" id="wall"></div></div>
+
+    <div class="hero-in wrap">
+      <div class="hero-copy">
+        <p class="pill hero-pill" data-hero><svg aria-hidden="true"><use href="#i-spark"/></svg><b data-k="ia.hero.pill">Formation IA</b><span class="pill-sep" aria-hidden="true"></span><span><span data-k="ia.hero.pill2">en darija</span> · <span lang="ar" dir="rtl">بالدارجة</span></span></p>
+        <h1 class="hero-t" id="hero-t">
+          <span class="ht-l ht-l1"><span class="ht-du" data-k="ia.hero.l1">Du</span> <span class="ht-prompt"><span class="ht-typed" id="ht-typed" data-k="ia.hero.word">prompt</span><i class="caret" aria-hidden="true"></i></span></span>
+          <span class="ht-l ht-l2" data-k="ia.hero.l2">à la pub</span>
+          <span class="ht-l ht-l3"><span class="grad" data-k="ia.hero.l3">qui vend.</span></span>
+        </h1>
+        <p class="hero-sub" data-hero data-h="ia.hero.sub">Images, vidéos, voix, UGC, cinématique&nbsp;: apprends à créer tes pubs avec l’IA, puis à vendre ce savoir-faire. Des leçons de 2&nbsp;minutes, expliquées en darija, sur ton téléphone.</p>
+        <div class="hero-cta" data-hero>
+          <a class="bt bt--lime bt--l" href="#inscription" data-magnet><span data-k="ia.cta">Réserver ma place</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="bt bt--ghost bt--l" href="#pipeline"><svg aria-hidden="true"><use href="#i-play"/></svg><span data-k="ia.hero.see">Voir l’IA en action</span></a>
+        </div>
+        <p class="hero-note" data-hero><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.hero.note">Aucun paiement en ligne : l’équipe te rappelle sur WhatsApp.</span></p>
+      </div>
+
+      <!-- Générateur : exemples écrits avec le gabarit de la leçon IA01 · « Le prompt image » -->
+      <figure class="gen" id="gen" aria-label="Exemple : un prompt écrit avec la méthode de la formation, puis l’image générée" data-ka="aria-label:ia.gen.label">
+        <div class="gen-glow" aria-hidden="true"></div>
+        <div class="gen-in">
+          <div class="gen-top">
+            <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="gen-name"><svg aria-hidden="true"><use href="#i-wand"/></svg><span data-k="ia.gen.name">Générateur d’images</span></span>
+            <span class="tag" data-k="ia.ex">Exemple</span>
+          </div>
+          <div class="gen-prompt">
+            <span class="gen-k" data-k="ia.gen.k">Prompt</span>
+            <p class="gen-txt" id="gen-txt" aria-live="off"></p>
+          </div>
+          <div class="gen-row">
+            <span class="gen-status" id="gen-status" data-k="ia.gen.ready">Prêt</span>
+            <span class="gen-go" id="gen-go" aria-hidden="true"><svg><use href="#i-spark"/></svg><span data-k="ia.gen.go">Générer</span></span>
+          </div>
+          <div class="gen-out">
+            <canvas class="gen-cv" id="gen-cv" width="576" height="720" role="img" aria-label="Image générée (exemple)" data-ka="aria-label:ia.gen.img"></canvas>
+            <div class="gen-scan" aria-hidden="true"></div>
+            <div class="gen-bar" aria-hidden="true"><i id="gen-bar"></i></div>
+            <span class="gen-pct" id="gen-pct" aria-hidden="true">0&nbsp;%</span>
+            <div class="gen-vars" id="gen-vars" aria-hidden="true"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <figcaption class="gen-cap" data-h="ia.gen.cap">Prompts écrits avec le gabarit de la leçon <b>IA01 · Le prompt image</b>. Visuels de la formation.</figcaption>
+      </figure>
+    </div>
+
+    <ul class="stats wrap" aria-label="La Formation IA en chiffres" data-ka="aria-label:ia.stats.label">
+      <li><b class="dot-n" data-count="ia-lessons">0</b><span data-k="ia.stats.lessons">leçons IA</span></li>
+      <li><b class="dot-n" data-count="ia-mods">0</b><span data-k="ia.stats.mods">modules</span></li>
+      <li><b class="dot-n">2<small data-k="ia.stats.min">min</small></b><span data-k="ia.stats.max">max par leçon</span></li>
+      <li><b class="dot-n">1<small data-k="ia.stats.year">an</small></b><span data-k="ia.stats.access">d’accès</span></li>
+    </ul>
+  </section>
+
+  <!-- 2 · OUTILS : bandeau qui accélère avec le défilement ===================================== -->
+  <section class="tools" aria-label="Outils et compétences de la formation" data-ka="aria-label:ia.tools.label">
+    <p class="kicker wrap" data-scramble data-k="ia.tools.k">// Les outils changent vite. La méthode reste.</p>
+    <div class="mq" data-dir="1">
+      <ul class="mq-t" dir="ltr">
+        <li><svg aria-hidden="true"><use href="#i-chat"/></svg>ChatGPT</li>
+        <li><svg aria-hidden="true"><use href="#i-chat"/></svg>Claude</li>
+        <li><svg aria-hidden="true"><use href="#i-image"/></svg>Nano Banana</li>
+        <li><svg aria-hidden="true"><use href="#i-video"/></svg>Veo 3.1</li>
+        <li><svg aria-hidden="true"><use href="#i-video"/></svg>Kling</li>
+        <li><svg aria-hidden="true"><use href="#i-film"/></svg>Higgsfield</li>
+        <li><svg aria-hidden="true"><use href="#i-mic"/></svg>ElevenLabs</li>
+        <li><svg aria-hidden="true"><use href="#i-film"/></svg>CapCut</li>
+        <li><svg aria-hidden="true"><use href="#i-chart"/></svg>Hooked Lab</li>
+      </ul>
+    </div>
+    <div class="mq mq--alt" data-dir="-1">
+      <ul class="mq-t" id="skills" dir="ltr" data-list="ia.skills"><li>Prompting</li><li>Packshot</li><li>Mises en situation</li><li>Personnage cohérent</li><li>Image → vidéo</li><li>Mouvements de caméra</li><li>Voix off</li><li>Sous-titres</li><li>UGC</li><li>Storyboard</li><li>Cinématique</li><li>Prospection</li></ul>
+    </div>
+  </section>
+
+  <!-- 3 · EN ACTION : la pub IA de A à Z, épinglée et pilotée par le défilement =============== -->
+  <section class="pipe" id="pipeline" aria-labelledby="pipe-t">
+    <header class="sec-h wrap">
+      <p class="kicker" data-scramble data-k="ia.pipe.k">// En action</p>
+      <h2 class="h2" id="pipe-t" data-split data-k="ia.pipe.t">Une pub IA, de A à Z.</h2>
+      <p class="lead" data-fade data-k="ia.pipe.lead">Voici ce que tu apprends à faire, étape par étape. Fais défiler : la pub se construit sous tes yeux.</p>
+    </header>
+
+    <div class="pipe-pin">
+      <div class="pipe-in wrap">
+        <ol class="ps-list" id="ps-list">
+          <li class="ps is-on"><span class="ps-n">01</span><div class="ps-b"><p class="ps-m"><svg aria-hidden="true"><use href="#i-chat"/></svg><span data-k="ia.s1.m">IA01 · Prompting</span></p><h3 data-k="ia.s1.t">Le prompt</h3><p data-k="ia.s1.x">Rôle, contexte, tâche, format, contraintes : tu écris des instructions que l’IA comprend.</p><ul class="ps-chips" data-list="ia.s1.chips"><li>Rôle</li><li>Contexte</li><li>Tâche</li><li>Format</li><li>Contraintes</li></ul></div></li>
+          <li class="ps"><span class="ps-n">02</span><div class="ps-b"><p class="ps-m"><svg aria-hidden="true"><use href="#i-image"/></svg><span data-k="ia.s2.m">IA02 · Génération d’images</span></p><h3 data-k="ia.s2.t">L’image</h3><p data-k="ia.s2.x">Sujet, décor, lumière, cadrage, style — et toujours le format. Un packshot pro, sans studio.</p></div></li>
+          <li class="ps"><span class="ps-n">03</span><div class="ps-b"><p class="ps-m"><svg aria-hidden="true"><use href="#i-video"/></svg><span data-k="ia.s3.m">IA03 · Génération de vidéos</span></p><h3 data-k="ia.s3.t">La vidéo</h3><p data-k="ia.s3.x">Image de départ, action, mouvement de caméra, durée : ton packshot s’anime en 5 secondes.</p></div></li>
+          <li class="ps"><span class="ps-n">04</span><div class="ps-b"><p class="ps-m"><svg aria-hidden="true"><use href="#i-mic"/></svg><span data-k="ia.s4.m">IA04 · Voix, musique, sous-titres</span></p><h3 data-k="ia.s4.t">La voix et les sous-titres</h3><p data-k="ia.s4.x">Voix off, musique, et des sous-titres gros, centrés, contrastés, avec le mot clé en couleur.</p></div></li>
+          <li class="ps"><span class="ps-n">05</span><div class="ps-b"><p class="ps-m"><svg aria-hidden="true"><use href="#i-film"/></svg><span data-k="ia.s5.m">IA05 · IA06 · UGC et cinématique</span></p><h3 data-k="ia.s5.t">Le niveau au-dessus</h3><p data-k="ia.s5.x">Script UGC, avatar qui parle, storyboard plan par plan : des formats qui arrêtent le scroll.</p></div></li>
+          <li class="ps"><span class="ps-n">06</span><div class="ps-b"><p class="ps-m"><svg aria-hidden="true"><use href="#i-deal"/></svg><span data-k="ia.s6.m">IA07 · IA08 · Analyser et vendre</span></p><h3 data-k="ia.s6.t">Tes premiers clients</h3><p data-k="ia.s6.x">Tu analyses ce qui marche avec Hooked Lab, tu itères, puis tu trouves et signes tes clients.</p><a class="bt bt--lime ps-go" href="#inscription" data-magnet><span data-k="ia.s6.go">Apprendre à le faire</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div></li>
+        </ol>
+
+        <div class="stage">
+          <div class="stage-glow" aria-hidden="true"></div>
+          <div class="dev" id="dev" role="img" aria-label="Exemple de publicité construite étape par étape avec l’IA" data-ka="aria-label:ia.dev.label">
+            <div class="dev-scr">
+              <div class="d-bg" id="d-bg"></div>
+              <canvas class="d-cv" id="d-cv" width="576" height="720"></canvas>
+              <div class="d-sweep" aria-hidden="true"></div>
+
+              <div class="d-chat" id="d-chat">
+                <p class="dc-h"><span class="dc-av"><svg aria-hidden="true"><use href="#i-spark"/></svg></span><span data-k="ia.dev.assist">Assistant IA</span></p>
+                <div class="dc-me"><span id="dc-me"></span></div>
+                <div class="dc-typing" id="dc-typing"><i></i><i></i><i></i></div>
+                <div class="dc-ai" id="dc-ai">
+                  <p data-k="ia.dev.hooks">3 hooks pour ta pub de 15 s :</p>
+                  <ol>
+                    <li data-k="ia.dev.h1">« Elle tient toute ta journée. »</li>
+                    <li data-k="ia.dev.h2">« Le blanc qui reste blanc. »</li>
+                    <li data-k="ia.dev.h3">« Tu l’oublies à ton pied. »</li>
+                  </ol>
+                </div>
+              </div>
+
+              <ul class="d-chips" id="d-chips" aria-hidden="true">
+                <li class="c1" data-k="ia.cat.Sujet">Sujet</li><li class="op">+</li><li class="c2" data-k="ia.cat.Décor">Décor</li><li class="op">+</li><li class="c3" data-k="ia.cat.Lumière">Lumière</li><li class="op">+</li><li class="c4" data-k="ia.cat.Cadrage">Cadrage</li><li class="op">+</li><li class="c5" data-k="ia.cat.Style">Style</li>
+              </ul>
+
+              <div class="d-ad" id="d-ad" aria-hidden="true">
+                <p class="da-top"><span class="da-av"></span><b data-k="ia.dev.shop">ta.boutique</b><span data-k="ia.dev.spons">Sponsorisé</span></p>
+                <p class="da-cta"><span data-k="ia.dev.buy">Commander</span><svg><use href="#i-arrow"/></svg></p>
+              </div>
+
+              <div class="d-flash" id="d-flash" aria-hidden="true"></div>
+              <div class="d-vid" id="d-vid" aria-hidden="true">
+                <p class="dv-k"><span data-k="ia.dev.i2v">Image → vidéo</span><b id="dv-move" data-k="ia.dev.mv1">Travelling avant</b></p>
+                <div class="dv-frames" id="dv-frames"><i></i><i></i><i></i><i></i><i></i></div>
+                <div class="dv-row">
+                  <svg class="dv-ic"><use href="#i-play"/></svg>
+                  <span class="dv-bar"><i id="dv-fill"></i></span>
+                  <span class="dv-t" id="dv-t">0:00</span>
+                </div>
+              </div>
+
+              <div class="d-subs" id="d-subs" aria-hidden="true">
+                <span data-k="ia.dev.sub1">LE BLANC</span><span data-k="ia.dev.sub2">QUI RESTE</span><span class="kw" data-k="ia.dev.sub3">BLANC.</span>
+              </div>
+              <div class="d-wave" id="d-wave" aria-hidden="true"></div>
+              <span class="d-voice" id="d-voice" aria-hidden="true"><svg><use href="#i-mic"/></svg><span data-k="ia.dev.voice">Voix off · darija</span></span>
+
+              <div class="d-box" id="d-box" aria-hidden="true"><i></i><i></i></div>
+
+              <div class="d-lab" id="d-lab" aria-hidden="true">
+                <p class="dl-h"><svg><use href="#i-chart"/></svg><span data-k="ia.dev.lab">Analyse</span></p>
+                <ul>
+                  <li><i class="h"></i>Hook<span data-k="ia.dev.labh">accroche dès la 1re seconde</span></li>
+                  <li><i class="b"></i>Body<span data-k="ia.dev.labb">bénéfice montré</span></li>
+                  <li><i class="c"></i>CTA<span data-k="ia.dev.labc">clair et visible</span></li>
+                </ul>
+              </div>
+              <div class="d-notif" id="d-notif" aria-hidden="true">
+                <span class="dn-ic"><svg><use href="#i-chat"/></svg></span>
+                <p><b data-k="ia.dev.msg">Nouveau message</b><span data-k="ia.dev.msgx">« Salam ! Tu peux faire des pubs comme ça pour ma boutique ? »</span></p>
+              </div>
+              <div class="d-grade" id="d-grade" aria-hidden="true"></div>
+              <div class="story" id="story" aria-hidden="true">
+                <figure><i></i><figcaption data-k="ia.dev.p1">Plan 1 · large</figcaption></figure>
+                <figure><i></i><figcaption data-k="ia.dev.p2">Plan 2 · détail</figcaption></figure>
+                <figure><i></i><figcaption data-k="ia.dev.p3">Plan 3 · mouvement</figcaption></figure>
+                <figure><i></i><figcaption data-k="ia.dev.p4">Plan 4 · packshot</figcaption></figure>
+              </div>
+              <div class="hbc" id="hbc" aria-hidden="true">
+                <span class="hbc-h"><i></i><b>Hook</b></span><span class="hbc-b"><i></i><b>Body</b></span><span class="hbc-c"><i></i><b>CTA</b></span>
+              </div>
+              <span class="d-tag" data-k="ia.ex">Exemple</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pipe-meter" aria-hidden="true"><b id="pm-n">01</b><span>/ 06</span><i><em id="pm-bar"></em></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · PROGRAMME : trois étapes en cartes qui s'empilent ==================================== -->
+  <section class="prog" id="programme" aria-labelledby="prog-t">
+    <header class="sec-h wrap">
+      <p class="kicker" data-scramble data-k="ia.prog.k">// Le programme</p>
+      <h2 class="h2" id="prog-t" data-split data-h="ia.prog.t">Le programme de la Formation IA.</h2>
+      <p class="lead" data-fade data-k="ia.prog.lead">Trois étapes : maîtriser les outils, produire, puis vendre. Chaque leçon dure 2 minutes au maximum, avec un quiz, un exercice et un atelier (PDF, prompts, ressources).</p>
+    </header>
+
+    <div class="phases wrap" id="phases">
+      <article class="ph" data-ph="1">
+        <div class="ph-in spot">
+          <header class="ph-h"><span class="ph-n dot-n">01</span><h3 class="ph-t" data-k="ia.ph1.t">Maîtriser</h3><p data-k="ia.ph1.x">Prompting, images, vidéos, voix : les outils, et surtout la méthode.</p></header>
+          <ul class="mods" data-mods="ia1,ia2,ia3,ia4"></ul>
+        </div>
+        <i class="ph-shade" aria-hidden="true"></i>
+      </article>
+      <article class="ph" data-ph="2">
+        <div class="ph-in spot">
+          <header class="ph-h"><span class="ph-n dot-n">02</span><h3 class="ph-t" data-k="ia.ph2.t">Produire</h3><p data-k="ia.ph2.x">UGC et cinématique : les formats qui arrêtent le scroll.</p></header>
+          <ul class="mods" data-mods="ia5,ia6"></ul>
+        </div>
+        <i class="ph-shade" aria-hidden="true"></i>
+      </article>
+      <article class="ph" data-ph="3">
+        <div class="ph-in spot">
+          <header class="ph-h"><span class="ph-n dot-n">03</span><h3 class="ph-t" data-k="ia.ph3.t">Vendre</h3><p data-k="ia.ph3.x">Mesurer, itérer, trouver tes clients, puis ton projet final et ton certificat.</p></header>
+          <ul class="mods" data-mods="ia7,ia8,ia9"></ul>
+        </div>
+        <i class="ph-shade" aria-hidden="true"></i>
+      </article>
+    </div>
+
+    <div class="all wrap">
+      <button class="bt bt--ghost" id="all-btn" type="button" aria-expanded="false" aria-controls="all-list"><svg aria-hidden="true"><use href="#i-plus"/></svg><span id="all-lbl">Voir toutes les leçons</span></button>
+      <div class="all-list" id="all-list" hidden></div>
+    </div>
+  </section>
+
+  <!-- 5 · LA PLATEFORME : le téléphone qui tourne, captures réelles ============================ -->
+  <section class="plat" id="plateforme" aria-labelledby="plat-t">
+    <div class="plat-in wrap">
+      <header class="plat-copy">
+        <p class="kicker" data-scramble data-k="ia.plat.k">// La plateforme</p>
+        <h2 class="h2" id="plat-t" data-split data-k="ia.plat.t">2 minutes. Une idée. Sur ton téléphone.</h2>
+        <p class="lead" data-fade data-k="ia.plat.lead">Chaque leçon est une vidéo animée, expliquée en darija, suivie de l’essentiel à retenir, d’un exercice, d’un quiz et d’un atelier avec les prompts de la leçon.</p>
+        <p class="plat-cta" data-fade><a class="bt bt--ghost" href="../app/?demo=1"><svg aria-hidden="true"><use href="#i-phone"/></svg><span data-k="ia.plat.demo">Essayer le compte démo</span></a><small data-k="ia.plat.limit">Démo limitée : une leçon par formation.</small></p>
+      </header>
+      <div class="plat-track" id="plat-track">
+        <div class="plat-sticky">
+          <div class="phone-sc">
+            <div class="phone" id="phone">
+              <div class="phone-scr">
+                <img class="ps-img is-on" src="img/app-lecon.webp" alt="Leçon « Le prompt image » en lecture" data-ka="alt:ia.plat.a1" width="780" height="1688" data-k2="0">
+                <img class="ps-img" src="img/app-prompts.webp" alt="Atelier de la leçon : le gabarit de prompt image" data-ka="alt:ia.plat.a2" width="780" height="1688" loading="lazy" data-k2="1">
+                <img class="ps-img" src="img/app-quiz.webp" alt="Le quiz de la leçon" data-ka="alt:ia.plat.a3" width="780" height="1688" loading="lazy" data-k2="2">
+                <div class="ps-img ps-long" data-k2="3"><img src="img/app-parcours.webp" alt="La page de la Formation IA" data-ka="alt:ia.plat.a4" width="780" height="2800" loading="lazy"></div>
+              </div>
+              <i class="phone-isl" aria-hidden="true"></i>
+            </div>
+            <ul class="orbit" id="orbit">
+              <li data-k2="0"><svg aria-hidden="true"><use href="#i-play"/></svg><span data-k="ia.plat.c1">Vidéo animée · 2 min max</span></li>
+              <li data-k2="0"><svg aria-hidden="true"><use href="#i-mic"/></svg><span data-k="ia.plat.c2">Voix off en darija</span></li>
+              <li data-k2="1"><svg aria-hidden="true"><use href="#i-wand"/></svg><span data-k="ia.plat.c3">Atelier : PDF, prompts, ressources</span></li>
+              <li data-k2="1"><svg aria-hidden="true"><use href="#i-star"/></svg><span data-k="ia.plat.c4">L’essentiel à retenir</span></li>
+              <li data-k2="2"><svg aria-hidden="true"><use href="#i-target"/></svg><span data-k="ia.plat.c5">Un quiz par leçon</span></li>
+              <li data-k2="2"><svg aria-hidden="true"><use href="#i-list"/></svg><span data-k="ia.plat.c6">Exercice : 4 à 6 actions</span></li>
+              <li data-k2="3"><svg aria-hidden="true"><use href="#i-bolt"/></svg><span data-k="ia.plat.c7">XP, séries, badges</span></li>
+              <li data-k2="3"><svg aria-hidden="true"><use href="#i-trophy"/></svg><span data-k="ia.plat.c8">Certificat</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="plat-note wrap" data-k="ia.plat.note">Captures réelles de l’espace étudiant (compte de démonstration).</p>
+  </section>
+
+  <!-- 6 · LA CRÉATIVE : le complément (bascule violet → or) ===================================== -->
+  <section class="crea" id="creative" aria-labelledby="crea-t">
+    <div class="crea-in wrap">
+      <div class="crea-copy">
+        <p class="kicker" data-scramble data-k="ia.crea.k">// Et la créative ?</p>
+        <h2 class="h2" id="crea-t" data-split data-k="ia.crea.t">L’IA produit. La créative fait vendre.</h2>
+        <p class="lead" data-fade data-k="ia.crea.lead">La Formation Créative t’apprend ce qui fait vendre une pub, et à la produire avec ton téléphone, CapCut et Canva : hook, body, CTA, formules de vente, UGC, tournage, montage, stratégie.</p>
+        <ul class="crea-stats" data-fade>
+          <li><b class="dot-n" data-count="crea-lessons">0</b><span data-k="ia.crea.lessons">leçons</span></li>
+          <li><b class="dot-n" data-count="crea-mods">0</b><span data-k="ia.crea.mods">modules</span></li>
+          <li><b class="dot-n">30<small data-k="ia.crea.s">s</small></b><span data-k="ia.crea.final">projet final</span></li>
+        </ul>
+        <p class="crea-duo" data-fade><svg aria-hidden="true"><use href="#i-spark"/></svg><span data-k="ia.crea.duo">Le duo conseillé : la créative d’abord, l’IA ensuite.</span></p>
+      </div>
+      <figure class="crea-vis">
+        <div class="crea-img"><img src="../assets/img/couv-creative.webp" alt="Couverture de la Formation Créative : un parfum filmé au téléphone, montage dans CapCut" data-ka="alt:ia.crea.alt" width="1280" height="720" loading="lazy"></div>
+        <div class="crea-tl" aria-hidden="true">
+          <span class="ct-h"><i></i><b>Hook</b><small data-k="ia.crea.hook">0–3 s</small></span>
+          <span class="ct-b"><i></i><b>Body</b><small data-k="ia.crea.body">le bénéfice</small></span>
+          <span class="ct-c"><i></i><b>CTA</b><small data-k="ia.crea.cta">l’action</small></span>
+        </div>
+        <figcaption data-k="ia.crea.cap">Module M02 : la structure d’une créative qui vend.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 7 · TARIFS (prix publiés par le serveur, data/offres.js) =================================== -->
+  <section class="tarifs" id="tarifs" aria-labelledby="tar-t">
+    <header class="sec-h wrap">
+      <p class="kicker" data-scramble data-k="ia.tar.k">// Tarifs</p>
+      <h2 class="h2" id="tar-t" data-split data-k="ia.tar.t">Choisis ta formule.</h2>
+      <p class="lead" data-fade data-k="ia.tar.lead">Aucun paiement en ligne : l’équipe t’appelle d’abord, puis tu paies par CCP, BaridiMob ou en espèces. Accès d’un an.</p>
+    </header>
+    <div class="cards wrap">
+      <article class="card spot" aria-labelledby="c-ia">
+        <p class="card-k"><svg aria-hidden="true"><use href="#i-spark"/></svg><span data-k="ia.tar.ia.k">Formation IA</span></p>
+        <h3 class="card-t" id="c-ia" data-k="ia.tar.ia.t">Produire avec l’IA, puis le vendre</h3>
+        <p class="price"><b data-price="ia">—</b><span data-k="ia.tar.da">DA</span></p>
+        <p class="per" data-k="ia.tar.year">Accès 1 an</p>
+        <ul class="inc">
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-h="ia.tar.ia.1">Leçons animées de 2 min, en darija</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-h="ia.tar.ia.2">Du prompting aux premiers clients</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.ia.3">Un atelier par leçon : PDF, prompts, ressources</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.ia.4">Images, vidéos, voix et UGC générés par l’IA</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.final">Projet final validé par l’équipe</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.ia.6">Certificat Formation IA</span></li>
+        </ul>
+        <a class="bt bt--ghost card-go" href="#inscription" data-pick="ia"><span data-k="ia.tar.ia.go">Choisir l’IA</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </article>
+
+      <article class="card card--pack spot" aria-labelledby="c-both">
+        <p class="card-badge" data-k="ia.tar.badge">Recommandé</p>
+        <p class="card-k"><svg aria-hidden="true"><use href="#i-spark"/></svg><span data-k="ia.tar.b.k">Pack complet · IA + Créative</span></p>
+        <h3 class="card-t" id="c-both" data-k="ia.tar.b.t">Les deux formations</h3>
+        <p class="price"><b data-price="both">—</b><span data-k="ia.tar.da">DA</span></p>
+        <p class="per"><s data-h="ia.tar.b.was"></s> · <b class="save" data-h="ia.tar.b.save"></b></p>
+        <p class="upsell"><svg aria-hidden="true"><use href="#i-plus"/></svg><span data-h="ia.tar.b.up"></span></p>
+        <ul class="inc">
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-h="ia.tar.b.1">Toutes les leçons des deux formations</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.b.2">Tout le contenu IA et tout le contenu Créative</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.b.3">Les ateliers, la bibliothèque de prompts et les ressources</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.final">Projet final validé par l’équipe</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.b.5">Les deux certificats</span></li>
+        </ul>
+        <a class="bt bt--lime card-go" href="#inscription" data-pick="both" data-magnet><span data-k="ia.tar.b.go">Choisir le pack</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </article>
+
+      <article class="card card--crea spot" aria-labelledby="c-crea">
+        <p class="card-k"><svg aria-hidden="true"><use href="#i-film"/></svg><span data-k="ia.tar.c.k">Formation Créative</span></p>
+        <h3 class="card-t" id="c-crea" data-k="ia.tar.c.t">Ce qui fait vendre une pub</h3>
+        <p class="price"><b data-price="creative">—</b><span data-k="ia.tar.da">DA</span></p>
+        <p class="per" data-k="ia.tar.year">Accès 1 an</p>
+        <ul class="inc">
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-h="ia.tar.c.1">Leçons animées de 2 min, en darija</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-h="ia.tar.c.2">Des bases au projet final</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.c.3">Hooks, scripts, formules de vente et UGC</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.c.4">Tournage, montage avancé et stratégie marketing</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.c.5">Un quiz et une to-do pratique à chaque leçon</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.c.6">Projet final de 30 s et certificat</span></li>
+        </ul>
+        <a class="bt bt--ghost card-go" href="#inscription" data-pick="creative"><span data-k="ia.tar.c.go">Choisir la Créative</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </article>
+    </div>
+    <div class="incall wrap" data-fade>
+      <p class="kicker" data-k="ia.tar.all">Dans chaque formule</p>
+      <ul>
+        <li><svg aria-hidden="true"><use href="#i-bolt"/></svg><span data-k="ia.tar.all1">Ton espace étudiant : progression, XP, badges</span></li>
+        <li><svg aria-hidden="true"><use href="#i-mic"/></svg><span data-k="ia.tar.all2">Voix en darija, textes à l’écran en français, anglais ou arabe</span></li>
+        <li><svg aria-hidden="true"><use href="#i-chat"/></svg><span data-k="ia.tar.all3">Tes questions à l’équipe sur WhatsApp</span></li>
+      </ul>
+      <p class="small" data-k="ia.tar.note">Prix en dinars algériens (DA), pour un an d’accès à la plateforme.</p>
+    </div>
+  </section>
+
+  <!-- 8 · INSCRIPTION (même serveur que la landing, source « Landing IA ») ======================== -->
+  <section class="join" id="inscription" aria-labelledby="join-t">
+    <div class="join-in wrap">
+      <div class="join-copy">
+        <p class="kicker" data-scramble data-k="ia.join.k">// Inscription</p>
+        <h2 class="h2" id="join-t" data-split data-k="ia.join.t">Réserve ta place. L’équipe te rappelle.</h2>
+        <ol class="steps" data-fade>
+          <li><b>1</b><div><strong data-k="ia.join.s1">Tu remplis le formulaire</strong><span data-k="ia.join.s1x">30 secondes, sans paiement en ligne.</span></div></li>
+          <li><b>2</b><div><strong data-k="ia.join.s2">L’équipe te contacte sur WhatsApp</strong><span data-k="ia.join.s2x">Formule, session et paiement (CCP, BaridiMob ou espèces).</span></div></li>
+          <li><b>3</b><div><strong data-k="ia.join.s3">Tu reçois ton accès</strong><span data-k="ia.join.s3x">Ton espace étudiant s’ouvre : module 1, leçon 1.</span></div></li>
+        </ol>
+      </div>
+      <form class="form" id="form" novalidate>
+        <div class="form-glow" aria-hidden="true"></div>
+        <fieldset class="form-in">
+          <legend data-k="ia.f.legend">Réserve ta place en 30 secondes</legend>
+          <div class="row2">
+            <label class="fld"><span data-k="ia.f.name">Nom et prénom</span><input name="name" autocomplete="name" required minlength="2" placeholder="Ex. : Amina Benali" data-ka="placeholder:ia.f.name.ph"></label>
+            <label class="fld"><span>WhatsApp</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="05 50 00 00 00" pattern="[\d\s+().\-]{8,}" dir="ltr"></label>
+          </div>
+          <div class="fld">
+            <span id="f-pack" data-k="ia.f.pack">Choisis ta formule · accès 1 an</span>
+            <div class="seg" role="radiogroup" aria-labelledby="f-pack">
+              <label><input type="radio" name="formation" value="ia"><span><b data-k="ia.f.ia">Formation IA</b><small data-price-s="ia"></small></span></label>
+              <label><input type="radio" name="formation" value="both" checked><span><b data-k="ia.f.both">Pack complet</b><small data-price-s="both"></small></span></label>
+              <label><input type="radio" name="formation" value="creative"><span><b data-k="ia.f.crea">Formation Créative</b><small data-price-s="creative"></small></span></label>
+            </div>
+          </div>
+          <div class="fld">
+            <span id="f-pro" data-k="ia.f.profil">Tu es…</span>
+            <div class="chips-in" role="radiogroup" aria-labelledby="f-pro">
+              <label><input type="radio" name="profil" value="debutant" checked><span data-k="ia.f.p1">Je débute</span></label>
+              <label><input type="radio" name="profil" value="ecommercant"><span data-k="ia.f.p2">E-commerçant·e</span></label>
+              <label><input type="radio" name="profil" value="freelance"><span data-k="ia.f.p3">Freelance / CM</span></label>
+              <label><input type="radio" name="profil" value="createur"><span data-k="ia.f.p4">Créateur·rice</span></label>
+              <label><input type="radio" name="profil" value="agence"><span data-k="ia.f.p5">Agence / équipe</span></label>
+            </div>
+          </div>
+          <label class="fld"><span data-h="ia.f.email">E-mail <em>(facultatif)</em></span><input name="email" type="email" autocomplete="email" placeholder="toi@mail.com" dir="ltr" data-ka="placeholder:ia.f.email.ph"></label>
+          <label class="hp" aria-hidden="true">Site web<input name="website" tabindex="-1" autocomplete="off"></label>
+          <label class="check"><input type="checkbox" name="ok" required><span data-k="ia.f.ok">J’accepte d’être contacté·e par l’équipe Hooked Academy sur WhatsApp.</span></label>
+          <button class="bt bt--lime bt--l form-go" type="submit" data-magnet><span data-k="ia.f.send">Envoyer ma demande</span><svg aria-hidden="true"><use href="#i-send"/></svg></button>
+          <p class="form-err" id="form-err" role="alert"></p>
+        </fieldset>
+        <div class="form-done" id="form-done" hidden tabindex="-1">
+          <span class="fd-ic"><svg aria-hidden="true"><use href="#i-check"/></svg></span>
+          <h3 id="done-t">C’est noté !</h3>
+          <p data-k="ia.f.donex">Ta demande est arrivée chez l’équipe : elle te contacte sur WhatsApp pour confirmer ta formule, la session et le paiement. Ensuite, tu reçois ton code d’accès.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- 9 · QUESTIONS (FAQ de l'équipe, data/faq.json et espace équipe) =========================== -->
+  <section class="faq" id="faq" aria-labelledby="faq-t">
+    <div class="faq-in wrap">
+      <header class="faq-h">
+        <p class="kicker" data-scramble data-k="ia.faq.k">// Questions</p>
+        <h2 class="h2" id="faq-t" data-split data-k="ia.faq.t">Avant de te lancer.</h2>
+      </header>
+      <div class="qa" id="qa"></div>
+    </div>
+  </section>
+
+  <!-- 10 · FINAL : les particules forment le monogramme ========================================= -->
+  <section class="fin" id="final" aria-labelledby="fin-t">
+    <canvas class="fin-cv" id="fin-cv" aria-hidden="true"></canvas>
+    <div class="fin-in wrap">
+      <h2 class="fin-t" id="fin-t" data-split data-k="ia.fin.t">À toi de générer la suite.</h2>
+      <p class="lead" data-fade data-k="ia.fin.lead">Formation IA · Formation Créative · en darija</p>
+      <a class="bt bt--lime bt--l" href="#inscription" data-magnet data-fade><span data-k="ia.cta">Réserver ma place</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot-in wrap">
+    <a class="logo" href="#top" aria-label="Hooked Academy, retour en haut" data-ka="aria-label:ia.top">
+      <span class="logo-p"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-mark"/></svg></span>
+      <span class="logo-n"><b>HOOKED</b><span>ACADEMY</span></span>
+    </a>
+    <nav class="foot-l" aria-label="Liens">
+      <a href="../app/" data-k="ia.nav.space">Espace étudiant</a>
+      <a href="#inscription" data-k="ia.foot.join">Inscription</a>
+      <a href="#faq" data-k="ia.nav.faq">Questions</a>
+    </nav>
+    <p class="foot-note" data-k="ia.foot.note">Exemples de prompts, d’images, de publicités et de messages présentés à titre d’illustration. Captures : espace étudiant, compte de démonstration.</p>
+  </div>
+</footer>
+</body>
+</html>

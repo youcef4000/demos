@@ -34,6 +34,8 @@ const DEMO_OPEN = ['m1-l1', 'ia1-l1'];
 const STATUS = ['nouvelle', 'contactee', 'paiement', 'validee', 'refusee'];
 const PROFILS = ['debutant', 'ecommercant', 'freelance', 'createur', 'agence'];
 const PACKS = ['creative', 'ia', 'both'];
+// Pages du test A/B des landings (compteur de visites) : la landing (a) et la landing Formation IA (ia)
+const AB_PAGES = ['a', 'ia'];
 const CATS = ['inscription', 'formation', 'plateforme', 'ia', 'creation', 'business'];
 const AUD = ['public', 'pro', 'both'];
 const KINDS = ['pdf', 'prompt', 'link', 'image', 'file', 'audio', 'video'];
@@ -664,6 +666,7 @@ export class Plateforme {
       return json(this.publicData(), 200, h);
     }
     if (is('POST', 'apply')) return this.apply(req);
+    if (is('POST', 'visit')) return this.visit(req);
     if (is('POST', 'salt')) return this.salt(req);
     if (is('POST', 'login')) return this.loginStudent(req);
     if (is('POST', 'logout')) return this.logout(req, 'student');
@@ -752,6 +755,23 @@ export class Plateforme {
     this.sql.exec('INSERT INTO apps (id, at, v) VALUES (?, ?, ?)', app.id, Date.now(), JSON.stringify(app));
     this.take('apply:all', 1500, 864e5);
     return json({ ok: true, id: app.id });
+  }
+  /** Test A/B des landings : une visite par jour, par réseau et par page (« a » = landing, « ia » = /ia/). */
+  async visit(req) {
+    const v = await readJSON(req, 1024);
+    const page = AB_PAGES.includes(v.page) ? v.page : null;
+    if (!page) fail(400, 'page');
+    const day = iso().slice(0, 10);
+    if (this.take(`visit:${page}:${day}:${this.ipKey(req)}`, 1, 864e5)) {
+      const ab = this.kv('ab', {});
+      const days = ab.days && typeof ab.days === 'object' ? ab.days : {};
+      const d = (days[day] ||= {});
+      d[page] = (Number(d[page]) || 0) + 1;
+      // 400 jours au plus
+      const keep = Object.keys(days).sort().slice(-400);
+      this.setKv('ab', { days: Object.fromEntries(keep.map((k) => [k, days[k]])) });
+    }
+    return json({ ok: true });
   }
   app(id) {
     const r = this.sql.exec('SELECT v FROM apps WHERE id = ?', String(id)).toArray()[0];
@@ -1065,7 +1085,7 @@ export class Plateforme {
     for (const r of this.docs('res')) res[r.id] = JSON.parse(r.v);
     const files = this.sql.exec('SELECT id, name, type, size, scope, at, lesson FROM files ORDER BY at DESC').toArray();
     const audit = this.sql.exec(`SELECT at, who, act, info FROM audit ORDER BY at DESC LIMIT ${full ? 2000 : 60}`).toArray();
-    return { ...this.publicData(), settings: { ...DEFAULTS, ...this.kv('settings', {}) }, faqAll: this.kv('faq'), applications: apps, students, res, files, audit };
+    return { ...this.publicData(), settings: { ...DEFAULTS, ...this.kv('settings', {}) }, faqAll: this.kv('faq'), applications: apps, students, res, files, audit, ab: this.kv('ab', { days: {} }) };
   }
   async putSettings(req) {
     const v = await readJSON(req);

@@ -467,6 +467,26 @@ function viewOverview() {
     const mods = coreModulesOf(id);
     return `<a class="ov-tr" href="#/programme" style="--t:${tr.color}"><span class="ov-tr-i">${icon(tr.icon, { size: 20 })}</span><span class="ov-tr-t"><b>${t(`track.${id}`)}</b><small>${plural('module', mods.length)} · ${plural('lesson', lessonsOf(id).length)}</small></span><em dir="ltr">${modCode(mods[0])}–${modCode(mods[mods.length - 1])}</em></a>`;
   });
+  // Test A/B des landings : visites comptées par le serveur, inscriptions par source, depuis le premier jour mesuré
+  const abDays = Object.keys(d.ab?.days || {}).sort();
+  const abStart = abDays[0];
+  const abSrc = (a) => (a.source === 'Landing IA' ? 'ia' : !a.source || a.source === 'Landing' ? 'a' : null);
+  const abRows = ['a', 'ia'].map((k) => {
+    const visits = abDays.reduce((n, day) => n + (Number(d.ab.days[day][k]) || 0), 0);
+    const apps = abStart ? A.filter((a) => abSrc(a) === k && S.iso(new Date(a.createdAt)) >= abStart).length : 0;
+    return { k, visits, apps, rate: visits ? apps / visits : 0 };
+  });
+  const abBest = Math.max(...abRows.map((r) => r.rate));
+  const abCard = `<section class="card ab-card"><p class="card-k">${t('ad.ab.title')}</p>${
+    abStart
+      ? `<div class="ab">${abRows
+          .map(
+            (r) =>
+              `<div class="ab-r${r.rate && r.rate === abBest ? ' is-top' : ''}"><a href="${r.k === 'a' ? '../' : '../ia/'}" target="_blank" rel="noopener"><b>${t(`ad.ab.${r.k}`)}</b><small dir="ltr">${r.k === 'a' ? '/' : '/ia/'}</small></a><span><b>${fmtNum(r.visits)}</b>${t('ad.ab.visits')}</span><span><b>${fmtNum(r.apps)}</b>${t('ad.ab.apps')}</span><span class="ab-rate"><b>${r.visits ? pct(r.rate) : '—'}</b>${t('ad.ab.rate')}</span><em><i style="transform:scaleX(${abBest ? r.rate / abBest : 0})"></i></em></div>`,
+          )
+          .join('')}</div><p class="muted small">${esc(t('ad.ab.since', { date: fmtDate(new Date(abStart), { day: 'numeric', month: 'long' }) }))}</p>`
+      : `<p class="muted small">${t('ad.ab.none')}</p>`
+  }</section>`;
   shell(
     '#/',
     `<div class="ph-h"><div><h1>${t('ad.nav.overview')}</h1><p>${esc(fmtDate(new Date(), { weekday: 'long', day: 'numeric', month: 'long' }))}</p></div><a class="b b--or b--s" href="#/inscriptions">${icon('users', { size: 16 })} ${t('ad.ov.cta')}</a></div>
@@ -483,6 +503,7 @@ function viewOverview() {
         .map(([k, s]) => `<div style="--c:${s.c}"><span>${esc(stLabel(k))}</span><em><i style="transform:scaleX(${A.length ? by(k) / A.length : 0})"></i></em><b>${fmtNum(by(k))}</b></div>`)
         .join('')}</div></section>
       <section class="card"><p class="card-k">${t('ad.ov.activity')}</p><ul class="act">${events.map((e) => `<li style="--c:${e.c}"><span class="dot"></span><span>${e.t}<br><small class="muted">${esc(e.by || '')}</small></span><time datetime="${esc(e.at)}">${esc(ago(e.at))}</time></li>`).join('') || `<li class="muted">${t('ad.ov.none')}</li>`}</ul></section>
+      ${abCard}
       <section class="card ov-tracks"><p class="card-k">${t('ad.ov.tracks')}</p>${tracks.join('')}<a class="b b--s" href="#/ressources">${icon('box', { size: 16 })} ${t('ad.ov.manageRes')}</a></section>
     </div>`,
   );

@@ -128,3 +128,9 @@ unique (100 bits). Seule son empreinte SHA-256 est dans `server/plateforme.js` (
 `SETUP_HASH` du serveur) ; la remplacer désactive le compte existant (procédure « mot de passe perdu »).
 
 Tester en local : `node server/index.mjs`, puis http://localhost:3000/admin/.
+
+Test A/B des landings : la landing principale (`/`, page « a ») et la landing Formation IA (`/ia/`, page « ia »,
+`sites/hooked-academy/ia/`, non indexée). Chaque page envoie `POST api/visit` (une visite par jour, par réseau
+et par page) ; les inscriptions de `/ia/` arrivent avec la source « Landing IA ». La vue d'ensemble de l'espace
+équipe affiche visiteurs, inscriptions et taux de chaque page depuis le premier jour mesuré. Textes de `/ia/` en
+trois langues : `ia/ia-i18n.js`, vérifiés par `node tools/hooked-academy/ia-check.mjs`.

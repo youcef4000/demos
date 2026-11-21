@@ -8,6 +8,7 @@ import './i18n/landing.js';
 import { logoInner, markSVG, morphMark } from './brand.js';
 import { TRACKS, MODULES as ALL_MODULES, allLessons, modCode, coreModulesOf, findLesson } from '../../data/programme.js';
 import { addApplication, settings } from './store.js';
+import { api } from './api.js';
 import * as FAQ from './faq.js';
 import { OFFRES } from '../../data/offres.js';
 import { mountAssistant } from './assistant.js';
@@ -794,3 +795,5 @@ const start = () => {
 if (document.fonts?.ready) document.fonts.ready.then(start);
 else start();
 initPWA('sw.js');
+// Test A/B des landings : une visite par jour et par réseau, comptée par le serveur (page « a » ; /ia/ compte « ia »)
+api('POST', 'visit', { page: 'a' }).catch(() => {});
