@@ -2,6 +2,7 @@
 // La vraie version : comptes administrateurs côté serveur, base de données, photos stockées en ligne.
 import * as S from './store.js';
 import { eur, esc, ic, src, toast, modale, documentCommercial, dateCourte, heure, definirRacine, nombre } from './ui.js';
+import * as P from './premium.js';
 
 definirRacine('../');
 const $ = (s, r = document) => r.querySelector(s);
@@ -37,6 +38,8 @@ const MENU = [
   ['categories', 'layers', 'Catégories'],
   ['clients', 'users', 'Clients'],
   ['devis', 'file', 'Devis'],
+  ['fournisseurs', 'pallet', 'Fournisseurs', true],
+  ['seo', 'trend', 'SEO et langues', true],
   ['reglages', 'settings', 'Réglages'],
 ];
 function compteurs() {
@@ -52,7 +55,7 @@ function cadre(section, titre, contenu, actions = '') {
   app.innerHTML = `<div class="cadre">
     <aside class="lateral" id="lateral">
       <div class="lateral-tete"><img src="../img/logo-blanc.svg" alt="Discount Horeca" width="133" height="36"><span>Espace admin</span></div>
-      <nav aria-label="Administration">${MENU.map(([k, i, t]) => `<a href="#/${k}" ${section === k ? 'aria-current="page"' : ''}>${ic(i)}${t}${n[k] ? `<span class="compteur">${n[k]}</span>` : ''}</a>`).join('')}</nav>
+      <nav aria-label="Administration">${MENU.map(([k, i, t, prem]) => `<a href="#/${k}" ${section === k ? 'aria-current="page"' : ''}>${ic(i)}${t}${prem ? '<span class="tag-premium">Premium</span>' : ''}${n[k] ? `<span class="compteur">${n[k]}</span>` : ''}</a>`).join('')}</nav>
       <div class="lateral-pied">
         <a href="../" target="_blank" rel="noopener">${ic('eye')}Voir la boutique</a>
         <a href="#" data-sortir>${ic('logout')}Quitter</a>
@@ -188,7 +191,7 @@ function vueCommandes(params) {
         <td>${S.MODES_COURTS[c.livraison?.mode] || ''}<br><small class="muet">${esc(c.livraison?.cp || '')} ${esc(c.livraison?.ville || '')}</small></td>
         <td>${esc({ bancontact: 'Bancontact', carte: 'Carte', virement: 'Virement', acompte: 'Acompte 30 %', showroom: 'Au showroom' }[c.paiement] || '')}</td>
         <td class="num"><strong>${eur(c.totaux.ht)}</strong></td>
-        <td><span class="pastille ${couleurStatut(c.statut)}">${S.statut(c.statut, c.livraison?.mode === 'showroom').court}</span></td>
+        <td><span class="pastille ${couleurStatut(c.statut)}">${S.statut(c.statut, c.livraison?.mode === 'showroom').court}</span>${c.peppol ? ' <span class="pastille p-vert" title="Facture envoyée par Peppol">Peppol</span>' : ''}</td>
       </tr>`).join('') || '<tr><td colspan="6" class="muet">Aucune commande.</td></tr>'}
       </tbody></table></div>
     </section>`);
@@ -239,6 +242,7 @@ function vueCommande(num) {
       <div style="display:grid;gap:18px">
         <section class="panneau"><h2>Client</h2><div class="fiche-client"><strong>${esc(c.client.societe)}</strong><span>${esc(c.client.contact || '')}</span><span>${esc(c.client.email || '')} · ${esc(c.client.tel || '')}</span><span class="muet">${c.client.bce ? `N° d’entreprise ${esc(c.client.bce)} · TVA ${esc(c.client.tva || '—')}` : 'Sans n° d’entreprise'}</span>${client ? `<span>${client.statut === 'valide' ? '<span class="pastille p-vert">Compte actif</span>' : '<span class="pastille p-jaune">Compte à valider</span>'} <span class="pastille p-bleu">${esc(S.TYPES[client.type] || '')}</span></span>` : '<span class="muet">Commande sans compte</span>'}</div></section>
         <section class="panneau"><h2>${retrait ? 'Retrait' : 'Livraison'}</h2><div class="fiche-client"><strong>${esc(S.LIVRAISONS[c.livraison?.mode] || '')}</strong>${retrait ? `<span>Showroom, ${esc(S.reglages().adresse)}</span>` : `${c.livraison.destinataire ? `<span>Client final : <strong>${esc(c.livraison.destinataire)}</strong>${c.livraison.telDest ? ' · ' + esc(c.livraison.telDest) : ''}</span><span class="pastille p-orange" style="justify-self:start">Étiquette neutre, sans prix</span>` : ''}<span>${esc(c.livraison.adresse)}</span><span>${esc(c.livraison.cp)} ${esc(c.livraison.ville)} · ${esc(c.livraison.pays || 'Belgique')}${c.livraison.mode === 'installation' ? '<span class="pastille p-orange" style="justify-self:start">Installation : devis à envoyer</span>' : ''}</span>`}${c.refClient ? `<span class="muet">Bon de commande client : ${esc(c.refClient)}</span>` : ''}</div></section>
+        ${P.blocPeppol(c)}
         <section class="panneau"><h2>Historique</h2><ul class="historique">${c.historique.map((h) => `<li><span>${S.statut(h.statut, retrait).nom}<br><small>${heure(h.date)}${h.note ? ' · ' + esc(h.note) : ''}</small></span></li>`).join('')}</ul></section>
       </div>
     </div>`, `<a class="btn btn-petit" href="#/commandes">${ic('left')}Commandes</a>`);
@@ -266,7 +270,8 @@ function vueCommande(num) {
     S.changerStatut(c.num, 'annulee', { note: r.donnees.note || '' });
     vueCommande(num);
   });
-  $$('[data-doc]').forEach((b) => b.addEventListener('click', () => imprimer(documentCommercial(b.dataset.doc, c))));
+  $$('[data-doc]').forEach((b) => b.addEventListener('click', () => imprimer(documentCommercial(b.dataset.doc, S.commande(num) || c))));
+  P.brancherPeppol(c, () => vueCommande(num));
 }
 
 /* ---------- Produits ---------- */
@@ -482,6 +487,7 @@ function vueEditeur(id) {
           <label class="champ"><span>Texte de présentation (un paragraphe par ligne)</span><textarea name="texte" rows="4">${esc((p.texte || []).join('\n'))}</textarea></label>
           <label class="champ"><span>Caractéristiques techniques</span><textarea name="specs" rows="10" style="font-family:ui-monospace,monospace;font-size:13px" placeholder="## Dimensions et capacité&#10;Dimensions (L x P x H, mm) : 600 x 700 x 850&#10;## Alimentation&#10;Tension : 230/1N 50Hz">${esc(versTexteSpecs(p.specs))}</textarea><small>« ## » ouvre un groupe ; puis une ligne « Caractéristique : valeur ».</small></label>
         </section>
+        ${P.sectionTraductions(p)}
       </div>
       <aside class="editeur-cote">
         <section class="panneau"><h2>Aperçu</h2><div class="apercu" id="apercu"></div></section>
@@ -534,6 +540,7 @@ function vueEditeur(id) {
   };
   photos();
   apercu();
+  P.brancherTraductions(p);
 
   $('[data-supprimer-fiche]')?.addEventListener('click', () => supprimer([p.id]));
   form.addEventListener('submit', (e) => {
@@ -558,6 +565,7 @@ function vueEditeur(id) {
       texte: d.texte.split(/\r?\n/).map((x) => x.trim()).filter(Boolean),
       specs: depuisTexteSpecs(d.specs),
     });
+    P.lireTraductions(d, p);
     if (nouveau) p.id = S.nouvelId(p.ref || p.nom);
     if (!S.enregistrerProduit(p)) { toast('Enregistrement impossible : stockage du navigateur plein (photos trop lourdes ?).', 'erreur', 6000); return; }
     toast(`${ic('check')} Produit enregistré — visible dans la boutique <a href="../#/p/${p.id}" target="_blank" rel="noopener">Voir</a>`, 'ok', 4500);
@@ -779,6 +787,7 @@ function imprimer(html) {
 }
 
 /* ---------- Routeur ---------- */
+const CTX = { cadre, importerPrix, router: () => router() };
 function router() {
   if (!entre()) return ecranEntree();
   const [chemin, qs] = location.hash.replace(/^#\/?/, '').split('?');
@@ -791,6 +800,8 @@ function router() {
   else if (a === 'categories') vueCategories();
   else if (a === 'clients') vueClients(params);
   else if (a === 'devis') b ? vueUnDevis(b) : vueDevis();
+  else if (a === 'fournisseurs') P.vueFournisseurs(CTX);
+  else if (a === 'seo') P.vueSeo(CTX);
   else if (a === 'reglages') vueReglages();
   else introuvable('Page');
   if (router.precedent !== chemin) window.scrollTo(0, 0); else window.scrollTo(0, y);

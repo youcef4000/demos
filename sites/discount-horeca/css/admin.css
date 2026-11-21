@@ -45,7 +45,7 @@ body { background: #eef2f6; }
 /* Cartes et KPI */
 .panneau { background: #fff; border: 1px solid var(--trait); border-radius: 14px; padding: 18px 20px; display: grid; gap: 14px; align-content: start; min-width: 0; }
 .panneau-tete { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-.panneau-tete h2 { font-size: 16.5px; }
+.panneau-tete h2, .panneau > h2 { font-size: 16.5px; }
 .panneau-tete a { font-weight: 700; color: var(--bleu-f); font-size: 13.5px; }
 .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 .kpi { background: #fff; border: 1px solid var(--trait); border-radius: 14px; padding: 16px 18px; display: grid; gap: 4px; }
@@ -170,3 +170,30 @@ body { background: #eef2f6; }
 .sous-edit small { color: var(--encre-3); white-space: nowrap; }
 .grille-fams { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; }
 @media (max-width: 640px) { .grille-fams { grid-template-columns: 1fr; } }
+
+/* ---------- Version Premium ---------- */
+.tag-premium { margin-left: auto; font-size: 10px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; padding: 2px 7px; border-radius: 99px; background: linear-gradient(90deg, #f6c343, #f08a24); color: #3b2300; }
+.lateral nav a .tag-premium + .compteur { margin-left: 6px; }
+.bandeau-simu { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: 12px; background: var(--jaune-c); color: #5a3f00; font-size: 13.5px; line-height: 1.5; margin: 0 0 18px; }
+.bandeau-simu svg { flex: none; margin-top: 2px; }
+.actions-ligne { white-space: nowrap; text-align: right; }
+.actions-ligne .btn + .btn { margin-left: 6px; }
+.controles { display: grid; }
+.controle { border-top: 1px solid var(--trait-2); }
+.controle:first-child { border-top: 0; }
+.controle summary { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; padding: 12px 0; cursor: pointer; list-style: none; font-size: 14px; }
+.controle summary::-webkit-details-marker { display: none; }
+.controle summary small { display: block; color: var(--encre-3); font-size: 12.5px; margin-top: 2px; }
+.controle summary .pastille { min-width: 44px; justify-content: center; text-align: center; }
+.controle[open] summary > svg { transform: rotate(180deg); }
+.controle .liste-simple { padding: 0 0 12px 56px; }
+.plan-seo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.plan-seo h3 { font-size: 14.5px; margin: 0 0 10px; }
+.plan-seo .case { font-size: 14px; padding: 6px 0; }
+.trad-ligne { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center; }
+.bloc-peppol code, .fiche-client code { font-size: 13px; background: var(--fond); padding: 1px 6px; border-radius: 6px; }
+@media (max-width: 900px) {
+  .plan-seo { grid-template-columns: 1fr; }
+  .trad-ligne { grid-template-columns: 1fr; gap: 6px; }
+  .controle .liste-simple { padding-left: 0; }
+}

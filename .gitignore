@@ -2,3 +2,6 @@ node_modules/
 
 # Données locales du serveur Hooked Academy (node server/index.mjs)
 /data/
+
+# Caches Python des outils
+__pycache__/

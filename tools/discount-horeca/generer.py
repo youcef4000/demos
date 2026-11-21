@@ -258,8 +258,14 @@ for fslug, fnom, fcourt, ficone, fdesc, subs in FAMILLES:
             produits.append((fslug, sslug, c))
         print(fslug, sslug, 'candidats', len(cand), 'pris', len(pris), flush=True)
 
+# Produits rangés dans une mauvaise catégorie sur discounthoreca.be (catégorie par défaut erronée) :
+# on les remet dans la bonne catégorie, sans changer leur ordre (noms_traduits.py suit cet ordre).
+RECLASSER = {1668: ('friterie-snack', 'rotissoires'), 1693: ('cafe-dessert', 'frigos-de-bar'), 39: ('froid', 'vitrines-boissons'),
+             2365: ('froid', 'vitrines-refrigerees'), 1357: ('cuisson', 'maintien-au-chaud')}
+
 sortie = []
 for fslug, sslug, fi in produits:
+    fslug, sslug = RECLASSER.get(int(fi['pid']), (fslug, sslug))
     d = fi['data']
     nom = nom_propre(d['name'])
     pid = fi['pid']

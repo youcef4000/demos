@@ -38,6 +38,10 @@ promotions et économie, bonnes affaires et modèles d’exposition, packs d’o
 remise, livraison en Belgique gratuite dès 1 200 € HTVA, retrait au showroom, installation sur devis, paiement
 Bancontact / Payconiq / carte / virement / acompte de 30 % (simulés), devis PDF, suivi de commande, bouton WhatsApp.
 Espace admin (`/discount-horeca/admin/`) : produits, promotions, catégories, commandes, clients, devis, réglages.
+**Version Premium** : boutique en français, néerlandais et anglais (`#/nl/…`, `#/en/…`, hreflang), facture Peppol
+(fichier UBL 2.1 / Peppol BIS Billing 3.0, envoi simulé), fournisseurs (règles et synchronisation simulée des prix et
+stocks, journal), « SEO et langues » (contrôles calculés sur le catalogue, mots-clés cibles, plan de trois mois) et
+traductions relues fiche par fiche dans l’éditeur de produit.
 Analyse du site actuel : `/discount-horeca/analyse-seo.html`. Lien privé : https://demos.bornzstudio.com/discount-horeca/
 
 - **Réel** (relevé public du 21/11/2026, 1 355 produits, 214 catégories) : 325 produits de la démo avec noms (casse et
@@ -48,6 +52,10 @@ Analyse du site actuel : `/discount-horeca/analyse-seo.html`. Lien privé : http
 - Textes éditoriaux et SEO : `sites/discount-horeca/js/univers.js`. Logo redessiné (texte vectorisé) : `img/logo.svg`.
 - Rafraîchir le catalogue : `python3 tools/discount-horeca/scrape.py /tmp/dh` puis
   `python3 tools/discount-horeca/generer.py /tmp/dh sites/discount-horeca`.
+- Langues : textes d’interface dans `tools/discount-horeca/textes_ui.py` (clés : `cles_ui.json`), gammes, catégories et
+  FAQ dans `textes_contenu.py`, puis `python3 tools/discount-horeca/i18n_ui.py` écrit `js/i18n-nl.js` et `js/i18n-en.js`.
+  Fiches produits : `traduire.py` (traduction automatique locale, noms traduits à la main dans `noms_traduits.py`)
+  écrit `js/catalogue-nl.js` et `js/catalogue-en.js` ; la boutique signale ces fiches tant qu’elles ne sont pas relues.
 
 ## Stockinox — plateforme de vente en gros (`sites/grossiste-chr/`)
 

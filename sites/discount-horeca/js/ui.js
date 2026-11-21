@@ -1,12 +1,16 @@
 // Petits outils d'affichage partagés par la boutique et l'admin.
 import * as S from './store.js';
+import { t } from './i18n.js';
 
-const fmt = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' });
+let LOC = 'fr-BE';
+let fmt = new Intl.NumberFormat(LOC, { style: 'currency', currency: 'EUR' });
+/* Formats des prix et des dates selon la langue (fr-BE, nl-BE, en-IE). */
+export function definirLocale(l) { LOC = l; fmt = new Intl.NumberFormat(LOC, { style: 'currency', currency: 'EUR' }); }
 export const eur = (n) => fmt.format(Number(n) || 0);
-export const nombre = (n) => new Intl.NumberFormat('fr-FR').format(n);
-export const dateCourte = (d) => new Date(d).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
-export const dateLongue = (d) => new Date(d).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
-export const heure = (d) => new Date(d).toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+export const nombre = (n) => new Intl.NumberFormat(LOC).format(n);
+export const dateCourte = (d) => new Date(d).toLocaleDateString(LOC, { day: '2-digit', month: '2-digit', year: 'numeric' });
+export const dateLongue = (d) => new Date(d).toLocaleDateString(LOC, { day: 'numeric', month: 'long', year: 'numeric' });
+export const heure = (d) => new Date(d).toLocaleString(LOC, { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
 
 export function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -128,42 +132,42 @@ export function modale({ titre, corps, actions = [{ id: 'ok', libelle: 'OK', cla
 /* Document imprimable : devis, facture, bon de préparation. */
 export function documentCommercial(type, o) {
   const r = S.reglages();
-  const titres = { devis: 'Devis', facture: 'Facture', bon: 'Bon de préparation' };
+  const titres = { devis: t('Devis'), facture: t('Facture'), bon: t('Bon de préparation') };
   const retrait = o.livraison?.mode === 'showroom';
   const lignes = o.lignes.map((l) => `<tr>
       <td>${esc(l.ref)}</td><td>${esc(l.nom)}</td><td class="num">${l.qte}</td>
-      ${type === 'bon' ? '<td class="num">☐</td>' : `<td class="num">${eur(l.unit)}${l.barre || l.unit < l.base ? `<br><small>au lieu de ${eur(l.unit < l.base ? l.base : l.barre)}</small>` : ''}</td><td class="num">${eur(l.total)}</td>`}
+      ${type === 'bon' ? '<td class="num">☐</td>' : `<td class="num">${eur(l.unit)}${l.barre || l.unit < l.base ? `<br><small>${t('au lieu de {prix}', { prix: eur(l.unit < l.base ? l.base : l.barre) })}</small>` : ''}</td><td class="num">${eur(l.total)}</td>`}
     </tr>`).join('');
   return `<article class="doc">
     <header class="doc-tete">
       <div class="doc-emetteur">
         <img src="${src('img/logo.svg')}" alt="Discount Horeca" width="160" height="43">
-        <p>${esc(r.societe)} — Discount Horeca<br>${esc(r.adresse)}<br>${[r.telephone, r.email].filter(Boolean).map(esc).join(' · ')}<br>TVA ${esc(r.numeroTva)}</p>
+        <p>${esc(r.societe)} — Discount Horeca<br>${esc(r.adresse)}<br>${[r.telephone, r.email].filter(Boolean).map(esc).join(' · ')}<br>${t('TVA')} ${esc(r.numeroTva)}</p>
       </div>
       <div class="doc-titre">
         <h1>${titres[type]}</h1>
-        <p><strong>N° ${esc(o.num)}</strong><br>du ${dateLongue(o.date)}${type === 'devis' ? `<br>valable jusqu'au ${dateLongue(o.validite)}` : ''}${o.refClient ? `<br>Votre référence : ${esc(o.refClient)}` : ''}</p>
+        <p><strong>${t('N°')} ${esc(o.num)}</strong><br>${t('du {date}', { date: dateLongue(o.date) })}${type === 'devis' ? `<br>${t('valable jusqu’au {date}', { date: dateLongue(o.validite) })}` : ''}${o.refClient ? `<br>${t('Votre référence')} : ${esc(o.refClient)}` : ''}${o.peppol ? `<br>Peppol : ${esc(o.peppol.id)}` : ''}</p>
       </div>
     </header>
     <section class="doc-parties">
-      <div><h2>Client</h2><p><strong>${esc(o.client.societe)}</strong><br>${esc(o.client.contact || '')}<br>${esc(o.client.email || '')} · ${esc(o.client.tel || '')}${o.client.bce ? `<br>N° d’entreprise ${esc(o.client.bce)}<br>TVA ${esc(o.client.tva || '—')}` : ''}</p></div>
-      ${o.livraison ? `<div><h2>${retrait ? 'Retrait' : 'Livraison'}</h2><p>${retrait ? 'Showroom Discount Horeca, ' + esc(r.adresse) : `${o.livraison.destinataire ? esc(o.livraison.destinataire) + '<br>' : ''}${esc(o.livraison.adresse)}<br>${esc(o.livraison.cp)} ${esc(o.livraison.ville)}<br>${esc(o.livraison.pays || 'Belgique')}`}<br><em>${esc(S.LIVRAISONS[o.livraison.mode] || '')}</em></p></div>` : ''}
-      ${o.paiement ? `<div><h2>Paiement</h2><p>${esc(S.PAIEMENTS[o.paiement] || '')}</p></div>` : ''}
+      <div><h2>${t('Client')}</h2><p><strong>${esc(o.client.societe)}</strong><br>${esc(o.client.contact || '')}<br>${esc(o.client.email || '')} · ${esc(o.client.tel || '')}${o.client.bce ? `<br>${t('N° d’entreprise')} ${esc(o.client.bce)}<br>${t('TVA')} ${esc(o.client.tva || '—')}` : ''}</p></div>
+      ${o.livraison ? `<div><h2>${retrait ? t('Retrait') : t('Livraison')}</h2><p>${retrait ? t('Showroom Discount Horeca') + ', ' + esc(r.adresse) : `${o.livraison.destinataire ? esc(o.livraison.destinataire) + '<br>' : ''}${esc(o.livraison.adresse)}<br>${esc(o.livraison.cp)} ${esc(o.livraison.ville)}<br>${esc(t(o.livraison.pays || 'Belgique'))}`}<br><em>${esc(t(S.LIVRAISONS[o.livraison.mode] || ''))}</em></p></div>` : ''}
+      ${o.paiement ? `<div><h2>${t('Paiement')}</h2><p>${esc(t(S.PAIEMENTS[o.paiement] || ''))}</p></div>` : ''}
     </section>
     <table class="doc-lignes">
-      <thead><tr><th>Réf.</th><th>Désignation</th><th class="num">Qté</th>${type === 'bon' ? '<th class="num">Prêt</th>' : '<th class="num">PU HTVA</th><th class="num">Total HTVA</th>'}</tr></thead>
+      <thead><tr><th>${t('Réf.')}</th><th>${t('Désignation')}</th><th class="num">${t('Qté')}</th>${type === 'bon' ? `<th class="num">${t('Prêt')}</th>` : `<th class="num">${t('PU HTVA')}</th><th class="num">${t('Total HTVA')}</th>`}</tr></thead>
       <tbody>${lignes}</tbody>
     </table>
     ${type === 'bon' ? '' : `<table class="doc-totaux">
-      <tr><td>Total HTVA</td><td class="num">${eur(o.totaux.ht)}</td></tr>
-      <tr><td>Livraison HTVA</td><td class="num">${o.totaux.port ? eur(o.totaux.port) : retrait ? 'Retrait' : 'Gratuite'}</td></tr>
-      <tr><td>TVA ${r.tva} %</td><td class="num">${eur(o.totaux.tva)}</td></tr>
-      <tr class="doc-total"><td>Total TVAC</td><td class="num">${eur(o.totaux.ttc)}</td></tr>${o.totaux.acompte ? `<tr><td>Acompte payé (${r.acompte} %)</td><td class="num">${eur(o.totaux.acompte)}</td></tr><tr><td>Solde à la livraison</td><td class="num">${eur(o.totaux.ttc - o.totaux.acompte)}</td></tr>` : ''}
+      <tr><td>${t('Total HTVA')}</td><td class="num">${eur(o.totaux.ht)}</td></tr>
+      <tr><td>${t('Livraison HTVA')}</td><td class="num">${o.totaux.port ? eur(o.totaux.port) : retrait ? t('Retrait') : t('Gratuite')}</td></tr>
+      <tr><td>${t('TVA {taux} %', { taux: r.tva })}</td><td class="num">${eur(o.totaux.tva)}</td></tr>
+      <tr class="doc-total"><td>${t('Total TVAC')}</td><td class="num">${eur(o.totaux.ttc)}</td></tr>${o.totaux.acompte ? `<tr><td>${t('Acompte payé ({taux} %)', { taux: r.acompte })}</td><td class="num">${eur(o.totaux.acompte)}</td></tr><tr><td>${t('Solde à la livraison')}</td><td class="num">${eur(o.totaux.ttc - o.totaux.acompte)}</td></tr>` : ''}
     </table>`}
-    ${o.message ? `<p class="doc-note"><strong>Message du client :</strong> ${esc(o.message)}</p>` : ''}
+    ${o.message ? `<p class="doc-note"><strong>${t('Message du client')} :</strong> ${esc(o.message)}</p>` : ''}
     <footer class="doc-pied">
-      ${type === 'devis' ? `Devis valable ${r.validiteDevis} jours, prix HTVA. Installation et raccordement facturés en régie sauf mention contraire. Acompte de ${r.acompte} % à la commande. Bon pour accord : date, cachet et signature.` : type === 'facture' ? 'Document de démonstration : la vraie facture est numérotée et émise par le logiciel de facturation (compatible Peppol pour la facturation électronique B2B).' : 'Contrôler chaque article et cocher avant expédition.'}
-      <br>Démo réalisée par Bornz Studio — document sans valeur commerciale.
+      ${type === 'devis' ? t('Devis valable {jours} jours, prix HTVA. Installation et raccordement facturés en régie sauf mention contraire. Acompte de {acompte} % à la commande. Bon pour accord : date, cachet et signature.', { jours: r.validiteDevis, acompte: r.acompte }) : type === 'facture' ? t('Document de démonstration : la vraie facture est numérotée et émise par le logiciel de facturation, et envoyée par Peppol aux entreprises belges.') : t('Contrôler chaque article et cocher avant expédition.')}
+      <br>${t('Démo réalisée par Bornz Studio — document sans valeur commerciale.')}
     </footer>
   </article>`;
 }

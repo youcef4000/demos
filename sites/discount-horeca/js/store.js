@@ -361,6 +361,19 @@ export function exportCatalogueCsv(cli = clientConnecte(), base = location.href.
   return '﻿' + lignes.map((l) => l.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(';')).join('\r\n');
 }
 
+/* ---------- Version Premium : données des modules admin (fournisseurs, journal, plan SEO) ---------- */
+export const lirePremium = (cle, defaut) => lire('premium.' + cle, defaut);
+export const ecrirePremium = (cle, valeur) => ecrire('premium.' + cle, valeur);
+/* Facture marquée comme envoyée par Peppol (dans la démo, l'envoi est simulé). */
+export function envoyerPeppol(num, id) {
+  const liste = commandes();
+  const c = liste.find((x) => x.num === num);
+  if (!c) return null;
+  c.peppol = { date: new Date().toISOString(), id };
+  enregistrerCommandes(liste);
+  return c;
+}
+
 /* ---------- Remise à zéro ---------- */
 export function reinitialiser() {
   Object.keys(localStorage).filter((k) => k.startsWith(K)).forEach((k) => localStorage.removeItem(k));

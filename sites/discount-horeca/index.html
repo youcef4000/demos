@@ -9,6 +9,9 @@
 <meta name="robots" content="noindex">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <link rel="canonical" href="https://demos.bornzstudio.com/discount-horeca/">
+<link rel="alternate" hreflang="fr-BE" href="https://demos.bornzstudio.com/discount-horeca/">
+<link rel="alternate" hreflang="nl-BE" href="https://demos.bornzstudio.com/discount-horeca/#/nl/">
+<link rel="alternate" hreflang="en-BE" href="https://demos.bornzstudio.com/discount-horeca/#/en/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_BE">
 <meta property="og:site_name" content="Discount Horeca">
@@ -34,47 +37,47 @@
 <script type="module" src="js/boutique.js"></script>
 </head>
 <body>
-<a class="sr" href="#vue">Aller au contenu</a>
+<a class="sr" href="#vue" data-t>Aller au contenu</a>
 
 <div class="ruban-demo" id="ruban-demo">
-  <p><strong>Démo</strong> : proposition de nouvelle boutique pour Discount Horeca par Bornz Studio<span class="ruban-long"> — produits, prix, photos et conditions relevés sur discounthoreca.be ; clients, commandes et modèles d’exposition sont des exemples ; aucun paiement, tout reste dans votre navigateur</span>.</p>
-  <a href="admin/" target="_blank" rel="noopener">Ouvrir l'espace admin</a>
-  <a href="analyse-seo.html">Analyse du site actuel</a>
-  <button class="btn-icone" type="button" data-fermer-ruban aria-label="Masquer ce bandeau"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <p data-t><strong>Démo</strong> : proposition de nouvelle boutique pour Discount Horeca par Bornz Studio<span class="ruban-long"> — version Premium : français, néerlandais et anglais, synchronisation fournisseurs, factures Peppol et suivi SEO dans l’admin ; produits, prix et photos relevés sur discounthoreca.be ; clients, commandes et modèles d’exposition sont des exemples ; aucun paiement réel</span>.</p>
+  <a href="admin/" target="_blank" rel="noopener" data-t>Ouvrir l’espace admin</a>
+  <a href="analyse-seo.html" data-t>Analyse du site actuel</a>
+  <button class="btn-icone" type="button" data-fermer-ruban aria-label="Masquer ce bandeau" data-ta="aria-label"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
 </div>
 
 <div class="bandeau-haut">
   <div class="conteneur bandeau-haut-l">
     <p class="bandeau-msg"><span class="drapeau" aria-hidden="true"><i></i><i></i><i></i></span><span id="bandeau-msg">Showroom à Sint-Pieters-Leeuw · Livraison dans toute la Belgique</span></p>
     <div class="bandeau-droite">
-      <span class="langues" role="group" aria-label="Langue"><a href="#/" aria-current="true" lang="fr">FR</a><a href="#/infos/langues" lang="nl" title="Nederlandse versie (voorzien in de echte site)">NL</a><a href="#/infos/langues" lang="en" title="English version (planned for the real site)">EN</a></span>
+      <span class="langues" role="group" aria-label="Langue" data-ta="aria-label"><a href="#/" data-langue="fr" aria-current="true" lang="fr-BE" title="Français">FR</a><a href="#/nl/" data-langue="nl" lang="nl-BE" title="Nederlands">NL</a><a href="#/en/" data-langue="en" lang="en" title="English">EN</a></span>
       <a class="bandeau-revendeur" id="lien-whatsapp" href="#/infos/contact" data-ic-avant="phone">WhatsApp</a>
-      <a href="#/infos/contact" data-ic-avant="pin">Showroom</a>
+      <a href="#/infos/contact" data-ic-avant="pin"><span data-t>Showroom</span></a>
     </div>
   </div>
 </div>
 
 <header class="entete" id="entete">
   <div class="conteneur entete-l">
-    <button class="btn-icone entete-burger" type="button" data-ouvrir-menu aria-label="Ouvrir le menu" data-ic="menu"></button>
-    <a class="logo" href="#/" aria-label="Discount Horeca, accueil">
+    <button class="btn-icone entete-burger" type="button" data-ouvrir-menu aria-label="Ouvrir le menu" data-ta="aria-label" data-ic="menu"></button>
+    <a class="logo" href="#/" aria-label="Discount Horeca, accueil" data-ta="aria-label">
       <img src="img/logo.svg" alt="Discount Horeca" width="133" height="36">
-      <span>Matériel horeca</span>
+      <span data-t>Matériel horeca</span>
     </a>
     <form class="recherche recherche-bureau" id="recherche" role="search" autocomplete="off">
-      <label class="sr" for="q">Rechercher un produit ou une référence</label>
-      <input id="q" name="q" type="search" placeholder="Rechercher : « friteuse », « table inox », « four à pizza »…" enterkeyhint="search">
-      <button type="submit" class="recherche-btn" aria-label="Rechercher" data-ic="search"></button>
+      <label class="sr" for="q" data-t>Rechercher un produit ou une référence</label>
+      <input id="q" name="q" type="search" placeholder="Rechercher : « friteuse », « table inox », « four à pizza »…" data-ta="placeholder" enterkeyhint="search">
+      <button type="submit" class="recherche-btn" aria-label="Rechercher" data-ta="aria-label" data-ic="search"></button>
       <div class="suggestions" id="suggestions" hidden></div>
     </form>
-    <nav class="entete-actions" aria-label="Mon espace">
-      <button class="btn-icone entete-loupe" type="button" data-ouvrir-recherche aria-label="Rechercher" data-ic="search"></button>
-      <a class="entete-action action-catalogue" href="#/catalogue" data-ic-avant="grid"><span>Catalogue<small>catégories</small></span></a>
+    <nav class="entete-actions" aria-label="Mon espace" data-ta="aria-label">
+      <button class="btn-icone entete-loupe" type="button" data-ouvrir-recherche aria-label="Rechercher" data-ta="aria-label" data-ic="search"></button>
+      <a class="entete-action action-catalogue" href="#/catalogue" data-ic-avant="grid"><span><span data-t>Catalogue</span><small>catégories</small></span></a>
       <a class="entete-action action-compte" href="#/compte" id="lien-compte" data-ic-avant="user"><span id="libelle-compte">Mon compte<small>Se connecter</small></span></a>
-      <a class="entete-action action-panier" href="#/panier" id="lien-panier" aria-label="Panier" data-ic-avant="cart"><span id="panier-total">Panier</span><span class="panier-nb" id="panier-nb" hidden>0</span></a>
+      <a class="entete-action action-panier" href="#/panier" id="lien-panier" aria-label="Panier" data-ta="aria-label" data-ic-avant="cart"><span id="panier-total">Panier</span><span class="panier-nb" id="panier-nb" hidden>0</span></a>
     </nav>
   </div>
-  <nav class="nav-familles" aria-label="Univers">
+  <nav class="nav-familles" aria-label="Univers" data-ta="aria-label">
     <div class="conteneur nav-familles-l" id="nav-familles"></div>
   </nav>
 </header>
@@ -87,61 +90,62 @@
     <div class="pied-grille">
       <div class="pied-marque">
         <img src="img/logo-blanc.svg" alt="Discount Horeca" width="160" height="43" loading="lazy">
-        <p>Magasin de matériel professionnel pour l’horeca : froid, cuisson, friterie, pizzeria, préparation, lavage, inox et hottes fabriqués en Belgique. Livraison à Bruxelles et dans toute la Belgique, d’Arlon à Ostende.</p>
+        <p data-t>Magasin de matériel professionnel pour l’horeca : froid, cuisson, friterie, pizzeria, préparation, lavage, inox et hottes fabriqués en Belgique. Livraison à Bruxelles et dans toute la Belgique, d’Arlon à Ostende.</p>
         <p class="pied-adresse" id="pied-adresse"></p>
         <p class="pied-tel" id="pied-tel"></p>
       </div>
       <div>
-        <h2>Catalogue</h2>
+        <h2 data-t>Catalogue</h2>
         <ul id="pied-familles"></ul>
       </div>
       <div>
-        <h2>Acheter</h2>
+        <h2 data-t>Acheter</h2>
         <ul>
-          <li><a href="#/promos">Promotions</a></li>
-          <li><a href="#/bonnes-affaires">Bonnes affaires et exposition</a></li>
-          <li><a href="#/packs">Packs prêts à ouvrir</a></li>
-          <li><a href="#/compte">Mon compte pro</a></li>
-          <li><a href="#/revendeurs">Revendeurs et installateurs</a></li>
-          <li><a href="#/suivi">Suivre une commande</a></li>
+          <li><a href="#/promos" data-t>Promotions</a></li>
+          <li><a href="#/bonnes-affaires" data-t>Bonnes affaires et exposition</a></li>
+          <li><a href="#/packs" data-t>Packs prêts à ouvrir</a></li>
+          <li><a href="#/compte" data-t>Mon compte pro</a></li>
+          <li><a href="#/revendeurs" data-t>Revendeurs et installateurs</a></li>
+          <li><a href="#/suivi" data-t>Suivre une commande</a></li>
         </ul>
       </div>
       <div>
-        <h2>Infos pratiques</h2>
+        <h2 data-t>Infos pratiques</h2>
         <ul>
-          <li><a href="#/infos/livraison">Livraison et retour</a></li>
-          <li><a href="#/infos/paiement">Moyens de paiement</a></li>
-          <li><a href="#/infos/conditions">Conditions de vente</a></li>
-          <li><a href="#/infos/garantie">Garantie et SAV</a></li>
-          <li><a href="#/infos/contact">Showroom et contact</a></li>
-          <li><a href="analyse-seo.html">Analyse du site actuel</a></li>
+          <li><a href="#/infos/livraison" data-t>Livraison et retour</a></li>
+          <li><a href="#/infos/paiement" data-t>Moyens de paiement</a></li>
+          <li><a href="#/infos/conditions" data-t>Conditions de vente</a></li>
+          <li><a href="#/infos/garantie" data-t>Garantie et SAV</a></li>
+          <li><a href="#/infos/contact" data-t>Showroom et contact</a></li>
+          <li><a href="#/infos/langues" data-t>Français, Nederlands, English</a></li>
+          <li><a href="analyse-seo.html" data-t>Analyse du site actuel</a></li>
         </ul>
       </div>
     </div>
     <div class="pied-bas">
       <p id="pied-societe">© 2026 Discount Horeca · Prix en euros HTVA, TVAC indiqué.</p>
-      <p>Démo de refonte réalisée par <a href="https://bornzstudio.com" target="_blank" rel="noopener">Bornz Studio</a> · <a href="admin/">Espace admin</a></p>
+      <p data-t>Démo de refonte réalisée par <a href="https://bornzstudio.com" target="_blank" rel="noopener">Bornz Studio</a> · <a href="admin/">Espace admin</a></p>
     </div>
   </div>
 </footer>
 
-<a class="bouton-whatsapp" id="bouton-whatsapp" href="#/infos/contact" target="_blank" rel="noopener" aria-label="Écrire sur WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3z"/></svg></a>
+<a class="bouton-whatsapp" id="bouton-whatsapp" href="#/infos/contact" target="_blank" rel="noopener" aria-label="Écrire sur WhatsApp" data-ta="aria-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3z"/></svg></a>
 
-<nav class="barre-onglets" id="barre-onglets" aria-label="Navigation rapide">
-  <a href="#/" data-onglet="" data-ic-avant="home"><span>Accueil</span></a>
-  <a href="#/catalogue" data-onglet="catalogue" data-ic-avant="grid"><span>Catalogue</span></a>
-  <button type="button" data-ouvrir-recherche data-ic-avant="search"><span>Recherche</span></button>
-  <a href="#/compte" data-onglet="compte" data-ic-avant="user"><span>Compte</span></a>
-  <a href="#/panier" data-onglet="panier" data-ic-avant="cart"><span>Panier</span><span class="panier-nb" id="panier-nb-mobile" hidden>0</span></a>
-  <a href="#/infos/contact" data-onglet="infos" data-ic-avant="pin"><span>Showroom</span></a>
+<nav class="barre-onglets" id="barre-onglets" aria-label="Navigation rapide" data-ta="aria-label">
+  <a href="#/" data-onglet="" data-ic-avant="home"><span data-t>Accueil</span></a>
+  <a href="#/catalogue" data-onglet="catalogue" data-ic-avant="grid"><span data-t>Catalogue</span></a>
+  <button type="button" data-ouvrir-recherche data-ic-avant="search"><span data-t>Recherche</span></button>
+  <a href="#/compte" data-onglet="compte" data-ic-avant="user"><span data-t>Compte</span></a>
+  <a href="#/panier" data-onglet="panier" data-ic-avant="cart"><span data-t="Panier (onglet mobile)">Panier</span><span class="panier-nb" id="panier-nb-mobile" hidden>0</span></a>
+  <a href="#/infos/contact" data-onglet="infos" data-ic-avant="pin"><span data-t>Showroom</span></a>
 </nav>
 
 <div class="tiroir" id="tiroir-menu" hidden>
   <div class="tiroir-voile" data-fermer-tiroir></div>
-  <nav class="tiroir-boite" aria-label="Menu">
+  <nav class="tiroir-boite" aria-label="Menu" data-ta="aria-label">
     <header class="tiroir-tete">
       <img src="img/logo.svg" alt="Discount Horeca" width="118" height="32">
-      <button class="btn-icone" type="button" data-fermer-tiroir aria-label="Fermer le menu" data-ic="x"></button>
+      <button class="btn-icone" type="button" data-fermer-tiroir aria-label="Fermer le menu" data-ta="aria-label" data-ic="x"></button>
     </header>
     <div class="tiroir-corps" id="tiroir-corps"></div>
   </nav>
@@ -150,16 +154,16 @@
 <div class="recherche-mobile" id="recherche-mobile" hidden>
   <div class="recherche-mobile-tete">
     <form class="recherche" id="recherche-m" role="search" autocomplete="off">
-      <label class="sr" for="qm">Rechercher un produit ou une référence</label>
-      <input id="qm" type="search" placeholder="Produit, catégorie, référence…" enterkeyhint="search">
-      <button type="submit" class="recherche-btn" aria-label="Rechercher" data-ic="search"></button>
+      <label class="sr" for="qm" data-t>Rechercher un produit ou une référence</label>
+      <input id="qm" type="search" placeholder="Produit, catégorie, référence…" data-ta="placeholder" enterkeyhint="search">
+      <button type="submit" class="recherche-btn" aria-label="Rechercher" data-ta="aria-label" data-ic="search"></button>
     </form>
-    <button class="btn-icone" type="button" data-fermer-recherche aria-label="Fermer" data-ic="x"></button>
+    <button class="btn-icone" type="button" data-fermer-recherche aria-label="Fermer" data-ta="aria-label" data-ic="x"></button>
   </div>
   <div class="recherche-mobile-corps"><div class="suggestions" id="suggestions-m"></div></div>
 </div>
 
-<aside class="volant" id="volant" hidden aria-label="Article ajouté au panier">
+<aside class="volant" id="volant" hidden aria-label="Article ajouté au panier" data-ta="aria-label">
   <div class="volant-voile" data-fermer-volant></div>
   <div class="volant-boite" id="volant-boite" role="dialog" aria-modal="true" aria-labelledby="volant-titre"></div>
 </aside>
