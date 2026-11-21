@@ -1030,7 +1030,7 @@ import { initPWA } from '../assets/js/pwa.js';
       onEnter: () =>
         $$('[data-price]').forEach((el) => {
           const o = { v: 0 };
-          gsap.to(o, { v: Number(el.dataset.price), duration: 1.6, ease: 'power3.out', onUpdate: () => (el.textContent = fmt(Math.round(o.v / 100) * 100)) });
+          gsap.to(o, { v: P[el.dataset.price], duration: 1.6, ease: 'power3.out', onUpdate: () => (el.textContent = fmt(Math.round(o.v / 100) * 100)) });
         }),
     });
     gsap.from('.card-badge', { scale: 0, rotation: -12, duration: 0.8, ease: 'back.out(3)', delay: 0.5, scrollTrigger: { trigger: '.cards', start: 'top 78%' } });
