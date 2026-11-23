@@ -1,0 +1,3 @@
+# Outils cités dans la leçon dv4-l1 (généré par tools/hooked-academy/fiches-lecons.mjs)
+PageSpeed Insights | https://pagespeed.web.dev
+MDN Web Docs | https://developer.mozilla.org/fr/

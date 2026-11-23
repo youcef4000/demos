@@ -1,6 +1,7 @@
 # Ressources — les sites que tout créateur de sites et d'apps doit connaître
 
 > Classés par besoin. 🆓 gratuit · 💳 gratuit limité / payant. Vérifié en novembre 2026.
+> **Les meilleurs dépôts GitHub par domaine (avec leurs étoiles)** : voir `recherches.md`, section 7.
 
 ## Apprendre
 
@@ -37,7 +38,10 @@
 | Site | Pour | |
 |---|---|---|
 | **Awwwards** | Les meilleurs sites du monde, primés | 🆓 |
-| **Godly** | Galerie de sites très créatifs | 🆓 |
+| **Recent** (recent.design, ex-Godly) | Galerie de sites très créatifs, aperçus animés | 🆓 |
+| **Motionsites** (motionsites.ai) | Prompts, fonds animés et modèles prêts pour Lovable, Cursor, Claude | 💳 |
+| **Refero** | Écrans d'applications et de SaaS (UX) | 💳 |
+| **CSS Design Awards** | Concours de sites, alternative à Awwwards | 🆓 |
 | **Land-book**, **Lapa Ninja**, **One Page Love** | Landing pages par secteur | 🆓 |
 | **Mobbin** | Écrans d'applications mobiles et web réelles | 💳 |
 | **Dribbble**, **Behance** | Maquettes et identités de designers | 🆓 |
@@ -146,3 +150,17 @@
 | **opengraph.xyz**, **LinkedIn Post Inspector** | Aperçu du lien partagé | 🆓 |
 | **Loom**, **Cap** (open source), **Screen Studio** (Mac) | Vidéo de démo à l'écran | 💳 / 🆓 |
 | **ray.so** | Belles captures de code pour les réseaux | 🆓 |
+
+## Sécurité (outils à connaître)
+
+| Outil | Pour | |
+|---|---|---|
+| **OWASP Top 10 2025** (owasp.org/Top10) | Les 10 risques majeurs du web | 🆓 |
+| **OWASP Cheat Sheets** (cheatsheetseries.owasp.org) | Comment se protéger, sujet par sujet | 🆓 |
+| **gitleaks**, **TruffleHog** | Détecter les secrets dans un dépôt Git | 🆓 |
+| **npm audit**, **OSV-Scanner**, **Dependabot** | Failles connues des dépendances | 🆓 |
+| **Semgrep**, **CodeQL** | Analyse de code automatique | 🆓 |
+| **Trivy** | Scanner d'images Docker et de dépendances | 🆓 |
+| **OWASP Juice Shop** | Application volontairement vulnérable pour s'entraîner | 🆓 |
+| **securityheaders.com** | Vérifier les en-têtes de sécurité d'un site | 🆓 |
+| **Supabase Advisors** | Tables sans RLS, réglages risqués | 🆓 |

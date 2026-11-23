@@ -1,0 +1,4 @@
+# Outils cités dans la leçon dv5-l6 (généré par tools/hooked-academy/fiches-lecons.mjs)
+GitHub | https://github.com
+Git | https://git-scm.com
+Bolt | https://bolt.new

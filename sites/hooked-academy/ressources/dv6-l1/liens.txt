@@ -1,0 +1,9 @@
+# Outils cités dans la leçon dv6-l1 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Hostinger | https://www.hostinger.com/fr?REFERRALCODE=EORYOUCEFD4E
+GitHub | https://github.com
+Supabase (documentation) | https://supabase.com/docs
+Vercel | https://vercel.com
+Netlify | https://www.netlify.com
+Cloudflare Pages | https://pages.cloudflare.com
+Railway | https://railway.com
+Render | https://render.com

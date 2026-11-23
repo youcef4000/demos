@@ -96,6 +96,7 @@ $('#coach-lessons').textContent = String(LESSONS.length);
 }
 for (const tr of TRACKS) {
   const { mods, lessons } = byTrack[tr.id];
+  if (!$(`#duo-range-${tr.id}`)) continue; // formation sans panneau sur cette page
   $(`#duo-range-${tr.id}`).textContent = `${modCode(mods[0])}–${modCode(mods[mods.length - 1])}`;
   $(`#duo-pitch-${tr.id}`).textContent = tr.pitch;
   // Programme détaillé : chaque module se déplie sur la liste de ses leçons
@@ -112,14 +113,21 @@ $('#count-t').textContent = `${nL(LESSONS.length)}, ${nM(MODULES.length)}, ${t('
 // Tarifs (data/offres.js) : billets et choix de formation du formulaire
 const money = (n) => `${new Intl.NumberFormat(lang === 'en' ? 'en-GB' : 'fr-FR').format(n)} ${t('tix.cur')}`;
 const sep = OFFRES.creative + OFFRES.ia;
+const sep3 = sep + OFFRES.dev;
 $$('.js-amt').forEach((el) => (el.textContent = money(OFFRES[el.dataset.offre])));
-$$('.js-was, .js-save').forEach((el) => {
-  el.hidden = sep <= OFFRES.both;
-  el.textContent = el.matches('.js-was') ? t('tix.was', { p: money(sep) }) : t('tix.save', { p: money(sep - OFFRES.both) });
-});
+// Économie de chaque pack : « both » (Créative + IA) et « all » (les trois formations)
+const saving = (was, save, sum, pack) => {
+  $$(`${was}, ${save}`).forEach((el) => {
+    el.hidden = sum <= pack;
+    el.textContent = el.matches(was) ? t('tix.was', { p: money(sum) }) : t('tix.save', { p: money(sum - pack) });
+  });
+};
+saving('.js-was', '.js-save', sep, OFFRES.both);
+saving('.js-was-all', '.js-save-all', sep3, OFFRES.all);
+const BOTH = byTrack.creative.lessons.length + byTrack.ia.lessons.length;
 $$('.js-inc').forEach((el) => {
   const { track, mods } = el.dataset;
-  const n = track === 'all' ? LESSONS.length : track ? byTrack[track].lessons.length : byTrack[mods].mods.length;
+  const n = track === 'all' ? LESSONS.length : track === 'both' ? BOTH : track ? byTrack[track].lessons.length : byTrack[mods].mods.length;
   el.textContent = t(el.dataset.k, { n });
 });
 $$('[data-pick]').forEach((a) =>

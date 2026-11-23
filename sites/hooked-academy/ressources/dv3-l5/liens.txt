@@ -1,0 +1,6 @@
+# Outils cités dans la leçon dv3-l5 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Supabase (documentation) | https://supabase.com/docs
+Vercel | https://vercel.com
+Netlify | https://www.netlify.com
+Railway | https://railway.com
+Bolt | https://bolt.new

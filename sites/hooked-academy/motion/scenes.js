@@ -1196,7 +1196,7 @@ export function anatomy(root, sc, d) {
 export function outro(root, sc, d, ctx) {
   // Dernière leçon d'une formation : « Fin de la formation » au lieu d'une leçon suivante
   const end = !sc.next && !ctx.next;
-  const track = ctx.module?.track === 'ia' ? 'ia' : 'creative';
+  const track = ['ia', 'dev'].includes(ctx.module?.track) ? ctx.module.track : 'creative';
   const next = sc.next ?? ctx.next?.title ?? tr(`mo.ou.end.${track}`);
   root.innerHTML = `<div class="ou">
       <div class="ou-mark">${markSVG({ lab: true })}</div>

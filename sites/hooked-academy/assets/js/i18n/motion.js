@@ -104,6 +104,7 @@ add({
     'mo.ou.end': 'Bravo, tu as terminé',
     'mo.ou.end.creative': 'La Formation Créative',
     'mo.ou.end.ia': 'La Formation IA',
+    'mo.ou.end.dev': 'La Formation Sites & Apps',
 
     'mo.pl.play': 'Lire la vidéo',
     'mo.pl.say': 'À dire',
@@ -214,6 +215,7 @@ add({
     'mo.ou.end': 'Well done, you’ve finished',
     'mo.ou.end.creative': 'The Creative Course',
     'mo.ou.end.ia': 'The AI Course',
+    'mo.ou.end.dev': 'The Sites & Apps Course',
 
     'mo.pl.play': 'Play the video',
     'mo.pl.say': 'To say',
@@ -324,6 +326,7 @@ add({
     'mo.ou.end': 'أحسنت، لقد أنهيت',
     'mo.ou.end.creative': 'التكوين الإبداعي',
     'mo.ou.end.ia': 'تكوين الذكاء الاصطناعي',
+    'mo.ou.end.dev': 'تكوين المواقع والتطبيقات',
 
     'mo.pl.play': 'شغّل الفيديو',
     'mo.pl.say': 'النص المنطوق',

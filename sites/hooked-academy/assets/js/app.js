@@ -115,9 +115,10 @@ export function copy(text) {
 const RING_DEF = `<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
 <linearGradient id="ring-or" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f2dfa0"/><stop offset="1" stop-color="#c9a227"/></linearGradient>
 <linearGradient id="ring-ia" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#efeaff"/><stop offset="1" stop-color="#9c84f0"/></linearGradient>
+<linearGradient id="ring-dev" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d6fbef"/><stop offset="1" stop-color="#2fae8c"/></linearGradient>
 </defs></svg>`;
 
-/** Anneau de progression. `track` : 'creative' (or) ou 'ia' (lavande). */
+/** Anneau de progression. `track` : 'creative' (or), 'ia' (lavande) ou 'dev' (menthe). */
 function ring(p, { size = 100, sw = 9, label = '', color = '', track = '', title = '' } = {}) {
   const r = 50 - sw / 2 - 1;
   const c = 2 * Math.PI * r;
@@ -726,13 +727,14 @@ function trackSwitch(active, PP, demo) {
 
 function endCard(trackId) {
   const other = TRACKS.find((x) => x.id !== trackId);
-  const cta = trackId === 'creative' ? `<a class="b b--acc-o" href="#/parcours/${other.id}" data-track="${other.id}">${icon(other.icon, { size: 16 })} ${t('app.end.creative.cta')}</a>` : `<a class="b b--acc" href="#/profil">${icon('trophy', { size: 16 })} ${t('app.end.ia.cta')}</a>`;
+  const cta = trackId === 'creative' ? `<a class="b b--acc-o" href="#/parcours/${other.id}" data-track="${other.id}">${icon(other.icon, { size: 16 })} ${t('app.end.creative.cta')}</a>` : `<a class="b b--acc" href="#/profil">${icon('trophy', { size: 16 })} ${t(`app.end.${trackId}.cta`)}</a>`;
   return `<section class="card trk-end"><span class="trk-end-ic">${icon('trophy', { size: 28 })}</span><div><h2>${t(`app.end.${trackId}.title`)}</h2><p>${t(`app.end.${trackId}.text`)}</p></div>${cta}</section>`;
 }
 
 /* Cartes de leçon façon « classroom » : miniature, petite intro, progression */
 // Image de la leçon (sans texte, donc la même en FR, EN et AR) ; couverture propre à chaque formation
-const thumb = (l) => `../assets/img/lecons/${l.id}.webp`;
+// Formation Sites & Apps : la miniature est une image de la leçon animée (tools/hooked-academy/vignettes.mjs)
+const thumb = (l) => (String(l.id).startsWith('dv') ? `../video/vignettes/${l.id}.jpg` : `../assets/img/lecons/${l.id}.webp`);
 const coverOf = (track) => `../assets/img/couv-${track}.webp`;
 // Si l'image manque, on retombe sur la capture de la vidéo animée, puis sur l'icône du module
 const THUMB_ERR = `onerror="this.src.includes('/lecons/')?(this.src=this.src.replace(/assets\\/img\\/lecons\\/(.+)\\.webp$/,'video/vignettes/$1.jpg')):this.remove()"`;
@@ -773,7 +775,7 @@ function lessonCard(l, m, P) {
       ${cur ? `<span class="lc-here">${t('app.map.here')}</span>` : ''}
     </span>
     <span class="lc-b">
-      <small class="lc-k">${bdi(lessonTag(l, m))}${(lang === 'fr' && l.voice) || l.audio || l.screen ? ` · ${t('app.map.voice')}` : ''}</small>
+      <small class="lc-k">${bdi(lessonTag(l, m))}${l.prat ? ` · <span class="lc-prat">${t('app.map.prat')}</span>` : ''}${(lang === 'fr' && l.voice) || l.audio || l.screen ? ` · ${t('app.map.voice')}` : ''}</small>
       <b class="lc-t">${esc(l.title)}</b>
       <span class="lc-x">${esc(introOf(l))}</span>
       <span class="lc-bar" aria-hidden="true"><i style="width:${(seen * 100).toFixed(0)}%"></i></span>

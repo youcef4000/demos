@@ -1,0 +1,4 @@
+# Outils cités dans la leçon dv4-l4 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Canva | https://www.canva.com
+PageSpeed Insights | https://pagespeed.web.dev
+OpenGraph.xyz | https://www.opengraph.xyz

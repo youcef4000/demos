@@ -1,0 +1,7 @@
+# Outils cités dans la leçon dv6-l5 (généré par tools/hooked-academy/fiches-lecons.mjs)
+TikTok Creative Center | https://ads.tiktok.com/business/creativecenter/
+GitHub | https://github.com
+Vercel | https://vercel.com
+Netlify | https://www.netlify.com
+Cloudflare Pages | https://pages.cloudflare.com
+Railway | https://railway.com

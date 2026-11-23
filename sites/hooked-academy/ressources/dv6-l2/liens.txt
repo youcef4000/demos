@@ -1,0 +1,6 @@
+# Outils cités dans la leçon dv6-l2 (généré par tools/hooked-academy/fiches-lecons.mjs)
+GitHub | https://github.com
+Vercel | https://vercel.com
+Netlify | https://www.netlify.com
+Cloudflare Pages | https://pages.cloudflare.com
+OpenGraph.xyz | https://www.opengraph.xyz

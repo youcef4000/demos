@@ -7,6 +7,7 @@
 // Tout ce qui est modifié ici (textes des leçons, quiz, ateliers, voix off, ressources, FAQ, réglages) est
 // publié par le serveur : le site est à jour pour tout le monde, sans passer par GitHub.
 
+import { OFFRES } from '../../data/offres.js';
 import { LANGS, lang, isRTL, locale, t, tIn, has, fmtNum, fmtDate, switcher, bindSwitchers } from './i18n.js';
 import './i18n/common.js';
 import { plural, exText } from './i18n/admin.js';
@@ -100,9 +101,9 @@ const stuName = (s) => (S.isDemo(s) ? t('ad.st.demo') : exText(s.name));
 const lvName = (xp) => t(`level.${S.level(xp).i}`);
 const exTag = () => `<span class="ex-tag">${t('ad.ex.tag')}</span>`;
 // Formation et langue choisies sur la landing (absentes des fiches plus anciennes)
-const fmOf = (a) => (['creative', 'ia', 'both'].includes(a?.formation) ? a.formation : null);
+const fmOf = (a) => (['creative', 'ia', 'dev', 'both', 'all'].includes(a?.formation) ? a.formation : null);
 const lgOf = (a) => (LANGS.some((x) => x.code === a?.lang) ? a.lang : null);
-const fmLabel = (f, long = false) => (!f ? '' : f === 'both' ? t(long ? 'ad.fm.bothL' : 'ad.fm.both') : long ? t(`track.${f}`) : t(`ad.fm.${f}`));
+const fmLabel = (f, long = false) => (!f ? '' : f === 'both' || f === 'all' ? t(long ? `ad.fm.${f}L` : `ad.fm.${f}`) : long ? t(`track.${f}`) : t(`ad.fm.${f}`));
 const fmChip = (f, long = false) => (f ? `<span class="fm" data-fm="${f}">${esc(fmLabel(f, long))}</span>` : '');
 const lgName = (l) => LANGS.find((x) => x.code === l)?.label || '';
 
@@ -462,7 +463,7 @@ function viewOverview() {
   ])
     .sort((x, y) => new Date(y.at) - new Date(x.at))
     .slice(0, 8);
-  const tracks = ['creative', 'ia'].map((id) => {
+  const tracks = S.TRACK_IDS.map((id) => {
     const tr = trackOf(id);
     const mods = coreModulesOf(id);
     return `<a class="ov-tr" href="#/programme" style="--t:${tr.color}"><span class="ov-tr-i">${icon(tr.icon, { size: 20 })}</span><span class="ov-tr-t"><b>${t(`track.${id}`)}</b><small>${plural('module', mods.length)} · ${plural('lesson', lessonsOf(id).length)}</small></span><em dir="ltr">${modCode(mods[0])}–${modCode(mods[mods.length - 1])}</em></a>`;
@@ -748,7 +749,7 @@ function addStudentDrawer() {
       <label class="lbl">${t('ad.f.wa')}<input class="in" name="phone" inputmode="tel" dir="ltr" maxlength="30"></label>
       <label class="lbl">${t('ad.f.email')}<input class="in" name="email" type="email" dir="ltr" maxlength="120"></label>
       <fieldset class="ac-tracks"><legend>${t('ad.f.formation')}</legend>
-        ${['both', 'creative', 'ia'].map((f, i) => `<label class="ac-tr" data-fm="${f === 'both' ? 'creative' : f}"><input type="radio" name="formation" value="${f}"${i ? '' : ' checked'}><span><b>${esc(fmLabel(f, true))}</b></span></label>`).join('')}
+        ${['both', 'creative', 'ia', 'dev', 'all'].map((f, i) => `<label class="ac-tr" data-fm="${f === 'both' || f === 'all' ? 'creative' : f}"><input type="radio" name="formation" value="${f}"${i ? '' : ' checked'}><span><b>${esc(fmLabel(f, true))}</b></span></label>`).join('')}
       </fieldset>
       <p class="muted" style="font-size:13px">${t('ad.st2.addHint')}</p>
       <p class="login-err" id="nserr" role="alert"></p>
@@ -849,7 +850,7 @@ function editAccess(s) {
     <form id="acf" class="ac-form">
       ${app && fmOf(app) ? `<p class="muted">${t('ad.ac.pack', { p: esc(fmLabel(fmOf(app), true)) })}</p>` : ''}
       <fieldset class="ac-tracks"><legend>${t('ad.ac.tracks')}</legend>
-        ${S.TRACK_IDS.map((x) => `<label class="ac-tr" data-fm="${x}"><input type="checkbox" name="tr" value="${x}"${tr.includes(x) ? ' checked' : ''}><span>${icon(x === 'ia' ? 'sparkles' : 'film', { size: 18 })}<b>${esc(t(`track.${x}`))}</b></span></label>`).join('')}
+        ${S.TRACK_IDS.map((x) => `<label class="ac-tr" data-fm="${x}"><input type="checkbox" name="tr" value="${x}"${tr.includes(x) ? ' checked' : ''}><span>${icon(trackOf(x).icon, { size: 18 })}<b>${esc(t(`track.${x}`))}</b></span></label>`).join('')}
       </fieldset>
       <label class="lbl">${t('ad.ac.until')}<input class="in" type="date" name="until" value="${ymd(s.expiresAt)}" dir="ltr"></label>
       <p class="muted ac-state">${S.isExpired(s) ? `<span class="ac-exp">${t('ad.ac.expired', { d: esc(fmtDate(s.expiresAt, { dateStyle: 'long' })) })}</span>` : ''}</p>
@@ -1251,7 +1252,7 @@ function viewStudio(id) {
     '#/studio',
     `<div class="ph-h"><div><h1>${t('ad.nav.studio')}</h1><p>${t('ad.vx.lead')}</p></div><button class="b b--s" id="allscript" type="button">${icon('doc', { size: 16 })} ${t('ad.sd.all')}</button></div>
     <div class="studio">
-      <section class="card"><div class="st-list">${['creative', 'ia']
+      <section class="card"><div class="st-list">${S.TRACK_IDS
         .map(
           (tid) =>
             `<p class="st-tr" style="--t:${trackOf(tid).color}">${icon(trackOf(tid).icon, { size: 15 })}${t(`track.${tid}`)}</p>${modulesOf(tid)
@@ -1546,7 +1547,7 @@ function viewProgramme() {
   shell(
     '#/programme',
     `<div class="ph-h"><div><h1>${t('ad.nav.prog')}</h1><p>${t('ad.pg.lead')}</p></div></div>
-    <div class="pg">${['creative', 'ia']
+    <div class="pg">${S.TRACK_IDS
       .map((id) => {
         const mods = modulesOf(id);
         const ls_ = lessonsOf(id);
@@ -1771,7 +1772,7 @@ function moduleDrawer(m) {
 
 function viewSettings() {
   const st = D.settings;
-  const of = { creative: 14900, ia: 24900, both: 32900, ...(st.offres || {}) };
+  const of = { ...OFFRES, ...(st.offres || {}) };
   const code = (x) => `<code dir="ltr" style="color:var(--gold-300)">${esc(x)}</code>`;
   shell(
     '#/reglages',
@@ -1783,7 +1784,7 @@ function viewSettings() {
         <label class="lbl">${t('ad.set.cohort')}<input class="in" name="cohort" value="${esc(st.cohort)}" maxlength="80"></label>
         <label class="lbl">${t('ad.set.wa')}<input class="in" name="whatsapp" value="${esc(st.whatsapp)}" inputmode="tel" dir="ltr" maxlength="24"></label>
         <fieldset class="set-prices"><legend>${t('ad.set2.prices')}</legend>
-          ${['creative', 'ia', 'both'].map((k) => `<label class="lbl">${esc(fmLabel(k, true))}<span class="set-da"><input class="in" name="of-${k}" type="number" min="1" max="10000000" step="100" value="${of[k]}" dir="ltr"><b>DA</b></span></label>`).join('')}
+          ${['creative', 'ia', 'dev', 'both', 'all'].map((k) => `<label class="lbl">${esc(fmLabel(k, true))}<span class="set-da"><input class="in" name="of-${k}" type="number" min="1" max="10000000" step="100" value="${of[k]}" dir="ltr"><b>DA</b></span></label>`).join('')}
         </fieldset>
         <p class="muted" style="margin:0;font-size:13px">${t('ad.set2.pricesP')}</p>
         <button class="b b--or" type="submit">${t('ad.set.save')}</button>
@@ -1815,7 +1816,7 @@ function viewSettings() {
   $('#sf').addEventListener('submit', async (e) => {
     e.preventDefault();
     const f = e.target.elements;
-    const body = { cohort: f.cohort.value.trim(), whatsapp: f.whatsapp.value.trim(), offres: Object.fromEntries(['creative', 'ia', 'both'].map((k) => [k, Number(f[`of-${k}`].value)])) };
+    const body = { cohort: f.cohort.value.trim(), whatsapp: f.whatsapp.value.trim(), offres: Object.fromEntries(['creative', 'ia', 'dev', 'both', 'all'].map((k) => [k, Number(f[`of-${k}`].value)])) };
     if (await act(() => api('PUT', 'admin/settings', body))) reloadPage(t('ad.set.saved'));
   });
   $('#pwf').addEventListener('submit', async (e) => {

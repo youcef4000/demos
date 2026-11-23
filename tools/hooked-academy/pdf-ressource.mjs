@@ -1,6 +1,6 @@
 // PDF des ressources Hooked Academy (guides, check-lists, packs de prompts) : Markdown → PDF A4 à la marque.
 //
-//   node tools/hooked-academy/pdf-ressource.mjs <source.md> <sortie.pdf> [--formation creative|ia]
+//   node tools/hooked-academy/pdf-ressource.mjs <source.md> <sortie.pdf> [--formation creative|ia|dev]
 //
 // Langue : prise du nom de la source (« guide.ar.md » → arabe, de droite à gauche), français par défaut.
 // Markdown accepté (volontairement réduit) : « # Titre », « _Sous-titre_ » en 2ᵉ ligne, « ## » et « ### »,
@@ -14,11 +14,11 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 
 const SITE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../sites/hooked-academy');
 const T = {
-  fr: { creative: 'Formation Créative', ia: 'Formation IA', res: 'Ressource étudiant', prompt: 'Prompt à copier', page: 'Page' },
-  en: { creative: 'Creative Course', ia: 'AI Course', res: 'Student resource', prompt: 'Prompt to copy', page: 'Page' },
-  ar: { creative: 'التكوين الإبداعي', ia: 'تكوين الذكاء الاصطناعي', res: 'مورد للطلبة', prompt: 'برومبت للنسخ', page: 'صفحة' },
+  fr: { creative: 'Formation Créative', ia: 'Formation IA', dev: 'Formation Sites & Apps', res: 'Ressource étudiant', prompt: 'Prompt à copier', page: 'Page' },
+  en: { creative: 'Creative Course', ia: 'AI Course', dev: 'Sites & Apps Course', res: 'Student resource', prompt: 'Prompt to copy', page: 'Page' },
+  ar: { creative: 'التكوين الإبداعي', ia: 'تكوين الذكاء الاصطناعي', dev: 'تكوين المواقع والتطبيقات', res: 'مورد للطلبة', prompt: 'برومبت للنسخ', page: 'صفحة' },
 };
-const ACCENT = { creative: '#e0be55', ia: '#c8b6ff' };
+const ACCENT = { creative: '#e0be55', ia: '#c8b6ff', dev: '#5fd3b3' };
 
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const inline = (s) =>
@@ -216,7 +216,7 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   const fi = process.argv.indexOf('--formation');
   const formation = fi > 0 ? process.argv[fi + 1] : 'creative';
   if (!src || !out) {
-    console.error('Usage : node tools/hooked-academy/pdf-ressource.mjs <source.md> <sortie.pdf> [--formation creative|ia]');
+    console.error('Usage : node tools/hooked-academy/pdf-ressource.mjs <source.md> <sortie.pdf> [--formation creative|ia|dev]');
     process.exit(1);
   }
   const lang = (path.basename(src).match(/\.(fr|en|ar)\.md$/) || [, 'fr'])[1];

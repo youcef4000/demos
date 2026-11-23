@@ -1,0 +1,4 @@
+# Outils cités dans la leçon dv8-l2 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Claude | https://claude.ai/referral/OtTQNvbscA
+OWASP Top 10 | https://owasp.org/Top10/
+OWASP Cheat Sheets | https://cheatsheetseries.owasp.org

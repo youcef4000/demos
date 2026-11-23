@@ -1,0 +1,6 @@
+# Outils cités dans la leçon dv5-l3 (généré par tools/hooked-academy/fiches-lecons.mjs)
+GitHub | https://github.com
+Git | https://git-scm.com
+Vercel | https://vercel.com
+Netlify | https://www.netlify.com
+Cloudflare Pages | https://pages.cloudflare.com

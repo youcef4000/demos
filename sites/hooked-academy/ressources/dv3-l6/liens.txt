@@ -1,0 +1,9 @@
+# Outils cités dans la leçon dv3-l6 (généré par tools/hooked-academy/fiches-lecons.mjs)
+GitHub | https://github.com
+Vercel | https://vercel.com
+Netlify | https://www.netlify.com
+Cloudflare Pages | https://pages.cloudflare.com
+Railway | https://railway.com
+Render | https://render.com
+Lovable | https://lovable.dev
+Bolt | https://bolt.new

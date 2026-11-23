@@ -1,0 +1,4 @@
+# Outils cités dans la leçon dv8-l4 (généré par tools/hooked-academy/fiches-lecons.mjs)
+OWASP Top 10 | https://owasp.org/Top10/
+OWASP Cheat Sheets | https://cheatsheetseries.owasp.org
+Playwright | https://playwright.dev

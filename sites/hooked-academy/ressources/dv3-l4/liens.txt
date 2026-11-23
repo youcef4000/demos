@@ -1,0 +1,5 @@
+# Outils cités dans la leçon dv3-l4 (généré par tools/hooked-academy/fiches-lecons.mjs)
+GitHub | https://github.com
+Supabase (documentation) | https://supabase.com/docs
+Vercel | https://vercel.com
+Bolt | https://bolt.new

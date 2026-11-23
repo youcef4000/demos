@@ -1,0 +1,4 @@
+# Outils cités dans la leçon dv8-l6 (généré par tools/hooked-academy/fiches-lecons.mjs)
+GitHub | https://github.com
+Node.js | https://nodejs.org
+OWASP Cheat Sheets | https://cheatsheetseries.owasp.org

@@ -1,0 +1,3 @@
+# Outils cités dans la leçon dv5-l1 (généré par tools/hooked-academy/fiches-lecons.mjs)
+GitHub | https://github.com
+Git | https://git-scm.com

@@ -148,3 +148,10 @@ add({
     'faq.cat.business': 'البيع والعملاء',
   },
 });
+
+// Formation Sites & Apps (novembre 2026)
+add({
+  fr: { 'track.dev': 'Formation Sites & Apps' },
+  en: { 'track.dev': 'Sites & Apps Course' },
+  ar: { 'track.dev': 'تكوين المواقع والتطبيقات' },
+});

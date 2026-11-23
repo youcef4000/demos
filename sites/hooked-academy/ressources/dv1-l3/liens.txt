@@ -1,0 +1,9 @@
+# Outils cités dans la leçon dv1-l3 (généré par tools/hooked-academy/fiches-lecons.mjs)
+ChatGPT | https://chatgpt.com
+Claude | https://claude.ai/referral/OtTQNvbscA
+Claude Code (documentation) | https://code.claude.com/docs
+GitHub | https://github.com
+VS Code | https://code.visualstudio.com
+Lovable | https://lovable.dev
+Bolt | https://bolt.new
+Replit | https://replit.com

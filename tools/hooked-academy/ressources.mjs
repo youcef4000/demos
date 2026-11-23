@@ -64,9 +64,9 @@ async function lessonIds() {
     warn(`programme illisible (${e.message}) : identifiants lus directement dans data/`);
   }
   const ids = [];
-  for (const f of ['programme.js', 'programme-ia.js']) {
+  for (const f of ['programme.js', 'programme-ia.js', 'programme-dev-1.js', 'programme-dev-2.js', 'programme-dev-3.js']) {
     const src = await readFile(path.join(SITE, 'data', f), 'utf8').catch(() => '');
-    for (const m of src.matchAll(/\bid:\s*'((?:m|ia)\d+-l\d+)'/g)) if (!ids.includes(m[1])) ids.push(m[1]);
+    for (const m of src.matchAll(/\bid:\s*'((?:m|ia|dv)\d+-l\d+)'/g)) if (!ids.includes(m[1])) ids.push(m[1]);
   }
   if (!ids.length) throw new Error('aucune leçon trouvée dans data/programme.js');
   return ids;

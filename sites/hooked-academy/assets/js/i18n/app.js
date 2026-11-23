@@ -1081,3 +1081,28 @@ add({
     'app.cert.project': 'مشروع نهائي يراجعه الفريق',
   },
 });
+
+// Formation Sites & Apps (novembre 2026)
+add({
+  fr: {
+    'app.end.dev.title': 'Formation Sites & Apps terminée !',
+    'app.end.dev.short': 'Tu crées, sécurises, publies et vends des sites et des applications.',
+    'app.end.dev.text': 'Il te reste le projet final : trois projets en ligne, relus par l’équipe avant ton certificat.',
+    'app.end.dev.cta': 'Voir mon certificat',
+    'app.map.prat': 'Pratique',
+  },
+  en: {
+    'app.end.dev.title': 'Sites & Apps Course completed!',
+    'app.end.dev.short': 'You build, secure, publish and sell websites and apps.',
+    'app.end.dev.text': 'One step left: your final project, three live projects reviewed by the team before your certificate.',
+    'app.end.dev.cta': 'See my certificate',
+    'app.map.prat': 'Hands-on',
+  },
+  ar: {
+    'app.end.dev.title': 'أنهيت تكوين المواقع والتطبيقات!',
+    'app.end.dev.short': 'تصنع المواقع والتطبيقات وتحميها وتنشرها وتبيعها.',
+    'app.end.dev.text': 'بقي المشروع النهائي: ثلاثة مشاريع على الإنترنت يراجعها الفريق قبل منحك الشهادة.',
+    'app.end.dev.cta': 'عرض شهادتي',
+    'app.map.prat': 'تطبيق',
+  },
+});

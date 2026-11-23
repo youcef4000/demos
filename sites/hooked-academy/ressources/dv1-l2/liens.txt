@@ -1,0 +1,3 @@
+# Outils cités dans la leçon dv1-l2 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Vite | https://vite.dev
+Claude Code (documentation) | https://code.claude.com/docs

@@ -1080,3 +1080,10 @@ const EX = {
 
 /** Texte d'exemple traduit dans la langue de l'interface (sinon le texte tel quel). */
 export const exText = (s) => (lang !== 'fr' && s && EX[s]?.[lang]) || s;
+
+// Formation Sites & Apps (novembre 2026) : formation « dev » et pack des trois formations « all »
+add({
+  fr: { 'ad.fm.dev': 'Sites & Apps', 'ad.fm.all': 'Les trois', 'ad.fm.allL': 'Les trois formations' },
+  en: { 'ad.fm.dev': 'Sites & Apps', 'ad.fm.all': 'All three', 'ad.fm.allL': 'All three courses' },
+  ar: { 'ad.fm.dev': 'المواقع والتطبيقات', 'ad.fm.all': 'الثلاثة', 'ad.fm.allL': 'التكوينات الثلاثة' },
+});

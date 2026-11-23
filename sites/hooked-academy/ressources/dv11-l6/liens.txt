@@ -1,0 +1,4 @@
+# Outils cités dans la leçon dv11-l6 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Claude | https://claude.ai/referral/OtTQNvbscA
+Awwwards | https://www.awwwards.com
+Motionsites | https://motionsites.ai

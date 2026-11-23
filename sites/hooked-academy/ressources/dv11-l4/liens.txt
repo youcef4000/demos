@@ -1,0 +1,5 @@
+# Outils cités dans la leçon dv11-l4 (généré par tools/hooked-academy/fiches-lecons.mjs)
+PageSpeed Insights | https://pagespeed.web.dev
+GSAP | https://gsap.com
+LottieFiles | https://lottiefiles.com
+Spline | https://spline.design

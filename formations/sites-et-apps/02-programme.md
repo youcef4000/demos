@@ -1,5 +1,8 @@
 # Formation Sites & Apps — programme complet
 
+> **Brouillon initial (23/11/2026).** La formation réelle est maintenant dans la plateforme : `sites/hooked-academy/data/programme-dev-*.js`
+> (16 modules, 88 leçons). Vue d'ensemble à jour : `programme-plateforme.md`.
+
 > **Créer, publier et vendre des sites web et des applications avec l'IA.**
 > Pour les **débutants complets** (on part de zéro, sans jargon) et, dans chaque leçon, une partie
 > **🔥 Niveau avancé** pour ceux qui ont déjà des bases.

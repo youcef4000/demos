@@ -1,0 +1,8 @@
+# Outils cités dans la leçon dv12-l3 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Claude | https://claude.ai/referral/OtTQNvbscA
+Claude Code (documentation) | https://code.claude.com/docs
+Skills Claude (documentation) | https://code.claude.com/docs/en/skills
+Plugins Claude Code (documentation) | https://code.claude.com/docs/en/discover-plugins
+MCP dans Claude Code (documentation) | https://code.claude.com/docs/en/mcp
+GitHub | https://github.com
+Supabase (documentation) | https://supabase.com/docs

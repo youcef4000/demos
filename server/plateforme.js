@@ -27,13 +27,16 @@ const ADMIN_TTL = 12 * 3600e3;
 const STUDENT_TTL = 30 * 864e5;
 const YEAR = 365 * 864e5;
 const LANGS = ['fr', 'en', 'ar'];
-const TRACKS = ['creative', 'ia'];
-const FREE_OPEN = ['m0-l1', 'm0-l2', 'm0-l3', 'm0-l4', 'ia0-l1', 'ia0-l4', 'ia0-l5', 'ia0-l6'];
+// Formations : Créative (m…), IA (ia…), Sites & Apps (dv…)
+const TRACKS = ['creative', 'ia', 'dev'];
+const FREE_OPEN = ['m0-l1', 'm0-l2', 'm0-l3', 'm0-l4', 'ia0-l1', 'ia0-l4', 'ia0-l5', 'ia0-l6', 'dv0-l1', 'dv0-l2', 'dv0-l3', 'dv0-l4'];
 // Leçons ouvertes au compte démo (landing, « essayer la plateforme ») : leur voix off reste publique
-const DEMO_OPEN = ['m1-l1', 'ia1-l1'];
+const DEMO_OPEN = ['m1-l1', 'ia1-l1', 'dv1-l1'];
 const STATUS = ['nouvelle', 'contactee', 'paiement', 'validee', 'refusee'];
 const PROFILS = ['debutant', 'ecommercant', 'freelance', 'createur', 'agence'];
-const PACKS = ['creative', 'ia', 'both'];
+// Packs : une formation, « both » = Créative + IA (le pack historique), « all » = les trois formations
+const PACKS = ['creative', 'ia', 'dev', 'both', 'all'];
+const packTracks = (f) => (f === 'all' ? [...TRACKS] : ['creative', 'ia', 'dev'].includes(f) ? [f] : ['creative', 'ia']);
 // Pages du test A/B des landings (compteur de visites) : la landing (a) et la landing Formation IA (ia)
 const AB_PAGES = ['a', 'ia'];
 const CATS = ['inscription', 'formation', 'plateforme', 'ia', 'creation', 'business'];
@@ -135,10 +138,10 @@ function normCode(s) {
 }
 
 const S = (v, max = 200) => (typeof v === 'string' ? v.replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '').trim().slice(0, max) : '');
-const isLesson = (s) => typeof s === 'string' && /^(m|ia)\d{1,2}-l\d{1,2}$/.test(s);
-const isModule = (s) => typeof s === 'string' && /^(m|ia)\d{1,2}$/.test(s);
+const isLesson = (s) => typeof s === 'string' && /^(m|ia|dv)\d{1,2}-l\d{1,2}$/.test(s);
+const isModule = (s) => typeof s === 'string' && /^(m|ia|dv)\d{1,2}$/.test(s);
 const isFileId = (s) => typeof s === 'string' && /^f[a-z2-7]{20}$/.test(s);
-const trackOfLesson = (id) => (String(id).startsWith('ia') ? 'ia' : 'creative');
+const trackOfLesson = (id) => (String(id).startsWith('ia') ? 'ia' : String(id).startsWith('dv') ? 'dev' : 'creative');
 const normEmail = (s) => {
   const e = S(s, 120).toLowerCase();
   return /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/.test(e) ? e : '';
@@ -810,7 +813,7 @@ export class Plateforme {
     let row = this.sql.exec('SELECT id FROM students WHERE id = ?', a.studentId || '').toArray()[0];
     if (!row && email) row = this.sql.exec('SELECT id FROM students WHERE email = ?', email).toArray()[0];
     if (!row && phone) row = this.sql.exec('SELECT id FROM students WHERE phone = ?', phone).toArray()[0];
-    const tracks = a.formation === 'creative' ? ['creative'] : a.formation === 'ia' ? ['ia'] : TRACKS;
+    const tracks = packTracks(a.formation);
     const settings = this.kv('settings', {});
     const done = (st, code) => {
       if (a.status !== 'validee') a.history.push({ at: iso(), status: 'validee', by: 'Équipe' });
@@ -866,7 +869,7 @@ export class Plateforme {
     if (email && this.sql.exec('SELECT id FROM students WHERE email = ?', email).toArray().length) fail(409, 'exists');
     if (phone && this.sql.exec('SELECT id FROM students WHERE phone = ?', phone).toArray().length) fail(409, 'exists');
     const s = this.kv('settings', {});
-    const tracks = v.formation === 'creative' ? ['creative'] : v.formation === 'ia' ? ['ia'] : TRACKS;
+    const tracks = packTracks(v.formation);
     const st = {
       id: rid('st-', 12),
       appId: null,

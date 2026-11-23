@@ -4,6 +4,7 @@
 // que l'animation tourne, pour enregistrer la voix off en darija parfaitement synchronisée.
 
 import { MODULES_IA } from './programme-ia.js';
+import { MODULES_DEV } from './programme-dev.js';
 import { RES_CREATIVE } from './programme-creative-res.js';
 import { leconEcran } from './videos-ecran.js';
 import { OVERLAY } from './i18n/index.js';
@@ -21,12 +22,16 @@ import { lang } from '../assets/js/i18n.js';
 export const TRACKS = [
   { id: 'creative', code: 'M', title: 'Formation Créative', ar: 'التكوين الإبداعي', color: '#e0be55', icon: 'film', pitch: 'Comprendre ce qui fait vendre une publicité, et la produire avec ton téléphone, CapCut et Canva.' },
   { id: 'ia', code: 'IA', title: 'Formation IA', ar: 'تكوين الذكاء الاصطناعي', color: '#c8b6ff', icon: 'sparkles', pitch: 'Prompting, images et vidéos IA, voix, UGC, cinématique — puis analyser, vendre et signer tes clients.' },
+  { id: 'dev', code: 'D', title: 'Formation Sites & Apps', ar: 'تكوين المواقع والتطبيقات', color: '#5fd3b3', icon: 'layout', pitch: 'Créer, sécuriser, publier et vendre des sites et des applications avec l’IA (vibe coding), de zéro au premier client.' },
 ];
 
 export const PARTS = [
   { id: 'p1', n: 1, track: 'creative', title: 'Les fondamentaux', ar: 'الأساسيات', pitch: 'Comprendre ce qui fait vendre une créative, et la produire sans IA.' },
   { id: 'p2', n: 2, track: 'ia', title: 'L’IA créative', ar: 'الذكاء الاصطناعي الإبداعي', pitch: 'Prompting, images, vidéos, voix, UGC et cinématique.' },
   { id: 'p3', n: 3, track: 'ia', title: 'Vendre son savoir-faire', ar: 'بيع خدماتك', pitch: 'Analyser, itérer et signer ses premiers clients.' },
+  { id: 'p4', n: 1, track: 'dev', title: 'Les bases du vibe coding', ar: 'أساسيات البرمجة بالذكاء الاصطناعي', pitch: 'Comprendre le web, diriger l’IA, connaître ses outils, publier son premier site.' },
+  { id: 'p5', n: 2, track: 'dev', title: 'Construire, sécuriser, stabiliser', ar: 'البناء والحماية والاستقرار', pitch: 'Mettre en ligne, backend et Supabase, cybersécurité, vraie application, tests, motion design.' },
+  { id: 'p6', n: 3, track: 'dev', title: 'Passer pro et vendre', ar: 'الاحتراف والبيع', pitch: 'Booster Claude, démos qui font signer, livrer proprement, projet final.' },
 ];
 
 const MODULES_1 = [
@@ -4355,9 +4360,9 @@ MODULES_1.forEach((m) => m.lessons.forEach((l) => {
 }));
 
 // Leçons retirées du parcours (off: true) : gardées dans ce fichier pour pouvoir les remettre
-export const RETIREES = [...MODULES_1, ...MODULES_IA].flatMap((m) => m.lessons.filter((l) => l.off).map((l) => l.id));
-[...MODULES_1, ...MODULES_IA].forEach((m) => (m.lessons = m.lessons.filter((l) => !l.off)));
-export const MODULES = [...MODULES_1, ...MODULES_IA];
+export const RETIREES = [...MODULES_1, ...MODULES_IA, ...MODULES_DEV].flatMap((m) => m.lessons.filter((l) => l.off).map((l) => l.id));
+[...MODULES_1, ...MODULES_IA, ...MODULES_DEV].forEach((m) => (m.lessons = m.lessons.filter((l) => !l.off)));
+export const MODULES = [...MODULES_1, ...MODULES_IA, ...MODULES_DEV];
 
 /* ------------------------------------------------------------------ */
 /* Parcours et numérotation                                            */
@@ -4368,8 +4373,8 @@ MODULES.forEach((m) => {
   m.track = PART_TRACK[m.part] || 'creative';
 });
 
-/** Code affiché d'un module : M01…M05 pour la formation Créative, IA01…IA10 pour la formation IA. */
-export const modCode = (m) => `${m.track === 'ia' ? 'IA' : 'M'}${String(m.n).padStart(2, '0')}`;
+/** Code affiché d'un module : M01…M05 pour la formation Créative, IA01…IA10 pour la formation IA, D01… pour Sites & Apps. */
+export const modCode = (m) => `${m.track === 'ia' ? 'IA' : m.track === 'dev' ? 'D' : 'M'}${String(m.n).padStart(2, '0')}`;
 export const trackOf = (idOrModule) => TRACKS.find((t) => t.id === (typeof idOrModule === 'string' ? idOrModule : idOrModule?.track)) || TRACKS[0];
 export const modulesOf = (track) => MODULES.filter((m) => m.track === track);
 /** Modules du programme sans la bienvenue (module 00) : pour les comptes, les plages M01–M06, la landing. */

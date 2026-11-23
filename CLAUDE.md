@@ -29,8 +29,9 @@ ou publié sur LinkedIn. Les démos sont publiées par **GitHub Pages** : pousse
 - `sites/404.html` : page des liens cassés ; elle renvoie aussi les anciens liens `/hooked-academy/…` vers
   https://hooked-academy.tech.
 - Démos retirées : dans `hors-ligne/` (jamais publié).
-- Brouillons de formations pour Hooked Academy : dans `formations/<slug>/` (jamais publié).
-  Ex. `formations/sites-et-apps/` : programme, aide-mémoire, ressources et modèles de la Formation Sites & Apps.
+- Brouillons et documents de formations pour Hooked Academy : dans `formations/<slug>/` (jamais publié).
+  Ex. `formations/sites-et-apps/` : aide-mémoire, recherches, scripts de tournage et modèles de la Formation Sites & Apps,
+  dont les leçons vivent dans `sites/hooked-academy/data/programme-dev-*.js` (formation `dev`, leçons `dv…`).
 - Code serveur d'un projet client (hors démo) : dans `projets/<client>/` (jamais publié, ne tourne pas sur le VPS).
   Ex. `projets/maxi-gastro/` : moteur Node de synchro fournisseurs → Shopify, tests avec `npm test`.
 

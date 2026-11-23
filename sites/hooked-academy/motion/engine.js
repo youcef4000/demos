@@ -4,6 +4,7 @@
 
 import * as S from './scenes.js';
 import * as SC from './scenes-cours.js';
+import * as DV from './scenes-dev.js';
 import { G, fmt, autoDuration, esc, isAr, setAr } from './kit.js';
 import { markSVG } from '../assets/js/brand.js';
 import { lang, t as tr } from '../assets/js/i18n.js';
@@ -15,6 +16,8 @@ export const BASE = {
   title: 4.2, big: 4.6, quote: 5, stat: 4.6, cards: 6, grid: 6, steps: 7, checklist: 6.5, compare: 7,
   formula: 6, flow: 7, funnel: 6, curve: 7, timeline: 8, prompt: 9, chat: 8, wave: 6, storyboard: 8,
   camera: 10, ratio: 8, layers: 8, scan: 9, price: 7, phone: 7, anatomy: 10, acronym: 8, table: 9, hooks: 8, outro: 4.2,
+  // Formation Sites & Apps (scenes-dev.js)
+  terminal: 9, code: 9, browser: 8, tree: 7, diff: 8, gitgraph: 8, alert: 9,
 };
 
 export const sceneDuration = (sc) => +(sc.d ?? autoDuration(sc, BASE[sc.type] ?? 5)).toFixed(2);
@@ -103,6 +106,9 @@ export function compose(lesson, mount, { module, next, chrome = true } = {}) {
   const duration = steps.reduce((s, p) => s + p.d, 0);
   const root = document.createElement('div');
   root.className = 'mx';
+  // Formation Sites & Apps : thème « code » (motion/dev.css)
+  const DEV = module?.track === 'dev';
+  if (DEV) root.classList.add('is-dev');
   root.dataset.lang = lang;
   root.style.setProperty('--accent', module?.color || 'var(--gold-400)');
   const code = tr('mo.code', { mod: modCode(module || { n: 0 }), n: String(lesson.n ?? 0).padStart(2, '0') });
@@ -119,7 +125,7 @@ export function compose(lesson, mount, { module, next, chrome = true } = {}) {
     ${
       chrome
         ? `<header class="mx-top"><span class="mx-logo">${markSVG()}<b>HOOKED</b><em>ACADEMY</em></span>
-      <span class="mx-code">${esc(code)}<i></i>${headTitle}</span></header>
+      <span class="mx-code">${DEV ? '<span class="mx-sh">~/dev $</span>' : ''}${esc(code)}<i></i>${headTitle}</span></header>
     <footer class="mx-bot"><span class="mx-tc">00:00</span><div class="mx-prog"><i></i>${steps.map((p) => `<b style="left:${((p.t / duration) * 100).toFixed(2)}%"></b>`).join('')}</div><span class="mx-tc mx-tot">${fmt(duration)}</span></footer>`
         : ''
     }
@@ -137,7 +143,7 @@ export function compose(lesson, mount, { module, next, chrome = true } = {}) {
     sec.className = `sc sc-${sc.type}`;
     sec.dataset.i = i;
     sceneBox.appendChild(sec);
-    const make = SC[sc.type] || S[sc.type] || S.big;
+    const make = DV[sc.type] || SC[sc.type] || S[sc.type] || S.big;
     let sub;
     try {
       sub = make(sec, sc, d, ctx);

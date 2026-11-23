@@ -1,0 +1,8 @@
+# Outils cités dans la leçon dv8-l8 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Claude | https://claude.ai/referral/OtTQNvbscA
+Claude Code (documentation) | https://code.claude.com/docs
+MCP dans Claude Code (documentation) | https://code.claude.com/docs/en/mcp
+GitHub | https://github.com
+Node.js | https://nodejs.org
+Supabase (documentation) | https://supabase.com/docs
+OWASP Cheat Sheets | https://cheatsheetseries.owasp.org

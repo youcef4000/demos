@@ -3367,3 +3367,29 @@ html[lang='ar'] :is(.duo-hint, .duo-mods .lv) {
   font-family: var(--f-text);
   letter-spacing: 0;
 }
+
+/* Formation Sites & Apps (novembre 2026) : panneau seul, fond menthe ; deuxième rang de billets */
+.duo--solo {
+  grid-template-columns: 1fr;
+  min-height: auto;
+}
+.duo-p[data-track='dev'] {
+  background: #5fd3b3;
+}
+.tix-row--dev {
+  margin-top: 22px;
+}
+@media (min-width: 1000px) {
+  .tix-row--dev {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+    max-width: 1100px;
+    margin-inline: auto;
+  }
+}
+.tk[data-offre='dev'] {
+  background: #5fd3b3;
+}
+.tk[data-offre='dev'] .tk-go:hover {
+  background: var(--paper);
+  color: var(--ink);
+}

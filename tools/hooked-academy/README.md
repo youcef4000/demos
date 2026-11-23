@@ -29,6 +29,13 @@ entrées et sorties.
 2 minutes maximum. Chaque leçon contient ses scènes animées, le texte « à dire » de chaque scène, les
 points clés, le quiz et l'exercice interactif.
 
+**Formation Sites & Apps** (troisième formation, novembre 2026) : `data/programme-dev.js`, qui réunit
+`programme-dev-1.js`, `-2.js` et `-3.js` (16 modules D00–D15, 88 leçons `dv…`, dont 13 pratiques `prat: true`).
+Ses vidéos ont leur propre thème « code » (`motion/dev.css`, classe `.is-dev` posée par `engine.js`) et sept types de
+scènes (`motion/scenes-dev.js` : `terminal`, `code`, `browser`, `tree`, `diff`, `gitgraph`, `alert`). Miniatures :
+`video/vignettes/dv*.jpg` (`vignettes.mjs`) ; fiches PDF : `TRACK=dev LANGS=fr node tools/hooked-academy/fiches-lecons.mjs`.
+Documents (recherches, tournages, modèles) : `formations/sites-et-apps/`.
+
 Structure IA demandée : Prompting → Images → Vidéos → UGC → Cinématique → Acquisition clients.
 Ajouts : **Voix, musique et sous-titres** (indispensable pour l'UGC et la cinématique, placé avant),
 **Tester et analyser avec Hooked Lab** (on mesure avant de vendre), éthique de l'UGC IA dans le

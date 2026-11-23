@@ -1,0 +1,4 @@
+# Outils cités dans la leçon dv11-l5 (généré par tools/hooked-academy/fiches-lecons.mjs)
+TikTok Creative Center | https://ads.tiktok.com/business/creativecenter/
+GitHub | https://github.com
+Supabase (documentation) | https://supabase.com/docs

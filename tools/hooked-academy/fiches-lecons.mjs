@@ -5,7 +5,7 @@
 // Puis relancer `node tools/hooked-academy/ressources.mjs` pour mettre à jour le manifeste.
 //
 //   node tools/hooked-academy/fiches-lecons.mjs                 toutes les leçons, trois langues
-//   TRACK=creative node tools/hooked-academy/fiches-lecons.mjs  une seule formation (creative ou ia)
+//   TRACK=creative node tools/hooked-academy/fiches-lecons.mjs  une seule formation (creative, ia ou dev)
 //   node tools/hooked-academy/fiches-lecons.mjs ia1-l2 ia3-l4   seulement ces leçons
 //   LANGS=fr node tools/hooked-academy/fiches-lecons.mjs        une seule langue
 //
@@ -28,6 +28,7 @@ const TRACK = process.env.TRACK;
 const COURSE = {
   creative: { fr: 'Formation Créative', en: 'Creative Course', ar: 'التكوين الإبداعي' },
   ia: { fr: 'Formation IA', en: 'AI Course', ar: 'تكوين الذكاء الاصطناعي' },
+  dev: { fr: 'Formation Sites & Apps', en: 'Sites & Apps Course', ar: 'تكوين المواقع والتطبيقات' },
 };
 const FILE = { fr: '01-fiche-de-la-leçon', en: '01-lesson-sheet', ar: '01-ملخص-الدرس' };
 const T = {
@@ -46,6 +47,46 @@ const EXTRA = {
   snaptik: { name: 'SnapTik', url: 'https://snaptik.app' },
   metasound: { name: 'Meta Sound Collection', url: 'https://www.facebook.com/sound/collection/' },
   tiktokmusic: { name: 'TikTok Commercial Music Library', url: 'https://ads.tiktok.com/business/creativecenter/music/pc/en' },
+  // Formation Sites & Apps : pages officielles des outils cités
+  claudecode: { name: 'Claude Code (documentation)', url: 'https://code.claude.com/docs' },
+  skills: { name: 'Skills Claude (documentation)', url: 'https://code.claude.com/docs/en/skills' },
+  plugins: { name: 'Plugins Claude Code (documentation)', url: 'https://code.claude.com/docs/en/discover-plugins' },
+  mcp: { name: 'MCP dans Claude Code (documentation)', url: 'https://code.claude.com/docs/en/mcp' },
+  github: { name: 'GitHub', url: 'https://github.com' },
+  git: { name: 'Git', url: 'https://git-scm.com' },
+  vscode: { name: 'VS Code', url: 'https://code.visualstudio.com' },
+  node: { name: 'Node.js', url: 'https://nodejs.org' },
+  supabase: { name: 'Supabase (documentation)', url: 'https://supabase.com/docs' },
+  vercel: { name: 'Vercel', url: 'https://vercel.com' },
+  netlify: { name: 'Netlify', url: 'https://www.netlify.com' },
+  cloudflare: { name: 'Cloudflare Pages', url: 'https://pages.cloudflare.com' },
+  railway: { name: 'Railway', url: 'https://railway.com' },
+  render: { name: 'Render', url: 'https://render.com' },
+  coolify: { name: 'Coolify', url: 'https://coolify.io' },
+  pagespeed: { name: 'PageSpeed Insights', url: 'https://pagespeed.web.dev' },
+  opengraph: { name: 'OpenGraph.xyz', url: 'https://www.opengraph.xyz' },
+  owasp: { name: 'OWASP Top 10', url: 'https://owasp.org/Top10/' },
+  cheatsheets: { name: 'OWASP Cheat Sheets', url: 'https://cheatsheetseries.owasp.org' },
+  mdn: { name: 'MDN Web Docs', url: 'https://developer.mozilla.org/fr/' },
+  vite: { name: 'Vite', url: 'https://vite.dev' },
+  vitest: { name: 'Vitest', url: 'https://vitest.dev' },
+  playwright: { name: 'Playwright', url: 'https://playwright.dev' },
+  zod: { name: 'Zod', url: 'https://zod.dev' },
+  gsap: { name: 'GSAP', url: 'https://gsap.com' },
+  lottie: { name: 'LottieFiles', url: 'https://lottiefiles.com' },
+  spline: { name: 'Spline', url: 'https://spline.design' },
+  awwwards: { name: 'Awwwards', url: 'https://www.awwwards.com' },
+  motionsites: { name: 'Motionsites', url: 'https://motionsites.ai' },
+  chargily: { name: 'Chargily Pay (développeurs)', url: 'https://dev.chargily.com' },
+  lovable: { name: 'Lovable', url: 'https://lovable.dev' },
+  bolt: { name: 'Bolt', url: 'https://bolt.new' },
+  replit: { name: 'Replit', url: 'https://replit.com' },
+  squoosh: { name: 'Squoosh', url: 'https://squoosh.app' },
+  realtimecolors: { name: 'Realtime Colors', url: 'https://www.realtimecolors.com' },
+  uptimerobot: { name: 'UptimeRobot', url: 'https://uptimerobot.com' },
+  resend: { name: 'Resend', url: 'https://resend.com' },
+  expo: { name: 'Expo', url: 'https://expo.dev' },
+  shadcn: { name: 'shadcn/ui', url: 'https://ui.shadcn.com' },
 };
 const DETECT = [
   ['chatgpt', /chatgpt/i],
@@ -65,16 +106,58 @@ const DETECT = [
   ['metasound', /sound collection|musique autoris|musique libre de droits/i],
   ['tiktokmusic', /sound collection|musique autoris|musique libre de droits/i],
   ['tiktok', /tiktok/i],
+  // Formation Sites & Apps
+  ['claudecode', /claude code/i],
+  ['skills', /\bskills?\b|SKILL\.md/],
+  ['plugins', /\/plugin\b|\bplugins?\b/i],
+  ['mcp', /\bMCP\b/],
+  ['github', /github/i],
+  ['git', /\bgit (init|add|commit|push|log|revert|merge|checkout|status)\b/],
+  ['vscode', /vs code|vscode/i],
+  ['node', /node\.?js|\bnpm\b/i],
+  ['supabase', /supabase/i],
+  ['vercel', /vercel/i],
+  ['netlify', /netlify/i],
+  ['cloudflare', /cloudflare/i],
+  ['railway', /railway/i],
+  ['render', /\bRender\b/],
+  ['coolify', /coolify|dokploy/i],
+  ['pagespeed', /lighthouse|pagespeed/i],
+  ['opengraph', /open ?graph|og:image/i],
+  ['owasp', /owasp/i],
+  ['cheatsheets', /owasp|xss|injection|idor/i],
+  ['vite', /\bVite\b/],
+  ['vitest', /vitest/i],
+  ['playwright', /playwright/i],
+  ['zod', /\bzod\b/i],
+  ['gsap', /gsap|scrolltrigger|lenis/i],
+  ['lottie', /lottie/i],
+  ['spline', /spline/i],
+  ['awwwards', /awwwards/i],
+  ['motionsites', /motionsites/i],
+  ['chargily', /chargily/i],
+  ['lovable', /lovable/i],
+  ['bolt', /\bbolt\b/i],
+  ['replit', /replit/i],
+  ['squoosh', /squoosh/i],
+  ['realtimecolors', /realtime colors/i],
+  ['uptimerobot', /uptimerobot/i],
+  ['resend', /resend/i],
+  ['expo', /\bexpo\b/i],
+  ['shadcn', /shadcn/i],
 ];
 const DEFAULT = { ia0: ['chatgpt', 'claude'], ia1: ['chatgpt', 'claude'], ia2: ['gemini', 'canva'], ia3: ['veo', 'kling', 'capcut'], ia4: ['elevenlabs', 'capcut'], ia10: ['adlib', 'chatgpt'], ia5: ['elevenlabs', 'higgsfield'], ia6: ['higgsfield', 'capcut'], ia7: ['lab', 'adlib'], ia8: ['chatgpt', 'canva'], ia9: ['lab', 'chatgpt'],
   m0: ['capcut', 'canva'], m1: ['capcut', 'canva'], m2: ['capcut', 'chatgpt'], m3: ['chatgpt', 'canva'], m4: ['capcut', 'chatgpt'], m5: ['capcut', 'canva'], m6: ['canva', 'chatgpt'],
-  m7: ['adlib', 'capcut'], m8: ['capcut'], m9: ['capcut'], m10: ['adlib', 'chatgpt'], m11: ['canva', 'capcut'], m12: ['capcut', 'canva'] };
+  m7: ['adlib', 'capcut'], m8: ['capcut'], m9: ['capcut'], m10: ['adlib', 'chatgpt'], m11: ['canva', 'capcut'], m12: ['capcut', 'canva'],
+  dv0: ['claudecode', 'github'], dv1: ['claudecode', 'mdn'], dv2: ['mdn', 'vite'], dv3: ['claudecode', 'github'], dv4: ['pagespeed', 'mdn'], dv5: ['github', 'git'],
+  dv6: ['github', 'netlify'], dv7: ['supabase', 'cheatsheets'], dv8: ['owasp', 'cheatsheets'], dv9: ['supabase', 'vite'], dv10: ['vitest', 'playwright'], dv11: ['gsap', 'awwwards'],
+  dv12: ['claudecode', 'skills'], dv13: ['github', 'pagespeed'], dv14: ['owasp', 'uptimerobot'], dv15: ['github', 'claudecode'] };
 const linksOf = (m, l) => {
   // le texte de la leçon, sans les noms de scènes (« flow » est un type de scène, pas l'outil Flow)
   const txt = JSON.stringify(l, (k, v) => (k === 'type' || k === 'widget' ? undefined : v));
   const ids = DETECT.filter(([, re]) => re.test(txt)).map(([id]) => id);
   for (const id of DEFAULT[m.id] || []) if (ids.length < 2 && !ids.includes(id)) ids.push(id);
-  return ids.map((id) => TOOL[id] || EXTRA[id]).filter(Boolean);
+  return ids.slice(0, m.track === 'dev' ? 8 : ids.length).map((id) => TOOL[id] || EXTRA[id]).filter(Boolean);
 };
 
 // Traduction d'une leçon : les tableaux se fusionnent par position, comme dans l'espace étudiant
@@ -116,11 +199,38 @@ function method(scenes) {
       sc.parts.filter((p) => p.fr || p.sub).forEach((p) => lines.push(`- **${clean(p.label)}**${p.when ? ` (${clean(p.when)})` : ''} — ${clean(p.fr || p.sub)}`));
     } else if (sc.type === 'formula' && sc.parts) {
       lines.push(`- ${sc.parts.map((p) => clean(p.t)).join(' + ')}${sc.result?.t ? ` = **${clean(sc.result.t)}**` : ''}`);
+    } else if (sc.type === 'terminal') {
+      const cmd = [];
+      for (const l of sc.lines || []) {
+        if (l.comment) cmd.push(l.comment);
+        else {
+          cmd.push(`$ ${l.cmd}`);
+          (l.out || []).slice(0, 6).forEach((o) => cmd.push(typeof o === 'string' ? o : o.t));
+        }
+      }
+      if (cmd.length) lines.push('```', ...cmd, '```');
+    } else if (sc.type === 'code' || sc.type === 'diff') {
+      const code = sc.type === 'code' ? String(sc.code || '') : (sc.lines || []).map((l) => `${l.t === ' ' ? ' ' : l.t} ${l.code}`).join('\n');
+      if (code.trim()) lines.push(sc.file ? `\`${clean(sc.file)}\`` : '', '```', code, '```');
+      (sc.notes || []).forEach((n) => lines.push(`- ${n.line ? `Ligne ${n.line} : ` : ''}${clean(n.text)}`));
+    } else if (sc.type === 'alert') {
+      lines.push(`- **${clean(sc.code || '')} · ${clean(sc.name)}**${sc.level ? ` (${clean(sc.level)})` : ''}`);
+      if (sc.attack) lines.push(`- ${clean(sc.attackLabel || 'L’attaque')} : ${clean(sc.attack)}`);
+      if (sc.impact) lines.push(`- ${clean(sc.impactLabel || 'L’impact')} : ${clean(sc.impact)}`);
+      (sc.fix || []).forEach((f) => lines.push(`- ✔ ${clean(f)}`));
+    } else if (sc.type === 'tree') {
+      (sc.items || []).forEach((it) => lines.push(`- \`${clean(it.p)}\`${it.note ? ` — ${clean(it.note)}` : ''}`));
+    } else if (sc.type === 'gitgraph') {
+      (sc.commits || []).forEach((c) => lines.push(`- \`${clean(c.b)}\` — ${clean(c.msg)}${c.merge ? ` (fusion de \`${clean(c.merge)}\`)` : ''}`));
+    } else if (sc.type === 'browser') {
+      if (sc.lighthouse) lines.push(`- Lighthouse : ${Object.entries(sc.lighthouse).map(([k, v]) => `${k} ${v}`).join(' · ')}`);
+      (sc.console || []).forEach((c) => lines.push(`- Console : ${clean(c.t)}`));
     } else if (sc.type === 'quote' || sc.type === 'big') {
       lines.push(`> ${clean(sc.text)}${sc.sub ? ` — ${clean(sc.sub)}` : ''}`);
     } else {
       for (const list of [sc.items, sc.nodes, sc.steps, sc.rows, sc.cards, sc.letters, sc.levels, sc.frames, sc.layers]) if (Array.isArray(list)) list.forEach((x) => lines.push(bullet(x)));
     }
+    if (sc.note) lines.push(`> ${clean(sc.note).replace(/\*/g, '')}`);
     const body = lines.filter(Boolean);
     if (!body.length) continue;
     if (head) out.push(`### ${head}`);

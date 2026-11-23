@@ -5174,3 +5174,41 @@ a.lc:focus-visible .lc-go,
 .pw-f .b {
   justify-self: start;
 }
+
+/* ==========================================================================
+   Formation Sites & Apps (novembre 2026) : menthe, grille de plan d'architecte
+   ========================================================================== */
+[data-track='dev'] {
+  --acc: #5fd3b3;
+  --acc-2: #a6f3dc;
+  --acc-rgb: 95 211 179;
+  --acc-grad: linear-gradient(180deg, #d6fbef 0%, #2fae8c 100%);
+}
+.ring--dev .fg {
+  stroke: url(#ring-dev);
+}
+.prod[data-track='dev'],
+[data-track='dev'] .trk-h {
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgb(95 211 179 / 0.16), transparent 55%),
+    linear-gradient(rgb(95 211 179 / 0.06) 1px, transparent 1px) 0 0 / 22px 22px,
+    linear-gradient(90deg, rgb(95 211 179 / 0.06) 1px, transparent 1px) 0 0 / 22px 22px,
+    linear-gradient(170deg, #0f1a1a, #0a0f12);
+}
+:root[data-theme='light'] [data-track='dev'] {
+  --acc: #1f8f73;
+  --acc-2: #176b56;
+  --acc-rgb: 31 143 115;
+}
+:root[data-theme='light'] :is(.prod[data-track='dev'], [data-track='dev'] .trk-h) {
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgb(31 143 115 / 0.1), transparent 55%),
+    linear-gradient(rgb(31 143 115 / 0.07) 1px, transparent 1px) 0 0 / 22px 22px,
+    linear-gradient(90deg, rgb(31 143 115 / 0.07) 1px, transparent 1px) 0 0 / 22px 22px,
+    var(--paper-2);
+}
+/* Leçon pratique (Formation Sites & Apps) : petit repère dans la carte */
+.lc-prat {
+  color: var(--acc);
+  font-weight: 700;
+}

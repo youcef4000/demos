@@ -169,7 +169,7 @@ async function serveFile(req, res, url, base) {
     return notFound(res, base);
   }
   // Voix off d'une leçon payante : seulement pour l'équipe et les étudiants de la formation
-  const voix = rel.match(/^\/video\/voix\/((?:m|ia)\d{1,2}-l\d{1,2})\.m4a$/);
+  const voix = rel.match(/^\/video\/voix\/((?:m|ia|dv)\d{1,2}-l\d{1,2})\.m4a$/);
   if (voix) {
     const request = new Request(url, { headers: { cookie: req.headers.cookie || '' } });
     if (!(await app.lessonAllowed(request, voix[1]))) {

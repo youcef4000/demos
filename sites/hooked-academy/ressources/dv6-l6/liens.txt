@@ -1,0 +1,5 @@
+# Outils cités dans la leçon dv6-l6 (généré par tools/hooked-academy/fiches-lecons.mjs)
+GitHub | https://github.com
+Supabase (documentation) | https://supabase.com/docs
+Railway | https://railway.com
+Coolify | https://coolify.io

@@ -1,0 +1,3 @@
+# Outils cités dans la leçon dv0-l4 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Claude | https://claude.ai/referral/OtTQNvbscA
+GitHub | https://github.com

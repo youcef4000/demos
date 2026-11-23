@@ -11,18 +11,19 @@ const OLD = ['hooked-academy:data:v1', 'hooked-academy:session:v1', 'hooked-acad
 export const DEMO_STUDENT = { email: 'demo@hooked.academy', code: 'DEMO-2026' };
 
 /** Le compte démo ne montre presque rien : une leçon par formation, le reste est verrouillé. */
-export const DEMO_OPEN = ['m1-l1', 'ia1-l1'];
+export const DEMO_OPEN = ['m1-l1', 'ia1-l1', 'dv1-l1'];
 /** Bienvenue et prise en main de chaque formation : ouvertes à tous, en démo comme avant l'inscription. */
-export const FREE_OPEN = ['m0-l1', 'm0-l2', 'm0-l3', 'm0-l4', 'ia0-l1', 'ia0-l4', 'ia0-l5', 'ia0-l6'];
+export const FREE_OPEN = ['m0-l1', 'm0-l2', 'm0-l3', 'm0-l4', 'ia0-l1', 'ia0-l4', 'ia0-l5', 'ia0-l6', 'dv0-l1', 'dv0-l2', 'dv0-l3', 'dv0-l4'];
 
 /**
- * Accès par formation. Chaque pack ouvre une ou deux formations pour un an :
- * « creative » (Formation Créative), « ia » (Formation IA), « both » (les deux).
+ * Accès par formation. Chaque pack ouvre une ou plusieurs formations pour un an :
+ * « creative » (Formation Créative), « ia » (Formation IA), « dev » (Formation Sites & Apps),
+ * « both » (Créative + IA, le pack historique), « all » (les trois formations).
  * L'équipe peut ensuite ajouter ou retirer une formation et prolonger l'accès (espace équipe → Étudiants).
  */
-export const TRACK_IDS = ['creative', 'ia'];
+export const TRACK_IDS = ['creative', 'ia', 'dev'];
 export const ACCESS_DAYS = 365;
-const lessonTrack = (id) => (String(id).startsWith('ia') ? 'ia' : 'creative');
+const lessonTrack = (id) => (String(id).startsWith('ia') ? 'ia' : String(id).startsWith('dv') ? 'dev' : 'creative');
 
 export const STATUS = {
   nouvelle: { label: 'Nouvelle', c: '#e0be55' },

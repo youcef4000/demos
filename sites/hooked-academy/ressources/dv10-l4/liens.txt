@@ -1,0 +1,6 @@
+# Outils cités dans la leçon dv10-l4 (généré par tools/hooked-academy/fiches-lecons.mjs)
+GitHub | https://github.com
+Git | https://git-scm.com
+Node.js | https://nodejs.org
+Vitest | https://vitest.dev
+Zod | https://zod.dev

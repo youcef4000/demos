@@ -1,0 +1,3 @@
+# Outils cités dans la leçon dv9-l4 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Chargily Pay (développeurs) | https://dev.chargily.com
+Supabase (documentation) | https://supabase.com/docs

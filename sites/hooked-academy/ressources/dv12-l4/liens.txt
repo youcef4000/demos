@@ -1,0 +1,6 @@
+# Outils cités dans la leçon dv12-l4 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Claude | https://claude.ai/referral/OtTQNvbscA
+MCP dans Claude Code (documentation) | https://code.claude.com/docs/en/mcp
+GitHub | https://github.com
+Supabase (documentation) | https://supabase.com/docs
+Playwright | https://playwright.dev
