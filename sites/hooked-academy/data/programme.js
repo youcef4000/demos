@@ -12,6 +12,7 @@ import { VOIX } from './voix-off.js';
 import { NARRATION } from './narration.js';
 import { PUB, pubEdits } from './serveur.js';
 import { lang } from '../assets/js/i18n.js';
+import { LAB, masquer } from './hooked-lab.js';
 
 /**
  * Deux formations distinctes :
@@ -4510,6 +4511,9 @@ if (lang !== 'fr')
     editModule(m, editOf('modules', m.id, lang));
     m.lessons = m.lessons.map((l) => editLesson(l, editOf('lessons', l.id, lang)));
   });
+
+// 4. Hooked Lab pas encore ouvert : les passages qui le citent sont remplacés à l'affichage (data/hooked-lab.js)
+if (!LAB) [TRACKS, PARTS, MODULES].forEach((x) => masquer(x));
 
 /* ------------------------------------------------------------------ */
 

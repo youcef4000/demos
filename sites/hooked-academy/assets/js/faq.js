@@ -6,6 +6,7 @@
 // kw : mots-clés de l'assistant (toutes langues, séparés par des virgules), en plus de la question et de la réponse.
 
 import { PUB } from '../../data/serveur.js';
+import { LAB, citeLab, sansLab } from '../../data/hooked-lab.js';
 
 const SRC = new URL('../../data/faq.json', import.meta.url);
 export const CATS = ['inscription', 'formation', 'plateforme', 'ia', 'creation', 'business'];
@@ -14,6 +15,9 @@ const LANGS = ['fr', 'en', 'ar'];
 
 const str = (v) => String(v ?? '').trim();
 const texts = (o) => Object.fromEntries(LANGS.map((l) => [l, str(o?.[l])]));
+/** Hooked Lab pas encore ouvert (data/hooked-lab.js) : sa question est cachée, les autres réponses ne le citent pas. */
+const visible = (l) =>
+  LAB ? l : l.filter((x) => x.id !== 'lab' && !LANGS.some((g) => citeLab(x.q?.[g]))).map((x) => ({ ...x, a: Object.fromEntries(Object.entries(x.a || {}).map(([g, v]) => [g, sansLab(v)])) }));
 export function norm(x, i = 0) {
   if (!x || typeof x !== 'object') return null;
   const it = {
@@ -42,7 +46,7 @@ export function base() {
 /** Charge la liste publique : celle du serveur, sinon data/faq.json. */
 export function ready(force = false) {
   if (force) loading = null;
-  if (!loading) loading = (Array.isArray(PUB?.faq) ? Promise.resolve(normList(PUB.faq)) : base()).then((l) => (published = l.filter((x) => x.aud !== 'pro')));
+  if (!loading) loading = (Array.isArray(PUB?.faq) ? Promise.resolve(normList(PUB.faq)) : base()).then((l) => (published = visible(l.filter((x) => x.aud !== 'pro'))));
   return loading;
 }
 /** Questions publiques (appeler ready() avant). */
@@ -50,7 +54,7 @@ export const list = () => clone(published || []);
 
 let pro = [];
 /** Questions réservées aux membres, reçues du serveur à la connexion. */
-export const setPro = (l) => (pro = normList(l).filter((x) => x.aud !== 'public'));
+export const setPro = (l) => (pro = visible(normList(l).filter((x) => x.aud !== 'public')));
 /** Espace étudiant : questions publiques + questions pro. */
 export const memberList = () => {
   const seen = new Set();

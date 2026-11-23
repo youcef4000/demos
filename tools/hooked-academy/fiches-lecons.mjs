@@ -21,6 +21,8 @@ const SITE = path.resolve(HERE, '../../sites/hooked-academy');
 globalThis.localStorage = { getItem: () => null, setItem: () => {} };
 const { MODULES, modCode } = await import(pathToFileURL(path.join(SITE, 'data/programme.js')).href);
 const { OUTILS } = await import(pathToFileURL(path.join(SITE, 'data/outils.js')).href);
+// Hooked Lab pas encore ouvert : les traductions passent par le même masque que le site (data/hooked-lab.js)
+const { LAB, masquer, sansLab } = await import(pathToFileURL(path.join(SITE, 'data/hooked-lab.js')).href);
 
 const LANGS = (process.env.LANGS || 'fr,en,ar').split(',');
 const ONLY = process.argv.slice(2);
@@ -156,7 +158,7 @@ const linksOf = (m, l) => {
   // le texte de la leçon, sans les noms de scènes (« flow » est un type de scène, pas l'outil Flow)
   const txt = JSON.stringify(l, (k, v) => (k === 'type' || k === 'widget' ? undefined : v));
   const ids = DETECT.filter(([, re]) => re.test(txt)).map(([id]) => id);
-  for (const id of DEFAULT[m.id] || []) if (ids.length < 2 && !ids.includes(id)) ids.push(id);
+  for (const id of DEFAULT[m.id] || []) if (ids.length < 2 && !ids.includes(id) && (LAB || id !== 'lab')) ids.push(id);
   return ids.slice(0, m.track === 'dev' ? 8 : ids.length).map((id) => TOOL[id] || EXTRA[id]).filter(Boolean);
 };
 
@@ -292,8 +294,8 @@ for (const m of MODULES.filter((x) => !TRACK || x.track === TRACK)) {
     let tools = [];
     for (const lang of LANGS) {
       const ovm = OV[lang]?.[m.id];
-      const mm = lang === 'fr' ? m : { ...m, title: ovm?.modules?.[m.id]?.title || m.title };
-      const l = lang === 'fr' ? l0 : merge(l0, ovm?.lessons?.[l0.id]);
+      const mm = lang === 'fr' ? m : { ...m, title: sansLab(ovm?.modules?.[m.id]?.title || m.title) };
+      const l = lang === 'fr' ? l0 : masquer(merge(l0, ovm?.lessons?.[l0.id]));
       const s = sheet(mm, l, lang);
       tools = s.tools;
       const html = await buildHtml(s.md, { lang, formation: m.track });

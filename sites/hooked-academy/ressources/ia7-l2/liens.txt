@@ -1,3 +1,2 @@
 # Outils cités dans la leçon ia7-l2 (généré par tools/hooked-academy/fiches-lecons.mjs)
-Hooked Lab | https://hooked-lab.com
 Meta Ad Library | https://www.facebook.com/ads/library/

@@ -66,6 +66,7 @@ add({
     'mo.ly.ai': 'Image IA',
 
     'mo.sn.badge': 'Analyse d’exemple',
+    'mo.sn.brand': 'Analyse',
     'mo.sn.script': 'Script reconstitué',
     'mo.sn.seq': 'Séquences',
     'mo.sn.hook': 'Hook · 3 premières secondes',
@@ -177,6 +178,7 @@ add({
     'mo.ly.ai': 'AI image',
 
     'mo.sn.badge': 'Sample analysis',
+    'mo.sn.brand': 'Analysis',
     'mo.sn.script': 'Reconstructed script',
     'mo.sn.seq': 'Sequences',
     'mo.sn.hook': 'Hook · first 3 seconds',
@@ -288,6 +290,7 @@ add({
     'mo.ly.ai': 'صورة بالذكاء الاصطناعي',
 
     'mo.sn.badge': 'تحليل على سبيل المثال',
+    'mo.sn.brand': 'التحليل',
     'mo.sn.script': 'السكريبت المستخرج',
     'mo.sn.seq': 'المقاطع',
     'mo.sn.hook': 'الهوك · أول 3 ثوانٍ',

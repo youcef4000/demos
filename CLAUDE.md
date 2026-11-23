@@ -41,6 +41,8 @@ ou publié sur LinkedIn. Les démos sont publiées par **GitHub Pages** : pousse
 servi par le VPS Hostinger avec son serveur (`server/index.mjs`, `server/plateforme.js`, voir README et
 DEPLOIEMENT-VPS.md). Le VPS récupère `main` toutes les 5 minutes. Une erreur dans `server/` met Hooked Academy
 hors ligne : tester avec `node server/index.mjs` avant de pousser.
+Hooked Lab n'est pas encore ouvert : il est masqué partout (interrupteur `data/hooked-lab.js`, `LAB = false`) ; ne pas
+le mentionner dans les nouveaux contenus tant que l'interrupteur est éteint.
 
 ## Qualité attendue
 

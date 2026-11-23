@@ -132,7 +132,7 @@ $$('.js-inc').forEach((el) => {
   el.textContent = t(el.dataset.k, { n });
 });
 
-// Formulaire : la formule (une formation, Pack Hooked, Pack Créateur), puis la formation si « une formation ».
+// Formulaire : la formule (une formation, pack complet, pack Créative + IA), puis la formation si « une formation ».
 // Le champ caché `formation` porte l'offre envoyée au serveur (creative, ia, dev, both ou all).
 const SOLO = ['creative', 'ia', 'dev'];
 const offerName = (id) => (SOLO.includes(id) ? t(`track.${id}`) : t({ both: 'f.track.b', all: 'f.track.a' }[id] || 'f.track.a'));
@@ -154,9 +154,10 @@ $$('input[name="formule"], input[name="solo"]', fForm).forEach((r) => r.addEvent
 $$('.js-from').forEach((el) => (el.textContent = t('f.f.from', { p: money(Math.min(...SOLO.map((k) => OFFRES[k]))) })));
 fSync();
 $$('[data-pick]').forEach((a) => a.addEventListener('click', () => pickOffer(a.dataset.pick)));
+$$('.js-n').forEach((el) => (el.textContent = t('count.lessons', { n: byTrack[el.dataset.track].lessons.length })));
 
 // Billet 01 : une formation au choix. Le sélecteur change le contenu, la couleur et le prix du billet,
-// et propose le pack qui ajoute le plus pour le moins (Créative ou IA → Pack Créateur ; Sites & Apps → Pack Hooked).
+// et propose le pack qui ajoute le plus pour le moins (Créative ou IA → pack Créative + IA ; Sites & Apps → pack complet).
 const soloTk = $('#tk-solo');
 if (soloTk) {
   const UP = { creative: ['both', OFFRES.both - OFFRES.creative], ia: ['both', OFFRES.both - OFFRES.ia], dev: ['all', OFFRES.all - OFFRES.dev] };

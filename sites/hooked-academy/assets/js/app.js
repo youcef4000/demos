@@ -4,6 +4,7 @@
 // Fichiers de l'équipe : ressources/manifest.json (facultatif) ; vidéos publiées : video/manifest.json.
 // Textes de l'interface : assets/js/i18n/app.js (+ i18n/common.js pour niveaux, badges, formations).
 
+import { LAB } from '../../data/hooked-lab.js';
 import { lang, LANG, LANGS, isRTL, locale, t, switcher, bindSwitchers, fmtNum, fmtDate } from './i18n.js';
 import './i18n/common.js';
 import './i18n/app.js';
@@ -486,7 +487,7 @@ function shell(active, html, { track = '' } = {}) {
       </nav>
       <div class="side-foot">
         ${switcher('lang-sw')}
-        <a class="nv" href="https://hooked-lab.com" target="_blank" rel="noopener">${markSVG({ lab: true, cls: 'side-lab' }).replace('<svg', '<svg width="20" height="20"')}<span>Hooked Lab</span>${icon('arrow', { size: 14, cls: 'i-ext' })}</a>
+        ${LAB ? `<a class="nv" href="https://hooked-lab.com" target="_blank" rel="noopener">${markSVG({ lab: true, cls: 'side-lab' }).replace('<svg', '<svg width="20" height="20"')}<span>Hooked Lab</span>${icon('arrow', { size: 14, cls: 'i-ext' })}</a>` : ''}
         <button class="nv nv-app" type="button" data-pwa-install ${installable() ? '' : 'hidden'}>${icon('download', { size: 20 })}<span>${t('pwa.install')}</span></button>
         <a class="nv" href="../">${back(20)}<span>${t('app.nav.site')}</span></a>
       </div>
@@ -647,10 +648,14 @@ function viewHome() {
         <a class="b b--s" href="#/ressources">${icon('book', { size: 15 })} ${t('app.defi.cta')}</a>
       </section>
 
-      <a class="card lab-card" href="https://hooked-lab.com" target="_blank" rel="noopener">
+      ${
+        LAB
+          ? `<a class="card lab-card" href="https://hooked-lab.com" target="_blank" rel="noopener">
         <span class="lc-m">${markSVG({ lab: true })}</span>
         <div><p class="card-k">Hooked Lab</p><h3>${t('app.lab.title')}</h3><p class="muted">${t('app.lab.text')}</p></div>
-      </a>
+      </a>`
+          : ''
+      }
 
       <section class="bdg-sec">
         <div class="sec-h"><div><h2>${t('app.badges.title')}</h2></div><a class="b b--s" href="#/profil">${t('app.badges.all')}</a></div>
@@ -1206,7 +1211,7 @@ function viewLesson(id) {
             .join('')}</div>
         </section>
         ${demo ? '' : partnerCard(l)}
-        <a class="card lab-card lab-card--s" href="https://hooked-lab.com" target="_blank" rel="noopener"><span class="lc-m">${markSVG({ lab: true })}</span><div><h3>${t('app.lab.apply')}</h3><p class="muted">${t('app.lab.apply.text')}</p></div></a>
+        ${LAB ? `<a class="card lab-card lab-card--s" href="https://hooked-lab.com" target="_blank" rel="noopener"><span class="lc-m">${markSVG({ lab: true })}</span><div><h3>${t('app.lab.apply')}</h3><p class="muted">${t('app.lab.apply.text')}</p></div></a>` : ''}
       </aside>
     </div>`,
     { track: track.id },

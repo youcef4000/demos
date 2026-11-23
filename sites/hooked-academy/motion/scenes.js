@@ -2,6 +2,7 @@
 // Chaque scène reçoit sa section (1920 × 1080), ses données et sa durée, remplit le DOM et renvoie
 // une timeline GSAP qui démarre à 0. La sortie (fondu) est gérée par le moteur.
 
+import { LAB } from '../data/hooked-lab.js';
 import { G, esc, rich, words, kicker, $, $$, riseWords, type, count, draw, track, isAr, setAr } from './kit.js';
 import { icon } from '../assets/js/icons.js';
 import { markSVG } from '../assets/js/brand.js';
@@ -873,7 +874,7 @@ export function scan(root, sc, d) {
     <div class="sn">
       <div class="sn-phone"><div class="sn-screen" style="background:${BG.teal}"><div class="sn-art">${product('parfum')}</div><i class="sn-line"></i>${[0, 1, 2, 3, 4, 5].map((i) => `<i class="sn-box" style="--i:${i}"></i>`).join('')}</div></div>
       <div class="sn-panel">
-        <div class="sn-brand">${markSVG({ lab: true })}<b>Hooked Lab</b><span>${esc(sc.badge || tr('mo.sn.badge'))}</span></div>
+        <div class="sn-brand">${LAB ? `${markSVG({ lab: true })}<b>Hooked Lab</b>` : `${markSVG()}<b>${esc(tr('mo.sn.brand'))}</b>`}<span>${esc(sc.badge || tr('mo.sn.badge'))}</span></div>
         <div class="sn-card sn-script"><h4>${icon('doc', { size: 22 })} ${esc(tr('mo.sn.script'))}</h4><p></p><p></p><p></p></div>
         <div class="sn-card"><h4>${icon('film', { size: 22 })} ${esc(tr('mo.sn.seq'))}</h4><div class="sn-seq">${seq.map(([t, c]) => `<span style="--c:${col(c)}">${esc(t)}</span>`).join('')}</div></div>
         <div class="sn-card"><h4>${icon('hook', { size: 22 })} ${esc(tr('mo.sn.hook'))}</h4><div class="sn-gauge"><i></i></div><span class="sn-g">${esc(tr('mo.sn.gauge'))}</span></div>

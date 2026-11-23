@@ -8,7 +8,7 @@ Pour les débutants complets, avec des encadrés « niveau avancé » dans chaqu
 |---|---|
 | Contenu | 16 modules · 88 leçons · 432 scènes animées · 13 leçons pratiques · 92 prompts d'atelier |
 | Durée | ≈ 1 h 40 de vidéo animée (estimée d'après le prompteur ; elle suivra ta voix off) |
-| Prix | **35 000 DA** seule ; **pack 3 formations 59 900 DA** (proposition, modifiable dans Réglages) |
+| Prix | **30 000 DA** seule ; **pack complet (3 formations) 50 000 DA** (modifiable dans Réglages) |
 | Style | Thème « code » propre à cette formation : menthe, grille de plan d'architecte, terminal, éditeur, navigateur |
 | Voix off | **Aucune voix générée** : texte « à dire » de chaque scène pour le prompteur du Studio voix off |
 
@@ -32,7 +32,7 @@ Pour les débutants complets, avec des encadrés « niveau avancé » dans chaqu
 
 - **Serveur** (`server/plateforme.js`, `server/index.mjs`) : formation `dev`, leçons `dv…`, packs `dev` et `all` ;
   le pack `both` reste Créative + IA (les anciens élèves ne reçoivent pas la nouvelle formation automatiquement).
-- **Page d'accueil** : panneau « Formation 03 · Sites & Apps », billets 04 (35 000 DA) et 05 (pack 3), deux choix de
+- **Page d'accueil** : panneau « Formation 03 · Sites & Apps », billet « une formation au choix » (30 000 DA pour Sites & Apps) et pack complet, deux choix de
   plus dans le formulaire, textes en français, anglais et arabe.
 - **Espace étudiant** : troisième formation (menthe), badge « Pratique », miniatures, carte de fin de formation.
 - **Espace équipe** : choix des nouveaux packs, prix dans Réglages, la formation dans le programme et le studio voix off.
@@ -45,7 +45,7 @@ Pour les débutants complets, avec des encadrés « niveau avancé » dans chaqu
 3. **Relire** les leçons et ajuster le ton ; les modifications se font aussi depuis l'espace équipe.
 4. **Traductions** anglaise et arabe des leçons (`data/i18n/en|ar/dv*.js`) : l'interface et la page d'accueil sont déjà
    traduites ; le contenu des leçons est en français pour l'instant.
-5. **Prix** : confirmer 35 000 DA et le pack 3 à 59 900 DA (Réglages), décider si les anciens élèves « both » reçoivent
+5. **Prix** : 30 000 DA et le pack complet à 50 000 DA (novembre 2026, Réglages), décider si les anciens élèves « both » reçoivent
    la formation en cadeau (Admin → Étudiants → cocher la formation).
 
 ## Les pratiques réelles (faites dans le cloud le 23/11/2026)

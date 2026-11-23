@@ -328,7 +328,7 @@
           <li class="st" data-part="p3">
             <span class="st-k"><span data-i18n="path.part">Partie</span> 3</span>
             <h3 data-i18n="path.p3.t">Vendre ton savoir-faire</h3>
-            <p data-i18n="path.p3.x">Mesurer avec Hooked Lab, itérer, choisir ta niche, prospecter, signer.</p>
+            <p data-i18n="path.p3.x">Mesurer, itérer, choisir ta niche, prospecter, signer.</p><!-- avec Hooked Lab : « Mesurer avec Hooked Lab, itérer… » -->
             <ul class="chips" data-chips="p3"></ul>
           </li>
           <li class="st st--final" data-part="final">
@@ -402,28 +402,29 @@
     </div>
   </section>
 
-  <!-- PLAN 09 · Tarifs : la billetterie (trois billets, le Pack Hooked au centre) === -->
+  <!-- PLAN 09 · Tarifs : la billetterie (trois billets, le pack complet au centre) === -->
   <section class="sh tix" id="tarifs" data-ton="papier" data-plan="09" data-name="plan.tarifs" aria-labelledby="tix-h">
     <header class="sec-h tix-head">
       <p class="lbl" data-i18n="tix.k">Tarifs</p>
       <h2 class="h2" id="tix-h" data-i18n-html="tix.h">Choisis ta séance. <span class="nb dim">Paie après l’appel.</span></h2>
       <p class="lead" data-i18n="tix.lead">Une formation au choix, ou un pack à prix réduit. Aucun paiement en ligne : l’équipe t’appelle d’abord, puis tu paies par CCP, BaridiMob ou en espèces.</p>
     </header>
-    <!-- Trois billets seulement (moins de choix, une recommandation claire) : une formation au choix, le Pack Hooked
-         (les trois formations, au centre, la meilleure offre) et le Pack Créateur (Créative + IA). Prix : data/offres.js -->
+    <!-- Trois billets seulement (moins de choix, une recommandation claire) : une formation au choix (couleur et prix
+         selon la formation), le pack complet au centre (les trois formations, la meilleure offre) et le pack
+         Créative + IA (les deux formations côte à côte). Prix : data/offres.js -->
     <div class="tix-row">
       <article class="tk tk--solo" data-offre="creative" id="tk-solo" aria-labelledby="tk-solo-k">
         <div class="tk-main">
           <p class="tk-k burn" id="tk-solo-k" data-i18n="tix.s.k">Billet 01 · Une formation au choix</p>
           <div class="tk-sw" role="group" aria-label="Choisis ta formation" data-i18n-attr="aria-label:tix.s.sw">
-            <button type="button" data-t="creative" aria-pressed="true" data-i18n="duo.big1">Créative</button>
-            <button type="button" data-t="ia" aria-pressed="false" data-i18n="duo.big2">IA</button>
-            <button type="button" data-t="dev" aria-pressed="false" data-i18n="duo.big3">Sites & Apps</button>
+            <button type="button" data-t="creative" aria-pressed="true"><i aria-hidden="true"></i><span data-i18n="duo.big1">Créative</span></button>
+            <button type="button" data-t="ia" aria-pressed="false"><i aria-hidden="true"></i><span data-i18n="duo.big2">IA</span></button>
+            <button type="button" data-t="dev" aria-pressed="false"><i aria-hidden="true"></i><span data-i18n="duo.big3">Sites & Apps</span></button>
           </div>
           <div class="tk-var" data-t="creative">
             <h3 class="tk-t"><span class="tk-big" data-i18n="duo.big1">Créative</span> <span class="tk-name" data-i18n="track.creative">Formation Créative</span></h3>
             <p class="tk-p" data-i18n="tix.c.p">Comprendre ce qui fait vendre une pub, et la produire avec ton téléphone.</p>
-            <p class="tk-price"><span class="tk-amt js-amt" data-offre="creative">14&#8239;900&nbsp;DA</span><span class="tk-year" data-i18n="tix.year">Accès 1 an</span></p>
+            <p class="tk-price"><span class="tk-amt js-amt" data-offre="creative">20&#8239;000&nbsp;DA</span><span class="tk-year" data-i18n="tix.year">Accès 1 an</span></p>
             <ul class="tk-inc">
               <li class="js-inc" data-k="tix.inc.lessons" data-track="creative">66 leçons animées de 2 min, en darija</li>
               <li class="js-inc" data-k="tix.c.1" data-mods="creative">12 modules, des bases au projet final</li>
@@ -435,7 +436,7 @@
           <div class="tk-var" data-t="ia" hidden>
             <h3 class="tk-t"><span class="tk-big" data-i18n="duo.big2">IA</span> <span class="tk-name" data-i18n="track.ia">Formation IA</span></h3>
             <p class="tk-p" data-i18n="tix.i.p">Produire avec l’IA (images, vidéos, voix, UGC), puis vendre ce savoir-faire.</p>
-            <p class="tk-price"><span class="tk-amt js-amt" data-offre="ia">24&#8239;900&nbsp;DA</span><span class="tk-year" data-i18n="tix.year">Accès 1 an</span></p>
+            <p class="tk-price"><span class="tk-amt js-amt" data-offre="ia">25&#8239;000&nbsp;DA</span><span class="tk-year" data-i18n="tix.year">Accès 1 an</span></p>
             <ul class="tk-inc">
               <li class="js-inc" data-k="tix.inc.lessons" data-track="ia">67 leçons animées de 2 min, en darija</li>
               <li class="js-inc" data-k="tix.i.1" data-mods="ia">10 modules, du prompting aux premiers clients</li>
@@ -447,7 +448,7 @@
           <div class="tk-var" data-t="dev" hidden>
             <h3 class="tk-t"><span class="tk-big" data-i18n="tix.d.big">Sites & Apps</span> <span class="tk-name" data-i18n="track.dev">Formation Sites & Apps</span></h3>
             <p class="tk-p" data-i18n="tix.d.p">Créer, sécuriser, publier et vendre des sites et des applications avec l’IA (vibe coding).</p>
-            <p class="tk-price"><span class="tk-amt js-amt" data-offre="dev">35&#8239;000&nbsp;DA</span><span class="tk-year" data-i18n="tix.year">Accès 1 an</span></p>
+            <p class="tk-price"><span class="tk-amt js-amt" data-offre="dev">30&#8239;000&nbsp;DA</span><span class="tk-year" data-i18n="tix.year">Accès 1 an</span></p>
             <ul class="tk-inc">
               <li class="js-inc" data-k="tix.d.0" data-track="dev">84 leçons animées, théorie et pratique</li>
               <li class="js-inc" data-k="tix.d.1" data-mods="dev">15 modules, de zéro au premier client</li>
@@ -467,9 +468,14 @@
         <p class="tk-stamp" data-i18n="tix.a.stamp">Meilleure offre</p>
         <div class="tk-main">
           <p class="tk-k burn" data-i18n="tix.a.k">Billet 02 · Les trois formations</p>
-          <h3 class="tk-t" id="tk-all-t"><span class="tk-big" data-i18n="tix.a.big">Pack Hooked</span> <span class="tk-name" data-i18n="tix.a.name">Créative + IA + Sites & Apps</span></h3>
+          <h3 class="tk-t" id="tk-all-t"><span class="tk-big" data-i18n="tix.a.big">Pack complet</span> <span class="tk-name" data-i18n="tix.a.name">Créative + IA + Sites & Apps</span></h3>
+          <ul class="tk-parts tk-parts--3">
+            <li data-t="creative"><b data-i18n="duo.big1">Créative</b><span class="js-n" data-track="creative">66 leçons</span></li>
+            <li data-t="ia"><b data-i18n="duo.big2">IA</b><span class="js-n" data-track="ia">67 leçons</span></li>
+            <li data-t="dev"><b data-i18n="duo.big3">Sites & Apps</b><span class="js-n" data-track="dev">84 leçons</span></li>
+          </ul>
           <p class="tk-p" data-i18n="tix.a.p">Faire la pub, la produire avec l’IA, puis livrer le site ou l’application qui vend.</p>
-          <p class="tk-price"><span class="tk-amt js-amt" data-offre="all">59&#8239;900&nbsp;DA</span><s class="tk-was js-was-all">au lieu de 74&#8239;800&nbsp;DA</s><span class="tk-save js-save-all">Tu économises 14&#8239;900&nbsp;DA</span><span class="tk-year" data-i18n="tix.year">Accès 1 an</span></p>
+          <p class="tk-price"><span class="tk-amt js-amt" data-offre="all">50&#8239;000&nbsp;DA</span><s class="tk-was js-was-all">au lieu de 75&#8239;000&nbsp;DA</s><span class="tk-save js-save-all">Tu économises 25&#8239;000&nbsp;DA</span><span class="tk-year" data-i18n="tix.year">Accès 1 an</span></p>
           <ul class="tk-inc">
             <li class="js-inc" data-k="tix.a.1" data-track="all">Les 217 leçons des trois formations</li>
             <li data-i18n="tix.a.5">Les trois formations ouvertes dès le premier jour</li>
@@ -486,9 +492,13 @@
       <article class="tk tk--duo" data-offre="both" id="tk-both" aria-labelledby="tk-both-t">
         <div class="tk-main">
           <p class="tk-k burn" data-i18n="tix.b.k">Billet 03 · Deux formations</p>
-          <h3 class="tk-t" id="tk-both-t"><span class="tk-big" data-i18n="tix.b.big">Pack Créateur</span> <span class="tk-name" data-i18n="tix.b.name">Créative + IA</span></h3>
+          <ul class="tk-parts tk-parts--2">
+            <li data-t="creative"><b data-i18n="duo.big1">Créative</b><span class="js-n" data-track="creative">66 leçons</span></li>
+            <li data-t="ia"><b data-i18n="duo.big2">IA</b><span class="js-n" data-track="ia">67 leçons</span></li>
+          </ul>
+          <h3 class="tk-t" id="tk-both-t"><span class="tk-name" data-i18n="tix.b.big">Pack Créative + IA</span></h3>
           <p class="tk-p" data-i18n="tix.b.p">Les deux formations de la pub, dans l’ordre conseillé : la créative d’abord, l’IA ensuite.</p>
-          <p class="tk-price"><span class="tk-amt js-amt" data-offre="both">32&#8239;900&nbsp;DA</span><s class="tk-was js-was">au lieu de 39&#8239;800&nbsp;DA</s><span class="tk-save js-save">Tu économises 6&#8239;900&nbsp;DA</span><span class="tk-year" data-i18n="tix.year">Accès 1 an</span></p>
+          <p class="tk-price"><span class="tk-amt js-amt" data-offre="both">35&#8239;000&nbsp;DA</span><s class="tk-was js-was">au lieu de 45&#8239;000&nbsp;DA</s><span class="tk-save js-save">Tu économises 10&#8239;000&nbsp;DA</span><span class="tk-year" data-i18n="tix.year">Accès 1 an</span></p>
           <ul class="tk-inc">
             <li class="js-inc" data-k="tix.b.1" data-track="both">Les 133 leçons des deux formations</li>
             <li data-i18n="tix.b.2">Tout le contenu Créative et tout le contenu IA</li>
@@ -556,14 +566,14 @@
           <div class="fld">
             <span id="f-trk-l" data-i18n="f.track">Choisis ta formule · accès 1 an</span>
             <div class="seg seg--3" role="radiogroup" aria-labelledby="f-trk-l">
-              <label><input type="radio" name="formule" value="solo"><span><b data-i18n="f.f.solo">Une formation</b><small class="js-from">dès 14&#8239;900&nbsp;DA</small></span></label>
-              <label><input type="radio" name="formule" value="all" checked><span><b data-i18n="f.track.a">Pack Hooked</b><small class="js-amt" data-offre="all">59&#8239;900&nbsp;DA</small></span></label>
-              <label><input type="radio" name="formule" value="both"><span><b data-i18n="f.track.b">Pack Créateur</b><small class="js-amt" data-offre="both">32&#8239;900&nbsp;DA</small></span></label>
+              <label><input type="radio" name="formule" value="solo"><span><b data-i18n="f.f.solo">Une formation</b><small class="js-from">dès 20&#8239;000&nbsp;DA</small></span></label>
+              <label><input type="radio" name="formule" value="all" checked><span><b data-i18n="f.track.a">Pack complet</b><small class="js-amt" data-offre="all">50&#8239;000&nbsp;DA</small></span></label>
+              <label><input type="radio" name="formule" value="both"><span><b data-i18n="f.track.b">Pack Créative + IA</b><small class="js-amt" data-offre="both">35&#8239;000&nbsp;DA</small></span></label>
             </div>
             <div class="seg seg--3 seg--sub" id="f-solo" role="radiogroup" aria-label="Ta formation" data-i18n-attr="aria-label:f.f.which" hidden>
-              <label><input type="radio" name="solo" value="creative" checked><span><b data-i18n="duo.big1">Créative</b><small class="js-amt" data-offre="creative">14&#8239;900&nbsp;DA</small></span></label>
-              <label><input type="radio" name="solo" value="ia"><span><b data-i18n="duo.big2">IA</b><small class="js-amt" data-offre="ia">24&#8239;900&nbsp;DA</small></span></label>
-              <label><input type="radio" name="solo" value="dev"><span><b data-i18n="duo.big3">Sites & Apps</b><small class="js-amt" data-offre="dev">35&#8239;000&nbsp;DA</small></span></label>
+              <label><input type="radio" name="solo" value="creative" checked><span><b data-i18n="duo.big1">Créative</b><small class="js-amt" data-offre="creative">20&#8239;000&nbsp;DA</small></span></label>
+              <label><input type="radio" name="solo" value="ia"><span><b data-i18n="duo.big2">IA</b><small class="js-amt" data-offre="ia">25&#8239;000&nbsp;DA</small></span></label>
+              <label><input type="radio" name="solo" value="dev"><span><b data-i18n="duo.big3">Sites & Apps</b><small class="js-amt" data-offre="dev">30&#8239;000&nbsp;DA</small></span></label>
             </div>
             <input type="hidden" name="formation" value="all">
           </div>
@@ -605,10 +615,11 @@
     <div class="srt" id="srt">
       <details><summary><span class="srt-i" aria-hidden="true"><b>1</b><span>00:00:01,000 --&gt; 00:00:04,800</span></span><span data-i18n="faq.q1">Faut-il un ordinateur ?</span></summary><p data-i18n="faq.a1">Non. Les leçons se suivent sur téléphone et les trois outils de base (CapCut, Canva, ChatGPT) existent sur mobile, en version gratuite. Un ordinateur est plus confortable pour le montage avancé et la cinématique.</p></details>
       <details><summary><span class="srt-i" aria-hidden="true"><b>2</b><span>00:00:05,000 --&gt; 00:00:08,200</span></span><span data-i18n="faq.q2">Je n’y connais rien, c’est pour moi ?</span></summary><p data-i18n="faq.a2">Oui. Le module 1 commence par « c’est quoi une créative ? ». Chaque leçon dure 2 minutes au maximum et ne traite qu’une idée.</p></details>
-      <details><summary><span class="srt-i" aria-hidden="true"><b>3</b><span>00:00:08,400 --&gt; 00:00:12,000</span></span><span data-i18n="faq.q3">Quelle formation choisir ?</span></summary><p data-i18n="faq.a3">La Formation Créative t’apprend ce qui fait vendre une pub et comment la produire avec ton téléphone, CapCut et Canva. La Formation IA t’apprend à produire avec l’IA (images, vidéos, voix, UGC), puis à vendre ce savoir-faire. La Formation Sites & Apps t’apprend à créer, sécuriser et vendre des sites et des applications avec l’IA. Prends celle qui te sert, ou un pack : Créative + IA (Pack Créateur) ou les trois (Pack Hooked).</p></details>
+      <details><summary><span class="srt-i" aria-hidden="true"><b>3</b><span>00:00:08,400 --&gt; 00:00:12,000</span></span><span data-i18n="faq.q3">Quelle formation choisir ?</span></summary><p data-i18n="faq.a3">La Formation Créative t’apprend ce qui fait vendre une pub et comment la produire avec ton téléphone, CapCut et Canva. La Formation IA t’apprend à produire avec l’IA (images, vidéos, voix, UGC), puis à vendre ce savoir-faire. La Formation Sites & Apps t’apprend à créer, sécuriser et vendre des sites et des applications avec l’IA. Prends celle qui te sert, ou un pack : Créative + IA, ou le pack complet avec les trois.</p></details>
       <details><summary><span class="srt-i" aria-hidden="true"><b>4</b><span>00:00:12,200 --&gt; 00:00:15,600</span></span><span data-i18n="faq.q4">Les outils IA sont-ils payants ?</span></summary><p data-i18n="faq.a4">Plusieurs outils ont une version gratuite suffisante pour apprendre. Pour produire en volume, certains abonnements deviennent utiles : la formation t’explique lesquels choisir selon ton usage et ton budget.</p></details>
-      <details><summary><span class="srt-i" aria-hidden="true"><b>5</b><span>00:00:15,800 --&gt; 00:00:19,400</span></span><span data-i18n="faq.q5">Quel est le lien avec Hooked Lab ?</span></summary><p data-i18n="faq.a5">Hooked Lab est l’application d’analyse de créatives de la même équipe. Dans la formation, tu l’utilises pour décortiquer les publicités qui marchent avant de produire les tiennes.</p></details>
-      <details><summary><span class="srt-i" aria-hidden="true"><b>6</b><span>00:00:19,600 --&gt; 00:00:23,000</span></span><span data-i18n="faq.q6">Comment se passe le paiement ?</span></summary><p data-i18n="faq.a6">Aucun paiement sur le site. Après ton inscription, l’équipe te contacte sur WhatsApp pour confirmer ta formule (une formation, le Pack Créateur ou le Pack Hooked) et les moyens de paiement (CCP, BaridiMob ou espèces). Ton accès est activé dès la validation.</p></details>
+      <!-- Hooked Lab pas encore ouvert (data/hooked-lab.js) : question cachée -->
+      <details hidden><summary><span class="srt-i" aria-hidden="true"><b>5</b><span>00:00:15,800 --&gt; 00:00:19,400</span></span><span data-i18n="faq.q5">Quel est le lien avec Hooked Lab ?</span></summary><p data-i18n="faq.a5">Hooked Lab est l’application d’analyse de créatives de la même équipe. Dans la formation, tu l’utilises pour décortiquer les publicités qui marchent avant de produire les tiennes.</p></details>
+      <details><summary><span class="srt-i" aria-hidden="true"><b>6</b><span>00:00:19,600 --&gt; 00:00:23,000</span></span><span data-i18n="faq.q6">Comment se passe le paiement ?</span></summary><p data-i18n="faq.a6">Aucun paiement sur le site. Après ton inscription, l’équipe te contacte sur WhatsApp pour confirmer ta formule (une formation au choix, le pack Créative + IA ou le pack complet) et les moyens de paiement (CCP, BaridiMob ou espèces). Ton accès est activé dès la validation.</p></details>
       <details><summary><span class="srt-i" aria-hidden="true"><b>7</b><span>00:00:23,200 --&gt; 00:00:26,000</span></span><span data-i18n="faq.q7">Est-ce qu’il y a un certificat ?</span></summary><p data-i18n="faq.a7">Oui, un par formation : quand toutes ses leçons sont terminées, les quiz réussis et, pour la Formation IA, ton projet final validé par l’équipe.</p></details>
     </div>
   </section>
@@ -618,16 +629,16 @@
 <footer class="sh foot" data-ton="encre" data-plan="12" data-name="plan.foot">
   <div class="credits">
     <dl>
-      <div><dt data-i18n="foot.prod">Une production</dt><dd>Hooked Lab</dd></div>
+      <div hidden><dt data-i18n="foot.prod">Une production</dt><dd>Hooked Lab</dd></div><!-- caché tant que Hooked Lab n’est pas ouvert -->
       <div><dt data-i18n="foot.dir">Réalisation</dt><dd data-i18n="slate.you">Toi</dd></div>
-      <div><dt data-i18n="foot.courses">Formations</dt><dd><span data-i18n="track.creative">Formation Créative</span> · <span data-i18n="track.ia">Formation IA</span></dd></div>
+      <div><dt data-i18n="foot.courses">Formations</dt><dd><span data-i18n="track.creative">Formation Créative</span> · <span data-i18n="track.ia">Formation IA</span> · <span data-i18n="track.dev">Formation Sites & Apps</span></dd></div>
       <div><dt data-i18n="foot.voice">Voix</dt><dd data-i18n="foot.voice.x">Le formateur, en darija</dd></div>
     </dl>
     <nav class="foot-nav" aria-label="Liens" data-i18n-attr="aria-label:foot.links">
       <a href="app/" data-i18n="nav.space">Espace étudiant</a>
       <a href="admin/" data-i18n="foot.team">Espace équipe</a>
       <a href="#inscription" data-i18n="join.k">Inscription</a>
-      <a href="https://hooked-lab.com" target="_blank" rel="noopener">Hooked Lab ↗</a>
+      <a href="https://hooked-lab.com" target="_blank" rel="noopener" hidden>Hooked Lab ↗</a><!-- caché tant que Hooked Lab n’est pas ouvert -->
       <button class="foot-app" type="button" data-pwa-install hidden><span aria-hidden="true">⤓</span> <span data-i18n="pwa.install">Installer l’application</span></button>
     </nav>
   </div>

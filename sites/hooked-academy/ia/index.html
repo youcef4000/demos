@@ -166,7 +166,7 @@
         <li><svg aria-hidden="true"><use href="#i-film"/></svg>Higgsfield</li>
         <li><svg aria-hidden="true"><use href="#i-mic"/></svg>ElevenLabs</li>
         <li><svg aria-hidden="true"><use href="#i-film"/></svg>CapCut</li>
-        <li><svg aria-hidden="true"><use href="#i-chart"/></svg>Hooked Lab</li>
+        <li hidden><svg aria-hidden="true"><use href="#i-chart"/></svg>Hooked Lab</li><!-- caché tant que Hooked Lab n’est pas ouvert -->
       </ul>
     </div>
     <div class="mq mq--alt" data-dir="-1">
@@ -190,7 +190,7 @@
           <li class="ps"><span class="ps-n">03</span><div class="ps-b"><p class="ps-m"><svg aria-hidden="true"><use href="#i-video"/></svg><span data-k="ia.s3.m">IA03 · Génération de vidéos</span></p><h3 data-k="ia.s3.t">La vidéo</h3><p data-k="ia.s3.x">Image de départ, action, mouvement de caméra, durée : ton packshot s’anime en 5 secondes.</p></div></li>
           <li class="ps"><span class="ps-n">04</span><div class="ps-b"><p class="ps-m"><svg aria-hidden="true"><use href="#i-mic"/></svg><span data-k="ia.s4.m">IA04 · Voix, musique, sous-titres</span></p><h3 data-k="ia.s4.t">La voix et les sous-titres</h3><p data-k="ia.s4.x">Voix off, musique, et des sous-titres gros, centrés, contrastés, avec le mot clé en couleur.</p></div></li>
           <li class="ps"><span class="ps-n">05</span><div class="ps-b"><p class="ps-m"><svg aria-hidden="true"><use href="#i-film"/></svg><span data-k="ia.s5.m">IA06 · IA07 · UGC et cinématique</span></p><h3 data-k="ia.s5.t">Le niveau au-dessus</h3><p data-k="ia.s5.x">Script UGC, avatar qui parle, storyboard plan par plan : des formats qui arrêtent le scroll.</p></div></li>
-          <li class="ps"><span class="ps-n">06</span><div class="ps-b"><p class="ps-m"><svg aria-hidden="true"><use href="#i-deal"/></svg><span data-k="ia.s6.m">IA08 · IA09 · Analyser et vendre</span></p><h3 data-k="ia.s6.t">Tes premiers clients</h3><p data-k="ia.s6.x">Tu analyses ce qui marche avec Hooked Lab, tu itères, puis tu trouves et signes tes clients.</p><a class="bt bt--lime ps-go" href="#inscription" data-magnet><span data-k="ia.s6.go">Apprendre à le faire</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div></li>
+          <li class="ps"><span class="ps-n">06</span><div class="ps-b"><p class="ps-m"><svg aria-hidden="true"><use href="#i-deal"/></svg><span data-k="ia.s6.m">IA08 · IA09 · Analyser et vendre</span></p><h3 data-k="ia.s6.t">Tes premiers clients</h3><p data-k="ia.s6.x">Tu analyses ce qui marche, tu itères, puis tu trouves et signes tes clients.</p><a class="bt bt--lime ps-go" href="#inscription" data-magnet><span data-k="ia.s6.go">Apprendre à le faire</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div></li>
         </ol>
 
         <div class="stage">
@@ -404,8 +404,9 @@
       <h2 class="h2" id="tar-t" data-split data-k="ia.tar.t">Choisis ta formule.</h2>
       <p class="lead" data-fade data-k="ia.tar.lead">Aucun paiement en ligne : l’équipe t’appelle d’abord, puis tu paies par CCP, BaridiMob ou en espèces. Accès d’un an.</p>
     </header>
-    <!-- Trois formules : une formation au choix (IA par défaut sur cette page), le Pack Hooked au centre (les trois
-         formations, la meilleure offre) et le Pack Créateur (IA + Créative). Prix : data/offres.js -->
+    <!-- Trois formules : une formation au choix (IA par défaut sur cette page ; couleur et prix selon la formation),
+         le pack complet au centre (les trois formations, la meilleure offre) et le pack Créative + IA (les deux
+         formations côte à côte). Prix : data/offres.js -->
     <div class="cards wrap">
       <article class="card card--solo spot" data-t="ia" id="c-solo" aria-labelledby="c-solo-k">
         <p class="card-k" id="c-solo-k"><svg aria-hidden="true"><use href="#i-spark"/></svg><span data-k="ia.tar.s.k">Une formation au choix</span></p>
@@ -456,11 +457,15 @@
 
       <article class="card card--pack spot" aria-labelledby="c-all">
         <p class="card-badge" data-k="ia.tar.badge">Meilleure offre</p>
-        <p class="card-k"><svg aria-hidden="true"><use href="#i-spark"/></svg><span data-k="ia.tar.a.k">Pack Hooked · les trois formations</span></p>
+        <p class="card-k"><svg aria-hidden="true"><use href="#i-spark"/></svg><span data-k="ia.tar.a.k">Pack complet · les trois formations</span></p>
         <h3 class="card-t" id="c-all" data-k="ia.tar.a.t">IA + Créative + Sites & Apps</h3>
+        <ul class="cparts cparts--3">
+          <li data-t="ia"><b data-k="ia.tar.s.ia">IA</b><span class="js-n" data-n="ia-lessons"></span></li>
+          <li data-t="creative"><b data-k="ia.tar.s.crea">Créative</b><span class="js-n" data-n="crea-lessons"></span></li>
+          <li data-t="dev"><b data-k="ia.tar.s.dev">Sites & Apps</b><span class="js-n" data-n="dev-lessons"></span></li>
+        </ul>
         <p class="price"><b data-price="all">—</b><span data-k="ia.tar.da">DA</span></p>
         <p class="per"><s data-h="ia.tar.a.was"></s> · <b class="save" data-h="ia.tar.a.save"></b></p>
-        <p class="trio-bar" aria-hidden="true"><i></i><i></i><i></i></p>
         <ul class="inc">
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-h="ia.tar.a.1">Toutes les leçons des trois formations</span></li>
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.a.2">Les trois formations ouvertes dès le premier jour</span></li>
@@ -472,7 +477,11 @@
       </article>
 
       <article class="card card--duo spot" aria-labelledby="c-both">
-        <p class="card-k"><svg aria-hidden="true"><use href="#i-film"/></svg><span data-k="ia.tar.b.k">Pack Créateur · IA + Créative</span></p>
+        <p class="card-k"><svg aria-hidden="true"><use href="#i-film"/></svg><span data-k="ia.tar.b.k">Pack Créative + IA · deux formations</span></p>
+        <ul class="cparts cparts--2">
+          <li data-t="creative"><b data-k="ia.tar.s.crea">Créative</b><span class="js-n" data-n="crea-lessons"></span></li>
+          <li data-t="ia"><b data-k="ia.tar.s.ia">IA</b><span class="js-n" data-n="ia-lessons"></span></li>
+        </ul>
         <h3 class="card-t" id="c-both" data-k="ia.tar.b.t">Les deux formations de la pub</h3>
         <p class="price"><b data-price="both">—</b><span data-k="ia.tar.da">DA</span></p>
         <p class="per"><s data-h="ia.tar.b.was"></s> · <b class="save" data-h="ia.tar.b.save"></b></p>
@@ -520,8 +529,8 @@
             <span id="f-pack" data-k="ia.f.pack">Choisis ta formule · accès 1 an</span>
             <div class="seg" role="radiogroup" aria-labelledby="f-pack">
               <label><input type="radio" name="formule" value="solo"><span><b data-k="ia.f.solo">Une formation</b><small data-h="ia.f.from"></small></span></label>
-              <label><input type="radio" name="formule" value="all" checked><span><b data-k="ia.f.all">Pack Hooked</b><small data-price-s="all"></small></span></label>
-              <label><input type="radio" name="formule" value="both"><span><b data-k="ia.f.both">Pack Créateur</b><small data-price-s="both"></small></span></label>
+              <label><input type="radio" name="formule" value="all" checked><span><b data-k="ia.f.all">Pack complet</b><small data-price-s="all"></small></span></label>
+              <label><input type="radio" name="formule" value="both"><span><b data-k="ia.f.both">Pack Créative + IA</b><small data-price-s="both"></small></span></label>
             </div>
             <div class="seg seg--sub" id="f-solo" role="radiogroup" aria-label="Ta formation" data-ka="aria-label:ia.f.which" hidden>
               <label><input type="radio" name="solo" value="ia" checked><span><b data-k="ia.f.ia">Formation IA</b><small data-price-s="ia"></small></span></label>

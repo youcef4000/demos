@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-23T13:31:27.463Z",
+  "generated": "2026-11-23T21:18:57.222Z",
   "lessons": {
     "m0-l1": [
       {
@@ -710,7 +710,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/m2-l10/01-fiche-de-la-leçon.fr.pdf",
-        "size": 217869
+        "size": 217247
       },
       {
         "kind": "pdf",
@@ -718,7 +718,7 @@
         "file": "01-lesson-sheet.en.pdf",
         "lang": "en",
         "path": "ressources/m2-l10/01-lesson-sheet.en.pdf",
-        "size": 200318
+        "size": 199691
       },
       {
         "kind": "pdf",
@@ -726,13 +726,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l10/01-ملخص-الدرس.ar.pdf",
-        "size": 171284
-      },
-      {
-        "kind": "link",
-        "title": "Hooked Lab",
-        "url": "https://hooked-lab.com/",
-        "file": "liens.txt"
+        "size": 170818
       },
       {
         "kind": "link",
@@ -1424,7 +1418,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/m7-l1/01-fiche-de-la-leçon.fr.pdf",
-        "size": 204781
+        "size": 204154
       },
       {
         "kind": "pdf",
@@ -1432,7 +1426,7 @@
         "file": "01-lesson-sheet.en.pdf",
         "lang": "en",
         "path": "ressources/m7-l1/01-lesson-sheet.en.pdf",
-        "size": 185846
+        "size": 185212
       },
       {
         "kind": "pdf",
@@ -1440,13 +1434,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m7-l1/01-ملخص-الدرس.ar.pdf",
-        "size": 156767
-      },
-      {
-        "kind": "link",
-        "title": "Hooked Lab",
-        "url": "https://hooked-lab.com/",
-        "file": "liens.txt"
+        "size": 156244
       },
       {
         "kind": "link",
@@ -2648,7 +2636,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/ia0-l1/01-fiche-de-la-leçon.fr.pdf",
-        "size": 186005
+        "size": 185669
       },
       {
         "kind": "pdf",
@@ -2656,7 +2644,7 @@
         "file": "01-lesson-sheet.en.pdf",
         "lang": "en",
         "path": "ressources/ia0-l1/01-lesson-sheet.en.pdf",
-        "size": 175995
+        "size": 176475
       },
       {
         "kind": "pdf",
@@ -2664,18 +2652,18 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/ia0-l1/01-ملخص-الدرس.ar.pdf",
-        "size": 152946
-      },
-      {
-        "kind": "link",
-        "title": "Hooked Lab",
-        "url": "https://hooked-lab.com/",
-        "file": "liens.txt"
+        "size": 153325
       },
       {
         "kind": "link",
         "title": "ChatGPT",
         "url": "https://chatgpt.com/",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
         "file": "liens.txt"
       }
     ],
@@ -4996,7 +4984,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/ia7-l1/01-fiche-de-la-leçon.fr.pdf",
-        "size": 173025
+        "size": 172710
       },
       {
         "kind": "pdf",
@@ -5004,7 +4992,7 @@
         "file": "01-lesson-sheet.en.pdf",
         "lang": "en",
         "path": "ressources/ia7-l1/01-lesson-sheet.en.pdf",
-        "size": 160120
+        "size": 159818
       },
       {
         "kind": "pdf",
@@ -5012,13 +5000,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/ia7-l1/01-ملخص-الدرس.ar.pdf",
-        "size": 147942
-      },
-      {
-        "kind": "link",
-        "title": "Hooked Lab",
-        "url": "https://hooked-lab.com/",
-        "file": "liens.txt"
+        "size": 147532
       },
       {
         "kind": "link",
@@ -5034,7 +5016,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/ia7-l2/01-fiche-de-la-leçon.fr.pdf",
-        "size": 168303
+        "size": 166263
       },
       {
         "kind": "pdf",
@@ -5042,7 +5024,7 @@
         "file": "01-lesson-sheet.en.pdf",
         "lang": "en",
         "path": "ressources/ia7-l2/01-lesson-sheet.en.pdf",
-        "size": 161881
+        "size": 158451
       },
       {
         "kind": "pdf",
@@ -5050,13 +5032,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/ia7-l2/01-ملخص-الدرس.ar.pdf",
-        "size": 147632
-      },
-      {
-        "kind": "link",
-        "title": "Hooked Lab",
-        "url": "https://hooked-lab.com/",
-        "file": "liens.txt"
+        "size": 138799
       },
       {
         "kind": "link",
@@ -5072,7 +5048,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/ia7-l3/01-fiche-de-la-leçon.fr.pdf",
-        "size": 174286
+        "size": 174190
       },
       {
         "kind": "pdf",
@@ -5080,7 +5056,7 @@
         "file": "01-lesson-sheet.en.pdf",
         "lang": "en",
         "path": "ressources/ia7-l3/01-lesson-sheet.en.pdf",
-        "size": 166948
+        "size": 166730
       },
       {
         "kind": "pdf",
@@ -5088,7 +5064,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/ia7-l3/01-ملخص-الدرس.ar.pdf",
-        "size": 158789
+        "size": 158742
       },
       {
         "kind": "link",
@@ -5098,8 +5074,8 @@
       },
       {
         "kind": "link",
-        "title": "Hooked Lab",
-        "url": "https://hooked-lab.com/",
+        "title": "Meta Ad Library",
+        "url": "https://www.facebook.com/ads/library/",
         "file": "liens.txt"
       }
     ],
@@ -5110,7 +5086,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/ia7-l4/01-fiche-de-la-leçon.fr.pdf",
-        "size": 177360
+        "size": 176730
       },
       {
         "kind": "pdf",
@@ -5118,7 +5094,7 @@
         "file": "01-lesson-sheet.en.pdf",
         "lang": "en",
         "path": "ressources/ia7-l4/01-lesson-sheet.en.pdf",
-        "size": 166649
+        "size": 166694
       },
       {
         "kind": "pdf",
@@ -5126,7 +5102,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/ia7-l4/01-ملخص-الدرس.ar.pdf",
-        "size": 148118
+        "size": 148256
       },
       {
         "kind": "link",
@@ -5136,8 +5112,8 @@
       },
       {
         "kind": "link",
-        "title": "Hooked Lab",
-        "url": "https://hooked-lab.com/",
+        "title": "Meta Ad Library",
+        "url": "https://www.facebook.com/ads/library/",
         "file": "liens.txt"
       }
     ],
@@ -5272,7 +5248,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/ia8-l3/01-fiche-de-la-leçon.fr.pdf",
-        "size": 152823
+        "size": 151095
       },
       {
         "kind": "pdf",
@@ -5280,7 +5256,7 @@
         "file": "01-lesson-sheet.en.pdf",
         "lang": "en",
         "path": "ressources/ia8-l3/01-lesson-sheet.en.pdf",
-        "size": 154548
+        "size": 153504
       },
       {
         "kind": "pdf",
@@ -5288,18 +5264,18 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/ia8-l3/01-ملخص-الدرس.ar.pdf",
-        "size": 129894
-      },
-      {
-        "kind": "link",
-        "title": "Hooked Lab",
-        "url": "https://hooked-lab.com/",
-        "file": "liens.txt"
+        "size": 129342
       },
       {
         "kind": "link",
         "title": "ChatGPT",
         "url": "https://chatgpt.com/",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Canva",
+        "url": "https://www.canva.com/",
         "file": "liens.txt"
       }
     ],
@@ -5538,7 +5514,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/ia9-l1/01-fiche-de-la-leçon.fr.pdf",
-        "size": 168183
+        "size": 166483
       },
       {
         "kind": "pdf",
@@ -5546,7 +5522,7 @@
         "file": "01-lesson-sheet.en.pdf",
         "lang": "en",
         "path": "ressources/ia9-l1/01-lesson-sheet.en.pdf",
-        "size": 164648
+        "size": 165758
       },
       {
         "kind": "pdf",
@@ -5554,13 +5530,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/ia9-l1/01-ملخص-الدرس.ar.pdf",
-        "size": 146823
-      },
-      {
-        "kind": "link",
-        "title": "Hooked Lab",
-        "url": "https://hooked-lab.com/",
-        "file": "liens.txt"
+        "size": 145423
       },
       {
         "kind": "link",

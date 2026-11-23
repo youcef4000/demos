@@ -44,16 +44,33 @@ ligne) : `assets/js/site-build.js` et `assets/css/site-build.css`, partagés par
 
 ## Les offres (novembre 2026)
 
-Trois billets seulement, pour ne pas noyer le visiteur dans le choix : **une formation au choix** (sélecteur Créative /
-IA / Sites & Apps, avec le pack qui ajoute le plus pour le moins), le **Pack Hooked** au centre (les trois formations,
-« meilleure offre ») et le **Pack Créateur** (Créative + IA). Le formulaire suit le même ordre : la formule, puis la
-formation si « une formation ». Les identifiants envoyés au serveur ne changent pas (`creative`, `ia`, `dev`, `both`,
-`all`) ; les prix restent dans `data/offres.js` (ou Admin → Réglages).
+Trois billets seulement, pour ne pas noyer le visiteur dans le choix (landing et `/ia/`) :
 
-Structure IA demandée : Prompting → Images → Vidéos → UGC → Cinématique → Acquisition clients.
-Ajouts : **Voix, musique et sous-titres** (indispensable pour l'UGC et la cinématique, placé avant),
-**Tester et analyser avec Hooked Lab** (on mesure avant de vendre), éthique de l'UGC IA dans le
-module UGC, et un **projet final** avec certificat.
+| Billet | Prix | Design |
+|---|---|---|
+| Une formation au choix | Créative 20 000 DA · IA 25 000 DA · Sites & Apps 30 000 DA | un sélecteur change la couleur, le contenu et le prix, et propose le pack qui ajoute le plus pour le moins |
+| Pack complet (au centre, « meilleure offre ») | 50 000 DA au lieu de 75 000 | les trois formations en blocs de couleur reliés par « + » |
+| Pack Créative + IA | 35 000 DA au lieu de 45 000 | les deux formations côte à côte, reliées par « + » |
+
+Le formulaire suit le même ordre : la formule, puis la formation si « une formation ». Les identifiants envoyés au
+serveur ne changent pas (`creative`, `ia`, `dev`, `both`, `all`) ; les prix sont dans `data/offres.js`, et l'équipe peut
+les remplacer dans Admin → Réglages (ils priment alors sur le fichier).
+
+## Hooked Lab masqué (novembre 2026)
+
+Hooked Lab n'est pas encore ouvert : la plateforme n'en parle nulle part, mais rien n'est supprimé. L'interrupteur est
+`data/hooked-lab.js` (`LAB = false`) :
+
+- landing et `/ia/` : section, liens, question de la FAQ et mentions cachées (attribut `hidden`, texte d'origine en commentaire) ;
+- espace étudiant : lien du menu et cartes Hooked Lab non affichés ; FAQ : la question « Quel est le lien avec Hooked Lab ? »
+  est cachée et les autres réponses passent par le masque ;
+- leçons (9 leçons, français, anglais, arabe et darija du prompteur) : `MASQUE` remplace les passages à l'affichage
+  (`data/programme.js`, étape 4) ; l'animation d'analyse (IA08 · L02) affiche « Analyse » au lieu de la marque ;
+- fiches PDF et `liens.txt` : régénérés sans Hooked Lab (`fiches-lecons.mjs` applique le même masque).
+
+Pour tout remettre : `LAB = true`, puis `node tools/hooked-academy/fiches-lecons.mjs m2-l10 m7-l1 ia0-l1 ia7-l1 ia7-l2
+ia7-l3 ia7-l4 ia8-l3 ia9-l1` et `node tools/hooked-academy/ressources.mjs`, et retirer les attributs `hidden` notés
+« caché tant que Hooked Lab n’est pas ouvert ».
 
 ## Les vidéos
 

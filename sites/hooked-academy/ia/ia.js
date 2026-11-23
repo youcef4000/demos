@@ -122,6 +122,7 @@ import { mountSiteBuild } from '../assets/js/site-build.js';
     });
     $$('[data-price]').forEach((el) => (el.textContent = fmt(P[el.dataset.price])));
     $$('[data-price-s]').forEach((el) => (el.textContent = da(P[el.dataset.priceS])));
+    $$('.js-n').forEach((el) => (el.textContent = nl(N[el.dataset.n])));
     $('#all-lbl').textContent = t('ia.all.open', { n: N['ia-lessons'] });
     $$('#lsw [data-lang]').forEach((b) => {
       b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
@@ -212,7 +213,7 @@ import { mountSiteBuild } from '../assets/js/site-build.js';
   /* Formulaire : même serveur que la landing, source « Landing IA »   */
   /* ---------------------------------------------------------------- */
   const form = $('#form');
-  // La formule (une formation, Pack Hooked, Pack Créateur), puis la formation si « une formation » :
+  // La formule (une formation, pack complet, pack Créative + IA), puis la formation si « une formation » :
   // le champ caché `formation` porte l'offre envoyée au serveur (creative, ia, dev, both ou all).
   const fSync = () => {
     const f = $('input[name="formule"]:checked', form)?.value || 'all';
@@ -234,7 +235,7 @@ import { mountSiteBuild } from '../assets/js/site-build.js';
     if (a) pickOffer(a.dataset.pick);
   });
   // Carte « une formation au choix » : le sélecteur change la formation, le prix et le pack proposé
-  // (IA ou Créative → Pack Créateur ; Sites & Apps → Pack Hooked).
+  // (IA ou Créative → pack Créative + IA ; Sites & Apps → pack complet).
   const soloCard = $('#c-solo');
   const UP = { ia: ['both', P.both - P.ia], creative: ['both', P.both - P.creative], dev: ['all', P.all - P.dev] };
   const showSolo = (id, anim) => {

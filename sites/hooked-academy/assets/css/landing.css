@@ -3523,3 +3523,157 @@ html[lang='ar'] .tk-sw button {
     min-height: 0;
   }
 }
+
+/* Packs (2e version) : chaque pack montre ses formations en blocs de couleur reliés par « + ».
+   Pack complet : trois blocs (orange, lavande, menthe) ; pack Créative + IA : deux grands blocs côte à côte. */
+.tk-sw button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.tk-sw button i {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1.5px var(--ink);
+  background: var(--orange);
+}
+.tk-sw button[data-t='ia'] i {
+  background: var(--lav);
+}
+.tk-sw button[data-t='dev'] i {
+  background: #5fd3b3;
+}
+.tk-parts {
+  display: grid;
+  gap: 16px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.tk-parts--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.tk-parts--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+.tk-parts li {
+  position: relative;
+  display: grid;
+  align-content: end;
+  gap: 4px;
+  min-width: 0;
+  padding: 10px 10px 9px;
+  border-radius: 4px;
+  background: var(--orange);
+  color: var(--ink);
+}
+.tk-parts li[data-t='ia'] {
+  background: var(--lav);
+}
+.tk-parts li[data-t='dev'] {
+  background: #5fd3b3;
+}
+.tk-parts b {
+  font-family: var(--f-cond);
+  font-weight: 900;
+  font-size: 21px;
+  line-height: 0.95;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+.tk-parts span {
+  font-size: 12.5px;
+  font-weight: 800;
+}
+/* le « + » entre deux blocs */
+.tk-parts li + li::before {
+  content: '+';
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  inset-inline-start: -13px;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin-top: -11px;
+  border-radius: 50%;
+  background: var(--lime);
+  color: var(--ink);
+  font-family: var(--f-cond);
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 1;
+}
+.tk-parts--2 li {
+  min-height: 112px;
+  padding: 14px 14px 12px;
+}
+.tk-parts--2 b {
+  font-size: clamp(34px, 3.4vw, 48px);
+}
+.tk-parts--2 li + li::before {
+  inset-inline-start: -21px;
+  width: 32px;
+  height: 32px;
+  margin-top: -16px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 28px;
+}
+html[lang='ar'] .tk-parts b {
+  font-size: 17px;
+  line-height: 1.2;
+}
+html[lang='ar'] .tk-parts--2 b {
+  font-size: clamp(24px, 2.4vw, 32px);
+}
+.tk--duo {
+  background: #fbf9f3;
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+.tk--duo .tk-t {
+  margin-top: 16px;
+}
+.tk--duo .tk-name {
+  font-family: var(--f-cond);
+  font-weight: 900;
+  font-size: clamp(30px, 2.6vw, 38px);
+  line-height: 0.95;
+}
+.tk--duo .tk-go:hover {
+  background: var(--lime);
+  color: var(--ink);
+}
+/* Les noms des formations remplissent leur bloc sans se couper (unités de conteneur) */
+.tk-parts li {
+  container-type: inline-size;
+}
+.tk-parts b {
+  font-size: clamp(14px, 18cqi, 24px);
+  white-space: nowrap;
+  overflow-wrap: normal;
+}
+.tk-parts--2 b {
+  font-size: clamp(22px, 27cqi, 46px);
+}
+.tk-parts--3 li + li {
+  padding-inline-start: 16px;
+}
+.tk-parts--2 li + li {
+  padding-inline-start: 22px;
+}
+html[lang='ar'] .tk-parts b {
+  font-size: clamp(13px, 13cqi, 18px);
+  white-space: normal;
+}
+html[lang='ar'] .tk-parts--2 b {
+  font-size: clamp(20px, 20cqi, 32px);
+}
+html[lang='ar'] .tk--duo .tk-name {
+  font-size: clamp(22px, 2vw, 28px);
+  line-height: 1.3;
+}
