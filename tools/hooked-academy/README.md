@@ -35,6 +35,8 @@ Ses vidéos ont leur propre thème « code » (`motion/dev.css`, classe `.is-dev
 scènes (`motion/scenes-dev.js` : `terminal`, `code`, `browser`, `tree`, `diff`, `gitgraph`, `alert`). Miniatures :
 `video/vignettes/dv*.jpg` (`vignettes.mjs`) ; fiches PDF : `TRACK=dev LANGS=fr node tools/hooked-academy/fiches-lecons.mjs`.
 Documents (recherches, tournages, modèles) : `formations/sites-et-apps/`.
+Anglais et arabe : `data/i18n/<langue>/dv0.js … dv15.js` traduisent les titres, les présentations des modules et les
+points essentiels (environ 10 % des textes, voir `i18n-check.mjs`) ; les scènes, quiz et exercices restent en français.
 
 Structure IA demandée : Prompting → Images → Vidéos → UGC → Cinématique → Acquisition clients.
 Ajouts : **Voix, musique et sous-titres** (indispensable pour l'UGC et la cinématique, placé avant),

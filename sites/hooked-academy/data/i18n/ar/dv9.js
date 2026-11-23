@@ -1,0 +1,60 @@
+// Traduction (ar) du module dv9 — بناء تطبيق حقيقي.
+// Titres, présentation et points essentiels ; les scènes restent en français pour l'instant (voir i18n-check.mjs).
+export default {
+  "modules": {
+    "dv9": {
+      "title": "بناء تطبيق حقيقي",
+      "pitch": "من المواصفات إلى المنتج: مولّد أو Claude Code، الدفع (Chargily والدفع الدولي)، البريد، الإحصائيات، PWA والهاتف."
+    }
+  },
+  "lessons": {
+    "dv9-l1": {
+      "title": "من حاجة الزبون إلى المواصفات",
+      "key": [
+        "المواصفات: المستخدمون، المشكلة، MVP، الشاشات والبيانات، خارج النطاق.",
+        "قصص المستخدم: بصفتي… أريد… حتى… + معيار قابل للاختبار.",
+        "مصادق عليها كتابيًا قبل البرمجة؛ أساس عرض السعر؛ الطلبات الجديدة = نسخة 2."
+      ]
+    },
+    "dv9-l2": {
+      "title": "الطريق السريع: مولّد + Supabase",
+      "key": [
+        "مواصفات ← توليد صفحة بصفحة ← Supabase (جداول + RLS) ← GitHub منذ البداية.",
+        "تحقّق: RLS على كل جدول، لا مفتاح سري في الواجهة، الرصيد، الكود محدّث على GitHub.",
+        "ثم مراجعة بـ Claude Code قبل التسليم."
+      ]
+    },
+    "dv9-l3": {
+      "title": "تطبيق · الطريق المحترف مع Claude Code",
+      "key": [
+        "npm create vite@latest my-app (Vite 8، create-vite 9)؛ npm install؛ npm run build.",
+        "أضف منذ البداية: CLAUDE.md وspec.md و.env.example ومكانًا للاختبارات.",
+        "شاشة بشاشة: وضع الخطة ← البناء ← الاختبار (npm run dev + الهاتف) ← commit."
+      ]
+    },
+    "dv9-l4": {
+      "title": "التحصيل: Chargily في الجزائر والدفع الدولي",
+      "key": [
+        "الجزائر: Chargily Pay (CIB وEdahabia، وضع اختبار)؛ دوليًا: Stripe وPaddle وLemon Squeezy؛ خطّط للدفع عند الاستلام.",
+        "المسار: الخادم ينشئ الدفع ← صفحة المزوّد ← webhook موقّع يؤكد.",
+        "لا تحقق في المتصفح أبدًا؛ تحقّق من التوقيع؛ معالجة غير مكررة."
+      ]
+    },
+    "dv9-l5": {
+      "title": "النماذج والبريد والإحصائيات",
+      "key": [
+        "النماذج: Tally وFormspree؛ البريد: Resend وBrevo؛ الإحصائيات: Plausible وUmami وClarity؛ Search Console.",
+        "بريد يصل: SPF وDKIM وDMARC ومُرسِل واضح.",
+        "تذكير تلقائي في اليوم السابق ورابط واتساب في البريد."
+      ]
+    },
+    "dv9-l6": {
+      "title": "PWA وتطبيقات الهاتف",
+      "key": [
+        "PWA = تطبيق ويب + manifest + service worker: يُثبَّت دون متجر ودون تكلفة.",
+        "Capacitor (تغليف تطبيق ويب) أو Expo (تطبيق أصلي) للمتاجر: Apple بـ 99 دولارًا سنويًا، Google بـ 25 دولارًا مرة واحدة.",
+        "المتاجر: مدة المراجعة، حسابات باسم الزبون، كل تحديث يُراجَع من جديد."
+      ]
+    }
+  }
+};
