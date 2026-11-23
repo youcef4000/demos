@@ -1,10 +1,11 @@
-// Fiches PDF et liens des leçons de la Formation IA, générés à partir du programme (et de ses traductions) :
+// Fiches PDF et liens des leçons (Formation Créative et Formation IA), générés à partir du programme et de ses traductions :
 //   ressources/<leçon>/01-fiche-de-la-leçon.fr.pdf (+ .en, .ar) : l'essentiel, la méthode vue dans la vidéo,
 //   les prompts de l'atelier, l'exercice, le quiz corrigé et les outils ;
 //   ressources/<leçon>/liens.txt : les outils cités dans la leçon (pages officielles).
 // Puis relancer `node tools/hooked-academy/ressources.mjs` pour mettre à jour le manifeste.
 //
-//   node tools/hooked-academy/fiches-lecons.mjs                 toutes les leçons IA, trois langues
+//   node tools/hooked-academy/fiches-lecons.mjs                 toutes les leçons, trois langues
+//   TRACK=creative node tools/hooked-academy/fiches-lecons.mjs  une seule formation (creative ou ia)
 //   node tools/hooked-academy/fiches-lecons.mjs ia1-l2 ia3-l4   seulement ces leçons
 //   LANGS=fr node tools/hooked-academy/fiches-lecons.mjs        une seule langue
 //
@@ -23,11 +24,16 @@ const { OUTILS } = await import(pathToFileURL(path.join(SITE, 'data/outils.js'))
 
 const LANGS = (process.env.LANGS || 'fr,en,ar').split(',');
 const ONLY = process.argv.slice(2);
+const TRACK = process.env.TRACK;
+const COURSE = {
+  creative: { fr: 'Formation Créative', en: 'Creative Course', ar: 'التكوين الإبداعي' },
+  ia: { fr: 'Formation IA', en: 'AI Course', ar: 'تكوين الذكاء الاصطناعي' },
+};
 const FILE = { fr: '01-fiche-de-la-leçon', en: '01-lesson-sheet', ar: '01-ملخص-الدرس' };
 const T = {
-  fr: { course: 'Formation IA', lesson: 'Leçon', sheet: 'fiche de la leçon', ess: 'L’essentiel', meth: 'La méthode de la vidéo', prompts: 'Les prompts de l’atelier', ex: 'L’exercice', quiz: 'Vérifie-toi', answer: 'Réponse', tools: 'Les outils', note: 'Remplace ce qui est entre crochets [ ] par ton produit, ta cible, ta ville.', video: 'Le prompt de la vidéo' },
-  en: { course: 'AI Course', lesson: 'Lesson', sheet: 'lesson sheet', ess: 'Key points', meth: 'The method from the video', prompts: 'Workshop prompts', ex: 'The exercise', quiz: 'Check yourself', answer: 'Answer', tools: 'Tools', note: 'Replace what is in square brackets [ ] with your product, audience and city.', video: 'The prompt from the video' },
-  ar: { course: 'تكوين الذكاء الاصطناعي', lesson: 'الدرس', sheet: 'ملخص الدرس', ess: 'الأساسي', meth: 'طريقة الفيديو', prompts: 'برومبتات الورشة', ex: 'التمرين', quiz: 'اختبر نفسك', answer: 'الجواب', tools: 'الأدوات', note: 'استبدل ما بين المعقوفين [ ] بمنتجك وجمهورك ومدينتك.', video: 'برومبت الفيديو' },
+  fr: { lesson: 'Leçon', sheet: 'fiche de la leçon', ess: 'L’essentiel', meth: 'La méthode de la vidéo', prompts: 'Les prompts de l’atelier', ex: 'L’exercice', quiz: 'Vérifie-toi', answer: 'Réponse', tools: 'Les outils', note: 'Remplace ce qui est entre crochets [ ] par ton produit, ta cible, ta ville.', video: 'Le prompt de la vidéo' },
+  en: { lesson: 'Lesson', sheet: 'lesson sheet', ess: 'Key points', meth: 'The method from the video', prompts: 'Workshop prompts', ex: 'The exercise', quiz: 'Check yourself', answer: 'Answer', tools: 'Tools', note: 'Replace what is in square brackets [ ] with your product, audience and city.', video: 'The prompt from the video' },
+  ar: { lesson: 'الدرس', sheet: 'ملخص الدرس', ess: 'الأساسي', meth: 'طريقة الفيديو', prompts: 'برومبتات الورشة', ex: 'التمرين', quiz: 'اختبر نفسك', answer: 'الجواب', tools: 'الأدوات', note: 'استبدل ما بين المعقوفين [ ] بمنتجك وجمهورك ومدينتك.', video: 'برومبت الفيديو' },
 };
 
 // Outils cités → liens (page officielle, ou lien de parrainage de l'équipe quand il existe, comme dans l'espace étudiant)
@@ -36,12 +42,16 @@ const EXTRA = {
   adlib: { name: 'Meta Ad Library', url: 'https://www.facebook.com/ads/library/' },
   tiktok: { name: 'TikTok Creative Center', url: 'https://ads.tiktok.com/business/creativecenter/' },
   lab: { name: 'Hooked Lab', url: 'https://hooked-lab.com' },
+  aliexpress: { name: 'AliExpress', url: 'https://www.aliexpress.com' },
+  snaptik: { name: 'SnapTik', url: 'https://snaptik.app' },
+  metasound: { name: 'Meta Sound Collection', url: 'https://www.facebook.com/sound/collection/' },
+  tiktokmusic: { name: 'TikTok Commercial Music Library', url: 'https://ads.tiktok.com/business/creativecenter/music/pc/en' },
 };
 const DETECT = [
   ['chatgpt', /chatgpt/i],
   ['claude', /\bclaude\b/i],
   ['gemini', /gemini|nano banana/i],
-  ['veo', /\bveo\b|flow/i],
+  ['veo', /\bveo\b|\bflow\b/i],
   ['kling', /kling/i],
   ['higgsfield', /higgsfield/i],
   ['elevenlabs', /elevenlabs/i],
@@ -50,11 +60,18 @@ const DETECT = [
   ['hostinger', /hostinger/i],
   ['lab', /hooked lab/i],
   ['adlib', /biblioth[eè]que publicitaire|ad library/i],
+  ['aliexpress', /aliexpress/i],
+  ['snaptik', /snaptik/i],
+  ['metasound', /sound collection|musique autoris|musique libre de droits/i],
+  ['tiktokmusic', /sound collection|musique autoris|musique libre de droits/i],
   ['tiktok', /tiktok/i],
 ];
-const DEFAULT = { ia0: ['chatgpt', 'claude'], ia1: ['chatgpt', 'claude'], ia2: ['gemini', 'canva'], ia3: ['veo', 'kling', 'capcut'], ia4: ['elevenlabs', 'capcut'], ia10: ['adlib', 'chatgpt'], ia5: ['elevenlabs', 'higgsfield'], ia6: ['higgsfield', 'capcut'], ia7: ['lab', 'adlib'], ia8: ['chatgpt', 'canva'], ia9: ['lab', 'chatgpt'] };
+const DEFAULT = { ia0: ['chatgpt', 'claude'], ia1: ['chatgpt', 'claude'], ia2: ['gemini', 'canva'], ia3: ['veo', 'kling', 'capcut'], ia4: ['elevenlabs', 'capcut'], ia10: ['adlib', 'chatgpt'], ia5: ['elevenlabs', 'higgsfield'], ia6: ['higgsfield', 'capcut'], ia7: ['lab', 'adlib'], ia8: ['chatgpt', 'canva'], ia9: ['lab', 'chatgpt'],
+  m0: ['capcut', 'canva'], m1: ['capcut', 'canva'], m2: ['capcut', 'chatgpt'], m3: ['chatgpt', 'canva'], m4: ['capcut', 'chatgpt'], m5: ['capcut', 'canva'], m6: ['canva', 'chatgpt'],
+  m7: ['adlib', 'capcut'], m8: ['capcut'], m9: ['capcut'], m10: ['adlib', 'chatgpt'], m11: ['canva', 'capcut'], m12: ['capcut', 'canva'] };
 const linksOf = (m, l) => {
-  const txt = JSON.stringify(l);
+  // le texte de la leçon, sans les noms de scènes (« flow » est un type de scène, pas l'outil Flow)
+  const txt = JSON.stringify(l, (k, v) => (k === 'type' || k === 'widget' ? undefined : v));
   const ids = DETECT.filter(([, re]) => re.test(txt)).map(([id]) => id);
   for (const id of DEFAULT[m.id] || []) if (ids.length < 2 && !ids.includes(id)) ids.push(id);
   return ids.map((id) => TOOL[id] || EXTRA[id]).filter(Boolean);
@@ -71,7 +88,7 @@ function merge(base, ov) {
 const OV = {};
 for (const lang of LANGS.filter((l) => l !== 'fr')) {
   OV[lang] = {};
-  for (const m of MODULES.filter((x) => x.track === 'ia')) {
+  for (const m of MODULES.filter((x) => !TRACK || x.track === TRACK)) {
     try {
       OV[lang][m.id] = (await import(pathToFileURL(path.join(SITE, `data/i18n/${lang}/${m.id}.js`)).href)).default;
     } catch {}
@@ -81,8 +98,10 @@ for (const lang of LANGS.filter((l) => l !== 'fr')) {
 const clean = (s) => String(s ?? '').replace(/[~^]/g, '').replace(/\s+/g, ' ').trim();
 const bullet = (x) => {
   if (typeof x === 'string') return `- ${clean(x)}`;
-  const label = clean(x.label || x.t || x.title || '');
-  const sub = clean(x.sub || x.text || '');
+  if (Array.isArray(x.cells)) return `- **${clean(x.cells[0])}** — ${x.cells.slice(1).map(clean).join(' · ')}`;
+  if (x.text && x.fr) return `- ${clean(x.text)} — ${clean(x.fr)}`;
+  const label = clean(x.label || x.t || x.title || (x.word ? `${x.k ? `${x.k} · ` : ''}${x.word}` : ''));
+  const sub = clean(x.sub || x.text || x.fr || x.when || '');
   return label || sub ? `- ${label ? `**${label}**` : ''}${label && sub ? ' — ' : ''}${sub}` : '';
 };
 function method(scenes) {
@@ -93,12 +112,14 @@ function method(scenes) {
     const lines = [];
     if (sc.type === 'compare') {
       for (const side of [sc.left, sc.right]) if (side) lines.push(`- **${clean(side.title)}** : ${(side.items || []).map(clean).join(' · ')}`);
+    } else if (sc.type === 'anatomy' && sc.parts) {
+      sc.parts.filter((p) => p.fr || p.sub).forEach((p) => lines.push(`- **${clean(p.label)}**${p.when ? ` (${clean(p.when)})` : ''} — ${clean(p.fr || p.sub)}`));
     } else if (sc.type === 'formula' && sc.parts) {
       lines.push(`- ${sc.parts.map((p) => clean(p.t)).join(' + ')}${sc.result?.t ? ` = **${clean(sc.result.t)}**` : ''}`);
     } else if (sc.type === 'quote' || sc.type === 'big') {
       lines.push(`> ${clean(sc.text)}${sc.sub ? ` — ${clean(sc.sub)}` : ''}`);
     } else {
-      for (const list of [sc.items, sc.nodes, sc.steps, sc.rows, sc.cards]) if (Array.isArray(list)) list.forEach((x) => lines.push(bullet(x)));
+      for (const list of [sc.items, sc.nodes, sc.steps, sc.rows, sc.cards, sc.letters, sc.levels, sc.frames, sc.layers]) if (Array.isArray(list)) list.forEach((x) => lines.push(bullet(x)));
     }
     const body = lines.filter(Boolean);
     if (!body.length) continue;
@@ -110,7 +131,7 @@ function method(scenes) {
 function sheet(m, l, lang) {
   const t = T[lang];
   const tools = linksOf(m, l);
-  const md = [`# ${clean(l.title)}`, `_${t.course} · ${modCode(m)} · ${t.lesson} ${String(l.n).padStart(2, '0')} — ${clean(m.title)}_`, ''];
+  const md = [`# ${clean(l.title)}`, `_${COURSE[m.track][lang]} · ${modCode(m)} · ${t.lesson} ${String(l.n).padStart(2, '0')} — ${clean(m.title)}_`, ''];
   if (l.key?.length) md.push(`## ${t.ess}`, ...l.key.map((k) => `- ${clean(k)}`), '');
   const meth = method(l.scenes || []);
   if (meth.length) md.push(`## ${t.meth}`, ...meth);
@@ -131,6 +152,15 @@ function sheet(m, l, lang) {
     for (const q of l.quiz) md.push(`**${clean(q.q)}**`, '', ...q.a.map((a) => `- ${clean(a)}`), '', `> ${t.answer} : ${clean(q.a[q.ok])}${q.why ? ` — ${clean(q.why)}` : ''}`, '');
   }
   if (tools.length) md.push(`## ${t.tools}`, ...tools.map((x) => `- **${x.name}** : ${x.url}`), '');
+  // En arabe, une puce qui commence par un mot latin (Hook, CTA, A · Attention) passerait de gauche à droite :
+  // une marque invisible de droite à gauche la garde dans le sens de la page (hors des blocs de prompt).
+  if (lang === 'ar') {
+    let code = false;
+    md.forEach((line, i) => {
+      if (line.startsWith('```')) code = !code;
+      else if (!code && /^- (\[ \] )?/.test(line)) md[i] = line.replace(/^- (\[ \] )?/, (m) => `${m}\u200F`);
+    });
+  }
   return { md: md.join('\n'), tools };
 }
 
@@ -138,7 +168,7 @@ const { chromium } = await import('playwright');
 const browser = await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});
 const page = await browser.newPage();
 let n = 0;
-for (const m of MODULES.filter((x) => x.track === 'ia')) {
+for (const m of MODULES.filter((x) => !TRACK || x.track === TRACK)) {
   for (const l0 of m.lessons) {
     if (l0.off || (ONLY.length && !ONLY.includes(l0.id))) continue;
     const dir = path.join(SITE, 'ressources', l0.id);
@@ -152,7 +182,7 @@ for (const m of MODULES.filter((x) => x.track === 'ia')) {
       const l = lang === 'fr' ? l0 : merge(l0, ovm?.lessons?.[l0.id]);
       const s = sheet(mm, l, lang);
       tools = s.tools;
-      const html = await buildHtml(s.md, { lang, formation: 'ia' });
+      const html = await buildHtml(s.md, { lang, formation: m.track });
       await renderPdf(page, html, path.join(dir, `${FILE[lang]}.${lang}.pdf`), { lang, title: parse(s.md).title });
       n++;
     }

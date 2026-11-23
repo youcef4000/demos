@@ -1,0 +1,4 @@
+# Outils cités dans la leçon m7-l10 (généré par tools/hooked-academy/fiches-lecons.mjs)
+AliExpress | https://www.aliexpress.com
+SnapTik | https://snaptik.app
+TikTok Creative Center | https://ads.tiktok.com/business/creativecenter/

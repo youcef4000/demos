@@ -78,6 +78,12 @@ export default {
         "Note your customer’s main problem: you’ll use it for PAS",
         "Note 3 facts about your product that you can prove: you’ll use them for CAP",
         "Note the real reason your customer buys: you’ll use it for SONCAS"
+      ],
+      "res": [
+        {
+          "title": "The 4 formulas on one page",
+          "text": "AIDA — Attention, Interest, Desire, Action\nUse it to: structure a whole video or a carousel (one slide per step).\n\nPAS — Problem, Agitation, Solution\nUse it to: build the body when the product solves a known pain. The agitation stays honest.\n\nCAP — Characteristic, Advantage, Proof\nUse it to: convince sceptics with demonstrated facts.\n\nSONCAS — Security, Pride, Novelty, Comfort, Money, Sympathy\nUse it to: find why the customer really buys, and so the angle of the ad.\n\nWhat I prepare for my product:\n- My customer’s main problem (PAS): [  ]\n- 3 facts I can prove (CAP): [  ]\n- The real reason to buy (SONCAS): [  ]"
+        }
       ]
     },
     "m3-l2": {
@@ -167,6 +173,12 @@ export default {
         "Next to each sentence, note the shot to film with it",
         "In Canva, make a 4-slide carousel, one slide per AIDA step",
         "Check that the last slide clearly says what to do"
+      ],
+      "res": [
+        {
+          "title": "Prompt — AIDA script with shots",
+          "text": "Act as an ad copywriter. Product: [product]. Audience: [audience]. Problem: [problem]. True proof: [facts]. Offer: [offer].\nWrite a 20 to 30 second ad following AIDA. For each step (Attention, Interest, Desire, Action): the line to say, the on-screen text and the shot to film.\nThen adapt the same message into a 4-slide carousel, one slide per step, with a title of under 8 words per slide.\nThe final Action asks for one thing, clearly."
+        }
       ]
     },
     "m3-l3": {
@@ -249,6 +261,12 @@ export default {
         "Reread the agitation and remove anything that lies or scares",
         "Read your PAS script aloud and time it",
         "Record it as a voice-over on your phone and listen back as a customer would"
+      ],
+      "res": [
+        {
+          "title": "Prompt — honest PAS script",
+          "text": "Act as a copywriter who respects their customers. Product: [product]. Audience: [audience]. The problem in the customer’s words: [customer’s sentence]. What the product really solves: [true fact].\nWrite a 15 to 20 second PAS script:\n- PROBLEM: name the pain in one sentence, in the customer’s words.\n- AGITATION: a concrete everyday situation where this problem gets in the way. No exaggeration, no fear, no medical promise.\n- SOLUTION: how the product solves this problem, with the true fact, then a CTA.\nThen reread your agitation and flag any sentence that exaggerates."
+        }
       ]
     },
     "m3-l4": {
@@ -316,6 +334,12 @@ export default {
         "Find proof for each advantage: a demo, an honest before/after or a real review",
         "Cross out any advantage you can’t prove",
         "Film your strongest proof as a demo, in a single shot"
+      ],
+      "res": [
+        {
+          "title": "CAP table to fill in",
+          "text": "Characteristic (a fact) → Advantage (what it does for the customer) → Proof (how I show it)\n\n1. [e.g. stainless steel] → [does not rust when washed] → [I wash it on camera]\n2. [  ] → [  ] → [  ]\n3. [  ] → [  ] → [  ]\n4. [  ] → [  ] → [  ]\n\nTypes of proof: a one-shot demonstration, an honest before / after (same light, same framing), a real customer review (with their consent), a document (warranty, spec sheet).\nRule: no proof = cross out the advantage."
+        }
       ]
     },
     "m3-l5": {
@@ -427,6 +451,12 @@ export default {
         "Circle the 2 buttons that matter most to your customer",
         "Turn those 2 angles into 2 different hooks",
         "Ask a customer or someone close why they would buy, and note the matching button"
+      ],
+      "res": [
+        {
+          "title": "Prompt — 6 SONCAS angles",
+          "text": "Act as an advertising strategist. Product: [product]. Audience: [audience]. True facts about the product: [list].\nFor each of the 6 SONCAS buttons (Security, Pride, Novelty, Comfort, Money, Sympathy), write:\n- the angle in one sentence;\n- a hook of under 10 words;\n- the opening shot to film.\nUse only the facts given. Then rank the 6 angles from most to least relevant for this audience, and explain the top choice in 2 sentences."
+        }
       ]
     },
     "m3-l6": {
@@ -519,6 +549,12 @@ export default {
         "Write its script with AIDA, with a body built on PAS",
         "Add CAP proof in the body: a fact, its advantage, its demonstration",
         "Reread it as your customer: does it talk to a person, or recite a technique?"
+      ],
+      "res": [
+        {
+          "title": "Prompt — combine the 4 formulas",
+          "text": "Act as an ad copywriter. Product: [product]. Audience: [audience]. Chosen SONCAS button: [button]. Customer’s problem: [problem]. Strongest proof: [characteristic → advantage → proof].\nWrite a 25 to 30 second ad:\n- overall structure in AIDA;\n- angle set by the chosen SONCAS button;\n- body built with PAS;\n- one CAP proof in the body, shown on screen.\nMark in brackets which formula is at work in each sentence. Then rewrite the final version without brackets, as if speaking to one person."
+        }
       ]
     }
   }

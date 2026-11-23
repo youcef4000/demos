@@ -1,3 +1,4 @@
 # Outils cités dans la leçon ia4-l2 (généré par tools/hooked-academy/fiches-lecons.mjs)
 CapCut | https://www.capcut.com/capcut_pc_web/fission_receive?code=ifMmSl17713579&lng=fr-FR
-ElevenLabs | https://try.elevenlabs.io/hbtya37nta0b
+Meta Sound Collection | https://www.facebook.com/sound/collection/
+TikTok Commercial Music Library | https://ads.tiktok.com/business/creativecenter/music/pc/en

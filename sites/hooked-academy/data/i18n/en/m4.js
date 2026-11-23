@@ -115,6 +115,12 @@ export default {
         "Write 3 points about your product to say in your own words, no salesy script",
         "Film yourself at home on your phone, talking about your product as if to a friend",
         "Rewatch it: does it sound real, or like an ad? Note what you’d change"
+      ],
+      "res": [
+        {
+          "title": "Prompt — my talking points, no sales script",
+          "text": "I want to film a UGC video on my phone about [product], for [audience]. What I really think of it: [my opinion, in my words]. What I noticed while using it: [real experience].\nDo not write me a script. Give me:\n- 3 points to say, each in a few words (I will talk in my own sentences);\n- a natural first sentence, as if talking to a friend;\n- 3 gestures to make with the product while I talk;\n- 3 “advert” phrases to avoid because they sound fake."
+        }
       ]
     },
     "m4-l2": {
@@ -233,6 +239,12 @@ export default {
         "Film your product twice: one very polished version, one natural version in hand",
         "Show both to someone close without explaining, and ask which one they believe more",
         "Note their answer and what convinced them"
+      ],
+      "res": [
+        {
+          "title": "Sheet — the classic vs UGC test",
+          "text": "Version A (polished, studio style): [file name]\nVersion B (natural, in hand): [file name]\n\nShow both to 3 people close to you, without explaining, then ask:\n1. “Which one do you believe more?”\n2. “Why? What made you doubt the other one?”\n3. “After that one, would you want to ask the price?”\n\nPerson 1: A / B — reason: [  ]\nPerson 2: A / B — reason: [  ]\nPerson 3: A / B — reason: [  ]\n\nWhat I keep for my next video: [  ]"
+        }
       ]
     },
     "m4-l3": {
@@ -299,6 +311,12 @@ export default {
         "Film a short UGC test on your phone, with them or with yourself",
         "Check that a real person is on screen, not just the product and your logo",
         "Note what this shoot cost you, in time and equipment"
+      ],
+      "res": [
+        {
+          "title": "Prompt — my customer portrait and their real words",
+          "text": "Help me describe my typical customer for a UGC video. Product: [product]. What I know about my buyers: [age, city, situation, questions they ask, messages received].\n1. Sum up my typical customer in 3 lines: who they are, their problem, the way they talk.\n2. List 5 questions they ask themselves before buying.\n3. Suggest the profile of the ideal person to film the UGC (someone who really uses the product).\nBase everything only on what I gave you; if information is missing, tell me what to ask my customers instead of inventing it."
+        }
       ]
     }
   }

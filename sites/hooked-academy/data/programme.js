@@ -4,6 +4,7 @@
 // que l'animation tourne, pour enregistrer la voix off en darija parfaitement synchronisée.
 
 import { MODULES_IA } from './programme-ia.js';
+import { RES_CREATIVE } from './programme-creative-res.js';
 import { leconEcran } from './videos-ecran.js';
 import { OVERLAY } from './i18n/index.js';
 import { VOIX } from './voix-off.js';
@@ -4170,6 +4171,11 @@ const MODULES_1 = [
     ],
   },
 ];
+
+// Formation Créative : prompt ou modèle d'atelier des leçons qui n'en avaient pas (data/programme-creative-res.js)
+MODULES_1.forEach((m) => m.lessons.forEach((l) => {
+  if (!l.res?.length && RES_CREATIVE[l.id]) l.res = RES_CREATIVE[l.id].map((r) => ({ ...r.fr }));
+}));
 
 // Leçons retirées du parcours (off: true) : gardées dans ce fichier pour pouvoir les remettre
 export const RETIREES = [...MODULES_1, ...MODULES_IA].flatMap((m) => m.lessons.filter((l) => l.off).map((l) => l.id));

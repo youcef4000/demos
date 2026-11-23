@@ -74,6 +74,12 @@ export default {
         "Set a fixed time each day for your lesson and add a reminder on your phone",
         "Open CapCut and Canva on your phone, and install whichever is missing",
         "Create an album on your phone to keep your course photos and videos"
+      ],
+      "res": [
+        {
+          "title": "My starting sheet",
+          "text": "My product: [product name]\nWhat it does, in one sentence: [  ]\nWho it is for: [age, city, situation]\nWhere I sell it: [page, WhatsApp, shop]\n\nMy lesson time every day: [  ] — reminder set on my phone: yes / no\nCapCut installed: yes / no — Canva installed: yes / no\n“Course” album created on my phone: yes / no\n\nWhat I want to be able to do by the end: [  ]"
+        }
       ]
     },
     "m0-l2": {
@@ -252,6 +258,12 @@ export default {
         "Open the last module of your course and read the final project brief",
         "Write down now the product you’ll use for your project",
         "Keep your best exercises: they’ll help with the final project"
+      ],
+      "res": [
+        {
+          "title": "My final project notebook",
+          "text": "The product for my final project: [  ]\nWhy this one: [I really sell it / I know it well / I have photos and videos]\n\nMy best exercises to keep (note the lesson and the file):\n- Hook: [lesson] — [file name]\n- Script: [lesson] — [file name]\n- Filmed shots: [lesson] — [file name]\n- CTA card: [lesson] — [file name]\n\nWhat I still need to learn before the project: [  ]"
+        }
       ]
     }
   }

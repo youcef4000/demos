@@ -113,6 +113,12 @@ export default {
         "Film two shots with the same gesture (set down, turn, open), with the object in the same spot in the frame",
         "Edit this match cut by cutting mid-movement, and check it frame by frame",
         "Export the new version with a clear name: product-transitions-v2"
+      ],
+      "res": [
+        {
+          "title": "Sheet — nailing a match cut",
+          "text": "The chosen gesture: [put down / turn / open / lift]\n\nFilming\n☐ two shots with the same gesture\n☐ the object in the same place in the frame in both shots (turn on the grid)\n☐ same direction of movement\n☐ the whole gesture filmed, with 1 s before and after\n\nEditing in CapCut\n☐ cut during the movement, not before or after\n☐ checked frame by frame: the object does not jump\n☐ no transition added: the cut is enough\n\nElsewhere in the video: hard cuts everywhere; one zoom transition at most, a single style.\nExport name: [product-transitions-v2]"
+        }
       ]
     },
     "m8-l2": {
@@ -219,6 +225,12 @@ export default {
         "Animate a product photo with two keyframes, from 100 to 110%",
         "Watch the result on your phone and delete every zoom that shows nothing new",
         "Export and compare with the version without zooms"
+      ],
+      "res": [
+        {
+          "title": "Cheat sheet — punch-in, Ken Burns, keyframes",
+          "text": "PUNCH-IN (sharp zoom on a key word)\n1. Put the playhead just before the key word → Split.\n2. Select the 2nd part → scale to 110–120%.\n3. Reframe to keep the face or product centred.\nMy key words: [price] / [benefit] / [detail]\n\nKEN BURNS (slow zoom on a photo)\nKeyframe at the start at 100%, keyframe at the end at about 110%. Same direction for every photo in the series.\n\nKEYFRAMES\nThe diamond button (depending on your version): a start point, an end point, CapCut works out the path.\n\nRule: every movement shows something more. Otherwise, delete it.\nTip: filming in 4K keeps the punch-in sharp."
+        }
       ]
     },
     "m8-l3": {
@@ -331,6 +343,12 @@ export default {
         "Choose music licensed for advertising and mark its strong beats",
         "Line up your cuts with the markers, and the key gesture with the strongest beat",
         "Export and watch: if it’s exhausting, remove some cuts"
+      ],
+      "res": [
+        {
+          "title": "Sheet — speed ramp and licensed music",
+          "text": "SPEED RAMP\n☐ key gesture filmed at 60 fps: [spray / clasp / opening]\n☐ CapCut → Speed → Curve (depending on your version)\n☐ fast on the movement, slow on the key moment, then back to normal\n\nEDITING TO THE MUSIC\n☐ strong beats marked (automatic or manual markers)\n☐ cuts placed on markers, not on every beat\n☐ the key gesture on the strongest beat\n☐ music below the voice\n\nMUSIC FOR A PAID AD\nChoose a track licensed for commercial use: TikTok’s Commercial Music Library, Meta Sound Collection, or music bought with a licence. A trending sound is not necessarily allowed in an ad.\nMy music: [title] — source: [library] — licence checked ☐"
+        }
       ]
     },
     "m8-l4": {

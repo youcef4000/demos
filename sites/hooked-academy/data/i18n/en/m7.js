@@ -201,6 +201,12 @@ export default {
         "Check that a shot, a zoom or a text changes every 2 to 3 seconds",
         "Watch it all the way through, note where you get bored, and cut that part",
         "Compare the final length with your target length"
+      ],
+      "res": [
+        {
+          "title": "Sheet — target length and cut list",
+          "text": "Length guides\n- 6–15 s: stories and reels, a single message\n- 15–30 s: most TikTok and Reels ads\n- 30–60 s: UGC, demos, products that need explaining\n\nMy ad: what the product needs to show: [  ] → target length: [  ] s\n\nCut list\n☐ the “hi, today I’m going to…” intro\n☐ silences and “um”s\n☐ sentences said twice\n☐ shots where nothing changes for more than 3 s\n☐ the moment I get bored while watching: [  ] s\n\nFinal length: [  ] s — gap with the target: [  ] s"
+        }
       ]
     },
     "m7-l3": {
@@ -499,6 +505,12 @@ export default {
         "Color 1 or 2 keywords per sentence: the price, the benefit, the hook word",
         "Place them in the center, away from the bottom and the right edge of the screen",
         "Watch your ad with the sound off and note whether the product and offer come across"
+      ],
+      "res": [
+        {
+          "title": "Prompt — fix my captions",
+          "text": "Here are the auto captions of my ad for [product], in [language]: [paste the text].\nFix only recognition errors (misheard words, names, prices, brand: [brand name], price: [price]). Do not change the meaning or the tone.\nThen split the text into lines of 2 on-screen lines maximum (about 5 to 7 words per line) and mark, for each sentence, 1 or 2 key words to colour (the price, the benefit, the hook)."
+        }
       ]
     },
     "m7-l6": {
@@ -611,6 +623,12 @@ export default {
         "Download it as a PNG and place it at the end of your video in CapCut, for 2 to 3 seconds",
         "Say the CTA in the voice-over at the same moment",
         "Check: readable in one second, inside the safe zone, only one action asked"
+      ],
+      "res": [
+        {
+          "title": "Template — my CTA card",
+          "text": "Format: 1080 × 1920, plain background, 2 to 3 seconds at the end of the video\n\n1. The product: [sharp photo, cut out or on a plain background]\n2. The offer (only if it is true): [e.g. nationwide delivery]\n3. The action, big on a button that stands out: [e.g. “Order on WhatsApp”]\n4. The reassurance: [e.g. pay on delivery]\n\nLine said in voice-over at the same moment: [  ]\n\nBefore approving\n☐ readable in one second\n☐ in the safe area (nothing at the bottom or right)\n☐ only one action requested\n☐ true offer and conditions"
+        }
       ]
     },
     "m7-l7": {
@@ -959,6 +977,12 @@ export default {
         "Copy the product name",
         "Search for that name on TikTok and pick 5 videos that show the product well",
         "Download them with SnapTik and keep them in one folder"
+      ],
+      "res": [
+        {
+          "title": "Sheet — find the product and its videos",
+          "text": "1. Screenshot of the product (sharp, product alone if possible).\n2. AliExpress → camera icon in the search bar → upload the screenshot.\n3. Copy the exact product name: [  ]\n4. TikTok → search with that name (try English too) → keep 5 videos that show the product well.\n5. Copy each video’s link and download it with SnapTik.\n6. Put everything in one folder: [product]/source-videos/\n\nSelected videos:\n1. [link] — what it shows: [  ]\n2. [link] — [  ]\n3. [link] — [  ]\n4. [link] — [  ]\n5. [link] — [  ]\n\nRights: these videos belong to their creators. Use them to practise editing; before using them in a paid ad, ask the creator or supplier for permission, or film your own shots."
+        }
       ]
     },
     "m7-l11": {

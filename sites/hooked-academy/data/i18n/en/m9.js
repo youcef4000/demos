@@ -210,6 +210,12 @@ export default {
         "Redo your talking-to-camera shot with your eyes on the top line",
         "Check each shot on your phone: nothing important at the bottom or on the right",
         "Crop a shot to 4:5 in CapCut: the head and the product must stay whole"
+      ],
+      "res": [
+        {
+          "title": "Shot list — the 4 shot sizes",
+          "text": "Before filming: grid on ☐ — phone vertical ☐ — lens cleaned ☐\n\n1. MEDIUM-WIDE SHOT (the whole person, the product in use)\nWhat I film: [  ] — done ☐\n2. MEDIUM CLOSE-UP (chest to head, talking to camera)\nEyes on the top line of the grid ☐ — what I say: [  ] — done ☐\n3. CLOSE-UP (the face, a reaction)\nWhat I film: [  ] — done ☐\n4. DETAIL SHOT (cap, texture, stitching, watch face)\nDetail 1: [  ] ☐ — Detail 2: [  ] ☐ — Detail 3: [  ] ☐\n\nCheck: nothing important at the bottom or right ☐ — margin at top and bottom for 4:5 ☐ — space on the side of the gaze ☐"
+        }
       ]
     },
     "m9-l3": {

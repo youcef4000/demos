@@ -121,16 +121,18 @@ Forme du manifeste :
 }
 ```
 
-### Fiches PDF et liens générés (Formation IA)
+### Fiches PDF et liens générés (les deux formations)
 
-Chaque leçon IA a une fiche PDF en trois langues et un fichier de liens, générés depuis le programme :
+Chaque leçon (Créative et IA) a une fiche PDF en trois langues et un fichier de liens, générés depuis le programme :
 `ressources/<leçon>/01-fiche-de-la-leçon.fr.pdf` (+ `01-lesson-sheet.en.pdf`, `01-ملخص-الدرس.ar.pdf`) avec
 l'essentiel, la méthode de la vidéo, les prompts (atelier et vidéo), l'exercice, le quiz corrigé et les outils ;
-`ressources/<leçon>/liens.txt` avec les outils cités. Chaque leçon a aussi au moins un prompt d'atelier
-(`data/programme-ia-prompts.js`, traduit). À relancer quand une leçon change :
+`ressources/<leçon>/liens.txt` avec les outils cités. Les leçons ont aussi un prompt ou un modèle à remplir dans
+l'atelier : `data/programme-ia-prompts.js` (IA) et `data/programme-creative-res.js` (Créative), avec leur traduction
+recopiée dans `data/i18n/<langue>/<module>.js`. À relancer quand une leçon change :
 
 ```bash
-node tools/hooked-academy/fiches-lecons.mjs            # toutes les leçons IA (ou : … ia1-l2 ia3-l4)
+node tools/hooked-academy/fiches-lecons.mjs            # toutes les leçons (ou : … m2-l1 ia3-l4)
+TRACK=creative node tools/hooked-academy/fiches-lecons.mjs   # une seule formation (creative ou ia)
 node tools/hooked-academy/ressources.mjs               # puis le manifeste
 ```
 

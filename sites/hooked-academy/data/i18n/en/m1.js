@@ -164,6 +164,12 @@ export default {
         "For the video, note its length and how it shows the product",
         "For the carousel, note what each slide adds, right up to the last one",
         "Choose the format that best suits your product, and write one sentence on why"
+      ],
+      "res": [
+        {
+          "title": "Prompt — which format for my product?",
+          "text": "Act as a social media ad creator. My product: [product]. My audience: [audience]. What people need to see to believe it: [what the product visibly does].\nFor this product, compare the 3 formats: short video (15 to 30 s), image and carousel. For each one: what it would show, its strength, its limit. End with the format to produce first and explain why in 2 sentences. Do not invent any product feature."
+        }
       ]
     },
     "m1-l2": {
@@ -394,6 +400,12 @@ export default {
         "In CapCut, add text in the center, away from the hidden zones at the top and bottom",
         "Duplicate the project and switch it to 4:5, keeping the product in frame",
         "Watch both versions on your phone and note what gets cut off or hidden"
+      ],
+      "res": [
+        {
+          "title": "Cheat sheet — formats, sizes and hidden areas",
+          "text": "9:16 — 1080 × 1920 px: Reels, TikTok, Stories, Shorts. The format to produce first.\n4:5 — 1080 × 1350 px: Instagram and Facebook feed.\n1:1 — 1080 × 1080 px: carousels and feed.\n16:9 — 1920 × 1080 px: YouTube.\n\nHidden areas in 9:16 (approximate, the interface changes with each app):\n- top: about 250 px (account name, close button);\n- bottom: about 350 px (caption, action button);\n- right: about 150 px (likes, comments, share).\nKeep the product, text and face in the centre.\n\nMethod: film in 9:16 with margin at the top and bottom, then duplicate the project and reframe in 4:5 and 1:1."
+        }
       ]
     },
     "m1-l4": {
@@ -476,6 +488,12 @@ export default {
         "Spot the one that tries to do everything at once, and note what makes it unclear",
         "For your product, write one creative idea per stage, in one sentence",
         "Pick a single goal for your next creative and note what it needs to include"
+      ],
+      "res": [
+        {
+          "title": "Prompt — one creative per customer stage",
+          "text": "Act as a social media advertising strategist. Product: [product]. Audience: [audience]. Price: [price]. What I can prove: [true facts].\nSuggest one creative idea for each of the 4 stages: awareness, consideration, conversion, loyalty. For each idea: the goal in one sentence, the format (video, image, carousel), the hook, what we show, the action requested. One idea = one goal. Promise nothing I cannot prove."
+        }
       ]
     }
   }

@@ -92,6 +92,12 @@ export default {
         "Describe your ideal customer’s lifestyle in one sentence",
         "Write 3 post ideas that show this lifestyle without selling directly",
         "Take a photo of your product in that everyday setting, with no sales text"
+      ],
+      "res": [
+        {
+          "title": "Prompt — Brand Content ideas",
+          "text": "Act as a creative director. My brand sells [product] to [audience]. What I want people to feel: [3 words]. My ideal customer’s lifestyle: [one sentence].\nSuggest 10 post ideas that show this lifestyle without saying “buy”: behind the scenes, everyday rituals, moments where the product belongs, brand values. For each: the format (photo, reel, carousel), what we see, the caption in one sentence. Avoid clichés and promises."
+        }
       ]
     },
     "m6-l2": {
@@ -170,6 +176,12 @@ export default {
         "Write a Brand Content line: your vision, and the movement the customer joins",
         "Decide your current priority: sell fast, or build loyalty and move upmarket",
         "Plan a week of posts that mixes creatives and Brand Content"
+      ],
+      "res": [
+        {
+          "title": "One-week plan: sell and build",
+          "text": "My current priority: sell fast / build loyalty and move upmarket\n\nMonday — [creative / Brand Content]: [idea]\nTuesday — [creative / Brand Content]: [idea]\nWednesday — [creative / Brand Content]: [idea]\nThursday — [creative / Brand Content]: [idea]\nFriday — [creative / Brand Content]: [idea]\nSaturday — [creative / Brand Content]: [idea]\nSunday — [creative / Brand Content]: [idea]\n\nGuide: “sell” priority ≈ 4 creatives + 3 Brand Content; “build” priority ≈ 3 creatives + 4 Brand Content.\nMy creative sentence: [problem solved → action]\nMy Brand Content sentence: [my vision → the movement the customer joins]"
+        }
       ]
     },
     "m6-l3": {
@@ -253,6 +265,12 @@ export default {
         "Describe the person your customer dreams of becoming by using your product",
         "Make a Canva visual that shows this moment, with your colors and font",
         "Check it: sharp image, same colors, a story, a customer who can picture themselves"
+      ],
+      "res": [
+        {
+          "title": "My express brand guide",
+          "text": "Main colour: [name + code, e.g. #1E3A5F]\nSecondary colour: [name + code]\nHeading font: [  ] — Body font: [  ]\nPhoto style: [natural light / plain background / lifestyle setting…]\n\nMy “why” in 3 sentences:\n1. My mission: [  ]\n2. Behind the scenes: [  ]\n3. What makes my product carefully made: [  ]\n\nThe person my customer dreams of becoming: [  ]\n\nPrestige check before posting: sharp image ☐ — my 2 colours ☐ — my font ☐ — a story ☐ — the customer can picture themselves ☐"
+        }
       ]
     },
     "m6-l4": {
@@ -334,6 +352,12 @@ export default {
         "Write the outline of your ad: a hook, an AIDA or PAS body, a CTA",
         "Add a reassuring UGC moment to the body and a polished detail that enhances your brand",
         "Send this outline to the team on WhatsApp and note the feedback you get"
+      ],
+      "res": [
+        {
+          "title": "Full ad plan (to send to the team)",
+          "text": "Product: [  ] — Audience: [  ] — Goal: [sale / WhatsApp message / visit]\n\nTHE SPARK — Hook (0–3 s)\nWhat we see: [  ] — What we hear: [  ] — Text: [  ]\n\nTHE ENGINE — Body\nFormula: AIDA / PAS\nWhat sells: [  ]\nUGC moment that reassures: [  ]\nPolished detail that elevates the brand: [  ]\n\nTHE DESTINATION — CTA\nSingle action: [  ] — True reassurance: [  ]\n\nTarget length: [  ] s — Format: 9:16\nTeam feedback: [  ]"
+        }
       ]
     }
   }

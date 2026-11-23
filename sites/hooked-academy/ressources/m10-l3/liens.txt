@@ -1,0 +1,3 @@
+# Outils cités dans la leçon m10-l3 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Meta Ad Library | https://www.facebook.com/ads/library/
+ChatGPT | https://chatgpt.com

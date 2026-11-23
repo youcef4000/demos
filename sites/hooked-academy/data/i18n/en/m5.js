@@ -96,6 +96,12 @@ export default {
         "Add auto captions, then music low enough to hear the voice",
         "Write the CTA on screen and say it in the voice-over at the end",
         "Check the hook shows from the first frame and the product appears fast, then export"
+      ],
+      "res": [
+        {
+          "title": "CapCut editing checklist",
+          "text": "Footage to import: ☐ hook ☐ demo ☐ details ☐ CTA\n\n1. Cut — ☐ dead time removed, including the start and end of each take\n2. Order — ☐ from hook to CTA ☐ a change on screen every 2 to 3 s\n3. Caption — ☐ auto captions ☐ checked line by line\n4. Music — ☐ low enough to hear the voice ☐ licensed for advertising\n5. CTA — ☐ written on screen ☐ said in voice-over\n\nBefore exporting:\n☐ the hook is there from the first frame\n☐ the product is visible early\n☐ nothing important in the hidden areas\n☐ export 1080 × 1920, 30 fps, MP4 — name: [product-v1]"
+        }
       ]
     },
     "m5-l2": {
@@ -173,6 +179,12 @@ export default {
         "Write a headline of 6 words max that carries a single message",
         "Add true proof, like delivery or a guarantee, then an action button",
         "Show the image to someone close for one second and ask what they understood"
+      ],
+      "res": [
+        {
+          "title": "Prompt — headlines and proof for my image",
+          "text": "I am creating an ad image in Canva for [product], aimed at [audience]. The main benefit: [benefit]. True proof available: [delivery, warranty, cash on delivery…].\nSuggest:\n- 8 headlines of 6 words maximum, one message each;\n- 3 short proof lines, using only the proof given;\n- 3 button texts (2 to 3 words, action verb).\nThen pick the best headline + proof + button combination and say why it is understood in one second."
+        }
       ]
     },
     "m5-l3": {
@@ -245,6 +257,12 @@ export default {
         "Duplicate it to keep the same style, then fill in the other 4 slides",
         "Put the CTA on the last slide and export the 5 images",
         "Swipe through the carousel on your phone and note where the urge to swipe drops"
+      ],
+      "res": [
+        {
+          "title": "Prompt — 5-slide carousel",
+          "text": "Act as an ad carousel creator. Product: [product]. Audience: [audience]. Problem: [problem]. True proof: [proof]. Desired action: [action].\nWrite the text for 5 square slides: 1. a hook that makes people swipe, 2. problem, 3. solution, 4. proof, 5. CTA.\nFor each slide: a title of 8 words maximum, an optional line of text, and the image to use. One idea per slide. Slide 1 does not reveal everything: it makes people want to see the rest."
+        }
       ]
     },
     "m5-l4": {
@@ -316,6 +334,12 @@ export default {
         "Watch the whole video on your phone, then a second time with the sound off",
         "Proofread every text and check that none is hidden by the interface",
         "Name each file with the product and the version, for example product-v1"
+      ],
+      "res": [
+        {
+          "title": "Cheat sheet — export settings",
+          "text": "VIDEO (CapCut)\nResolution: 1080 × 1920 (9:16) — 1080 × 1350 for 4:5\nFrame rate: 30 fps (60 if you filmed at 60 and keep slow motion)\nFormat: MP4 (H.264)\n\nIMAGES (Canva)\nStory / Reel: 1080 × 1920 — Feed: 1080 × 1350 — Square: 1080 × 1080\nFormat: PNG for text and flat colours, JPG for photos\n\nNAMING FILES\n[product]-[format]-v[number] — e.g. leather-bag-9x16-v2\n\nFINAL CHECK\n☐ watched in full on a phone ☐ watched without sound ☐ spelling checked ☐ no text in the hidden areas"
+        }
       ]
     }
   }

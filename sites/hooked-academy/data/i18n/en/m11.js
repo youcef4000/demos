@@ -299,6 +299,12 @@ export default {
         "Plan a 5-slide carousel that explains one point about your niche",
         "Set a date for a first 10-minute live and list the products to show",
         "Mark the lesson as completed and take the quiz"
+      ],
+      "res": [
+        {
+          "title": "Prompt — one product, four organic formats",
+          "text": "Act as a community manager. My page sells [product] to [audience], in [city]. Orders go through my WhatsApp.\nFor this product, suggest:\n- 1 reel idea to reach new people (hook + 3-shot outline);\n- 1 five-slide carousel that explains a useful point in my niche;\n- 3 stories for today: behind the scenes, a poll, a WhatsApp reminder;\n- the plan for a 10-minute live: the products to show, the order, 3 questions to ask viewers, and the announcement to post the day before.\nNo fake reviews, no fake urgency."
+        }
       ]
     },
     "m11-l4": {

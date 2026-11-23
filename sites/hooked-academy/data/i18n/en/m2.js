@@ -224,6 +224,12 @@ export default {
         "Note what its body presents: the product, how to use it, its strengths, the problem it solves",
         "Note its CTA: the action it asks for in the last seconds",
         "Write the outline of your own ad in 3 lines: hook, body, CTA"
+      ],
+      "res": [
+        {
+          "title": "Prompt — my Hook · Body · CTA script",
+          "text": "Act as a short video ad copywriter. Product: [product]. Audience: [audience]. Problem it solves: [problem]. True strengths: [3 points]. Offer and delivery: [offer].\nWrite the script for a 20 to 25 second ad in 3 parts:\n1. HOOK (0–3 s): what we see, what we hear, the on-screen text.\n2. BODY (3–20 s): what it is, how to use it, its strengths, the problem solved — one shot per sentence.\n3. CTA (last 3 to 5 seconds): one clear action.\nShort sentences, to be read aloud, in [language]."
+        }
       ]
     },
     "m2-l2": {
@@ -317,6 +323,12 @@ export default {
         "Watch them again with the sound off: does the hook still make sense?",
         "Write 3 hooks for your product, short enough to fit in 3 seconds",
         "Film the best one, then watch it with the sound off: does it still stop the scroll?"
+      ],
+      "res": [
+        {
+          "title": "Grid — the ads that stopped me",
+          "text": "Ad 1: [brand / product]\nWhat stopped me (image, sound, text): [  ]\nWithout sound, is the hook clear? yes / no\nThe product appears at: [  ] s\n\nAd 2: [brand / product]\nWhat stopped me: [  ]\nWithout sound: yes / no — Product at: [  ] s\n\nAd 3: [brand / product]\nWhat stopped me: [  ]\nWithout sound: yes / no — Product at: [  ] s\n\nWhat the 3 have in common: [  ]\nMy 3 hooks (3 seconds each):\n1. [  ]\n2. [  ]\n3. [  ]"
+        }
       ]
     },
     "m2-l3": {
@@ -523,6 +535,12 @@ export default {
         "Write 2 statistical hooks with that number, following the “1 in 2 women…” model",
         "In CapCut, show the number in big text from the very first second",
         "Line up your best positive, negative and statistical hooks, ready to test"
+      ],
+      "res": [
+        {
+          "title": "Prompt — find a true number (without inventing it)",
+          "text": "My customer’s problem: [problem], in [country].\n1. Tell me which kinds of reliable sources publish figures on this problem (public bodies, university studies, professional associations) and which keywords to search to find them.\n2. Do not invent any figure. If you quote one, give the exact source and year, and say that I must check it myself.\n3. With the figure I will have checked — [figure + source] — write 3 statistical hooks of under 10 words, on the model “1 woman in 2…”."
+        }
       ]
     },
     "m2-l5": {
@@ -667,6 +685,12 @@ export default {
         "Tie it all to your customer’s problem: your product is the solution",
         "Film one shot per section: the product, how it’s used, a strength",
         "Edit them in CapCut after your best hook and see if attention holds"
+      ],
+      "res": [
+        {
+          "title": "Prompt — the body in 3 sections",
+          "text": "Act as an honest salesperson presenting a product on video. Product: [product]. Audience: [audience]. Customer’s problem: [problem]. True features: [list].\nWrite the body of an ad (10 to 15 seconds) in 3 sections:\n1. DEFINITION: what it is and who it is for, in one sentence.\n2. USE: how to use it, in 3 simple gestures to film.\n3. STRENGTHS: 3 features, each turned into a benefit for the customer (“… so you …”).\nEnd with a sentence linking the product to the customer’s problem. Next to each sentence, give the shot to film."
+        }
       ]
     },
     "m2-l6": {
@@ -784,6 +808,12 @@ export default {
         "Add true reassurance, like cash on delivery, if you offer it",
         "Keep the best one and show it in big text at the end of your video in CapCut",
         "Show the ending to someone close: do they know right away what to do?"
+      ],
+      "res": [
+        {
+          "title": "Bank of clear CTAs",
+          "text": "A CTA = an action verb + what you get + a true reassurance.\n\nOrder\n- “Order now, pay on delivery.”\n- “Tap Order and choose your colour.”\nWrite\n- “Message us on WhatsApp, we reply today.”\n- “Send ‘INFO’ by message for the price and delivery.”\nBook / visit\n- “Book your spot with the button below.”\n- “Come to the shop, [address], open until [time].”\n\nAvoid: “More info”, “Don’t hesitate”, two actions at once, an offer or deadline that does not exist."
+        }
       ]
     },
     "m2-l7": {
