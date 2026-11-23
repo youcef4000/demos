@@ -13,6 +13,7 @@ import { api } from '../assets/js/api.js';
 import * as FAQ from '../assets/js/faq.js';
 import { mountAssistant } from '../assets/js/assistant.js';
 import { initPWA } from '../assets/js/pwa.js';
+import { mountSiteBuild } from '../assets/js/site-build.js';
 
 {
   const D = document;
@@ -33,12 +34,16 @@ import { initPWA } from '../assets/js/pwa.js';
     'ia-mods': coreModulesOf('ia').length,
     'crea-lessons': LESSONS.filter((l) => l.module.track === 'creative').length,
     'crea-mods': coreModulesOf('creative').length,
+    'dev-lessons': LESSONS.filter((l) => l.module.track === 'dev').length,
+    'dev-mods': coreModulesOf('dev').length,
+    both: LESSONS.filter((l) => ['creative', 'ia'].includes(l.module.track)).length,
     all: LESSONS.length,
   };
   const DATA = {
     ia: coreModulesOf('ia').map((m) => ({ id: m.id, code: modCode(m), title: m.title, pitch: m.pitch, lessons: m.lessons.map((l) => l.title) })),
   };
-  const P = { creative: OFFRES.creative, ia: OFFRES.ia, both: OFFRES.both };
+  const P = { creative: OFFRES.creative, ia: OFFRES.ia, dev: OFFRES.dev, both: OFFRES.both, all: OFFRES.all };
+  const SOLO = ['ia', 'creative', 'dev'];
   const reduce = H.classList.contains('rm');
   const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
   const CAP = /[?&]capture\b/.test(location.search);
@@ -78,10 +83,15 @@ import { initPWA } from '../assets/js/pwa.js';
     'ia.tar.ia.2': { nm: N['ia-mods'] },
     'ia.tar.c.1': { n: N['crea-lessons'] },
     'ia.tar.c.2': { nm: N['crea-mods'] },
-    'ia.tar.b.1': { n: N.all },
+    'ia.tar.d.1': { n: N['dev-lessons'] },
+    'ia.tar.d.2': { nm: N['dev-mods'] },
+    'ia.tar.b.1': { n: N.both },
     'ia.tar.b.was': { prix: fmt(P.creative + P.ia) },
     'ia.tar.b.save': { prix: fmt(P.creative + P.ia - P.both) },
-    'ia.tar.b.up': { prix: fmt(P.both - P.ia) },
+    'ia.tar.a.1': { n: N.all },
+    'ia.tar.a.was': { prix: fmt(P.creative + P.ia + P.dev) },
+    'ia.tar.a.save': { prix: fmt(P.creative + P.ia + P.dev - P.all) },
+    'ia.f.from': { prix: fmt(Math.min(...SOLO.map((k) => P[k]))) },
   };
   // Typographie française : espace insécable avant « : ; ! ? » et dans les guillemets
   function frTypo(root) {
@@ -134,6 +144,9 @@ import { initPWA } from '../assets/js/pwa.js';
         })
         .join('');
     });
+    $('#sa-mods').innerHTML = coreModulesOf('dev')
+      .map((m) => `<li><b>${esc(modCode(m))}</b>${esc(m.title)}</li>`)
+      .join('');
     $('#all-list').innerHTML = DATA.ia
       .map((m) => `<section class="al-m"><h4><span>${m.code}</span>${esc(m.title)}<em>${nl(m.lessons.length)}</em></h4><ol>${m.lessons.map((x) => `<li>${esc(x)}</li>`).join('')}</ol></section>`)
       .join('');
@@ -198,8 +211,49 @@ import { initPWA } from '../assets/js/pwa.js';
   /* ---------------------------------------------------------------- */
   /* Formulaire : même serveur que la landing, source « Landing IA »   */
   /* ---------------------------------------------------------------- */
-  let sending = false;
   const form = $('#form');
+  // La formule (une formation, Pack Hooked, Pack Créateur), puis la formation si « une formation » :
+  // le champ caché `formation` porte l'offre envoyée au serveur (creative, ia, dev, both ou all).
+  const fSync = () => {
+    const f = $('input[name="formule"]:checked', form)?.value || 'all';
+    const s = $('input[name="solo"]:checked', form)?.value || 'ia';
+    $('#f-solo').hidden = f !== 'solo';
+    $('input[name="formation"]', form).value = f === 'solo' ? s : f;
+  };
+  const pickOffer = (id) => {
+    const solo = SOLO.includes(id);
+    const r = $(`input[name="formule"][value="${solo ? 'solo' : id}"]`, form);
+    if (r) r.checked = true;
+    if (solo) $(`input[name="solo"][value="${id}"]`, form).checked = true;
+    fSync();
+  };
+  $$('input[name="formule"], input[name="solo"]', form).forEach((r) => r.addEventListener('change', fSync));
+  fSync();
+  D.addEventListener('click', (e) => {
+    const a = e.target.closest('[data-pick]');
+    if (a) pickOffer(a.dataset.pick);
+  });
+  // Carte « une formation au choix » : le sélecteur change la formation, le prix et le pack proposé
+  // (IA ou Créative → Pack Créateur ; Sites & Apps → Pack Hooked).
+  const soloCard = $('#c-solo');
+  const UP = { ia: ['both', P.both - P.ia], creative: ['both', P.both - P.creative], dev: ['all', P.all - P.dev] };
+  const showSolo = (id, anim) => {
+    soloCard.dataset.t = id;
+    $$('.csw button', soloCard).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.t === id)));
+    $$('.cvar', soloCard).forEach((v) => (v.hidden = v.dataset.t !== id));
+    $('.js-solo-go', soloCard).dataset.pick = id;
+    const [pk, diff] = UP[id];
+    const up = $('.js-up', soloCard);
+    up.dataset.pick = pk;
+    up.textContent = t(`ia.tar.up.${id}`, { prix: fmt(diff) });
+    frTypo(up);
+    up.parentElement.hidden = !(diff > 0);
+    if (anim && hasGsap && !reduce) gsap.from($('.cvar:not([hidden])', soloCard).children, { y: 14, autoAlpha: 0, duration: 0.45, stagger: 0.04, ease: 'power3.out' });
+  };
+  $$('.csw button', soloCard).forEach((b) => b.addEventListener('click', () => showSolo(b.dataset.t, true)));
+  showSolo('ia');
+
+  let sending = false;
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const err = $('#form-err');
@@ -231,7 +285,7 @@ import { initPWA } from '../assets/js/pwa.js';
       .catch((e2) => {
         // Serveur injoignable ou trop d'envois : la demande part sur WhatsApp, rien n'est perdu
         const wa = String(settings().whatsapp || '').replace(/\D/g, '');
-        const pack = t({ ia: 'ia.f.ia', both: 'ia.f.both', creative: 'ia.f.crea' }[data.formation] || 'ia.f.both');
+        const pack = t({ ia: 'ia.f.ia', both: 'ia.f.both', creative: 'ia.f.crea', dev: 'ia.f.dev', all: 'ia.f.all' }[data.formation] || 'ia.f.all');
         const msg = t('ia.f.waMsg', { name: data.name || '', phone: data.phone || '', pack });
         err.innerHTML = `${esc(t(e2?.status === 429 ? 'ia.f.rate' : 'ia.f.err'))} <a href="https://wa.me/${wa}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">${esc(t('ia.f.wa'))}</a>`;
       })
@@ -536,6 +590,7 @@ import { initPWA } from '../assets/js/pwa.js';
     $$('#hbc i').forEach((i) => (i.style.transform = 'none'));
     $$('#ps-list .ps').forEach((p) => p.classList.add('is-on'));
     $$('.crea-tl i').forEach((i) => (i.style.transform = 'none'));
+    mountSiteBuild($('#sa-sb'), { reduce: true });
     $$('#orbit li').forEach((li) => li.classList.add('is-on'));
     renderFaq(false);
     const fin = logoParticles($('#fin-cv'));
@@ -571,10 +626,6 @@ import { initPWA } from '../assets/js/pwa.js';
       const target = id === '#top' ? 0 : $(id);
       if (target === null) return;
       e.preventDefault();
-      if (a.dataset.pick) {
-        const radio = $(`input[name="formation"][value="${a.dataset.pick}"]`);
-        if (radio) radio.checked = true;
-      }
       if (lenis) lenis.scrollTo(target, { offset: -16, duration: 1.5 });
       else scrollTo({ top: target === 0 ? 0 : target.getBoundingClientRect().top + scrollY - 16, behavior: 'smooth' });
     });
@@ -594,6 +645,7 @@ import { initPWA } from '../assets/js/pwa.js';
     programme();
     platform();
     creative();
+    sitesApps();
     pricing();
     reveals();
     faq();
@@ -1017,6 +1069,15 @@ import { initPWA } from '../assets/js/pwa.js';
     const ct = gsap.timeline({ scrollTrigger: { trigger: '.crea-tl', start: 'top 92%', end: 'top 55%', scrub: 0.5 } });
     ct.to('.ct-h i', { scaleX: 1, ease: 'none', duration: 0.26 }).to('.ct-b i', { scaleX: 1, ease: 'none', duration: 0.48 }).to('.ct-c i', { scaleX: 1, ease: 'none', duration: 0.26 });
     ScrollTrigger.create({ trigger: '.crea-stats', start: 'top 88%', once: true, onEnter: () => countUp($$('.crea-stats [data-count]'), 1.2) });
+  }
+
+  /* -------- Sites & Apps : bascule vers la menthe, le site se construit au défilement -------- */
+  function sitesApps() {
+    const tl = gsap.timeline({ scrollTrigger: { trigger: '.sa', start: 'top 75%', end: 'bottom 25%', scrub: true } });
+    tl.to(H, { '--bgc': '#03100d', duration: 1, ease: 'none' }).to(H, { '--bgc': '#03100d', duration: 2, ease: 'none' }).to(H, { '--bgc': '#07060b', duration: 1, ease: 'none' });
+    mountSiteBuild($('#sa-sb'), { gsap, ScrollTrigger, trigger: '.sa-vis', start: 'top 60%', end: 'bottom bottom' });
+    ScrollTrigger.create({ trigger: '.sa-stats', start: 'top 88%', once: true, onEnter: () => countUp($$('.sa-stats [data-count]'), 1.2) });
+    gsap.from('.sa-mods li', { y: 18, autoAlpha: 0, scale: 0.92, duration: 0.6, stagger: 0.04, ease: 'back.out(2)', scrollTrigger: { trigger: '.sa-mods', start: 'top 88%' } });
   }
 
   /* -------- Tarifs -------- */

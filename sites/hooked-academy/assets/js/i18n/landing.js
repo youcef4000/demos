@@ -656,6 +656,7 @@ add({
     'duo.big3': 'Sites & Apps',
     'duo.cov3': 'Sites & Apps Course cover',
     'duo.go.dev': 'See the price',
+    'duo.seam3': 'From prompt · to live website',
     'tix.d.k': 'Ticket 04 · New',
     'tix.d.big': 'Sites & Apps',
     'tix.d.p': 'Build, secure, publish and sell websites and apps with AI (vibe coding).',
@@ -687,6 +688,7 @@ add({
     'duo.big3': 'مواقع وتطبيقات',
     'duo.cov3': 'غلاف تكوين المواقع والتطبيقات',
     'duo.go.dev': 'اطّلع على السعر',
+    'duo.seam3': 'من البرومبت · إلى موقع على الإنترنت',
     'tix.d.k': 'التذكرة 04 · جديد',
     'tix.d.big': 'مواقع وتطبيقات',
     'tix.d.p': 'اصنع المواقع والتطبيقات واحمها وانشرها وبِعها بالذكاء الاصطناعي (vibe coding).',
@@ -708,4 +710,67 @@ add({
     'f.track.d': 'باقة المواقع والتطبيقات',
     'f.track.a': 'باقة التكوينات الثلاثة',
   },
+});
+
+// Tarifs simplifiés (novembre 2026) : trois billets — une formation au choix, Pack Hooked (les trois), Pack Créateur
+// (Créative + IA) — et un formulaire en deux temps (formule, puis formation).
+add({
+  fr: {
+    'tix.up.creative': 'Ajoute l’IA pour {p} de plus : Pack Créateur →',
+    'tix.up.ia': 'Ajoute la Créative pour {p} de plus : Pack Créateur →',
+    'tix.up.dev': 'Les 3 formations pour {p} de plus : Pack Hooked →',
+    'f.f.from': 'dès {p}',
+    'f.track.a': 'Pack Hooked',
+    'f.track.b': 'Pack Créateur',
+  },
+  en: {
+    'tix.lead': 'One course of your choice, or a bundle at a reduced price. No online payment: the team calls you first, then you pay by CCP, BaridiMob or cash.',
+    'tix.s.k': 'Ticket 01 · One course of your choice',
+    'tix.s.sw': 'Choose your course',
+    'tix.up.creative': 'Add AI for {p} more: Creator Pack →',
+    'tix.up.ia': 'Add Creative for {p} more: Creator Pack →',
+    'tix.up.dev': 'All 3 courses for {p} more: Hooked Pack →',
+    'tix.a.stamp': 'Best value',
+    'tix.a.k': 'Ticket 02 · All three courses',
+    'tix.a.big': 'Hooked Pack',
+    'tix.a.5': 'All three courses open from day one',
+    'tix.b.k': 'Ticket 03 · Two courses',
+    'tix.b.big': 'Creator Pack',
+    'tix.b.p': 'The two ad courses, in the recommended order: creative first, then AI.',
+    'f.track': 'Choose your plan · 1-year access',
+    'f.f.solo': 'One course',
+    'f.f.from': 'from {p}',
+    'f.f.which': 'Your course',
+    'f.track.a': 'Hooked Pack',
+    'f.track.b': 'Creator Pack',
+    'faq.a6': 'No payment on the website. After you sign up, the team contacts you on WhatsApp to confirm your plan (one course, the Creator Pack or the Hooked Pack) and the payment options (CCP, BaridiMob or cash). Your access is activated as soon as it’s approved.',
+  },
+  ar: {
+    'tix.lead': 'تكوين واحد تختاره، أو باقة بسعر مخفّض. لا دفع على الإنترنت: يتصل بك الفريق أولًا، ثم تدفع عبر CCP أو BaridiMob أو نقدًا.',
+    'tix.s.k': 'التذكرة 01 · تكوين واحد تختاره',
+    'tix.s.sw': 'اختر تكوينك',
+    'tix.up.creative': 'أضف الذكاء الاصطناعي مقابل {p} إضافية: باقة صانع المحتوى ←',
+    'tix.up.ia': 'أضف الإبداعي مقابل {p} إضافية: باقة صانع المحتوى ←',
+    'tix.up.dev': 'التكوينات الثلاثة مقابل {p} إضافية: باقة Hooked ←',
+    'tix.a.stamp': 'أفضل عرض',
+    'tix.a.k': 'التذكرة 02 · التكوينات الثلاثة',
+    'tix.a.big': 'باقة Hooked',
+    'tix.a.5': 'التكوينات الثلاثة مفتوحة من اليوم الأول',
+    'tix.b.k': 'التذكرة 03 · تكوينان',
+    'tix.b.big': 'باقة صانع المحتوى',
+    'tix.b.p': 'تكوينا الإعلان بالترتيب المنصوح به: الإبداعي أولًا، ثم الذكاء الاصطناعي.',
+    'f.track': 'اختر صيغتك · وصول لمدة سنة',
+    'f.f.solo': 'تكوين واحد',
+    'f.f.from': 'ابتداءً من {p}',
+    'f.f.which': 'تكوينك',
+    'f.track.a': 'باقة Hooked',
+    'f.track.b': 'باقة صانع المحتوى',
+    'faq.a6': 'لا دفع على الموقع. بعد تسجيلك يتواصل معك الفريق على واتساب لتأكيد صيغتك (تكوين واحد أو باقة صانع المحتوى أو باقة Hooked) وطرق الدفع (CCP أو BaridiMob أو نقدًا). يُفعَّل وصولك فور المصادقة.',
+  },
+});
+
+// FAQ : trois formations
+add({
+  en: { 'faq.q3': "Which course should I choose?", 'faq.a3': "The Creative Course teaches you what makes an ad sell and how to produce it with your phone, CapCut and Canva. The AI Course teaches you to produce with AI (images, videos, voice, UGC), then to sell that skill. The Sites & Apps Course teaches you to build, secure and sell websites and apps with AI. Take the one you need, or a bundle: Creative + AI (Creator Pack) or all three (Hooked Pack)." },
+  ar: { 'faq.q3': "أيّ تكوين أختار؟", 'faq.a3': "يعلّمك التكوين الإبداعي ما الذي يجعل الإعلان يبيع وكيف تنتجه بهاتفك وCapCut وCanva. ويعلّمك تكوين الذكاء الاصطناعي الإنتاج بالذكاء الاصطناعي (صور، فيديوهات، صوت، UGC)، ثم بيع هذه المهارة. ويعلّمك تكوين المواقع والتطبيقات صنع المواقع والتطبيقات وحمايتها وبيعها بالذكاء الاصطناعي. اختر ما تحتاجه، أو باقة: الإبداعي + الذكاء الاصطناعي (باقة صانع المحتوى) أو الثلاثة (باقة Hooked)." },
 });

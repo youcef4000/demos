@@ -12,6 +12,7 @@ import { api } from './api.js';
 import * as FAQ from './faq.js';
 import { OFFRES } from '../../data/offres.js';
 import { mountAssistant } from './assistant.js';
+import { mountSiteBuild } from './site-build.js';
 import { initPWA } from './pwa.js';
 import { OUTILS, BUDGETS, CHECKED } from '../../data/outils.js';
 
@@ -130,12 +131,52 @@ $$('.js-inc').forEach((el) => {
   const n = track === 'all' ? LESSONS.length : track === 'both' ? BOTH : track ? byTrack[track].lessons.length : byTrack[mods].mods.length;
   el.textContent = t(el.dataset.k, { n });
 });
-$$('[data-pick]').forEach((a) =>
-  a.addEventListener('click', () => {
-    const r = $(`#form input[name="formation"][value="${a.dataset.pick}"]`);
-    if (r) r.checked = true;
-  }),
-);
+
+// Formulaire : la formule (une formation, Pack Hooked, Pack Créateur), puis la formation si « une formation ».
+// Le champ caché `formation` porte l'offre envoyée au serveur (creative, ia, dev, both ou all).
+const SOLO = ['creative', 'ia', 'dev'];
+const offerName = (id) => (SOLO.includes(id) ? t(`track.${id}`) : t({ both: 'f.track.b', all: 'f.track.a' }[id] || 'f.track.a'));
+const fForm = $('#form');
+const fSync = () => {
+  const f = $('input[name="formule"]:checked', fForm)?.value || 'all';
+  const s = $('input[name="solo"]:checked', fForm)?.value || 'creative';
+  $('#f-solo').hidden = f !== 'solo';
+  $('input[name="formation"]', fForm).value = f === 'solo' ? s : f;
+};
+const pickOffer = (id) => {
+  const solo = SOLO.includes(id);
+  const r = $(`input[name="formule"][value="${solo ? 'solo' : id}"]`, fForm);
+  if (r) r.checked = true;
+  if (solo) $(`input[name="solo"][value="${id}"]`, fForm).checked = true;
+  fSync();
+};
+$$('input[name="formule"], input[name="solo"]', fForm).forEach((r) => r.addEventListener('change', fSync));
+$$('.js-from').forEach((el) => (el.textContent = t('f.f.from', { p: money(Math.min(...SOLO.map((k) => OFFRES[k]))) })));
+fSync();
+$$('[data-pick]').forEach((a) => a.addEventListener('click', () => pickOffer(a.dataset.pick)));
+
+// Billet 01 : une formation au choix. Le sélecteur change le contenu, la couleur et le prix du billet,
+// et propose le pack qui ajoute le plus pour le moins (Créative ou IA → Pack Créateur ; Sites & Apps → Pack Hooked).
+const soloTk = $('#tk-solo');
+if (soloTk) {
+  const UP = { creative: ['both', OFFRES.both - OFFRES.creative], ia: ['both', OFFRES.both - OFFRES.ia], dev: ['all', OFFRES.all - OFFRES.dev] };
+  const showSolo = (id, anim) => {
+    soloTk.dataset.offre = id;
+    $$('.tk-sw button', soloTk).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.t === id)));
+    $$('.tk-var', soloTk).forEach((v) => (v.hidden = v.dataset.t !== id));
+    $('.js-solo-go', soloTk).dataset.pick = id;
+    const [pk, diff] = UP[id];
+    const up = $('.js-up', soloTk);
+    up.dataset.pick = pk;
+    up.textContent = t(`tix.up.${id}`, { p: money(diff) });
+    frTypo(up);
+    up.parentElement.hidden = !(diff > 0);
+    const g = window.gsap;
+    if (anim && g && !reduce) g.fromTo($('.tk-var:not([hidden])', soloTk), { clipPath: isRTL ? 'inset(0 0 0 100%)' : 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0%)', duration: 0.12, ease: 'steps(3)', clearProps: 'clipPath' });
+  };
+  $$('.tk-sw button', soloTk).forEach((b) => b.addEventListener('click', () => showSolo(b.dataset.t, true)));
+  showSolo('creative');
+}
 frTypo(document.body);
 
 // Parcours : les modules de chaque partie, le dernier module (projet final) à part
@@ -642,7 +683,7 @@ next.addEventListener('click', () => {
     .catch((e) => {
       // Serveur injoignable ou trop d'envois : l'inscription part sur WhatsApp, rien n'est perdu
       const wa = settings().whatsapp;
-      const msg = t('f.err.waMsg', { name: data.name || '', phone: data.phone || '', pack: data.formation || '' });
+      const msg = t('f.err.waMsg', { name: data.name || '', phone: data.phone || '', pack: offerName(data.formation) });
       err.innerHTML = `${esc(t(e?.status === 429 ? 'f.err.rate' : 'f.err.send'))} <a href="https://wa.me/${wa}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">${esc(t('f.err.wa'))}</a>`;
     })
     .finally(() => {
@@ -793,10 +834,21 @@ function bot() {
   });
 }
 
+// Formation Sites & Apps : le site se construit pendant qu'on lit le panneau (sauts, comme le reste de la page)
+function siteBuild() {
+  const el = $('#dvb');
+  if (!el) return;
+  const ok = window.gsap && window.ScrollTrigger && !reduce;
+  mountSiteBuild(el, { gsap: ok && window.gsap, ScrollTrigger: ok && window.ScrollTrigger, reduce, cut: true, start: 'top 70%', end: 'bottom bottom' });
+}
+
 const start = () => {
   fitBig();
-  new ResizeObserver(fitBig).observe($('#formations'));
+  const ro = new ResizeObserver(fitBig);
+  ro.observe($('#formations'));
+  if ($('#formation-dev')) ro.observe($('#formation-dev'));
   animate();
+  siteBuild();
   onScroll();
   bot();
 };

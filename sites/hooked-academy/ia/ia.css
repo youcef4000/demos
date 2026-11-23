@@ -3283,3 +3283,225 @@ body.in-scene .hb {
   opacity: 0;
   visibility: hidden;
 }
+
+/* 6 bis · Sites & Apps (novembre 2026) : la troisième formation, en menthe. Sur ordinateur, le texte reste en place
+   pendant que le site se construit à côté (assets/css/site-build.css) ; sur téléphone, le site vient après. */
+.sa {
+  --acc: #5fd3b3;
+  --mint: #5fd3b3;
+  position: relative;
+  padding: clamp(90px, 14vw, 170px) 0 clamp(60px, 10vw, 120px);
+}
+.sa::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 40% at 70% 40%, rgb(95 211 179 / 0.14), transparent 70%),
+    radial-gradient(circle at 1px 1px, rgb(95 211 179 / 0.09) 1px, transparent 0) 0 0 / 24px 24px;
+  -webkit-mask: linear-gradient(transparent, #000 12%, #000 88%, transparent);
+  mask: linear-gradient(transparent, #000 12%, #000 88%, transparent);
+  pointer-events: none;
+  z-index: -1;
+}
+.sa .h2 {
+  background: linear-gradient(180deg, #fff 35%, #9be8d2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.sa-in {
+  display: grid;
+  gap: 40px;
+}
+.sa-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 26px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.sa-stats li {
+  display: grid;
+  gap: 2px;
+  padding-top: 12px;
+  border-top: 1px solid rgb(95 211 179 / 0.28);
+}
+.sa-stats b {
+  font-size: clamp(2.2rem, 9vw, 3.2rem);
+  line-height: 1;
+  color: var(--mint);
+}
+.sa-stats span {
+  font-size: 14px;
+  color: var(--muted);
+}
+.sa-mods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.sa-mods li {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  padding: 6px 11px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--txt);
+  background: rgb(95 211 179 / 0.07);
+  box-shadow: inset 0 0 0 1px rgb(95 211 179 / 0.22);
+}
+.sa-mods b {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--mint);
+}
+.sa-trio {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 26px 0 0;
+  padding: 10px 16px 10px 12px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #9be8d2;
+  background: rgb(95 211 179 / 0.1);
+  box-shadow: inset 0 0 0 1px rgb(95 211 179 / 0.35);
+}
+.sa-trio svg {
+  width: 16px;
+  height: 16px;
+  color: var(--mint);
+}
+.sa-vis {
+  --sb-top: calc(var(--nav-h) + 6vh);
+  --sb-head: var(--f-disp);
+  display: grid;
+  min-height: 200svh;
+}
+.sa-sb .sb-cap-t {
+  font-weight: 850;
+  letter-spacing: -0.02em;
+}
+@media (min-width: 900px) {
+  .sa-in {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 5vw;
+    align-items: start;
+  }
+  .sa-copy {
+    position: sticky;
+    top: calc(var(--nav-h) + 8vh);
+  }
+  .sa-vis {
+    min-height: 240vh;
+  }
+}
+
+/* Tarifs : la carte « une formation au choix » (sélecteur), le Pack Hooked au centre, le Pack Créateur */
+.csw {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: start;
+  gap: 6px;
+  margin: 14px 0 0;
+}
+.csw button {
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.05);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.14);
+  color: var(--muted);
+  font: 700 13.5px/1 var(--f-text);
+  cursor: pointer;
+  transition: background-color 0.25s, color 0.25s, box-shadow 0.25s;
+}
+.csw button[aria-pressed='true'] {
+  color: #0d0c10;
+  background: var(--acc);
+  box-shadow: none;
+}
+.csw button:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 2px;
+}
+.card--solo[data-t='creative'] {
+  --acc: var(--gold);
+}
+.card--solo[data-t='dev'] {
+  --acc: #5fd3b3;
+}
+.card--solo .card-k,
+.card--solo .inc svg {
+  color: var(--acc);
+}
+.card--solo .upsell a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.card--solo .upsell[hidden] {
+  display: none;
+}
+.card--duo .card-k,
+.card--duo .inc svg {
+  color: var(--gold);
+}
+.card--duo {
+  background:
+    linear-gradient(135deg, rgb(224 190 85 / 0.1), transparent 45%),
+    linear-gradient(315deg, rgb(124 92 255 / 0.12), transparent 45%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.02));
+}
+.trio-bar {
+  display: flex;
+  gap: 4px;
+  margin: 14px 0 0;
+}
+.trio-bar i {
+  flex: 1;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--gold);
+}
+.trio-bar i:nth-child(2) {
+  background: var(--violet-2);
+}
+.trio-bar i:nth-child(3) {
+  background: #5fd3b3;
+}
+.seg--sub {
+  margin-top: 8px;
+  padding-inline-start: 14px;
+  border-inline-start: 2px solid rgb(198 242 60 / 0.35);
+}
+.seg--sub[hidden] {
+  display: none;
+}
+@media (min-width: 900px) {
+  .cards .card--pack {
+    margin-top: -18px;
+  }
+}
+/* Mouvement réduit : rien ne défile, le site est déjà construit ; pas de grande colonne vide */
+html.rm .sa-vis,
+html.nojs .sa-vis {
+  min-height: 0;
+}
+html.rm .sa-copy {
+  position: static;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sa-vis {
+    min-height: 0;
+  }
+}

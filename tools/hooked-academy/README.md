@@ -38,6 +38,18 @@ Documents (recherches, tournages, modèles) : `formations/sites-et-apps/`.
 Anglais et arabe : `data/i18n/<langue>/dv0.js … dv15.js` traduisent les titres, les présentations des modules et les
 points essentiels (environ 10 % des textes, voir `i18n-check.mjs`) ; les scènes, quiz et exercices restent en français.
 
+Sur la landing (`index.html`) et la page `/ia/`, la formation a son panneau « Formation 03 », du même format que les
+deux autres, avec à côté le site qui se construit au défilement en cinq étapes (décrire, coder, vérifier, mobile, en
+ligne) : `assets/js/site-build.js` et `assets/css/site-build.css`, partagés par les deux pages.
+
+## Les offres (novembre 2026)
+
+Trois billets seulement, pour ne pas noyer le visiteur dans le choix : **une formation au choix** (sélecteur Créative /
+IA / Sites & Apps, avec le pack qui ajoute le plus pour le moins), le **Pack Hooked** au centre (les trois formations,
+« meilleure offre ») et le **Pack Créateur** (Créative + IA). Le formulaire suit le même ordre : la formule, puis la
+formation si « une formation ». Les identifiants envoyés au serveur ne changent pas (`creative`, `ia`, `dev`, `both`,
+`all`) ; les prix restent dans `data/offres.js` (ou Admin → Réglages).
+
 Structure IA demandée : Prompting → Images → Vidéos → UGC → Cinématique → Acquisition clients.
 Ajouts : **Voix, musique et sous-titres** (indispensable pour l'UGC et la cinématique, placé avant),
 **Tester et analyser avec Hooked Lab** (on mesure avant de vendre), éthique de l'UGC IA dans le

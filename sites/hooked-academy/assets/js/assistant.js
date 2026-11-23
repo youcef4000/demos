@@ -146,16 +146,16 @@ export const SURE = 1.2;
 /** Réponses intégrées, en plus de la FAQ : les tarifs (data/offres.js) et les salutations. Jamais proposées en suggestion. */
 const da = (n) => `${new Intl.NumberFormat(lang === 'en' ? 'en-GB' : 'fr-FR').format(n)} ${{ fr: 'DA', en: 'DZD', ar: 'دج' }[lang] || 'DA'}`;
 export function builtins() {
-  const p = { c: da(OFFRES.creative), i: da(OFFRES.ia), b: da(OFFRES.both) };
+  const p = { c: da(OFFRES.creative), i: da(OFFRES.ia), d: da(OFFRES.dev), b: da(OFFRES.both), a: da(OFFRES.all) };
   return [
     {
       id: '_prix',
       kw: 'prix, tarif, tarifs, coût, combien, cher, dinar, dinars, da, dzd, pack, packs, price, cost, how much, fee, سعر, الثمن, ثمن, كم, تكلفة, دينار, شحال, بشحال',
       q: { fr: 'Combien coûte la formation ?', en: 'How much does the course cost?', ar: 'كم يكلّف التكوين؟' },
       a: {
-        fr: `Pack Créative : ${p.c} · Pack IA : ${p.i} · Pack complet (les deux formations) : ${p.b}.\n\nChaque pack donne un an d’accès à la plateforme. Le paiement se fait avec l’équipe sur WhatsApp, après ton inscription (CCP, BaridiMob ou espèces).`,
-        en: `Creative pack: ${p.c} · AI pack: ${p.i} · Full pack (both courses): ${p.b}.\n\nEach pack gives one year of access to the platform. You pay with the team on WhatsApp, after signing up (CCP, BaridiMob or cash).`,
-        ar: `باقة التكوين الإبداعي: ${p.c} · باقة الذكاء الاصطناعي: ${p.i} · الباقة الكاملة (التكوينان): ${p.b}.\n\nتمنحك كل باقة وصولًا إلى المنصة لمدة سنة. يتم الدفع مع الفريق عبر واتساب بعد تسجيلك (CCP أو BaridiMob أو نقدًا).`,
+        fr: `Une formation au choix : Créative ${p.c} · IA ${p.i} · Sites & Apps ${p.d}.\nPack Créateur (Créative + IA) : ${p.b} · Pack Hooked (les trois formations) : ${p.a}.\n\nChaque formule donne un an d’accès à la plateforme. Le paiement se fait avec l’équipe sur WhatsApp, après ton inscription (CCP, BaridiMob ou espèces).`,
+        en: `One course of your choice: Creative ${p.c} · AI ${p.i} · Sites & Apps ${p.d}.\nCreator Pack (Creative + AI): ${p.b} · Hooked Pack (all three courses): ${p.a}.\n\nEach plan gives one year of access to the platform. You pay with the team on WhatsApp, after signing up (CCP, BaridiMob or cash).`,
+        ar: `تكوين واحد تختاره: الإبداعي ${p.c} · الذكاء الاصطناعي ${p.i} · المواقع والتطبيقات ${p.d}.\nباقة صانع المحتوى (الإبداعي + الذكاء الاصطناعي): ${p.b} · باقة Hooked (التكوينات الثلاثة): ${p.a}.\n\nتمنحك كل صيغة وصولًا إلى المنصة لمدة سنة. يتم الدفع مع الفريق عبر واتساب بعد تسجيلك (CCP أو BaridiMob أو نقدًا).`,
       },
     },
     {

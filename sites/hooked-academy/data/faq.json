@@ -52,16 +52,16 @@
   "cat": "formation",
   "landing": true,
   "q": {
-   "fr": "Pourquoi deux formations ?",
-   "en": "Why two courses?",
-   "ar": "لماذا تكوينان؟"
+   "fr": "Quelle formation choisir ?",
+   "en": "Which course should I choose?",
+   "ar": "أيّ تكوين أختار؟"
   },
   "a": {
-   "fr": "La Formation Créative t’apprend ce qui fait vendre une pub et comment la produire avec ton téléphone, CapCut et Canva. La Formation IA t’apprend à produire avec l’IA (images, vidéos, voix, UGC), puis à vendre ce savoir-faire. Tu peux suivre l’une, l’autre, ou les deux.",
-   "en": "The Creative Course teaches you what makes an ad sell and how to produce it with your phone, CapCut and Canva. The AI Course teaches you to produce with AI (images, videos, voice, UGC), then to sell that skill. Take one, the other, or both.",
-   "ar": "يعلّمك التكوين الإبداعي ما الذي يجعل الإعلان يبيع وكيف تنتجه بهاتفك وCapCut وCanva. ويعلّمك تكوين الذكاء الاصطناعي الإنتاج بالذكاء الاصطناعي (صور، فيديوهات، صوت، UGC)، ثم بيع هذه المهارة. يمكنك أن تتابع أحدهما أو كليهما."
+   "fr": "La Formation Créative t’apprend ce qui fait vendre une pub et comment la produire avec ton téléphone, CapCut et Canva. La Formation IA t’apprend à produire avec l’IA (images, vidéos, voix, UGC), puis à vendre ce savoir-faire. La Formation Sites & Apps t’apprend à créer, sécuriser et vendre des sites et des applications avec l’IA. Prends celle qui te sert, ou un pack : Créative + IA (Pack Créateur) ou les trois (Pack Hooked).",
+   "en": "The Creative Course teaches you what makes an ad sell and how to produce it with your phone, CapCut and Canva. The AI Course teaches you to produce with AI (images, videos, voice, UGC), then to sell that skill. The Sites & Apps Course teaches you to build, secure and sell websites and apps with AI. Take the one you need, or a bundle: Creative + AI (Creator Pack) or all three (Hooked Pack).",
+   "ar": "يعلّمك التكوين الإبداعي ما الذي يجعل الإعلان يبيع وكيف تنتجه بهاتفك وCapCut وCanva. ويعلّمك تكوين الذكاء الاصطناعي الإنتاج بالذكاء الاصطناعي (صور، فيديوهات، صوت، UGC)، ثم بيع هذه المهارة. ويعلّمك تكوين المواقع والتطبيقات صنع المواقع والتطبيقات وحمايتها وبيعها بالذكاء الاصطناعي. اختر ما تحتاجه، أو باقة: الإبداعي + الذكاء الاصطناعي (باقة صانع المحتوى) أو الثلاثة (باقة Hooked)."
   },
-  "kw": "deux formations, différence, choisir, laquelle, créative ou ia, two courses, difference, choose, which, تكوينان, الفرق, أختار"
+  "kw": "deux formations, différence, choisir, laquelle, créative ou ia, two courses, difference, choose, which, تكوينان, الفرق, أختار, trois formations, sites, apps, application, site web, three courses, websites, ثلاثة, مواقع, تطبيقات"
  },
  {
   "id": "outils",
@@ -121,9 +121,9 @@
    "ar": "كيف يتم الدفع؟"
   },
   "a": {
-   "fr": "Aucun paiement sur le site. Après ton inscription, l’équipe te contacte sur WhatsApp pour confirmer ton pack (Créative, IA ou les deux, accès d’un an) et les moyens de paiement (CCP, BaridiMob ou espèces). Ton accès est activé dès la validation.",
-   "en": "No payment on the website. After you sign up, the team contacts you on WhatsApp to confirm your pack (Creative, AI or both, one-year access) and the payment options (CCP, BaridiMob or cash). Your access is activated as soon as it’s approved.",
-   "ar": "لا دفع على الموقع. بعد تسجيلك يتواصل معك الفريق على واتساب لتأكيد باقتك (الإبداعي أو الذكاء الاصطناعي أو كلاهما، مع وصول لمدة سنة) وطرق الدفع (CCP أو BaridiMob أو نقدًا). ويُفعَّل دخولك فور المصادقة."
+   "fr": "Aucun paiement sur le site. Après ton inscription, l’équipe te contacte sur WhatsApp pour confirmer ta formule (une formation au choix, le Pack Créateur ou le Pack Hooked, accès d’un an) et les moyens de paiement (CCP, BaridiMob ou espèces). Ton accès est activé dès la validation.",
+   "en": "No payment on the website. After you sign up, the team contacts you on WhatsApp to confirm your plan (one course of your choice, the Creator Pack or the Hooked Pack, one-year access) and the payment options (CCP, BaridiMob or cash). Your access is activated as soon as it’s approved.",
+   "ar": "لا دفع على الموقع. بعد تسجيلك يتواصل معك الفريق على واتساب لتأكيد صيغتك (تكوين واحد تختاره أو باقة صانع المحتوى أو باقة Hooked، مع وصول لمدة سنة) وطرق الدفع (CCP أو BaridiMob أو نقدًا). ويُفعَّل دخولك فور المصادقة."
   },
   "kw": "paiement, payer, ccp, baridimob, espèces, prix, tarif, combien, payment, pay, price, cash, how much, دفع, سعر, ثمن, كم, ندفع, نخلص, خلاص, الخلاص"
  },
@@ -153,9 +153,9 @@
    "ar": "هل يمكنني إضافة التكوين الآخر إلى باقتي؟"
   },
   "a": {
-   "fr": "Oui. Si tu as commencé par la Formation Créative ou la Formation IA, tu peux ajouter l’autre à tout moment : touche « Ajouter à mon pack » sur la formation verrouillée, l’équipe s’en occupe sur WhatsApp.",
-   "en": "Yes. If you started with the Creative Course or the AI Course, you can add the other one at any time: tap “Add to my pack” on the locked course, and the team takes care of it on WhatsApp.",
-   "ar": "نعم. إذا بدأت بالتكوين الإبداعي أو بتكوين الذكاء الاصطناعي، يمكنك إضافة الآخر في أي وقت: اضغط على « أضفه إلى باقتي » في التكوين المقفل، ويتكفّل الفريق بذلك عبر واتساب."
+   "fr": "Oui. Tu peux ajouter une autre formation à tout moment : touche « Ajouter à mon pack » sur la formation verrouillée, l’équipe s’en occupe sur WhatsApp.",
+   "en": "Yes. You can add another course at any time: tap “Add to my pack” on the locked course, and the team takes care of it on WhatsApp.",
+   "ar": "نعم. يمكنك إضافة تكوين آخر في أي وقت: اضغط على « أضفه إلى باقتي » في التكوين المقفل، ويتكفّل الفريق بذلك عبر واتساب."
   },
   "kw": "ajouter, pack, autre formation, changer, upgrade, add, bundle, other course, باقة, إضافة, التكوين الآخر"
  },

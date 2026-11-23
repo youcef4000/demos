@@ -27,6 +27,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Figtree:wght@400..800&family=Doto:wght@700..900&family=JetBrains+Mono:wght@400..700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="ia.css">
+<link rel="stylesheet" href="../assets/css/site-build.css">
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" defer></script>
@@ -76,6 +77,7 @@
     <a href="#pipeline" data-k="ia.nav.action">En action</a>
     <a href="#programme" data-k="ia.nav.prog">Programme</a>
     <a href="#plateforme" data-k="ia.nav.plat">Plateforme</a>
+    <a href="#sites-apps" data-k="ia.nav.sa">Sites & Apps</a>
     <a href="#tarifs" data-k="ia.nav.price">Tarifs</a>
     <a href="#faq" data-k="ia.nav.faq">Questions</a>
   </nav>
@@ -375,6 +377,26 @@
     </div>
   </section>
 
+  <!-- 6 bis · SITES & APPS : la troisième formation (bascule violet → menthe). Le texte reste en place pendant que
+       le site se construit au défilement, en cinq étapes (assets/js/site-build.js) ==================================== -->
+  <section class="sa" id="sites-apps" aria-labelledby="sa-t">
+    <div class="sa-in wrap">
+      <div class="sa-copy">
+        <p class="kicker" data-scramble data-k="ia.sa.k">// Et le site ?</p>
+        <h2 class="h2" id="sa-t" data-split data-k="ia.sa.t">La pub attire. Le site encaisse.</h2>
+        <p class="lead" data-fade data-k="ia.sa.lead">La Formation Sites & Apps t’apprend à créer, sécuriser, publier et vendre des sites et des applications avec l’IA (vibe coding) : Claude Code, GitHub, Supabase, l’hébergement et la cybersécurité, jusqu’à ton premier client.</p>
+        <ul class="sa-stats" data-fade>
+          <li><b class="dot-n" data-count="dev-lessons">0</b><span data-k="ia.sa.lessons">leçons</span></li>
+          <li><b class="dot-n" data-count="dev-mods">0</b><span data-k="ia.sa.mods">modules</span></li>
+          <li><b class="dot-n">3</b><span data-k="ia.sa.final">projets en ligne</span></li>
+        </ul>
+        <ol class="sa-mods" id="sa-mods" aria-label="Modules de la Formation Sites & Apps" data-ka="aria-label:ia.sa.modsl"></ol>
+        <p class="sa-trio" data-fade><svg aria-hidden="true"><use href="#i-spark"/></svg><span data-k="ia.sa.trio">Le trio : la créative, l’IA, puis le site qui vend.</span></p>
+      </div>
+      <div class="sa-vis"><div class="sa-sb" id="sa-sb"></div></div>
+    </div>
+  </section>
+
   <!-- 7 · TARIFS (prix publiés par le serveur, data/offres.js) =================================== -->
   <section class="tarifs" id="tarifs" aria-labelledby="tar-t">
     <header class="sec-h wrap">
@@ -382,54 +404,85 @@
       <h2 class="h2" id="tar-t" data-split data-k="ia.tar.t">Choisis ta formule.</h2>
       <p class="lead" data-fade data-k="ia.tar.lead">Aucun paiement en ligne : l’équipe t’appelle d’abord, puis tu paies par CCP, BaridiMob ou en espèces. Accès d’un an.</p>
     </header>
+    <!-- Trois formules : une formation au choix (IA par défaut sur cette page), le Pack Hooked au centre (les trois
+         formations, la meilleure offre) et le Pack Créateur (IA + Créative). Prix : data/offres.js -->
     <div class="cards wrap">
-      <article class="card spot" aria-labelledby="c-ia">
-        <p class="card-k"><svg aria-hidden="true"><use href="#i-spark"/></svg><span data-k="ia.tar.ia.k">Formation IA</span></p>
-        <h3 class="card-t" id="c-ia" data-k="ia.tar.ia.t">Produire avec l’IA, puis le vendre</h3>
-        <p class="price"><b data-price="ia">—</b><span data-k="ia.tar.da">DA</span></p>
-        <p class="per" data-k="ia.tar.year">Accès 1 an</p>
-        <ul class="inc">
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-h="ia.tar.ia.1">Leçons animées de 2 min, en darija</span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-h="ia.tar.ia.2">Du prompting aux premiers clients</span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.ia.3">Un atelier par leçon : PDF, prompts, ressources</span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.ia.4">Images, vidéos, voix et UGC générés par l’IA</span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.final">Projet final validé par l’équipe</span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.ia.6">Certificat Formation IA</span></li>
-        </ul>
-        <a class="bt bt--ghost card-go" href="#inscription" data-pick="ia"><span data-k="ia.tar.ia.go">Choisir l’IA</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <article class="card card--solo spot" data-t="ia" id="c-solo" aria-labelledby="c-solo-k">
+        <p class="card-k" id="c-solo-k"><svg aria-hidden="true"><use href="#i-spark"/></svg><span data-k="ia.tar.s.k">Une formation au choix</span></p>
+        <div class="csw" role="group" aria-label="Choisis ta formation" data-ka="aria-label:ia.tar.s.sw">
+          <button type="button" data-t="ia" aria-pressed="true"><span data-k="ia.tar.s.ia">IA</span></button>
+          <button type="button" data-t="creative" aria-pressed="false"><span data-k="ia.tar.s.crea">Créative</span></button>
+          <button type="button" data-t="dev" aria-pressed="false"><span data-k="ia.tar.s.dev">Sites & Apps</span></button>
+        </div>
+        <div class="cvar" data-t="ia">
+          <h3 class="card-t" data-k="ia.tar.ia.t">Produire avec l’IA, puis le vendre</h3>
+          <p class="price"><b data-price="ia">—</b><span data-k="ia.tar.da">DA</span></p>
+          <p class="per" data-k="ia.tar.year">Accès 1 an</p>
+          <ul class="inc">
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-h="ia.tar.ia.1">Leçons animées de 2 min, en darija</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-h="ia.tar.ia.2">Du prompting aux premiers clients</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.ia.3">Un atelier par leçon : PDF, prompts, ressources</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.ia.4">Images, vidéos, voix et UGC générés par l’IA</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.ia.6">Certificat Formation IA</span></li>
+          </ul>
+        </div>
+        <div class="cvar" data-t="creative" hidden>
+          <h3 class="card-t" data-k="ia.tar.c.t">Ce qui fait vendre une pub</h3>
+          <p class="price"><b data-price="creative">—</b><span data-k="ia.tar.da">DA</span></p>
+          <p class="per" data-k="ia.tar.year">Accès 1 an</p>
+          <ul class="inc">
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-h="ia.tar.c.1">Leçons animées de 2 min, en darija</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-h="ia.tar.c.2">Des bases au projet final</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.c.3">Hooks, scripts, formules de vente et UGC</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.c.4">Tournage, montage avancé et stratégie marketing</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.c.6">Projet final de 30 s et certificat</span></li>
+          </ul>
+        </div>
+        <div class="cvar" data-t="dev" hidden>
+          <h3 class="card-t" data-k="ia.tar.d.t">Créer et vendre des sites et des apps</h3>
+          <p class="price"><b data-price="dev">—</b><span data-k="ia.tar.da">DA</span></p>
+          <p class="per" data-k="ia.tar.year">Accès 1 an</p>
+          <ul class="inc">
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-h="ia.tar.d.1">Leçons animées, théorie et pratique</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-h="ia.tar.d.2">De zéro au premier client</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.d.3">Claude Code, GitHub, Supabase et l’hébergement</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.d.4">Backend et cybersécurité : les chapitres qui font la différence</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.d.5">Projet final (3 projets en ligne) et certificat</span></li>
+          </ul>
+        </div>
+        <p class="upsell"><svg aria-hidden="true"><use href="#i-plus"/></svg><a class="js-up" href="#inscription" data-pick="both"></a></p>
+        <a class="bt bt--ghost card-go js-solo-go" href="#inscription" data-pick="ia"><span data-k="ia.tar.s.go">Choisir cette formation</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </article>
 
-      <article class="card card--pack spot" aria-labelledby="c-both">
-        <p class="card-badge" data-k="ia.tar.badge">Recommandé</p>
-        <p class="card-k"><svg aria-hidden="true"><use href="#i-spark"/></svg><span data-k="ia.tar.b.k">Pack complet · IA + Créative</span></p>
-        <h3 class="card-t" id="c-both" data-k="ia.tar.b.t">Les deux formations</h3>
+      <article class="card card--pack spot" aria-labelledby="c-all">
+        <p class="card-badge" data-k="ia.tar.badge">Meilleure offre</p>
+        <p class="card-k"><svg aria-hidden="true"><use href="#i-spark"/></svg><span data-k="ia.tar.a.k">Pack Hooked · les trois formations</span></p>
+        <h3 class="card-t" id="c-all" data-k="ia.tar.a.t">IA + Créative + Sites & Apps</h3>
+        <p class="price"><b data-price="all">—</b><span data-k="ia.tar.da">DA</span></p>
+        <p class="per"><s data-h="ia.tar.a.was"></s> · <b class="save" data-h="ia.tar.a.save"></b></p>
+        <p class="trio-bar" aria-hidden="true"><i></i><i></i><i></i></p>
+        <ul class="inc">
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-h="ia.tar.a.1">Toutes les leçons des trois formations</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.a.2">Les trois formations ouvertes dès le premier jour</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.a.3">Tous les ateliers, prompts, skills et ressources</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.a.4">Trois projets finaux validés par l’équipe</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.a.5">Les trois certificats</span></li>
+        </ul>
+        <a class="bt bt--lime card-go" href="#inscription" data-pick="all" data-magnet><span data-k="ia.tar.b.go">Choisir le pack</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </article>
+
+      <article class="card card--duo spot" aria-labelledby="c-both">
+        <p class="card-k"><svg aria-hidden="true"><use href="#i-film"/></svg><span data-k="ia.tar.b.k">Pack Créateur · IA + Créative</span></p>
+        <h3 class="card-t" id="c-both" data-k="ia.tar.b.t">Les deux formations de la pub</h3>
         <p class="price"><b data-price="both">—</b><span data-k="ia.tar.da">DA</span></p>
         <p class="per"><s data-h="ia.tar.b.was"></s> · <b class="save" data-h="ia.tar.b.save"></b></p>
-        <p class="upsell"><svg aria-hidden="true"><use href="#i-plus"/></svg><span data-h="ia.tar.b.up"></span></p>
         <ul class="inc">
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-h="ia.tar.b.1">Toutes les leçons des deux formations</span></li>
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.b.2">Tout le contenu IA et tout le contenu Créative</span></li>
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.b.3">Les ateliers, la bibliothèque de prompts et les ressources</span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.final">Projet final validé par l’équipe</span></li>
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.b.5">Les deux certificats</span></li>
         </ul>
-        <a class="bt bt--lime card-go" href="#inscription" data-pick="both" data-magnet><span data-k="ia.tar.b.go">Choisir le pack</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-      </article>
-
-      <article class="card card--crea spot" aria-labelledby="c-crea">
-        <p class="card-k"><svg aria-hidden="true"><use href="#i-film"/></svg><span data-k="ia.tar.c.k">Formation Créative</span></p>
-        <h3 class="card-t" id="c-crea" data-k="ia.tar.c.t">Ce qui fait vendre une pub</h3>
-        <p class="price"><b data-price="creative">—</b><span data-k="ia.tar.da">DA</span></p>
-        <p class="per" data-k="ia.tar.year">Accès 1 an</p>
-        <ul class="inc">
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-h="ia.tar.c.1">Leçons animées de 2 min, en darija</span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-h="ia.tar.c.2">Des bases au projet final</span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.c.3">Hooks, scripts, formules de vente et UGC</span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.c.4">Tournage, montage avancé et stratégie marketing</span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.c.5">Un quiz et une to-do pratique à chaque leçon</span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.tar.c.6">Projet final de 30 s et certificat</span></li>
-        </ul>
-        <a class="bt bt--ghost card-go" href="#inscription" data-pick="creative"><span data-k="ia.tar.c.go">Choisir la Créative</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="bt bt--ghost card-go" href="#inscription" data-pick="both"><span data-k="ia.tar.b.go">Choisir le pack</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </article>
     </div>
     <div class="incall wrap" data-fade>
@@ -466,10 +519,16 @@
           <div class="fld">
             <span id="f-pack" data-k="ia.f.pack">Choisis ta formule · accès 1 an</span>
             <div class="seg" role="radiogroup" aria-labelledby="f-pack">
-              <label><input type="radio" name="formation" value="ia"><span><b data-k="ia.f.ia">Formation IA</b><small data-price-s="ia"></small></span></label>
-              <label><input type="radio" name="formation" value="both" checked><span><b data-k="ia.f.both">Pack complet</b><small data-price-s="both"></small></span></label>
-              <label><input type="radio" name="formation" value="creative"><span><b data-k="ia.f.crea">Formation Créative</b><small data-price-s="creative"></small></span></label>
+              <label><input type="radio" name="formule" value="solo"><span><b data-k="ia.f.solo">Une formation</b><small data-h="ia.f.from"></small></span></label>
+              <label><input type="radio" name="formule" value="all" checked><span><b data-k="ia.f.all">Pack Hooked</b><small data-price-s="all"></small></span></label>
+              <label><input type="radio" name="formule" value="both"><span><b data-k="ia.f.both">Pack Créateur</b><small data-price-s="both"></small></span></label>
             </div>
+            <div class="seg seg--sub" id="f-solo" role="radiogroup" aria-label="Ta formation" data-ka="aria-label:ia.f.which" hidden>
+              <label><input type="radio" name="solo" value="ia" checked><span><b data-k="ia.f.ia">Formation IA</b><small data-price-s="ia"></small></span></label>
+              <label><input type="radio" name="solo" value="creative"><span><b data-k="ia.f.crea">Formation Créative</b><small data-price-s="creative"></small></span></label>
+              <label><input type="radio" name="solo" value="dev"><span><b data-k="ia.f.dev">Formation Sites & Apps</b><small data-price-s="dev"></small></span></label>
+            </div>
+            <input type="hidden" name="formation" value="all">
           </div>
           <div class="fld">
             <span id="f-pro" data-k="ia.f.profil">Tu es…</span>
@@ -512,7 +571,7 @@
     <canvas class="fin-cv" id="fin-cv" aria-hidden="true"></canvas>
     <div class="fin-in wrap">
       <h2 class="fin-t" id="fin-t" data-split data-k="ia.fin.t">À toi de générer la suite.</h2>
-      <p class="lead" data-fade data-k="ia.fin.lead">Formation IA · Formation Créative · en darija</p>
+      <p class="lead" data-fade data-k="ia.fin.lead">Formation IA · Formation Créative · Sites & Apps · en darija</p>
       <a class="bt bt--lime bt--l" href="#inscription" data-magnet data-fade><span data-k="ia.cta">Réserver ma place</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </div>
   </section>
