@@ -183,6 +183,12 @@ export default {
         "Next to each hook, note the audience to show it to",
         "Keep the “cold customer” hook and the “hot customer” hook",
         "Add them to your library, under Hooks"
+      ],
+      "res": [
+        {
+          "title": "The lesson prompt",
+          "text": "For [product], write a hook of fewer than 12 words for each of the 5 awareness levels: unaware, problem-aware, solution-aware, product-aware, ready to buy. Say who to show each version to."
+        }
       ]
     },
     "ia10-l3": {
@@ -256,6 +262,12 @@ export default {
         "Paste the 5 most frequent into the lesson prompt",
         "Choose the angle that suits you best among the 3 suggested",
         "Write it in your product sheet, under the dominant desire"
+      ],
+      "res": [
+        {
+          "title": "The lesson prompt",
+          "text": "Here are the promises of 5 competitor ads for [product]: [list]. Tell me if this market is new, full of identical promises, or saturated. Then suggest 3 angles: a stronger promise, a new mechanism, an identity."
+        }
       ]
     },
     "ia10-l4": {
@@ -433,6 +445,12 @@ export default {
         "Keep the 3 the AI recommends, plus your favourite",
         "Plan the image of the first 3 seconds for each hook",
         "Save them in your library: they’ll feed your variants"
+      ],
+      "res": [
+        {
+          "title": "The lesson prompt",
+          "text": "Write 10 hooks of fewer than 8 words for [product], 2 per family: question, number, counter-intuitive, before/after, point of view. For each, describe the image of the first 3 seconds. Then pick the 3 to test first and explain why."
+        }
       ]
     }
   }

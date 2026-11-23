@@ -70,6 +70,12 @@ export default {
         "Check whether it offers 4:5 and 9:16, and accepts your own photo",
         "Take a photo of your real product: it’s your starting point for this module",
         "Note in your toolbox the image tool you’re keeping, and why"
+      ],
+      "res": [
+        {
+          "title": "Which image tool for my need?",
+          "text": "I need to produce: [packshot / lifestyle shot / character / poster with text / retouch].\nMy product: [product], I have [a real photo / no photo].\nFor this need, compare the image tools I can use ([list]): product fidelity, text in the image, retouching, price and commercial usage rights. Recommend one and explain why."
+        }
       ]
     },
     "ia2-l2": {
@@ -144,6 +150,12 @@ export default {
         "Put the result next to the real photo: same label, shape and color?",
         "Try 3 settings and keep the best packshot in your portfolio",
         "Save your setting prompt in your library, under Packshots"
+      ],
+      "res": [
+        {
+          "title": "Packshot from my real photo",
+          "text": "Keep the product exactly identical to the attached photo (shape, label, colours, text). Place it on [setting: marble pedestal / plain background / wooden surface], [soft studio / natural window] light, realistic shadow on the ground, [front / 3/4] framing, e-commerce product photo style, [1:1 / 4:5] format. No added text."
+        }
       ]
     },
     "ia2-l3": {
@@ -219,6 +231,12 @@ export default {
         "Check each image: product size, hands, fingers, reflections",
         "Regenerate the ones that fail the check",
         "Keep the most believable one in your portfolio, with the moment it targets"
+      ],
+      "res": [
+        {
+          "title": "Lifestyle shot",
+          "text": "Keep the product identical to the attached photo. Scene: [a moment in the customer’s life, e.g. a rushed morning in an Algerian kitchen], the product [set down / hand-held / in use], realistic size compared with the objects around, [natural morning] light, [medium shot] framing, photo taken on a smartphone, 4:5 format. Natural hands with five fingers, no text."
+        }
       ]
     },
     "ia2-l4": {
@@ -285,6 +303,12 @@ export default {
         "Using that sheet as a reference, create 3 images of the character with your product",
         "Compare the face from one image to the next and note what changed",
         "Save the description and the sheet in your library to reuse them"
+      ],
+      "res": [
+        {
+          "title": "Character sheet",
+          "text": "Create a character sheet for my ads: [age], [gender], [clothing style], [hairstyle], [facial features], [expression].\nGenerate a reference board: front face, profile, full medium shot, same outfit and same hairstyle, neutral background, realistic photo.\nAlso give me the fixed description to copy word for word into every following prompt."
+        }
       ]
     },
     "ia2-l5": {
@@ -347,6 +371,12 @@ export default {
         "Expand the frame from square to 4:5, then 9:16, without cutting the product",
         "Upscale the final version for sharpness before you export",
         "Save the 1:1, 4:5 and 9:16 versions in your portfolio, named by format"
+      ],
+      "res": [
+        {
+          "title": "Retouch and change of format",
+          "text": "On the attached image:\n1. Local retouch: fix only [area: reflection on the bottle / hand / background] without touching the product or its label.\n2. Extend the frame to a [9:16] format by continuing the setting naturally; the product stays in the same place and at the same size.\n3. Return a sharp version, ready for upscaling."
+        }
       ]
     },
     "ia2-l6": {
@@ -404,6 +434,12 @@ export default {
         "Add your hook at the top, big and easy to read",
         "Add a true proof point about your product, then a clear CTA",
         "Export it and look at it on your phone: can you read it at a glance?"
+      ],
+      "res": [
+        {
+          "title": "Turn an AI visual into an ad",
+          "text": "Here is my AI visual: [description of the image]. Product: [product], price [price], delivery [areas], payment [on delivery].\nSuggest 3 text versions for an image ad: a hook of 6 words maximum, one line of proof or benefit, and a CTA. Say where to place each text on the image so the product stays visible."
+        }
       ]
     },
     "ia2-l7": {
@@ -595,6 +631,12 @@ export default {
         "Compare the label before and after: is it intact?",
         "Upscale the final image to 4K with your tool",
         "Keep both versions in your portfolio"
+      ],
+      "res": [
+        {
+          "title": "Masked retouch",
+          "text": "Change ONLY the selected area: [what needs fixing]. Everything else in the image stays strictly identical: product, label, text, colours, light, face. Same framing and same resolution."
+        }
       ]
     }
   }

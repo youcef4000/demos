@@ -73,6 +73,12 @@ export default {
         "Write your offer: “I help [target] get [result] with [method]”",
         "Have someone from your target read it: do they get it right away?",
         "Put that sentence in your Instagram bio and your LinkedIn headline"
+      ],
+      "res": [
+        {
+          "title": "My niche and offer in one sentence",
+          "text": "I can produce: [what I can do: AI video ads, UGC, product images…]. I know well: [sectors]. I live in [city].\nSuggest 3 precise niches (sector, country, sales model), each with the client’s main pain and my offer in one sentence: “I help [audience] to [result] thanks to [method].” Recommend the best one to start with."
+        }
       ]
     },
     "ia8-l2": {
@@ -130,6 +136,12 @@ export default {
         "Write under each creative: “Personal project, not commissioned by the brand”",
         "Explain your approach in 3 lines: hook, angle, structure",
         "Create the folder or page that will hold your portfolio"
+      ],
+      "res": [
+        {
+          "title": "Present a portfolio project",
+          "text": "Here is a creative from my portfolio: [product, format, what the ad shows]. It’s a personal project, not commissioned.\nWrite its portfolio presentation in 5 lines: the context (saying honestly it’s a personal project), the chosen hook, the angle, the structure, and what I would test next."
+        }
       ]
     },
     "ia8-l3": {
@@ -207,6 +219,12 @@ export default {
         "Add up the monthly cost of your tools, using your toolbox",
         "Work out your prices with the lesson’s calculator: time, tools, margin",
         "Present your 3 offers as results delivered, never as hours"
+      ],
+      "res": [
+        {
+          "title": "My price grid in 3 packs",
+          "text": "My costs: tools [amount] per month, average time for one ad [hours], average generation cost [amount]. My audience: [type of clients] in [city / country].\nBuild 3 packs (test, growth, subscription) with what’s delivered, the lead time and the price in DA. Show the calculation: time + tools + margin, and each pack’s real margin."
+        }
       ]
     },
     "ia8-l4": {
@@ -268,6 +286,12 @@ export default {
         "Prepare 3 hook ideas for one product from each shop",
         "Write one message per shop with the lesson’s tool, ending with a single question",
         "Send your 5 messages and track the replies in a table"
+      ],
+      "res": [
+        {
+          "title": "Personalised prospecting message",
+          "text": "Here is the brand I want to contact: [name, what it sells, what I’ve seen of its ads]. Channel: [Instagram / LinkedIn / WhatsApp].\nWrite a first message of 5 lines maximum: show I know the brand, offer concrete value (2 hook ideas for their product), and end with ONE simple question. No price, no generic copy-paste."
+        }
       ]
     },
     "ia8-l5": {
@@ -329,6 +353,12 @@ export default {
         "Do a practice call with someone close playing the client, following the 5 steps",
         "Practise closing: a start date and a deposit",
         "After the practice call, note when you talked more than you listened"
+      ],
+      "res": [
+        {
+          "title": "Prepare my client call",
+          "text": "I have a call with [client], who sells [product] and wants [goal].\nPrepare for me: 5 discovery questions, how to sum up their problem (diagnosis), my proposal in 3 points with the recommended pack, answers to the 3 likely objections (price, timing, “I’ll think about it”), and the sentence to set a start date with a deposit."
+        }
       ]
     },
     "ia8-l6": {
@@ -391,6 +421,12 @@ export default {
         "Agree on a date with the client to go over their numbers together",
         "Prepare 2 ideas for new variations to suggest once results are in",
         "Write the message asking for a referral after measured results"
+      ],
+      "res": [
+        {
+          "title": "Delivery and follow-up message",
+          "text": "I’m delivering to [client]: [list of files and formats]. Results measured after [days]: [numbers if available].\nWrite the delivery message (what is delivered, how to use it, where the files are), then the follow-up message to send 7 days later to discuss results and suggest next steps, and a simple, polite referral request."
+        }
       ]
     },
     "ia8-l7": {

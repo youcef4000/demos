@@ -73,6 +73,12 @@ export default {
         "Compare: in which shot does your product stay true to life?",
         "List the short shots your next ad would need",
         "Save the image → video prompt that worked in your library"
+      ],
+      "res": [
+        {
+          "title": "Image → video, short shot",
+          "text": "From the attached (approved) image, animate a [4 to 6]-second shot: [one single action, e.g. steam rises from the coffee], camera [one single slow move, e.g. gentle push-in], [warm] mood, the product and its label stay identical. No text, no distortion."
+        }
       ]
     },
     "ia3-l2": {
@@ -131,6 +137,12 @@ export default {
         "Generate the 2 that suit your product best, from your approved image",
         "Compare the emotion of each: desire, luxury or discovery?",
         "Save each prompt in your library, with the exact name of the move"
+      ],
+      "res": [
+        {
+          "title": "Choose the camera move",
+          "text": "My shot: [description of the image and product]. The emotion I want: [desire / luxury / fluidity / overview].\nSuggest the most suitable camera move among push-in, orbit, tracking shot, high-angle, and write the full video prompt with that exact word, one single move, duration [5 s]."
+        }
       ]
     },
     "ia3-l3": {
@@ -176,6 +188,12 @@ export default {
         "Check each shot frame by frame: shape, label, color",
         "Replace any shot where the label gets distorted with your real footage",
         "Write the 5 reflexes at the top of your Video shots section"
+      ],
+      "res": [
+        {
+          "title": "Keep the product identical in video",
+          "text": "Keep the product exactly identical to the starting image: shape, label, colours and text never change. [4]-second shot, slow move [gentle sideways tracking], the label does not turn towards the camera, no distortion, no text appearing."
+        }
       ]
     },
     "ia3-l4": {
@@ -241,6 +259,12 @@ export default {
         "Check that it ends on a sharp shot, with room for the text and the CTA",
         "Try another detail, a drop or a reflection, and keep the best version",
         "Save the winning prompt in your library, under Video shots"
+      ],
+      "res": [
+        {
+          "title": "The lesson prompt",
+          "text": "Keep the bottle perfectly identical. A glint of light glides slowly from left to right, subtle push-in, 5 seconds, black background."
+        }
       ]
     },
     "ia3-l5": {
@@ -315,6 +339,12 @@ export default {
         "In CapCut, alternate AI shots for impact and real shots for proof",
         "Add auto captions, fix them, then put the music under the voice",
         "Export in 9:16 and watch with the sound off: does the message get through?"
+      ],
+      "res": [
+        {
+          "title": "CapCut edit plan",
+          "text": "I have these elements: [list of AI shots], [list of real product videos], my [duration] s voice-over, a music track.\nGive me a [20]-second edit plan for CapCut: order of shots with start and end, where to put the real video (proof), the subtitles, the final CTA card and the cuts on the beat."
+        }
       ]
     },
     "ia3-l6": {
@@ -719,6 +749,12 @@ export default {
         "Compare the product frame by frame with the original",
         "Make a second variant: the outfit or the text",
         "Note the cost of each edit in your table"
+      ],
+      "res": [
+        {
+          "title": "The lesson prompt",
+          "text": "In this video, replace only the background with [new setting]. Do not change the person, the product, its label or the movements. Keep the same light on the product."
+        }
       ]
     },
     "ia3-l10": {
@@ -861,6 +897,12 @@ export default {
         "Watch the whole video on your phone",
         "Find where the “AI content” label is on TikTok, Instagram and Facebook",
         "Note these settings in your library"
+      ],
+      "res": [
+        {
+          "title": "Export checklist by platform",
+          "text": "I’m posting this video on [TikTok / Instagram Reels / Facebook]: duration [duration], [9:16] format, burned-in subtitles, content [realistic AI-generated / not].\nGive me the export settings (resolution, frames per second, bitrate), the safe zone for text on this platform and what I must turn on to label AI-generated content."
+        }
       ]
     }
   }

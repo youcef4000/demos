@@ -1,0 +1,3 @@
+# Outils cités dans la leçon ia1-l5 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Kling | https://klingai.com
+ChatGPT | https://chatgpt.com

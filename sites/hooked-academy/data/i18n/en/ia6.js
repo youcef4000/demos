@@ -76,6 +76,12 @@ export default {
         "Write 4 image prompts for your product, one per shot size",
         "Generate your close-up in soft light, then high-contrast, and compare the emotion",
         "Add these film terms to your library, ready for your prompts"
+      ],
+      "res": [
+        {
+          "title": "Turn an emotion into shots",
+          "text": "My ad for [product] must make people feel: [emotion, e.g. trust / luxury / energy].\nSuggest 4 shots in film language: shot size (wide, medium, close-up, insert), lighting (soft, high-contrast, backlight), angle, and write for each shot the matching image prompt, 9:16 format."
+        }
       ]
     },
     "ia6-l2": {
@@ -152,6 +158,12 @@ export default {
         "Check each shot: size, move, light, duration, image prompt",
         "Check that the total is 15 seconds and the last shot carries the CTA",
         "Keep this storyboard: you’ll use it for your end-of-module cinematic spot"
+      ],
+      "res": [
+        {
+          "title": "The lesson prompt",
+          "text": "Turn this script into a 5-shot storyboard. For each shot, give the shot size, camera move, lighting, duration and an image prompt."
+        }
       ]
     },
     "ia6-l3": {
@@ -213,6 +225,12 @@ export default {
         "Paste it into every prompt in your storyboard, with your character sheet",
         "Generate 3 shots and put them side by side: film or collage?",
         "In CapCut, apply the same color grade to every shot"
+      ],
+      "res": [
+        {
+          "title": "Style bible for the spot",
+          "text": "Create the style bible of my spot for [product]: a palette of 4 colours (with their role), a 20-word style sentence to paste into every prompt (light, grain, lens, mood), the character and setting sheet, and the colour-grading settings to apply to every shot in editing."
+        }
       ]
     },
     "ia6-l4": {
@@ -279,6 +297,12 @@ export default {
         "Add ambience under the whole spot: city, wind, indoor room tone",
         "Add a sound effect on each movement: whoosh, rush of air, impact",
         "Do the test: mute the sound and note what the emotion loses"
+      ],
+      "res": [
+        {
+          "title": "Sound and cut map",
+          "text": "My [15] s spot has [number] shots and a music track at [tempo] BPM.\nGive me a second-by-second map: where to cut each shot on a strong beat, which ambience under each shot, which effects (whoosh, impact, product detail) and when, and where the music dips to let the voice through."
+        }
       ]
     },
     "ia6-l5": {
@@ -346,6 +370,12 @@ export default {
         "Animate each image into a 3- to 5-second shot",
         "Edit with music, ambience and effects, then export the MP4 in 9:16",
         "Gather the storyboard, prompts and a short analysis of what you’d change"
+      ],
+      "res": [
+        {
+          "title": "My 15 s spot from A to Z",
+          "text": "You are an ad director. For [product] (dominant desire: [desire]), write:\n1. The 15 s script (hook in the first 2 seconds, final CTA).\n2. The 5-shot storyboard: size, move, light, duration.\n3. One image prompt per shot, then one video prompt per shot (one action, one move, identical product).\n4. The sound edit plan.\nEnd with 3 questions to analyse the result."
+        }
       ]
     },
     "ia6-l6": {
@@ -530,6 +560,12 @@ export default {
         "Generate the three shots: wide, host, guest",
         "Generate the two voices with two different voice sheets",
         "Edit the ad with subtitles in CapCut"
+      ],
+      "res": [
+        {
+          "title": "Podcast ad dialogue",
+          "text": "Write a 25-second dialogue for a podcast-style ad about [product]: the host asks a question about [problem], the guest tells a short real-life story, the product comes in as the solution, then a CTA said naturally. Short lines, tone of a real conversation, in [Darija / French]. Indicate the 3 shots: wide, host, guest."
+        }
       ]
     }
   }

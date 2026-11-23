@@ -76,6 +76,12 @@ export default {
         "Produce the image and the carousel, with the same angle",
         "Write 5 hook variations for your video",
         "Present it all as you would to a client, then send it to the team for approval"
+      ],
+      "res": [
+        {
+          "title": "My final project plan",
+          "text": "My final project: a campaign for [real product] sold to [audience].\nHelp me prepare each part: 1. the analysis of a competitor ad (structure, hook, angle); 2. the dominant desire and the targeted awareness level; 3. the creatives to produce (one AI video, one image, one carousel) with their prompt; 4. three variants to test; 5. the outline of my presentation to the “client”."
+        }
       ]
     }
   }

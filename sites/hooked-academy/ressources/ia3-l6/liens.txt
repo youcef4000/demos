@@ -1,0 +1,4 @@
+# Outils cités dans la leçon ia3-l6 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Gemini · Nano Banana | https://gemini.google.com
+Veo 3.1 · Flow | https://labs.google/flow
+Kling | https://klingai.com

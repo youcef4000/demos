@@ -81,6 +81,12 @@ export default {
         "For each UGC ad, note what makes it feel natural: framing, tone, setting",
         "Film yourself for 15 seconds facing the camera, talking about your product",
         "Save the 3 UGC examples in an inspiration folder"
+      ],
+      "res": [
+        {
+          "title": "UGC ideas for my product",
+          "text": "My product: [product], for [audience], sold [price, delivery].\nGive me 5 ideas for talking-to-camera UGC videos that look like real user posts: for each, the situation, the first sentence said to the camera, and what we see of the product. Natural tone, simple Darija."
+        }
       ]
     },
     "ia5-l2": {
@@ -153,6 +159,12 @@ export default {
         "Read the script out loud with a timer: between 20 and 30 seconds?",
         "Rewrite anything that sounds “salesy” in everyday words",
         "Save the prompt and the script in your library, under Scripts"
+      ],
+      "res": [
+        {
+          "title": "The lesson prompt",
+          "text": "Write a 25-second UGC script for [product], talking to camera, natural tone in Darija. Structure: personal hook, problem, discovery, result, CTA. List the shots to film."
+        }
       ]
     },
     "ia5-l3": {
@@ -218,6 +230,12 @@ export default {
         "Try lip-sync with a tool’s free credits, Kling for example",
         "Edit it in CapCut, cutting to real shots of your product",
         "Add the label “AI-generated content”"
+      ],
+      "res": [
+        {
+          "title": "Create the talking avatar",
+          "text": "Create an avatar for a UGC video: [age], [style], [place: living room / kitchen / car], natural light, filmed on a smartphone held at arm’s length, looking at the camera, [smiling and natural] expression.\nThen write a 15-second script in short sentences for this avatar, with a planned cut to a real product shot every 2 sentences."
+        }
       ]
     },
     "ia5-l4": {
@@ -282,6 +300,12 @@ export default {
         "Ask ChatGPT for a Hook / Body / CTA script for each one",
         "Film the hook of each one on your phone, in 9:16",
         "Save both scripts in your library, under Scripts"
+      ],
+      "res": [
+        {
+          "title": "6 UGC formats for one product",
+          "text": "For [product], write a video idea in each of these 6 formats: unboxing, before/after, 3 reasons, reaction, tutorial, myth/truth. For each format: the hook (first sentence), the 3 shots to film and the CTA. Keep the Hook / Body / CTA structure."
+        }
       ]
     },
     "ia5-l5": {
@@ -331,6 +355,12 @@ export default {
         "Look up how TikTok and Meta ask you to disclose AI content",
         "Draft a short written consent for anyone filmed or whose voice is cloned",
         "Add these points to your ethics checklist before delivery"
+      ],
+      "res": [
+        {
+          "title": "Check an ad before publishing",
+          "text": "Review this ad before publishing: [script and description of the images].\nCheck point by point: is there a fake customer, a fake review or an unverifiable number? a real person without written consent? a health promise or a guaranteed result? is realistic AI-generated content labelled when the platform asks? Suggest a fix for each problem."
+        }
       ]
     },
     "ia5-l6": {
@@ -393,6 +423,12 @@ export default {
         "Import the audio as a reference in your video model",
         "Check the lip sync shot by shot",
         "Cut the misses in editing and keep the best take"
+      ],
+      "res": [
+        {
+          "title": "Darija text for the voice",
+          "text": "Write a 15-second text in everyday Algerian Darija to present [product] to camera, like a genuine recommendation. Sentences of 6 words maximum, one idea per sentence, punctuation marking the pauses. Give the version in Arabic script for ElevenLabs and the version in Latin letters for the subtitles."
+        }
       ]
     },
     "ia5-l7": {
@@ -478,6 +514,12 @@ export default {
         "Generate a 15 to 20 s smartphone-style video",
         "Check the face and the label in every shot",
         "Add the voice from the previous lesson and edit the ad"
+      ],
+      "res": [
+        {
+          "title": "The lesson prompt",
+          "text": "Image 1 is the person, image 2 is the product: keep them exactly identical (face, label, colours). Vertical 20 s video filmed on a handheld smartphone: the person talks to camera in her kitchen, shows the product, opens it and smiles."
+        }
       ]
     }
   }

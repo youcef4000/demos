@@ -87,6 +87,12 @@ export default {
         "Pick a real product from your niche: it will be your example in the exercises",
         "Write in one sentence what you want to be able to produce and sell by the end",
         "Mark the lesson as completed and take the quiz"
+      ],
+      "res": [
+        {
+          "title": "My course goal",
+          "text": "You are my learning coach. I’m taking the Hooked Academy AI Course to produce ads with AI and then sell that service.\nMy level: [beginner / I already make content / I already sell].\nMy example product or niche: [product].\nMy goal at the end: [what I want to be able to produce and sell].\nHelp me write my goal in one sentence, then suggest a realistic pace (lessons per week) and 3 concrete results to aim for in my portfolio."
+        }
       ]
     },
     "ia0-l2": {
@@ -184,6 +190,12 @@ export default {
         "Set the maximum balance for your card dedicated to subscriptions",
         "Make a tracking table: tool, end of free trial, auto-renewal turned off or not",
         "Before paying for a tool, test its free version on your real product"
+      ],
+      "res": [
+        {
+          "title": "My tools budget",
+          "text": "I live in Algeria and pay for my AI tools with an international card in foreign currency.\nTools I want to use: [list].\nMy maximum monthly budget: [amount in euros or dollars].\nHelp me choose: what I take for free, what I pay for, and in what order. Add safety rules (dedicated card, limited balance, free-trial end dates to note)."
+        }
       ]
     },
     "ia0-l3": {
@@ -418,6 +430,12 @@ export default {
         "Start a lesson and read the key points under the video",
         "Flip a flashcard after answering from memory",
         "Do the lesson’s exercise, then pass its quiz"
+      ],
+      "res": [
+        {
+          "title": "My study plan",
+          "text": "Here is the number of lessons in my course: [number], 2 minutes each, with an exercise and a quiz.\nI can spend [minutes] a day on it, [days] days a week.\nMake me a week-by-week plan up to the final project, with one catch-up day per week and a reminder to review the flashcards."
+        }
       ]
     },
     "ia0-l6": {
@@ -447,6 +465,12 @@ export default {
         "Open the last module of your course and read the final project brief",
         "Write down now the product you’ll use for your project",
         "Keep your best exercises: they’ll help with the final project"
+      ],
+      "res": [
+        {
+          "title": "Prepare my final project",
+          "text": "My AI Course final project: a complete campaign for [real product], from analysis to creative, presented as to a real client.\nMake me a checklist of what I should prepare right now (product, photos, client information, competitors to analyse) and a schedule to hand it in within [number] weeks."
+        }
       ]
     }
   }

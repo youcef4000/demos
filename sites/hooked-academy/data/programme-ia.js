@@ -6,6 +6,7 @@
 
 import { leconEcran } from './videos-ecran.js';
 import { STRATEGIE, AJOUTS } from './programme-ia-ajouts.js';
+import { PROMPTS } from './programme-ia-prompts.js';
 
 export const MODULES_IA = [
   // Bienvenue (leçon 00) : ouverte à tous, même en démo. « say » en darija (prompteur ou voix clonée).
@@ -1704,3 +1705,13 @@ MODULES_IA.splice(
   { ...STRATEGIE, lessons: STRATEGIE.lessons.map((l, i) => ({ ...l, n: i + 1 })) },
 );
 MODULES_IA.forEach((m, i) => (m.n = i));
+
+// Au moins un prompt d'atelier par leçon : celui de programme-ia-prompts.js, sinon le prompt montré dans la vidéo.
+for (const m of MODULES_IA) {
+  for (const l of m.lessons) {
+    if (l.off || l.res?.length) continue;
+    const sc = l.scenes.find((x) => x.type === 'prompt');
+    if (PROMPTS[l.id]) l.res = [{ ...PROMPTS[l.id].fr }];
+    else if (sc) l.res = [{ title: 'Le prompt de la leçon', text: sc.segments.map((x) => x.text).join(' ') }];
+  }
+}

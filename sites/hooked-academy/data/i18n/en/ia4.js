@@ -63,6 +63,12 @@ export default {
         "Keep the best take and cut out the hesitations in CapCut",
         "Generate the same text with an AI voice in ElevenLabs, free version",
         "Compare the two and note which sounds more natural for your audience"
+      ],
+      "res": [
+        {
+          "title": "Prepare my voice-over",
+          "text": "Here is my ad script: “[script]”.\nAdapt it for a voice-over in [Darija / French]: short sentences, punctuation that marks pauses, easy-to-pronounce words, [20] seconds long. Mark the words to stress, and tell me whether an AI voice or my own voice is more credible for this audience."
+        }
       ]
     },
     "ia4-l2": {
@@ -130,6 +136,12 @@ export default {
         "Lower the music under the voice, to around −20 dB",
         "Line up your cuts on the beat of the music",
         "Add one-off effects: a whoosh, a pop on a text, a ding on the CTA"
+      ],
+      "res": [
+        {
+          "title": "Music and sound effects",
+          "text": "My [duration] s ad for [product] has this tone: [energetic / premium / warm].\nSuggest the music style (tempo, instruments, mood) to look for in a royalty-free library, then 4 precise sound effects to place (with the moment in seconds), and describe each effect in one short sentence for a sound-effect generator."
+        }
       ]
     },
     "ia4-l3": {
@@ -209,6 +221,12 @@ export default {
         "Put the keyword of each sentence in color",
         "Keep them clear of the areas hidden by TikTok and Reels buttons",
         "Watch your video with the sound off: is everything clear?"
+      ],
+      "res": [
+        {
+          "title": "Split the subtitles",
+          "text": "Here is my voice-over text: “[text]”.\nSplit it into subtitles of 2 to 4 words maximum, one line each, in order. For each subtitle, give the key word to colour. Fix the spelling and keep Darija words as they are pronounced."
+        }
       ]
     },
     "ia4-l4": {

@@ -79,6 +79,12 @@ export default {
         "Work out its 4 metrics with the lesson’s calculator",
         "Find on its retention curve where people drop off",
         "Write your diagnosis: hook, body or CTA to rework?"
+      ],
+      "res": [
+        {
+          "title": "Read my ad metrics",
+          "text": "Here are my ad numbers over [period]: impressions [ ], 3 s views [ ], long views (ThruPlay) [ ], clicks [ ], purchases [ ], spend [ ].\nCalculate the hook rate, hold rate, CTR and CPA. Tell me which part of the ad is weakest (hook, body or CTA) and what I should test first."
+        }
       ]
     },
     "ia7-l2": {
@@ -137,6 +143,12 @@ export default {
         "Note its structure: hook, problem, solution, proof, offer, CTA",
         "Rewrite that structure for your product, without reusing its text or visuals",
         "Keep the analysis and your adaptation together, ready to test"
+      ],
+      "res": [
+        {
+          "title": "Adapt an analysed ad",
+          "text": "Here is the Hooked Lab analysis of an ad that works: [script, sequences, hook, angles].\nExtract its structure (not its content): hook type, order of sequences, angle, CTA. Then apply that structure to my product [product] with my own words and my own images, without copying anything."
+        }
       ]
     },
     "ia7-l3": {
@@ -197,6 +209,12 @@ export default {
         "Make the “first frame” variation the same way",
         "Name each file after what changes, for example “perfume-v2-hook”",
         "Set up a table to compare each variation with the winner"
+      ],
+      "res": [
+        {
+          "title": "5 variants of a winner",
+          "text": "Here is my winning ad: [script and description]. Its numbers: [hook rate, CTR, CPA].\nSuggest 5 variants, each with ONE SINGLE change: hook, first image, music, CTA, format. For each, say what changes, why, and which number should move if it does better."
+        }
       ]
     },
     "ia7-l4": {
@@ -270,6 +288,12 @@ export default {
         "Edit the 10 variants in CapCut, changing only the start and the end",
         "Name them V01 to V10 with the hook and the CTA",
         "Prepare the tracking table in Hooked Lab"
+      ],
+      "res": [
+        {
+          "title": "10 named variants",
+          "text": "Here is the body of my winning ad: [description]. Write 5 different hooks (question, number, counter-intuitive, before/after, point of view) and 2 CTAs (cash on delivery / limited offer).\nCombine them into 10 variants and give each a clear file name in the format V01-[hook type]-[CTA]."
+        }
       ]
     }
   }

@@ -62,6 +62,12 @@ export default {
         "Compare the two answers and note what makes the second one usable",
         "Run the test again in Claude or Gemini: is the difference the same?",
         "Paste your precise prompt into your prompt library"
+      ],
+      "res": [
+        {
+          "title": "From vague prompt to useful prompt",
+          "text": "Here is a vague prompt: “[your vague prompt, e.g. write an ad for my perfume]”.\nRewrite it as a useful prompt by adding: your role, the audience, the product and its price, the expected answer format and the tone. Then show side by side the result of the vague prompt and of the useful one."
+        }
       ]
     },
     "ia1-l2": {
@@ -417,6 +423,12 @@ export default {
         "Generate a 5-second shot with Kling’s free credits",
         "Write 3 more shot prompts for your product, with just one move each",
         "Save the prompt that worked in your library, under Video shots"
+      ],
+      "res": [
+        {
+          "title": "The lesson prompt",
+          "text": "Starting from the bottle image: a drop slides down the glass, slow push-in toward the cap, 5 seconds, warm mood."
+        }
       ]
     },
     "ia1-l6": {
@@ -490,6 +502,12 @@ export default {
         "Go around the loop 3 times, noting each change and its effect",
         "Sort your library into 4 sections: Hooks, Scripts, Packshots, Video shots",
         "For every prompt that works, add an example of the result"
+      ],
+      "res": [
+        {
+          "title": "Diagnosing a failed result",
+          "text": "Here is my prompt: “[prompt]”.\nHere is what I got: [description of the result].\nHere is what I wanted: [what you wanted].\nTell me which part of the prompt is the problem, suggest ONE single correction to test, and explain what it should change. Then file the corrected prompt with a title for my library."
+        }
       ]
     },
     "ia1-l7": {
