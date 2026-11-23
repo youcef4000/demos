@@ -635,6 +635,89 @@ export default {
           "text": "Salam [first name], thank you again for trusting me with [project]!\nIf you’re happy with it, could you write me 2 or 3 sentences about working together: what you liked, how it went?\nWith your consent, I’ll publish it on [my portfolio / my page], [with your name and your shop / with your first name only]. You’ll be able to read it before it goes live.\nThank you!"
         }
       ]
+    },
+    "ia8-l9": {
+      "title": "The “owner’s face” ad",
+      "scenes": [
+        {
+          "sub": "The manager on screen, without filming every week"
+        },
+        {
+          "title": "Invented avatar or *the real owner*?",
+          "left": {
+            "title": "Invented avatar",
+            "items": [
+              "Nobody knows him",
+              "Trust to build"
+            ]
+          },
+          "right": {
+            "title": "The real manager",
+            "items": [
+              "Customers recognise him",
+              "An offer you can sell every month"
+            ]
+          }
+        },
+        {
+          "title": "The method",
+          "items": [
+            {
+              "label": "Written consent",
+              "sub": "Image, voice, use, duration"
+            },
+            {
+              "label": "The files",
+              "sub": "1 to 2 min of clean voice, sharp photos"
+            },
+            {
+              "label": "The clone",
+              "sub": "Avatar and voice"
+            },
+            {
+              "label": "The scripts",
+              "sub": "Approved by him before each video"
+            },
+            {
+              "label": "The offer",
+              "sub": "A monthly pack of videos"
+            }
+          ]
+        },
+        {
+          "text": "Never without *his written consent*. Never words he hasn’t approved."
+        },
+        {}
+      ],
+      "key": [
+        "The manager’s face creates local trust no avatar has.",
+        "Written consent (image, voice, use, duration) before anything.",
+        "Every script is approved by him; it’s a monthly offer."
+      ],
+      "quiz": [
+        {
+          "q": "What do you need before cloning a manager’s face and voice?",
+          "a": [
+            "Nothing, it’s his shop",
+            "His written consent on use and duration",
+            "A paid subscription"
+          ],
+          "why": "Without written consent it’s illegal, and trust is lost."
+        }
+      ],
+      "todo": [
+        "Prepare a consent template: image, voice, uses, duration, withdrawal",
+        "List 3 shops in your city whose manager is well known",
+        "Write an offer “4 videos a month with your face”",
+        "Prepare a sample script to get approved",
+        "Add the offer to your price grid"
+      ],
+      "res": [
+        {
+          "title": "Usage consent (template to adapt)",
+          "text": "I, the undersigned [name], manager of [business], authorise [your name] to create a video avatar and a voice from my photos and recordings.\nUse: ads for [business] only, on [platforms].\nEach script is submitted to me and approved before publication.\nDuration: from [date] to [date]. I may withdraw this consent in writing at any time; the files are then deleted.\nSigned in [city], on [date]. Signatures."
+        }
+      ]
     }
   }
 };

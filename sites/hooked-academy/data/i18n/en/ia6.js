@@ -461,6 +461,76 @@ export default {
         "If you try Marketing Studio, check what’s said and add the AI disclosure",
         "Note the credits used in your sheet, for your next quote"
       ]
+    },
+    "ia6-l7": {
+      "title": "The podcast-format ad",
+      "scenes": [
+        {
+          "sub": "People listen to a conversation, not an ad"
+        },
+        {
+          "title": "The script as a dialogue",
+          "items": [
+            {
+              "label": "The question",
+              "sub": "0–3 s · the host raises the problem"
+            },
+            {
+              "label": "The story",
+              "sub": "3–15 s · the guest tells it"
+            },
+            {
+              "label": "The product",
+              "sub": "15–25 s · what changed"
+            },
+            {
+              "label": "The CTA",
+              "sub": "At the end, said naturally"
+            }
+          ]
+        },
+        {
+          "title": "The staging",
+          "items": [
+            {
+              "label": "The set",
+              "sub": "Mics, warm light"
+            },
+            {
+              "label": "Two characters",
+              "sub": "Locked as references"
+            },
+            {
+              "label": "Three shots",
+              "sub": "Wide, one, then the other"
+            }
+          ]
+        },
+        {}
+      ],
+      "key": [
+        "A dialogue: question, story, product, natural CTA.",
+        "Two characters locked as references.",
+        "Three shots: wide, shot, reverse shot."
+      ],
+      "quiz": [
+        {
+          "q": "What makes the podcast format work?",
+          "a": [
+            "The expensive set",
+            "You think you’re hearing a real conversation",
+            "Loud music"
+          ],
+          "why": "The brain lowers its guard in front of a conversation."
+        }
+      ],
+      "todo": [
+        "Ask ChatGPT for a 25 s dialogue for your product, with the lesson’s structure",
+        "Create the two characters and lock them as references",
+        "Generate the three shots: wide, host, guest",
+        "Generate the two voices with two different voice sheets",
+        "Edit the ad with subtitles in CapCut"
+      ]
     }
   }
 };

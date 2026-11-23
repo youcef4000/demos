@@ -198,6 +198,79 @@ export default {
         "Name each file after what changes, for example “perfume-v2-hook”",
         "Set up a table to compare each variation with the winner"
       ]
+    },
+    "ia7-l4": {
+      "title": "10 variants of an ad in 30 minutes",
+      "scenes": [
+        {
+          "sub": "One winning angle, ten tests"
+        },
+        {
+          "parts": [
+            {
+              "t": "1 winning body"
+            },
+            {
+              "t": "5 hooks"
+            },
+            {
+              "t": "2 CTAs"
+            }
+          ],
+          "result": {
+            "t": "10 variants"
+          }
+        },
+        {
+          "title": "The method",
+          "items": [
+            {
+              "label": "Keep the body",
+              "sub": "The core that works"
+            },
+            {
+              "label": "Change the hook",
+              "sub": "5 versions"
+            },
+            {
+              "label": "Change the CTA",
+              "sub": "Or the first image"
+            },
+            {
+              "label": "Name clearly",
+              "sub": "V01-question-delivery…"
+            },
+            {
+              "label": "Same budget",
+              "sub": "Then compare in Hooked Lab"
+            }
+          ]
+        },
+        {}
+      ],
+      "key": [
+        "Test the hooks and CTAs, not everything at once.",
+        "One winning body × 5 hooks × 2 CTAs = 10 variants.",
+        "Clear names and the same budget to compare."
+      ],
+      "quiz": [
+        {
+          "q": "To know which hook works, what stays identical?",
+          "a": [
+            "Nothing",
+            "The body and the budget",
+            "Only the music"
+          ],
+          "why": "If everything changes, you no longer know what made the difference."
+        }
+      ],
+      "todo": [
+        "Take your most successful ad",
+        "Write 5 hooks (lesson “The 3-second hook”) and 2 CTAs",
+        "Edit the 10 variants in CapCut, changing only the start and the end",
+        "Name them V01 to V10 with the hook and the CTA",
+        "Prepare the tracking table in Hooked Lab"
+      ]
     }
   }
 };

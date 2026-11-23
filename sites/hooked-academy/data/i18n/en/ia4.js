@@ -339,6 +339,82 @@ export default {
         "Generate a sound effect from one sentence: a cap popping open or a whoosh",
         "Fill in the “ElevenLabs sheet” from the Prompts tab, commercial use included"
       ]
+    },
+    "ia4-l5": {
+      "title": "The locked voice sheet",
+      "scenes": [
+        {
+          "sub": "The same voice across 10 videos"
+        },
+        {
+          "title": "The method",
+          "items": [
+            {
+              "label": "Describe the voice",
+              "sub": "Age, tone, pace, accent"
+            },
+            {
+              "label": "Copy the sheet",
+              "sub": "Into every generation"
+            },
+            {
+              "label": "Short lines",
+              "sub": "One idea per sentence"
+            },
+            {
+              "label": "Punctuation",
+              "sub": "It’s the rhythm"
+            }
+          ]
+        },
+        {
+          "title": "Punctuation *is rhythm*",
+          "items": [
+            {
+              "label": "Comma",
+              "sub": "Short pause"
+            },
+            {
+              "label": "Full stop",
+              "sub": "Real pause"
+            },
+            {
+              "label": "Ellipsis",
+              "sub": "Hesitation, suspense"
+            }
+          ]
+        },
+        {}
+      ],
+      "key": [
+        "A fixed voice sheet, copied into every generation.",
+        "Short lines, one idea per sentence.",
+        "Punctuation sets the rhythm."
+      ],
+      "quiz": [
+        {
+          "q": "Why copy the same voice sheet into every generation?",
+          "a": [
+            "To go faster",
+            "To keep the same voice from one video to the next",
+            "To pay less"
+          ],
+          "why": "A brand is also recognised by its voice."
+        }
+      ],
+      "todo": [
+        "Write your brand’s voice sheet with the workshop template",
+        "Generate 3 lines with this sheet",
+        "Change only the punctuation of one line and listen again",
+        "Keep the settings that sound most natural",
+        "Save the sheet in your library"
+      ],
+      "res": [
+        {
+          "title": "Voice sheet",
+          "text": "Voice name: [  ]\nApparent age: [  ] · Gender: [  ]\nTone: [warm / energetic / calm]\nPace: [slow / medium / fast]\nAccent and language: [Algiers Darija / Western… / French]\nSettings: stability [  ] · similarity [  ] · style [  ]\nCopy into every generation, without changing anything."
+        }
+      ]
     }
   }
 };

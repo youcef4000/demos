@@ -332,6 +332,153 @@ export default {
         "Draft a short written consent for anyone filmed or whose voice is cloned",
         "Add these points to your ethics checklist before delivery"
       ]
+    },
+    "ia5-l6": {
+      "title": "Make the avatar speak Darija",
+      "scenes": [
+        {
+          "sub": "A natural Darija, not robotic"
+        },
+        {
+          "title": "The workflow",
+          "items": [
+            {
+              "label": "The text",
+              "sub": "In Darija, short sentences"
+            },
+            {
+              "label": "The voice",
+              "sub": "Generated in ElevenLabs"
+            },
+            {
+              "label": "The import",
+              "sub": "Audio as a reference in the video model"
+            },
+            {
+              "label": "The check",
+              "sub": "Lips in sync, misses cut"
+            }
+          ]
+        },
+        {
+          "title": "To make it sound *real*",
+          "items": [
+            "*Everyday words*, not translation",
+            "Listen to the voice *before* animating",
+            "One sentence = *one shot*",
+            "Cloned voice: the person’s *written consent*"
+          ]
+        },
+        {}
+      ],
+      "key": [
+        "Generate the voice separately (ElevenLabs), then give it to the video model as an audio reference.",
+        "Short sentences in everyday Darija.",
+        "A cloned voice requires the person’s written consent."
+      ],
+      "quiz": [
+        {
+          "q": "For natural Darija, what’s the best workflow?",
+          "a": [
+            "Let the video model invent the voice",
+            "Generate the voice separately, then import it",
+            "Dub in French"
+          ],
+          "why": "A separately generated voice can be controlled: accent, rhythm, words."
+        }
+      ],
+      "todo": [
+        "Write a 15-second Darija text for your product",
+        "Generate the voice in ElevenLabs with your voice sheet",
+        "Import the audio as a reference in your video model",
+        "Check the lip sync shot by shot",
+        "Cut the misses in editing and keep the best take"
+      ]
+    },
+    "ia5-l7": {
+      "title": "Avatar and product locked in one video",
+      "scenes": [
+        {
+          "sub": "The same face, the same product, from start to finish"
+        },
+        {
+          "parts": [
+            {
+              "t": "Ref. 1: the person"
+            },
+            {
+              "t": "Ref. 2: the product"
+            },
+            {
+              "t": "Script"
+            },
+            {
+              "t": "Smartphone shot"
+            }
+          ],
+          "result": {
+            "t": "UGC with no drift"
+          }
+        },
+        {
+          "title": "The method",
+          "items": [
+            {
+              "label": "The approved avatar",
+              "sub": "Always the same image"
+            },
+            {
+              "label": "The real product photo",
+              "sub": "Sharp label"
+            },
+            {
+              "label": "Roles in the prompt",
+              "sub": "“image 1 = the person, image 2 = the product”"
+            },
+            {
+              "label": "Handheld shot",
+              "sub": "15 to 30 s, smartphone style"
+            }
+          ]
+        },
+        {
+          "segments": [
+            {
+              "text": "Image 1 is the person, image 2 is the product: keep them exactly identical (face, label, colours). Vertical 20 s video filmed on a handheld smartphone: the person talks to camera in her kitchen, shows the product, opens it and smiles."
+            }
+          ],
+          "result": {
+            "lines": [
+              "Same face in every shot",
+              "Label readable from start to finish"
+            ]
+          }
+        },
+        {}
+      ],
+      "key": [
+        "Two references: one for the person, one for the product.",
+        "State each image’s role in the prompt and ask for them to stay identical.",
+        "Check the label in every shot."
+      ],
+      "quiz": [
+        {
+          "q": "Why attach the real product photo?",
+          "a": [
+            "So the label and shape stay exact",
+            "To go faster",
+            "It isn’t useful"
+          ],
+          "why": "Without the real photo, the model invents: the label drifts."
+        }
+      ],
+      "todo": [
+        "Take your approved avatar and a sharp photo of your product",
+        "Write the prompt with each image’s role",
+        "Generate a 15 to 20 s smartphone-style video",
+        "Check the face and the label in every shot",
+        "Add the voice from the previous lesson and edit the ad"
+      ]
     }
   }
 };

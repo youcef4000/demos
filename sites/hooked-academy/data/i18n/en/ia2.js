@@ -523,6 +523,79 @@ export default {
         "Compare each image with the real photo: label, shape, color, every letter",
         "Save the prompts that worked in your library, with the lock first"
       ]
+    },
+    "ia2-l8": {
+      "title": "Precise retouching and 4K upscale",
+      "scenes": [
+        {
+          "sub": "Fix one area without damaging the rest"
+        },
+        {
+          "title": "Retouch *without breaking everything*",
+          "left": {
+            "title": "The whole image, 10 times",
+            "items": [
+              "The label gets blurry",
+              "The face changes at every try"
+            ]
+          },
+          "right": {
+            "title": "Masked retouch",
+            "items": [
+              "Only the chosen area changes",
+              "The rest stays still"
+            ]
+          }
+        },
+        {
+          "title": "The method",
+          "items": [
+            {
+              "label": "Select",
+              "sub": "Only the area to fix"
+            },
+            {
+              "label": "One retouch at a time",
+              "sub": "Always from the best version"
+            },
+            {
+              "label": "The label moves?",
+              "sub": "Go back to the original image"
+            },
+            {
+              "label": "Upscale to 4K",
+              "sub": "Before animating, never after"
+            }
+          ]
+        },
+        {
+          "text": "A sharp image before animation means *a sharp video* after."
+        },
+        {}
+      ],
+      "key": [
+        "Retouch only the area to fix (masked editing).",
+        "One retouch at a time, from the best version.",
+        "Upscale to 4K before animating."
+      ],
+      "quiz": [
+        {
+          "q": "When should you upscale an image?",
+          "a": [
+            "Before animating it",
+            "After editing",
+            "Never"
+          ],
+          "why": "The video model starts from the image: the sharper it is, the sharper the video."
+        }
+      ],
+      "todo": [
+        "Take an image from your portfolio that has a flaw",
+        "Select only the flawed area and fix it",
+        "Compare the label before and after: is it intact?",
+        "Upscale the final image to 4K with your tool",
+        "Keep both versions in your portfolio"
+      ]
     }
   }
 };

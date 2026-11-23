@@ -14,7 +14,7 @@ import { lang } from '../assets/js/i18n.js';
 /**
  * Deux formations distinctes :
  *  - « creative » : bienvenue M00 (m0), puis modules M01 à M12, des bases au projet final, sans IA ;
- *  - « ia »       : bienvenue IA00 (ia0), puis modules IA01 à IA09, l'IA créative puis la vente.
+ *  - « ia »       : bienvenue IA00 (ia0), puis modules IA01 à IA10, l'IA créative puis la vente.
  * Chaque formation a son identité (couleur, icône), sa progression et sa fin.
  */
 export const TRACKS = [
@@ -4185,7 +4185,7 @@ MODULES.forEach((m) => {
   m.track = PART_TRACK[m.part] || 'creative';
 });
 
-/** Code affiché d'un module : M01…M05 pour la formation Créative, IA01…IA09 pour la formation IA. */
+/** Code affiché d'un module : M01…M05 pour la formation Créative, IA01…IA10 pour la formation IA. */
 export const modCode = (m) => `${m.track === 'ia' ? 'IA' : 'M'}${String(m.n).padStart(2, '0')}`;
 export const trackOf = (idOrModule) => TRACKS.find((t) => t.id === (typeof idOrModule === 'string' ? idOrModule : idOrModule?.track)) || TRACKS[0];
 export const modulesOf = (track) => MODULES.filter((m) => m.track === track);

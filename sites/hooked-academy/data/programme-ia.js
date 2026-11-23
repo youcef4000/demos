@@ -5,6 +5,7 @@
 // Les outils cités sont des exemples : ils changent vite, la méthode reste.
 
 import { leconEcran } from './videos-ecran.js';
+import { STRATEGIE, AJOUTS } from './programme-ia-ajouts.js';
 
 export const MODULES_IA = [
   // Bienvenue (leçon 00) : ouverte à tous, même en démo. « say » en darija (prompteur ou voix clonée).
@@ -1688,3 +1689,18 @@ export const MODULES_IA = [
     ],
   },
 ];
+
+// Ajouts de novembre 2026 (programme-ia-ajouts.js) : nouvelles leçons en fin de module, puis le module
+// « Stratégie de pub » avant l'UGC. Les numéros affichés (IA05, leçon 08…) suivent l'ordre ; les identifiants ne changent pas.
+for (const m of MODULES_IA) {
+  const add = AJOUTS[m.id];
+  if (!add) continue;
+  let n = Math.max(...m.lessons.map((l) => l.n || 0));
+  m.lessons.push(...add.map((l) => ({ ...l, n: ++n })));
+}
+MODULES_IA.splice(
+  MODULES_IA.findIndex((m) => m.id === 'ia5'),
+  0,
+  { ...STRATEGIE, lessons: STRATEGIE.lessons.map((l, i) => ({ ...l, n: i + 1 })) },
+);
+MODULES_IA.forEach((m, i) => (m.n = i));

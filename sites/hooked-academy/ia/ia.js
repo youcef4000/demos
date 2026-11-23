@@ -62,7 +62,7 @@ import { initPWA } from '../assets/js/pwa.js';
     dattes: 'img/gen-dattes.webp',
     // une vignette réelle de leçon par module
     mods: Object.fromEntries(
-      Object.entries({ ia1: 'ia1-l1', ia2: 'ia2-l3', ia3: 'ia3-l5', ia4: 'ia4-l1', ia5: 'ia5-l1', ia6: 'ia6-l5', ia7: 'ia7-l2', ia8: 'ia8-l1', ia9: 'ia9-l1' }).map(([k, v]) => [k, `../assets/img/lecons/${v}.webp`]),
+      Object.entries({ ia1: 'ia1-l1', ia2: 'ia2-l3', ia3: 'ia3-l5', ia4: 'ia4-l1', ia5: 'ia5-l1', ia6: 'ia6-l5', ia7: 'ia7-l2', ia8: 'ia8-l1', ia9: 'ia9-l1', ia10: 'ia5-l4' }).map(([k, v]) => [k, `../assets/img/lecons/${v}.webp`]),
     ),
   };
 
