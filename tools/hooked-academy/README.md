@@ -44,20 +44,17 @@ ligne) : `assets/js/site-build.js` et `assets/css/site-build.css`, partagés par
 
 ## Les offres (novembre 2026)
 
-Trois billets seulement, pour ne pas noyer le visiteur dans le choix (landing et `/ia/`) :
+Prix (`data/offres.js`, ou Admin → Réglages, qui priment alors) : Créative 20 000 DA, IA 25 000 DA, Sites & Apps
+30 000 DA, pack Créative + IA 35 000 DA, pack complet (les trois) 50 000 DA.
 
-| Offre | Prix | Affiche (haut de la carte) |
-|---|---|---|
-| Une formation au choix | Créative 20 000 DA · IA 25 000 DA · Sites & Apps 30 000 DA | une bande dont la couleur suit le sélecteur ; il propose aussi le pack qui ajoute le plus pour le moins |
-| Pack complet (au centre, « meilleure offre ») | 50 000 DA au lieu de 75 000 | trois bandes (Créative, IA, Sites & Apps) reliées par « + » |
-| Pack Créative + IA | 35 000 DA au lieu de 45 000 | deux bandes (Créative, IA) reliées par « + » |
-
-Chaque carte montre aussi le prix par leçon (le pack complet revient le moins cher). Landing : cartes `.of` (fin de
-`assets/css/landing.css`) ; `/ia/` : même principe, `.cposter` et `.cband` (fin de `ia/ia.css`).
-
-Le formulaire suit le même ordre : la formule, puis la formation si « une formation ». Les identifiants envoyés au
-serveur ne changent pas (`creative`, `ia`, `dev`, `both`, `all`) ; les prix sont dans `data/offres.js`, et l'équipe peut
-les remplacer dans Admin → Réglages (ils priment alors sur le fichier).
+La section prix de la landing et de `/ia/` est un configurateur, **« Compose ta formule »** (`assets/js/compose.js`,
+`assets/css/compose.css`) : trois formules toutes faites, ou les formations à cocher (les trois le sont au départ), et un
+ticket qui calcule en direct la meilleure formule, la remise, le prix par leçon et par jour, « À payer aujourd'hui : 0 DA »,
+et propose le pack qui ajoute le plus pour le moins. Thème « cut » sur la landing (sauts, panneau à volets, tampon),
+« glass » sur `/ia/` (verre, bordure animée, confettis au pack complet) ; immobile en mouvement réduit, liste des prix sans
+JavaScript. Le bouton du ticket remplit le formulaire (identifiants serveur inchangés : `creative`, `ia`, `dev`, `both`,
+`all`). Leviers psychologiques, sources et limites (aucun faux avis, faux compte à rebours ni fausse rareté) :
+`formations/tarifs/README.md`.
 
 ## Hooked Lab masqué (novembre 2026)
 

@@ -14,6 +14,7 @@ import * as FAQ from '../assets/js/faq.js';
 import { mountAssistant } from '../assets/js/assistant.js';
 import { initPWA } from '../assets/js/pwa.js';
 import { mountSiteBuild } from '../assets/js/site-build.js';
+import { mountCompose } from '../assets/js/compose.js';
 
 {
   const D = document;
@@ -122,9 +123,6 @@ import { mountSiteBuild } from '../assets/js/site-build.js';
     });
     $$('[data-price]').forEach((el) => (el.textContent = fmt(P[el.dataset.price])));
     $$('[data-price-s]').forEach((el) => (el.textContent = da(P[el.dataset.priceS])));
-    $$('.js-n').forEach((el) => (el.textContent = nl(N[el.dataset.n])));
-    // Prix par leçon : le pack complet revient le moins cher à la leçon
-    $$('.js-per').forEach((el) => (el.textContent = t('ia.of.per', { prix: fmt(Math.round(P[el.dataset.offre] / N[el.dataset.n])) })));
     $('#all-lbl').textContent = t('ia.all.open', { n: N['ia-lessons'] });
     $$('#lsw [data-lang]').forEach((b) => {
       b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
@@ -236,34 +234,17 @@ import { mountSiteBuild } from '../assets/js/site-build.js';
     const a = e.target.closest('[data-pick]');
     if (a) pickOffer(a.dataset.pick);
   });
-  // Carte « une formation au choix » : le sélecteur change la formation, le prix et le pack proposé
-  // (IA ou Créative → pack Créative + IA ; Sites & Apps → pack complet).
-  const soloCard = $('#c-solo');
-  const UP = { ia: ['both', P.both - P.ia], creative: ['both', P.both - P.creative], dev: ['all', P.all - P.dev] };
-  const showSolo = (id, anim) => {
-    soloCard.dataset.t = id;
-    $('.js-solo-big', soloCard).textContent = t({ ia: 'ia.tar.s.ia', creative: 'ia.tar.s.crea', dev: 'ia.tar.s.dev' }[id]);
-    $$('.csw button', soloCard).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.t === id)));
-    $$('.cvar', soloCard).forEach((v) => (v.hidden = v.dataset.t !== id));
-    $('.js-solo-go', soloCard).dataset.pick = id;
-    const [pk, diff] = UP[id];
-    const up = $('.js-up', soloCard);
-    up.dataset.pick = pk;
-    up.textContent = t(`ia.tar.up.${id}`, { prix: fmt(diff) });
-    frTypo(up);
-    up.parentElement.hidden = !(diff > 0);
-    // Des clics rapides ne doivent jamais laisser un texte à moitié transparent : on arrête l'animation précédente,
-    // puis on anime vers un état final explicite (fromTo), et on nettoie les styles à la fin.
-    if (hasGsap) {
-      const kids = $$('.cvar > *', soloCard);
-      gsap.killTweensOf(kids);
-      gsap.set(kids, { clearProps: 'transform,opacity,visibility' });
-    }
-    if (anim && hasGsap && !reduce)
-      gsap.fromTo($('.cvar:not([hidden])', soloCard).children, { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.45, stagger: 0.04, ease: 'power3.out', clearProps: 'transform,opacity,visibility' });
-  };
-  $$('.csw button', soloCard).forEach((b) => b.addEventListener('click', () => showSolo(b.dataset.t, true)));
-  showSolo('ia');
+  // Tarifs : « compose ta formule » (assets/js/compose.js, thème « glass »). Les trois formations sont cochées au départ
+  // (pack complet) ; « Une formation » propose l'IA sur cette page. Le bouton du ticket choisit la formule du formulaire.
+  mountCompose($('#compose'), {
+    theme: 'glass',
+    prices: P,
+    lessons: { creative: N['crea-lessons'], ia: N['ia-lessons'], dev: N['dev-lessons'] },
+    mods: { creative: N['crea-mods'], ia: N['ia-mods'], dev: N['dev-mods'] },
+    one: 'ia',
+    cohort: settings().cohort,
+    onPick: pickOffer,
+  });
 
   let sending = false;
   form.addEventListener('submit', (e) => {
@@ -1094,19 +1075,10 @@ import { mountSiteBuild } from '../assets/js/site-build.js';
 
   /* -------- Tarifs -------- */
   function pricing() {
-    const cards = $$('.card');
-    gsap.from(cards, { y: 80, rotationX: 14, autoAlpha: 0, transformPerspective: 1100, transformOrigin: '50% 100%', duration: 1.1, stagger: 0.12, ease: 'expo.out', scrollTrigger: { trigger: '.cards', start: 'top 82%' } });
-    ScrollTrigger.create({
-      trigger: '.cards',
-      start: 'top 78%',
-      once: true,
-      onEnter: () =>
-        $$('[data-price]').forEach((el) => {
-          const o = { v: 0 };
-          gsap.to(o, { v: P[el.dataset.price], duration: 1.6, ease: 'power3.out', onUpdate: () => (el.textContent = fmt(Math.round(o.v / 100) * 100)) });
-        }),
-    });
-    gsap.from('.card-badge', { scale: 0, rotation: -12, duration: 0.8, ease: 'back.out(3)', delay: 0.5, scrollTrigger: { trigger: '.cards', start: 'top 78%' } });
+    // Les formules puis les formations montent en cascade ; le ticket a sa propre entrée (compose.js)
+    gsap.from('#compose .cp-pre', { y: 50, autoAlpha: 0, rotationX: 18, transformPerspective: 900, duration: 0.9, stagger: 0.09, ease: 'expo.out', clearProps: 'transform,opacity,visibility', scrollTrigger: { trigger: '#compose', start: 'top 80%' } });
+    gsap.from('#compose .cp-c', { x: isRTL ? 60 : -60, autoAlpha: 0, duration: 1, stagger: 0.1, ease: 'expo.out', clearProps: 'transform,opacity,visibility', scrollTrigger: { trigger: '#compose .cp-courses', start: 'top 85%' } });
+    gsap.from('#compose .cp-k', { autoAlpha: 0, x: isRTL ? 24 : -24, duration: 0.8, stagger: 0.2, ease: 'power3.out', clearProps: 'transform,opacity,visibility', scrollTrigger: { trigger: '#compose', start: 'top 82%' } });
   }
 
   /* -------- Apparitions génériques : titres, textes, petites étiquettes -------- */

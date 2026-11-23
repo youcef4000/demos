@@ -843,3 +843,15 @@ add({
     'tix.all': 'في كل صيغة',
   },
 });
+
+// Tarifs (novembre 2026, 4e version) : « compose ta formule » ; les textes du configurateur sont dans compose.js
+add({
+  en: {
+    'tix.lead': 'Pick a plan or tick your courses: your ticket works out the best price by itself. Nothing to pay online: the team calls you first.',
+    'tix.all': 'In every plan',
+  },
+  ar: {
+    'tix.lead': 'اختر صيغة أو حدّد تكويناتك: تذكرتك تحسب أفضل سعر وحدها. لا شيء تدفعه على الإنترنت: الفريق يتصل بك أولًا.',
+    'tix.all': 'في كل صيغة',
+  },
+});

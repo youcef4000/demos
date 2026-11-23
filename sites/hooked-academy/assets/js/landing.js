@@ -13,6 +13,7 @@ import * as FAQ from './faq.js';
 import { OFFRES } from '../../data/offres.js';
 import { mountAssistant } from './assistant.js';
 import { mountSiteBuild } from './site-build.js';
+import { mountCompose } from './compose.js';
 import { initPWA } from './pwa.js';
 import { OUTILS, BUDGETS, CHECKED } from '../../data/outils.js';
 
@@ -113,24 +114,7 @@ $('#count-t').textContent = `${nL(LESSONS.length)}, ${nM(MODULES.length)}, ${t('
 
 // Tarifs (data/offres.js) : billets et choix de formation du formulaire
 const money = (n) => `${new Intl.NumberFormat(lang === 'en' ? 'en-GB' : 'fr-FR').format(n)} ${t('tix.cur')}`;
-const sep = OFFRES.creative + OFFRES.ia;
-const sep3 = sep + OFFRES.dev;
 $$('.js-amt').forEach((el) => (el.textContent = money(OFFRES[el.dataset.offre])));
-// Économie de chaque pack : « both » (Créative + IA) et « all » (les trois formations)
-const saving = (was, save, sum, pack) => {
-  $$(`${was}, ${save}`).forEach((el) => {
-    el.hidden = sum <= pack;
-    el.textContent = el.matches(was) ? t('tix.was', { p: money(sum) }) : t('tix.save', { p: money(sum - pack) });
-  });
-};
-saving('.js-was', '.js-save', sep, OFFRES.both);
-saving('.js-was-all', '.js-save-all', sep3, OFFRES.all);
-const BOTH = byTrack.creative.lessons.length + byTrack.ia.lessons.length;
-$$('.js-inc').forEach((el) => {
-  const { track, mods } = el.dataset;
-  const n = track === 'all' ? LESSONS.length : track === 'both' ? BOTH : track ? byTrack[track].lessons.length : byTrack[mods].mods.length;
-  el.textContent = t(el.dataset.k, { n });
-});
 
 // Formulaire : la formule (une formation, pack complet, pack Créative + IA), puis la formation si « une formation ».
 // Le champ caché `formation` porte l'offre envoyée au serveur (creative, ia, dev, both ou all).
@@ -154,39 +138,17 @@ $$('input[name="formule"], input[name="solo"]', fForm).forEach((r) => r.addEvent
 $$('.js-from').forEach((el) => (el.textContent = t('f.f.from', { p: money(Math.min(...SOLO.map((k) => OFFRES[k]))) })));
 fSync();
 $$('[data-pick]').forEach((a) => a.addEventListener('click', () => pickOffer(a.dataset.pick)));
-$$('.js-n').forEach((el) => (el.textContent = t('count.lessons', { n: byTrack[el.dataset.track].lessons.length })));
-// Prix en grand (le nombre seul) et prix par leçon : le pack complet revient le moins cher à la leçon
-const fmtN = (n) => new Intl.NumberFormat(lang === 'en' ? 'en-GB' : 'fr-FR').format(n);
-$$('.js-num').forEach((el) => (el.textContent = fmtN(OFFRES[el.dataset.offre])));
-$$('.js-per').forEach((el) => {
-  const tr = el.dataset.track;
-  const n = tr === 'all' ? LESSONS.length : tr === 'both' ? BOTH : byTrack[tr].lessons.length;
-  el.textContent = t('of.per', { p: money(Math.round(OFFRES[el.dataset.offre] / n)) });
+// Tarifs : « compose ta formule » (assets/js/compose.js). Les trois formations sont cochées au départ (pack complet) ;
+// le bouton du ticket choisit la formule dans le formulaire, puis la page descend jusqu'à l'inscription.
+mountCompose($('#compose'), {
+  theme: 'cut',
+  prices: OFFRES,
+  lessons: Object.fromEntries(SOLO.map((c) => [c, byTrack[c].lessons.length])),
+  mods: Object.fromEntries(SOLO.map((c) => [c, byTrack[c].mods.length])),
+  one: 'creative',
+  cohort: settings().cohort,
+  onPick: pickOffer,
 });
-
-// Billet 01 : une formation au choix. Le sélecteur change le contenu, la couleur et le prix du billet,
-// et propose le pack qui ajoute le plus pour le moins (Créative ou IA → pack Créative + IA ; Sites & Apps → pack complet).
-const soloTk = $('#tk-solo');
-if (soloTk) {
-  const UP = { creative: ['both', OFFRES.both - OFFRES.creative], ia: ['both', OFFRES.both - OFFRES.ia], dev: ['all', OFFRES.all - OFFRES.dev] };
-  const showSolo = (id, anim) => {
-    soloTk.dataset.offre = id;
-    $('.js-solo-big', soloTk).textContent = t(`of.c.${id}`);
-    $$('.of-sw button', soloTk).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.t === id)));
-    $$('.of-var', soloTk).forEach((v) => (v.hidden = v.dataset.t !== id));
-    $('.js-solo-go', soloTk).dataset.pick = id;
-    const [pk, diff] = UP[id];
-    const up = $('.js-up', soloTk);
-    up.dataset.pick = pk;
-    up.textContent = t(`tix.up.${id}`, { p: money(diff) });
-    frTypo(up);
-    up.parentElement.hidden = !(diff > 0);
-    const g = window.gsap;
-    if (anim && g && !reduce) g.fromTo($('.of-var:not([hidden])', soloTk), { clipPath: isRTL ? 'inset(0 0 0 100%)' : 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0%)', duration: 0.12, ease: 'steps(3)', clearProps: 'clipPath' });
-  };
-  $$('.of-sw button', soloTk).forEach((b) => b.addEventListener('click', () => showSolo(b.dataset.t, true)));
-  showSolo('creative');
-}
 frTypo(document.body);
 
 // Parcours : les modules de chaque partie, le dernier module (projet final) à part
@@ -814,10 +776,10 @@ function animate() {
   const svg = $('#lab-mark svg');
   ST.create({ trigger: '#hooked-lab', start: 'top 60%', once: true, onEnter: () => morphMark(svg, g, { duration: 0.24, ease: 'steps(6)' }) });
 
-  // Billetterie : les billets sortent de la machine, en 6 images chacun
-  const tks = $$('.of');
-  g.set(tks, { clipPath: 'inset(0 0 100% 0)' });
-  ST.create({ trigger: '.of-row', start: 'top 80%', once: true, onEnter: () => g.to(tks, { clipPath: 'inset(0 0 0% 0)', duration: 0.24, ease: 'steps(6)', stagger: 0.14, clearProps: 'clipPath' }) });
+  // Tarifs : les formules et les formations entrent par images (le ticket a sa propre entrée, compose.js)
+  const cps = $$('#compose .cp-pre, #compose .cp-c');
+  g.set(cps, { clipPath: 'inset(0 0 100% 0)' });
+  ST.create({ trigger: '#compose', start: 'top 80%', once: true, onEnter: () => g.to(cps, { clipPath: 'inset(0 0 0% 0)', duration: 0.24, ease: 'steps(6)', stagger: 0.08, clearProps: 'clipPath' }) });
 
   // Coupe : chaque plan « tombe » en une image (aucun fondu)
   addEventListener('load', () => ST.refresh());

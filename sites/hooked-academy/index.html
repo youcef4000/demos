@@ -40,6 +40,7 @@
 <link rel="stylesheet" href="assets/css/brand.css">
 <link rel="stylesheet" href="assets/css/landing.css">
 <link rel="stylesheet" href="assets/css/site-build.css">
+<link rel="stylesheet" href="assets/css/compose.css">
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
@@ -402,122 +403,24 @@
     </div>
   </section>
 
-  <!-- PLAN 09 · Tarifs : trois offres, le pack complet au centre ================== -->
+  <!-- PLAN 09 · Tarifs : « compose ta formule », le ticket calcule la meilleure offre ===== -->
   <section class="sh tix" id="tarifs" data-ton="papier" data-plan="09" data-name="plan.tarifs" aria-labelledby="tix-h">
     <header class="sec-h tix-head">
       <p class="lbl" data-i18n="tix.k">Tarifs</p>
       <h2 class="h2" id="tix-h" data-i18n-html="tix.h">Choisis ta séance. <span class="nb dim">Paie après l’appel.</span></h2>
-      <p class="lead" data-i18n="tix.lead">Une formation au choix, ou un pack à prix réduit. Aucun paiement en ligne : l’équipe t’appelle d’abord, puis tu paies par CCP, BaridiMob ou en espèces.</p>
+      <p class="lead" data-i18n="tix.lead">Choisis une formule ou coche tes formations : ton ticket calcule tout seul le meilleur prix. Rien à payer en ligne : l’équipe t’appelle d’abord.</p>
     </header>
-    <!-- Trois offres (data/offres.js). En haut de chaque carte, « l'affiche » : une bande de couleur par formation
-         incluse (1, 2 ou 3 bandes, toujours la même hauteur) ; en dessous, le prix et le contenu.
-         Une formation au choix (le sélecteur change la couleur, le contenu et le prix) · pack complet au centre
-         (les trois formations, la meilleure offre) · pack Créative + IA. -->
-    <div class="of-row">
-      <article class="of of--solo" data-offre="creative" id="tk-solo" aria-labelledby="of-solo-k">
-        <div class="of-poster">
-          <div class="of-band of-band--solo">
-            <p class="of-n" data-i18n="of.n1">1 formation</p>
-            <p class="of-big js-solo-big" aria-hidden="true">Créative</p>
-            <div class="of-sw" role="group" aria-label="Choisis ta formation" data-i18n-attr="aria-label:tix.s.sw">
-              <button type="button" data-t="creative" aria-pressed="true"><i aria-hidden="true"></i><span data-i18n="of.c.creative">Créative</span></button>
-              <button type="button" data-t="ia" aria-pressed="false"><i aria-hidden="true"></i><span data-i18n="of.c.ia">IA</span></button>
-              <button type="button" data-t="dev" aria-pressed="false"><i aria-hidden="true"></i><span data-i18n="of.c.dev">Sites & Apps</span></button>
-            </div>
-          </div>
-        </div>
-        <div class="of-body">
-          <p class="of-k" id="of-solo-k" data-i18n="of.k1">Une formation au choix</p>
-          <div class="of-var" data-t="creative">
-            <h3 class="of-t" data-i18n="track.creative">Formation Créative</h3>
-            <p class="of-p" data-i18n="tix.c.p">Comprendre ce qui fait vendre une pub, et la produire avec ton téléphone.</p>
-            <p class="of-price"><b class="js-num" data-offre="creative">20&#8239;000</b> <span data-i18n="tix.cur">DA</span></p>
-            <p class="of-per js-per" data-offre="creative" data-track="creative"></p>
-            <ul class="of-inc">
-              <li class="js-inc" data-k="tix.inc.lessons" data-track="creative">66 leçons animées de 2 min, en darija</li>
-              <li class="js-inc" data-k="tix.c.1" data-mods="creative">12 modules, des bases au projet final</li>
-              <li data-i18n="tix.c.2">Hooks, scripts, formules de vente et UGC</li>
-              <li data-i18n="tix.c.3">Tournage, montage avancé et stratégie marketing</li>
-              <li data-i18n="tix.c.5">Projet final de 30 s et certificat</li>
-            </ul>
-          </div>
-          <div class="of-var" data-t="ia" hidden>
-            <h3 class="of-t" data-i18n="track.ia">Formation IA</h3>
-            <p class="of-p" data-i18n="tix.i.p">Produire avec l’IA (images, vidéos, voix, UGC), puis vendre ce savoir-faire.</p>
-            <p class="of-price"><b class="js-num" data-offre="ia">25&#8239;000</b> <span data-i18n="tix.cur">DA</span></p>
-            <p class="of-per js-per" data-offre="ia" data-track="ia"></p>
-            <ul class="of-inc">
-              <li class="js-inc" data-k="tix.inc.lessons" data-track="ia">67 leçons animées de 2 min, en darija</li>
-              <li class="js-inc" data-k="tix.i.1" data-mods="ia">10 modules, du prompting aux premiers clients</li>
-              <li data-i18n="tix.i.2">Un atelier par leçon : PDF, prompts, ressources</li>
-              <li data-i18n="tix.i.3">Images, vidéos, voix et UGC générés par l’IA</li>
-              <li data-i18n="tix.i.5">Certificat Formation IA</li>
-            </ul>
-          </div>
-          <div class="of-var" data-t="dev" hidden>
-            <h3 class="of-t" data-i18n="track.dev">Formation Sites & Apps</h3>
-            <p class="of-p" data-i18n="tix.d.p">Créer, sécuriser, publier et vendre des sites et des applications avec l’IA (vibe coding).</p>
-            <p class="of-price"><b class="js-num" data-offre="dev">30&#8239;000</b> <span data-i18n="tix.cur">DA</span></p>
-            <p class="of-per js-per" data-offre="dev" data-track="dev"></p>
-            <ul class="of-inc">
-              <li class="js-inc" data-k="tix.d.0" data-track="dev">84 leçons animées, théorie et pratique</li>
-              <li class="js-inc" data-k="tix.d.1" data-mods="dev">15 modules, de zéro au premier client</li>
-              <li data-i18n="tix.d.2">Claude Code, GitHub, Supabase et l’hébergement</li>
-              <li data-i18n="tix.d.3">Backend et cybersécurité : les chapitres qui font la différence</li>
-              <li data-i18n="tix.d.5">Projet final (3 projets en ligne) et certificat</li>
-            </ul>
-          </div>
-          <p class="of-up"><a class="js-up" href="#inscription" data-pick="both"></a></p>
-          <a class="bt bt--ink of-go js-solo-go" href="#inscription" data-pick="creative" data-i18n="of.go.s">Choisir cette formation</a>
-        </div>
-      </article>
-
-      <article class="of of--all" data-offre="all" id="tk-all" aria-labelledby="of-all-t">
-        <p class="of-tag" data-i18n="tix.a.stamp">Meilleure offre</p>
-        <div class="of-poster of-poster--3">
-          <p class="of-band" data-t="creative"><b data-i18n="of.c.creative">Créative</b><span class="js-n" data-track="creative">66 leçons</span></p>
-          <p class="of-band" data-t="ia"><b data-i18n="of.c.ia">IA</b><span class="js-n" data-track="ia">67 leçons</span></p>
-          <p class="of-band" data-t="dev"><b data-i18n="of.c.dev">Sites & Apps</b><span class="js-n" data-track="dev">84 leçons</span></p>
-        </div>
-        <div class="of-body">
-          <p class="of-k" data-i18n="of.k3">Les trois formations</p>
-          <h3 class="of-t" id="of-all-t" data-i18n="tix.a.big">Pack complet</h3>
-          <p class="of-p" data-i18n="tix.a.p">Faire la pub, la produire avec l’IA, puis livrer le site ou l’application qui vend.</p>
-          <p class="of-price"><b class="js-num" data-offre="all">50&#8239;000</b> <span data-i18n="tix.cur">DA</span></p>
-          <p class="of-old"><s class="js-was-all">au lieu de 75&#8239;000&nbsp;DA</s><span class="of-save js-save-all">Tu économises 25&#8239;000&nbsp;DA</span></p>
-          <p class="of-per js-per" data-offre="all" data-track="all"></p>
-          <ul class="of-inc">
-            <li class="js-inc" data-k="tix.a.1" data-track="all">Les 217 leçons des trois formations</li>
-            <li data-i18n="tix.a.5">Les trois formations ouvertes dès le premier jour</li>
-            <li data-i18n="tix.a.2">Tous les ateliers, prompts, skills et ressources</li>
-            <li data-i18n="tix.a.3">Trois projets finaux validés par l’équipe</li>
-            <li data-i18n="tix.a.4">Les trois certificats</li>
-          </ul>
-          <a class="bt bt--lime of-go" href="#inscription" data-pick="all" data-i18n="of.go.p">Choisir ce pack</a>
-        </div>
-      </article>
-
-      <article class="of of--duo" data-offre="both" id="tk-both" aria-labelledby="of-both-t">
-        <div class="of-poster of-poster--2">
-          <p class="of-band" data-t="creative"><b data-i18n="of.c.creative">Créative</b><span class="js-n" data-track="creative">66 leçons</span></p>
-          <p class="of-band" data-t="ia"><b data-i18n="of.c.ia">IA</b><span class="js-n" data-track="ia">67 leçons</span></p>
-        </div>
-        <div class="of-body">
-          <p class="of-k" data-i18n="of.k2">Deux formations</p>
-          <h3 class="of-t" id="of-both-t" data-i18n="tix.b.big">Pack Créative + IA</h3>
-          <p class="of-p" data-i18n="tix.b.p">Les deux formations de la pub, dans l’ordre conseillé : la créative d’abord, l’IA ensuite.</p>
-          <p class="of-price"><b class="js-num" data-offre="both">35&#8239;000</b> <span data-i18n="tix.cur">DA</span></p>
-          <p class="of-old"><s class="js-was">au lieu de 45&#8239;000&nbsp;DA</s><span class="of-save js-save">Tu économises 10&#8239;000&nbsp;DA</span></p>
-          <p class="of-per js-per" data-offre="both" data-track="both"></p>
-          <ul class="of-inc">
-            <li class="js-inc" data-k="tix.b.1" data-track="both">Les 133 leçons des deux formations</li>
-            <li data-i18n="tix.b.2">Tout le contenu Créative et tout le contenu IA</li>
-            <li data-i18n="tix.b.3">Les ateliers, la bibliothèque de prompts et les ressources</li>
-            <li data-i18n="tix.b.5">Les deux certificats</li>
-          </ul>
-          <a class="bt bt--ink of-go" href="#inscription" data-pick="both" data-i18n="of.go.p">Choisir ce pack</a>
-        </div>
-      </article>
+    <!-- « Compose ta formule » (assets/js/compose.js, assets/css/compose.css) : l'élève coche ses formations, le ticket
+         calcule la meilleure formule (data/offres.js). Sources et choix : formations/tarifs/README.md.
+         Contenu de secours, sans JavaScript : la liste des prix. -->
+    <div class="cp" id="compose" data-theme="cut">
+      <ul class="cp-static">
+        <li>Formation Créative : 20&#8239;000&nbsp;DA</li>
+        <li>Formation IA : 25&#8239;000&nbsp;DA</li>
+        <li>Formation Sites & Apps : 30&#8239;000&nbsp;DA</li>
+        <li>Pack Créative + IA : 35&#8239;000&nbsp;DA</li>
+        <li>Pack complet (les trois formations) : 50&#8239;000&nbsp;DA</li>
+      </ul>
     </div>
     <div class="tix-all">
       <p class="tix-all-k burn" data-i18n="tix.all">Dans chaque formule</p>
