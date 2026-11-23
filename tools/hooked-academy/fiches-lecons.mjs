@@ -28,7 +28,7 @@ const LANGS = (process.env.LANGS || 'fr,en,ar').split(',');
 const ONLY = process.argv.slice(2);
 const TRACK = process.env.TRACK;
 const COURSE = {
-  creative: { fr: 'Formation Créative', en: 'Creative Course', ar: 'التكوين الإبداعي' },
+  creative: { fr: 'Formation Créative', en: 'Creative Course', ar: 'تكوين الكرياتيف' },
   ia: { fr: 'Formation IA', en: 'AI Course', ar: 'تكوين الذكاء الاصطناعي' },
   dev: { fr: 'Formation Sites & Apps', en: 'Sites & Apps Course', ar: 'تكوين المواقع والتطبيقات' },
 };

@@ -7,6 +7,7 @@
 
 import { PUB } from '../../data/serveur.js';
 import { LAB, citeLab, sansLab } from '../../data/hooked-lab.js';
+import { termesAr } from '../../data/termes-ar.js';
 
 const SRC = new URL('../../data/faq.json', import.meta.url);
 export const CATS = ['inscription', 'formation', 'plateforme', 'ia', 'creation', 'business'];
@@ -15,9 +16,10 @@ const LANGS = ['fr', 'en', 'ar'];
 
 const str = (v) => String(v ?? '').trim();
 const texts = (o) => Object.fromEntries(LANGS.map((l) => [l, str(o?.[l])]));
-/** Hooked Lab pas encore ouvert (data/hooked-lab.js) : sa question est cachée, les autres réponses ne le citent pas. */
-const visible = (l) =>
-  LAB ? l : l.filter((x) => x.id !== 'lab' && !LANGS.some((g) => citeLab(x.q?.[g]))).map((x) => ({ ...x, a: Object.fromEntries(Object.entries(x.a || {}).map(([g, v]) => [g, sansLab(v)])) }));
+/** Hooked Lab pas encore ouvert (data/hooked-lab.js) : sa question est cachée, les autres réponses ne le citent pas.
+ *  En arabe, « Créative » s'écrit كرياتيف (data/termes-ar.js), même dans les textes gardés par le serveur. */
+const fix = (o) => Object.fromEntries(Object.entries(o || {}).map(([g, v]) => [g, g === 'ar' ? termesAr(sansLab(v)) : sansLab(v)]));
+const visible = (l) => (LAB ? l : l.filter((x) => x.id !== 'lab' && !LANGS.some((g) => citeLab(x.q?.[g])))).map((x) => ({ ...x, q: fix(x.q), a: fix(x.a) }));
 export function norm(x, i = 0) {
   if (!x || typeof x !== 'object') return null;
   const it = {

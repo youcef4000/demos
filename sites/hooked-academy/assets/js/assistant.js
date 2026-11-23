@@ -155,7 +155,7 @@ export function builtins() {
       a: {
         fr: `Une formation au choix : Créative ${p.c} · IA ${p.i} · Sites & Apps ${p.d}.\nPack Créative + IA : ${p.b} · Pack complet (les trois formations) : ${p.a}.\n\nChaque formule donne un an d’accès à la plateforme. Le paiement se fait avec l’équipe sur WhatsApp, après ton inscription (CCP, BaridiMob ou espèces).`,
         en: `One course of your choice: Creative ${p.c} · AI ${p.i} · Sites & Apps ${p.d}.\nCreative + AI Pack: ${p.b} · Complete Pack (all three courses): ${p.a}.\n\nEach plan gives one year of access to the platform. You pay with the team on WhatsApp, after signing up (CCP, BaridiMob or cash).`,
-        ar: `تكوين واحد تختاره: الإبداعي ${p.c} · الذكاء الاصطناعي ${p.i} · المواقع والتطبيقات ${p.d}.\nباقة الإبداعي + الذكاء الاصطناعي: ${p.b} · الباقة الكاملة (التكوينات الثلاثة): ${p.a}.\n\nتمنحك كل صيغة وصولًا إلى المنصة لمدة سنة. يتم الدفع مع الفريق عبر واتساب بعد تسجيلك (CCP أو BaridiMob أو نقدًا).`,
+        ar: `تكوين واحد تختاره: الكرياتيف ${p.c} · الذكاء الاصطناعي ${p.i} · المواقع والتطبيقات ${p.d}.\nباقة الكرياتيف + الذكاء الاصطناعي: ${p.b} · الباقة الكاملة (التكوينات الثلاثة): ${p.a}.\n\nتمنحك كل صيغة وصولًا إلى المنصة لمدة سنة. يتم الدفع مع الفريق عبر واتساب بعد تسجيلك (CCP أو BaridiMob أو نقدًا).`,
       },
     },
     {

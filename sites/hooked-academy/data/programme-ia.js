@@ -51,7 +51,7 @@ export const MODULES_IA = [
             items: ['Ouvre l’*atelier* de chaque leçon', 'Teste chaque prompt *toi-même*', 'Garde tes meilleurs résultats : ton *portfolio*', 'Termine le *projet final* pour ton certificat'],
             say: 'باش تنجح: افتح الأتولييه تاع كل درس. جرّب كل برومبت بيدّك. خبّي أحسن النتايج تاعك، هوما البورتفوليو تاعك. وكمّل المشروع النهائي باش تدّي الشهادة.',
           },
-          { type: 'quote', text: 'L’IA ne remplace pas ta créativité. Elle *la multiplie*.', say: 'وتفكّر: الذكاء الاصطناعي ما يعوّضش الإبداع تاعك… يضاعفو.' },
+          { type: 'quote', text: 'L’IA ne remplace pas ta créativité. Elle *la multiplie*.', say: 'وتفكّر: الذكاء الاصطناعي ما يعوّضش الأفكار تاعك… يضاعفهم.' },
           { type: 'outro', text: 'On commence ?', say: 'يلا نبداو! أول حاجة: نوريك كيفاش تستعمل المنصة، ومن بعد نوجدو الأدوات.' },
         ],
         key: ['Trois étapes : maîtriser les outils, produire, puis vendre.', 'Comprendre la méthode vaut mieux que copier des prompts.', 'Atelier, essais, portfolio, puis projet final pour le certificat.'],

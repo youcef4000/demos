@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-23T21:18:57.222Z",
+  "generated": "2026-11-23T22:06:34.681Z",
   "lessons": {
     "m0-l1": [
       {
@@ -24,7 +24,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m0-l1/01-ملخص-الدرس.ar.pdf",
-        "size": 146940
+        "size": 146960
       },
       {
         "kind": "link",
@@ -62,7 +62,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m0-l3/01-ملخص-الدرس.ar.pdf",
-        "size": 116836
+        "size": 116531
       },
       {
         "kind": "link",
@@ -100,7 +100,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m0-l4/01-ملخص-الدرس.ar.pdf",
-        "size": 139908
+        "size": 139436
       },
       {
         "kind": "link",
@@ -138,7 +138,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m1-l1/01-ملخص-الدرس.ar.pdf",
-        "size": 149321
+        "size": 149249
       },
       {
         "kind": "link",
@@ -176,7 +176,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m1-l2/01-ملخص-الدرس.ar.pdf",
-        "size": 150257
+        "size": 150272
       },
       {
         "kind": "link",
@@ -232,7 +232,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m1-l3/01-ملخص-الدرس.ar.pdf",
-        "size": 148179
+        "size": 147863
       },
       {
         "kind": "link",
@@ -270,7 +270,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m1-l4/01-ملخص-الدرس.ar.pdf",
-        "size": 143767
+        "size": 143716
       },
       {
         "kind": "link",
@@ -308,7 +308,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l1/01-ملخص-الدرس.ar.pdf",
-        "size": 151658
+        "size": 152368
       },
       {
         "kind": "link",
@@ -346,7 +346,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l2/01-ملخص-الدرس.ar.pdf",
-        "size": 152344
+        "size": 152221
       },
       {
         "kind": "link",
@@ -384,7 +384,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l11/01-ملخص-الدرس.ar.pdf",
-        "size": 182353
+        "size": 182194
       },
       {
         "kind": "link",
@@ -422,7 +422,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l12/01-ملخص-الدرس.ar.pdf",
-        "size": 169639
+        "size": 169489
       },
       {
         "kind": "link",
@@ -460,7 +460,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l3/01-ملخص-الدرس.ar.pdf",
-        "size": 162763
+        "size": 164705
       },
       {
         "kind": "link",
@@ -498,7 +498,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l4/01-ملخص-الدرس.ar.pdf",
-        "size": 146209
+        "size": 147977
       },
       {
         "kind": "link",
@@ -536,7 +536,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l5/01-ملخص-الدرس.ar.pdf",
-        "size": 151413
+        "size": 151237
       },
       {
         "kind": "link",
@@ -574,7 +574,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l6/01-ملخص-الدرس.ar.pdf",
-        "size": 157966
+        "size": 157837
       },
       {
         "kind": "link",
@@ -612,18 +612,18 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l7/01-ملخص-الدرس.ar.pdf",
-        "size": 170360
+        "size": 170259
+      },
+      {
+        "kind": "link",
+        "title": "Bolt",
+        "url": "https://bolt.new/",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "CapCut",
         "url": "https://www.capcut.com/capcut_pc_web/fission_receive?code=ifMmSl17713579&lng=fr-FR",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "ChatGPT",
-        "url": "https://chatgpt.com/",
         "file": "liens.txt"
       }
     ],
@@ -650,7 +650,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l8/01-ملخص-الدرس.ar.pdf",
-        "size": 186960
+        "size": 186856
       },
       {
         "kind": "link",
@@ -688,7 +688,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l9/01-ملخص-الدرس.ar.pdf",
-        "size": 169603
+        "size": 169561
       },
       {
         "kind": "link",
@@ -726,7 +726,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l10/01-ملخص-الدرس.ar.pdf",
-        "size": 170818
+        "size": 170633
       },
       {
         "kind": "link",
@@ -764,18 +764,18 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m3-l1/01-ملخص-الدرس.ar.pdf",
-        "size": 145411
+        "size": 145472
+      },
+      {
+        "kind": "link",
+        "title": "Bolt",
+        "url": "https://bolt.new/",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "ChatGPT",
         "url": "https://chatgpt.com/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Canva",
-        "url": "https://www.canva.com/",
         "file": "liens.txt"
       }
     ],
@@ -802,7 +802,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m3-l2/01-ملخص-الدرس.ar.pdf",
-        "size": 144854
+        "size": 144763
       },
       {
         "kind": "link",
@@ -840,18 +840,18 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m3-l3/01-ملخص-الدرس.ar.pdf",
-        "size": 145499
+        "size": 146302
+      },
+      {
+        "kind": "link",
+        "title": "Bolt",
+        "url": "https://bolt.new/",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "ChatGPT",
         "url": "https://chatgpt.com/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Canva",
-        "url": "https://www.canva.com/",
         "file": "liens.txt"
       }
     ],
@@ -878,7 +878,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m3-l4/01-ملخص-الدرس.ar.pdf",
-        "size": 146555
+        "size": 148173
       },
       {
         "kind": "link",
@@ -916,7 +916,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m3-l5/01-ملخص-الدرس.ar.pdf",
-        "size": 156222
+        "size": 156245
       },
       {
         "kind": "link",
@@ -954,7 +954,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m3-l6/01-ملخص-الدرس.ar.pdf",
-        "size": 149524
+        "size": 149754
       },
       {
         "kind": "link",
@@ -992,7 +992,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m4-l1/01-ملخص-الدرس.ar.pdf",
-        "size": 143418
+        "size": 143284
       },
       {
         "kind": "link",
@@ -1030,7 +1030,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m4-l2/01-ملخص-الدرس.ar.pdf",
-        "size": 144494
+        "size": 144432
       },
       {
         "kind": "link",
@@ -1068,7 +1068,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m4-l3/01-ملخص-الدرس.ar.pdf",
-        "size": 147646
+        "size": 147438
       },
       {
         "kind": "link",
@@ -1130,7 +1130,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m6-l1/01-ملخص-الدرس.ar.pdf",
-        "size": 149119
+        "size": 148954
       },
       {
         "kind": "link",
@@ -1168,18 +1168,18 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m6-l2/01-ملخص-الدرس.ar.pdf",
-        "size": 146487
+        "size": 145789
+      },
+      {
+        "kind": "link",
+        "title": "Bolt",
+        "url": "https://bolt.new/",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "Canva",
         "url": "https://www.canva.com/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "ChatGPT",
-        "url": "https://chatgpt.com/",
         "file": "liens.txt"
       }
     ],
@@ -1206,7 +1206,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m6-l3/01-ملخص-الدرس.ar.pdf",
-        "size": 152192
+        "size": 152174
       },
       {
         "kind": "link",
@@ -1244,7 +1244,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m6-l4/01-ملخص-الدرس.ar.pdf",
-        "size": 145390
+        "size": 147152
       },
       {
         "kind": "link",
@@ -1282,7 +1282,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m5-l1/01-ملخص-الدرس.ar.pdf",
-        "size": 156802
+        "size": 156945
       },
       {
         "kind": "link",
@@ -1320,7 +1320,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m5-l2/01-ملخص-الدرس.ar.pdf",
-        "size": 144096
+        "size": 144142
       },
       {
         "kind": "link",
@@ -1358,7 +1358,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m5-l3/01-ملخص-الدرس.ar.pdf",
-        "size": 145950
+        "size": 145774
       },
       {
         "kind": "link",
@@ -1396,7 +1396,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m5-l4/01-ملخص-الدرس.ar.pdf",
-        "size": 149190
+        "size": 149254
       },
       {
         "kind": "link",
@@ -1434,7 +1434,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m7-l1/01-ملخص-الدرس.ar.pdf",
-        "size": 156244
+        "size": 156117
       },
       {
         "kind": "link",
@@ -1472,7 +1472,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m7-l10/01-ملخص-الدرس.ar.pdf",
-        "size": 145892
+        "size": 145589
       },
       {
         "kind": "link",
@@ -1516,7 +1516,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m7-l11/01-ملخص-الدرس.ar.pdf",
-        "size": 127503
+        "size": 127067
       },
       {
         "kind": "link",
@@ -1554,7 +1554,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m7-l2/01-ملخص-الدرس.ar.pdf",
-        "size": 157784
+        "size": 157620
       },
       {
         "kind": "link",
@@ -1592,7 +1592,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m7-l3/01-ملخص-الدرس.ar.pdf",
-        "size": 157098
+        "size": 157046
       },
       {
         "kind": "link",
@@ -1630,7 +1630,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m7-l4/01-ملخص-الدرس.ar.pdf",
-        "size": 160033
+        "size": 159779
       },
       {
         "kind": "link",
@@ -1668,7 +1668,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m7-l5/01-ملخص-الدرس.ar.pdf",
-        "size": 156152
+        "size": 156184
       },
       {
         "kind": "link",
@@ -1706,7 +1706,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m7-l6/01-ملخص-الدرس.ar.pdf",
-        "size": 157733
+        "size": 157834
       },
       {
         "kind": "link",
@@ -1744,7 +1744,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m7-l7/01-ملخص-الدرس.ar.pdf",
-        "size": 146776
+        "size": 146701
       },
       {
         "kind": "link",
@@ -1782,7 +1782,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m7-l8/01-ملخص-الدرس.ar.pdf",
-        "size": 159442
+        "size": 159282
       },
       {
         "kind": "link",
@@ -1820,7 +1820,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m7-l9/01-ملخص-الدرس.ar.pdf",
-        "size": 170267
+        "size": 170277
       },
       {
         "kind": "link",
@@ -1858,7 +1858,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m8-l1/01-ملخص-الدرس.ar.pdf",
-        "size": 158302
+        "size": 158190
       },
       {
         "kind": "link",
@@ -1890,7 +1890,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m8-l2/01-ملخص-الدرس.ar.pdf",
-        "size": 167467
+        "size": 167620
       },
       {
         "kind": "link",
@@ -1922,7 +1922,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m8-l3/01-ملخص-الدرس.ar.pdf",
-        "size": 175143
+        "size": 175714
       },
       {
         "kind": "link",
@@ -1944,8 +1944,8 @@
       },
       {
         "kind": "link",
-        "title": "TikTok Creative Center",
-        "url": "https://ads.tiktok.com/business/creativecenter/",
+        "title": "Bolt",
+        "url": "https://bolt.new/",
         "file": "liens.txt"
       }
     ],
@@ -1972,7 +1972,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m8-l4/01-ملخص-الدرس.ar.pdf",
-        "size": 165514
+        "size": 165525
       },
       {
         "kind": "link",
@@ -2004,7 +2004,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m8-l5/01-ملخص-الدرس.ar.pdf",
-        "size": 164225
+        "size": 164072
       },
       {
         "kind": "link",
@@ -2036,7 +2036,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m9-l1/01-ملخص-الدرس.ar.pdf",
-        "size": 162115
+        "size": 162140
       },
       {
         "kind": "link",
@@ -2068,7 +2068,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m9-l2/01-ملخص-الدرس.ar.pdf",
-        "size": 168337
+        "size": 168344
       },
       {
         "kind": "link",
@@ -2100,7 +2100,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m9-l3/01-ملخص-الدرس.ar.pdf",
-        "size": 161993
+        "size": 161864
       },
       {
         "kind": "link",
@@ -2132,7 +2132,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m9-l4/01-ملخص-الدرس.ar.pdf",
-        "size": 156762
+        "size": 156801
       },
       {
         "kind": "link",
@@ -2164,7 +2164,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m9-l5/01-ملخص-الدرس.ar.pdf",
-        "size": 161625
+        "size": 161552
       },
       {
         "kind": "link",
@@ -2196,7 +2196,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m10-l1/01-ملخص-الدرس.ar.pdf",
-        "size": 162203
+        "size": 162078
       },
       {
         "kind": "link",
@@ -2234,7 +2234,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m10-l2/01-ملخص-الدرس.ar.pdf",
-        "size": 163613
+        "size": 163724
       },
       {
         "kind": "link",
@@ -2272,7 +2272,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m10-l3/01-ملخص-الدرس.ar.pdf",
-        "size": 156981
+        "size": 156994
       },
       {
         "kind": "link",
@@ -2310,7 +2310,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m10-l4/01-ملخص-الدرس.ar.pdf",
-        "size": 174072
+        "size": 174230
       },
       {
         "kind": "link",
@@ -2348,7 +2348,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m10-l5/01-ملخص-الدرس.ar.pdf",
-        "size": 171937
+        "size": 171970
       },
       {
         "kind": "link",
@@ -2386,7 +2386,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m11-l1/01-ملخص-الدرس.ar.pdf",
-        "size": 154285
+        "size": 154171
       },
       {
         "kind": "link",
@@ -2424,7 +2424,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m11-l2/01-ملخص-الدرس.ar.pdf",
-        "size": 148416
+        "size": 148339
       },
       {
         "kind": "link",
@@ -2462,7 +2462,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m11-l3/01-ملخص-الدرس.ar.pdf",
-        "size": 174006
+        "size": 173822
       },
       {
         "kind": "link",
@@ -2500,7 +2500,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m11-l4/01-ملخص-الدرس.ar.pdf",
-        "size": 159280
+        "size": 159151
       },
       {
         "kind": "link",
@@ -2538,7 +2538,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m11-l5/01-ملخص-الدرس.ar.pdf",
-        "size": 159217
+        "size": 159240
       },
       {
         "kind": "link",
@@ -2576,7 +2576,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m12-l1/01-ملخص-الدرس.ar.pdf",
-        "size": 165878
+        "size": 166049
       },
       {
         "kind": "link",
@@ -2614,7 +2614,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m12-l2/01-ملخص-الدرس.ar.pdf",
-        "size": 168508
+        "size": 168493
       },
       {
         "kind": "link",
@@ -2652,7 +2652,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/ia0-l1/01-ملخص-الدرس.ar.pdf",
-        "size": 153325
+        "size": 153307
       },
       {
         "kind": "link",

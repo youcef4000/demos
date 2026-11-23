@@ -46,11 +46,14 @@ ligne) : `assets/js/site-build.js` et `assets/css/site-build.css`, partagés par
 
 Trois billets seulement, pour ne pas noyer le visiteur dans le choix (landing et `/ia/`) :
 
-| Billet | Prix | Design |
+| Offre | Prix | Affiche (haut de la carte) |
 |---|---|---|
-| Une formation au choix | Créative 20 000 DA · IA 25 000 DA · Sites & Apps 30 000 DA | un sélecteur change la couleur, le contenu et le prix, et propose le pack qui ajoute le plus pour le moins |
-| Pack complet (au centre, « meilleure offre ») | 50 000 DA au lieu de 75 000 | les trois formations en blocs de couleur reliés par « + » |
-| Pack Créative + IA | 35 000 DA au lieu de 45 000 | les deux formations côte à côte, reliées par « + » |
+| Une formation au choix | Créative 20 000 DA · IA 25 000 DA · Sites & Apps 30 000 DA | une bande dont la couleur suit le sélecteur ; il propose aussi le pack qui ajoute le plus pour le moins |
+| Pack complet (au centre, « meilleure offre ») | 50 000 DA au lieu de 75 000 | trois bandes (Créative, IA, Sites & Apps) reliées par « + » |
+| Pack Créative + IA | 35 000 DA au lieu de 45 000 | deux bandes (Créative, IA) reliées par « + » |
+
+Chaque carte montre aussi le prix par leçon (le pack complet revient le moins cher). Landing : cartes `.of` (fin de
+`assets/css/landing.css`) ; `/ia/` : même principe, `.cposter` et `.cband` (fin de `ia/ia.css`).
 
 Le formulaire suit le même ordre : la formule, puis la formation si « une formation ». Les identifiants envoyés au
 serveur ne changent pas (`creative`, `ia`, `dev`, `both`, `all`) ; les prix sont dans `data/offres.js`, et l'équipe peut

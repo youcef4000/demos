@@ -155,6 +155,14 @@ $$('.js-from').forEach((el) => (el.textContent = t('f.f.from', { p: money(Math.m
 fSync();
 $$('[data-pick]').forEach((a) => a.addEventListener('click', () => pickOffer(a.dataset.pick)));
 $$('.js-n').forEach((el) => (el.textContent = t('count.lessons', { n: byTrack[el.dataset.track].lessons.length })));
+// Prix en grand (le nombre seul) et prix par leçon : le pack complet revient le moins cher à la leçon
+const fmtN = (n) => new Intl.NumberFormat(lang === 'en' ? 'en-GB' : 'fr-FR').format(n);
+$$('.js-num').forEach((el) => (el.textContent = fmtN(OFFRES[el.dataset.offre])));
+$$('.js-per').forEach((el) => {
+  const tr = el.dataset.track;
+  const n = tr === 'all' ? LESSONS.length : tr === 'both' ? BOTH : byTrack[tr].lessons.length;
+  el.textContent = t('of.per', { p: money(Math.round(OFFRES[el.dataset.offre] / n)) });
+});
 
 // Billet 01 : une formation au choix. Le sélecteur change le contenu, la couleur et le prix du billet,
 // et propose le pack qui ajoute le plus pour le moins (Créative ou IA → pack Créative + IA ; Sites & Apps → pack complet).
@@ -163,8 +171,9 @@ if (soloTk) {
   const UP = { creative: ['both', OFFRES.both - OFFRES.creative], ia: ['both', OFFRES.both - OFFRES.ia], dev: ['all', OFFRES.all - OFFRES.dev] };
   const showSolo = (id, anim) => {
     soloTk.dataset.offre = id;
-    $$('.tk-sw button', soloTk).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.t === id)));
-    $$('.tk-var', soloTk).forEach((v) => (v.hidden = v.dataset.t !== id));
+    $('.js-solo-big', soloTk).textContent = t(`of.c.${id}`);
+    $$('.of-sw button', soloTk).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.t === id)));
+    $$('.of-var', soloTk).forEach((v) => (v.hidden = v.dataset.t !== id));
     $('.js-solo-go', soloTk).dataset.pick = id;
     const [pk, diff] = UP[id];
     const up = $('.js-up', soloTk);
@@ -173,9 +182,9 @@ if (soloTk) {
     frTypo(up);
     up.parentElement.hidden = !(diff > 0);
     const g = window.gsap;
-    if (anim && g && !reduce) g.fromTo($('.tk-var:not([hidden])', soloTk), { clipPath: isRTL ? 'inset(0 0 0 100%)' : 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0%)', duration: 0.12, ease: 'steps(3)', clearProps: 'clipPath' });
+    if (anim && g && !reduce) g.fromTo($('.of-var:not([hidden])', soloTk), { clipPath: isRTL ? 'inset(0 0 0 100%)' : 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0%)', duration: 0.12, ease: 'steps(3)', clearProps: 'clipPath' });
   };
-  $$('.tk-sw button', soloTk).forEach((b) => b.addEventListener('click', () => showSolo(b.dataset.t, true)));
+  $$('.of-sw button', soloTk).forEach((b) => b.addEventListener('click', () => showSolo(b.dataset.t, true)));
   showSolo('creative');
 }
 frTypo(document.body);
@@ -806,9 +815,9 @@ function animate() {
   ST.create({ trigger: '#hooked-lab', start: 'top 60%', once: true, onEnter: () => morphMark(svg, g, { duration: 0.24, ease: 'steps(6)' }) });
 
   // Billetterie : les billets sortent de la machine, en 6 images chacun
-  const tks = $$('.tk');
+  const tks = $$('.of');
   g.set(tks, { clipPath: 'inset(0 0 100% 0)' });
-  ST.create({ trigger: '.tix-row', start: 'top 80%', once: true, onEnter: () => g.to(tks, { clipPath: 'inset(0 0 0% 0)', duration: 0.24, ease: 'steps(6)', stagger: 0.14, clearProps: 'clipPath' }) });
+  ST.create({ trigger: '.of-row', start: 'top 80%', once: true, onEnter: () => g.to(tks, { clipPath: 'inset(0 0 0% 0)', duration: 0.24, ease: 'steps(6)', stagger: 0.14, clearProps: 'clipPath' }) });
 
   // Coupe : chaque plan « tombe » en une image (aucun fondu)
   addEventListener('load', () => ST.refresh());

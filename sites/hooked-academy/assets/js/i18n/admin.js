@@ -846,7 +846,7 @@ add({
     'ad.f.received': 'تاريخ الاستلام',
     'ad.f.formation': 'التكوين',
     'ad.f.lang': 'اللغة',
-    'ad.fm.creative': 'الإبداعي',
+    'ad.fm.creative': 'الكرياتيف',
     'ad.fm.ia': 'الذكاء الاصطناعي',
     'ad.fm.both': 'الاثنان',
     'ad.fm.bothL': 'التكوينان معًا',

@@ -3489,96 +3489,202 @@ html.rm .sa-copy {
   }
 }
 
-/* Packs : chaque pack montre ses formations en tuiles de couleur reliées par « + »
-   (IA violet, Créative or, Sites & Apps menthe). */
-.cparts {
-  display: grid;
-  gap: 12px;
-  margin: 16px 0 0;
+/* Tarifs (3e version) : chaque carte commence par son « affiche » — une bande de couleur par formation incluse
+   (1, 2 ou 3, toujours la même hauteur) : IA violet, Créative or, Sites & Apps menthe. */
+.cards .card {
+  display: flex;
+  flex-direction: column;
   padding: 0;
-  list-style: none;
 }
-.cparts--3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.card-badge {
+  z-index: 2;
 }
-.cparts--2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-}
-.cparts li {
-  --c: 155 123 255;
-  position: relative;
+.cposter {
   display: grid;
-  align-content: end;
-  gap: 3px;
+  height: 178px;
+  overflow: hidden;
+  border-radius: 28px 28px 0 0;
+}
+.cposter--2 {
+  grid-template-rows: 1fr 1fr;
+}
+.cposter--3 {
+  grid-template-rows: 1fr 1fr 1fr;
+}
+.cband {
+  --c1: #8e6dff;
+  --c2: #c8b6ff;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   min-width: 0;
-  padding: 10px 10px 9px;
-  border-radius: 14px;
-  container-type: inline-size;
-  background: rgb(var(--c) / 0.14);
-  box-shadow: inset 0 0 0 1px rgb(var(--c) / 0.55);
+  margin: 0;
+  padding: 0 22px;
+  background: linear-gradient(115deg, var(--c1), var(--c2));
+  color: #0d0c10;
 }
-.cparts li[data-t='creative'] {
-  --c: 224 190 85;
+.cband[data-t='creative'] {
+  --c1: #d9b244;
+  --c2: #f2dfa0;
 }
-.cparts li[data-t='dev'] {
-  --c: 95 211 179;
+.cband[data-t='dev'] {
+  --c1: #3fbf9c;
+  --c2: #a6ecd8;
 }
-.cparts b {
+.cband + .cband {
+  box-shadow: inset 0 1.5px 0 rgb(13 12 16 / 0.45);
+}
+.cband b {
+  min-width: 0;
+  overflow: hidden;
   font-family: var(--f-disp);
-  font-weight: 850;
-  font-size: clamp(12px, 15cqi, 17px);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  font-weight: 900;
+  font-size: clamp(21px, 1.9vw, 27px);
+  letter-spacing: -0.03em;
+  text-overflow: ellipsis;
   white-space: nowrap;
-  color: rgb(var(--c));
 }
-.cparts li[data-t='ia'] b {
-  color: var(--lav);
+.cposter--2 .cband b {
+  font-size: clamp(28px, 2.6vw, 38px);
 }
-.cparts span {
+.cband > span {
   font-family: var(--f-mono);
-  font-size: 11px;
-  color: var(--muted);
+  font-weight: 700;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0.75;
 }
-.cparts li + li::before {
+/* le « + » à la jonction de deux bandes */
+.cband + .cband::before {
   content: '+';
   position: absolute;
   z-index: 1;
-  top: 50%;
-  inset-inline-start: -11px;
+  top: 0;
+  left: 50%;
   display: grid;
   place-items: center;
-  width: 18px;
-  height: 18px;
-  margin-top: -9px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: var(--lime);
-  color: #0d0c10;
+  background: #0d0c10;
+  color: var(--lime);
   font-weight: 900;
-  font-size: 14px;
-  line-height: 1;
-}
-.cparts--2 li {
-  min-height: 96px;
-  padding: 14px 14px 12px;
-}
-.cparts--2 b {
-  font-size: clamp(20px, 22cqi, 34px);
-  letter-spacing: -0.035em;
-}
-.cparts--2 li + li::before {
-  inset-inline-start: -16px;
-  width: 26px;
-  height: 26px;
-  margin-top: -13px;
   font-size: 18px;
+  line-height: 1;
+  transform: translate(-50%, -50%);
 }
-html[lang='ar'] .cparts b {
-  white-space: normal;
+/* une formation au choix : une seule bande, sa couleur suit le sélecteur */
+.cband--solo {
+  container-type: inline-size;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 16px 22px 18px;
+}
+.card--solo[data-t='creative'] .cband--solo {
+  --c1: #d9b244;
+  --c2: #f2dfa0;
+}
+.card--solo[data-t='dev'] .cband--solo {
+  --c1: #3fbf9c;
+  --c2: #a6ecd8;
+}
+.cband-n {
+  margin: 0;
+  font-family: var(--f-mono);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+.cband-big {
+  margin: 0;
+  font-family: var(--f-disp);
+  font-weight: 900;
+  font-size: clamp(34px, 14cqi, 58px);
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+}
+.cband--solo .csw {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+.cband--solo .csw button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgb(13 12 16 / 0.1);
+  box-shadow: inset 0 0 0 1.5px rgb(13 12 16 / 0.55);
+  color: #0d0c10;
+}
+.cband--solo .csw button[aria-pressed='true'] {
+  background: #0d0c10;
+  box-shadow: none;
+  color: #fff;
+}
+.csw i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #8e6dff;
+  box-shadow: 0 0 0 1.5px rgb(13 12 16 / 0.6);
+}
+.csw button[data-t='creative'] i {
+  background: #d9b244;
+}
+.csw button[data-t='dev'] i {
+  background: #3fbf9c;
+}
+.csw button[aria-pressed='true'] i {
+  box-shadow: 0 0 0 1.5px #fff;
+}
+/* le corps de la carte */
+.cbody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 22px;
+}
+.cbody .inc {
+  margin-bottom: 22px;
+}
+.cbody .upsell {
+  margin: -6px 0 14px;
+}
+.cbody .card-go {
+  margin-top: auto;
+}
+.cper {
+  margin: 6px 0 0;
+  font-family: var(--f-mono);
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.card--pack .cper {
+  color: var(--lime);
+}
+html[lang='ar'] :is(.cband-n, .cband > span, .cper) {
+  font-family: var(--f-ar);
   letter-spacing: 0;
-  line-height: 1.3;
 }
-.card--duo {
-  box-shadow: inset 0 0 0 1px rgb(224 190 85 / 0.22), 0 30px 60px -40px rgb(0 0 0 / 0.9);
+html[lang='ar'] .cband-big {
+  font-size: clamp(28px, 11cqi, 48px);
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+html[lang='ar'] .cband b {
+  font-size: clamp(18px, 1.6vw, 23px);
+  letter-spacing: 0;
+}
+html[lang='ar'] .cposter--2 .cband b {
+  font-size: clamp(22px, 2vw, 30px);
+}
+html[lang='ar'] .card-k {
+  font-family: var(--f-ar);
+  letter-spacing: 0;
 }

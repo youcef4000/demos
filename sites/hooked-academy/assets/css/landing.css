@@ -2290,247 +2290,10 @@ html[lang='ar'] .lab-chips li {
 }
 
 /* --------------------------------------------------------------------------
-   PLAN 08 · tarifs : la billetterie (des billets de cinéma, en aplats)
-   Le talon est séparé par une ligne perforée et deux encoches (masque).
+   PLAN 09 · tarifs : trois offres (les cartes .of sont à la fin du fichier)
    -------------------------------------------------------------------------- */
 .tix-head .lead {
   max-width: 54ch;
-}
-.tix-row {
-  display: grid;
-  gap: 22px;
-}
-@media (min-width: 1000px) {
-  .tix-row {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr) minmax(0, 1fr);
-    align-items: end;
-    gap: clamp(16px, 2vw, 30px);
-  }
-}
-.tk {
-  --stub: 112px;
-  --notch: 15px;
-  --cut: calc(100% - var(--stub));
-  position: relative;
-  display: grid;
-  grid-template-rows: 1fr var(--stub);
-  border-radius: 6px;
-  background: var(--orange);
-  color: var(--ink);
-  -webkit-mask:
-    radial-gradient(circle var(--notch) at 0 var(--cut), #0000 97%, #000) left / 51% 100% no-repeat,
-    radial-gradient(circle var(--notch) at 100% var(--cut), #0000 97%, #000) right / 51% 100% no-repeat;
-  mask:
-    radial-gradient(circle var(--notch) at 0 var(--cut), #0000 97%, #000) left / 51% 100% no-repeat,
-    radial-gradient(circle var(--notch) at 100% var(--cut), #0000 97%, #000) right / 51% 100% no-repeat;
-  transition: transform calc(var(--img) * 3) steps(3);
-}
-.tk[data-offre='ia'] {
-  background: var(--lav);
-}
-.tk--pack {
-  background: var(--ink);
-  color: var(--paper);
-}
-.tk-main {
-  display: flex;
-  flex-direction: column;
-  padding: 24px 24px 26px;
-}
-.tk--pack .tk-main {
-  padding-top: 30px;
-}
-@media (min-width: 1000px) {
-  .tk--pack .tk-main {
-    padding-top: 58px;
-    padding-bottom: 34px;
-  }
-}
-.tk-k {
-  font-size: 12px;
-  opacity: 0.78;
-}
-.tk--pack .tk-k {
-  padding-inline-end: 128px;
-}
-.tk-t {
-  display: grid;
-  margin: 18px 0 0;
-}
-.tk-big {
-  font-family: var(--f-cond);
-  font-weight: 900;
-  font-size: clamp(56px, 6.2vw, 92px);
-  line-height: 0.84;
-  text-transform: uppercase;
-}
-.tk--pack .tk-big {
-  font-size: clamp(50px, 5.4vw, 80px);
-}
-html[lang='ar'] .tk-big {
-  font-weight: 800;
-  font-size: clamp(40px, 4.4vw, 62px);
-  line-height: 1.15;
-}
-.tk-name {
-  margin-top: 10px;
-  font-size: 15px;
-  font-weight: 800;
-}
-.tk-p {
-  margin: 12px 0 0;
-  max-width: 36ch;
-  font-size: 16px;
-  line-height: 1.45;
-}
-.tk-price {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 8px 14px;
-  margin: 22px 0 0;
-  padding-top: 18px;
-  border-top: 2px solid currentColor;
-}
-.tk-amt {
-  font-family: var(--f-dot);
-  font-weight: 900;
-  font-size: clamp(42px, 4.4vw, 60px);
-  line-height: 1;
-  white-space: nowrap;
-}
-.tk--pack .tk-amt {
-  color: var(--lime);
-}
-.tk-was {
-  font-size: 15px;
-  opacity: 0.7;
-}
-.tk-year {
-  flex-basis: 100%;
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  opacity: 0.8;
-}
-html[lang='ar'] .tk-year {
-  letter-spacing: 0;
-}
-.tk-save {
-  padding: 4px 9px 3px;
-  background: var(--lime);
-  color: var(--ink);
-  font-size: 14px;
-  font-weight: 800;
-}
-.tk-inc {
-  display: grid;
-  gap: 10px;
-  margin: 20px 0 0;
-  padding: 0;
-  list-style: none;
-  font-size: 15.5px;
-  line-height: 1.35;
-}
-.tk-inc li {
-  display: grid;
-  grid-template-columns: 16px minmax(0, 1fr);
-  gap: 10px;
-}
-.tk-inc li::before {
-  content: '';
-  width: 13px;
-  height: 7px;
-  margin-top: 5px;
-  border-left: 2.5px solid currentColor;
-  border-bottom: 2.5px solid currentColor;
-  transform: rotate(-45deg);
-}
-.tk--pack .tk-inc li::before {
-  border-color: var(--lime);
-}
-.tk-stub {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 16px;
-  padding: 0 24px;
-}
-.tk-stub::before {
-  content: '';
-  position: absolute;
-  top: -1px;
-  inset-inline: calc(var(--notch) + 8px);
-  border-top: 2.5px dashed currentColor;
-  opacity: 0.5;
-}
-.tk-go {
-  width: 100%;
-  padding: 0 14px;
-}
-.tk[data-offre='creative'] .tk-go:hover,
-.tk[data-offre='ia'] .tk-go:hover {
-  background: var(--paper);
-  color: var(--ink);
-}
-.tk-adm {
-  display: grid;
-  justify-items: center;
-  gap: 6px;
-  margin: 0;
-}
-.tk-adm .burn {
-  font-size: 9px;
-  letter-spacing: 0.12em;
-  opacity: 0.8;
-}
-.tk-code {
-  display: block;
-  width: 70px;
-  height: 38px;
-  background: repeating-linear-gradient(90deg, currentColor 0 2px, #0000 2px 4px, currentColor 4px 5px, #0000 5px 8px, currentColor 8px 11px, #0000 11px 12px, currentColor 12px 13px, #0000 13px 17px);
-}
-.tk-stamp {
-  position: absolute;
-  z-index: 1;
-  top: 20px;
-  inset-inline-end: 18px;
-  margin: 0;
-  padding: 7px 10px 6px;
-  border: 3px double var(--lime);
-  color: var(--lime);
-  font-family: var(--f-dot);
-  font-weight: 900;
-  font-size: 14px;
-  line-height: 1;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  transform: rotate(-7deg);
-}
-html[lang='ar'] .tk-stamp {
-  font-family: var(--f-text);
-  font-weight: 800;
-  letter-spacing: 0;
-  transform: rotate(7deg);
-}
-@media (hover: hover) and (pointer: fine) {
-  .tk:hover {
-    transform: translateY(-8px) rotate(-0.8deg);
-  }
-  .tk--pack:hover {
-    transform: translateY(-8px) rotate(0.8deg);
-  }
-}
-@media (max-width: 380px) {
-  .tk-main,
-  .tk-stub {
-    padding-inline: 18px;
-  }
-  .tk-code {
-    width: 54px;
-  }
 }
 .tix-all {
   display: grid;
@@ -2562,11 +2325,6 @@ html[lang='ar'] .tk-stamp {
   margin: 0;
   font-size: 14px;
   color: var(--paper-mute);
-}
-@media (prefers-reduced-motion: reduce) {
-  .tk {
-    transition: none;
-  }
 }
 
 /* --------------------------------------------------------------------------
@@ -3411,82 +3169,6 @@ html[lang='ar'] .dvb .sb-cap-t {
     padding: 48px var(--gut) 56px;
   }
 }
-.tk[data-offre='dev'] {
-  background: #5fd3b3;
-}
-.tk[data-offre='dev'] .tk-go:hover {
-  background: var(--paper);
-  color: var(--ink);
-}
-
-/* Tarifs simplifiés (novembre 2026) : trois billets.
-   01 · une formation au choix (le sélecteur change la couleur, le contenu et le prix) ;
-   02 · Pack Hooked, au centre (les trois couleurs en tête de billet) ; 03 · Pack Créateur (orange et lavande). */
-.tk-sw {
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  justify-content: start;
-  gap: 4px;
-  margin: 14px 0 0;
-}
-.tk-sw button {
-  min-height: 40px;
-  padding: 0 12px;
-  border: 0;
-  border-radius: 3px;
-  background: transparent;
-  box-shadow: inset 0 0 0 2px var(--ink);
-  color: var(--ink);
-  font-family: var(--f-cond);
-  font-weight: 800;
-  font-size: 18px;
-  line-height: 1;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-.tk-sw button[aria-pressed='true'] {
-  background: var(--ink);
-  color: var(--paper);
-}
-.tk-sw button:focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 2px;
-}
-html[lang='ar'] .tk-sw button {
-  font-size: 16px;
-}
-@media (hover: hover) and (pointer: fine) {
-  .tk-sw button[aria-pressed='false']:hover {
-    background: rgb(15 15 13 / 0.12);
-  }
-}
-.tk-up {
-  margin: 18px 0 0;
-}
-.tk-up a {
-  color: inherit;
-  font-weight: 800;
-  font-size: 15px;
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
-}
-.tk-up a:hover {
-  background: var(--ink);
-  color: var(--paper);
-  text-decoration: none;
-}
-.tk--duo {
-  background: linear-gradient(135deg, var(--orange) 0 50%, var(--lav) 50% 100%);
-}
-.tk--duo .tk-go:hover {
-  background: var(--paper);
-  color: var(--ink);
-}
-.tk[data-offre='all'] .tk-main {
-  border-top: 8px solid;
-  border-image: linear-gradient(90deg, var(--orange) 0 33.3%, var(--lav) 33.3% 66.6%, #5fd3b3 66.6%) 1;
-}
 .seg--3 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -3510,170 +3192,418 @@ html[lang='ar'] .tk-sw button {
     font-size: 16px;
   }
 }
-@media (min-width: 1000px) {
-  .tix-row {
-    align-items: stretch;
-  }
-  .tix-row .tk--pack {
-    margin-top: -26px;
-  }
-}
 @media (prefers-reduced-motion: reduce) {
   .duo--dev .dvb {
     min-height: 0;
   }
 }
 
-/* Packs (2e version) : chaque pack montre ses formations en blocs de couleur reliés par « + ».
-   Pack complet : trois blocs (orange, lavande, menthe) ; pack Créative + IA : deux grands blocs côte à côte. */
-.tk-sw button {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-}
-.tk-sw button i {
-  width: 11px;
-  height: 11px;
-  border-radius: 2px;
-  box-shadow: 0 0 0 1.5px var(--ink);
-  background: var(--orange);
-}
-.tk-sw button[data-t='ia'] i {
-  background: var(--lav);
-}
-.tk-sw button[data-t='dev'] i {
-  background: #5fd3b3;
-}
-.tk-parts {
+/* --------------------------------------------------------------------------
+   PLAN 09 · tarifs : trois offres (novembre 2026, 3e version)
+   Chaque carte commence par son « affiche » : une bande de couleur par formation incluse (1, 2 ou 3 bandes, toujours
+   la même hauteur), puis le prix en grand, le prix par leçon et le contenu. Le pack complet, au centre, est en encre.
+   -------------------------------------------------------------------------- */
+.of-row {
+  --mint: #5fd3b3;
+  --poster: 196px;
   display: grid;
-  gap: 16px;
-  margin: 16px 0 0;
-  padding: 0;
-  list-style: none;
+  gap: 30px;
+  margin-top: 10px;
 }
-.tk-parts--3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+@media (min-width: 1000px) {
+  .of-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.06fr) minmax(0, 1fr);
+    align-items: stretch;
+    gap: clamp(20px, 2.2vw, 34px);
+    padding-top: 26px;
+  }
+  .of--all {
+    margin-top: -26px;
+  }
 }
-.tk-parts--2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 14px;
-}
-.tk-parts li {
+.of {
   position: relative;
-  display: grid;
-  align-content: end;
-  gap: 4px;
+  display: flex;
+  flex-direction: column;
   min-width: 0;
-  padding: 10px 10px 9px;
-  border-radius: 4px;
+  border: 2.5px solid var(--ink);
+  border-radius: 16px;
+  background: #fbf9f3;
+  color: var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
+  transition:
+    transform calc(var(--img) * 3) steps(3),
+    box-shadow calc(var(--img) * 3) steps(3);
+}
+.of--all {
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 8px 8px 0 var(--lime);
+}
+@media (hover: hover) and (pointer: fine) {
+  .of:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 11px 11px 0 var(--ink);
+  }
+  .of--all:hover {
+    box-shadow: 11px 11px 0 var(--lime);
+  }
+}
+
+/* L'affiche : 1, 2 ou 3 bandes de couleur */
+.of-poster {
+  display: grid;
+  height: var(--poster);
+  overflow: hidden;
+  border-radius: 13px 13px 0 0;
+  border-bottom: 2.5px solid var(--ink);
+}
+.of--all .of-poster {
+  border-bottom-color: var(--paper);
+}
+.of-poster--2 {
+  grid-template-rows: 1fr 1fr;
+}
+.of-poster--3 {
+  grid-template-rows: 1fr 1fr 1fr;
+}
+.of-band {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+  margin: 0;
+  padding: 0 22px;
   background: var(--orange);
   color: var(--ink);
 }
-.tk-parts li[data-t='ia'] {
+.of-band[data-t='ia'] {
   background: var(--lav);
 }
-.tk-parts li[data-t='dev'] {
-  background: #5fd3b3;
+.of-band[data-t='dev'] {
+  background: var(--mint);
 }
-.tk-parts b {
+.of-band + .of-band {
+  border-top: 2.5px solid var(--ink);
+}
+.of-band b {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-family: var(--f-cond);
   font-weight: 900;
-  font-size: 21px;
-  line-height: 0.95;
+  font-size: clamp(27px, 2.3vw, 34px);
+  line-height: 1;
   text-transform: uppercase;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
 }
-.tk-parts span {
-  font-size: 12.5px;
+.of-poster--2 .of-band b {
+  font-size: clamp(36px, 3.3vw, 50px);
+}
+.of-band > span {
+  font-family: var(--f-dot);
   font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
-/* le « + » entre deux blocs */
-.tk-parts li + li::before {
+/* le « + » à la jonction de deux bandes */
+.of-band + .of-band::before {
   content: '+';
   position: absolute;
   z-index: 1;
-  top: 50%;
-  inset-inline-start: -13px;
+  top: 0;
+  left: 50%;
   display: grid;
   place-items: center;
-  width: 22px;
-  height: 22px;
-  margin-top: -11px;
-  border-radius: 50%;
-  background: var(--lime);
-  color: var(--ink);
-  font-family: var(--f-cond);
-  font-weight: 900;
-  font-size: 20px;
-  line-height: 1;
-}
-.tk-parts--2 li {
-  min-height: 112px;
-  padding: 14px 14px 12px;
-}
-.tk-parts--2 b {
-  font-size: clamp(34px, 3.4vw, 48px);
-}
-.tk-parts--2 li + li::before {
-  inset-inline-start: -21px;
   width: 32px;
   height: 32px;
-  margin-top: -16px;
+  border-radius: 50%;
   background: var(--ink);
   color: var(--paper);
-  font-size: 28px;
+  font-family: var(--f-cond);
+  font-weight: 900;
+  font-size: 26px;
+  line-height: 1;
+  transform: translate(-50%, -50%);
 }
-html[lang='ar'] .tk-parts b {
-  font-size: 17px;
-  line-height: 1.2;
+.of--all .of-band + .of-band::before {
+  background: var(--lime);
+  color: var(--ink);
+  box-shadow: 0 0 0 2.5px var(--ink);
 }
-html[lang='ar'] .tk-parts--2 b {
-  font-size: clamp(24px, 2.4vw, 32px);
+
+/* Une formation au choix : une seule bande, sa couleur suit le sélecteur */
+.of-band--solo {
+  container-type: inline-size;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 16px 22px 18px;
 }
-.tk--duo {
-  background: #fbf9f3;
+.of--solo[data-offre='ia'] .of-band--solo {
+  background: var(--lav);
+}
+.of--solo[data-offre='dev'] .of-band--solo {
+  background: var(--mint);
+}
+.of-n {
+  margin: 0;
+  font-family: var(--f-dot);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.of-big {
+  margin: 0;
+  font-family: var(--f-cond);
+  font-weight: 900;
+  font-size: clamp(40px, 15cqi, 70px);
+  line-height: 0.85;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.of-sw {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.of-sw button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(15 15 13 / 0.06);
   box-shadow: inset 0 0 0 2px var(--ink);
+  color: var(--ink);
+  font-family: var(--f-cond);
+  font-weight: 800;
+  font-size: 17px;
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
 }
-.tk--duo .tk-t {
-  margin-top: 16px;
+.of-sw button[aria-pressed='true'] {
+  background: var(--ink);
+  color: var(--paper);
 }
-.tk--duo .tk-name {
+.of-sw button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+.of-sw i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 0 1.5px var(--ink);
+}
+.of-sw button[data-t='ia'] i {
+  background: var(--lav);
+}
+.of-sw button[data-t='dev'] i {
+  background: var(--mint);
+}
+.of-sw button[aria-pressed='true'] i {
+  box-shadow: 0 0 0 1.5px var(--paper);
+}
+
+/* Le corps : nom, prix, prix par leçon, contenu */
+.of-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 22px 24px 24px;
+}
+.of-k {
+  margin: 0;
+  font-family: var(--f-dot);
+  font-weight: 800;
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.of-t {
+  margin: 8px 0 0;
   font-family: var(--f-cond);
   font-weight: 900;
   font-size: clamp(30px, 2.6vw, 38px);
   line-height: 0.95;
+  text-transform: uppercase;
 }
-.tk--duo .tk-go:hover {
+.of-p {
+  margin: 10px 0 0;
+  font-size: 15.5px;
+  line-height: 1.45;
+}
+.of-price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 20px 0 0;
+  padding-top: 16px;
+  border-top: 2px solid currentColor;
+}
+.of-price b {
+  font-family: var(--f-cond);
+  font-weight: 900;
+  font-size: clamp(62px, 5.6vw, 82px);
+  line-height: 0.85;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.of-price span {
+  font-family: var(--f-cond);
+  font-weight: 800;
+  font-size: 26px;
+  text-transform: uppercase;
+}
+.of--all .of-price b {
+  color: var(--lime);
+}
+.of-old {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  margin: 10px 0 0;
+  font-size: 14.5px;
+}
+.of-old s {
+  opacity: 0.65;
+}
+.of-old [hidden] {
+  display: none;
+}
+.of-save {
+  padding: 3px 9px 2px;
+  background: var(--lime);
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 13.5px;
+}
+.of-per {
+  margin: 8px 0 0;
+  font-family: var(--f-dot);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  opacity: 0.8;
+}
+.of-inc {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0 24px;
+  padding: 18px 0 0;
+  list-style: none;
+  border-top: 1.5px dashed currentColor;
+  font-size: 15px;
+  line-height: 1.35;
+}
+.of-inc li {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 10px;
+}
+.of-inc li::before {
+  content: '';
+  width: 13px;
+  height: 7px;
+  margin-top: 5px;
+  border-left: 2.5px solid currentColor;
+  border-bottom: 2.5px solid currentColor;
+  transform: rotate(-45deg);
+}
+.of--all .of-inc li::before {
+  border-color: var(--lime);
+}
+.of-up {
+  margin: -6px 0 18px;
+}
+.of-up[hidden] {
+  display: none;
+}
+.of-up a {
+  color: inherit;
+  font-weight: 800;
+  font-size: 14.5px;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.of-up a:hover {
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+}
+.of-go {
+  width: 100%;
+  margin-top: auto;
+}
+.of--duo .of-go:hover,
+.of--solo .of-go:hover {
   background: var(--lime);
   color: var(--ink);
 }
-/* Les noms des formations remplissent leur bloc sans se couper (unités de conteneur) */
-.tk-parts li {
-  container-type: inline-size;
-}
-.tk-parts b {
-  font-size: clamp(14px, 18cqi, 24px);
+.of-tag {
+  position: absolute;
+  z-index: 2;
+  top: -17px;
+  left: 50%;
+  margin: 0;
+  padding: 7px 16px 6px;
+  border: 2.5px solid var(--ink);
+  border-radius: 999px;
+  background: var(--lime);
+  color: var(--ink);
+  font-family: var(--f-cond);
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   white-space: nowrap;
-  overflow-wrap: normal;
+  transform: translateX(-50%);
 }
-.tk-parts--2 b {
-  font-size: clamp(22px, 27cqi, 46px);
+
+/* Arabe : Doto n'a pas de lettres arabes ; les titres condensés ont besoin d'interligne */
+html[lang='ar'] :is(.of-n, .of-k, .of-per, .of-band > span) {
+  font-family: var(--f-text);
+  letter-spacing: 0;
 }
-.tk-parts--3 li + li {
-  padding-inline-start: 16px;
+html[lang='ar'] :is(.of-t, .of-band b, .of-tag) {
+  line-height: 1.2;
 }
-.tk-parts--2 li + li {
-  padding-inline-start: 22px;
+html[lang='ar'] .of-big {
+  font-size: clamp(30px, 11cqi, 56px);
+  line-height: 1.15;
 }
-html[lang='ar'] .tk-parts b {
-  font-size: clamp(13px, 13cqi, 18px);
-  white-space: normal;
+html[lang='ar'] .of-band b {
+  font-size: clamp(19px, 1.6vw, 24px);
 }
-html[lang='ar'] .tk-parts--2 b {
-  font-size: clamp(20px, 20cqi, 32px);
+html[lang='ar'] .of-poster--2 .of-band b {
+  font-size: clamp(22px, 2vw, 30px);
 }
-html[lang='ar'] .tk--duo .tk-name {
-  font-size: clamp(22px, 2vw, 28px);
-  line-height: 1.3;
+@media (max-width: 420px) {
+  .of-row {
+    --poster: 180px;
+  }
+  .of-band,
+  .of-body {
+    padding-inline: 18px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .of {
+    transition: none;
+  }
 }

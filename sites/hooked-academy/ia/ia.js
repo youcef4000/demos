@@ -123,6 +123,8 @@ import { mountSiteBuild } from '../assets/js/site-build.js';
     $$('[data-price]').forEach((el) => (el.textContent = fmt(P[el.dataset.price])));
     $$('[data-price-s]').forEach((el) => (el.textContent = da(P[el.dataset.priceS])));
     $$('.js-n').forEach((el) => (el.textContent = nl(N[el.dataset.n])));
+    // Prix par leçon : le pack complet revient le moins cher à la leçon
+    $$('.js-per').forEach((el) => (el.textContent = t('ia.of.per', { prix: fmt(Math.round(P[el.dataset.offre] / N[el.dataset.n])) })));
     $('#all-lbl').textContent = t('ia.all.open', { n: N['ia-lessons'] });
     $$('#lsw [data-lang]').forEach((b) => {
       b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
@@ -240,6 +242,7 @@ import { mountSiteBuild } from '../assets/js/site-build.js';
   const UP = { ia: ['both', P.both - P.ia], creative: ['both', P.both - P.creative], dev: ['all', P.all - P.dev] };
   const showSolo = (id, anim) => {
     soloCard.dataset.t = id;
+    $('.js-solo-big', soloCard).textContent = t({ ia: 'ia.tar.s.ia', creative: 'ia.tar.s.crea', dev: 'ia.tar.s.dev' }[id]);
     $$('.csw button', soloCard).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.t === id)));
     $$('.cvar', soloCard).forEach((v) => (v.hidden = v.dataset.t !== id));
     $('.js-solo-go', soloCard).dataset.pick = id;
@@ -249,7 +252,15 @@ import { mountSiteBuild } from '../assets/js/site-build.js';
     up.textContent = t(`ia.tar.up.${id}`, { prix: fmt(diff) });
     frTypo(up);
     up.parentElement.hidden = !(diff > 0);
-    if (anim && hasGsap && !reduce) gsap.from($('.cvar:not([hidden])', soloCard).children, { y: 14, autoAlpha: 0, duration: 0.45, stagger: 0.04, ease: 'power3.out' });
+    // Des clics rapides ne doivent jamais laisser un texte à moitié transparent : on arrête l'animation précédente,
+    // puis on anime vers un état final explicite (fromTo), et on nettoie les styles à la fin.
+    if (hasGsap) {
+      const kids = $$('.cvar > *', soloCard);
+      gsap.killTweensOf(kids);
+      gsap.set(kids, { clearProps: 'transform,opacity,visibility' });
+    }
+    if (anim && hasGsap && !reduce)
+      gsap.fromTo($('.cvar:not([hidden])', soloCard).children, { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.45, stagger: 0.04, ease: 'power3.out', clearProps: 'transform,opacity,visibility' });
   };
   $$('.csw button', soloCard).forEach((b) => b.addEventListener('click', () => showSolo(b.dataset.t, true)));
   showSolo('ia');

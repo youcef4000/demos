@@ -12,7 +12,7 @@ voir le tableau. Chiffres : chiffres latins (0-9) partout, y compris en arabe (u
 | Hooked Academy | Hooked Academy | Hooked Academy (jamais traduit) |
 | Hooked Lab | Hooked Lab | Hooked Lab |
 | une créative / la créative | an ad creative / the creative | الكرياتيف (الإعلان) |
-| Formation Créative | Creative Course | التكوين الإبداعي |
+| Formation Créative | Creative Course | تكوين الكرياتيف |
 | Formation IA | AI Course | تكوين الذكاء الاصطناعي |
 | module (M01, IA01) | module (M01, IA01) | وحدة (M01، IA01) |
 | leçon | lesson | درس |
@@ -50,3 +50,7 @@ voir le tableau. Chiffres : chiffres latins (0-9) partout, y compris en arabe (u
 | AIDA, PAS, CAP, SONCAS | AIDA, PAS, CAP, SONCAS | AIDA، PAS، CAP، SONCAS (acronymes gardés) |
 | Leçon suivante | Next lesson | الدرس التالي |
 | Verrouillé (démo) | Locked (demo) | مقفل (تجريبي) |
+
+
+> Arabe : « Créative » s’écrit toujours **كرياتيف** (Formation Créative = تكوين الكرياتيف, pack Créative + IA = باقة الكرياتيف +
+> الذكاء الاصطناعي) ; jamais إبداع ni إبداعي. La liste des corrections est dans `sites/hooked-academy/data/termes-ar.js`.

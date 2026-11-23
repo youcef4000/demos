@@ -363,7 +363,7 @@ export const LEVELS = [
   { xp: 0, name: 'Scrolleur', ar: 'متصفح' },
   { xp: 400, name: 'Accrocheur', ar: 'صاحب الهوك' },
   { xp: 1200, name: 'Créateur', ar: 'مبدع' },
-  { xp: 2600, name: 'Directeur créatif', ar: 'مدير إبداعي' },
+  { xp: 2600, name: 'Directeur créatif', ar: 'مدير كرياتيف' },
   { xp: 4600, name: 'Hooked Pro', ar: 'محترف' },
 ];
 export function level(xp = 0) {

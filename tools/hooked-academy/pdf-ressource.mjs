@@ -16,7 +16,7 @@ const SITE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../s
 const T = {
   fr: { creative: 'Formation Créative', ia: 'Formation IA', dev: 'Formation Sites & Apps', res: 'Ressource étudiant', prompt: 'Prompt à copier', page: 'Page' },
   en: { creative: 'Creative Course', ia: 'AI Course', dev: 'Sites & Apps Course', res: 'Student resource', prompt: 'Prompt to copy', page: 'Page' },
-  ar: { creative: 'التكوين الإبداعي', ia: 'تكوين الذكاء الاصطناعي', dev: 'تكوين المواقع والتطبيقات', res: 'مورد للطلبة', prompt: 'برومبت للنسخ', page: 'صفحة' },
+  ar: { creative: 'تكوين الكرياتيف', ia: 'تكوين الذكاء الاصطناعي', dev: 'تكوين المواقع والتطبيقات', res: 'مورد للطلبة', prompt: 'برومبت للنسخ', page: 'صفحة' },
 };
 const ACCENT = { creative: '#e0be55', ia: '#c8b6ff', dev: '#5fd3b3' };
 

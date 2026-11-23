@@ -21,14 +21,14 @@ import { LAB, masquer } from './hooked-lab.js';
  * Chaque formation a son identité (couleur, icône), sa progression et sa fin.
  */
 export const TRACKS = [
-  { id: 'creative', code: 'M', title: 'Formation Créative', ar: 'التكوين الإبداعي', color: '#e0be55', icon: 'film', pitch: 'Comprendre ce qui fait vendre une publicité, et la produire avec ton téléphone, CapCut et Canva.' },
+  { id: 'creative', code: 'M', title: 'Formation Créative', ar: 'تكوين الكرياتيف', color: '#e0be55', icon: 'film', pitch: 'Comprendre ce qui fait vendre une publicité, et la produire avec ton téléphone, CapCut et Canva.' },
   { id: 'ia', code: 'IA', title: 'Formation IA', ar: 'تكوين الذكاء الاصطناعي', color: '#c8b6ff', icon: 'sparkles', pitch: 'Prompting, images et vidéos IA, voix, UGC, cinématique — puis analyser, vendre et signer tes clients.' },
   { id: 'dev', code: 'D', title: 'Formation Sites & Apps', ar: 'تكوين المواقع والتطبيقات', color: '#5fd3b3', icon: 'layout', pitch: 'Créer, sécuriser, publier et vendre des sites et des applications avec l’IA (vibe coding), de zéro au premier client.' },
 ];
 
 export const PARTS = [
   { id: 'p1', n: 1, track: 'creative', title: 'Les fondamentaux', ar: 'الأساسيات', pitch: 'Comprendre ce qui fait vendre une créative, et la produire sans IA.' },
-  { id: 'p2', n: 2, track: 'ia', title: 'L’IA créative', ar: 'الذكاء الاصطناعي الإبداعي', pitch: 'Prompting, images, vidéos, voix, UGC et cinématique.' },
+  { id: 'p2', n: 2, track: 'ia', title: 'L’IA créative', ar: 'الكرياتيف بالذكاء الاصطناعي', pitch: 'Prompting, images, vidéos, voix, UGC et cinématique.' },
   { id: 'p3', n: 3, track: 'ia', title: 'Vendre son savoir-faire', ar: 'بيع خدماتك', pitch: 'Analyser, itérer et signer ses premiers clients.' },
   { id: 'p4', n: 1, track: 'dev', title: 'Les bases du vibe coding', ar: 'أساسيات البرمجة بالذكاء الاصطناعي', pitch: 'Comprendre le web, diriger l’IA, connaître ses outils, publier son premier site.' },
   { id: 'p5', n: 2, track: 'dev', title: 'Construire, sécuriser, stabiliser', ar: 'البناء والحماية والاستقرار', pitch: 'Mettre en ligne, backend et Supabase, cybersécurité, vraie application, tests, motion design.' },
@@ -53,7 +53,7 @@ const MODULES_1 = [
         id: 'm0-l1',
         n: 0,
         title: 'Bienvenue dans la Formation Créative',
-        ar: 'مرحبا بيك في التكوين الإبداعي',
+        ar: 'مرحبا بيك في تكوين الكرياتيف',
         scenes: [
           { type: 'title', kicker: 'Module 00 · Bienvenue', sub: 'Ce qui t’attend, et ce qu’il faut faire pour réussir', say: 'مرحبا بيك في الفورماسيون الكرياتيف تاع Hooked Academy! قبل ما نبداو، حبيت نقولك واش راك رايح تلقى هنا، وواش لازم عليك دير باش تنجح.' },
           { type: 'big', kicker: 'Ton objectif', text: 'Faire des pubs qui *arrêtent le scroll*… et qui *vendent*.', say: 'الهدف تاعنا واضح: تولّي تدير إعلانات توقّف السكرول، وفوق كلش… تبيع.' },
@@ -2103,7 +2103,7 @@ const MODULES_1 = [
         id: 'm6-l4',
         n: 4,
         title: 'L’écosystème créatif parfait',
-        ar: 'المنظومة الإبداعية المثالية',
+        ar: 'منظومة الكرياتيف المثالية',
         scenes: [
           { type: 'title', kicker: 'Module 05 · Leçon 04', sub: 'Tout ce que tu as appris, en une équation', say: 'On assemble tout ce que tu as appris : l’écosystème créatif parfait.' },
           {
