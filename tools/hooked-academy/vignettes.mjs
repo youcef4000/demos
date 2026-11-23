@@ -34,8 +34,9 @@ const server = createServer(async (req, res) => {
     if (p.endsWith('/')) p += 'index.html';
     const f = path.join(ROOT, p);
     if (!f.startsWith(ROOT)) throw new Error('hors du site');
+    const body = await readFile(f); // lu avant l'en-tête : un fichier absent (voix pas encore enregistrée) donne un 404
     res.writeHead(200, { 'content-type': TYPES[path.extname(f)] || 'application/octet-stream' });
-    res.end(await readFile(f));
+    res.end(body);
   } catch {
     res.writeHead(404);
     res.end();

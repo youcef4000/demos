@@ -286,7 +286,8 @@ export default {
       "key": [
         "The hook has one goal: stop people mid-scroll so they watch your video.",
         "If nobody stops, nobody sees what you sell: it all starts with the hook.",
-        "The hook takes up the first 3 seconds of the creative."
+        "The hook takes up the first 3 seconds of the creative.",
+        "To make people stay, the hook gives two things: a clear topic (they know right away what the video is about) and targeted curiosity (they feel it is for them and want to see what comes next)."
       ],
       "quiz": [
         {
@@ -315,6 +316,15 @@ export default {
             "Only after 10 seconds"
           ],
           "why": "Many people watch with the sound off: on-screen text and visuals must be enough."
+        },
+        {
+          "q": "To keep watching after the hook, the viewer must…",
+          "a": [
+            "See the brand logo",
+            "Understand the topic right away and feel it is for them",
+            "Hear trending music"
+          ],
+          "why": "A clear topic and curiosity aimed at them: without both, they cannot decide to stay."
         }
       ],
       "todo": [
@@ -335,7 +345,7 @@ export default {
       "title": "Hook examples: positive and negative",
       "scenes": [
         {
-          "kicker": "Module 02 · Lesson 03",
+          "kicker": "Module 02 · Lesson 05",
           "sub": "Hooks that work right now"
         },
         {
@@ -448,7 +458,7 @@ export default {
       "res": [
         {
           "title": "Prompt — 10 hooks, 3 families",
-          "text": "Act as an ad copywriter. Product: [product]. Target audience: [audience]. Main problem: [problem]. Write 10 hooks of under 10 words each: 4 positive (the desired result), 4 negative (a problem or a mistake), and 2 with a [number] placeholder that I’ll fill in with a real figure. Rank them from strongest to weakest."
+          "text": "Act as an ad copywriter. Product: [product]. Target audience: [audience]. Main problem: [problem]. Write 10 hooks of under 10 words each: 4 positive (the desired result), 4 negative (a problem or a mistake), and 2 with a [number] placeholder that I’ll fill in with a real figure. Each hook states the topic in the first words, speaks to the viewer as “you” and is understood on first read. Rank them from strongest to weakest."
         }
       ],
       "todo": [
@@ -464,7 +474,7 @@ export default {
       "title": "The statistical hook",
       "scenes": [
         {
-          "kicker": "Module 02 · Lesson 04",
+          "kicker": "Module 02 · Lesson 06",
           "sub": "A striking number"
         },
         {
@@ -547,7 +557,7 @@ export default {
       "title": "The Body: present the product",
       "scenes": [
         {
-          "kicker": "Module 02 · Lesson 05",
+          "kicker": "Module 02 · Lesson 07",
           "sub": "After the hook, the body"
         },
         {
@@ -697,7 +707,7 @@ export default {
       "title": "The CTA: a clear CTA = a sale",
       "scenes": [
         {
-          "kicker": "Module 02 · Lesson 06",
+          "kicker": "Module 02 · Lesson 08",
           "sub": "CTA: the call to action"
         },
         {
@@ -1270,6 +1280,288 @@ export default {
         {
           "title": "Swipe file: hooks and formats (template)",
           "text": "SWIPE FILE · Ad no. [  ] · saved on [date]\nLink: [ad link] · Platform: [Facebook / Instagram / TikTok]\nPage / brand: [name] · Country: [  ] · Niche: [  ]\nRunning since: [start date] · Other versions spotted: [yes / no, how many]\n\nHOOK\nWhat you see (1st frame): [  ]\nWhat you read (on-screen text): [  ]\nWhat you hear (first word, sound): [  ]\nFamily: [pointed question / honest before-after / number or real proof / striking demo / personal story / visual stopper / call-out]\n\nFORMAT: [UGC / demo / before-after / talking to camera / carousel / packshot / unboxing…] · Length: [  ] s\n\nWhat I’m reusing (the mechanics, never the text, images or video): [  ]\nMy adapted hook: [  ]\n\nTEST: same body, same CTA, same budget, published at the same time\nHook A: [  ]\nHook B: [  ]\nHook C: [  ]\n(up to 5)\nResult: [orders, cost per order] → winner: [  ]"
+        }
+      ]
+    },
+    "m2-l11": {
+      "title": "The 4 mistakes that make a hook fail",
+      "scenes": [
+        {
+          "sub": "A clear topic, targeted curiosity"
+        },
+        {
+          "title": "A hook that holds = *2 things*",
+          "parts": [
+            {
+              "t": "A clear topic",
+              "sub": "You know what the video is about"
+            },
+            {
+              "t": "Targeted curiosity",
+              "sub": "It’s for me, I want what comes next"
+            }
+          ],
+          "result": {
+            "t": "People stay",
+            "sub": "and watch your product"
+          }
+        },
+        {
+          "title": "The *4 mistakes*",
+          "items": [
+            {
+              "label": "Delay",
+              "sub": "The topic comes too late"
+            },
+            {
+              "label": "Confusion",
+              "sub": "The sentence is hard to follow"
+            },
+            {
+              "label": "Off-target",
+              "sub": "The viewer doesn’t feel it’s for them"
+            },
+            {
+              "label": "Boredom",
+              "sub": "Nothing makes them want more"
+            }
+          ]
+        },
+        {
+          "title": "Mistake 1: *delay*",
+          "left": {
+            "title": "Too late",
+            "items": [
+              "“Hey everyone, today I’m going to show you something incredible…”",
+              "Something? What? Scroll"
+            ]
+          },
+          "right": {
+            "title": "Right away",
+            "items": [
+              "“If your hair frizzes as soon as it’s humid, here are 3 steps.”",
+              "The topic from the 1st second"
+            ]
+          }
+        },
+        {
+          "label": "to say *what* your video is about",
+          "sub": "Every vague second loses viewers"
+        },
+        {
+          "title": "Mistake 2: *confusion*",
+          "items": [
+            "Fewer words, *simple* words",
+            "An *active* sentence: “This serum nourishes your hair”",
+            "The test: could it be *understood differently*?",
+            {
+              "t": "A long sentence full of detours"
+            }
+          ]
+        },
+        {
+          "title": "Mistake 3: *off-target*",
+          "left": {
+            "title": "Off-target",
+            "items": [
+              "“My feet have always swollen”",
+              "“3 summer fragrance trends”"
+            ]
+          },
+          "right": {
+            "title": "On target",
+            "items": [
+              "“If your feet swell after a day on them…”",
+              "“Your perfume fades before noon? Try this.”"
+            ]
+          }
+        },
+        {
+          "kicker": "Mistake 4 · Boredom",
+          "text": "Create *contrast*: what they believe, *versus* what you show.",
+          "sub": "In detail in the next lesson"
+        },
+        {}
+      ],
+      "key": [
+        "A hook holds when it gives two things right away: a clear topic (you know what the video is about) and targeted curiosity (you feel it is for you and want what comes next).",
+        "Delay: the topic arrives too late. Cut the intro lines and state the topic in the first 1 to 2 seconds. Confusion: fewer words, simple words, an active sentence, then the test “could it be understood differently?”.",
+        "Off-target: say “you” instead of “I” and start from a problem the audience already has, not a “nice to know” fact. Boredom: create contrast. A vague hook can work thanks to a face or on-screen text, but far less often."
+      ],
+      "quiz": [
+        {
+          "q": "“Hi, I’m going to show you something crazy!”: which mistake?",
+          "a": [
+            "Delay: you don’t know what the video is about",
+            "Confusion",
+            "None, it’s a good hook"
+          ],
+          "why": "It teases, but with no topic the viewer can’t decide whether it’s for them, so they leave."
+        },
+        {
+          "q": "Which one is most on target?",
+          "a": [
+            "“I’ve always had dry skin”",
+            "“If your skin feels tight after a shower, try this”",
+            "“This year’s skincare trends”"
+          ],
+          "why": "It says “you” and starts from a problem she already has: she feels it’s for her."
+        },
+        {
+          "q": "To check a hook’s clarity, you ask yourself…",
+          "a": [
+            "Is it long enough?",
+            "Could it be understood in two ways?",
+            "Does it include the brand name?"
+          ],
+          "why": "If there is a second reading, rewrite it until only one is left."
+        }
+      ],
+      "todo": [
+        "Take your last 3 hooks and note, for each, the second when the topic becomes clear",
+        "Cut everything before it: the topic must arrive in the first 2 seconds",
+        "Rewrite each hook with simple words, as an active sentence, and read it to someone: did they get it first time?",
+        "Replace “I” with “you” and start from a problem your audience already has",
+        "Run your hooks through the 4-mistake checklist and keep the ones that pass all 4 tests"
+      ],
+      "res": [
+        {
+          "title": "Checklist — the 4 hook tests",
+          "text": "My hook: “[  ]”\n\n1. DELAY — Is the topic clear within the first 2 seconds?\n☐ yes  ☐ no → cut what comes before the topic.\n\n2. CONFUSION — Does someone get it first time? Could it be understood differently?\n☐ clear  ☐ rewrite → fewer words, simple words, active sentence.\n\n3. OFF-TARGET — Do I say “you”? Do I start from a problem my audience already has?\n☐ yes  ☐ no → replace “I” with “you”, start from the problem.\n\n4. BOREDOM — Is there a contrast that makes people want what comes next?\n☐ yes  ☐ no → add a true contrast (next lesson).\n\nDoes the hook pass all 4 tests? It’s ready to film."
+        },
+        {
+          "title": "Prompt — make my hook clearer",
+          "text": "Here is the hook of a short video about [product or topic], for [audience]: “[my hook]”.\nRewrite it to make it clearer without changing the meaning: simple words a 12-year-old understands, an active sentence, the topic in the first words, 12 words maximum, speaking to the viewer as “you”.\nGive 5 versions. For each, say whether it could be understood another way; if so, fix it. Do not add any promise I did not write. Write in [language]."
+        }
+      ]
+    },
+    "m2-l12": {
+      "title": "Contrast: make your hook irresistible",
+      "scenes": [
+        {
+          "sub": "Open a curiosity loop"
+        },
+        {
+          "title": "The curiosity *loop*",
+          "nodes": [
+            {
+              "label": "I see the hook"
+            },
+            {
+              "label": "I wonder",
+              "sub": "“How? Really?”"
+            },
+            {
+              "label": "I stay",
+              "sub": "To get the answer"
+            },
+            {
+              "label": "A new question",
+              "sub": "And I stay again"
+            }
+          ]
+        },
+        {
+          "title": "Contrast = *A versus B*",
+          "parts": [
+            {
+              "t": "A",
+              "sub": "What your audience already does or believes"
+            },
+            {
+              "t": "B",
+              "sub": "Your alternative, true and visible"
+            }
+          ],
+          "result": {
+            "t": "Curiosity",
+            "sub": "faster, simpler, cheaper?"
+          }
+        },
+        {
+          "title": "Two ways to *say it*",
+          "items": [
+            {
+              "label": "Stated contrast",
+              "sub": "“Still chopping onions with a knife? This chopper does it in seconds.”"
+            },
+            {
+              "label": "Implied contrast",
+              "sub": "“This chopper dices an onion in seconds.” Everyone thinks of the knife."
+            }
+          ]
+        },
+        {
+          "title": "A hook in *2 or 3 lines*",
+          "items": [
+            {
+              "label": "The topic",
+              "sub": "Clear, targeted, with “you”"
+            },
+            {
+              "label": "The contrast",
+              "sub": "A versus B, or B alone"
+            },
+            {
+              "label": "The proof",
+              "sub": "The video shows B, for real"
+            }
+          ]
+        },
+        {
+          "text": "The contrast must be *true*: B is shown on screen."
+        },
+        {}
+      ],
+      "key": [
+        "Curiosity is a loop: the hook raises a question, the video partly answers it and opens another. The surest way to open the first one: contrast.",
+        "Contrast = A versus B. A: what your audience already does or believes. B: your alternative, faster, simpler or cheaper. Stated contrast: you name A and B. Implied contrast: you only say B, A is obvious to everyone.",
+        "A hook often takes 2 or 3 lines: the topic (clear, with “you”), then the contrast. B must be true and visible in the video: no health promises, no invented results."
+      ],
+      "quiz": [
+        {
+          "q": "“This chopper dices an onion in seconds.” Which contrast?",
+          "a": [
+            "Stated",
+            "Implied",
+            "None"
+          ],
+          "why": "The knife isn’t named, but everyone thinks of it: that’s an implied contrast."
+        },
+        {
+          "q": "In a two-line hook, the first line gives…",
+          "a": [
+            "The contrast",
+            "The topic, clear and targeted",
+            "The price"
+          ],
+          "why": "First you know what it’s about and that it’s for you; then the contrast makes you want more."
+        },
+        {
+          "q": "Your hook promises “3 times faster”. You need to…",
+          "a": [
+            "Say it confidently, that’s enough",
+            "Show it in the video, for real",
+            "Add a second number"
+          ],
+          "why": "The hook promises, the video keeps the promise: B must be visible on screen."
+        }
+      ],
+      "todo": [
+        "Write what your audience does or believes today about their problem: that’s your A",
+        "Write how your product does better, faster, simpler or cheaper, with a true fact: that’s your B",
+        "Write 2 hooks with stated contrast (A versus B) and 2 with implied contrast (B alone)",
+        "Put your best hook together in 2 lines: the topic, then the contrast",
+        "Film B in a single shot: if you can’t show it, change the contrast"
+      ],
+      "res": [
+        {
+          "title": "Prompt — 8 contrast hooks",
+          "text": "Act as an honest ad copywriter. Product: [product]. Audience: [audience]. Their problem: [problem]. What they do or believe today (A): [their usual solution]. What my product does better, with a true fact (B): [verifiable fact].\nWrite 8 two-line hooks: line 1, the topic, clear, speaking as “you”; line 2, the contrast. 4 with stated contrast (A versus B), 4 with implied contrast (B alone).\nFor each hook, give the shot that proves B on screen. Do not invent any figure or result, no health promises. Write in [language]."
+        },
+        {
+          "title": "Template — my A / B contrast",
+          "text": "My audience: [  ]\nTheir problem: [  ]\n\nA — What they do or believe today: [  ]\nB — What my product does better (faster / simpler / cheaper): [  ]\nProof of B, in one shot: [  ]\n\nStated contrast (A versus B):\nLine 1 (the topic): [  ]\nLine 2 (the contrast): [  ]\n\nImplied contrast (B alone):\nLine 1 (the topic): [  ]\nLine 2 (the contrast): [  ]\n\nDoes the hook pass the 4 tests (delay, confusion, off-target, boredom)? ☐"
         }
       ]
     }

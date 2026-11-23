@@ -655,11 +655,13 @@ const MODULES_1 = [
           'Le hook a un seul objectif : arrêter la personne qui scrolle, pour qu’elle regarde ta vidéo.',
           'Si personne ne s’arrête, personne ne voit ce que tu vends : tout commence par le hook.',
           'Le hook occupe les 3 premières secondes de la créative.',
+          'Pour qu’on reste, le hook donne deux choses : un sujet clair (on sait tout de suite de quoi parle la vidéo) et une curiosité ciblée (on sent que c’est pour soi et on veut la suite).',
         ],
         quiz: [
           { q: 'Quel est l’objectif du hook ?', a: ['Présenter toutes les qualités du produit', 'Arrêter le scroll', 'Donner le prix'], ok: 1, why: 'Un seul but : que la personne s’arrête et regarde.' },
           { q: 'Le hook occupe…', a: ['Les 3 premières secondes', 'Le milieu de la vidéo', 'Les dernières secondes'], ok: 0, why: 'C’est dans les toutes premières secondes que l’on décide de rester ou de scroller.' },
           { q: 'Un hook doit se comprendre…', a: ['Uniquement avec le son', 'Même sans le son', 'Seulement après 10 secondes'], ok: 1, why: 'Beaucoup regardent sans le son : texte à l’écran et image doivent suffire.' },
+          { q: 'Pour rester après le hook, la personne doit…', a: ['Voir le logo de la marque', 'Comprendre tout de suite le sujet et sentir que c’est pour elle', 'Entendre une musique à la mode'], ok: 1, why: 'Un sujet clair et une curiosité qui la vise : sans ces deux choses, elle ne peut pas décider de rester.' },
         ],
         todo: [
           'Fais défiler ton fil et note les 3 pubs qui t’ont arrêté',
@@ -670,14 +672,189 @@ const MODULES_1 = [
         ],
       },
       {
-        id: 'm2-l3',
+        id: 'm2-l11',
         n: 3,
+        title: 'Les 4 erreurs qui font rater un hook',
+        ar: 'الأخطاء الأربعة اللي تخسّر الهوك',
+        scenes: [
+          { type: 'title', sub: 'Un sujet clair, une curiosité ciblée', say: 'Ton hook arrête le pouce… mais les gens repartent quand même ? Il y a presque toujours une de ces quatre erreurs. On les corrige une par une.' },
+          {
+            type: 'formula',
+            title: 'Un hook qui retient = *2 choses*',
+            parts: [
+              { t: 'Un sujet clair', sub: 'On sait de quoi parle la vidéo', c: 'hook' },
+              { t: 'Une curiosité ciblée', sub: 'C’est pour moi, je veux la suite', c: 'body' },
+            ],
+            result: { t: 'On reste', sub: 'et on regarde ton produit', c: 'body' },
+            say: 'Pour rester, la personne doit recevoir deux choses dans les premières secondes. Un sujet clair : elle sait de quoi parle la vidéo. Et une curiosité ciblée : elle sent que c’est pour elle, et elle veut la suite.',
+          },
+          {
+            type: 'cards',
+            title: 'Les *4 erreurs*',
+            items: [
+              { icon: 'clock', label: 'Le retard', sub: 'Le sujet arrive trop tard', c: 'danger' },
+              { icon: 'help', label: 'La confusion', sub: 'On ne comprend pas la phrase', c: 'hook' },
+              { icon: 'target', label: 'Le hors-cible', sub: 'On ne se sent pas visé', c: 'body' },
+              { icon: 'moon', label: 'L’ennui', sub: 'Rien ne donne envie de la suite', c: 'cta' },
+            ],
+            say: 'Les quatre erreurs : le retard, le sujet arrive trop tard. La confusion, on ne comprend pas la phrase. Le hors-cible, on ne se sent pas concerné. Et l’ennui, rien ne donne envie de voir la suite.',
+          },
+          {
+            type: 'compare',
+            title: 'Erreur 1 : *le retard*',
+            left: { title: 'En retard', tone: 'bad', items: ['« Salam la famille, aujourd’hui je vais vous montrer un truc incroyable… »', 'Un truc ? Lequel ? On scrolle'] },
+            right: { title: 'Tout de suite', tone: 'good', items: ['« Si tes cheveux frisent dès qu’il fait humide, voici 3 gestes. »', 'Le sujet dès la 1ʳᵉ seconde'] },
+            say: 'Le retard : « aujourd’hui je vais vous montrer un truc incroyable ». Ça semble intriguer, mais on ne sait pas de quoi tu parles, donc on ne peut pas décider de rester. Coupe les premières phrases et commence par le sujet.',
+          },
+          {
+            type: 'stat',
+            value: '2',
+            suffix: 's',
+            label: 'pour dire *de quoi parle* ta vidéo',
+            sub: 'Chaque seconde floue fait partir du monde',
+            say: 'C’est dans les deux premières secondes que la courbe d’audience chute le plus. Le sujet doit être clair avant. Un hook vague peut marcher grâce à un visage ou un texte à l’écran, mais beaucoup moins souvent.',
+          },
+          {
+            type: 'checklist',
+            title: 'Erreur 2 : *la confusion*',
+            items: ['Moins de mots, des mots *simples*', 'Une phrase *active* : « Ce sérum nourrit tes cheveux »', 'Le test : peut-on le *comprendre autrement* ?', { t: 'Une longue phrase pleine de détours', bad: true }],
+            say: 'La confusion : la phrase est trop longue ou mal construite, on n’en comprend que la moitié. Moins de mots, des mots simples, une phrase active. Puis relis ton hook seul et demande-toi : peut-on le comprendre autrement ? Si oui, réécris-le.',
+          },
+          {
+            type: 'compare',
+            title: 'Erreur 3 : *le hors-cible*',
+            left: { title: 'Hors-cible', tone: 'bad', items: ['« J’ai toujours eu les pieds qui gonflent »', '« 3 tendances parfum de l’été »'] },
+            right: { title: 'Ciblé', tone: 'good', items: ['« Si tes pieds gonflent après une journée debout… »', '« Ton parfum disparaît avant midi ? Essaie ça. »'] },
+            say: 'Le hors-cible : on parle de soi, ou d’un sujet sympa à savoir. Dis « tu » au lieu de « je », et pars d’un problème que ta cible vit déjà. Un problème à régler retient bien plus qu’une simple info.',
+          },
+          {
+            type: 'big',
+            kicker: 'Erreur 4 · L’ennui',
+            text: 'Crée un *contraste* : ce qu’elle croit, *contre* ce que tu montres.',
+            sub: 'La leçon suivante, en détail',
+            say: 'L’ennui : le sujet est clair, la cible se sent visée, mais rien ne donne envie de voir la suite. La solution, c’est le contraste. On le voit en détail dans la leçon suivante.',
+          },
+          { type: 'outro', say: 'Leçon suivante : le contraste, pour rendre ton hook irrésistible.' },
+        ],
+        key: [
+          'Un hook retient quand il donne deux choses tout de suite : un sujet clair (on sait de quoi parle la vidéo) et une curiosité ciblée (on sent que c’est pour soi et on veut la suite).',
+          'Le retard : le sujet arrive trop tard. On coupe les phrases d’introduction et on annonce le sujet dans les 1 à 2 premières secondes. La confusion : moins de mots, des mots simples, une phrase active, puis le test « peut-on le comprendre autrement ? ».',
+          'Le hors-cible : on dit « tu » au lieu de « je » et on part d’un problème que la cible vit déjà, pas d’une info « sympa à savoir ». L’ennui : on crée un contraste. Un hook vague peut marcher grâce au visage ou au texte à l’écran, mais beaucoup moins souvent.',
+        ],
+        quiz: [
+          { q: '« Salam, je vais vous montrer un truc de fou ! » : quelle erreur ?', a: ['Le retard : on ne sait pas de quoi parle la vidéo', 'La confusion', 'Aucune, c’est un bon hook'], ok: 0, why: 'Ça intrigue, mais sans sujet : la personne ne peut pas décider si c’est pour elle, et elle part.' },
+          { q: 'Lequel est le plus ciblé ?', a: ['« J’ai toujours eu la peau sèche »', '« Si ta peau tire après la douche, essaie ça »', '« Les tendances soins de l’année »'], ok: 1, why: 'On dit « tu » et on part d’un problème qu’elle vit déjà : elle se sent visée.' },
+          { q: 'Pour vérifier la clarté d’un hook, tu te demandes…', a: ['Est-il assez long ?', 'Peut-on le comprendre de deux façons ?', 'Contient-il le nom de la marque ?'], ok: 1, why: 'S’il existe une deuxième lecture, réécris-le jusqu’à ce qu’il n’en reste qu’une.' },
+        ],
+        todo: [
+          'Prends tes 3 derniers hooks et note, pour chacun, la seconde où l’on comprend le sujet',
+          'Coupe tout ce qui vient avant : le sujet doit arriver dans les 2 premières secondes',
+          'Réécris chaque hook avec des mots simples, en phrase active, et lis-le à un proche : l’a-t-il compris du premier coup ?',
+          'Remplace « je » par « tu » et pars d’un problème que ta cible vit déjà',
+          'Passe tes hooks dans la check-list des 4 erreurs et garde ceux qui réussissent les 4 tests',
+        ],
+        res: [
+          {
+            title: 'Check-list — les 4 tests du hook',
+            text: 'Mon hook : « [  ] »\n\n1. LE RETARD — Le sujet est-il clair dans les 2 premières secondes ?\n☐ oui  ☐ non → coupe ce qui vient avant le sujet.\n\n2. LA CONFUSION — Un proche le comprend-il du premier coup ? Peut-on le comprendre autrement ?\n☐ clair  ☐ à réécrire → moins de mots, mots simples, phrase active.\n\n3. LE HORS-CIBLE — Je dis « tu » ? Je pars d’un problème que ma cible vit déjà ?\n☐ oui  ☐ non → remplace « je » par « tu », pars du problème.\n\n4. L’ENNUI — Y a-t-il un contraste qui donne envie de voir la suite ?\n☐ oui  ☐ non → ajoute un contraste vrai (leçon suivante).\n\nLe hook passe les 4 tests ? Il est prêt à être filmé.',
+          },
+          {
+            title: 'Prompt — rendre mon hook plus clair',
+            text: 'Voici le hook d’une vidéo courte sur [produit ou sujet], pour [cible] : « [mon hook] ».\nRéécris-le pour qu’il soit plus clair, sans changer le sens : des mots simples qu’un enfant de 12 ans comprend, une phrase active, le sujet dans les premiers mots, 12 mots maximum, en t’adressant à la personne avec « tu ».\nDonne 5 versions. Pour chacune, dis s’il existe une autre façon de la comprendre ; si oui, corrige-la. N’ajoute aucune promesse que je n’ai pas écrite. Écris en [langue].',
+          },
+        ],
+      },
+      {
+        id: 'm2-l12',
+        n: 4,
+        title: 'Le contraste : rendre ton hook irrésistible',
+        ar: 'التباين: هوك ما يتقاومش',
+        scenes: [
+          { type: 'title', sub: 'Ouvrir une boucle de curiosité', say: 'Ton hook est clair et ciblé, mais on scrolle encore ? Il manque la curiosité. Le moyen le plus sûr de la créer : le contraste.' },
+          {
+            type: 'flow',
+            title: 'La *boucle* de curiosité',
+            nodes: [
+              { icon: 'eye', label: 'Je vois le hook' },
+              { icon: 'help', label: 'Je me demande', sub: '« Comment ? Vraiment ? »' },
+              { icon: 'play', label: 'Je reste', sub: 'Pour avoir la réponse' },
+              { icon: 'repeat', label: 'Une nouvelle question', sub: 'Et je reste encore' },
+            ],
+            say: 'La curiosité, c’est une boucle. Le hook fait naître une question. La vidéo y répond en partie, et en ouvre une autre. Ton travail dans le hook : ouvrir la première boucle.',
+          },
+          {
+            type: 'formula',
+            title: 'Le contraste = *A contre B*',
+            parts: [
+              { t: 'A', sub: 'Ce que ta cible fait ou croit déjà', c: 'hook' },
+              { t: 'B', sub: 'Ton alternative, vraie et visible', c: 'body' },
+            ],
+            result: { t: 'La curiosité', sub: 'plus vite, plus simple, moins cher ?', c: 'body' },
+            say: 'Le contraste, c’est l’écart entre A, ce que ta cible fait ou croit déjà, et B, ce que tu lui proposes : plus rapide, plus simple ou moins cher. Cet écart lui rappelle son problème, et elle veut savoir comment B le règle.',
+          },
+          {
+            type: 'cards',
+            title: 'Deux façons de *le dire*',
+            items: [
+              { icon: 'megaphone', label: 'Le contraste dit', sub: '« Tu coupes encore tes oignons au couteau ? Ce hachoir le fait en quelques secondes. »', c: 'hook' },
+              { icon: 'spark', label: 'Le contraste sous-entendu', sub: '« Ce hachoir coupe un oignon en quelques secondes. » Le couteau, tout le monde y pense.', c: 'body' },
+            ],
+            say: 'Deux façons. Le contraste dit : tu nommes A et B, impossible de le rater. Le contraste sous-entendu : tu ne dis que B, parce que A, tout le monde le connaît déjà.',
+          },
+          {
+            type: 'steps',
+            title: 'Un hook en *2 ou 3 lignes*',
+            items: [
+              { k: '1', label: 'Le sujet', sub: 'Clair, ciblé, avec « tu »', c: 'gold' },
+              { k: '2', label: 'Le contraste', sub: 'A contre B, ou B seul', c: 'hook' },
+              { k: '3', label: 'La preuve', sub: 'La vidéo montre B, en vrai', c: 'body' },
+            ],
+            say: 'En pratique, un hook tient souvent en deux ou trois lignes : d’abord le sujet, clair et ciblé, puis le contraste. Si tu arrives à mettre les deux dans une seule phrase, garde-la : c’est un hook que tu pourras réutiliser.',
+          },
+          {
+            type: 'quote',
+            text: 'Le contraste doit être *vrai* : B se montre à l’image.',
+            say: 'Une règle de la formation : B doit être vrai et se voir dans la vidéo. Quelques secondes ? Filme-les en un seul plan. Pas de promesse de santé, pas de résultat inventé.',
+          },
+          { type: 'outro', say: 'Leçon suivante : des exemples de hooks, positifs et négatifs.' },
+        ],
+        key: [
+          'La curiosité est une boucle : le hook fait naître une question, la vidéo y répond en partie et en ouvre une autre. Le moyen le plus sûr d’ouvrir la première : le contraste.',
+          'Contraste = A contre B. A : ce que ta cible fait ou croit déjà. B : ton alternative, plus rapide, plus simple ou moins chère. Contraste dit : on nomme A et B. Contraste sous-entendu : on ne dit que B, A est évident pour tout le monde.',
+          'Un hook tient souvent en 2 ou 3 lignes : le sujet (clair, avec « tu »), puis le contraste. B doit être vrai et se voir dans la vidéo : pas de promesse de santé, pas de résultat inventé.',
+        ],
+        quiz: [
+          { q: '« Ce hachoir coupe un oignon en quelques secondes. » Quel contraste ?', a: ['Dit', 'Sous-entendu', 'Aucun'], ok: 1, why: 'Le couteau n’est pas nommé, mais tout le monde y pense : c’est un contraste sous-entendu.' },
+          { q: 'Dans un hook en deux lignes, la première ligne donne…', a: ['Le contraste', 'Le sujet, clair et ciblé', 'Le prix'], ok: 1, why: 'D’abord on sait de quoi on parle et que c’est pour soi ; ensuite le contraste donne envie de voir la suite.' },
+          { q: 'Ton hook promet « 3 fois plus rapide ». Il faut…', a: ['Le dire avec assurance, ça suffit', 'Le montrer dans la vidéo, en vrai', 'Ajouter un deuxième chiffre'], ok: 1, why: 'Le hook promet, la vidéo tient la promesse : B doit se voir à l’image.' },
+        ],
+        todo: [
+          'Écris ce que ta cible fait ou croit aujourd’hui face à son problème : c’est ton A',
+          'Écris en quoi ton produit fait mieux, plus vite, plus simple ou moins cher, avec un fait vrai : c’est ton B',
+          'Écris 2 hooks à contraste dit (A contre B) et 2 à contraste sous-entendu (B seul)',
+          'Assemble ton meilleur hook en 2 lignes : le sujet, puis le contraste',
+          'Filme B en un seul plan : si tu ne peux pas le montrer, change de contraste',
+        ],
+        res: [
+          {
+            title: 'Prompt — 8 hooks à contraste',
+            text: 'Agis comme un copywriter publicitaire honnête. Produit : [produit]. Cible : [cible]. Son problème : [problème]. Ce qu’elle fait ou croit aujourd’hui (A) : [sa solution habituelle]. Ce que mon produit fait mieux, avec un fait vrai (B) : [fait vérifiable].\nÉcris 8 hooks de 2 lignes : ligne 1, le sujet, clair, en disant « tu » ; ligne 2, le contraste. 4 à contraste dit (A contre B), 4 à contraste sous-entendu (B seul).\nPour chaque hook, indique le plan qui prouve B à l’image. N’invente aucun chiffre ni résultat, pas de promesse de santé. Écris en [langue].',
+          },
+          {
+            title: 'Modèle — mon contraste A / B',
+            text: 'Ma cible : [  ]\nSon problème : [  ]\n\nA — Ce qu’elle fait ou croit aujourd’hui : [  ]\nB — Ce que mon produit fait mieux (plus vite / plus simple / moins cher) : [  ]\nLa preuve de B, en un plan : [  ]\n\nContraste dit (A contre B) :\nLigne 1 (le sujet) : [  ]\nLigne 2 (le contraste) : [  ]\n\nContraste sous-entendu (B seul) :\nLigne 1 (le sujet) : [  ]\nLigne 2 (le contraste) : [  ]\n\nLe hook passe les 4 tests (retard, confusion, hors-cible, ennui) ? ☐',
+          },
+        ],
+      },
+      {
+        id: 'm2-l3',
+        n: 5,
         title: 'Exemples de hooks : positifs et négatifs',
         ar: 'أمثلة على الهوك',
         voice: true,
         audio: 'video/voix/m2-l3.m4a',
         scenes: [
-          { type: 'title', d: 4.6, kicker: 'Module 02 · Leçon 03', sub: 'Des hooks qui marchent en ce moment' },
+          { type: 'title', d: 4.6, kicker: 'Module 02 · Leçon 05', sub: 'Des hooks qui marchent en ce moment' },
           {
             type: 'cards',
             d: 7.2,
@@ -740,7 +917,7 @@ const MODULES_1 = [
           { q: 'Un hook parle surtout…', a: ['De la marque', 'Du client et de son problème ou de son envie', 'De la livraison'], ok: 1, why: 'Le client s’arrête quand il se reconnaît.' },
         ],
         widget: 'hooks',
-        res: [{ title: 'Prompt — 10 hooks en 3 familles', text: 'Agis comme un copywriter publicitaire. Produit : [produit]. Cible : [cible]. Problème principal : [problème]. Écris 10 hooks de moins de 10 mots : 4 positifs (résultat désiré), 4 négatifs (problème ou erreur), 2 avec un emplacement [chiffre] que je remplirai avec une donnée vraie. Classe-les du plus fort au plus faible.' }],
+        res: [{ title: 'Prompt — 10 hooks en 3 familles', text: 'Agis comme un copywriter publicitaire. Produit : [produit]. Cible : [cible]. Problème principal : [problème]. Écris 10 hooks de moins de 10 mots : 4 positifs (résultat désiré), 4 négatifs (problème ou erreur), 2 avec un emplacement [chiffre] que je remplirai avec une donnée vraie. Chaque hook annonce le sujet dès les premiers mots, parle à la personne avec « tu » et se comprend du premier coup. Classe-les du plus fort au plus faible.' }],
         todo: [
           'Écris en une phrase le résultat que ton produit apporte, puis le problème qu’il règle',
           'Écris 3 hooks positifs qui partent du résultat, comme « Regarde ce résultat avec moi ! »',
@@ -752,13 +929,13 @@ const MODULES_1 = [
       },
       {
         id: 'm2-l4',
-        n: 4,
+        n: 6,
         title: 'Le hook statistique',
         ar: 'الهوك الإحصائي',
         voice: true,
         audio: 'video/voix/m2-l4.m4a',
         scenes: [
-          { type: 'title', d: 4.6, kicker: 'Module 02 · Leçon 04', sub: 'Un chiffre qui interpelle' },
+          { type: 'title', d: 4.6, kicker: 'Module 02 · Leçon 06', sub: 'Un chiffre qui interpelle' },
           {
             type: 'checklist',
             d: 13.8,
@@ -805,13 +982,13 @@ const MODULES_1 = [
       },
       {
         id: 'm2-l5',
-        n: 5,
+        n: 7,
         title: 'Le Body : présenter le produit',
         ar: 'البودي',
         voice: true,
         audio: 'video/voix/m2-l5.m4a',
         scenes: [
-          { type: 'title', d: 6.9, kicker: 'Module 02 · Leçon 05', sub: 'Après le hook, le body' },
+          { type: 'title', d: 6.9, kicker: 'Module 02 · Leçon 07', sub: 'Après le hook, le body' },
           {
             type: 'phone',
             d: 17.8,
@@ -903,13 +1080,13 @@ const MODULES_1 = [
       },
       {
         id: 'm2-l6',
-        n: 6,
+        n: 8,
         title: 'Le CTA : un CTA clair = une vente',
         ar: 'CTA واضح = عملية بيع',
         voice: true,
         audio: 'video/voix/m2-l6.m4a',
         scenes: [
-          { type: 'title', d: 6.3, kicker: 'Module 02 · Leçon 06', sub: 'Call to action : l’appel à l’action' },
+          { type: 'title', d: 6.3, kicker: 'Module 02 · Leçon 08', sub: 'Call to action : l’appel à l’action' },
           {
             type: 'anatomy',
             d: 19.1,
@@ -979,7 +1156,7 @@ const MODULES_1 = [
       },
       {
         id: 'm2-l7',
-        n: 7,
+        n: 9,
         title: 'Les 7 familles de hooks',
         ar: 'العائلات السبع للهوك',
         scenes: [
@@ -1049,7 +1226,7 @@ const MODULES_1 = [
       },
       {
         id: 'm2-l8',
-        n: 8,
+        n: 10,
         title: 'La banque de hooks : 20 formules à adapter',
         ar: 'بنك الهوك: 20 صيغة للتكييف',
         scenes: [
@@ -1116,7 +1293,7 @@ const MODULES_1 = [
       },
       {
         id: 'm2-l9',
-        n: 9,
+        n: 11,
         title: 'Le hook visuel : tes 3 premières images',
         ar: 'الهوك البصري: أول ثلاث لقطات',
         scenes: [
@@ -1189,7 +1366,7 @@ const MODULES_1 = [
       },
       {
         id: 'm2-l10',
-        n: 10,
+        n: 12,
         title: 'Trouver les hooks et formats gagnants',
         ar: 'البحث عن الهوك والأشكال الناجحة',
         scenes: [

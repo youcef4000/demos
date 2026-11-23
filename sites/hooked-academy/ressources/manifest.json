@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-23T08:20:51.580Z",
+  "generated": "2026-11-23T08:39:42.737Z",
   "lessons": {
     "m0-l1": [
       {
@@ -330,7 +330,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/m2-l2/01-fiche-de-la-leçon.fr.pdf",
-        "size": 183183
+        "size": 187416
       },
       {
         "kind": "pdf",
@@ -338,7 +338,7 @@
         "file": "01-lesson-sheet.en.pdf",
         "lang": "en",
         "path": "ressources/m2-l2/01-lesson-sheet.en.pdf",
-        "size": 170188
+        "size": 175189
       },
       {
         "kind": "pdf",
@@ -346,7 +346,83 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l2/01-ملخص-الدرس.ar.pdf",
-        "size": 147241
+        "size": 152344
+      },
+      {
+        "kind": "link",
+        "title": "CapCut",
+        "url": "https://www.capcut.com/capcut_pc_web/fission_receive?code=ifMmSl17713579&lng=fr-FR",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "ChatGPT",
+        "url": "https://chatgpt.com/",
+        "file": "liens.txt"
+      }
+    ],
+    "m2-l11": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m2-l11/01-fiche-de-la-leçon.fr.pdf",
+        "size": 226994
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m2-l11/01-lesson-sheet.en.pdf",
+        "size": 215193
+      },
+      {
+        "kind": "pdf",
+        "title": "ملخص الدرس",
+        "file": "01-ملخص-الدرس.ar.pdf",
+        "lang": "ar",
+        "path": "ressources/m2-l11/01-ملخص-الدرس.ar.pdf",
+        "size": 182353
+      },
+      {
+        "kind": "link",
+        "title": "CapCut",
+        "url": "https://www.capcut.com/capcut_pc_web/fission_receive?code=ifMmSl17713579&lng=fr-FR",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "ChatGPT",
+        "url": "https://chatgpt.com/",
+        "file": "liens.txt"
+      }
+    ],
+    "m2-l12": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m2-l12/01-fiche-de-la-leçon.fr.pdf",
+        "size": 222548
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m2-l12/01-lesson-sheet.en.pdf",
+        "size": 206449
+      },
+      {
+        "kind": "pdf",
+        "title": "ملخص الدرس",
+        "file": "01-ملخص-الدرس.ar.pdf",
+        "lang": "ar",
+        "path": "ressources/m2-l12/01-ملخص-الدرس.ar.pdf",
+        "size": 169639
       },
       {
         "kind": "link",
@@ -368,7 +444,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/m2-l3/01-fiche-de-la-leçon.fr.pdf",
-        "size": 202328
+        "size": 202709
       },
       {
         "kind": "pdf",
@@ -376,7 +452,7 @@
         "file": "01-lesson-sheet.en.pdf",
         "lang": "en",
         "path": "ressources/m2-l3/01-lesson-sheet.en.pdf",
-        "size": 193353
+        "size": 193690
       },
       {
         "kind": "pdf",
@@ -384,7 +460,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l3/01-ملخص-الدرس.ar.pdf",
-        "size": 161784
+        "size": 162763
       },
       {
         "kind": "link",
@@ -406,7 +482,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/m2-l4/01-fiche-de-la-leçon.fr.pdf",
-        "size": 200695
+        "size": 200354
       },
       {
         "kind": "pdf",
@@ -414,7 +490,7 @@
         "file": "01-lesson-sheet.en.pdf",
         "lang": "en",
         "path": "ressources/m2-l4/01-lesson-sheet.en.pdf",
-        "size": 193063
+        "size": 192719
       },
       {
         "kind": "pdf",
@@ -422,7 +498,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l4/01-ملخص-الدرس.ar.pdf",
-        "size": 146317
+        "size": 146209
       },
       {
         "kind": "link",
@@ -444,7 +520,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/m2-l5/01-fiche-de-la-leçon.fr.pdf",
-        "size": 203733
+        "size": 203732
       },
       {
         "kind": "pdf",
@@ -452,7 +528,7 @@
         "file": "01-lesson-sheet.en.pdf",
         "lang": "en",
         "path": "ressources/m2-l5/01-lesson-sheet.en.pdf",
-        "size": 196941
+        "size": 196942
       },
       {
         "kind": "pdf",
@@ -460,7 +536,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l5/01-ملخص-الدرس.ar.pdf",
-        "size": 151354
+        "size": 151413
       },
       {
         "kind": "link",
@@ -482,7 +558,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/m2-l6/01-fiche-de-la-leçon.fr.pdf",
-        "size": 187712
+        "size": 187762
       },
       {
         "kind": "pdf",
@@ -490,7 +566,7 @@
         "file": "01-lesson-sheet.en.pdf",
         "lang": "en",
         "path": "ressources/m2-l6/01-lesson-sheet.en.pdf",
-        "size": 175389
+        "size": 175442
       },
       {
         "kind": "pdf",
@@ -498,7 +574,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l6/01-ملخص-الدرس.ar.pdf",
-        "size": 157921
+        "size": 157966
       },
       {
         "kind": "link",
@@ -520,7 +596,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/m2-l7/01-fiche-de-la-leçon.fr.pdf",
-        "size": 207453
+        "size": 207449
       },
       {
         "kind": "pdf",
@@ -528,7 +604,7 @@
         "file": "01-lesson-sheet.en.pdf",
         "lang": "en",
         "path": "ressources/m2-l7/01-lesson-sheet.en.pdf",
-        "size": 197532
+        "size": 197530
       },
       {
         "kind": "pdf",
@@ -536,18 +612,18 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l7/01-ملخص-الدرس.ar.pdf",
-        "size": 170294
-      },
-      {
-        "kind": "link",
-        "title": "Veo 3.1 · Flow",
-        "url": "https://labs.google/flow",
-        "file": "liens.txt"
+        "size": 170360
       },
       {
         "kind": "link",
         "title": "CapCut",
         "url": "https://www.capcut.com/capcut_pc_web/fission_receive?code=ifMmSl17713579&lng=fr-FR",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "ChatGPT",
+        "url": "https://chatgpt.com/",
         "file": "liens.txt"
       }
     ],
@@ -558,7 +634,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/m2-l8/01-fiche-de-la-leçon.fr.pdf",
-        "size": 231380
+        "size": 230735
       },
       {
         "kind": "pdf",
@@ -566,7 +642,7 @@
         "file": "01-lesson-sheet.en.pdf",
         "lang": "en",
         "path": "ressources/m2-l8/01-lesson-sheet.en.pdf",
-        "size": 219090
+        "size": 218440
       },
       {
         "kind": "pdf",
@@ -574,7 +650,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l8/01-ملخص-الدرس.ar.pdf",
-        "size": 186962
+        "size": 186960
       },
       {
         "kind": "link",
@@ -596,7 +672,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/m2-l9/01-fiche-de-la-leçon.fr.pdf",
-        "size": 227730
+        "size": 227737
       },
       {
         "kind": "pdf",
@@ -604,7 +680,7 @@
         "file": "01-lesson-sheet.en.pdf",
         "lang": "en",
         "path": "ressources/m2-l9/01-lesson-sheet.en.pdf",
-        "size": 206769
+        "size": 206766
       },
       {
         "kind": "pdf",
@@ -612,18 +688,18 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l9/01-ملخص-الدرس.ar.pdf",
-        "size": 169797
-      },
-      {
-        "kind": "link",
-        "title": "Veo 3.1 · Flow",
-        "url": "https://labs.google/flow",
-        "file": "liens.txt"
+        "size": 169603
       },
       {
         "kind": "link",
         "title": "CapCut",
         "url": "https://www.capcut.com/capcut_pc_web/fission_receive?code=ifMmSl17713579&lng=fr-FR",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "ChatGPT",
+        "url": "https://chatgpt.com/",
         "file": "liens.txt"
       }
     ],
@@ -634,7 +710,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/m2-l10/01-fiche-de-la-leçon.fr.pdf",
-        "size": 217876
+        "size": 217869
       },
       {
         "kind": "pdf",
@@ -642,7 +718,7 @@
         "file": "01-lesson-sheet.en.pdf",
         "lang": "en",
         "path": "ressources/m2-l10/01-lesson-sheet.en.pdf",
-        "size": 200325
+        "size": 200318
       },
       {
         "kind": "pdf",
@@ -650,7 +726,7 @@
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
         "path": "ressources/m2-l10/01-ملخص-الدرس.ar.pdf",
-        "size": 171243
+        "size": 171284
       },
       {
         "kind": "link",
