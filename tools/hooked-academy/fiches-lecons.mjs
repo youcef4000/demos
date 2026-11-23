@@ -174,7 +174,11 @@ for (const m of MODULES.filter((x) => !TRACK || x.track === TRACK)) {
     const dir = path.join(SITE, 'ressources', l0.id);
     await mkdir(dir, { recursive: true });
     // anciennes fiches de cette leçon (si le titre du fichier a changé)
-    for (const f of await readdir(dir)) if (/^01-(fiche-de-la-leçon|lesson-sheet|ملخص-الدرس)\./.test(f)) await unlink(path.join(dir, f));
+    // (seulement dans les langues générées : LANGS=ar ne touche pas aux fiches fr et en)
+    for (const f of await readdir(dir)) {
+      const m = f.match(/^01-(?:fiche-de-la-leçon|lesson-sheet|ملخص-الدرس)\.(fr|en|ar)\.pdf$/);
+      if (m && LANGS.includes(m[1])) await unlink(path.join(dir, f));
+    }
     let tools = [];
     for (const lang of LANGS) {
       const ovm = OV[lang]?.[m.id];

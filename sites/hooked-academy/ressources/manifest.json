@@ -1,7 +1,23 @@
 {
-  "generated": "2026-11-23T08:17:11.854Z",
+  "generated": "2026-11-23T08:20:51.580Z",
   "lessons": {
     "m0-l1": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m0-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 177095
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m0-l1/01-lesson-sheet.en.pdf",
+        "size": 166876
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -26,6 +42,22 @@
     "m0-l3": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m0-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 122943
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m0-l3/01-lesson-sheet.en.pdf",
+        "size": 118796
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -46,6 +78,22 @@
       }
     ],
     "m0-l4": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m0-l4/01-fiche-de-la-leçon.fr.pdf",
+        "size": 157287
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m0-l4/01-lesson-sheet.en.pdf",
+        "size": 152608
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -70,6 +118,22 @@
     "m1-l1": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m1-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 179306
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m1-l1/01-lesson-sheet.en.pdf",
+        "size": 171205
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -90,6 +154,22 @@
       }
     ],
     "m1-l2": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m1-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 197224
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m1-l2/01-lesson-sheet.en.pdf",
+        "size": 188095
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -132,6 +212,22 @@
     "m1-l3": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m1-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 177257
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m1-l3/01-lesson-sheet.en.pdf",
+        "size": 173158
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -152,6 +248,22 @@
       }
     ],
     "m1-l4": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m1-l4/01-fiche-de-la-leçon.fr.pdf",
+        "size": 172285
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m1-l4/01-lesson-sheet.en.pdf",
+        "size": 166616
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -176,6 +288,22 @@
     "m2-l1": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m2-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 196398
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m2-l1/01-lesson-sheet.en.pdf",
+        "size": 183944
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -196,6 +324,22 @@
       }
     ],
     "m2-l2": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m2-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 183183
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m2-l2/01-lesson-sheet.en.pdf",
+        "size": 170188
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -220,6 +364,22 @@
     "m2-l3": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m2-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 202328
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m2-l3/01-lesson-sheet.en.pdf",
+        "size": 193353
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -240,6 +400,22 @@
       }
     ],
     "m2-l4": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m2-l4/01-fiche-de-la-leçon.fr.pdf",
+        "size": 200695
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m2-l4/01-lesson-sheet.en.pdf",
+        "size": 193063
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -264,6 +440,22 @@
     "m2-l5": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m2-l5/01-fiche-de-la-leçon.fr.pdf",
+        "size": 203733
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m2-l5/01-lesson-sheet.en.pdf",
+        "size": 196941
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -284,6 +476,22 @@
       }
     ],
     "m2-l6": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m2-l6/01-fiche-de-la-leçon.fr.pdf",
+        "size": 187712
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m2-l6/01-lesson-sheet.en.pdf",
+        "size": 175389
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -308,6 +516,22 @@
     "m2-l7": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m2-l7/01-fiche-de-la-leçon.fr.pdf",
+        "size": 207453
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m2-l7/01-lesson-sheet.en.pdf",
+        "size": 197532
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -316,18 +540,34 @@
       },
       {
         "kind": "link",
-        "title": "CapCut",
-        "url": "https://www.capcut.com/capcut_pc_web/fission_receive?code=ifMmSl17713579&lng=fr-FR",
+        "title": "Veo 3.1 · Flow",
+        "url": "https://labs.google/flow",
         "file": "liens.txt"
       },
       {
         "kind": "link",
-        "title": "ChatGPT",
-        "url": "https://chatgpt.com/",
+        "title": "CapCut",
+        "url": "https://www.capcut.com/capcut_pc_web/fission_receive?code=ifMmSl17713579&lng=fr-FR",
         "file": "liens.txt"
       }
     ],
     "m2-l8": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m2-l8/01-fiche-de-la-leçon.fr.pdf",
+        "size": 231380
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m2-l8/01-lesson-sheet.en.pdf",
+        "size": 219090
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -352,6 +592,22 @@
     "m2-l9": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m2-l9/01-fiche-de-la-leçon.fr.pdf",
+        "size": 227730
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m2-l9/01-lesson-sheet.en.pdf",
+        "size": 206769
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -360,18 +616,34 @@
       },
       {
         "kind": "link",
-        "title": "CapCut",
-        "url": "https://www.capcut.com/capcut_pc_web/fission_receive?code=ifMmSl17713579&lng=fr-FR",
+        "title": "Veo 3.1 · Flow",
+        "url": "https://labs.google/flow",
         "file": "liens.txt"
       },
       {
         "kind": "link",
-        "title": "ChatGPT",
-        "url": "https://chatgpt.com/",
+        "title": "CapCut",
+        "url": "https://www.capcut.com/capcut_pc_web/fission_receive?code=ifMmSl17713579&lng=fr-FR",
         "file": "liens.txt"
       }
     ],
     "m2-l10": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m2-l10/01-fiche-de-la-leçon.fr.pdf",
+        "size": 217876
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m2-l10/01-lesson-sheet.en.pdf",
+        "size": 200325
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -402,6 +674,22 @@
     "m3-l1": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m3-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 172065
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m3-l1/01-lesson-sheet.en.pdf",
+        "size": 163939
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -422,6 +710,22 @@
       }
     ],
     "m3-l2": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m3-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 177074
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m3-l2/01-lesson-sheet.en.pdf",
+        "size": 168548
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -446,6 +750,22 @@
     "m3-l3": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m3-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 183536
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m3-l3/01-lesson-sheet.en.pdf",
+        "size": 175247
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -466,6 +786,22 @@
       }
     ],
     "m3-l4": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m3-l4/01-fiche-de-la-leçon.fr.pdf",
+        "size": 172024
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m3-l4/01-lesson-sheet.en.pdf",
+        "size": 158002
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -490,6 +826,22 @@
     "m3-l5": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m3-l5/01-fiche-de-la-leçon.fr.pdf",
+        "size": 206469
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m3-l5/01-lesson-sheet.en.pdf",
+        "size": 201538
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -510,6 +862,22 @@
       }
     ],
     "m3-l6": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m3-l6/01-fiche-de-la-leçon.fr.pdf",
+        "size": 188146
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m3-l6/01-lesson-sheet.en.pdf",
+        "size": 186352
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -534,6 +902,22 @@
     "m4-l1": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m4-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 201881
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m4-l1/01-lesson-sheet.en.pdf",
+        "size": 190339
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -554,6 +938,22 @@
       }
     ],
     "m4-l2": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m4-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 168286
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m4-l2/01-lesson-sheet.en.pdf",
+        "size": 159358
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -578,6 +978,22 @@
     "m4-l3": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m4-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 187080
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m4-l3/01-lesson-sheet.en.pdf",
+        "size": 178636
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -598,6 +1014,22 @@
       }
     ],
     "m6-l1": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m6-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 199739
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m6-l1/01-lesson-sheet.en.pdf",
+        "size": 181680
+      },
       {
         "kind": "pdf",
         "title": "Ta marque en 7 jours",
@@ -646,6 +1078,22 @@
     "m6-l2": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m6-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 180834
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m6-l2/01-lesson-sheet.en.pdf",
+        "size": 177153
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -666,6 +1114,22 @@
       }
     ],
     "m6-l3": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m6-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 207078
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m6-l3/01-lesson-sheet.en.pdf",
+        "size": 191875
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -690,6 +1154,22 @@
     "m6-l4": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m6-l4/01-fiche-de-la-leçon.fr.pdf",
+        "size": 191765
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m6-l4/01-lesson-sheet.en.pdf",
+        "size": 175680
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -710,6 +1190,22 @@
       }
     ],
     "m5-l1": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m5-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 201662
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m5-l1/01-lesson-sheet.en.pdf",
+        "size": 178948
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -734,6 +1230,22 @@
     "m5-l2": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m5-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 175646
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m5-l2/01-lesson-sheet.en.pdf",
+        "size": 168360
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -754,6 +1266,22 @@
       }
     ],
     "m5-l3": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m5-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 170557
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m5-l3/01-lesson-sheet.en.pdf",
+        "size": 161675
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -778,6 +1306,22 @@
     "m5-l4": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m5-l4/01-fiche-de-la-leçon.fr.pdf",
+        "size": 188761
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m5-l4/01-lesson-sheet.en.pdf",
+        "size": 181492
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -798,6 +1342,22 @@
       }
     ],
     "m7-l1": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m7-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 204781
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m7-l1/01-lesson-sheet.en.pdf",
+        "size": 185846
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -828,6 +1388,22 @@
     "m7-l10": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m7-l10/01-fiche-de-la-leçon.fr.pdf",
+        "size": 162146
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m7-l10/01-lesson-sheet.en.pdf",
+        "size": 158656
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -856,6 +1432,22 @@
     "m7-l11": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m7-l11/01-fiche-de-la-leçon.fr.pdf",
+        "size": 127964
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m7-l11/01-lesson-sheet.en.pdf",
+        "size": 124250
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -876,6 +1468,22 @@
       }
     ],
     "m7-l2": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m7-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 200762
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m7-l2/01-lesson-sheet.en.pdf",
+        "size": 190174
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -900,6 +1508,22 @@
     "m7-l3": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m7-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 198746
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m7-l3/01-lesson-sheet.en.pdf",
+        "size": 187381
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -920,6 +1544,22 @@
       }
     ],
     "m7-l4": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m7-l4/01-fiche-de-la-leçon.fr.pdf",
+        "size": 211222
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m7-l4/01-lesson-sheet.en.pdf",
+        "size": 194251
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -944,6 +1584,22 @@
     "m7-l5": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m7-l5/01-fiche-de-la-leçon.fr.pdf",
+        "size": 194682
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m7-l5/01-lesson-sheet.en.pdf",
+        "size": 185534
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -964,6 +1620,22 @@
       }
     ],
     "m7-l6": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m7-l6/01-fiche-de-la-leçon.fr.pdf",
+        "size": 207080
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m7-l6/01-lesson-sheet.en.pdf",
+        "size": 203364
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -988,6 +1660,22 @@
     "m7-l7": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m7-l7/01-fiche-de-la-leçon.fr.pdf",
+        "size": 199341
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m7-l7/01-lesson-sheet.en.pdf",
+        "size": 190213
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1008,6 +1696,22 @@
       }
     ],
     "m7-l8": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m7-l8/01-fiche-de-la-leçon.fr.pdf",
+        "size": 209789
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m7-l8/01-lesson-sheet.en.pdf",
+        "size": 195316
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -1032,6 +1736,22 @@
     "m7-l9": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m7-l9/01-fiche-de-la-leçon.fr.pdf",
+        "size": 208777
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m7-l9/01-lesson-sheet.en.pdf",
+        "size": 200304
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1054,6 +1774,22 @@
     "m8-l1": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m8-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 209073
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m8-l1/01-lesson-sheet.en.pdf",
+        "size": 200288
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1070,6 +1806,22 @@
     "m8-l2": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m8-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 225892
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m8-l2/01-lesson-sheet.en.pdf",
+        "size": 205994
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1084,6 +1836,22 @@
       }
     ],
     "m8-l3": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m8-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 213291
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m8-l3/01-lesson-sheet.en.pdf",
+        "size": 202626
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -1109,9 +1877,31 @@
         "title": "TikTok Commercial Music Library",
         "url": "https://ads.tiktok.com/business/creativecenter/music/pc/en",
         "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "TikTok Creative Center",
+        "url": "https://ads.tiktok.com/business/creativecenter/",
+        "file": "liens.txt"
       }
     ],
     "m8-l4": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m8-l4/01-fiche-de-la-leçon.fr.pdf",
+        "size": 202915
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m8-l4/01-lesson-sheet.en.pdf",
+        "size": 195808
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -1130,6 +1920,22 @@
     "m8-l5": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m8-l5/01-fiche-de-la-leçon.fr.pdf",
+        "size": 207975
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m8-l5/01-lesson-sheet.en.pdf",
+        "size": 198228
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1144,6 +1950,22 @@
       }
     ],
     "m9-l1": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m9-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 209408
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m9-l1/01-lesson-sheet.en.pdf",
+        "size": 193847
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -1162,6 +1984,22 @@
     "m9-l2": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m9-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 207132
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m9-l2/01-lesson-sheet.en.pdf",
+        "size": 198575
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1176,6 +2014,22 @@
       }
     ],
     "m9-l3": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m9-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 210816
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m9-l3/01-lesson-sheet.en.pdf",
+        "size": 197068
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -1194,6 +2048,22 @@
     "m9-l4": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m9-l4/01-fiche-de-la-leçon.fr.pdf",
+        "size": 208499
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m9-l4/01-lesson-sheet.en.pdf",
+        "size": 196667
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1210,6 +2080,22 @@
     "m9-l5": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m9-l5/01-fiche-de-la-leçon.fr.pdf",
+        "size": 199974
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m9-l5/01-lesson-sheet.en.pdf",
+        "size": 188260
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1224,6 +2110,22 @@
       }
     ],
     "m10-l1": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m10-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 206976
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m10-l1/01-lesson-sheet.en.pdf",
+        "size": 189601
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -1248,6 +2150,22 @@
     "m10-l2": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m10-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 197765
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m10-l2/01-lesson-sheet.en.pdf",
+        "size": 189827
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1268,6 +2186,22 @@
       }
     ],
     "m10-l3": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m10-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 198578
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m10-l3/01-lesson-sheet.en.pdf",
+        "size": 187689
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -1292,6 +2226,22 @@
     "m10-l4": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m10-l4/01-fiche-de-la-leçon.fr.pdf",
+        "size": 207510
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m10-l4/01-lesson-sheet.en.pdf",
+        "size": 199018
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1312,6 +2262,22 @@
       }
     ],
     "m10-l5": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m10-l5/01-fiche-de-la-leçon.fr.pdf",
+        "size": 203968
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m10-l5/01-lesson-sheet.en.pdf",
+        "size": 197216
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -1336,6 +2302,22 @@
     "m11-l1": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m11-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 194973
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m11-l1/01-lesson-sheet.en.pdf",
+        "size": 185235
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1356,6 +2338,22 @@
       }
     ],
     "m11-l2": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m11-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 206881
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m11-l2/01-lesson-sheet.en.pdf",
+        "size": 189518
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -1380,6 +2378,22 @@
     "m11-l3": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m11-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 201459
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m11-l3/01-lesson-sheet.en.pdf",
+        "size": 191902
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1400,6 +2414,22 @@
       }
     ],
     "m11-l4": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m11-l4/01-fiche-de-la-leçon.fr.pdf",
+        "size": 202256
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m11-l4/01-lesson-sheet.en.pdf",
+        "size": 198099
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -1424,6 +2454,22 @@
     "m11-l5": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m11-l5/01-fiche-de-la-leçon.fr.pdf",
+        "size": 191458
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m11-l5/01-lesson-sheet.en.pdf",
+        "size": 181725
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1444,6 +2490,22 @@
       }
     ],
     "m12-l1": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m12-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 203701
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m12-l1/01-lesson-sheet.en.pdf",
+        "size": 193367
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -1468,6 +2530,22 @@
     "m12-l2": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/m12-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 211277
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/m12-l2/01-lesson-sheet.en.pdf",
+        "size": 211139
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1488,6 +2566,22 @@
       }
     ],
     "ia0-l1": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia0-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 186005
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia0-l1/01-lesson-sheet.en.pdf",
+        "size": 175995
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -1512,6 +2606,22 @@
     "ia0-l5": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia0-l5/01-fiche-de-la-leçon.fr.pdf",
+        "size": 153303
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia0-l5/01-lesson-sheet.en.pdf",
+        "size": 143537
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1532,6 +2642,22 @@
       }
     ],
     "ia0-l6": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia0-l6/01-fiche-de-la-leçon.fr.pdf",
+        "size": 151502
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia0-l6/01-lesson-sheet.en.pdf",
+        "size": 146293
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -1556,6 +2682,22 @@
     "ia0-l2": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia0-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 182765
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia0-l2/01-lesson-sheet.en.pdf",
+        "size": 174252
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1576,6 +2718,22 @@
       }
     ],
     "ia0-l3": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia0-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 201659
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia0-l3/01-lesson-sheet.en.pdf",
+        "size": 191245
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -1636,6 +2794,22 @@
     "ia1-l1": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia1-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 167587
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia1-l1/01-lesson-sheet.en.pdf",
+        "size": 161640
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1670,6 +2844,22 @@
     "ia1-l2": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia1-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 174128
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia1-l2/01-lesson-sheet.en.pdf",
+        "size": 167078
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1690,6 +2880,22 @@
       }
     ],
     "ia1-l3": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia1-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 177137
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia1-l3/01-lesson-sheet.en.pdf",
+        "size": 168131
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -1714,6 +2920,22 @@
     "ia1-l4": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia1-l4/01-fiche-de-la-leçon.fr.pdf",
+        "size": 167716
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia1-l4/01-lesson-sheet.en.pdf",
+        "size": 164525
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1734,6 +2956,22 @@
       }
     ],
     "ia1-l5": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia1-l5/01-fiche-de-la-leçon.fr.pdf",
+        "size": 150864
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia1-l5/01-lesson-sheet.en.pdf",
+        "size": 145086
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -1766,11 +3004,27 @@
       },
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia1-l6/01-fiche-de-la-leçon.fr.pdf",
+        "size": 181799
+      },
+      {
+        "kind": "pdf",
         "title": "Le prompt avancé les techniques des pros",
         "file": "01-le-prompt-avancé-les-techniques-des-pros.fr.pdf",
         "lang": "fr",
         "path": "ressources/ia1-l6/01-le-prompt-avancé-les-techniques-des-pros.fr.pdf",
         "size": 346192
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia1-l6/01-lesson-sheet.en.pdf",
+        "size": 170310
       },
       {
         "kind": "pdf",
@@ -1804,6 +3058,22 @@
     "ia1-l7": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia1-l7/01-fiche-de-la-leçon.fr.pdf",
+        "size": 206738
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia1-l7/01-lesson-sheet.en.pdf",
+        "size": 204631
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1824,6 +3094,22 @@
       }
     ],
     "ia1-l8": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia1-l8/01-fiche-de-la-leçon.fr.pdf",
+        "size": 202220
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia1-l8/01-lesson-sheet.en.pdf",
+        "size": 183930
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -1854,6 +3140,22 @@
     "ia1-l9": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia1-l9/01-fiche-de-la-leçon.fr.pdf",
+        "size": 210472
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia1-l9/01-lesson-sheet.en.pdf",
+        "size": 204614
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1874,6 +3176,22 @@
       }
     ],
     "ia1-l10": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia1-l10/01-fiche-de-la-leçon.fr.pdf",
+        "size": 246722
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia1-l10/01-lesson-sheet.en.pdf",
+        "size": 231631
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -1928,6 +3246,22 @@
     "ia2-l1": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia2-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 173354
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia2-l1/01-lesson-sheet.en.pdf",
+        "size": 168857
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1948,6 +3282,22 @@
       }
     ],
     "ia2-l2": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia2-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 174555
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia2-l2/01-lesson-sheet.en.pdf",
+        "size": 163755
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -1972,6 +3322,22 @@
     "ia2-l3": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia2-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 171058
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia2-l3/01-lesson-sheet.en.pdf",
+        "size": 159724
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -1992,6 +3358,22 @@
       }
     ],
     "ia2-l4": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia2-l4/01-fiche-de-la-leçon.fr.pdf",
+        "size": 167840
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia2-l4/01-lesson-sheet.en.pdf",
+        "size": 153636
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2016,6 +3398,22 @@
     "ia2-l5": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia2-l5/01-fiche-de-la-leçon.fr.pdf",
+        "size": 172110
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia2-l5/01-lesson-sheet.en.pdf",
+        "size": 167638
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2036,6 +3434,22 @@
       }
     ],
     "ia2-l6": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia2-l6/01-fiche-de-la-leçon.fr.pdf",
+        "size": 177271
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia2-l6/01-lesson-sheet.en.pdf",
+        "size": 164289
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2060,6 +3474,22 @@
     "ia2-l7": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia2-l7/01-fiche-de-la-leçon.fr.pdf",
+        "size": 202389
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia2-l7/01-lesson-sheet.en.pdf",
+        "size": 196727
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2080,6 +3510,22 @@
       }
     ],
     "ia2-l8": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia2-l8/01-fiche-de-la-leçon.fr.pdf",
+        "size": 183992
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia2-l8/01-lesson-sheet.en.pdf",
+        "size": 178378
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2104,6 +3550,22 @@
     "ia3-l1": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia3-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 182562
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia3-l1/01-lesson-sheet.en.pdf",
+        "size": 175534
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2124,6 +3586,22 @@
       }
     ],
     "ia3-l2": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia3-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 167406
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia3-l2/01-lesson-sheet.en.pdf",
+        "size": 157254
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2148,6 +3626,22 @@
     "ia3-l3": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia3-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 163033
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia3-l3/01-lesson-sheet.en.pdf",
+        "size": 155608
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2168,6 +3662,22 @@
       }
     ],
     "ia3-l4": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia3-l4/01-fiche-de-la-leçon.fr.pdf",
+        "size": 170948
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia3-l4/01-lesson-sheet.en.pdf",
+        "size": 163394
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2198,6 +3708,22 @@
     "ia3-l5": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia3-l5/01-fiche-de-la-leçon.fr.pdf",
+        "size": 172803
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia3-l5/01-lesson-sheet.en.pdf",
+        "size": 163821
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2218,6 +3744,22 @@
       }
     ],
     "ia3-l6": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia3-l6/01-fiche-de-la-leçon.fr.pdf",
+        "size": 221409
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia3-l6/01-lesson-sheet.en.pdf",
+        "size": 210305
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2248,6 +3790,22 @@
     "ia3-l7": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia3-l7/01-fiche-de-la-leçon.fr.pdf",
+        "size": 217518
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia3-l7/01-lesson-sheet.en.pdf",
+        "size": 213396
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2268,6 +3826,22 @@
       }
     ],
     "ia3-l8": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia3-l8/01-fiche-de-la-leçon.fr.pdf",
+        "size": 181653
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia3-l8/01-lesson-sheet.en.pdf",
+        "size": 175163
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2292,6 +3866,22 @@
     "ia3-l9": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia3-l9/01-fiche-de-la-leçon.fr.pdf",
+        "size": 176964
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia3-l9/01-lesson-sheet.en.pdf",
+        "size": 168406
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2312,6 +3902,22 @@
       }
     ],
     "ia3-l10": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia3-l10/01-fiche-de-la-leçon.fr.pdf",
+        "size": 180991
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia3-l10/01-lesson-sheet.en.pdf",
+        "size": 165555
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2336,6 +3942,22 @@
     "ia3-l11": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia3-l11/01-fiche-de-la-leçon.fr.pdf",
+        "size": 190536
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia3-l11/01-lesson-sheet.en.pdf",
+        "size": 183373
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2350,12 +3972,28 @@
       },
       {
         "kind": "link",
-        "title": "Veo 3.1 · Flow",
-        "url": "https://labs.google/flow",
+        "title": "TikTok Creative Center",
+        "url": "https://ads.tiktok.com/business/creativecenter/",
         "file": "liens.txt"
       }
     ],
     "ia4-l1": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia4-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 166399
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia4-l1/01-lesson-sheet.en.pdf",
+        "size": 159138
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2378,6 +4016,22 @@
       }
     ],
     "ia4-l2": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia4-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 161765
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia4-l2/01-lesson-sheet.en.pdf",
+        "size": 155275
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2408,6 +4062,22 @@
     "ia4-l3": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia4-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 162674
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia4-l3/01-lesson-sheet.en.pdf",
+        "size": 156889
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2436,6 +4106,22 @@
     "ia4-l4": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia4-l4/01-fiche-de-la-leçon.fr.pdf",
+        "size": 224898
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia4-l4/01-lesson-sheet.en.pdf",
+        "size": 219811
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2456,6 +4142,22 @@
       }
     ],
     "ia4-l5": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia4-l5/01-fiche-de-la-leçon.fr.pdf",
+        "size": 177898
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia4-l5/01-lesson-sheet.en.pdf",
+        "size": 162565
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2480,6 +4182,22 @@
     "ia10-l1": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia10-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 179309
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia10-l1/01-lesson-sheet.en.pdf",
+        "size": 176194
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2500,6 +4218,22 @@
       }
     ],
     "ia10-l2": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia10-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 182311
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia10-l2/01-lesson-sheet.en.pdf",
+        "size": 169027
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2524,6 +4258,22 @@
     "ia10-l3": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia10-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 185457
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia10-l3/01-lesson-sheet.en.pdf",
+        "size": 172767
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2544,6 +4294,22 @@
       }
     ],
     "ia10-l4": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia10-l4/01-fiche-de-la-leçon.fr.pdf",
+        "size": 197497
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia10-l4/01-lesson-sheet.en.pdf",
+        "size": 187996
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2568,6 +4334,22 @@
     "ia10-l5": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia10-l5/01-fiche-de-la-leçon.fr.pdf",
+        "size": 179958
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia10-l5/01-lesson-sheet.en.pdf",
+        "size": 171987
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2588,6 +4370,22 @@
       }
     ],
     "ia5-l1": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia5-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 161547
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia5-l1/01-lesson-sheet.en.pdf",
+        "size": 156036
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2612,6 +4410,22 @@
     "ia5-l2": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia5-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 163367
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia5-l2/01-lesson-sheet.en.pdf",
+        "size": 154218
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2632,6 +4446,22 @@
       }
     ],
     "ia5-l3": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia5-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 178551
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia5-l3/01-lesson-sheet.en.pdf",
+        "size": 169473
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2668,6 +4498,22 @@
     "ia5-l4": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia5-l4/01-fiche-de-la-leçon.fr.pdf",
+        "size": 175354
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia5-l4/01-lesson-sheet.en.pdf",
+        "size": 168434
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2688,6 +4534,22 @@
       }
     ],
     "ia5-l5": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia5-l5/01-fiche-de-la-leçon.fr.pdf",
+        "size": 171973
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia5-l5/01-lesson-sheet.en.pdf",
+        "size": 161987
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2712,6 +4574,22 @@
     "ia5-l6": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia5-l6/01-fiche-de-la-leçon.fr.pdf",
+        "size": 170831
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia5-l6/01-lesson-sheet.en.pdf",
+        "size": 170731
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2732,6 +4610,22 @@
       }
     ],
     "ia5-l7": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia5-l7/01-fiche-de-la-leçon.fr.pdf",
+        "size": 167403
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia5-l7/01-lesson-sheet.en.pdf",
+        "size": 156410
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2756,6 +4650,22 @@
     "ia6-l1": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia6-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 164961
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia6-l1/01-lesson-sheet.en.pdf",
+        "size": 162032
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2776,6 +4686,22 @@
       }
     ],
     "ia6-l2": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia6-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 157476
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia6-l2/01-lesson-sheet.en.pdf",
+        "size": 153825
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2800,6 +4726,22 @@
     "ia6-l3": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia6-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 171090
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia6-l3/01-lesson-sheet.en.pdf",
+        "size": 163731
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2820,6 +4762,22 @@
       }
     ],
     "ia6-l4": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia6-l4/01-fiche-de-la-leçon.fr.pdf",
+        "size": 156540
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia6-l4/01-lesson-sheet.en.pdf",
+        "size": 148597
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2844,6 +4802,22 @@
     "ia6-l6": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia6-l6/01-fiche-de-la-leçon.fr.pdf",
+        "size": 214639
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia6-l6/01-lesson-sheet.en.pdf",
+        "size": 204116
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2864,6 +4838,22 @@
       }
     ],
     "ia6-l5": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia6-l5/01-fiche-de-la-leçon.fr.pdf",
+        "size": 179603
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia6-l5/01-lesson-sheet.en.pdf",
+        "size": 174683
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2888,6 +4878,22 @@
     "ia6-l7": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia6-l7/01-fiche-de-la-leçon.fr.pdf",
+        "size": 172074
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia6-l7/01-lesson-sheet.en.pdf",
+        "size": 160387
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2908,6 +4914,22 @@
       }
     ],
     "ia7-l1": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia7-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 173025
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia7-l1/01-lesson-sheet.en.pdf",
+        "size": 160120
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2932,6 +4954,22 @@
     "ia7-l2": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia7-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 168303
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia7-l2/01-lesson-sheet.en.pdf",
+        "size": 161881
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2952,6 +4990,22 @@
       }
     ],
     "ia7-l3": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia7-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 174286
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia7-l3/01-lesson-sheet.en.pdf",
+        "size": 166948
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -2976,6 +5030,22 @@
     "ia7-l4": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia7-l4/01-fiche-de-la-leçon.fr.pdf",
+        "size": 177360
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia7-l4/01-lesson-sheet.en.pdf",
+        "size": 166649
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -2996,6 +5066,22 @@
       }
     ],
     "ia8-l1": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia8-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 164701
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia8-l1/01-lesson-sheet.en.pdf",
+        "size": 159811
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -3041,6 +5127,22 @@
         "lang": "ar",
         "path": "ressources/ia8-l2/01-23-برومبت-لبناء-علامتك-الشخصية.ar.pdf",
         "size": 289907
+      },
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia8-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 168960
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia8-l2/01-lesson-sheet.en.pdf",
+        "size": 163827
       },
       {
         "kind": "pdf",
@@ -3090,6 +5192,22 @@
     "ia8-l3": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia8-l3/01-fiche-de-la-leçon.fr.pdf",
+        "size": 152823
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia8-l3/01-lesson-sheet.en.pdf",
+        "size": 154548
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -3110,6 +5228,22 @@
       }
     ],
     "ia8-l4": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia8-l4/01-fiche-de-la-leçon.fr.pdf",
+        "size": 167221
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia8-l4/01-lesson-sheet.en.pdf",
+        "size": 164351
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -3134,6 +5268,22 @@
     "ia8-l5": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia8-l5/01-fiche-de-la-leçon.fr.pdf",
+        "size": 169712
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia8-l5/01-lesson-sheet.en.pdf",
+        "size": 161563
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -3154,6 +5304,22 @@
       }
     ],
     "ia8-l7": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia8-l7/01-fiche-de-la-leçon.fr.pdf",
+        "size": 216778
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia8-l7/01-lesson-sheet.en.pdf",
+        "size": 205803
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -3178,6 +5344,22 @@
     "ia8-l6": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia8-l6/01-fiche-de-la-leçon.fr.pdf",
+        "size": 167467
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia8-l6/01-lesson-sheet.en.pdf",
+        "size": 164137
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -3198,6 +5380,22 @@
       }
     ],
     "ia8-l8": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia8-l8/01-fiche-de-la-leçon.fr.pdf",
+        "size": 196678
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia8-l8/01-lesson-sheet.en.pdf",
+        "size": 196996
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
@@ -3222,6 +5420,22 @@
     "ia8-l9": [
       {
         "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia8-l9/01-fiche-de-la-leçon.fr.pdf",
+        "size": 183224
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia8-l9/01-lesson-sheet.en.pdf",
+        "size": 173197
+      },
+      {
+        "kind": "pdf",
         "title": "ملخص الدرس",
         "file": "01-ملخص-الدرس.ar.pdf",
         "lang": "ar",
@@ -3242,6 +5456,22 @@
       }
     ],
     "ia9-l1": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/ia9-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 168183
+      },
+      {
+        "kind": "pdf",
+        "title": "Lesson sheet",
+        "file": "01-lesson-sheet.en.pdf",
+        "lang": "en",
+        "path": "ressources/ia9-l1/01-lesson-sheet.en.pdf",
+        "size": 164648
+      },
       {
         "kind": "pdf",
         "title": "ملخص الدرس",
