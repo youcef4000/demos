@@ -6,6 +6,7 @@ Site : `sites/hooked-academy/` → https://hooked-academy.tech/
 |---|---|
 | `/hooked-academy/` | Landing (inscription en 3 étapes) |
 | `/hooked-academy/app/` | Espace étudiant (compte démo : `demo@hooked.academy` / `DEMO-2026`, ou `app/?demo=1` ; il ne voit que les 3 premières vidéos de chaque formation, `FREE_OPEN`) |
+| `/hooked-academy/app/#/prompts` | Studio de prompts : 18 modèles (Créative, IA, Sites & Apps, Vendre), mode expert, contexte de marque ; voir `formations/prompts/README.md` |
 | `/hooked-academy/admin/` | Espace équipe (code démo : `HOOKED-TEAM`) |
 | `/hooked-academy/motion/player.html?id=m2-l1` | Une leçon animée seule (plein écran) |
 

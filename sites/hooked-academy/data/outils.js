@@ -62,48 +62,7 @@ export const CATS = {
   site: T('Site', 'Website', 'الموقع'),
 };
 
-/**
- * Générateur de prompts de la page « Outils IA ». {p} produit, {c} cible, {b} bénéfice, {o} offre et CTA.
- * Les prompts d'écriture suivent la langue de l'interface ; ceux d'image et de vidéo restent en anglais
- * (les modèles le comprennent mieux), seuls les champs de l'étudiant y sont insérés tels quels.
- */
-export const PROMPTS = {
-  hooks: {
-    tools: ['chatgpt', 'claude'],
-    text: T(
-      'Tu es expert en publicité vidéo pour les réseaux sociaux en Algérie.\nProduit : {p}\nCible : {c}\nBénéfice principal : {b}\n\nÉcris 10 hooks de 3 secondes maximum pour une pub verticale (Reels, TikTok), en darija algérienne simple : 2 questions qui piquent, 2 avant/après honnêtes, 2 démonstrations, 2 interpellations de la cible, 2 histoires personnelles.\nPour chaque hook, décris aussi la première image à l’écran.\nRègles : aucune promesse fausse, aucun chiffre inventé, des phrases courtes.',
-      'You are an expert in social video ads for the Algerian market.\nProduct: {p}\nTarget: {c}\nMain benefit: {b}\n\nWrite 10 hooks of 3 seconds maximum for a vertical ad (Reels, TikTok), in simple Algerian darija: 2 pointed questions, 2 honest before/afters, 2 demonstrations, 2 call-outs to the target, 2 personal stories.\nFor each hook, also describe the first image on screen.\nRules: no false promises, no invented numbers, short sentences.',
-      'أنت خبير في إعلانات الفيديو على مواقع التواصل في السوق الجزائري.\nالمنتج: {p}\nالجمهور المستهدف: {c}\nالفائدة الأساسية: {b}\n\nاكتب 10 هوكات لا تتجاوز 3 ثوانٍ لإعلان عمودي (Reels، TikTok) بالدارجة الجزائرية البسيطة: سؤالان يلمسان المشكلة، مقارنتان صادقتان قبل/بعد، عرضان للمنتج، نداءان مباشران للجمهور، وقصتان شخصيتان.\nلكل هوك، صِف أيضًا الصورة الأولى على الشاشة.\nالقواعد: لا وعود كاذبة، لا أرقام مخترعة، جمل قصيرة.',
-    ),
-  },
-  script: {
-    tools: ['chatgpt', 'claude'],
-    text: T(
-      'Tu es scénariste de publicités vidéo UGC.\nÉcris le script d’une pub verticale de 30 secondes maximum.\nProduit : {p}\nCible : {c}\nBénéfice principal : {b}\nOffre et appel à l’action : {o}\n\nStructure : Hook (0 à 3 s), Body (problème, solution, preuve), CTA (une seule action).\nPour chaque plan, donne : la durée, ce qu’on voit, la voix off en darija algérienne, le texte à l’écran.\nRien de faux sur le produit, aucun avis ni chiffre inventé.',
-      'You are a UGC video ad scriptwriter.\nWrite the script of a vertical ad of 30 seconds maximum.\nProduct: {p}\nTarget: {c}\nMain benefit: {b}\nOffer and call to action: {o}\n\nStructure: Hook (0 to 3 s), Body (problem, solution, proof), CTA (a single action).\nFor each shot, give: the duration, what we see, the voice-over in Algerian darija, the on-screen text.\nNothing false about the product, no invented reviews or numbers.',
-      'أنت كاتب سيناريو لإعلانات فيديو UGC.\nاكتب سيناريو إعلان عمودي لا يتجاوز 30 ثانية.\nالمنتج: {p}\nالجمهور المستهدف: {c}\nالفائدة الأساسية: {b}\nالعرض والدعوة إلى الفعل: {o}\n\nالهيكل: الهوك (من 0 إلى 3 ثوانٍ)، البودي (المشكلة، الحل، الدليل)، الـ CTA (فعل واحد فقط).\nلكل لقطة، اذكر: المدة، ما يظهر على الشاشة، التعليق الصوتي بالدارجة الجزائرية، النص المكتوب على الشاشة.\nلا شيء كاذب عن المنتج، ولا آراء أو أرقام مخترعة.',
-    ),
-  },
-  voice: {
-    tools: ['chatgpt', 'claude', 'elevenlabs'],
-    text: T(
-      'Écris une voix off de 30 secondes maximum (environ 70 mots) en darija algérienne naturelle.\nProduit : {p}\nCible : {c}\nBénéfice principal : {b}\nOffre et appel à l’action : {o}\n\nTon chaleureux et direct, phrases courtes, le hook dans la première phrase, l’appel à l’action à la fin.\nMarque les pauses avec « / » pour l’enregistrement ou la voix IA.',
-      'Write a voice-over of 30 seconds maximum (about 70 words) in natural Algerian darija.\nProduct: {p}\nTarget: {c}\nMain benefit: {b}\nOffer and call to action: {o}\n\nWarm and direct tone, short sentences, the hook in the first sentence, the call to action at the end.\nMark pauses with “/” for recording or for the AI voice.',
-      'اكتب تعليقًا صوتيًا لا يتجاوز 30 ثانية (حوالي 70 كلمة) بالدارجة الجزائرية الطبيعية.\nالمنتج: {p}\nالجمهور المستهدف: {c}\nالفائدة الأساسية: {b}\nالعرض والدعوة إلى الفعل: {o}\n\nنبرة دافئة ومباشرة، جمل قصيرة، الهوك في الجملة الأولى، والدعوة إلى الفعل في النهاية.\nضع علامة « / » عند كل وقفة للتسجيل أو للصوت الاصطناعي.',
-    ),
-  },
-  image: {
-    tools: ['gemini'],
-    en: true,
-    text: 'Advertising product photo of {p}, made for {c}.\nThe image shows the main benefit: {b}.\nHero shot, product centered and sharp, label readable, realistic reflections and soft shadows.\nSoft studio lighting, clean background in harmony with the product colors, premium commercial look.\nVertical 4:5 format. No extra text, no logo other than the product’s own, no watermark.',
-  },
-  video: {
-    tools: ['veo', 'kling', 'higgsfield'],
-    en: true,
-    text: 'Vertical 9:16 video, 5 seconds, from the attached product image of {p}.\nSlow camera push-in toward the product, a soft light sweep across the label, subtle background movement.\nMood: {b}, for {c}.\nThe product stays identical: same shape, same colors, same label. No text, no distortion, no extra objects.',
-  },
-};
-export const PROMPT_TYPES = Object.keys(PROMPTS);
+// Le générateur de prompts a sa propre page : le studio de prompts (#/prompts, data/prompts.js).
 
 /** Trois budgets de départ (dollars par mois). */
 export const BUDGETS = [

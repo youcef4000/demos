@@ -1,5 +1,5 @@
 // Hooked Academy — espace étudiant, en français, anglais et arabe (de droite à gauche).
-// Routes : #/ (accueil) · #/parcours/creative · #/parcours/ia · #/lecon/<id> · #/ressources · #/outils · #/aide · #/profil
+// Routes : #/ (accueil) · #/parcours/creative · #/parcours/ia · #/lecon/<id> · #/prompts(/<modèle>) · #/ressources · #/outils · #/aide · #/profil
 // Données : assets/js/store.js (localStorage) ; programme déjà traduit : data/programme.js.
 // Fichiers de l'équipe : ressources/manifest.json (facultatif) ; vidéos publiées : video/manifest.json.
 // Textes de l'interface : assets/js/i18n/app.js (+ i18n/common.js pour niveaux, badges, formations).
@@ -19,7 +19,9 @@ import * as FAQ from './faq.js';
 import { mountAssistant } from './assistant.js';
 import { getTheme, setTheme } from './theme.js';
 import { initPWA, installable } from './pwa.js';
-import { OUTILS, CATS as TOOL_CATS, BUDGETS, PROMPTS, PROMPT_TYPES, CHECKED as TOOLS_CHECKED } from '../../data/outils.js';
+import { OUTILS, CATS as TOOL_CATS, BUDGETS, CHECKED as TOOLS_CHECKED } from '../../data/outils.js';
+import { LESSON_TEMPLATE, byId as PS_TPL } from '../../data/prompts.js';
+import { viewStudio } from './prompt-studio.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -461,9 +463,9 @@ function shell(active, html, { track = '' } = {}) {
   const tabs = [
     ['#/', 'home', t('app.nav.home'), active === 'home'],
     [`#/parcours/${active.startsWith('track:') || active.startsWith('lesson:') ? active.split(':')[1] : lastTrack()}`, 'map', t('app.nav.path'), active.startsWith('track:') || active.startsWith('lesson:')],
+    ['#/prompts', 'wand', t('app.nav.prompts.short'), active === 'prompts', 'tab-ps'],
     ['#/ressources', 'book', t('app.nav.resources'), active === 'res'],
-    ['#/aide', 'help', t('app.nav.help'), active === 'help'],
-    ['#/profil', 'user', t('app.nav.profile'), active === 'profile'],
+    ['#/profil', 'user', t('app.nav.profile'), active === 'profile' || active === 'help' || active === 'tools'],
   ];
   root.innerHTML = `${RING_DEF}
   <a class="skip" href="#main">${t('app.skip')}</a>
@@ -472,6 +474,7 @@ function shell(active, html, { track = '' } = {}) {
       <a class="ha-logo" href="../" aria-label="Hooked Academy">${logoInner()}</a>
       <nav class="side-nav" aria-label="${esc(t('app.nav.label'))}">
         <a class="nv" href="#/" ${isOn('home')}>${icon('home', { size: 20 })}<span>${t('app.nav.home')}</span></a>
+        <a class="nv nv-ps" href="#/prompts" ${isOn('prompts')}>${icon('wand', { size: 20 })}<span>${t('app.nav.prompts')}</span><em class="nv-new">${t('app.nav.new')}</em></a>
         <p class="side-k">${t('app.nav.courses')}</p>
         ${TRACKS.map(
           (x) => `<a class="nv nv-trk" data-track="${x.id}" href="#/parcours/${x.id}" ${trackActive(x.id) ? 'aria-current="page"' : ''}>
@@ -517,7 +520,7 @@ function shell(active, html, { track = '' } = {}) {
       <main class="main" id="main" tabindex="-1" ${track ? `data-track="${track}"` : ''}>${html}</main>
     </div>
   </div>
-  <nav class="tabs" aria-label="${esc(t('app.nav.label'))}">${tabs.map(([h, ic, label, on]) => `<a href="${h}" ${on ? 'aria-current="page"' : ''}>${icon(ic, { size: 21 })}<span>${label}</span></a>`).join('')}</nav>`;
+  <nav class="tabs" aria-label="${esc(t('app.nav.label'))}">${tabs.map(([h, ic, label, on, cls]) => `<a href="${h}" ${cls ? `class="${cls}"` : ''} ${on ? 'aria-current="page"' : ''}>${icon(ic, { size: 21 })}<span>${label}</span></a>`).join('')}</nav>`;
   window.scrollTo(0, 0);
   animateRings(root);
 }
@@ -626,6 +629,8 @@ function viewHome() {
 
       ${contCard(hero)}
 
+      ${studioCard()}
+
       <div class="stats">
         <div class="card stat"><i>${icon('check', { size: 18 })}</i><b data-c="${done}">${num(done)}</b><span>${t('app.stat.done')}</span></div>
         <div class="card stat"><i>${icon('clock', { size: 18 })}</i><b>${num(Math.round(seconds / 60))}</b><span>${t('app.stat.minutes')}</span></div>
@@ -679,6 +684,15 @@ function viewHome() {
   stop.push(livePreview($('#cont-stage'), hero.next.id, { from: 0, to: 9 }));
 }
 
+/** Carte d'accueil du studio de prompts. */
+function studioCard() {
+  return `<a class="card ps-promo" href="#/prompts">
+    <span class="ps-promo-ic">${icon('wand', { size: 26 })}</span>
+    <span class="ps-promo-t"><span class="card-k">${t('app.nav.prompts')} <em class="nv-new">${t('app.nav.new')}</em></span><b>${t('app.ps.promo.t')}</b><span class="muted">${t('app.ps.promo.x')}</span></span>
+    <span class="ps-promo-go">${t('app.ps.promo.cta')} ${arrow(16)}</span>
+  </a>`;
+}
+
 function viewHomeDemo(PP) {
   const heroT = lastTrack();
   const hero = PP[heroT];
@@ -693,6 +707,7 @@ function viewHomeDemo(PP) {
         <div class="hello-cta"><a class="b b--or" href="${RESERVE}">${t('app.cta.reserve')}</a><a class="b" href="#/parcours/${heroT}">${icon('map', { size: 16 })} ${t('app.demo.home.path')}</a></div>
       </section>
       ${contCard(hero, { demo: true })}
+      ${studioCard()}
       <section class="prods" aria-labelledby="prods-h">
         <div class="sec-h"><div><h2 id="prods-h">${t('app.home.courses')}</h2><p>${t('app.demo.courses.sub')}</p></div></div>
         <div class="prods-g">${TRACKS.map((x) => productCard(x, PP[x.id], true)).join('')}</div>
@@ -1095,6 +1110,18 @@ function playerNote(l) {
   return `<span class="ls-note">${l.audio ? t('app.voice.translated') : t('app.voice.translated.soon')}</span>`;
 }
 
+/** Sous une leçon : le modèle du studio de prompts qui va avec son module. */
+function lessonStudio(m) {
+  const id = LESSON_TEMPLATE[m.id];
+  const x = id && PS_TPL[id];
+  if (!x) return '';
+  return `<a class="card ls-ps" href="#/prompts/${id}">
+    <span class="ls-ps-ic">${icon('wand', { size: 20 })}</span>
+    <span class="ls-ps-t"><small>${t('app.nav.prompts')}</small><b>${t('app.ps.lesson')}</b><span>${esc(pickT(x.title))}</span></span>
+    ${arrow(16)}
+  </a>`;
+}
+
 function viewLocked(f) {
   const { lesson: l, module: m, track } = f;
   const P = trackProgress(me, track.id);
@@ -1214,6 +1241,7 @@ function viewLesson(id) {
             )
             .join('')}</div>
         </section>
+        ${lessonStudio(m)}
         ${demo ? '' : partnerCard(l)}
         ${LAB ? `<a class="card lab-card lab-card--s" href="https://hooked-lab.com" target="_blank" rel="noopener"><span class="lc-m">${markSVG({ lab: true })}</span><div><h3>${t('app.lab.apply')}</h3><p class="muted">${t('app.lab.apply.text')}</p></div></a>` : ''}
       </aside>
@@ -1613,6 +1641,12 @@ function viewProfile() {
   const ident = me.protected ? `${icon('shield', { size: 14 })} ${t('app.profile.protected')}` : esc(me.email || me.phone || '');
   const name = demo ? t('app.demo.name') : esc(me.name || me.firstName || '');
   const initial = demo ? t('app.demo.initial') : esc(((me.firstName || me.name || 'H').trim()[0] || 'H').toUpperCase());
+  // Raccourcis (sur téléphone, la barre du bas n'a pas la place pour tout)
+  const links = `<nav class="card prof-links" aria-label="${esc(t('app.prof.links'))}">
+      <a href="#/prompts">${icon('wand', { size: 18 })}<span>${t('app.nav.prompts')}</span>${arrow(14)}</a>
+      <a href="#/outils">${icon('sparkles', { size: 18 })}<span>${t('app.nav.tools')}</span>${arrow(14)}</a>
+      <a href="#/aide">${icon('help', { size: 18 })}<span>${t('app.nav.faq')}</span>${arrow(14)}</a>
+    </nav>`;
   const head = `<header class="card prof-h">
       <span class="prof-av" aria-hidden="true">${initial}</span>
       <div class="prof-id"><h1>${name}</h1><p>${demo ? t('app.demo.limited') : `${ident}${cohortOf(me) ? ` <span class="dot" aria-hidden="true">·</span> ${esc(cohortOf(me))}` : ''}`}</p></div>
@@ -1633,6 +1667,7 @@ function viewProfile() {
           </ul>
           <a class="b b--or" href="${RESERVE}">${t('app.cta.reserve')}</a>
         </section>
+        ${links}
         ${teamCard()}
         ${prefsCard({ demo: true })}
       </div>`,
@@ -1644,6 +1679,7 @@ function viewProfile() {
       'profile',
       `<div class="prof">
         ${head}
+        ${links}
         ${teamCard()}
         ${me.protected ? '' : packCard()}
         ${me.protected ? '' : pwCard()}
@@ -1699,7 +1735,7 @@ function viewProfile() {
 
 /* ------------------------------------------------------------------ */
 /* Outils IA (#/outils) — à quoi sert chaque outil, ce qu'il coûte,    */
-/* sa leçon atelier, et un générateur de prompts prêts à coller        */
+/* sa leçon atelier ; le générateur de prompts a sa page (#/prompts)   */
 /* ------------------------------------------------------------------ */
 
 const pickT = (o) => (o && typeof o === 'object' ? o[lang] || o.fr : o || '');
@@ -1744,6 +1780,12 @@ function viewTools() {
     `<div class="tools">
       <div class="ph-h"><div><p class="card-k">${icon('sparkles', { size: 14 })} ${t('app.tools.k')}</p><h1>${t('app.tools.title')}</h1><p>${t('app.tools.lead')}</p></div></div>
 
+      <a class="card tl-ps" href="#/prompts">
+        <span class="ps-promo-ic">${icon('wand', { size: 26 })}</span>
+        <span class="ps-promo-t"><span class="card-k">${t('app.nav.prompts')}</span><b>${t('app.tools.ps.t')}</b><span class="muted">${t('app.tools.ps.x')}</span></span>
+        <span class="ps-promo-go">${t('app.ps.promo.cta')} ${arrow(16)}</span>
+      </a>
+
       <section class="tl-sec" aria-labelledby="tl-b-h">
         <h2 class="tl-h" id="tl-b-h">${t('app.tools.budget.title')}</h2>
         <div class="tl-budgets">${BUDGETS.map(
@@ -1773,24 +1815,6 @@ function viewTools() {
         ).join('')}</div>
       </section>
 
-      <section class="card tl-gen" aria-labelledby="tl-g-h">
-        <p class="card-k">${icon('wand', { size: 14 })} ${t('app.tools.gen.k')}</p>
-        <h2 class="tl-h" id="tl-g-h">${t('app.tools.gen.title')}</h2>
-        <p class="muted">${t('app.tools.gen.lead')}</p>
-        <div class="seg tl-types" id="gtype" role="group" aria-label="${esc(t('app.tools.gen.type'))}">${PROMPT_TYPES.map((k, i) => `<button type="button" aria-pressed="${i === 0}" data-k="${k}">${t(`app.tools.gen.t.${k}`)}</button>`).join('')}</div>
-        <div class="tl-gen-g">
-          <div class="tl-form">${['p', 'c', 'b', 'o']
-            .map((k) => `<label class="lbl" data-f="${k}"><span>${t(`app.tools.gen.${k}`)}</span><input class="in" id="g-${k}" type="text" placeholder="${esc(t(`app.tools.gen.${k}.ph`))}" autocomplete="off"></label>`)
-            .join('')}
-            <button class="b b--s" type="button" id="g-ex">${icon('spark', { size: 15 })} ${t('app.tools.gen.example')}</button>
-          </div>
-          <div class="tl-out">
-            <p class="tl-en muted" id="g-en" hidden>${icon('info', { size: 14 })} ${t('app.tools.gen.en')}</p>
-            <pre class="out tl-pre" id="g-out" dir="auto"></pre>
-            <div class="tl-act" id="g-act"></div>
-          </div>
-        </div>
-      </section>
     </div>`,
   );
 
@@ -1802,46 +1826,7 @@ function viewTools() {
     $$('#tl-grid .tl').forEach((c) => (c.hidden = b.dataset.c !== 'all' && c.dataset.cat !== b.dataset.c));
   });
 
-  // Générateur : le prompt se remplit à mesure que l'étudiant écrit
-  let type = PROMPT_TYPES[0];
-  const field = (k) => $(`#g-${k}`).value.trim();
-  const draw = () => {
-    const P = PROMPTS[type];
-    const fill = { p: field('p'), c: field('c'), b: field('b'), o: field('o') };
-    const txt = (P.en ? P.text : pickT(P.text)).replace(/\{([pcbo])\}/g, (_, k) => fill[k] || `[${t(`app.tools.gen.${k}`)}]`);
-    $('#g-out').textContent = txt;
-    $('#g-en').hidden = !P.en;
-    $('[data-f="o"]').hidden = !/\{o\}/.test(P.en ? P.text : pickT(P.text));
-    const q = encodeURIComponent(txt);
-    const launch = { chatgpt: `https://chatgpt.com/?q=${q}`, claude: `https://claude.ai/new?q=${q}` };
-    $('#g-act').innerHTML = `<button class="b b--or" type="button" id="g-copy">${icon('copy', { size: 16 })} ${t('app.tools.gen.copy')}</button>${P.tools
-      .map((id) => byId[id])
-      .filter(Boolean)
-      .map((o) => `<a class="b b--s" href="${esc(launch[o.id] || o.url)}" target="_blank" rel="noopener">${t(launch[o.id] ? 'app.tools.gen.in' : 'app.tools.gen.go', { name: esc(o.name) })}${icon('arrow', { size: 14, cls: 'i-ext' })}</a>`)
-      .join('')}`;
-    $('#g-copy').addEventListener('click', (e) => {
-      const btn = e.currentTarget;
-      navigator.clipboard?.writeText(txt).then(() => {
-        const o = btn.innerHTML;
-        btn.innerHTML = `${icon('check', { size: 15 })} ${t('app.tools.gen.copied')}`;
-        setTimeout(() => (btn.innerHTML = o), 1400);
-      });
-    });
-  };
-  $('#gtype').addEventListener('click', (e) => {
-    const b = e.target.closest('button[data-k]');
-    if (!b) return;
-    type = b.dataset.k;
-    $$('#gtype button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-    draw();
-  });
-  $$('.tl-form input').forEach((i) => i.addEventListener('input', draw));
-  $('#g-ex').addEventListener('click', () => {
-    ['p', 'c', 'b', 'o'].forEach((k) => ($(`#g-${k}`).value = t(`app.tools.gen.${k}.ex`)));
-    draw();
-  });
-  draw();
-  enter('.tools .ph-h, .tl-bud, .tl, .tl-gen');
+  enter('.tools .ph-h, .tl-bud, .tl, .tl-ps');
 }
 
 /* ------------------------------------------------------------------ */
@@ -1946,6 +1931,8 @@ async function route() {
   if (h === '#/ressources') return viewRes();
   if (h === '#/aide') return viewHelp();
   if (h === '#/outils') return viewTools();
+  const pm = h.match(/^#\/prompts(?:\/([a-z]+))?\/?$/);
+  if (pm) return viewStudio({ shell, setTitle, me, demo: S.isDemo(me), reserve: RESERVE, toast, enter, tplId: pm[1] });
   if (h === '#/profil') return viewProfile();
   return viewHome();
 }
