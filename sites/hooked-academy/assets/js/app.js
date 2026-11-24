@@ -479,8 +479,8 @@ function shell(active, html, { track = '' } = {}) {
         ${TRACKS.map(
           (x) => `<a class="nv nv-trk" data-track="${x.id}" href="#/parcours/${x.id}" ${trackActive(x.id) ? 'aria-current="page"' : ''}>
             <span class="nv-ic">${icon(x.icon, { size: 18 })}</span>
-            <span class="nv-t"><b>${trName(x.id)}</b><small>${demo ? t('app.demo.trk.title', { n: PP[x.id].open.length }) : notOwned(x.id) ? t('app.pack.notIn') : `${bdi(rangeOf(x.id))} · ${pc(PP[x.id].pct)}`}</small></span>
-            ${demo ? '' : notOwned(x.id) ? icon('lock', { size: 14, cls: 'nv-lk' }) : `<span class="nv-bar" aria-hidden="true"><i style="width:${(PP[x.id].pct * 100).toFixed(1)}%"></i></span>`}
+            <span class="nv-t"><b>${trName(x.id)}</b><small>${demo ? t('app.demo.trk.title', { n: PP[x.id].open.length }) : notOwned(x.id) ? (S.trackExpired(me, x.id) ? t('app.pack.expired.short') : t('app.pv.side', { n: num(S.PREVIEW[x.id].length) })) : `${bdi(rangeOf(x.id))} · ${pc(PP[x.id].pct)}`}</small></span>
+            ${demo ? '' : notOwned(x.id) ? icon(S.trackExpired(me, x.id) ? 'lock' : 'gift', { size: 14, cls: 'nv-lk' }) : `<span class="nv-bar" aria-hidden="true"><i style="width:${(PP[x.id].pct * 100).toFixed(1)}%"></i></span>`}
           </a>`,
         ).join('')}
         <p class="side-k">${t('app.nav.space')}</p>
@@ -584,7 +584,7 @@ function productCard(tr, P, demo) {
   const footer = demo
     ? `<a class="prod-next" href="#/lecon/${P.open[0]?.id || P.next.id}"><span><small>${t('app.demo.openLesson')}</small><b>${bdi(modCode(P.open[0]?.module || P.next.module))} · ${esc((P.open[0] || P.next).title)}</b></span><span class="prod-go">${arrow(18)}</span></a>`
     : !own
-      ? `<a class="prod-next is-add" href="${waUpgrade(tr.id)}" target="_blank" rel="noopener"><span><small>${t(S.isExpired(me) ? 'app.pack.expired.short' : 'app.pack.notIn')}</small><b>${t(S.isExpired(me) ? 'app.pack.renew' : 'app.pack.add')}</b></span><span class="prod-go">${icon('whatsapp', { size: 18 })}</span></a>`
+      ? pvFooter(tr.id)
       : P.complete
         ? `<div class="prod-end">${icon('trophy', { size: 20 })}<span><b>${t(`app.end.${tr.id}.title`)}</b><small>${t(`app.end.${tr.id}.short`)}</small></span></div>`
         : `<a class="prod-next" href="#/lecon/${P.next.id}"><span><small>${t(P.resume ? 'app.home.resume' : P.done ? 'app.home.continue' : 'app.home.start')}</small><b>${bdi(modCode(P.next.module))} · ${esc(P.next.title)}</b></span><span class="prod-go">${arrow(18)}</span></a>`;
@@ -785,8 +785,41 @@ function waUpgrade(track) {
   try {
     wa = String(S.settings().whatsapp || '').replace(/\D/g, '');
   } catch {}
-  const msg = t(S.isExpired(me) ? 'app.pack.renewMsg' : 'app.pack.addMsg', { track: trName(track) });
+  const msg = t(S.trackExpired(me, track) ? 'app.pack.renewMsg' : 'app.pack.addMsg', { track: trName(track) });
   return wa ? `https://wa.me/${wa}?text=${encodeURIComponent(msg)}` : RESERVE;
+}
+const addLabel = (track) => t(S.trackExpired(me, track) ? 'app.pack.renew' : 'app.pack.add');
+
+/** Leçon vue : terminée, ou regardée aux deux tiers. */
+const seenL = (l) => {
+  const r = me.progress.lessons[l.id] || {};
+  return !!r.done || (r.watched || 0) >= (DUR[l.id] || 1) * 0.66;
+};
+/** Aperçu offert d'une formation : ses 5 leçons (et leur module), combien sont vues, la prochaine à regarder. */
+function pvOf(track) {
+  const list = (S.PREVIEW[track] || []).map((id) => findLesson(id)).filter(Boolean);
+  const d = list.filter((f) => seenL(f.lesson)).length;
+  return { list, d, n: list.length, next: list.find((f) => !seenL(f.lesson)) || null };
+}
+/** Pied de la carte d'une formation hors du pack : la prochaine vidéo offerte, puis l'ajout au pack. */
+function pvFooter(track) {
+  const exp = S.trackExpired(me, track);
+  const pv = pvOf(track);
+  if (exp || !pv.next)
+    return `<a class="prod-next is-add" href="${waUpgrade(track)}" target="_blank" rel="noopener"><span><small>${exp ? t('app.pack.expired.short') : `${icon('gift', { size: 12 })} ${t('app.pv.all')}`}</small><b>${addLabel(track)}</b></span><span class="prod-go">${icon('whatsapp', { size: 18 })}</span></a>`;
+  return `<a class="prod-next is-pv" href="#/lecon/${pv.next.lesson.id}"><span><small>${icon('gift', { size: 12 })} ${t('app.pv.card', { d: num(pv.d), n: num(pv.n) })}</small><b>${bdi(modCode(pv.next.module))} · ${esc(pv.next.lesson.title)}</b></span><span class="prod-go">${icon('play', { size: 17 })}</span></a>
+      <a class="prod-add" href="${waUpgrade(track)}" target="_blank" rel="noopener">${icon('whatsapp', { size: 15 })} ${addLabel(track)}</a>`;
+}
+/** Bandeau d'une leçon regardée grâce à l'aperçu offert. */
+function pvBanner(l, track) {
+  const pv = pvOf(track);
+  const i = pv.list.findIndex((f) => f.lesson.id === l.id);
+  const nx = [...pv.list.slice(i + 1), ...pv.list.slice(0, i)].find((f) => !seenL(f.lesson)) || pv.list[i + 1];
+  return `<section class="card ls-pv" data-track="${track}">
+    <span class="ls-pv-ic">${icon('gift', { size: 22 })}</span>
+    <div class="ls-pv-t"><p class="card-k">${t('app.pv.k', { i: num(i + 1), n: num(pv.n) })} · ${trName(track)}</p><p>${t('app.pv.lesson.x', { track: trName(track) })}</p></div>
+    <div class="ls-pv-a">${nx ? `<a class="b b--s" href="#/lecon/${nx.lesson.id}">${icon('play', { size: 14 })} ${t('app.pv.next')}</a>` : ''}<a class="b b--acc b--s" href="${waUpgrade(track)}" target="_blank" rel="noopener">${icon('whatsapp', { size: 15 })} ${addLabel(track)}</a></div>
+  </section>`;
 }
 
 function lessonCard(l, m, P) {
@@ -798,6 +831,7 @@ function lessonCard(l, m, P) {
   const seen = done ? 1 : Math.min(1, (rec.watched || 0) / (DUR[l.id] || 1));
   const state = !open ? 'lock' : done ? 'done' : seen > 0.03 ? 'prog' : 'todo';
   const q = rec.quiz;
+  const pv = S.viaPreview(me, l.id);
   const meta = {
     lock: S.isDemo(me) ? t('app.lock.members') : t('app.pack.notIn'),
     done: `${t('app.lc.done')}${q != null ? ` · ${t('app.map.quiz', { s: pc(q) })}` : ''}`,
@@ -805,8 +839,9 @@ function lessonCard(l, m, P) {
     todo: t('app.lc.todo'),
   }[state];
   const tag = open ? 'a' : 'div';
-  return `<${tag} class="lc is-${state}${cur ? ' is-cur' : ''}" role="listitem" ${open ? `href="#/lecon/${l.id}"` : 'aria-disabled="true"'} style="--c:${m.color}">
+  return `<${tag} class="lc is-${state}${cur ? ' is-cur' : ''}${pv ? ' is-pv' : ''}" role="listitem" ${open ? `href="#/lecon/${l.id}"` : 'aria-disabled="true"'} style="--c:${m.color}">
     <span class="lc-img"><span class="lc-ph" aria-hidden="true">${icon(m.icon, { size: 34 })}</span><img src="${thumb(l)}" alt="" loading="lazy" decoding="async" ${THUMB_ERR}>
+      ${pv ? `<span class="lc-pv">${icon('gift', { size: 13 })} ${t('app.pv.badge')}</span>` : ''}
       <span class="lc-dur">${durOf(l)}</span>
       ${state === 'done' ? `<span class="lc-ok" aria-hidden="true">${icon('check', { size: 15, stroke: 3 })}</span>` : ''}
       <span class="lc-go" aria-hidden="true">${icon(state === 'lock' ? 'lock' : 'play', { size: 20 })}</span>
@@ -845,11 +880,19 @@ function moduleHTML(m, P, demo) {
 
 /** Bandeau d'une formation qui n'est pas dans le pack de l'étudiant (ou dont l'accès est terminé). */
 function packLock(trackId) {
-  const exp = S.isExpired(me) && S.accessOf(me).includes(trackId);
-  return `<section class="card pk-lock" data-track="${trackId}">
+  if (S.trackExpired(me, trackId))
+    return `<section class="card pk-lock" data-track="${trackId}">
     <span class="empty-ic">${icon('lock', { size: 24 })}</span>
-    <div><h2>${t(exp ? 'app.pack.expired.t' : 'app.pack.lock.t', { track: trName(trackId) })}</h2><p>${t(exp ? 'app.pack.expired.x' : 'app.pack.lock.x', { track: trName(trackId), d: me.expiresAt ? esc(fmtDate(me.expiresAt, { dateStyle: 'long' })) : '' })}</p></div>
-    <a class="b b--acc" href="${waUpgrade(trackId)}" target="_blank" rel="noopener">${icon('whatsapp', { size: 16 })} ${t(exp ? 'app.pack.renew' : 'app.pack.add')}</a>
+    <div><h2>${t('app.pack.expired.t')}</h2><p>${t('app.pack.expired.x', { d: esc(fmtDate(S.trackUntil(me, trackId), { dateStyle: 'long' })) })}</p></div>
+    <a class="b b--acc" href="${waUpgrade(trackId)}" target="_blank" rel="noopener">${icon('whatsapp', { size: 16 })} ${t('app.pack.renew')}</a>
+  </section>`;
+  // Pas dans le pack : l'aperçu offert d'abord (5 vidéos), l'ajout au pack ensuite
+  const pv = pvOf(trackId);
+  return `<section class="card pk-lock pk-pv" data-track="${trackId}">
+    <span class="empty-ic">${icon('gift', { size: 24 })}</span>
+    <div><h2>${t('app.pv.lock.t', { n: num(pv.n), track: trName(trackId) })}</h2><p>${t('app.pv.lock.x', { track: trName(trackId), total: num(lessonsOf(trackId).length) })}</p>
+      <p class="pv-dots" aria-label="${esc(t('app.pv.seen', { d: num(pv.d), n: num(pv.n) }))}">${pv.list.map((f) => `<i class="${seenL(f.lesson) ? 'on' : ''}" aria-hidden="true"></i>`).join('')}<small aria-hidden="true">${t('app.pv.seen', { d: num(pv.d), n: num(pv.n) })}</small></p></div>
+    <div class="pk-acts">${pv.next ? `<a class="b b--acc" href="#/lecon/${pv.next.lesson.id}">${icon('play', { size: 16 })} ${t('app.pv.watch')}</a>` : ''}<a class="b" href="${waUpgrade(trackId)}" target="_blank" rel="noopener">${icon('whatsapp', { size: 16 })} ${t('app.pack.add')}</a></div>
   </section>`;
 }
 
@@ -966,8 +1009,9 @@ const host = (u) => {
 function emptyState(ic, title, text) {
   return `<div class="empty"><span class="empty-ic">${icon(ic, { size: 26 })}</span><b>${title}</b><p>${text}</p></div>`;
 }
-function lockedPanel(text) {
-  return `<div class="locked-p"><div class="locked-sk" aria-hidden="true"><i></i><i></i><i></i></div><div class="empty is-lock"><span class="empty-ic">${icon('lock', { size: 24 })}</span><b>${t('app.lock.members')}</b><p>${text}</p><a class="b b--or b--s" href="${RESERVE}">${t('app.cta.reserve')}</a></div></div>`;
+function lockedPanel(text, cta = null) {
+  const go = cta ? `<a class="b b--or b--s" href="${cta.href}" target="_blank" rel="noopener">${icon('whatsapp', { size: 15 })} ${cta.label}</a>` : `<a class="b b--or b--s" href="${RESERVE}">${t('app.cta.reserve')}</a>`;
+  return `<div class="locked-p"><div class="locked-sk" aria-hidden="true"><i></i><i></i><i></i></div><div class="empty is-lock"><span class="empty-ic">${icon('lock', { size: 24 })}</span><b>${cta ? t('app.pv.resT') : t('app.lock.members')}</b><p>${text}</p>${go}</div></div>`;
 }
 
 function renderPdfs(panel, items) {
@@ -1141,7 +1185,9 @@ function lessonStudio(m) {
 function viewLocked(f) {
   const { lesson: l, module: m, track } = f;
   const P = trackProgress(me, track.id);
-  const open = P.open[0];
+  // Formation hors du pack : on propose la prochaine vidéo offerte plutôt que la bienvenue
+  const pvNext = notOwned(track.id) && !S.trackExpired(me, track.id) ? pvOf(track.id).next?.lesson : null;
+  const open = pvNext || P.open[0];
   setTitle(t('app.lock.title'));
   shell(
     `lesson:${track.id}`,
@@ -1153,7 +1199,7 @@ function viewLocked(f) {
         <h1>${notOwned(track.id) ? t('app.pack.lock.t', { track: trName(track.id) }) : t('app.lock.title')}</h1>
         <p>${notOwned(track.id) ? t('app.pack.lock.x', { track: trName(track.id) }) : t('app.lock.text', { n: P.total, track: trName(track.id) })}</p>
         <ul class="lk-list">${['app.lock.inc.lessons', 'app.lock.inc.quiz', 'app.lock.inc.files', 'app.lock.inc.cert'].map((k) => `<li>${icon('check', { size: 15, stroke: 2.4 })} ${t(k)}</li>`).join('')}</ul>
-        <div class="lk-act">${notOwned(track.id) ? `<a class="b b--or" href="${waUpgrade(track.id)}" target="_blank" rel="noopener">${icon('whatsapp', { size: 15 })} ${t(S.isExpired(me) ? 'app.pack.renew' : 'app.pack.add')}</a>` : `<a class="b b--or" href="${RESERVE}">${t('app.cta.reserve')}</a>`}${open ? `<a class="b" href="#/lecon/${open.id}">${icon('play', { size: 15 })} ${t('app.lock.open')}</a>` : ''}</div>
+        <div class="lk-act">${notOwned(track.id) ? `<a class="b b--or" href="${waUpgrade(track.id)}" target="_blank" rel="noopener">${icon('whatsapp', { size: 15 })} ${addLabel(track.id)}</a>` : `<a class="b b--or" href="${RESERVE}">${t('app.cta.reserve')}</a>`}${open ? `<a class="b" href="#/lecon/${open.id}">${icon(pvNext ? 'gift' : 'play', { size: 15 })} ${t(pvNext ? 'app.pv.watch' : 'app.lock.open')}</a>` : ''}</div>
       </div>
     </div>`,
     { track: track.id },
@@ -1170,6 +1216,9 @@ function viewLesson(id) {
   if (!S.canAccess(me, f.lesson.id)) return viewLocked(f);
   const { lesson: l, module: m, prev, next, track } = f;
   const demo = S.isDemo(me);
+  // Vue en aperçu offert : la vidéo oui, les PDF et ressources restent dans la formation
+  const pv = S.viaPreview(me, l.id);
+  const shut = demo || pv;
   const rec = me.progress.lessons[l.id] || {};
   S.recordLesson(me.id, l.id, { watched: rec.watched || 0 });
   refreshMe();
@@ -1190,9 +1239,9 @@ function viewLesson(id) {
   if (isIA) {
     const at = [
       { k: 'quiz', ic: 'target', label: t('app.tab.quiz'), count: quizN },
-      { k: 'pdf', ic: 'doc', label: t('app.tab.pdf'), count: pdfs.length, lock: demo },
-      { k: 'prompts', ic: 'chat', label: t('app.tab.prompts'), count: prompts.length, lock: demo },
-      { k: 'res', ic: 'link', label: t('app.tab.res'), count: others.length, lock: demo },
+      { k: 'pdf', ic: 'doc', label: t('app.tab.pdf'), count: pdfs.length, lock: shut },
+      { k: 'prompts', ic: 'chat', label: t('app.tab.prompts'), count: prompts.length, lock: shut },
+      { k: 'res', ic: 'link', label: t('app.tab.res'), count: others.length, lock: shut },
     ];
     tabsHTML = `<section class="atl" aria-labelledby="atl-h">
         <header class="atl-h"><span class="atl-ic">${icon('sparkles', { size: 20 })}</span><div><h2 id="atl-h">${t('app.atl.title')}</h2><p>${t(demo ? 'app.atl.sub.demo' : 'app.atl.sub')}</p></div></header>
@@ -1208,15 +1257,15 @@ function viewLesson(id) {
     const tabs = [
       ...learnTabs,
       { k: 'quiz', ic: 'target', label: t('app.tab.quiz'), count: quizN },
-      ...(prompts.length ? [{ k: 'prompts', ic: 'chat', label: t('app.tab.prompts'), count: prompts.length, lock: demo }] : []),
-      ...(pdfs.length + others.length ? [{ k: 'res', ic: 'link', label: t('app.tab.res'), count: pdfs.length + others.length, lock: demo }] : []),
+      ...(prompts.length ? [{ k: 'prompts', ic: 'chat', label: t('app.tab.prompts'), count: prompts.length, lock: shut }] : []),
+      ...(pdfs.length + others.length ? [{ k: 'res', ic: 'link', label: t('app.tab.res'), count: pdfs.length + others.length, lock: shut }] : []),
     ];
     tabsHTML = `<section class="learn">${tabList('lt', tabs, 'ls-tabs')}<div class="card ls-panel" id="lt-panel" role="tabpanel" tabindex="0"></div></section>`;
   }
 
   const nextLocked = next && !S.canAccess(me, next.id);
   const navNext = next
-    ? `<a href="#/lecon/${next.id}" class="is-next ${nextLocked ? 'is-lock' : ''}"><span>${t('app.next')} ${arrow(13)}</span><b>${nextLocked ? `${icon('lock', { size: 14 })} ${t('app.lock.members')}` : esc(next.title)}</b></a>`
+    ? `<a href="#/lecon/${next.id}" class="is-next ${nextLocked ? 'is-lock' : ''}"><span>${t('app.next')} ${arrow(13)}</span><b>${nextLocked ? `${icon('lock', { size: 14 })} ${demo ? t('app.lock.members') : t('app.pack.notIn')}` : esc(next.title)}</b></a>`
     : `<a href="#/parcours/${track.id}" class="is-next"><span>${t('app.track.end.k')} ${arrow(13)}</span><b>${t('app.track.end.link', { track: trName(track.id) })}</b></a>`;
 
   shell(
@@ -1237,6 +1286,7 @@ function viewLesson(id) {
           <span class="grow"></span>
           <button class="b b--s ${rec.done ? 'b--ok' : 'b--acc'}" id="mark" type="button" ${rec.done ? 'aria-pressed="true"' : 'aria-pressed="false"'}>${rec.done ? `${icon('check', { size: 16, stroke: 2.6 })} ${t('app.lesson.done')}` : t('app.lesson.mark')}</button>
         </div>
+        ${pv ? pvBanner(l, track.id) : ''}
         ${tabsHTML}
         <nav class="ls-next" aria-label="${esc(t('app.lesson.nav'))}">${prev ? `<a href="#/lecon/${prev.id}" class="is-prev"><span>${back(13)} ${t('app.prev')}</span><b>${esc(prev.title)}</b></a>` : '<span></span>'}${navNext}</nav>
       </div>
@@ -1279,9 +1329,10 @@ function viewLesson(id) {
       return renderWidget(l.widget, $('#wdx', panel), { lesson: l, module: m, onXP: (n, why) => gainXP(n, why) });
     }
     if (k === 'quiz') return renderQuiz(panel, l);
-    if (k === 'pdf') return demo ? (panel.innerHTML = lockedPanel(t('app.lock.atl'))) : renderPdfs(panel, pdfs);
-    if (k === 'prompts') return demo ? (panel.innerHTML = lockedPanel(t('app.lock.atl'))) : renderPrompts(panel, prompts);
-    if (k === 'res') return demo ? (panel.innerHTML = lockedPanel(t('app.lock.atl'))) : renderFiles(panel, isIA ? others : [...pdfs, ...others], { withPdf: !isIA });
+    const shutP = () => (panel.innerHTML = pv ? lockedPanel(t('app.pv.res', { track: trName(track.id) }), { href: waUpgrade(track.id), label: addLabel(track.id) }) : lockedPanel(t('app.lock.atl')));
+    if (k === 'pdf') return shut ? shutP() : renderPdfs(panel, pdfs);
+    if (k === 'prompts') return shut ? shutP() : renderPrompts(panel, prompts);
+    if (k === 'res') return shut ? shutP() : renderFiles(panel, isIA ? others : [...pdfs, ...others], { withPdf: !isIA });
   };
   if (isIA) {
     bindTabs('atl', renderPanel, 'quiz');
@@ -1641,13 +1692,18 @@ function bindPw() {
 
 /** Profil : formations du pack et date de fin d'accès. */
 function packCard() {
-  const tr = S.accessOf(me);
-  const missing = TRACKS.find((x) => notOwned(x.id));
+  const bought = S.accessOf(me);
+  // La formation à proposer : une formation terminée à renouveler, sinon une formation à ajouter
+  const missing = TRACKS.find((x) => S.trackExpired(me, x.id)) || TRACKS.find((x) => notOwned(x.id));
+  const dates = TRACKS.filter((x) => bought.includes(x.id) && S.trackUntil(me, x.id)).map((x) => {
+    const exp = S.trackExpired(me, x.id);
+    return `<li class="${exp ? 'is-exp' : ''}" data-track="${x.id}"><b>${trName(x.id)}</b> <span>${t(exp ? 'app.pack.endedOn' : 'app.pack.until', { d: esc(fmtDate(S.trackUntil(me, x.id), { dateStyle: 'long' })) })}</span></li>`;
+  });
   return `<section class="card pk-card">
     <p class="card-k">${icon('key', { size: 14 })} ${t('app.pack.k')}</p>
-    <div class="pk-tr">${TRACKS.map((x) => `<span class="pk-chip${tr.includes(x.id) && !S.isExpired(me) ? ' is-on' : ''}" data-track="${x.id}">${icon(tr.includes(x.id) && !S.isExpired(me) ? 'check' : 'lock', { size: 14 })} ${trName(x.id)}</span>`).join('')}</div>
-    ${me.expiresAt ? `<p class="muted pk-until">${t(S.isExpired(me) ? 'app.pack.expired.x' : 'app.pack.until', { d: esc(fmtDate(me.expiresAt, { dateStyle: 'long' })) })}</p>` : ''}
-    ${missing ? `<a class="b b--s" href="${waUpgrade(missing.id)}" target="_blank" rel="noopener">${icon('whatsapp', { size: 15 })} ${t(S.isExpired(me) ? 'app.pack.renew' : 'app.pack.add')}</a>` : ''}
+    <div class="pk-tr">${TRACKS.map((x) => `<span class="pk-chip${S.hasTrack(me, x.id) ? ' is-on' : ''}" data-track="${x.id}">${icon(S.hasTrack(me, x.id) ? 'check' : 'lock', { size: 14 })} ${trName(x.id)}</span>`).join('')}</div>
+    ${dates.length ? `<ul class="pk-dates">${dates.join('')}</ul>` : ''}
+    ${missing ? `<a class="b b--s" href="${waUpgrade(missing.id)}" target="_blank" rel="noopener">${icon('whatsapp', { size: 15 })} ${addLabel(missing.id)}</a>` : ''}
   </section>`;
 }
 

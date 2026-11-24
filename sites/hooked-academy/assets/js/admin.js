@@ -167,10 +167,15 @@ const firstOf = (name) => String(name || '').replace(/^Exemple — /, '').split(
 function welcomeText(st, l, code = '') {
   const id = st.email ? tIn(l, 'ad.msg.email', { v: st.email }) : tIn(l, 'ad.msg.phone', { v: st.phone || '—' });
   const name = S.isDemo(st) ? tIn(l, 'ad.msg.demoName') : st.firstName || firstOf(st.name);
-  const tr = S.accessOf(st);
-  const packName = tr.map((x) => tIn(l, `track.${x}`)).join(' + ');
-  const until = st.expiresAt ? new Intl.DateTimeFormat({ fr: 'fr-FR', en: 'en-GB', ar: 'ar-DZ' }[l] || 'fr-FR', { dateStyle: 'long' }).format(new Date(st.expiresAt)) : '';
-  const pack = !S.isDemo(st) && tr.length && until ? `${tIn(l, 'ad.msg.pack', { p: packName, d: until })}\n` : '';
+  // Les formations ouvertes et leur date de fin (une date par formation : un an à partir de son paiement)
+  const tr = S.accessOf(st).filter((x) => !S.trackExpired(st, x) && S.trackUntil(st, x));
+  const fmt = (d) => new Intl.DateTimeFormat({ fr: 'fr-FR', en: 'en-GB', ar: 'ar-DZ' }[l] || 'fr-FR', { dateStyle: 'long' }).format(new Date(d));
+  const ends = [...new Set(tr.map((x) => fmt(S.trackUntil(st, x))))];
+  const pack = S.isDemo(st) || !tr.length
+    ? ''
+    : ends.length === 1
+      ? `${tIn(l, 'ad.msg.pack', { p: tr.map((x) => tIn(l, `track.${x}`)).join(' + '), d: ends[0] })}\n`
+      : tr.map((x) => `${tIn(l, 'ad.msg.pack', { p: tIn(l, `track.${x}`), d: fmt(S.trackUntil(st, x)) })}\n`).join('');
   return tIn(l, 'ad.msg.welcome', { name, url: studentUrl(l), id, code: code || '—', pack });
 }
 const contactText = (a, l) => tIn(l, 'ad.msg.contact', { name: firstOf(a.name) });
@@ -658,7 +663,11 @@ function openApp(id, validation = null) {
       <dt>${t('ad.f.email')}</dt><dd dir="ltr">${esc(a.email || '—')}</dd>
       <dt>${t('ad.f.city')}</dt><dd>${esc(exText(a.city) || '—')}</dd>
       <dt>${t('ad.f.profil')}</dt><dd>${esc(prLabel(a.profil))}</dd>
-      <dt>${t('ad.f.formation')}</dt><dd>${fmChip(fmOf(a), true) || '—'}</dd>
+      <dt>${t('ad.f.formation')}</dt><dd>${
+        a.status === 'validee'
+          ? fmChip(fmOf(a), true) || '—'
+          : `<select class="in ap-pack" data-pack aria-label="${esc(t('ad.pack.label'))}">${['creative', 'ia', 'dev', 'both', 'all'].map((f) => `<option value="${f}"${fmOf(a) === f ? ' selected' : ''}>${esc(fmLabel(f, true))}</option>`).join('')}</select><small class="muted ap-pack-x">${t('ad.pack.hint')}</small>`
+      }${a.asked && a.asked !== a.formation ? `<small class="muted ap-pack-x">${t('ad.pack.asked', { p: esc(fmLabel(a.asked, true)) })}</small>` : ''}</dd>
       <dt>${t('ad.f.lang')}</dt><dd>${lgOf(a) ? `<span lang="${lgOf(a)}">${esc(lgName(lgOf(a)))}</span>` : '—'}</dd>
       <dt>${t('ad.f.level')}</dt><dd>${esc(exText(a.niveau) || '—')}</dd>
       <dt>${t('ad.f.goal')}</dt><dd>${esc(exText(a.objectif) || '—')}</dd>
@@ -691,6 +700,12 @@ function openApp(id, validation = null) {
   $('[data-newcode]', dw)?.addEventListener('click', () => {
     dispose();
     newCode(st);
+  });
+  $('[data-pack]', dw)?.addEventListener('change', async (e) => {
+    if (!(await act(() => api('PATCH', `admin/apps/${enc(a.id)}`, { formation: e.target.value }), t('ad.pack.saved')))) return;
+    await reload().catch(() => {});
+    dispose();
+    openApp(a.id);
   });
   $('[data-delapp]', dw).addEventListener('click', async () => {
     if (!confirm(t('ad.app.delC', { name: exText(a.name) }))) return;
@@ -792,9 +807,16 @@ function viewStudents() {
   const access = (s) => {
     if (s.demo) return '<small class="muted">—</small>';
     const tr = S.accessOf(s);
-    const chips = tr.length ? tr.map((x) => `<span class="fm" data-fm="${x}">${esc(t(`ad.fm.${x}`))}</span>`).join(' ') : `<span class="chip chip--off">${t('ad.ac.none')}</span>`;
-    const until = s.protected || !s.expiresAt ? '' : `<br><small class="${S.isExpired(s) ? 'ac-exp' : 'muted'}">${t(S.isExpired(s) ? 'ad.ac.expired' : 'ad.ac.untilShort', { d: esc(fmtDate(s.expiresAt, { day: '2-digit', month: 'short', year: 'numeric' })) })}</small>`;
-    return `<span class="ac-chips">${chips}</span>${until}`;
+    if (!tr.length) return `<span class="chip chip--off">${t('ad.ac.none')}</span>`;
+    if (s.protected) return `<span class="ac-chips">${tr.map((x) => `<span class="fm" data-fm="${x}">${esc(t(`ad.fm.${x}`))}</span>`).join(' ')}</span>`;
+    // Une date de fin par formation (un an à partir de son paiement)
+    return `<span class="ac-lines">${tr
+      .map((x) => {
+        const end = S.trackUntil(s, x);
+        const exp = S.trackExpired(s, x);
+        return `<span class="ac-line${exp ? ' is-exp' : ''}"><span class="fm" data-fm="${x}">${esc(t(`ad.fm.${x}`))}</span>${end ? ` <small class="${exp ? 'ac-exp' : 'muted'}">${t(exp ? 'ad.ac.expired' : 'ad.ac.untilShort', { d: esc(fmtDate(end, { day: '2-digit', month: 'short', year: 'numeric' })) })}</small>` : ''}</span>`;
+      })
+      .join('')}</span>`;
   };
   const accBtn = (s, full) =>
     s.protected || s.demo ? '' : `<button class="b b--s" data-acc="${esc(s.id)}" type="button" ${full ? '' : `aria-label="${esc(t('ad.ac.btn'))}" title="${esc(t('ad.ac.btn'))}"`}>${icon('key', { size: 15 })}${full ? ` ${t('ad.ac.btn')}` : ''}</button>`;
@@ -844,30 +866,51 @@ function viewStudents() {
 /** Formations ouvertes et durée d'accès d'un étudiant (pack du formulaire appliqué à la validation). */
 function editAccess(s) {
   const app = D.applications.find((a) => a.id === s.appId);
-  const tr = S.accessOf(s);
+  const u = S.untilOf(s);
   const ymd = (iso) => (iso ? new Date(iso).toISOString().slice(0, 10) : '');
+  const inYear = (from) => new Date(Math.max(Date.now(), Date.parse(from || 0) || 0) + S.ACCESS_DAYS * 864e5).toISOString().slice(0, 10);
   const html = `${drawerHead(icon('key', { size: 14 }) + ' ' + t('ad.ac.k'), t('ad.ac.title', { name: stuName(s) }))}
     <form id="acf" class="ac-form">
       ${app && fmOf(app) ? `<p class="muted">${t('ad.ac.pack', { p: esc(fmLabel(fmOf(app), true)) })}</p>` : ''}
       <fieldset class="ac-tracks"><legend>${t('ad.ac.tracks')}</legend>
-        ${S.TRACK_IDS.map((x) => `<label class="ac-tr" data-fm="${x}"><input type="checkbox" name="tr" value="${x}"${tr.includes(x) ? ' checked' : ''}><span>${icon(trackOf(x).icon, { size: 18 })}<b>${esc(t(`track.${x}`))}</b></span></label>`).join('')}
+        ${S.TRACK_IDS.map((x) => {
+          const on = x in u;
+          const exp = S.trackExpired(s, x);
+          return `<div class="ac-row" data-fm="${x}">
+          <label class="ac-tr" data-fm="${x}"><input type="checkbox" name="tr" value="${x}"${on ? ' checked' : ''}><span>${icon(trackOf(x).icon, { size: 18 })}<b>${esc(t(`track.${x}`))}</b></span></label>
+          <div class="ac-when"><input class="in" type="date" name="u-${x}" value="${ymd(u[x])}" dir="ltr" aria-label="${esc(`${t('ad.ac.until')} · ${t(`track.${x}`)}`)}"${on ? '' : ' disabled'}><button class="b b--s" type="button" data-plus="${x}">${icon('plus', { size: 14 })} ${t('ad.ac.plus')}</button></div>
+          ${exp ? `<small class="ac-exp">${t('ad.ac.expired', { d: esc(fmtDate(u[x], { dateStyle: 'long' })) })}</small>` : ''}
+        </div>`;
+        }).join('')}
       </fieldset>
-      <label class="lbl">${t('ad.ac.until')}<input class="in" type="date" name="until" value="${ymd(s.expiresAt)}" dir="ltr"></label>
-      <p class="muted ac-state">${S.isExpired(s) ? `<span class="ac-exp">${t('ad.ac.expired', { d: esc(fmtDate(s.expiresAt, { dateStyle: 'long' })) })}</span>` : ''}</p>
-      <div class="acts"><button class="b b--s" type="button" id="ac-plus">${icon('plus', { size: 15 })} ${t('ad.ac.plus')}</button></div>
       <p class="muted" style="font-size:13px">${t('ad.ac.hint')}</p>
       <div class="acts"><button class="b b--or" type="submit">${t('ad.ac.save')}</button><button class="b" type="button" data-x>${t('ad.fq.cancel')}</button></div>
     </form>`;
   const dw = drawer(t('ad.ac.title', { name: stuName(s) }), html);
   const f = $('#acf', dw.dw);
-  $('#ac-plus', dw.dw).addEventListener('click', () => {
-    const base = Math.max(Date.now(), Date.parse(f.elements.until.value || 0) || 0);
-    f.elements.until.value = new Date(base + S.ACCESS_DAYS * 864e5).toISOString().slice(0, 10);
-  });
+  const dateOf = (x) => f.elements[`u-${x}`];
+  // Cocher ouvre la formation pour un an ; décocher la retire ; « +1 an » prolonge à partir de sa fin (ou d'aujourd'hui)
+  $$('input[name="tr"]', f).forEach((cb) =>
+    cb.addEventListener('change', () => {
+      const d = dateOf(cb.value);
+      d.disabled = !cb.checked;
+      if (cb.checked && !d.value) d.value = inYear();
+    }),
+  );
+  $$('[data-plus]', f).forEach((b) =>
+    b.addEventListener('click', () => {
+      const x = b.dataset.plus;
+      const d = dateOf(x);
+      const cb = $(`input[name="tr"][value="${x}"]`, f);
+      d.value = inYear(cb.checked && d.value ? `${d.value}T23:59:59Z` : 0);
+      cb.checked = true;
+      d.disabled = false;
+    }),
+  );
   f.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const tracks = $$('input[name="tr"]:checked', f).map((i) => i.value);
-    const body = { access: tracks, ...(f.elements.until.value ? { expiresAt: f.elements.until.value } : {}) };
+    const until = Object.fromEntries(S.TRACK_IDS.map((x) => [x, $(`input[name="tr"][value="${x}"]`, f).checked ? dateOf(x).value || inYear() : null]));
+    const body = { until };
     if (!(await act(() => api('PATCH', `admin/students/${enc(s.id)}`, body), t('ad.ac.saved')))) return;
     dw.dispose();
     await reload().catch(() => {});

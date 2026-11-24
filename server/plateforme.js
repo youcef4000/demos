@@ -34,6 +34,10 @@ const TRACKS = ['creative', 'ia', 'dev'];
 const FREE_OPEN = ['m0-l1', 'm0-l3', 'm0-l4', 'ia0-l1', 'ia0-l5', 'ia0-l6', 'dv0-l5', 'dv0-l6', 'dv0-l7'];
 // Leçons ouvertes en plus au compte démo (aucune : il s'arrête aux 3 premières vidéos de chaque formation)
 const DEMO_OPEN = [];
+// Aperçu offert : 5 leçons de chaque formation, ouvertes aux étudiants inscrits qui n'ont pas (ou plus) cette formation,
+// pour leur donner envie de l'ajouter. La vidéo et la voix off seulement : PDF et ressources restent dans la formation.
+// Le compte démo n'y a pas accès. Même liste dans assets/js/store.js (PREVIEW).
+const PREVIEW = ['m2-l2', 'm2-l8', 'm3-l5', 'm7-l1', 'm10-l5', 'ia1-l2', 'ia2-l2', 'ia3-l4', 'ia5-l3', 'ia8-l3', 'dv1-l1', 'dv3-l2', 'dv4-l6', 'dv6-l2', 'dv13-l1'];
 const STATUS = ['nouvelle', 'contactee', 'paiement', 'validee', 'refusee'];
 const PROFILS = ['debutant', 'ecommercant', 'freelance', 'createur', 'agence'];
 // Packs : une formation, « both » = Créative + IA (le pack historique), « all » = les trois formations
@@ -157,6 +161,24 @@ const normPhone = (s) => {
 const clamp = (n, a, b) => Math.min(b, Math.max(a, n));
 const iso = (t = Date.now()) => new Date(t).toISOString();
 const ymd = (s) => (typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s) ? s : '');
+/**
+ * Accès d'un an PAR formation : { creative: fin, ia: fin, dev: fin } (date ISO). Acheter une formation ne prolonge
+ * pas les autres, et une formation terminée ne revient pas avec un nouvel achat. Anciens comptes : une date commune.
+ */
+const untilOf = (st) =>
+  st?.until && typeof st.until === 'object'
+    ? Object.fromEntries(TRACKS.filter((x) => st.until[x] !== undefined).map((x) => [x, st.until[x]]))
+    : Object.fromEntries((st?.access || []).filter((x) => TRACKS.includes(x)).map((x) => [x, st.expiresAt || null]));
+const openNow = (end) => end == null || Date.now() <= Date.parse(end);
+/** Enregistre les dates par formation ; access (formations achetées) et expiresAt (la date la plus lointaine) suivent. */
+function setUntil(st, until) {
+  st.until = Object.fromEntries(TRACKS.filter((x) => until[x] !== undefined).map((x) => [x, until[x]]));
+  st.access = Object.keys(st.until);
+  const ends = Object.values(st.until);
+  st.expiresAt = !ends.length || ends.includes(null) ? null : ends.reduce((a, b) => (Date.parse(a) >= Date.parse(b) ? a : b));
+}
+const yearFrom = (end) => iso(Math.max(Date.now(), Date.parse(end || 0) || 0) + YEAR);
+const endOfDay = (day) => new Date(`${day}T23:59:59Z`).toISOString();
 
 const SEC = { 'x-content-type-options': 'nosniff', 'referrer-policy': 'same-origin', 'x-frame-options': 'DENY' };
 function json(data, status = 200, headers = {}) {
@@ -360,6 +382,14 @@ export class Plateforme {
       CREATE TABLE IF NOT EXISTS hits (k TEXT PRIMARY KEY, n INTEGER NOT NULL, until INTEGER NOT NULL);
       CREATE TABLE IF NOT EXISTS audit (at INTEGER NOT NULL, who TEXT NOT NULL, act TEXT NOT NULL, info TEXT);
     `);
+    // Une fois : les voix off déjà déposées pour des leçons payantes ne sont plus publiques
+    if (!this.kv('mig:voix-membres')) {
+      for (const r of this.docs('voix')) {
+        const file = JSON.parse(r.v)?.file;
+        if (file && !FREE_OPEN.includes(r.id) && !DEMO_OPEN.includes(r.id)) this.sql.exec("UPDATE files SET scope = 'members', lesson = ? WHERE id = ?", r.id, file);
+      }
+      this.setKv('mig:voix-membres', 1);
+    }
   }
   cookie(role, value, maxAge) {
     const path = role === 'device' ? `${this.P}/api/admin/` : `${this.P}/`;
@@ -533,8 +563,8 @@ export class Plateforme {
   tracksOf(st) {
     if (!st || !st.active) return [];
     if (st.protected) return TRACKS;
-    if (st.expiresAt && Date.now() > Date.parse(st.expiresAt)) return [];
-    return (st.access || []).filter((x) => TRACKS.includes(x));
+    const u = untilOf(st);
+    return TRACKS.filter((x) => x in u && openNow(u[x]));
   }
   /** Ce que reçoit l'étudiant connecté : son profil, la FAQ pro, les ressources de ses formations. */
   member(st) {
@@ -554,12 +584,14 @@ export class Plateforme {
   }
   /**
    * Une leçon peut-elle être écoutée ? Bienvenue et leçons de démo : tout le monde ; sinon l'équipe,
-   * ou un étudiant qui a la formation. Sert à protéger les voix off des leçons payantes (fichiers du site).
+   * un étudiant qui a la formation, ou n'importe quel étudiant inscrit pour les leçons de l'aperçu offert.
+   * Sert à protéger les voix off des leçons payantes (fichiers du site et voix déposées par l'équipe).
    */
   async lessonAllowed(req, lessonId) {
     if (FREE_OPEN.includes(lessonId) || DEMO_OPEN.includes(lessonId)) return true;
     if (await this.session(req, 'admin')) return true;
-    return !!(await this.studentAccess(req))?.includes(trackOfLesson(lessonId));
+    const tracks = await this.studentAccess(req);
+    return !!tracks && (tracks.includes(trackOfLesson(lessonId)) || PREVIEW.includes(lessonId));
   }
 
   /* --------------------------- fichiers ---------------------------- */
@@ -789,6 +821,15 @@ export class Plateforme {
     const a = this.app(id);
     if (!a) fail(404, 'not_found');
     const v = await readJSON(req);
+    // Le pack réellement payé peut différer de celui choisi dans le formulaire : l'équipe le corrige avant de valider
+    if (v.formation !== undefined) {
+      if (!PACKS.includes(v.formation)) fail(400, 'formation');
+      if (a.status === 'validee') fail(409, 'validated');
+      if (v.formation !== a.formation) {
+        if (!a.asked) a.asked = a.formation;
+        a.formation = v.formation;
+      }
+    }
     if (v.status !== undefined) {
       if (!STATUS.includes(v.status) || v.status === 'validee') fail(400, 'status');
       if (v.status !== a.status) a.history.push({ at: iso(), status: v.status, by: S(v.by, 40) || 'Équipe' });
@@ -826,10 +867,12 @@ export class Plateforme {
     };
     if (row) {
       const st = this.student(row.id);
-      if (v.renew !== st.id) fail(409, 'exists', { student: { id: st.id, name: st.name, email: st.email, phone: st.phone, access: st.access, expiresAt: st.expiresAt, active: st.active } });
+      if (v.renew !== st.id) fail(409, 'exists', { student: { id: st.id, name: st.name, email: st.email, phone: st.phone, access: st.access, until: untilOf(st), expiresAt: st.expiresAt, active: st.active } });
       st.active = true;
-      st.access = TRACKS.filter((x) => (st.access || []).includes(x) || tracks.includes(x));
-      st.expiresAt = iso(Math.max(Date.now(), Date.parse(st.expiresAt || 0) || 0) + YEAR);
+      // Un an de plus pour les formations payées (à partir de leur fin si elles sont encore ouvertes) ; les autres ne bougent pas
+      const u = untilOf(st);
+      for (const x of tracks) u[x] = yearFrom(u[x]);
+      setUntil(st, u);
       this.saveStudent(st);
       this.log('réinscription', `${a.id} → ${st.id}`);
       return done(st, null);
@@ -844,10 +887,9 @@ export class Plateforme {
       createdAt: iso(),
       active: true,
       cohort: S(settings.cohort, 80) || DEFAULTS.cohort,
-      access: tracks,
-      expiresAt: iso(Date.now() + YEAR),
       progress: emptyProgress(),
     };
+    setUntil(st, Object.fromEntries(tracks.map((x) => [x, iso(Date.now() + YEAR)])));
     const code = accessCode();
     this.saveStudent(st, await this.mac(`code:${code}`));
     this.log('validation', `${a.id} → ${st.id}`);
@@ -882,10 +924,9 @@ export class Plateforme {
       createdAt: iso(),
       active: true,
       cohort: S(s.cohort, 80) || DEFAULTS.cohort,
-      access: tracks,
-      expiresAt: iso(Date.now() + YEAR),
       progress: emptyProgress(),
     };
+    setUntil(st, Object.fromEntries(tracks.map((x) => [x, iso(Date.now() + YEAR)])));
     const code = accessCode();
     this.saveStudent(st, await this.mac(`code:${code}`));
     this.log('étudiant ajouté', st.id);
@@ -896,11 +937,27 @@ export class Plateforme {
     if (!st) fail(404, 'not_found');
     const v = await readJSON(req);
     if (typeof v.active === 'boolean') st.active = v.active;
-    if (Array.isArray(v.access)) st.access = TRACKS.filter((x) => v.access.includes(x));
-    if (v.expiresAt !== undefined) {
-      const day = ymd(v.expiresAt);
-      if (!day) fail(400, 'date');
-      st.expiresAt = new Date(`${day}T23:59:59Z`).toISOString();
+    if (v.until && typeof v.until === 'object') {
+      // Une date de fin par formation ; une formation sans date est retirée
+      const u = {};
+      for (const x of TRACKS) {
+        if (v.until[x] == null || v.until[x] === '') continue;
+        const day = ymd(v.until[x]);
+        if (!day) fail(400, 'date');
+        u[x] = endOfDay(day);
+      }
+      setUntil(st, u);
+    } else if (Array.isArray(v.access) || v.expiresAt !== undefined) {
+      // Ancien format : formations cochées et une date commune
+      const old = untilOf(st);
+      let end;
+      if (v.expiresAt !== undefined) {
+        const day = ymd(v.expiresAt);
+        if (!day) fail(400, 'date');
+        end = endOfDay(day);
+      }
+      const tracks = Array.isArray(v.access) ? TRACKS.filter((x) => v.access.includes(x)) : Object.keys(old);
+      setUntil(st, Object.fromEntries(tracks.map((x) => [x, end ?? (x in old ? old[x] : iso(Date.now() + YEAR))])));
     }
     if (typeof v.name === 'string' && S(v.name, 80).length >= 2) st.name = S(v.name, 80);
     if (typeof v.firstName === 'string' && S(v.firstName, 40)) st.firstName = S(v.firstName, 40);
@@ -1225,8 +1282,8 @@ export class Plateforme {
     const f = this.fileRow(v.file);
     if (!f || !f.type.startsWith('audio/')) fail(400, 'file');
     if (!Array.isArray(v.d) || !v.d.length || v.d.length > 40 || !v.d.every((x) => Number.isFinite(x) && x >= 0.5 && x <= 300)) fail(400, 'd');
-    // Les voix off de leçon sont publiques, comme les animations
-    this.sql.exec("UPDATE files SET scope = 'public', lesson = ? WHERE id = ?", lesson, f.id);
+    // Voix off : publiques pour les leçons ouvertes à tous, sinon réservées (formation, aperçu offert, équipe)
+    this.sql.exec('UPDATE files SET scope = ?, lesson = ? WHERE id = ?', FREE_OPEN.includes(lesson) || DEMO_OPEN.includes(lesson) ? 'public' : 'members', lesson, f.id);
     const doc = { file: f.id, d: v.d.map((x) => Math.round(x * 100) / 100), at: iso() };
     this.setDoc('voix', lesson, '', doc);
     this.bump();
@@ -1241,9 +1298,13 @@ export class Plateforme {
     if (!f) fail(404, 'not_found');
     // Fichier des membres : l'équipe, ou un étudiant dont la formation contient la leçon du fichier
     if (f.scope !== 'public' && !(await this.session(req, 'admin'))) {
-      const tracks = await this.studentAccess(req);
-      if (!tracks) fail(401, 'auth');
-      if (f.lesson ? !(FREE_OPEN.includes(f.lesson) || tracks.includes(trackOfLesson(f.lesson))) : !tracks.length) fail(403, 'forbidden');
+      // Son et vidéo d'une leçon ouverte à tous : sans compte ; aperçu offert : tout étudiant inscrit ; le reste : la formation
+      const av = /^(audio|video)\//.test(f.type);
+      if (!(av && f.lesson && (FREE_OPEN.includes(f.lesson) || DEMO_OPEN.includes(f.lesson)))) {
+        const tracks = await this.studentAccess(req);
+        if (!tracks) fail(401, 'auth');
+        if (f.lesson ? !(FREE_OPEN.includes(f.lesson) || tracks.includes(trackOfLesson(f.lesson)) || (av && PREVIEW.includes(f.lesson))) : !tracks.length) fail(403, 'forbidden');
+      }
     }
     const etag = `"${f.id}"`;
     const inline = INLINE.test(f.type);

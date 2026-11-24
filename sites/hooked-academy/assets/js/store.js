@@ -14,6 +14,17 @@ export const DEMO_STUDENT = { email: 'demo@hooked.academy', code: 'DEMO-2026' };
 export const DEMO_OPEN = [];
 /** Les 3 premières vidéos de chaque formation (bienvenue, présentation de la plateforme) : ouvertes à tous, en démo comme avant l'inscription. */
 export const FREE_OPEN = ['m0-l1', 'm0-l3', 'm0-l4', 'ia0-l1', 'ia0-l5', 'ia0-l6', 'dv0-l5', 'dv0-l6', 'dv0-l7'];
+/**
+ * Aperçu offert : 5 leçons de chaque formation, ouvertes aux étudiants inscrits qui n'ont pas (ou plus) la formation.
+ * Une leçon par grande étape, dans l'ordre du parcours : le déclic, un résultat rapide, le « waouh », puis l'argent ;
+ * chacune s'arrête là où la leçon suivante (fermée) commence. Vidéo et voix off seulement. Même liste : server/plateforme.js.
+ */
+export const PREVIEW = {
+  creative: ['m2-l2', 'm2-l8', 'm3-l5', 'm7-l1', 'm10-l5'],
+  ia: ['ia1-l2', 'ia2-l2', 'ia3-l4', 'ia5-l3', 'ia8-l3'],
+  dev: ['dv1-l1', 'dv3-l2', 'dv4-l6', 'dv6-l2', 'dv13-l1'],
+};
+const PREVIEW_IDS = Object.values(PREVIEW).flat();
 
 /**
  * Accès par formation. Chaque pack ouvre une ou plusieurs formations pour un an :
@@ -294,16 +305,33 @@ export async function addApplication(form) {
 /* Accès                                                               */
 /* ------------------------------------------------------------------ */
 
-/** Formations ouvertes à un étudiant (le compte formateur a les deux). */
-export const accessOf = (st) => (!st ? [] : st.protected ? [...TRACK_IDS] : (Array.isArray(st.access) ? st.access : []).filter((x) => TRACK_IDS.includes(x)));
-/** L'accès d'un an est-il terminé ? */
-export const isExpired = (st) => !!st && !st.protected && !!st.expiresAt && Date.now() > Date.parse(st.expiresAt);
-/** L'étudiant a-t-il cette formation dans son pack (et un accès en cours) ? */
-export const hasTrack = (st, track) => !!st && !isDemo(st) && st.active !== false && accessOf(st).includes(track) && !isExpired(st);
+/** Fin d'accès de chaque formation achetée : { creative: date, … } (anciens comptes : une date commune). */
+export const untilOf = (st) =>
+  !st
+    ? {}
+    : st.until && typeof st.until === 'object'
+      ? Object.fromEntries(TRACK_IDS.filter((x) => st.until[x] !== undefined).map((x) => [x, st.until[x]]))
+      : Object.fromEntries((Array.isArray(st.access) ? st.access : []).filter((x) => TRACK_IDS.includes(x)).map((x) => [x, st.expiresAt || null]));
+const openNow = (end) => end == null || Date.now() <= Date.parse(end);
+/** Formations achetées par un étudiant, en cours ou terminées (le compte formateur a les trois). */
+export const accessOf = (st) => (!st ? [] : st.protected ? [...TRACK_IDS] : Object.keys(untilOf(st)));
+/** Date de fin de l'accès d'un an à une formation (null : pas achetée, ou sans fin). */
+export const trackUntil = (st, track) => (st && !st.protected ? untilOf(st)[track] || null : null);
+/** Formation achetée dont l'année d'accès est terminée. */
+export const trackExpired = (st, track) => !!st && !st.protected && track in untilOf(st) && !openNow(untilOf(st)[track]);
+/** Toutes les formations achetées sont terminées. */
+export const isExpired = (st) => !!st && !st.protected && accessOf(st).length > 0 && accessOf(st).every((x) => trackExpired(st, x));
+/** L'étudiant a-t-il cette formation, avec un accès en cours ? */
+export const hasTrack = (st, track) => !!st && !isDemo(st) && st.active !== false && (!!st.protected || (track in untilOf(st) && openNow(untilOf(st)[track])));
+/** Leçon de l'aperçu offert (5 par formation). */
+export const isPreview = (lessonId) => PREVIEW_IDS.includes(lessonId);
+/** Leçon ouverte seulement grâce à l'aperçu offert : formation jamais achetée (une formation terminée se renouvelle). */
+export const viaPreview = (st, lessonId) => !!st && !isDemo(st) && st.active !== false && !st.protected && isPreview(lessonId) && !FREE_OPEN.includes(lessonId) && !(lessonTrack(lessonId) in untilOf(st));
 /** Le compte démo : accès limité à DEMO_OPEN. */
 export const isDemo = (st) => !!st && (st.demo || st.id === 'st-demo');
-/** Une leçon est-elle ouverte pour cet étudiant ? (bienvenue : tout le monde ; démo : DEMO_OPEN ; sinon : son pack) */
-export const canAccess = (st, lessonId) => !!st && (FREE_OPEN.includes(lessonId) || (isDemo(st) ? DEMO_OPEN.includes(lessonId) : hasTrack(st, lessonTrack(lessonId))));
+/** Une leçon est-elle ouverte pour cet étudiant ? (bienvenue : tout le monde ; démo : DEMO_OPEN ; sinon : son pack, et l'aperçu offert des autres formations) */
+export const canAccess = (st, lessonId) =>
+  !!st && (FREE_OPEN.includes(lessonId) || (isDemo(st) ? DEMO_OPEN.includes(lessonId) : hasTrack(st, lessonTrack(lessonId)) || viaPreview(st, lessonId)));
 
 export const TODO_XP = 40;
 

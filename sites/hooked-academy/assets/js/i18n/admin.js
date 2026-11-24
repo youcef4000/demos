@@ -54,7 +54,7 @@ add({
     'ad.ac.save': 'Enregistrer',
     'ad.ac.saved': 'Accès mis à jour',
     'ad.ac.pack': 'Pack demandé dans le formulaire : {p}',
-    'ad.ac.hint': 'À la validation, le pack choisi dans le formulaire ouvre ses formations pour un an. Tu peux ici ajouter ou retirer une formation, et changer la date de fin.',
+    'ad.ac.hint': 'Chaque formation a sa propre date de fin : un an à partir de son paiement. Coche une formation pour l’ouvrir, « +1 an » pour la prolonger, décoche-la pour la retirer.',
     'ad.nav.faq': 'Questions fréquentes',
     'ad.fq.lead': 'Les réponses affichées dans l’espace étudiant (page Aide), utilisées par l’assistant (le bouton « Une question ? ») et, pour celles que tu coches, sur la page d’accueil.',
     'ad.fq.kw': 'Mots-clés pour l’assistant',
@@ -388,7 +388,7 @@ add({
     'ad.ac.save': 'Save',
     'ad.ac.saved': 'Access updated',
     'ad.ac.pack': 'Pack requested in the form: {p}',
-    'ad.ac.hint': 'On approval, the pack chosen in the form opens its courses for one year. Here you can add or remove a course and change the end date.',
+    'ad.ac.hint': 'Each course has its own end date: one year from its payment. Tick a course to open it, “+1 year” to extend it, untick it to remove it.',
     'ad.nav.faq': 'FAQ',
     'ad.fq.lead': 'Answers shown in the student space (Help page), used by the assistant (the “Got a question?” button) and, for the ones you tick, on the homepage.',
     'ad.fq.kw': 'Keywords for the assistant',
@@ -721,7 +721,7 @@ add({
     'ad.ac.save': 'حفظ',
     'ad.ac.saved': 'تم تحديث الوصول',
     'ad.ac.pack': 'الباقة المطلوبة في الاستمارة: {p}',
-    'ad.ac.hint': 'عند المصادقة تُفتح تكوينات الباقة المختارة في الاستمارة لمدة سنة. يمكنك هنا إضافة تكوين أو سحبه، وتغيير تاريخ النهاية.',
+    'ad.ac.hint': 'لكل تكوين تاريخ نهاية خاص به: سنة واحدة من تاريخ دفعه. حدّد تكوينًا لفتحه، و«+1 سنة» لتمديده، وألغِ تحديده لسحبه.',
     'ad.nav.faq': 'الأسئلة الشائعة',
     'ad.fq.lead': 'الأجوبة المعروضة في فضاء الطالب (صفحة المساعدة)، والتي يستعملها المساعد (زر « لديك سؤال؟ »)، وفي الصفحة الرئيسية للأسئلة التي تحددها.',
     'ad.fq.kw': 'كلمات مفتاحية للمساعد',
@@ -1081,9 +1081,37 @@ const EX = {
 /** Texte d'exemple traduit dans la langue de l'interface (sinon le texte tel quel). */
 export const exText = (s) => (lang !== 'fr' && s && EX[s]?.[lang]) || s;
 
+// Accès par formation et pack payé (novembre 2026)
+add({
+  fr: {
+    'ad.fm.both': 'Créative + IA',
+    'ad.fm.bothL': 'Pack Créative + IA',
+    'ad.pack.label': 'Pack payé',
+    'ad.pack.hint': 'Le pack réellement payé : c’est lui qui s’ouvre pour un an à la validation.',
+    'ad.pack.asked': 'Demandé dans le formulaire : {p}',
+    'ad.pack.saved': 'Pack mis à jour',
+  },
+  en: {
+    'ad.fm.both': 'Creative + AI',
+    'ad.fm.bothL': 'Creative + AI pack',
+    'ad.pack.label': 'Paid pack',
+    'ad.pack.hint': 'The pack actually paid: it is the one that opens for a year on approval.',
+    'ad.pack.asked': 'Requested in the form: {p}',
+    'ad.pack.saved': 'Pack updated',
+  },
+  ar: {
+    'ad.fm.both': 'الكرياتيف + الذكاء الاصطناعي',
+    'ad.fm.bothL': 'باقة الكرياتيف + الذكاء الاصطناعي',
+    'ad.pack.label': 'الباقة المدفوعة',
+    'ad.pack.hint': 'الباقة المدفوعة فعلًا: هي التي تُفتح لمدة سنة عند التأكيد.',
+    'ad.pack.asked': 'المطلوب في الاستمارة: {p}',
+    'ad.pack.saved': 'تم تحديث الباقة',
+  },
+});
+
 // Formation Sites & Apps (novembre 2026) : formation « dev » et pack des trois formations « all »
 add({
-  fr: { 'ad.fm.dev': 'Sites & Apps', 'ad.fm.all': 'Les trois', 'ad.fm.allL': 'Les trois formations' },
-  en: { 'ad.fm.dev': 'Sites & Apps', 'ad.fm.all': 'All three', 'ad.fm.allL': 'All three courses' },
-  ar: { 'ad.fm.dev': 'المواقع والتطبيقات', 'ad.fm.all': 'الثلاثة', 'ad.fm.allL': 'التكوينات الثلاثة' },
+  fr: { 'ad.fm.dev': 'Sites & Apps', 'ad.fm.all': 'Les trois', 'ad.fm.allL': 'Pack complet (les trois formations)' },
+  en: { 'ad.fm.dev': 'Sites & Apps', 'ad.fm.all': 'All three', 'ad.fm.allL': 'Full pack (all three courses)' },
+  ar: { 'ad.fm.dev': 'المواقع والتطبيقات', 'ad.fm.all': 'الثلاثة', 'ad.fm.allL': 'الباقة الكاملة (التكوينات الثلاثة)' },
 });

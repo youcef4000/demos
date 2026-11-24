@@ -19,6 +19,24 @@ Site : `sites/hooked-academy/` → https://hooked-academy.tech/
    (lien, identifiant, code) s'envoie en un clic sur WhatsApp.
 5. L'étudiant se connecte sur `/app/` avec son e-mail (ou téléphone) et son code.
 
+### Accès : ce qui est payé, un an par formation
+
+- **Pack payé** : dans le tiroir d'une inscription (avant validation), le menu « Pack payé » corrige le pack si le prospect
+  a payé autre chose que ce qu'il a choisi dans le formulaire. C'est ce pack qui s'ouvre à la validation (le choix
+  d'origine reste affiché).
+- **Une date par formation** (`until` de l'étudiant, côté serveur et `assets/js/store.js`) : chaque formation est ouverte
+  un an à partir de son paiement. Ajouter une formation ne prolonge pas les autres ; une formation terminée ne revient pas
+  avec l'achat d'une autre ; racheter une formation encore ouverte ajoute un an à partir de sa fin.
+- **Admin → Étudiants → Accès** : une ligne par formation (cocher pour ouvrir, « +1 an » pour prolonger, décocher pour retirer).
+- **Contrôle serveur** : les voix off des leçons (fichiers `video/voix/` et voix déposées depuis le studio) ne sont servies
+  qu'à l'équipe et aux étudiants qui ont la formation, plus les leçons de l'aperçu offert.
+
+### Aperçu offert : 5 vidéos de chaque formation non achetée
+
+Un étudiant inscrit voit, dans les formations qu'il n'a jamais achetées, 5 leçons marquées « Offerte » (`PREVIEW`, même
+liste dans `server/plateforme.js` et `assets/js/store.js`) : la vidéo et la voix off, sans les PDF ni les ressources.
+Le compte démo n'y a pas accès (il reste aux 3 premières vidéos). Choix des leçons et raisons : `formations/tarifs/README.md`.
+
 Démo sans serveur : tout est enregistré dans le navigateur (localStorage). Les fiches marquées
 « exemple » sont fictives. Pour la production, seules les fonctions de `assets/js/store.js` sont à
 brancher sur une API (Worker Cloudflare + D1, ou la base de Hooked Lab) : elles gardent les mêmes

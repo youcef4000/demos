@@ -61,6 +61,28 @@ réelle des réglages (« Inscriptions ouvertes · Prochaine session »).
 - [Animation et UX (Nielsen Norman Group)](https://www.nngroup.com/articles/animation-purpose-ux/)
 - [Dark patterns (FTC, 2022)](https://www.ftc.gov/system/files/ftc_gov/pdf/P214800%20Dark%20Patterns%20Report%209.14.2022%20-%20FINAL.pdf)
 
+## Aperçu offert : 5 vidéos des formations non achetées (novembre 2026)
+
+Un étudiant qui a une formation voit 5 leçons de chacune des autres, marquées « Offerte ». Le but : qu'il goûte la
+formation qu'il n'a pas, et qu'il l'ajoute à son pack. La psychologie utilisée :
+
+| Principe | Comment il est appliqué |
+|---|---|
+| Échantillon et réciprocité (Cialdini) | De vraies leçons, pas une bande-annonce : une banque de 20 hooks, la structure d'un prompt, le premier site construit avec Claude Code. |
+| Un résultat rapide (sentiment de compétence) | Chaque formation a une leçon « je peux le faire » : banque de hooks, packshot du téléphone au studio, la vitrine avec Claude Code. |
+| L'effet « waouh » | Le moment qui fait rêver : animer un packshot, un avatar qui parle, un site en ligne gratuitement. |
+| Le désir (l'argent) | La dernière leçon parle de vendre : parcours WhatsApp, fixer ses prix, la stratégie de la démo. |
+| Boucle ouverte (effet Zeigarnik) | Une leçon par grande étape, pas une série : chaque vidéo offerte est entourée de leçons fermées, et la suivante est verrouillée. |
+| Progression déjà commencée (Nunes et Drèze) | Les vidéos regardées comptent dans la progression (« 2/5 vues »), et la progression est gardée à l'achat. |
+
+| Formation | Les 5 leçons offertes |
+|---|---|
+| Créative | M02 Le Hook : arrêter le scroll · M02 La banque de hooks : 20 formules · M03 SONCAS : les 6 boutons psychologiques · M07 Trouver les pubs qui marchent · M10 De la pub à la vente : le parcours WhatsApp |
+| IA | IA01 La structure d'un bon prompt · IA02 Packshot : du téléphone au studio · IA03 Animer un packshot en 5 secondes · IA05 Créer un avatar et le faire parler · IA08 Fixer ses prix |
+| Sites & Apps | D01 C'est quoi, le vibe coding ? · D03 Claude Code : l'agent qui construit avec toi · D04 Construire la vitrine avec Claude Code · D06 GitHub Pages pas à pas · D13 La stratégie de la démo |
+
+Pour changer une leçon : la liste `PREVIEW` dans `server/plateforme.js` et dans `sites/hooked-academy/assets/js/store.js`.
+
 ## À mesurer ensuite
 
 Les études donnent des tendances, pas une garantie. La plateforme compte déjà les visites des deux landings (test A/B) et

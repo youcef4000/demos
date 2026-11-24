@@ -3137,3 +3137,44 @@ details[open] > summary .rs-car {
   background: rgb(95 211 179 / 0.12);
   box-shadow: inset 0 0 0 1.5px #5fd3b3;
 }
+
+/* Accès d'un an par formation (novembre 2026) : une ligne et une date par formation */
+.ac-lines {
+  display: grid;
+  gap: 4px;
+}
+.ac-line {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.ac-line.is-exp .fm {
+  opacity: 0.55;
+}
+.ac-row {
+  display: grid;
+  gap: 6px;
+}
+.ac-when {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.ac-when .in {
+  flex: 1;
+  min-width: 0;
+}
+.ac-when .in:disabled {
+  opacity: 0.45;
+}
+.ap-pack {
+  min-height: 40px;
+  max-width: 100%;
+}
+.ap-pack-x {
+  display: block;
+  margin-top: 4px;
+  font-size: 12.5px;
+}
