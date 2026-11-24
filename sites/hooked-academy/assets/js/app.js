@@ -150,7 +150,7 @@ function refreshMe() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Progression : deux formations distinctes                            */
+/* Progression : une par formation                                    */
 /* ------------------------------------------------------------------ */
 
 function trackProgress(st, track) {
@@ -541,6 +541,22 @@ function greet() {
   return t(h < 12 ? 'app.hi.morning' : h < 18 ? 'app.hi.day' : 'app.hi.evening');
 }
 
+/** Icône dessinée du moment de la journée, à la place d'un emoji : lever du soleil le matin, soleil l'après-midi, lune le soir et la nuit. */
+let hiN = 0;
+function timeIcon() {
+  const h = new Date().getHours();
+  const k = h >= 5 && h < 12 ? 'rise' : h >= 12 && h < 18 ? 'sun' : 'moon';
+  const id = `hi-g${++hiN}`;
+  const g = `url(#${id})`;
+  const star = (x, y, r) => `M${x} ${y - r}Q${x} ${y} ${x + r} ${y}Q${x} ${y} ${x} ${y + r}Q${x} ${y} ${x - r} ${y}Q${x} ${y} ${x} ${y - r}Z`;
+  const body = {
+    rise: `<g class="hi-up"><path class="hi-rays" fill="none" stroke="${g}" stroke-width="3" stroke-linecap="round" d="M24 20v-5M31 21.9l2.5-4.3M17 21.9l-2.5-4.3M36.1 27l4.3-2.5M11.9 27l-4.3-2.5"/><path d="M14 34a10 10 0 0 1 20 0Z" fill="${g}"/></g><path fill="none" stroke="${g}" stroke-width="3" stroke-linecap="round" d="M5 34h38"/><path class="hi-sea" fill="none" stroke="${g}" stroke-width="3" stroke-linecap="round" d="M13 40.5h22"/>`,
+    sun: `<path class="hi-rays" fill="none" stroke="${g}" stroke-width="3" stroke-linecap="round" d="M24 4.5v5M24 38.5v5M4.5 24h5M38.5 24h5M10.2 10.2l3.5 3.5M34.3 34.3l3.5 3.5M10.2 37.8l3.5-3.5M34.3 13.7l3.5-3.5"/><circle cx="24" cy="24" r="9.5" fill="${g}"/>`,
+    moon: `<path class="hi-moon" d="M21.62 10.01A16 16 0 1 0 37.41 30.3A13 13 0 0 1 21.62 10.01Z" fill="${g}"/><path class="hi-star" d="${star(39.5, 9, 4.5)}" fill="${g}"/><path class="hi-star hi-star--2" d="${star(44, 20.5, 2.6)}" fill="${g}"/>`,
+  }[k];
+  return `<svg class="hi-ic hi-ic--${k}" viewBox="0 0 48 48" width="48" height="48" aria-hidden="true" focusable="false"><defs><linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="6" y1="4" x2="42" y2="44"><stop class="hi-s1" offset="0"/><stop class="hi-s2" offset="1"/></linearGradient></defs>${body}</svg>`;
+}
+
 function voiceChip(l) {
   if (lang === 'fr') return l.voice || l.audio ? `<span class="chip chip--ok">${icon('mic', { size: 13 })} ${t('app.voice.darija')}</span>` : '';
   return l.audio || (l.screen && !l.soon) ? `<span class="chip chip--ok">${icon('mic', { size: 13 })} ${t('app.voice.darija')}</span>` : '';
@@ -616,11 +632,12 @@ function viewHome() {
   const name = esc(me.firstName || me.name || '');
   shell(
     'home',
-    `<div class="dash">
+    `<div class="dash dash--me${LAB ? ' dash--lab' : ''}">
       <section class="card hello">
         <div class="hello-deco" aria-hidden="true">${markSVG()}</div>
         <p class="card-k">${icon('sparkles', { size: 14 })} ${esc(cohortOf(me))}</p>
-        <h1>${greet()}${name ? `${AR ? "،" : ","} ${name}` : ''} <span id="wave" aria-hidden="true">👋</span></h1>
+        <h1>${greet()}${name ? `${AR ? '،' : ','} <span class="hi-nw">${name}${timeIcon()}</span>` : timeIcon()}</h1>
+        <p class="hello-date">${esc(fmtDate(today, { weekday: 'long', day: 'numeric', month: 'long' }))}</p>
         <div class="lvl">
           <div class="lvl-top"><span class="lvl-name">${t(`level.${lv.i}`)}</span><span class="muted">${lv.next ? t('app.level.next', { xp: num(me.progress.xp), need: num(lv.next.xp), name: esc(t(`level.${lv.i + 1}`)) }) : t('app.level.max')}</span></div>
           <div class="lvl-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(lv.pct * 100)}" aria-label="${esc(t(`level.${lv.i}`))}"><i id="lvl-i" style="transform:scaleX(${lv.pct})"></i></div>
@@ -677,7 +694,6 @@ function viewHome() {
   const g = G();
   if (g) {
     g.fromTo('#lvl-i', { scaleX: 0 }, { scaleX: lv.pct, duration: 1.4, ease: 'expo.out', delay: 0.2 });
-    g.fromTo('#wave', { rotate: 0 }, { rotate: 18, duration: 0.25, repeat: 5, yoyo: true, ease: 'sine.inOut', delay: 0.6 });
     g.from('.dash > *', { y: 30, autoAlpha: 0, duration: 0.8, ease: 'expo.out', stagger: 0.06, clearProps: 'transform,opacity,visibility' });
     g.from('.cc-img img', { scale: 1.08, duration: 1.4, ease: 'expo.out', delay: 0.2, clearProps: 'transform' });
   }
@@ -689,7 +705,7 @@ function studioCard() {
   return `<a class="card ps-promo" href="#/prompts">
     <span class="ps-promo-ic">${icon('wand', { size: 26 })}</span>
     <span class="ps-promo-t"><span class="card-k">${t('app.nav.prompts')} <em class="nv-new">${t('app.nav.new')}</em></span><b>${t('app.ps.promo.t')}</b><span class="muted">${t('app.ps.promo.x')}</span></span>
-    <span class="ps-promo-go">${t('app.ps.promo.cta')} ${arrow(16)}</span>
+    <span class="ps-promo-go"><span class="ps-promo-gl">${t('app.ps.promo.cta')}</span> ${arrow(16)}</span>
   </a>`;
 }
 

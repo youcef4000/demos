@@ -335,7 +335,7 @@ add({
     'ad.msg.email': 'Identifiant (e-mail) : {v}',
     'ad.msg.phone': 'Identifiant (téléphone) : {v}',
     'ad.msg.contact':
-      'Salam {name} ! Ici l’équipe Hooked Academy 👋 Merci pour ton inscription. On aimerait t’appeler pour te présenter la prochaine session, le tarif et les moyens de paiement (CCP, BaridiMob ou espèces). Quel moment t’arrange ?',
+      'Salam {name} ! Ici l’équipe Hooked Academy. Merci pour ton inscription. On aimerait t’appeler pour te présenter la prochaine session, le tarif et les moyens de paiement (CCP, BaridiMob ou espèces). Quel moment t’arrange ?',
     'ad.msg.demoName': 'Créateur',
   },
 
@@ -668,7 +668,7 @@ add({
     'ad.msg.email': 'Login (email): {v}',
     'ad.msg.phone': 'Login (phone): {v}',
     'ad.msg.contact':
-      'Hi {name}! This is the Hooked Academy team 👋 Thanks for signing up. We’d like to give you a quick call to walk you through the next session, the price and the payment options (CCP, BaridiMob or cash). When would suit you?',
+      'Hi {name}! This is the Hooked Academy team. Thanks for signing up. We’d like to give you a quick call to walk you through the next session, the price and the payment options (CCP, BaridiMob or cash). When would suit you?',
     'ad.msg.demoName': 'creator',
   },
 
@@ -1001,7 +1001,7 @@ add({
     'ad.msg.email': 'معرّف الدخول (البريد الإلكتروني): {v}',
     'ad.msg.phone': 'معرّف الدخول (رقم الهاتف): {v}',
     'ad.msg.contact':
-      'السلام عليكم {name}! معك فريق Hooked Academy 👋 شكرًا على تسجيلك. نودّ الاتصال بك لنعرّفك بالدورة القادمة وسعرها وطرق الدفع (CCP أو BaridiMob أو نقدًا). ما الوقت الذي يناسبك؟',
+      'السلام عليكم {name}! معك فريق Hooked Academy. شكرًا على تسجيلك. نودّ الاتصال بك لنعرّفك بالدورة القادمة وسعرها وطرق الدفع (CCP أو BaridiMob أو نقدًا). ما الوقت الذي يناسبك؟',
     'ad.msg.demoName': 'أيها المبدع',
   },
 });

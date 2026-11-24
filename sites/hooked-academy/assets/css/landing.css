@@ -1814,8 +1814,14 @@ html[lang='ar'] .mq-a button[data-i18n] {
   background: linear-gradient(180deg, #f2dfa0, #b08a24);
 }
 .mk-hi {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-weight: 800;
   font-size: 16px;
+}
+.mk-sun {
+  flex: none;
 }
 .mk-tag {
   padding: 2px 8px;
