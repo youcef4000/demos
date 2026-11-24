@@ -29,9 +29,11 @@ const YEAR = 365 * 864e5;
 const LANGS = ['fr', 'en', 'ar'];
 // Formations : Créative (m…), IA (ia…), Sites & Apps (dv…)
 const TRACKS = ['creative', 'ia', 'dev'];
-const FREE_OPEN = ['m0-l1', 'm0-l2', 'm0-l3', 'm0-l4', 'ia0-l1', 'ia0-l4', 'ia0-l5', 'ia0-l6', 'dv0-l1', 'dv0-l2', 'dv0-l3', 'dv0-l4'];
-// Leçons ouvertes au compte démo (landing, « essayer la plateforme ») : leur voix off reste publique
-const DEMO_OPEN = ['m1-l1', 'ia1-l1', 'dv1-l1'];
+// Les 3 premières vidéos de chaque formation (bienvenue et présentation de la plateforme) : ouvertes à tous,
+// au compte démo comme avant l'inscription. Le compte démo ne voit rien d'autre.
+const FREE_OPEN = ['m0-l1', 'm0-l3', 'm0-l4', 'ia0-l1', 'ia0-l5', 'ia0-l6', 'dv0-l5', 'dv0-l6', 'dv0-l7'];
+// Leçons ouvertes en plus au compte démo (aucune : il s'arrête aux 3 premières vidéos de chaque formation)
+const DEMO_OPEN = [];
 const STATUS = ['nouvelle', 'contactee', 'paiement', 'validee', 'refusee'];
 const PROFILS = ['debutant', 'ecommercant', 'freelance', 'createur', 'agence'];
 // Packs : une formation, « both » = Créative + IA (le pack historique), « all » = les trois formations

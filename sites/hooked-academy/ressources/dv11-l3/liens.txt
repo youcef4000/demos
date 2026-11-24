@@ -1,6 +1,7 @@
 # Outils cités dans la leçon dv11-l3 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Claude | https://claude.ai/referral/OtTQNvbscA
+Claude Code (documentation) | https://code.claude.com/docs
 Plugins Claude Code (documentation) | https://code.claude.com/docs/en/discover-plugins
-Node.js | https://nodejs.org
 GSAP | https://gsap.com
 LottieFiles | https://lottiefiles.com
 Spline | https://spline.design

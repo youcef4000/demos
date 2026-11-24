@@ -25,11 +25,11 @@ export default {
       ]
     },
     "dv9-l3": {
-      "title": "Hands-on · The pro lane with Claude Code",
+      "title": "Hands-on · Building the app with your agent",
       "key": [
-        "npm create vite@latest my-app (Vite 8, create-vite 9); npm install; npm run build.",
-        "Add from the start: CLAUDE.md, spec.md, .env.example, a place for tests.",
-        "Screen by screen: plan mode → build → test (npm run dev + phone) → commit."
+        "One request is enough: read spec.md, create the project, install everything, show the preview.",
+        "From the start: CLAUDE.md, spec.md, .env.example and a place for tests.",
+        "Screen by screen: plan mode → build → test (preview + phone) → save."
       ]
     },
     "dv9-l4": {

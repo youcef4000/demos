@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-23T22:26:14.681Z",
+  "generated": "2026-11-24T01:31:06.311Z",
   "lessons": {
     "m0-l1": [
       {
@@ -5539,36 +5539,36 @@
         "file": "liens.txt"
       }
     ],
-    "dv0-l1": [
+    "dv0-l5": [
       {
         "kind": "pdf",
         "title": "Fiche de la leçon",
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
-        "path": "ressources/dv0-l1/01-fiche-de-la-leçon.fr.pdf",
-        "size": 199041
+        "path": "ressources/dv0-l5/01-fiche-de-la-leçon.fr.pdf",
+        "size": 128010
       },
       {
         "kind": "link",
-        "title": "GitHub",
-        "url": "https://github.com/",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
         "file": "liens.txt"
       },
       {
         "kind": "link",
-        "title": "Claude Code (documentation)",
-        "url": "https://code.claude.com/docs",
+        "title": "Application Claude (Mac, Windows)",
+        "url": "https://claude.ai/download",
         "file": "liens.txt"
       }
     ],
-    "dv0-l2": [
+    "dv0-l6": [
       {
         "kind": "pdf",
         "title": "Fiche de la leçon",
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
-        "path": "ressources/dv0-l2/01-fiche-de-la-leçon.fr.pdf",
-        "size": 202580
+        "path": "ressources/dv0-l6/01-fiche-de-la-leçon.fr.pdf",
+        "size": 129283
       },
       {
         "kind": "link",
@@ -5580,6 +5580,108 @@
         "kind": "link",
         "title": "Claude Code (documentation)",
         "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Codex (OpenAI)",
+        "url": "https://openai.com/codex/",
+        "file": "liens.txt"
+      }
+    ],
+    "dv0-l7": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/dv0-l7/01-fiche-de-la-leçon.fr.pdf",
+        "size": 121453
+      },
+      {
+        "kind": "link",
+        "title": "Application Claude (Mac, Windows)",
+        "url": "https://claude.ai/download",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
+      }
+    ],
+    "dv0-l1": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/dv0-l1/01-fiche-de-la-leçon.fr.pdf",
+        "size": 202847
+      },
+      {
+        "kind": "link",
+        "title": "ChatGPT",
+        "url": "https://chatgpt.com/",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Codex (OpenAI)",
+        "url": "https://openai.com/codex/",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "GitHub",
+        "url": "https://github.com/",
+        "file": "liens.txt"
+      }
+    ],
+    "dv0-l2": [
+      {
+        "kind": "pdf",
+        "title": "Fiche de la leçon",
+        "file": "01-fiche-de-la-leçon.fr.pdf",
+        "lang": "fr",
+        "path": "ressources/dv0-l2/01-fiche-de-la-leçon.fr.pdf",
+        "size": 207591
+      },
+      {
+        "kind": "link",
+        "title": "ChatGPT",
+        "url": "https://chatgpt.com/",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Codex (OpenAI)",
+        "url": "https://openai.com/codex/",
         "file": "liens.txt"
       },
       {
@@ -5602,12 +5704,24 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv0-l3/01-fiche-de-la-leçon.fr.pdf",
-        "size": 205889
+        "size": 207027
+      },
+      {
+        "kind": "link",
+        "title": "ChatGPT",
+        "url": "https://chatgpt.com/",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "Claude",
         "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Application Claude (Mac, Windows)",
+        "url": "https://claude.ai/download",
         "file": "liens.txt"
       },
       {
@@ -5618,14 +5732,14 @@
       },
       {
         "kind": "link",
-        "title": "VS Code",
-        "url": "https://code.visualstudio.com/",
+        "title": "Codex (OpenAI)",
+        "url": "https://openai.com/codex/",
         "file": "liens.txt"
       },
       {
         "kind": "link",
-        "title": "Node.js",
-        "url": "https://nodejs.org/",
+        "title": "GitHub",
+        "url": "https://github.com/",
         "file": "liens.txt"
       }
     ],
@@ -5636,7 +5750,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv0-l4/01-fiche-de-la-leçon.fr.pdf",
-        "size": 190048
+        "size": 192724
       },
       {
         "kind": "link",
@@ -5680,18 +5794,18 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv1-l2/01-fiche-de-la-leçon.fr.pdf",
-        "size": 180653
-      },
-      {
-        "kind": "link",
-        "title": "Vite",
-        "url": "https://vite.dev/",
-        "file": "liens.txt"
+        "size": 182243
       },
       {
         "kind": "link",
         "title": "Claude Code (documentation)",
         "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Codex (OpenAI)",
+        "url": "https://openai.com/codex/",
         "file": "liens.txt"
       }
     ],
@@ -5702,7 +5816,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv1-l3/01-fiche-de-la-leçon.fr.pdf",
-        "size": 202470
+        "size": 200755
       },
       {
         "kind": "link",
@@ -5724,14 +5838,20 @@
       },
       {
         "kind": "link",
+        "title": "Codex (OpenAI)",
+        "url": "https://openai.com/codex/",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
         "title": "GitHub",
         "url": "https://github.com/",
         "file": "liens.txt"
       },
       {
         "kind": "link",
-        "title": "VS Code",
-        "url": "https://code.visualstudio.com/",
+        "title": "Supabase (documentation)",
+        "url": "https://supabase.com/docs",
         "file": "liens.txt"
       },
       {
@@ -5745,12 +5865,6 @@
         "title": "Bolt",
         "url": "https://bolt.new/",
         "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Replit",
-        "url": "https://replit.com/",
-        "file": "liens.txt"
       }
     ],
     "dv1-l4": [
@@ -5760,7 +5874,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv1-l4/01-fiche-de-la-leçon.fr.pdf",
-        "size": 203322
+        "size": 203227
       },
       {
         "kind": "link",
@@ -5772,6 +5886,12 @@
         "kind": "link",
         "title": "Claude Code (documentation)",
         "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Codex (OpenAI)",
+        "url": "https://openai.com/codex/",
         "file": "liens.txt"
       },
       {
@@ -5788,12 +5908,18 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv1-l5/01-fiche-de-la-leçon.fr.pdf",
-        "size": 209527
+        "size": 207565
       },
       {
         "kind": "link",
         "title": "Claude",
         "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Codex (OpenAI)",
+        "url": "https://openai.com/codex/",
         "file": "liens.txt"
       },
       {
@@ -5810,18 +5936,12 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv1-l6/01-fiche-de-la-leçon.fr.pdf",
-        "size": 181854
+        "size": 181798
       },
       {
         "kind": "link",
         "title": "Claude",
         "url": "https://claude.ai/referral/OtTQNvbscA",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Node.js",
-        "url": "https://nodejs.org/",
         "file": "liens.txt"
       },
       {
@@ -5838,18 +5958,18 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv2-l1/01-fiche-de-la-leçon.fr.pdf",
-        "size": 195760
+        "size": 197744
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "MDN Web Docs",
         "url": "https://developer.mozilla.org/fr/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Vite",
-        "url": "https://vite.dev/",
         "file": "liens.txt"
       }
     ],
@@ -5860,18 +5980,18 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv2-l2/01-fiche-de-la-leçon.fr.pdf",
-        "size": 201390
+        "size": 199062
       },
       {
         "kind": "link",
-        "title": "MDN Web Docs",
-        "url": "https://developer.mozilla.org/fr/",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
         "file": "liens.txt"
       },
       {
         "kind": "link",
-        "title": "Vite",
-        "url": "https://vite.dev/",
+        "title": "Bolt",
+        "url": "https://bolt.new/",
         "file": "liens.txt"
       }
     ],
@@ -5882,7 +6002,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv2-l3/01-fiche-de-la-leçon.fr.pdf",
-        "size": 192397
+        "size": 192223
       },
       {
         "kind": "link",
@@ -5892,8 +6012,8 @@
       },
       {
         "kind": "link",
-        "title": "MDN Web Docs",
-        "url": "https://developer.mozilla.org/fr/",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
         "file": "liens.txt"
       }
     ],
@@ -5904,7 +6024,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv2-l4/01-fiche-de-la-leçon.fr.pdf",
-        "size": 189921
+        "size": 196614
       },
       {
         "kind": "link",
@@ -5914,8 +6034,8 @@
       },
       {
         "kind": "link",
-        "title": "MDN Web Docs",
-        "url": "https://developer.mozilla.org/fr/",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
         "file": "liens.txt"
       }
     ],
@@ -5926,7 +6046,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv2-l5/01-fiche-de-la-leçon.fr.pdf",
-        "size": 198138
+        "size": 193241
       },
       {
         "kind": "link",
@@ -5938,18 +6058,6 @@
         "kind": "link",
         "title": "Supabase (documentation)",
         "url": "https://supabase.com/docs",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Vite",
-        "url": "https://vite.dev/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "GSAP",
-        "url": "https://gsap.com/",
         "file": "liens.txt"
       },
       {
@@ -6000,7 +6108,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv3-l2/01-fiche-de-la-leçon.fr.pdf",
-        "size": 196671
+        "size": 199015
       },
       {
         "kind": "link",
@@ -6010,8 +6118,20 @@
       },
       {
         "kind": "link",
+        "title": "Application Claude (Mac, Windows)",
+        "url": "https://claude.ai/download",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
         "title": "Claude Code (documentation)",
         "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Codex (OpenAI)",
+        "url": "https://openai.com/codex/",
         "file": "liens.txt"
       },
       {
@@ -6031,12 +6151,6 @@
         "title": "GitHub",
         "url": "https://github.com/",
         "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "VS Code",
-        "url": "https://code.visualstudio.com/",
-        "file": "liens.txt"
       }
     ],
     "dv3-l3": [
@@ -6046,7 +6160,13 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv3-l3/01-fiche-de-la-leçon.fr.pdf",
-        "size": 194413
+        "size": 192542
+      },
+      {
+        "kind": "link",
+        "title": "ChatGPT",
+        "url": "https://chatgpt.com/",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
@@ -6062,14 +6182,26 @@
       },
       {
         "kind": "link",
-        "title": "GitHub",
-        "url": "https://github.com/",
+        "title": "Codex (OpenAI)",
+        "url": "https://openai.com/codex/",
         "file": "liens.txt"
       },
       {
         "kind": "link",
-        "title": "VS Code",
-        "url": "https://code.visualstudio.com/",
+        "title": "Skills Claude (documentation)",
+        "url": "https://code.claude.com/docs/en/skills",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Plugins Claude Code (documentation)",
+        "url": "https://code.claude.com/docs/en/discover-plugins",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "GitHub",
+        "url": "https://github.com/",
         "file": "liens.txt"
       }
     ],
@@ -6292,12 +6424,18 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv4-l2/01-fiche-de-la-leçon.fr.pdf",
-        "size": 188877
+        "size": 188473
       },
       {
         "kind": "link",
         "title": "Claude",
         "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
         "file": "liens.txt"
       },
       {
@@ -6314,18 +6452,24 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv4-l3/01-fiche-de-la-leçon.fr.pdf",
-        "size": 191497
+        "size": 187374
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "Squoosh",
         "url": "https://squoosh.app/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "PageSpeed Insights",
-        "url": "https://pagespeed.web.dev/",
         "file": "liens.txt"
       }
     ],
@@ -6336,7 +6480,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv4-l4/01-fiche-de-la-leçon.fr.pdf",
-        "size": 198164
+        "size": 197049
       },
       {
         "kind": "link",
@@ -6364,7 +6508,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv4-l5/01-fiche-de-la-leçon.fr.pdf",
-        "size": 196600
+        "size": 192107
       },
       {
         "kind": "link",
@@ -6392,7 +6536,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv4-l6/01-fiche-de-la-leçon.fr.pdf",
-        "size": 212259
+        "size": 204689
       },
       {
         "kind": "link",
@@ -6439,7 +6583,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv5-l1/01-fiche-de-la-leçon.fr.pdf",
-        "size": 185881
+        "size": 188543
       },
       {
         "kind": "link",
@@ -6461,18 +6605,24 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv5-l2/01-fiche-de-la-leçon.fr.pdf",
-        "size": 186548
+        "size": 186655
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "GitHub",
         "url": "https://github.com/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Git",
-        "url": "https://git-scm.com/",
         "file": "liens.txt"
       }
     ],
@@ -6483,18 +6633,24 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv5-l3/01-fiche-de-la-leçon.fr.pdf",
-        "size": 199676
+        "size": 197892
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "GitHub",
         "url": "https://github.com/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Git",
-        "url": "https://git-scm.com/",
         "file": "liens.txt"
       },
       {
@@ -6523,18 +6679,24 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv5-l4/01-fiche-de-la-leçon.fr.pdf",
-        "size": 194399
+        "size": 199553
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "GitHub",
         "url": "https://github.com/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Git",
-        "url": "https://git-scm.com/",
         "file": "liens.txt"
       }
     ],
@@ -6545,7 +6707,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv5-l5/01-fiche-de-la-leçon.fr.pdf",
-        "size": 209620
+        "size": 207928
       },
       {
         "kind": "link",
@@ -6597,18 +6759,24 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv5-l6/01-fiche-de-la-leçon.fr.pdf",
-        "size": 198627
+        "size": 202657
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "GitHub",
         "url": "https://github.com/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Git",
-        "url": "https://git-scm.com/",
         "file": "liens.txt"
       },
       {
@@ -6625,13 +6793,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv6-l1/01-fiche-de-la-leçon.fr.pdf",
-        "size": 209805
-      },
-      {
-        "kind": "link",
-        "title": "Hostinger",
-        "url": "https://www.hostinger.com/fr?REFERRALCODE=EORYOUCEFD4E",
-        "file": "liens.txt"
+        "size": 203955
       },
       {
         "kind": "link",
@@ -6674,6 +6836,12 @@
         "title": "Render",
         "url": "https://render.com/",
         "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Bolt",
+        "url": "https://bolt.new/",
+        "file": "liens.txt"
       }
     ],
     "dv6-l2": [
@@ -6683,7 +6851,13 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv6-l2/01-fiche-de-la-leçon.fr.pdf",
-        "size": 215612
+        "size": 217715
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
@@ -6723,18 +6897,12 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv6-l3/01-fiche-de-la-leçon.fr.pdf",
-        "size": 222021
+        "size": 219187
       },
       {
         "kind": "link",
         "title": "GitHub",
         "url": "https://github.com/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Node.js",
-        "url": "https://nodejs.org/",
         "file": "liens.txt"
       },
       {
@@ -6766,12 +6934,6 @@
         "title": "Railway",
         "url": "https://railway.com/",
         "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Render",
-        "url": "https://render.com/",
-        "file": "liens.txt"
       }
     ],
     "dv6-l4": [
@@ -6781,18 +6943,24 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv6-l4/01-fiche-de-la-leçon.fr.pdf",
-        "size": 219710
+        "size": 217240
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "GitHub",
         "url": "https://github.com/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Node.js",
-        "url": "https://nodejs.org/",
         "file": "liens.txt"
       },
       {
@@ -6822,7 +6990,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv6-l5/01-fiche-de-la-leçon.fr.pdf",
-        "size": 195601
+        "size": 195372
       },
       {
         "kind": "link",
@@ -6861,40 +7029,6 @@
         "file": "liens.txt"
       }
     ],
-    "dv6-l6": [
-      {
-        "kind": "pdf",
-        "title": "Fiche de la leçon",
-        "file": "01-fiche-de-la-leçon.fr.pdf",
-        "lang": "fr",
-        "path": "ressources/dv6-l6/01-fiche-de-la-leçon.fr.pdf",
-        "size": 205065
-      },
-      {
-        "kind": "link",
-        "title": "GitHub",
-        "url": "https://github.com/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Supabase (documentation)",
-        "url": "https://supabase.com/docs",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Railway",
-        "url": "https://railway.com/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Coolify",
-        "url": "https://coolify.io/",
-        "file": "liens.txt"
-      }
-    ],
     "dv7-l1": [
       {
         "kind": "pdf",
@@ -6924,7 +7058,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv7-l2/01-fiche-de-la-leçon.fr.pdf",
-        "size": 188502
+        "size": 183957
       },
       {
         "kind": "link",
@@ -6946,18 +7080,36 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv7-l3/01-fiche-de-la-leçon.fr.pdf",
-        "size": 195889
+        "size": 208623
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Codex (OpenAI)",
+        "url": "https://openai.com/codex/",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "MCP dans Claude Code (documentation)",
+        "url": "https://code.claude.com/docs/en/mcp",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "Supabase (documentation)",
         "url": "https://supabase.com/docs",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "OWASP Cheat Sheets",
-        "url": "https://cheatsheetseries.owasp.org/",
         "file": "liens.txt"
       }
     ],
@@ -6968,18 +7120,24 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv7-l4/01-fiche-de-la-leçon.fr.pdf",
-        "size": 197540
+        "size": 191865
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "Supabase (documentation)",
         "url": "https://supabase.com/docs",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "OWASP Cheat Sheets",
-        "url": "https://cheatsheetseries.owasp.org/",
         "file": "liens.txt"
       }
     ],
@@ -6990,7 +7148,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv7-l5/01-fiche-de-la-leçon.fr.pdf",
-        "size": 214333
+        "size": 213994
       },
       {
         "kind": "link",
@@ -7024,7 +7182,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv7-l6/01-fiche-de-la-leçon.fr.pdf",
-        "size": 214432
+        "size": 201047
       },
       {
         "kind": "link",
@@ -7055,12 +7213,6 @@
         "title": "Bolt",
         "url": "https://bolt.new/",
         "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Resend",
-        "url": "https://resend.com/",
-        "file": "liens.txt"
       }
     ],
     "dv7-l7": [
@@ -7070,7 +7222,13 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv7-l7/01-fiche-de-la-leçon.fr.pdf",
-        "size": 202809
+        "size": 200171
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
@@ -7082,12 +7240,6 @@
         "kind": "link",
         "title": "OWASP Cheat Sheets",
         "url": "https://cheatsheetseries.owasp.org/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Zod",
-        "url": "https://zod.dev/",
         "file": "liens.txt"
       }
     ],
@@ -7160,7 +7312,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv8-l3/01-fiche-de-la-leçon.fr.pdf",
-        "size": 211503
+        "size": 209102
       },
       {
         "kind": "link",
@@ -7194,7 +7346,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv8-l4/01-fiche-de-la-leçon.fr.pdf",
-        "size": 212492
+        "size": 213622
       },
       {
         "kind": "link",
@@ -7222,7 +7374,19 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv8-l5/01-fiche-de-la-leçon.fr.pdf",
-        "size": 216054
+        "size": 209897
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
@@ -7250,18 +7414,24 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv8-l6/01-fiche-de-la-leçon.fr.pdf",
-        "size": 211119
+        "size": 213452
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "GitHub",
         "url": "https://github.com/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Node.js",
-        "url": "https://nodejs.org/",
         "file": "liens.txt"
       },
       {
@@ -7318,7 +7488,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv8-l8/01-fiche-de-la-leçon.fr.pdf",
-        "size": 205198
+        "size": 192272
       },
       {
         "kind": "link",
@@ -7334,20 +7504,8 @@
       },
       {
         "kind": "link",
-        "title": "MCP dans Claude Code (documentation)",
-        "url": "https://code.claude.com/docs/en/mcp",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
         "title": "GitHub",
         "url": "https://github.com/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Node.js",
-        "url": "https://nodejs.org/",
         "file": "liens.txt"
       },
       {
@@ -7438,7 +7596,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv9-l3/01-fiche-de-la-leçon.fr.pdf",
-        "size": 204963
+        "size": 195703
       },
       {
         "kind": "link",
@@ -7454,20 +7612,8 @@
       },
       {
         "kind": "link",
-        "title": "Node.js",
-        "url": "https://nodejs.org/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
         "title": "Supabase (documentation)",
         "url": "https://supabase.com/docs",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Vite",
-        "url": "https://vite.dev/",
         "file": "liens.txt"
       },
       {
@@ -7528,18 +7674,24 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv9-l6/01-fiche-de-la-leçon.fr.pdf",
-        "size": 190059
+        "size": 187753
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "Expo",
         "url": "https://expo.dev/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Supabase (documentation)",
-        "url": "https://supabase.com/docs",
         "file": "liens.txt"
       }
     ],
@@ -7550,12 +7702,12 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv10-l1/01-fiche-de-la-leçon.fr.pdf",
-        "size": 179621
+        "size": 181194
       },
       {
         "kind": "link",
-        "title": "Vitest",
-        "url": "https://vitest.dev/",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
         "file": "liens.txt"
       },
       {
@@ -7572,7 +7724,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv10-l2/01-fiche-de-la-leçon.fr.pdf",
-        "size": 210403
+        "size": 180784
       },
       {
         "kind": "link",
@@ -7582,20 +7734,8 @@
       },
       {
         "kind": "link",
-        "title": "Node.js",
-        "url": "https://nodejs.org/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Vitest",
-        "url": "https://vitest.dev/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Playwright",
-        "url": "https://playwright.dev/",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
         "file": "liens.txt"
       },
       {
@@ -7606,28 +7746,6 @@
         "size": 765
       }
     ],
-    "dv10-l3": [
-      {
-        "kind": "pdf",
-        "title": "Fiche de la leçon",
-        "file": "01-fiche-de-la-leçon.fr.pdf",
-        "lang": "fr",
-        "path": "ressources/dv10-l3/01-fiche-de-la-leçon.fr.pdf",
-        "size": 187866
-      },
-      {
-        "kind": "link",
-        "title": "Zod",
-        "url": "https://zod.dev/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Vitest",
-        "url": "https://vitest.dev/",
-        "file": "liens.txt"
-      }
-    ],
     "dv10-l4": [
       {
         "kind": "pdf",
@@ -7635,36 +7753,24 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv10-l4/01-fiche-de-la-leçon.fr.pdf",
-        "size": 192810
+        "size": 191719
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "GitHub",
         "url": "https://github.com/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Git",
-        "url": "https://git-scm.com/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Node.js",
-        "url": "https://nodejs.org/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Vitest",
-        "url": "https://vitest.dev/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Zod",
-        "url": "https://zod.dev/",
         "file": "liens.txt"
       }
     ],
@@ -7675,7 +7781,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv10-l5/01-fiche-de-la-leçon.fr.pdf",
-        "size": 179376
+        "size": 180310
       },
       {
         "kind": "link",
@@ -7719,18 +7825,24 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv11-l2/01-fiche-de-la-leçon.fr.pdf",
-        "size": 183700
+        "size": 174101
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "GSAP",
         "url": "https://gsap.com/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Awwwards",
-        "url": "https://www.awwwards.com/",
         "file": "liens.txt"
       }
     ],
@@ -7741,18 +7853,24 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv11-l3/01-fiche-de-la-leçon.fr.pdf",
-        "size": 195873
+        "size": 189913
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "Plugins Claude Code (documentation)",
         "url": "https://code.claude.com/docs/en/discover-plugins",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Node.js",
-        "url": "https://nodejs.org/",
         "file": "liens.txt"
       },
       {
@@ -7871,7 +7989,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv12-l1/01-fiche-de-la-leçon.fr.pdf",
-        "size": 208115
+        "size": 207039
       },
       {
         "kind": "link",
@@ -7889,12 +8007,6 @@
         "kind": "link",
         "title": "Skills Claude (documentation)",
         "url": "https://code.claude.com/docs/en/skills",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Vitest",
-        "url": "https://vitest.dev/",
         "file": "liens.txt"
       }
     ],
@@ -7946,7 +8058,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv12-l3/01-fiche-de-la-leçon.fr.pdf",
-        "size": 210986
+        "size": 201491
       },
       {
         "kind": "link",
@@ -7998,12 +8110,18 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv12-l4/01-fiche-de-la-leçon.fr.pdf",
-        "size": 206576
+        "size": 200538
       },
       {
         "kind": "link",
         "title": "Claude",
         "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
         "file": "liens.txt"
       },
       {
@@ -8038,7 +8156,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv12-l5/01-fiche-de-la-leçon.fr.pdf",
-        "size": 210514
+        "size": 199527
       },
       {
         "kind": "link",
@@ -8106,18 +8224,24 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv13-l2/01-fiche-de-la-leçon.fr.pdf",
-        "size": 207080
+        "size": 210294
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "GitHub",
         "url": "https://github.com/",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "Git",
-        "url": "https://git-scm.com/",
         "file": "liens.txt"
       }
     ],
@@ -8128,18 +8252,24 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv13-l3/01-fiche-de-la-leçon.fr.pdf",
-        "size": 193102
+        "size": 188519
+      },
+      {
+        "kind": "link",
+        "title": "Claude",
+        "url": "https://claude.ai/referral/OtTQNvbscA",
+        "file": "liens.txt"
+      },
+      {
+        "kind": "link",
+        "title": "Claude Code (documentation)",
+        "url": "https://code.claude.com/docs",
+        "file": "liens.txt"
       },
       {
         "kind": "link",
         "title": "Supabase (documentation)",
         "url": "https://supabase.com/docs",
-        "file": "liens.txt"
-      },
-      {
-        "kind": "link",
-        "title": "GitHub",
-        "url": "https://github.com/",
         "file": "liens.txt"
       }
     ],
@@ -8150,7 +8280,7 @@
         "file": "01-fiche-de-la-leçon.fr.pdf",
         "lang": "fr",
         "path": "ressources/dv13-l4/01-fiche-de-la-leçon.fr.pdf",
-        "size": 198000
+        "size": 197618
       },
       {
         "kind": "link",

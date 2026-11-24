@@ -1,4 +1,6 @@
 # Outils cités dans la leçon dv8-l5 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Claude | https://claude.ai/referral/OtTQNvbscA
+Claude Code (documentation) | https://code.claude.com/docs
 Supabase (documentation) | https://supabase.com/docs
 OWASP Top 10 | https://owasp.org/Top10/
 OWASP Cheat Sheets | https://cheatsheetseries.owasp.org

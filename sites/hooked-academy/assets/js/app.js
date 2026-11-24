@@ -30,6 +30,8 @@ const G = () => (reduce ? null : window.gsap || null);
 const root = $('#root');
 const LESSONS = allLessons();
 const DUR = Object.fromEntries(LESSONS.map((l) => [l.id, lessonDuration(l)]));
+/** Durée affichée d'une leçon (« Bientôt » pour une vidéo pas encore tournée). */
+const durOf = (l) => (l.soon ? t('app.soon.chip') : dur(DUR[l.id]));
 const TRK = Object.fromEntries(TRACKS.map((x) => [x.id, x]));
 const RESERVE = '../#inscription';
 const AR = lang === 'ar';
@@ -538,7 +540,7 @@ function greet() {
 
 function voiceChip(l) {
   if (lang === 'fr') return l.voice || l.audio ? `<span class="chip chip--ok">${icon('mic', { size: 13 })} ${t('app.voice.darija')}</span>` : '';
-  return l.audio || l.screen ? `<span class="chip chip--ok">${icon('mic', { size: 13 })} ${t('app.voice.darija')}</span>` : '';
+  return l.audio || (l.screen && !l.soon) ? `<span class="chip chip--ok">${icon('mic', { size: 13 })} ${t('app.voice.darija')}</span>` : '';
 }
 
 function contCard(P, { demo = false } = {}) {
@@ -551,7 +553,7 @@ function contCard(P, { demo = false } = {}) {
     <div class="cont-b">
       <p class="card-k">${icon(TRK[P.track].icon, { size: 13 })} ${trName(P.track)} · ${t(P.resume ? 'app.home.resume' : demo ? 'app.home.start' : 'app.home.continue')}</p>
       <h2>${esc(l.title)}</h2>
-      <div class="cont-meta"><span class="chip chip--acc">${bdi(modCode(m))}</span><span>${lessonN(l.n)} · ${dur(DUR[l.id])}</span>${voiceChip(l)}</div>
+      <div class="cont-meta"><span class="chip chip--acc">${bdi(modCode(m))}</span><span>${lessonN(l.n)} · ${durOf(l)}</span>${voiceChip(l)}</div>
     </div>
   </a>`;
 }
@@ -738,8 +740,8 @@ function endCard(trackId) {
 
 /* Cartes de leçon façon « classroom » : miniature, petite intro, progression */
 // Image de la leçon (sans texte, donc la même en FR, EN et AR) ; couverture propre à chaque formation
-// Formation Sites & Apps : la miniature est une image de la leçon animée (tools/hooked-academy/vignettes.mjs)
-const thumb = (l) => (String(l.id).startsWith('dv') ? `../video/vignettes/${l.id}.jpg` : `../assets/img/lecons/${l.id}.webp`);
+// Les trois formations ont leurs images (assets/img/lecons/<id>.webp, tools/hooked-academy/images-lecons-prompts.json)
+const thumb = (l) => `../assets/img/lecons/${l.id}.webp`;
 const coverOf = (track) => `../assets/img/couv-${track}.webp`;
 // Si l'image manque, on retombe sur la capture de la vidéo animée, puis sur l'icône du module
 const THUMB_ERR = `onerror="this.src.includes('/lecons/')?(this.src=this.src.replace(/assets\\/img\\/lecons\\/(.+)\\.webp$/,'video/vignettes/$1.jpg')):this.remove()"`;
@@ -774,13 +776,13 @@ function lessonCard(l, m, P) {
   const tag = open ? 'a' : 'div';
   return `<${tag} class="lc is-${state}${cur ? ' is-cur' : ''}" role="listitem" ${open ? `href="#/lecon/${l.id}"` : 'aria-disabled="true"'} style="--c:${m.color}">
     <span class="lc-img"><span class="lc-ph" aria-hidden="true">${icon(m.icon, { size: 34 })}</span><img src="${thumb(l)}" alt="" loading="lazy" decoding="async" ${THUMB_ERR}>
-      <span class="lc-dur">${dur(DUR[l.id])}</span>
+      <span class="lc-dur">${durOf(l)}</span>
       ${state === 'done' ? `<span class="lc-ok" aria-hidden="true">${icon('check', { size: 15, stroke: 3 })}</span>` : ''}
       <span class="lc-go" aria-hidden="true">${icon(state === 'lock' ? 'lock' : 'play', { size: 20 })}</span>
       ${cur ? `<span class="lc-here">${t('app.map.here')}</span>` : ''}
     </span>
     <span class="lc-b">
-      <small class="lc-k">${bdi(lessonTag(l, m))}${l.prat ? ` · <span class="lc-prat">${t('app.map.prat')}</span>` : ''}${(lang === 'fr' && l.voice) || l.audio || l.screen ? ` · ${t('app.map.voice')}` : ''}</small>
+      <small class="lc-k">${bdi(lessonTag(l, m))}${l.prat ? ` · <span class="lc-prat">${t('app.map.prat')}</span>` : ''}${(lang === 'fr' && l.voice) || l.audio || (l.screen && !l.soon) ? ` · ${t('app.map.voice')}` : ''}</small>
       <b class="lc-t">${esc(l.title)}</b>
       <span class="lc-x">${esc(introOf(l))}</span>
       <span class="lc-bar" aria-hidden="true"><i style="width:${(seen * 100).toFixed(0)}%"></i></span>
@@ -1074,6 +1076,8 @@ function crumb(f) {
 }
 
 function playerHTML(l) {
+  // Place réservée : la vidéo n'est pas encore tournée (data/videos-ecran.js, video: '')
+  if (l.soon) return `<div class="ls-soon"><img src="${thumb(l)}" alt="" decoding="async" ${THUMB_ERR}><div class="ls-soon-in"><span class="ls-soon-ic">${icon('clock', { size: 26 })}</span><b>${esc(t('app.soon.title'))}</b><span>${esc(t('app.soon.text'))}</span></div></div>`;
   // Vidéo filmée à l'écran (screen) : la même dans toutes les langues ; sinon le MP4 ne sert qu'en français
   const mp4 = l.video && (lang === 'fr' || l.screen);
   if (mp4) return `<video id="vid" src="../${esc(l.video)}" poster="${thumb(l)}" controls playsinline preload="metadata" aria-label="${esc(t('app.player.label', { title: l.title }))}"></video>`;
@@ -1184,7 +1188,7 @@ function viewLesson(id) {
         </header>
         <div class="player" id="player">${playerHTML(l)}</div>
         <div class="ls-row">
-          <span class="chip">${icon('clock', { size: 14 })} ${dur(DUR[l.id])}</span>
+          <span class="chip">${icon('clock', { size: 14 })} ${durOf(l)}</span>
           ${voiceChip(l)}
           ${playerNote(l)}
           <span class="grow"></span>

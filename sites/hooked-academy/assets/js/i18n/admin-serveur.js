@@ -242,7 +242,7 @@ add({
     'ad.set2.change': 'Changer le mot de passe',
     'ad.set2.changed': 'Mot de passe changé',
     'ad.set2.dataP': 'Les données vivent sur le serveur de la plateforme (le VPS) et se retrouvent sur tous tes appareils. L’export contient les inscriptions, les étudiants, les contenus modifiés et la FAQ (sans les codes d’accès).',
-    'ad.set2.accessP': 'Compte étudiant de démonstration (public, une leçon par formation) : {email} / {code}.',
+    'ad.set2.accessP': 'Compte étudiant de démonstration (public, les 3 premières vidéos de chaque formation) : {email} / {code}.',
     'ad.set2.log': 'Journal des actions',
   },
   en: {
@@ -477,7 +477,7 @@ add({
     'ad.set2.change': 'Change the password',
     'ad.set2.changed': 'Password changed',
     'ad.set2.dataP': 'Data lives on the platform server (the VPS) and follows you on every device. The export contains sign-ups, students, edited content and the FAQ (without access codes).',
-    'ad.set2.accessP': 'Demo student account (public, one lesson per course): {email} / {code}.',
+    'ad.set2.accessP': 'Demo student account (public, the first 3 videos of each course): {email} / {code}.',
     'ad.set2.log': 'Activity log',
   },
   ar: {
@@ -712,7 +712,7 @@ add({
     'ad.set2.change': 'تغيير كلمة المرور',
     'ad.set2.changed': 'تم تغيير كلمة المرور',
     'ad.set2.dataP': 'البيانات محفوظة على خادم المنصة (VPS) وتجدها على كل أجهزتك. يحتوي التصدير على التسجيلات والطلاب والمحتوى المعدَّل والأسئلة (بدون رموز الدخول).',
-    'ad.set2.accessP': 'حساب طالب تجريبي (عام، درس واحد لكل تكوين): {email} / {code}.',
+    'ad.set2.accessP': 'حساب طالب تجريبي (عام، أول 3 فيديوهات في كل تكوين): {email} / {code}.',
     'ad.set2.log': 'سجلّ العمليات',
   },
 });

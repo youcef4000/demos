@@ -4,7 +4,7 @@ export default {
   "modules": {
     "dv10": {
       "title": "Stabilising your application",
-      "pitch": "Why a vibe-coded app breaks, and how to make it reliable: tests, types and validation, safety nets, monitoring."
+      "pitch": "Why a vibe-coded app breaks, and how to make it reliable: tests written by the AI, safety nets, monitoring."
     }
   },
   "lessons": {
@@ -12,32 +12,24 @@ export default {
       "title": "Why a vibe-coded app breaks",
       "key": [
         "Causes: regressions, lost context, dependencies, unexpected real data.",
-        "Defence: tests, types and validation, small commits + CI, monitoring.",
-        "The bigger the app, the more these layers become mandatory."
+        "Defence: tests written by the agent, data validation, small saves + automatic checks, monitoring.",
+        "The more the app grows, the more these layers become mandatory."
       ]
     },
     "dv10-l2": {
       "title": "Hands-on · Getting the AI to write tests",
       "key": [
-        "Test critical calculations and rules: normal cases and forbidden cases.",
-        "npx vitest run: 3 green tests in ~120 ms (real session).",
-        "A test catches the regression (−27,000 instead of 2,700) before production."
-      ]
-    },
-    "dv10-l3": {
-      "title": "Types and validation: TypeScript and Zod",
-      "key": [
-        "Zod: a schema describes the accepted data; safeParse rejects the rest before the database.",
-        "Validate every input on the server side (forms, API, webhooks).",
-        "TypeScript: errors show up in the editor and the AI knows the exact shape of the data."
+        "Describe in plain words what must work and what must be forbidden; the agent writes and runs the tests.",
+        "A test catches the regression (−27,000 instead of 2,700) before it goes live.",
+        "In CLAUDE.md: “run the tests before every save”."
       ]
     },
     "dv10-l4": {
-      "title": "Safety nets: small commits, CI, rollback",
+      "title": "Safety nets: small saves, automatic checks, rollback",
       "key": [
-        "One branch per feature, small commits, green tests, merge; a tagged version per release.",
-        "CI: tests on every pull request (GitHub Actions); red = no merge.",
-        "Rollback: git revert, previous deployment, reverse migration, tested backup."
+        "One branch per feature, small saves, green tests, merge; a tagged version per release.",
+        "Automatic checks: tests on every pull request (GitHub Actions), requested from your agent; red = no merge.",
+        "Rollback: revert, previous deployment, reverse migration, tested backup."
       ]
     },
     "dv10-l5": {

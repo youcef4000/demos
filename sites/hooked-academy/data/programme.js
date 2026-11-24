@@ -23,7 +23,7 @@ import { LAB, masquer } from './hooked-lab.js';
 export const TRACKS = [
   { id: 'creative', code: 'M', title: 'Formation Créative', ar: 'تكوين الكرياتيف', color: '#e0be55', icon: 'film', pitch: 'Comprendre ce qui fait vendre une publicité, et la produire avec ton téléphone, CapCut et Canva.' },
   { id: 'ia', code: 'IA', title: 'Formation IA', ar: 'تكوين الذكاء الاصطناعي', color: '#c8b6ff', icon: 'sparkles', pitch: 'Prompting, images et vidéos IA, voix, UGC, cinématique — puis analyser, vendre et signer tes clients.' },
-  { id: 'dev', code: 'D', title: 'Formation Sites & Apps', ar: 'تكوين المواقع والتطبيقات', color: '#5fd3b3', icon: 'layout', pitch: 'Créer, sécuriser, publier et vendre des sites et des applications avec l’IA (vibe coding), de zéro au premier client.' },
+  { id: 'dev', code: 'D', title: 'Formation Sites & Apps', ar: 'تكوين المواقع والتطبيقات', color: '#5fd3b3', icon: 'layout', pitch: 'Créer, sécuriser, publier et vendre des sites et des applications en dirigeant l’IA (vibe coding), sans écrire de code, de zéro au premier client.' },
 ];
 
 export const PARTS = [

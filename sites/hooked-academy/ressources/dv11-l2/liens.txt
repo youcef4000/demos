@@ -1,3 +1,4 @@
 # Outils cités dans la leçon dv11-l2 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Claude | https://claude.ai/referral/OtTQNvbscA
+Claude Code (documentation) | https://code.claude.com/docs
 GSAP | https://gsap.com
-Awwwards | https://www.awwwards.com

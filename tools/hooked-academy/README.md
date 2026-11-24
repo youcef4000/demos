@@ -5,7 +5,7 @@ Site : `sites/hooked-academy/` → https://hooked-academy.tech/
 | Adresse | Contenu |
 |---|---|
 | `/hooked-academy/` | Landing (inscription en 3 étapes) |
-| `/hooked-academy/app/` | Espace étudiant (compte démo : `demo@hooked.academy` / `DEMO-2026`, ou `app/?demo=1`) |
+| `/hooked-academy/app/` | Espace étudiant (compte démo : `demo@hooked.academy` / `DEMO-2026`, ou `app/?demo=1` ; il ne voit que les 3 premières vidéos de chaque formation, `FREE_OPEN`) |
 | `/hooked-academy/admin/` | Espace équipe (code démo : `HOOKED-TEAM`) |
 | `/hooked-academy/motion/player.html?id=m2-l1` | Une leçon animée seule (plein écran) |
 
@@ -30,10 +30,14 @@ entrées et sorties.
 points clés, le quiz et l'exercice interactif.
 
 **Formation Sites & Apps** (troisième formation, novembre 2026) : `data/programme-dev.js`, qui réunit
-`programme-dev-1.js`, `-2.js` et `-3.js` (16 modules D00–D15, 88 leçons `dv…`, dont 13 pratiques `prat: true`).
-Ses vidéos ont leur propre thème « code » (`motion/dev.css`, classe `.is-dev` posée par `engine.js`) et sept types de
-scènes (`motion/scenes-dev.js` : `terminal`, `code`, `browser`, `tree`, `diff`, `gitgraph`, `alert`). Miniatures :
-`video/vignettes/dv*.jpg` (`vignettes.mjs`) ; fiches PDF : `TRACK=dev LANGS=fr node tools/hooked-academy/fiches-lecons.mjs`.
+`programme-dev-1.js`, `-2.js` et `-3.js` (16 modules D00–D15, 89 leçons `dv…`, dont 13 pratiques `prat: true` et les
+3 vidéos de présentation de D00, places réservées dans `data/videos-ecran.js`). **100 % vibe coding** : l'élève dirige
+Claude Code ou Codex par des demandes en français, sans commande ni éditeur de code ; les scènes montrent la demande et la
+réponse de l'agent (type `prompt`). Ses vidéos ont leur propre thème « code » (`motion/dev.css`, classe `.is-dev` posée par
+`engine.js`) et ses types de scènes (`motion/scenes-dev.js` : `terminal`, `code`, `browser`, `tree`, `diff`, `gitgraph`,
+`alert`, dont seuls `browser`, `tree`, `gitgraph`, `alert` et `code` pour les fichiers en français servent encore).
+Images des leçons : `assets/img/lecons/dv*.webp` (comme les deux autres formations) ; fiches PDF :
+`TRACK=dev LANGS=fr node tools/hooked-academy/fiches-lecons.mjs`.
 Documents (recherches, tournages, modèles) : `formations/sites-et-apps/`.
 Anglais et arabe : `data/i18n/<langue>/dv0.js … dv15.js` traduisent les titres, les présentations des modules et les
 points essentiels (environ 10 % des textes, voir `i18n-check.mjs`) ; les scènes, quiz et exercices restent en français.
@@ -178,8 +182,9 @@ node tools/hooked-academy/ressources.mjs               # puis le manifeste
 
 Chaque leçon a sa propre image, `sites/hooked-academy/assets/img/lecons/<id>.webp` (1280×720),
 générée avec Nano Banana Pro (Higgsfield, 16:9, 2K) puis réduite en WebP. Les images ne contiennent
-aucun texte : la même sert en français, en anglais et en arabe. Les couvertures des deux formations
-sont `assets/img/couv-creative.webp` et `assets/img/couv-ia.webp`.
+aucun texte : la même sert en français, en anglais et en arabe. Les couvertures des trois formations
+sont `assets/img/couv-creative.webp`, `assets/img/couv-ia.webp` et `assets/img/couv-dev.webp`. Les 89 images de la
+Formation Sites & Apps (novembre 2026) suivent le style de sa couverture : verre dépoli, menthe et violet, fond noir.
 
 Les prompts utilisés sont dans `images-lecons-prompts.json` (`{ "<id de leçon>": "<prompt>" }`).
 Pour une nouvelle leçon : écrire un prompt sur le même modèle (une scène propre à la leçon, puis la

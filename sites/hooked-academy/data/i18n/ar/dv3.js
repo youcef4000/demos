@@ -4,7 +4,7 @@ export default {
   "modules": {
     "dv3": {
       "title": "جولة في المنصات",
-      "pitch": "Claude وClaude Code وVS Code وGitHub وSupabase ومنصات الاستضافة ومولّدات التطبيقات: أين تنقر ولماذا."
+      "pitch": "Claude وClaude Code وCodex وGitHub وSupabase ومنصات الاستضافة ومولّدات التطبيقات: أين تنقر ولماذا."
     }
   },
   "lessons": {
@@ -19,17 +19,17 @@ export default {
     "dv3-l2": {
       "title": "Claude Code: الوكيل الذي يبني معك",
       "key": [
-        "Claude Code: الطرفية، تطبيق سطح المكتب، claude.ai/code (سحابة + GitHub)، الهاتف.",
-        "/init، Shift+Tab (وضع الخطة)، /clear، /compact، Esc مرتين، /mcp، /plugin، /skills.",
+        "Claude Code: تطبيق سطح المكتب (تبويب Code)، claude.ai/code (سحابة + GitHub)، الهاتف.",
+        "/init، وضع الخطة، /clear، /compact، الرجوع للخلف، /mcp، /plugin، /skills.",
         "اقرأ قبل القبول، لا كلمة مرور في المحادثة أبدًا، ودائمًا داخل مجلد المشروع."
       ]
     },
     "dv3-l3": {
-      "title": "VS Code (وCursor): ورشتك",
+      "title": "Codex: الوكيل الآخر",
       "key": [
-        "VS Code: المستكشف، المحرّر، الطرفية المدمجة (Ctrl + `)، التحكم بالمصدر، الإضافات.",
-        "الإضافات: Prettier وESLint وError Lens وGitLens وClaude Code.",
-        "Cursor وWindsurf: محرّرات ذكية بديلة، والطريقة نفسها."
+        "Codex: وكيل البرمجة من OpenAI، مضمَّن مع ChatGPT Plus؛ تطبيق سطح مكتب، سحابة مرتبطة بـ GitHub، هاتف.",
+        "يقرأ Codex ملف AGENTS.md كما يقرأ Claude Code ملف CLAUDE.md.",
+        "نفس المنهجية مع الاثنين؛ ويمكن لوكيل أن يراجع عمل الآخر."
       ]
     },
     "dv3-l4": {

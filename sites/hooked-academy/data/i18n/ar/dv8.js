@@ -43,16 +43,16 @@ export default {
     "dv8-l5": {
       "title": "الحقن وXSS وسياسة الأمان",
       "key": [
-        "XSS: اعرض بـ textContent، ولا تستعمل innerHTML مع بيانات المستخدم أبدًا.",
-        "SQL: supabase-js أو استعلامات بمعاملات، لا نص مُلصَق أبدًا.",
-        "Content-Security-Policy: قائمة مغلقة لمصادر السكربتات والاتصالات."
+        "XSS: بيانات الزوار تُعرض كنص، لا ككود أبدًا (textContent لا innerHTML).",
+        "الاستعلامات: supabase-js أو استعلامات مُعلَمة، لا نص ملصوق أبدًا.",
+        "Content-Security-Policy: قائمة مغلقة لمصادر السكربتات والاتصالات الشبكية، تطلبها من وكيلك."
       ]
     },
     "dv8-l6": {
-      "title": "تطبيق · المكتبات وnpm audit والـ slopsquatting",
+      "title": "تطبيق · المكتبات والـ slopsquatting: اجعل الوكيل يتحقق",
       "key": [
-        "npm audit يسرد الثغرات المعروفة؛ npm audit fix يقترح التحديثات.",
-        "الـ slopsquatting: تحقّق من كل حزمة مجهولة على npmjs.com؛ npm install --ignore-scripts.",
+        "اطلب تدقيق المكتبات قبل كل نشر؛ يشرح الوكيل كل ثغرة ويحدّث.",
+        "Slopsquatting: كل مكتبة مجهولة يُتحقَّق منها (المؤلف، التنزيلات، التاريخ) قبل التثبيت.",
         "مكتبات أقل، lockfile، Dependabot، تحديث سريع للثغرات الحرجة."
       ]
     },
@@ -67,9 +67,9 @@ export default {
     "dv8-l8": {
       "title": "تطبيق · تدقيق الأمان قبل النشر",
       "key": [
-        "التحقق: git check-ignore -v .env وgit grep والترويسات (curl -sI)؛ CSP في وسم meta على GitHub Pages.",
-        "القائمة: الأسرار، RLS مُختبَرة، npm audit، مدخلات مُتحقَّق منها، ترويسات، مصادقة ثنائية.",
-        "/security-review في Claude Code + MCP لـ Supabase للقراءة فقط؛ صادق على التصحيحات واحدًا تلو الآخر."
+        "اطلب التحقق: .env متجاهَل، لا سرّ محفوظ، ترويسات الأمان؛ CSP في وسم meta على GitHub Pages.",
+        "قائمة التحقق: الأسرار، RLS مُختبرة، مكتبات بلا ثغرات، مدخلات متحقَّق منها، الترويسات، 2FA.",
+        "/security-review في Claude Code + موصّل Supabase للقراءة فقط؛ اعتمد التصحيحات واحدًا تلو الآخر."
       ]
     }
   }

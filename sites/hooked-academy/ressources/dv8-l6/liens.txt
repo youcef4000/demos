@@ -1,4 +1,5 @@
 # Outils cités dans la leçon dv8-l6 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Claude | https://claude.ai/referral/OtTQNvbscA
+Claude Code (documentation) | https://code.claude.com/docs
 GitHub | https://github.com
-Node.js | https://nodejs.org
 OWASP Cheat Sheets | https://cheatsheetseries.owasp.org

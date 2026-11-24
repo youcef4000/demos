@@ -19,9 +19,9 @@ export default {
     "dv13-l2": {
       "title": "Hands-on · The €0/month demo system",
       "key": [
-        "One public repo + GitHub Pages + a subdomain (CNAME) + one folder per demo.",
-        "demos.json: public: false = private link, out of the gallery.",
-        "git push → live in 1 to 2 minutes; public repo: no keys, no real data."
+        "A public repository + GitHub Pages + a subdomain (CNAME) + one folder per demo.",
+        "demos.json: private = private link, out of the gallery.",
+        "One request, “publish the demo” → online in 1 to 2 minutes; public repository: no key, no real data."
       ]
     },
     "dv13-l3": {

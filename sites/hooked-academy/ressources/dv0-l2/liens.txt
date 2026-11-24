@@ -1,5 +1,7 @@
 # Outils cités dans la leçon dv0-l2 (généré par tools/hooked-academy/fiches-lecons.mjs)
+ChatGPT | https://chatgpt.com
 Claude | https://claude.ai/referral/OtTQNvbscA
 Claude Code (documentation) | https://code.claude.com/docs
+Codex (OpenAI) | https://openai.com/codex/
 GitHub | https://github.com
 Supabase (documentation) | https://supabase.com/docs

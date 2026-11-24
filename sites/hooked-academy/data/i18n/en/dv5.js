@@ -1,58 +1,58 @@
-// Traduction (en) du module dv5 — Git and GitHub.
+// Traduction (en) du module dv5 — Saving with GitHub.
 // Titres, présentation et points essentiels ; les scènes restent en français pour l'instant (voir i18n-check.mjs).
 export default {
   "modules": {
     "dv5": {
-      "title": "Git and GitHub",
-      "pitch": "Save, go back, work in branches, protect secrets, find the best repositories, publish automatically."
+      "title": "Saving with GitHub",
+      "pitch": "Save, go back, experiment safely, protect your secrets and publish automatically: just by asking your agent."
     }
   },
   "lessons": {
     "dv5-l1": {
       "title": "Git explained simply",
       "key": [
-        "Git = save points (commits) you can go back to.",
-        "The cycle: edit → git add → git commit → git push.",
+        "Git = save points (commits) you can go back to; your agent uses it for you.",
+        "The cycle: you ask → you test → the agent commits → then pushes to GitHub.",
         "A commit message says what changed."
       ]
     },
     "dv5-l2": {
-      "title": "Hands-on · Your first repository",
+      "title": "Hands-on · Your first repository, without a single command",
       "key": [
-        "git init -b main, git status, git add ., git commit -m \"…\", git log --oneline.",
-        "“??” = untracked file; after the commit, it’s saved.",
-        "To GitHub: git remote add origin … then git push -u origin main (or gh repo create … --push)."
+        "Request 1: “turn this folder into a repository and make a first save”, checking for secrets.",
+        "Request 2: “create a private repository on GitHub and send the project”; sign-in is one click on Authorize.",
+        "Check on GitHub: the files, the Commits tab, no .env, private repository."
       ]
     },
     "dv5-l3": {
-      "title": "Hands-on · Branches, merging and undoing",
+      "title": "Hands-on · Experiment, merge, go back",
       "key": [
-        "git checkout -b <branch> to try, git merge to merge.",
-        "git revert undoes a commit by adding a reverse commit: the history stays complete.",
+        "A branch to experiment without touching the main version; merge it if you like it.",
+        "To undo, ask for a “revert”: the agent adds a reverse save, the history stays complete.",
         "Pull request = a branch reviewed before merging; a preview per branch on Vercel, Netlify, Cloudflare."
       ]
     },
     "dv5-l4": {
-      "title": "Hands-on · Secrets: .gitignore and .env",
+      "title": "Hands-on · Secrets: never publish a key",
       "key": [
-        "Keys go in .env, listed in .gitignore; .env.example only publishes the names.",
-        "Check: git check-ignore -v .env, git ls-files, git grep.",
-        "Leaked key: revoke it and create a new one; deleting the commit is not enough."
+        "Keys go in .env, which Git ignores; .env.example only publishes the names.",
+        "Ask for the check: .env ignored, no secret in the files or in the history.",
+        "Key published: revoke it and create a new one; deleting the commit is not enough."
       ]
     },
     "dv5-l5": {
       "title": "Finding the best GitHub repositories",
       "key": [
-        "Filters: stars:>500, pushed:>date, topic:, license:mit, archived:false; gh search repos.",
+        "Search filters: stars:>500, pushed:>date, topic:, license:mit, archived:false; or ask your agent to search.",
         "References: shadcn-ui/ui, supabase/supabase, anthropics/skills, github/spec-kit, OWASP/CheatSheetSeries.",
-        "Before using one: licence, recent maintenance, active issues, an audit by Claude."
+        "Before using: licence, recent maintenance, active issues, an audit by Claude."
       ]
     },
     "dv5-l6": {
       "title": "GitHub Actions and Pages: publish automatically",
       "key": [
-        "git push → GitHub Actions → site built → live in 1 to 2 minutes.",
-        "A .github/workflows/*.yml file describes the robot (trigger, steps).",
+        "Push → GitHub Actions → site built → online in 1 to 2 minutes.",
+        "Your agent writes the robot’s file (.github/workflows) in one request, and explains what it does.",
         "Actions publish, test, check security and send reports."
       ]
     }

@@ -27,25 +27,25 @@ export default {
     "dv12-l3": {
       "title": "الـ plugins: قدرات خارقة بأمر واحد",
       "key": [
-        "/plugin (الكتالوج)، /plugin install <plugin>@claude-plugins-official، /plugin marketplace add، /reload-plugins.",
-        "النطاقات: user (~/.claude/settings.json)، project (.claude/settings.json)، local (.claude/settings.local.json).",
-        "الـ plugin قد ينفّذ كودًا: اقرأ التفاصيل، مصادر موثوقة، أزل ما لا تستعمله."
+        "/plugin: الكتالوج الرسمي مضاف مسبقًا؛ تثبيت، تعطيل، إزالة؛ و/plugin marketplace add لكتالوج آخر.",
+        "النطاقات: أنا فقط (كل مشاريعي)، المشروع (كل الفريق)، محلي (أنا، في هذا المشروع).",
+        "الإضافة قد تشغّل كودًا: اقرأ التفاصيل، مصادر موثوقة، وأزل ما لا تستعمله."
       ]
     },
     "dv12-l4": {
       "title": "MCP والموصّلات: ربط Claude بأدواتك",
       "key": [
-        "أدوات MCP مفيدة: Supabase وGitHub وPlaywright وContext7 وFigma وSentry.",
-        "claude mcp add --transport http <name> <url>؛ claude mcp add <name> -- <command>؛ --scope project؛ /mcp؛ claude mcp list.",
-        "أدنى صلاحيات: قراءة فقط، مشروع واحد، لا مفتاح بنص واضح؛ والموصّلات في claude.ai."
+        "MCP مفيدة: Supabase وGitHub وPlaywright وContext7 وFigma وSentry.",
+        "الربط: اطلب من وكيلك إضافة خادم MCP، أو الإعدادات ← الموصّلات؛ وتحقّق بـ /mcp.",
+        "أقل صلاحيات: قراءة فقط، مشروع واحد، لا رمز مكشوف."
       ]
     },
     "dv12-l5": {
       "title": "طرق عمل متقدمة: وكلاء فرعيون وhooks وجلسات متوازية",
       "key": [
-        "الوكلاء الفرعيون (/agents)، الـ hooks (/hooks)، جلسات متوازية على فروع، claude.ai/code و@claude على GitHub.",
-        "hook من نوع PostToolUse + matcher \"Edit|Write\": إجراء تلقائي بعد كل تعديل.",
-        "/install-github-app لاستدعاء @claude في GitHub؛ claude -p للسكربتات والـ Actions."
+        "وكلاء فرعيون (/agents)، hooks (/hooks)، جلسات متوازية على فروع، claude.ai/code و@claude على GitHub.",
+        "Hook: إجراء تلقائي بعد كل تعديل، تطلبه بجملة واحدة؛ و/hooks لرؤيته.",
+        "@claude في GitHub (/install-github-app): أطلق مهمة من issue أو pull request."
       ]
     }
   }

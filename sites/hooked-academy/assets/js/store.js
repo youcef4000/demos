@@ -10,10 +10,10 @@ const ME = 'hooked-academy:me:v2';
 const OLD = ['hooked-academy:data:v1', 'hooked-academy:session:v1', 'hooked-academy:admin:v1'];
 export const DEMO_STUDENT = { email: 'demo@hooked.academy', code: 'DEMO-2026' };
 
-/** Le compte démo ne montre presque rien : une leçon par formation, le reste est verrouillé. */
-export const DEMO_OPEN = ['m1-l1', 'ia1-l1', 'dv1-l1'];
-/** Bienvenue et prise en main de chaque formation : ouvertes à tous, en démo comme avant l'inscription. */
-export const FREE_OPEN = ['m0-l1', 'm0-l2', 'm0-l3', 'm0-l4', 'ia0-l1', 'ia0-l4', 'ia0-l5', 'ia0-l6', 'dv0-l1', 'dv0-l2', 'dv0-l3', 'dv0-l4'];
+/** Le compte démo ne voit que les 3 premières vidéos de chaque formation (FREE_OPEN) : aucune leçon en plus. */
+export const DEMO_OPEN = [];
+/** Les 3 premières vidéos de chaque formation (bienvenue, présentation de la plateforme) : ouvertes à tous, en démo comme avant l'inscription. */
+export const FREE_OPEN = ['m0-l1', 'm0-l3', 'm0-l4', 'ia0-l1', 'ia0-l5', 'ia0-l6', 'dv0-l5', 'dv0-l6', 'dv0-l7'];
 
 /**
  * Accès par formation. Chaque pack ouvre une ou plusieurs formations pour un an :
@@ -168,7 +168,7 @@ function demoAccount() {
     cohort: 'Session découverte',
     active: true,
     access: [],
-    progress: { lessons: { 'm1-l1': { done: false, watched: 12 } }, last: 'm1-l1', days: [iso()], xp: 0, badges: [] },
+    progress: { lessons: { 'm0-l1': { done: false, watched: 12 } }, last: 'm0-l1', days: [iso()], xp: 0, badges: [] },
   };
 }
 const normCode = (s) => {

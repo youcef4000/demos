@@ -4,4 +4,3 @@ Claude Code (documentation) | https://code.claude.com/docs
 MCP dans Claude Code (documentation) | https://code.claude.com/docs/en/mcp
 Supabase (documentation) | https://supabase.com/docs
 Bolt | https://bolt.new
-Resend | https://resend.com

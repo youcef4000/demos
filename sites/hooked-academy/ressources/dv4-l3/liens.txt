@@ -1,3 +1,4 @@
 # Outils cités dans la leçon dv4-l3 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Claude | https://claude.ai/referral/OtTQNvbscA
+Claude Code (documentation) | https://code.claude.com/docs
 Squoosh | https://squoosh.app
-PageSpeed Insights | https://pagespeed.web.dev

@@ -25,11 +25,11 @@ export default {
       ]
     },
     "dv9-l3": {
-      "title": "تطبيق · الطريق المحترف مع Claude Code",
+      "title": "تطبيق · بناء التطبيق مع وكيلك",
       "key": [
-        "npm create vite@latest my-app (Vite 8، create-vite 9)؛ npm install؛ npm run build.",
-        "أضف منذ البداية: CLAUDE.md وspec.md و.env.example ومكانًا للاختبارات.",
-        "شاشة بشاشة: وضع الخطة ← البناء ← الاختبار (npm run dev + الهاتف) ← commit."
+        "يكفي طلب واحد: قراءة spec.md، إنشاء المشروع، تثبيت كل شيء، عرض المعاينة.",
+        "منذ البداية: CLAUDE.md وspec.md و.env.example ومكان الاختبارات.",
+        "شاشة بعد شاشة: وضع الخطة ← البناء ← الاختبار (معاينة + هاتف) ← الحفظ."
       ]
     },
     "dv9-l4": {

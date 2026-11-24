@@ -1,5 +1,6 @@
 # Outils cités dans la leçon dv6-l4 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Claude | https://claude.ai/referral/OtTQNvbscA
+Claude Code (documentation) | https://code.claude.com/docs
 GitHub | https://github.com
-Node.js | https://nodejs.org
 Railway | https://railway.com
 Render | https://render.com

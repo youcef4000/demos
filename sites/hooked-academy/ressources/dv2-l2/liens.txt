@@ -1,3 +1,3 @@
 # Outils cités dans la leçon dv2-l2 (généré par tools/hooked-academy/fiches-lecons.mjs)
-MDN Web Docs | https://developer.mozilla.org/fr/
-Vite | https://vite.dev
+Claude | https://claude.ai/referral/OtTQNvbscA
+Bolt | https://bolt.new

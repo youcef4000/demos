@@ -27,8 +27,8 @@ export default {
     "dv1-l3": {
       "title": "The four families of tools",
       "key": [
-        "Four families: chat, generators (Lovable, Bolt, v0, Replit), AI editors (Cursor, Copilot), agents (Claude Code).",
-        "Winning combo: generator → GitHub → Claude Code → live.",
+        "Four families: chat, generators (Lovable, Bolt, v0, Replit), agents (Claude Code, Codex), platforms (GitHub, Supabase, hosts).",
+        "Winning combo: generator → GitHub → Claude Code → online.",
         "Before adopting a tool: GitHub export, a way out, credit prices, where the data lives."
       ]
     },
@@ -36,8 +36,8 @@ export default {
       "title": "The pro loop: spec, plan, build, test, save",
       "key": [
         "The loop: spec → approved plan → small step → real test → commit.",
-        "A spec: who for, what we want, testable criteria, out of scope. Fix the spec when the result is wrong.",
-        "Plan mode (Shift + Tab): fixing a plan costs far less than fixing code."
+        "A spec: for whom, what we want, testable criteria, out of scope. Fix the spec when the result is wrong.",
+        "Plan mode: fixing a plan costs far less than fixing code."
       ]
     },
     "dv1-l5": {

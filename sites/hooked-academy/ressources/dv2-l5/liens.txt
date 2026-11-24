@@ -1,7 +1,5 @@
 # Outils cités dans la leçon dv2-l5 (généré par tools/hooked-academy/fiches-lecons.mjs)
 Claude | https://claude.ai/referral/OtTQNvbscA
 Supabase (documentation) | https://supabase.com/docs
-Vite | https://vite.dev
-GSAP | https://gsap.com
 Expo | https://expo.dev
 shadcn/ui | https://ui.shadcn.com

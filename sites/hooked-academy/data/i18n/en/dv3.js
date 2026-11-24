@@ -4,7 +4,7 @@ export default {
   "modules": {
     "dv3": {
       "title": "The platform tour",
-      "pitch": "Claude, Claude Code, VS Code, GitHub, Supabase, hosts and app generators: where to click and why."
+      "pitch": "Claude, Claude Code, Codex, GitHub, Supabase, hosts and app generators: where to click and why."
     }
   },
   "lessons": {
@@ -19,17 +19,17 @@ export default {
     "dv3-l2": {
       "title": "Claude Code: the agent that builds with you",
       "key": [
-        "Claude Code: terminal, desktop app, claude.ai/code (cloud + GitHub), phone.",
-        "/init, Shift+Tab (plan mode), /clear, /compact, Esc×2, /mcp, /plugin, /skills.",
+        "Claude Code: desktop app (Code tab), claude.ai/code (cloud + GitHub), phone.",
+        "/init, plan mode, /clear, /compact, go back, /mcp, /plugin, /skills.",
         "Read before accepting, never a password in the chat, always in the project folder."
       ]
     },
     "dv3-l3": {
-      "title": "VS Code (and Cursor): your workshop",
+      "title": "Codex: the other agent",
       "key": [
-        "VS Code: explorer, editor, integrated terminal (Ctrl + `), source control, extensions.",
-        "Extensions: Prettier, ESLint, Error Lens, GitLens, Claude Code.",
-        "Cursor and Windsurf: alternative AI editors, same method."
+        "Codex: OpenAI’s coding agent, included with ChatGPT Plus; desktop app, cloud linked to GitHub, phone.",
+        "Codex reads AGENTS.md the way Claude Code reads CLAUDE.md.",
+        "Same method with both; one agent can review the other’s work."
       ]
     },
     "dv3-l4": {

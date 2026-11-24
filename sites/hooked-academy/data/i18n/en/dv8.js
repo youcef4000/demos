@@ -43,17 +43,17 @@ export default {
     "dv8-l5": {
       "title": "Injections, XSS and security policy",
       "key": [
-        "XSS: display with textContent, never innerHTML with user data.",
-        "SQL: supabase-js or parameterised queries, never concatenated text.",
-        "Content-Security-Policy: a closed list of script sources and network calls."
+        "XSS: visitors’ data is displayed as text, never as code (textContent, not innerHTML).",
+        "Queries: supabase-js or parameterised queries, never pasted text.",
+        "Content-Security-Policy: a closed list of script sources and network calls, requested from your agent."
       ]
     },
     "dv8-l6": {
-      "title": "Hands-on · Dependencies, npm audit and slopsquatting",
+      "title": "Hands-on · Dependencies and slopsquatting: have your agent check",
       "key": [
-        "npm audit lists known vulnerabilities; npm audit fix suggests updates.",
-        "Slopsquatting: check any unknown package on npmjs.com; npm install --ignore-scripts.",
-        "Fewer dependencies, lockfile, Dependabot, fast updates for critical flaws."
+        "Ask for a library audit before every release; the agent explains each flaw and updates.",
+        "Slopsquatting: every unknown library is checked (author, downloads, date) before installing.",
+        "Fewer libraries, lockfile, Dependabot, quick updates for critical flaws."
       ]
     },
     "dv8-l7": {
@@ -67,9 +67,9 @@ export default {
     "dv8-l8": {
       "title": "Hands-on · The security audit before going live",
       "key": [
-        "Check: git check-ignore -v .env, git grep, headers (curl -sI); CSP in a meta tag on GitHub Pages.",
-        "Checklist: secrets, tested RLS, npm audit, validated inputs, headers, 2FA.",
-        "/security-review in Claude Code + read-only Supabase MCP; approve fixes one by one."
+        "Have it checked: .env ignored, no secret saved, security headers; CSP in a meta tag on GitHub Pages.",
+        "Checklist: secrets, tested RLS, dependencies without flaws, validated inputs, headers, 2FA.",
+        "/security-review in Claude Code + Supabase connector read-only; approve fixes one by one."
       ]
     }
   }

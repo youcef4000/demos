@@ -4,24 +4,24 @@ export default {
   "modules": {
     "dv6": {
       "title": "النشر على الإنترنت",
-      "pitch": "GitHub Pages وVercel وNetlify وCloudflare وRailway وRender، اسم النطاق، الـ DNS، والـ VPS للمحترفين."
+      "pitch": "GitHub Pages وVercel وNetlify وCloudflare وRailway وRender واسم النطاق والـ DNS: على الإنترنت ببضع نقرات."
     }
   },
   "lessons": {
     "dv6-l1": {
       "title": "أنواع الاستضافة",
       "key": [
-        "ثابتة (Pages وCloudflare وNetlify وVercel)، PaaS (Railway وRender)، BaaS (Supabase)، VPS (+ Coolify).",
-        "الشجرة: بلا خادم ← ثابتة؛ بيانات ← + Supabase؛ خادم ← Railway/Render؛ تطبيقات كثيرة ← VPS.",
-        "التكلفة الكاملة: حلول قابلة للنقل، حسابات باسم الزبون، حدود للإنفاق."
+        "ثابت (Pages وCloudflare وNetlify وVercel)، PaaS (Railway وRender)، BaaS (Supabase).",
+        "الشجرة: بلا خادم ← ثابت؛ بيانات ← + Supabase؛ خادم ← Railway/Render؛ زبون ← حسابات باسمه.",
+        "التكلفة الإجمالية: حلول قابلة للنقل، حسابات باسم الزبون، حدود للإنفاق."
       ]
     },
     "dv6-l2": {
       "title": "تطبيق · GitHub Pages خطوة بخطوة",
       "key": [
-        "مستودع عام ← Settings ← Pages ← Deploy from a branch ← main / (root) ← Save.",
-        "العنوان: account.github.io/repo؛ يُعاد النشر مع كل push خلال دقيقة إلى دقيقتين.",
-        "مسارات نسبية (./css/style.css): الموقع يعيش داخل مجلد فرعي."
+        "مستودع عام ← Settings ← Pages ← Deploy from a branch ← main / (root) ← Save، أو طلب واحد لوكيلك.",
+        "العنوان: compte.github.io/depot؛ يُعاد النشر مع كل push خلال دقيقة إلى دقيقتين.",
+        "مسارات نسبية في كل مكان: الموقع يعيش في مجلد فرعي (قاعدة تُكتب في CLAUDE.md)."
       ]
     },
     "dv6-l3": {
@@ -33,11 +33,11 @@ export default {
       ]
     },
     "dv6-l4": {
-      "title": "تطبيق · خادم حقيقي على Railway أو Render",
+      "title": "تطبيق · خادم على الإنترنت عبر Railway",
       "key": [
-        "الخادم يستمع على process.env.PORT؛ مسار للصحة؛ 404 لكل ما عداه.",
-        "الاختبار محليًا: npm start ثم curl -i localhost:3000/api/sante ← 200 {\"ok\":true}.",
-        "Railway: تجربة بـ 5 دولارات، Free بدولار شهريًا، Hobby بـ 5 دولارات؛ Render: نوم بعد ~15 دقيقة، والقاعدة المجانية تُحذف بعد 30 يومًا. دائمًا حدّ للإنفاق."
+        "يُنشئ وكيلك الـ API ويختبرها بنفسه (عنوان الصحة، 404 للباقي) ويجهّزها لـ Railway.",
+        "Railway: New Project ← Deploy from GitHub ← Variables ← Generate Domain ← حدّ للإنفاق.",
+        "Railway: تجربة 5 $، Free بـ 1 $ شهريًا، Hobby بـ 5 $ شهريًا؛ Render: يدخل في سبات بعد ~15 دقيقة، وتُحذف قاعدته المجانية بعد 30 يومًا."
       ]
     },
     "dv6-l5": {
@@ -46,14 +46,6 @@ export default {
         "الشراء: Cloudflare Registrar وNamecheap وPorkbun؛ نطاق .dz عبر مسجّل معتمد من NIC.dz.",
         "الـ DNS: A (عنوان IP)، CNAME (اسم آخر)، TXT (التحقق، SPF)، MX (البريد).",
         "للزبون: النطاق باسمه، تجديد تلقائي، التحقق من حسابات التواصل، الـ DNS في Cloudflare."
-      ]
-    },
-    "dv6-l6": {
-      "title": "المستوى المحترف: VPS وDocker وCaddy وCoolify",
-      "key": [
-        "VPS (5–20 دولارًا شهريًا) + Docker (صندوق لكل تطبيق) + Caddy (HTTPS تلقائي)؛ Coolify أو Dokploy للواجهة.",
-        "Caddyfile: domain { reverse_proxy localhost:3000 }.",
-        "المسؤوليات: مفاتيح SSH، جدار ناري 22/80/443، تحديثات، نسخ احتياطية خارج الخادم."
       ]
     }
   }

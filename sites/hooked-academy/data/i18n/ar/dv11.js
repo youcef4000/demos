@@ -19,17 +19,17 @@ export default {
     "dv11-l2": {
       "title": "التحريك بـ CSS الحديث",
       "key": [
-        "animation-timeline: view(): تحريك مرتبط بالتمرير بـ CSS فقط.",
-        "@view-transition { navigation: auto; }: انتقالات بين الصفحات دون JavaScript.",
-        "تحقّق على caniuse.com، ابقَ سليمًا دون تحريك، واختبر على Safari."
+        "ظهور مرتبط بالتمرير بـ CSS فقط: الكلمة التي تطلبها هي « animation-timeline: view() ».",
+        "انتقال تلاشٍ بين الصفحات دون JavaScript: « View Transitions ».",
+        "تحقّق من caniuse.com، ابقَ سليمًا دون حركة، واختبر على Safari."
       ]
     },
     "dv11-l3": {
       "title": "GSAP وScrollTrigger وLenis",
       "key": [
-        "GSAP مجاني بإضافاته كلها (ScrollTrigger وSplitText…)؛ نسخة مثبّتة على الـ CDN (gsap@3.15.0).",
-        "gsap.matchMedia() لاحترام prefers-reduced-motion.",
-        "ScrollTrigger وSplitText وLenis (تمرير ناعم) والخطوط الزمنية."
+        "GSAP مجاني مع إضافاته (ScrollTrigger وSplitText…)؛ اطلب إصدارًا مثبّتًا على الـ CDN (gsap@3.15.0).",
+        "اطلب gsap.matchMedia() لاحترام تقليل الحركة.",
+        "ScrollTrigger وSplitText وLenis (تمرير ناعم) والـ timelines: المفردات التي تعطيها لوكيلك."
       ]
     },
     "dv11-l4": {

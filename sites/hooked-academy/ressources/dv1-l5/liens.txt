@@ -1,3 +1,4 @@
 # Outils cités dans la leçon dv1-l5 (généré par tools/hooked-academy/fiches-lecons.mjs)
 Claude | https://claude.ai/referral/OtTQNvbscA
+Codex (OpenAI) | https://openai.com/codex/
 Supabase (documentation) | https://supabase.com/docs

@@ -1,3 +1,6 @@
 # Outils cités dans la leçon dv7-l3 (généré par tools/hooked-academy/fiches-lecons.mjs)
+Claude | https://claude.ai/referral/OtTQNvbscA
+Claude Code (documentation) | https://code.claude.com/docs
+Codex (OpenAI) | https://openai.com/codex/
+MCP dans Claude Code (documentation) | https://code.claude.com/docs/en/mcp
 Supabase (documentation) | https://supabase.com/docs
-OWASP Cheat Sheets | https://cheatsheetseries.owasp.org

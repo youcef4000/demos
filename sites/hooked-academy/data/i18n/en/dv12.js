@@ -27,25 +27,25 @@ export default {
     "dv12-l3": {
       "title": "Plugins: superpowers in one command",
       "key": [
-        "/plugin (catalogue), /plugin install <plugin>@claude-plugins-official, /plugin marketplace add, /reload-plugins.",
-        "Scopes: user (~/.claude/settings.json), project (.claude/settings.json), local (.claude/settings.local.json).",
-        "A plugin can run code: read the details, trusted sources, uninstall what’s unused."
+        "/plugin: the official catalogue is already added; install, disable, uninstall; /plugin marketplace add for another catalogue.",
+        "Scopes: just me (all my projects), project (the whole team), local (me, on this project).",
+        "A plugin can run code: read the details, trusted sources, uninstall what you don’t use."
       ]
     },
     "dv12-l4": {
       "title": "MCP and connectors: plugging Claude into your tools",
       "key": [
         "Useful MCPs: Supabase, GitHub, Playwright, Context7, Figma, Sentry.",
-        "claude mcp add --transport http <name> <url>; claude mcp add <name> -- <command>; --scope project; /mcp; claude mcp list.",
-        "Least privilege: read-only, one project, no token in plain text; Connectors in claude.ai."
+        "Connect: ask your agent to add the MCP server, or Settings → Connectors; check with /mcp.",
+        "Least privilege: read-only, one project, no token in plain text."
       ]
     },
     "dv12-l5": {
       "title": "Advanced workflows: subagents, hooks, parallel sessions",
       "key": [
-        "Subagents (/agents), hooks (/hooks), parallel sessions on branches, claude.ai/code and @claude on GitHub.",
-        "PostToolUse hook + matcher \"Edit|Write\": an automatic action after every edit.",
-        "/install-github-app for @claude in GitHub; claude -p for scripts and Actions."
+        "Sub-agents (/agents), hooks (/hooks), parallel sessions on branches, claude.ai/code and @claude on GitHub.",
+        "Hook: an automatic action after every change, requested in one sentence; /hooks to see it.",
+        "@claude in GitHub (/install-github-app): start a task from an issue or a pull request."
       ]
     }
   }

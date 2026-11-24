@@ -1,3 +1,0 @@
-# Outils cités dans la leçon dv10-l3 (généré par tools/hooked-academy/fiches-lecons.mjs)
-Zod | https://zod.dev
-Vitest | https://vitest.dev

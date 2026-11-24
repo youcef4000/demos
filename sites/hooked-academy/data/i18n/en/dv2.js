@@ -33,19 +33,19 @@ export default {
       ]
     },
     "dv2-l4": {
-      "title": "HTML, CSS, JavaScript: learning to read them",
+      "title": "Checking the AI’s work without reading the code",
       "key": [
-        "HTML = structure; CSS = appearance; JavaScript = behaviour.",
-        "Reading is enough to check: find the title, the colour, the button.",
-        "CSS variables change the whole style in one line."
+        "You check the result, not the code: the preview, the phone, the summary of changes, the tests.",
+        "The vocabulary is enough: HTML = structure, CSS = appearance, JavaScript = behaviour.",
+        "A good bug report: what you see, what you expected, on which device."
       ]
     },
     "dv2-l5": {
       "title": "The 2026 tech stack",
       "key": [
-        "React 19, Next.js 16, Vite 8, Tailwind CSS 4, shadcn/ui, TypeScript: the modern stack (November 2026).",
-        "Showcase and demo: HTML/CSS/JS; app: React/Next.js + TypeScript + Tailwind + Supabase.",
-        "Latest stable version, up-to-date docs for the AI, pinned versions."
+        "React, Next.js, Tailwind CSS, shadcn/ui, Supabase: the names to know so you know what to ask for (November 2026).",
+        "Showcase and demo: a simple site without a framework; app: Next.js + Tailwind + Supabase.",
+        "Latest stable version, up-to-date docs for your agent, nothing that complicates things for no reason."
       ]
     }
   }

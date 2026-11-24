@@ -35,8 +35,8 @@ export default {
     "dv4-l4": {
       "title": "SEO and share previews",
       "key": [
-        "title < 60 characters, description < 155, Open Graph with a 1200 × 630 image as a full URL.",
-        "Local SEO: one h1, the customers’ real words, Google Business Profile, identical contact details everywhere.",
+        "Title < 60 characters, description < 155, share image 1200 × 630 with a full address.",
+        "Local SEO: a single main heading, the words customers really use, Google Business Profile, identical details everywhere.",
         "Test the preview: opengraph.xyz, LinkedIn Post Inspector, a test WhatsApp message."
       ]
     },
@@ -44,16 +44,16 @@ export default {
       "title": "Quality: Lighthouse, accessibility, mobile",
       "key": [
         "Lighthouse scores performance, accessibility, best practices and SEO: aim for 90+ on mobile.",
-        "The course’s example site scores 100 everywhere (real measurement).",
-        "F12 → Lighthouse → Mobile → Analyze, then fix with the AI and run it again."
+        "The course’s sample site scores 100 everywhere (real measurement).",
+        "Measure: ask your agent for Lighthouse, or pagespeed.web.dev once online; fix one point at a time, then measure again."
       ]
     },
     "dv4-l6": {
       "title": "Hands-on · Build the showcase with Claude Code",
       "key": [
-        "Starting prompt: read CLAUDE.md and brief.md, task, constraints, labelled sample content, plan first.",
-        "Test locally: python3 -m http.server 8000 then http://localhost:8000; 200 = OK.",
-        "Improve in small steps: one request, one test (computer + phone), one commit."
+        "Starting prompt: read CLAUDE.md and brief.md, task, constraints, sample content flagged, plan first.",
+        "Check: ask for the preview, test on computer and at phone width, then measure with Lighthouse.",
+        "Improve in small steps: one request, one test (computer + phone), one save."
       ]
     }
   }

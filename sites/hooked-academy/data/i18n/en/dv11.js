@@ -19,17 +19,17 @@ export default {
     "dv11-l2": {
       "title": "Animating with modern CSS",
       "key": [
-        "animation-timeline: view(): scroll-linked animations in pure CSS.",
-        "@view-transition { navigation: auto; }: page transitions without JavaScript.",
+        "Scroll-linked reveals in pure CSS: the word to ask for is “animation-timeline: view()”.",
+        "Fades between pages without JavaScript: “View Transitions”.",
         "Check caniuse.com, stay correct without animation, test on Safari."
       ]
     },
     "dv11-l3": {
       "title": "GSAP, ScrollTrigger and Lenis",
       "key": [
-        "GSAP is free, plugins included (ScrollTrigger, SplitText…); pinned version on the CDN (gsap@3.15.0).",
-        "gsap.matchMedia() to respect prefers-reduced-motion.",
-        "ScrollTrigger, SplitText, Lenis (smooth scrolling), timelines."
+        "GSAP is free, plugins included (ScrollTrigger, SplitText…); ask for a pinned version on the CDN (gsap@3.15.0).",
+        "Ask for gsap.matchMedia() to respect reduced motion.",
+        "ScrollTrigger, SplitText, Lenis (smooth scrolling), timelines: the vocabulary to give your agent."
       ]
     },
     "dv11-l4": {
