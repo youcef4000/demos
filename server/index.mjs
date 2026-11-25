@@ -26,6 +26,17 @@ const SITE = path.resolve(process.env.SITE_DIR || path.join(HERE, '../sites/hook
 const DATA = path.resolve(process.env.DATA_DIR || path.join(HERE, '../data'));
 const BASE = (process.env.BASE || '').replace(/\/$/, '');
 const PROXY = process.env.TRUST_PROXY === '1';
+// Pixel Meta (publicité) : chargé seulement sur les pages publiques (/ et /ia/), PageView à chaque page.
+// Sans META_PIXEL_ID (ou avec un ID mal formé), le script ne fait rien et les pages marchent comme avant.
+const PIXEL_ID = /^\d{6,20}$/.test(String(process.env.META_PIXEL_ID || '').trim()) ? String(process.env.META_PIXEL_ID).trim() : '';
+const PIXEL_JS = PIXEL_ID
+  ? `// Pixel Meta de Hooked Academy (ID : variable d'environnement META_PIXEL_ID du serveur)
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '${PIXEL_ID}');
+fbq('track', 'PageView');
+`
+  : '// Pixel Meta désactivé : META_PIXEL_ID n’est pas défini sur le serveur.\n';
+if (!PIXEL_ID && process.env.META_PIXEL_ID) console.warn('META_PIXEL_ID ignoré : il doit contenir seulement des chiffres.');
 
 /* ------------------------------------------------------------------ */
 /* Base SQLite (même interface que le stockage d'un Durable Object)    */
@@ -282,6 +293,11 @@ const server = createServer(async (req, res) => {
     if (req.method !== 'GET' && req.method !== 'HEAD') {
       res.writeHead(405, { ...base, allow: 'GET, HEAD' });
       return res.end();
+    }
+    // Pixel Meta des pages publiques : l'ID vient de la variable d'environnement META_PIXEL_ID, jamais du dépôt
+    if (sub === '/meta-pixel.js') {
+      res.writeHead(200, { ...base, 'content-type': 'text/javascript; charset=utf-8', 'cache-control': 'no-cache' });
+      return res.end(req.method === 'HEAD' ? undefined : PIXEL_JS);
     }
     return await serveFile(req, res, url, base);
   } catch (e) {

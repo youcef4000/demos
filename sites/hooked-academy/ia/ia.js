@@ -9,6 +9,7 @@ import './ia-i18n.js';
 import { allLessons, coreModulesOf, modCode } from '../data/programme.js';
 import { OFFRES } from '../data/offres.js';
 import { addApplication, settings } from '../assets/js/store.js';
+import { planFromUrl, utm, trackLead, watchDemo } from '../assets/js/suivi.js';
 import { api } from '../assets/js/api.js';
 import * as FAQ from '../assets/js/faq.js';
 import { mountAssistant } from '../assets/js/assistant.js';
@@ -234,6 +235,11 @@ import { mountCompose } from '../assets/js/compose.js';
     const a = e.target.closest('[data-pick]');
     if (a) pickOffer(a.dataset.pick);
   });
+  // ?plan=creative|ia|sites|pack2|pack3 (lien d'une publicité) : la formule est présélectionnée ; sans paramètre, rien ne change
+  const plan = planFromUrl();
+  if (plan) pickOffer(plan);
+  // Pixel Meta : ViewContent quand on ouvre le compte démo
+  watchDemo();
   // Tarifs : « compose ta formule » (assets/js/compose.js, thème « glass »). Les trois formations sont cochées au départ
   // (pack complet) ; « Une formation » propose l'IA sur cette page. Le bouton du ticket choisit la formule du formulaire.
   mountCompose($('#compose'), {
@@ -273,8 +279,12 @@ import { mountCompose } from '../assets/js/compose.js';
     sending = true;
     btn.disabled = true;
     btn.setAttribute('aria-busy', 'true');
-    addApplication(data)
-      .then(() => sent(data))
+    // Les UTM de la session partent avec la demande ; Lead seulement après la réponse OK du serveur
+    addApplication({ ...data, ...utm() })
+      .then(() => {
+        trackLead(data.formation);
+        sent(data);
+      })
       .catch((e2) => {
         // Serveur injoignable ou trop d'envois : la demande part sur WhatsApp, rien n'est perdu
         const wa = String(settings().whatsapp || '').replace(/\D/g, '');

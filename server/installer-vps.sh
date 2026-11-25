@@ -64,6 +64,8 @@ services:
     restart: unless-stopped
     environment:
       TRUST_PROXY: "1"
+      # Pixel Meta des pages publiques : l'ID se met dans /opt/hooked/.env (META_PIXEL_ID=…), jamais dans le dépôt
+      META_PIXEL_ID: "${META_PIXEL_ID:-}"
     volumes:
       - academy-data:/data
   caddy:

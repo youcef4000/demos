@@ -785,6 +785,10 @@ export class Plateforme {
       niveau: S(v.niveau, 200),
       objectif: S(v.objectif, 500),
       source: S(v.source, 40) || 'Landing',
+      // Campagne publicitaire (liens UTM des publicités) : vides sans UTM, comme pour les anciennes inscriptions
+      utm_source: S(v.utm_source, 150),
+      utm_campaign: S(v.utm_campaign, 150),
+      utm_content: S(v.utm_content, 150),
       status: 'nouvelle',
       notes: [],
       history: [{ at: iso(), status: 'nouvelle', by: 'Formulaire' }],

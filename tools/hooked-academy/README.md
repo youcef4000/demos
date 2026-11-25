@@ -19,6 +19,13 @@ Site : `sites/hooked-academy/` → https://hooked-academy.tech/
    (lien, identifiant, code) s'envoie en un clic sur WhatsApp.
 5. L'étudiant se connecte sur `/app/` avec son e-mail (ou téléphone) et son code.
 
+Campagnes publicitaires : chaque inscription garde `utm_source`, `utm_campaign` et `utm_content` (vides sans lien UTM)
+et le pixel Meta reçoit `Lead` après une inscription réussie (voir DEPLOIEMENT-VPS.md, « Pixel Meta »).
+
+Nombres de leçons et de modules des pages publiques : calculés depuis le programme au chargement, et écrits aussi dans
+le HTML (visibles même sans JavaScript). Après avoir ajouté ou retiré une leçon :
+`node tools/hooked-academy/compteurs.mjs` (ou `--check` pour vérifier).
+
 ### Accès : ce qui est payé, un an par formation
 
 - **Pack payé** : dans le tiroir d'une inscription (avant validation), le menu « Pack payé » corrige le pack si le prospect

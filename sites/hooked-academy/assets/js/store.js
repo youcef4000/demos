@@ -298,6 +298,10 @@ export async function addApplication(form) {
     objectif: pick('objectif', 500),
     source: pick('source', 40) || 'Landing',
     website: pick('website', 200),
+    // Campagne publicitaire (assets/js/suivi.js) : vides si le visiteur n'est pas arrivé par un lien UTM
+    utm_source: pick('utm_source', 150),
+    utm_campaign: pick('utm_campaign', 150),
+    utm_content: pick('utm_content', 150),
   });
 }
 

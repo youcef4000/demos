@@ -45,6 +45,36 @@ l'ancien compte est désactivé et tu en recrées un.
 - Espace équipe → **Réglages** → **Exporter (JSON)** : une copie lisible sur ton ordinateur, de temps en temps.
 - Hostinger → VPS → **Instantanés** : une image complète du VPS avant une grosse modification.
 
+## 4. Pixel Meta (publicités Facebook / Instagram)
+
+Le pixel est chargé seulement sur les pages publiques (`/` et `/ia/`) par `/meta-pixel.js`, que le serveur construit
+avec la variable d'environnement `META_PIXEL_ID`. L'ID n'est jamais écrit dans le dépôt. Sans ID, rien n'est envoyé
+et le site marche comme avant.
+
+Dans le terminal du VPS, une seule fois (remplace `123456789012345` par l'ID du pixel, Gestionnaire d'événements Meta) :
+
+```bash
+grep -v '^META_PIXEL_ID=' /opt/hooked/.env 2>/dev/null > /opt/hooked/.env.tmp; echo 'META_PIXEL_ID=123456789012345' >> /opt/hooked/.env.tmp; mv /opt/hooked/.env.tmp /opt/hooked/.env
+bash /opt/hooked/demos/server/installer-vps.sh hooked-academy.tech
+```
+
+Vérification : https://hooked-academy.tech/meta-pixel.js affiche `fbq('init', '…')` avec ton ID.
+Pour changer d'ID : même commande avec le nouvel ID. Pour couper le pixel : supprime la ligne de `/opt/hooked/.env`
+et relance l'installateur.
+
+Événements envoyés (`sites/hooked-academy/assets/js/suivi.js`) :
+
+| Événement | Quand |
+|---|---|
+| `PageView` | à chaque page publique |
+| `ViewContent` | « Voir une leçon » / lecture de la leçon démo (landing), clic sur « Essayer le compte démo » (`content_name` : `Leçon démo` ou `Compte démo`) |
+| `Lead` | après une inscription acceptée par le serveur, jamais au simple clic : `content_name` = la formule, `value` = son prix en DA, `currency: 'DZD'` |
+
+Liens des publicités : `?plan=creative|ia|sites|pack2|pack3` présélectionne la formule du formulaire
+(`pack2` = Créative + IA, `pack3` = pack complet), `?lang=fr|en|ar` ouvre la page dans la langue, et
+`utm_source`, `utm_campaign`, `utm_content` sont gardés pendant la visite puis enregistrés avec l'inscription.
+Exemple : `https://hooked-academy.tech/?lang=ar&plan=pack2&utm_source=facebook&utm_campaign=lancement&utm_content=video-1`.
+
 ---
 
 ## Tester sur ton ordinateur (facultatif)

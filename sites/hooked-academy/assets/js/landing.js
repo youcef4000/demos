@@ -15,6 +15,7 @@ import { mountAssistant } from './assistant.js';
 import { mountSiteBuild } from './site-build.js';
 import { mountCompose } from './compose.js';
 import { initPWA } from './pwa.js';
+import { planFromUrl, utm, trackLead, watchDemo } from './suivi.js';
 import { OUTILS, BUDGETS, CHECKED } from '../../data/outils.js';
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -138,6 +139,13 @@ $$('input[name="formule"], input[name="solo"]', fForm).forEach((r) => r.addEvent
 $$('.js-from').forEach((el) => (el.textContent = t('f.f.from', { p: money(Math.min(...SOLO.map((k) => OFFRES[k]))) })));
 fSync();
 $$('[data-pick]').forEach((a) => a.addEventListener('click', () => pickOffer(a.dataset.pick)));
+// ?plan=creative|ia|sites|pack2|pack3 (lien d'une publicité) : la formule est présélectionnée ; sans paramètre, rien ne change
+{
+  const plan = planFromUrl();
+  if (plan) pickOffer(plan);
+}
+// Pixel Meta : ViewContent quand on ouvre la leçon démo de la page ou le compte démo
+watchDemo({ lesson: 'a[href="#lecon"], #lv-play' });
 // Tarifs : « compose ta formule » (assets/js/compose.js). Les trois formations sont cochées au départ (pack complet) ;
 // le bouton du ticket choisit la formule dans le formulaire, puis la page descend jusqu'à l'inscription.
 mountCompose($('#compose'), {
@@ -650,8 +658,12 @@ next.addEventListener('click', () => {
   data.lang = lang;
   next.disabled = true;
   next.setAttribute('aria-busy', 'true');
-  addApplication(data)
-    .then(() => sent(data))
+  // Les UTM de la session partent avec la demande ; Lead seulement après la réponse OK du serveur
+  addApplication({ ...data, ...utm() })
+    .then(() => {
+      trackLead(data.formation);
+      sent(data);
+    })
     .catch((e) => {
       // Serveur injoignable ou trop d'envois : l'inscription part sur WhatsApp, rien n'est perdu
       const wa = settings().whatsapp;
