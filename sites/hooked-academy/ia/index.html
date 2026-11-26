@@ -29,6 +29,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Figtree:wght@400..800&family=Doto:wght@700..900&family=JetBrains+Mono:wght@400..700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="ia.css">
+<link rel="stylesheet" href="../assets/css/presentation.css">
 <link rel="stylesheet" href="../assets/css/site-build.css">
 <link rel="stylesheet" href="../assets/css/compose.css">
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
@@ -119,6 +120,36 @@
         <p class="hero-note" data-hero><svg aria-hidden="true"><use href="#i-check"/></svg><span data-k="ia.hero.note">Aucun paiement en ligne : l’équipe te rappelle sur WhatsApp.</span></p>
       </div>
 
+      <!-- Vidéo de présentation (assets/js/presentation.js) : la première chose qu'on voit ; le générateur est plus bas -->
+      <figure class="pres pres--glass" id="pres" data-pres data-dur="2:44">
+        <div class="pres-box">
+          <video class="pres-v" playsinline preload="none" poster="../assets/img/presentation.webp" aria-label="Vidéo de présentation de Hooked Academy">
+            <source src="../video/presentation-960.mp4" type="video/mp4" media="(max-width: 899px)">
+            <source src="../video/presentation.mp4" type="video/mp4">
+          </video>
+          <button class="pres-play" type="button" aria-label="Regarde la présentation">
+            <span class="pres-pill"><span class="pres-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.5.86l12.4-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg></span><span class="pres-txt"><b class="pres-t">Regarde la présentation</b><small class="pres-s">2:44 · avec le son</small></span></span>
+          </button>
+        </div>
+      </figure>
+    </div>
+
+    <ul class="stats wrap" aria-label="La Formation IA en chiffres" data-ka="aria-label:ia.stats.label">
+      <li><b class="dot-n" data-count="ia-lessons">67</b><span data-k="ia.stats.lessons">leçons IA</span></li>
+      <li><b class="dot-n" data-count="ia-mods">10</b><span data-k="ia.stats.mods">modules</span></li>
+      <li><b class="dot-n">2<small data-k="ia.stats.min">min</small></b><span data-k="ia.stats.max">max par leçon</span></li>
+      <li><b class="dot-n">1<small data-k="ia.stats.year">an</small></b><span data-k="ia.stats.access">d’accès</span></li>
+    </ul>
+  </section>
+
+  <!-- 1 bis · GÉNÉRATEUR : un prompt écrit avec la méthode, puis l'image (déplacé sous le héro) ============ -->
+  <section class="gen-sec" id="generateur" aria-labelledby="gen-sec-t">
+    <div class="gen-sec-in wrap">
+      <header class="gen-sec-h">
+        <p class="kicker" data-scramble data-k="ia.gensec.k">// Exemple</p>
+        <h2 class="h2" id="gen-sec-t" data-split data-k="ia.gensec.t">Un prompt bien écrit, une image qui vend.</h2>
+        <p class="lead" data-fade data-k="ia.gensec.lead">Sujet, décor, lumière, cadrage, style, format : la méthode du premier module, appliquée sous tes yeux.</p>
+      </header>
       <!-- Générateur : exemples écrits avec le gabarit de la leçon IA01 · « Le prompt image » -->
       <figure class="gen" id="gen" aria-label="Exemple : un prompt écrit avec la méthode de la formation, puis l’image générée" data-ka="aria-label:ia.gen.label">
         <div class="gen-glow" aria-hidden="true"></div>
@@ -147,13 +178,6 @@
         <figcaption class="gen-cap" data-h="ia.gen.cap">Prompts écrits avec le gabarit de la leçon <b>IA01 · Le prompt image</b>. Visuels de la formation.</figcaption>
       </figure>
     </div>
-
-    <ul class="stats wrap" aria-label="La Formation IA en chiffres" data-ka="aria-label:ia.stats.label">
-      <li><b class="dot-n" data-count="ia-lessons">67</b><span data-k="ia.stats.lessons">leçons IA</span></li>
-      <li><b class="dot-n" data-count="ia-mods">10</b><span data-k="ia.stats.mods">modules</span></li>
-      <li><b class="dot-n">2<small data-k="ia.stats.min">min</small></b><span data-k="ia.stats.max">max par leçon</span></li>
-      <li><b class="dot-n">1<small data-k="ia.stats.year">an</small></b><span data-k="ia.stats.access">d’accès</span></li>
-    </ul>
   </section>
 
   <!-- 2 · OUTILS : bandeau qui accélère avec le défilement ===================================== -->

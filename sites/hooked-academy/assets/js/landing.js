@@ -16,6 +16,7 @@ import { mountSiteBuild } from './site-build.js';
 import { mountCompose } from './compose.js';
 import { initPWA } from './pwa.js';
 import { planFromUrl, utm, trackLead, watchDemo } from './suivi.js';
+import { mountPresentation } from './presentation.js';
 import { OUTILS, BUDGETS, CHECKED } from '../../data/outils.js';
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -64,6 +65,8 @@ $$('#lsw [data-lang]').forEach((b) => {
   b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
   b.addEventListener('click', () => setLang(b.dataset.lang));
 });
+// Vidéo de présentation du héro (avant tout le reste)
+mountPresentation($('#pres'));
 $('#nav-logo').innerHTML = logoInner();
 $('#foot-logo').innerHTML = logoInner();
 

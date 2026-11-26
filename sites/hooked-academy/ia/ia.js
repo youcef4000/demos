@@ -16,6 +16,10 @@ import { mountAssistant } from '../assets/js/assistant.js';
 import { initPWA } from '../assets/js/pwa.js';
 import { mountSiteBuild } from '../assets/js/site-build.js';
 import { mountCompose } from '../assets/js/compose.js';
+import { mountPresentation } from '../assets/js/presentation.js';
+
+// Vidéo de présentation du héro : prête avant toutes les animations
+mountPresentation(document.getElementById('pres'));
 
 {
   const D = document;
@@ -665,7 +669,7 @@ import { mountCompose } from '../assets/js/compose.js';
       // l'assistant se retire aussi pendant les scènes (il cacherait les légendes)
       D.body.classList.toggle('in-scene', scene);
     };
-    zones.push(ScrollTrigger.create({ trigger: '#gen', start: 'bottom 35%', endTrigger: '#inscription', end: 'top 85%', onToggle: upd }));
+    zones.push(ScrollTrigger.create({ trigger: '.stats', start: 'bottom 35%', endTrigger: '#inscription', end: 'top 85%', onToggle: upd }));
     zones.push(ScrollTrigger.create({ trigger: '.pipe-pin', start: 'top bottom', end: () => `+=${Math.round(innerHeight * (isSmall() ? 6 : 6.4))}`, onToggle: upd }));
     zones.push(ScrollTrigger.create({ trigger: '#plat-track', start: 'top 60%', end: 'bottom 40%', onToggle: upd }));
 
@@ -675,7 +679,7 @@ import { mountCompose } from '../assets/js/compose.js';
 
   /* -------- Héro -------- */
   function hero() {
-    gsap.set(['.hero-t', '[data-hero]', '.gen', '.stats'], { visibility: 'visible' });
+    gsap.set(['.hero-t', '[data-hero]', '.stats'], { visibility: 'visible' });
     const typed = $('#ht-typed');
     const word = typed.textContent;
     typed.textContent = '';
@@ -693,9 +697,17 @@ import { mountCompose } from '../assets/js/compose.js';
       .from('.hero-sub', { y: 24, autoAlpha: 0, duration: 0.9 }, 1.3)
       .from('.hero-cta > *', { y: 24, autoAlpha: 0, scale: 0.94, duration: 0.8, stagger: 0.08 }, 1.42)
       .from('.hero-note', { y: 14, autoAlpha: 0, duration: 0.7 }, 1.6)
-      .from('.gen', { y: 70, rotationX: 22, autoAlpha: 0, transformPerspective: 1200, transformOrigin: '50% 100%', duration: 1.3 }, isSmall() ? 1.5 : 0.7)
-      .add(() => generator(), isSmall() ? 2.2 : 1.6)
       .from('.stats li', { y: 26, autoAlpha: 0, duration: 0.8, stagger: 0.07 }, 1.7);
+    // Le générateur (sa section sous le héro) entre et démarre quand on l'atteint
+    ScrollTrigger.create({
+      trigger: '#gen',
+      start: 'top 88%',
+      once: true,
+      onEnter: () => {
+        gsap.from('.gen', { y: 70, rotationX: 22, autoAlpha: 0, transformPerspective: 1200, transformOrigin: '50% 100%', duration: 1.3, ease: 'expo.out' });
+        gsap.delayedCall(0.7, generator);
+      },
+    });
     // Les chiffres comptent quand on les voit (après l'entrée du héro)
     ScrollTrigger.create({ trigger: '.stats', start: 'top 92%', once: true, onEnter: () => gsap.delayedCall(Math.max(0, 1.8 - tl.time()), () => countUp($$('.stats [data-count]'))) });
     // Le fond du héro s'éloigne au défilement
@@ -1191,9 +1203,10 @@ import { mountCompose } from '../assets/js/compose.js';
     const gx = gsap.quickTo(gen, 'rotationY', { duration: 0.8, ease: 'power3' });
     const gy = gsap.quickTo(gen, 'rotationX', { duration: 0.8, ease: 'power3' });
     addEventListener('pointermove', (e) => {
-      if (scrollY > innerHeight) return;
-      gx((e.clientX / innerWidth - 0.5) * 10);
-      gy(-(e.clientY / innerHeight - 0.5) * 8);
+      const r = gen.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) return;
+      gx(((e.clientX - (r.left + r.width / 2)) / innerWidth) * 10);
+      gy(-((e.clientY - (r.top + r.height / 2)) / innerHeight) * 8);
     }, { passive: true });
   }
 }

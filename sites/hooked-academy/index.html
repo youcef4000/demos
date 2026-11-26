@@ -41,6 +41,7 @@
 <link rel="stylesheet" href="assets/css/landing.css">
 <link rel="stylesheet" href="assets/css/site-build.css">
 <link rel="stylesheet" href="assets/css/compose.css">
+<link rel="stylesheet" href="assets/css/presentation.css">
 <!-- Pixel Meta : servi par le serveur à partir de META_PIXEL_ID (vide sans ID) ; PageView à chaque page -->
 <script src="meta-pixel.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
@@ -119,16 +120,22 @@
       </div>
 
       <div class="hero-side">
-        <p class="hero-sub" data-i18n-html="hero.sub">Trois formations — <b>Créative</b>, <b>IA</b> et <b>Sites &amp; Apps</b> — en leçons animées de <b>2&nbsp;minutes</b>, expliquées en darija. De ta première vidéo à tes premiers clients.</p>
+        <!-- Vidéo de présentation (assets/js/presentation.js) : la première chose qu'on voit -->
+        <figure class="pres pres--cut" id="pres" data-pres data-dur="2:44">
+          <div class="pres-box">
+            <video class="pres-v" playsinline preload="none" poster="assets/img/presentation.webp" aria-label="Vidéo de présentation de Hooked Academy">
+              <source src="video/presentation-960.mp4" type="video/mp4" media="(max-width: 899px)">
+              <source src="video/presentation.mp4" type="video/mp4">
+            </video>
+            <button class="pres-play" type="button" aria-label="Regarde la présentation">
+              <span class="pres-pill"><span class="pres-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.5.86l12.4-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg></span><span class="pres-txt"><b class="pres-t">Regarde la présentation</b><small class="pres-s">2:44 · avec le son</small></span></span>
+            </button>
+          </div>
+        </figure>
         <div class="hero-cta">
           <a class="bt bt--lime" href="#inscription" data-i18n="hero.cta">Réserver ma place</a>
           <a class="bt bt--line" href="#lecon" data-i18n="hero.cta2">Voir une leçon</a>
         </div>
-        <ul class="hero-legend" id="hero-legend">
-          <li data-track="creative"><i></i><a href="#formations"><b data-i18n="track.creative">Formation Créative</b><span class="js-count" data-track="creative">66 leçons</span></a></li>
-          <li data-track="ia"><i></i><a href="#formations"><b data-i18n="track.ia">Formation IA</b><span class="js-count" data-track="ia">67 leçons</span></a></li>
-        </ul>
-        <p class="hero-hint burn" aria-hidden="true" data-i18n="hero.hint">↖ Clique sur le clap</p>
       </div>
     </div>
   </section>

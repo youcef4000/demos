@@ -1,0 +1,112 @@
+/* Vidéo de présentation des pages publiques (assets/js/presentation.js).
+   Thème par variables : --pres-acc (bouton), --pres-r (arrondi), --pres-ring (filet). */
+.pres {
+  --pres-acc: #c6f23c;
+  --pres-ink: #0f0f0d;
+  --pres-r: 0px;
+  --pres-ring: rgb(255 255 255 / 0.12);
+  position: relative;
+  width: 100%;
+  margin: 0;
+}
+.pres-box {
+  position: relative;
+  aspect-ratio: 1600 / 772;
+  overflow: hidden;
+  border-radius: var(--pres-r);
+  background: #050505;
+  box-shadow: inset 0 0 0 1px var(--pres-ring), 0 40px 90px -40px rgb(0 0 0 / 0.95);
+}
+.pres-v {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #050505;
+}
+.pres-play {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: linear-gradient(180deg, rgb(0 0 0 / 0) 35%, rgb(0 0 0 / 0.5));
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.pres-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 22px 10px 10px;
+  border-radius: 999px;
+  background: var(--pres-acc);
+  color: var(--pres-ink);
+  text-align: start;
+  box-shadow: 0 18px 40px -14px rgb(0 0 0 / 0.8);
+  transition: transform 0.2s ease;
+}
+.pres-play:hover .pres-pill,
+.pres-play:focus-visible .pres-pill {
+  transform: scale(1.04);
+}
+.pres-play:focus-visible {
+  outline: 3px solid var(--pres-acc);
+  outline-offset: -3px;
+}
+.pres-ic {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--pres-ink);
+  color: var(--pres-acc);
+}
+.pres-ic svg {
+  width: 18px;
+  height: 18px;
+  margin-inline-start: 3px;
+}
+[dir='rtl'] .pres-ic svg {
+  margin-inline-start: 0;
+  margin-inline-end: 3px;
+  transform: scaleX(-1);
+}
+.pres-txt {
+  display: grid;
+  line-height: 1.15;
+}
+.pres-t {
+  font-weight: 800;
+  font-size: 17px;
+}
+.pres-s {
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0.72;
+}
+.pres.is-on .pres-play {
+  display: none;
+}
+@media (max-width: 520px) {
+  .pres-pill {
+    gap: 10px;
+    padding: 7px 16px 7px 7px;
+  }
+  .pres-ic {
+    width: 38px;
+    height: 38px;
+  }
+  .pres-t {
+    font-size: 15px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pres-pill {
+    transition: none;
+  }
+}

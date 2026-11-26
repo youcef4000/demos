@@ -25,8 +25,6 @@ const w = (text) => (_, a, b) => `${a}${text}${b}`;
 
 // [fichier, motif, remplacement] : le texte français de départ, identique à ce qu'écrit le JavaScript
 const RULES = [
-  // la liste du haut de la landing ne montre que la Créative et l'IA
-  ...TRACKS.filter((t) => t.id !== 'dev').map((t) => ['index.html', new RegExp(`(<span class="js-count" data-track="${t.id}">)[^<]*(</span>)`), w(`${nL(C[t.id].lessons)}`)]),
   ...TRACKS.map((t) => ['index.html', new RegExp(`(<span class="duo-n" id="duo-n-${t.id}">)[^<]*(</span>)`), w(`${nL(C[t.id].lessons)} · ${nM(C[t.id].mods)} · projet final`)]),
   ['index.html', /(id="coach-lessons">)[^<]*(<)/, w(`${ALL.lessons}`)],
   ['index.html', /(<h3 id="count-t">)[^<]*(<\/h3>)/, w(`${nL(ALL.lessons)}, ${nM(ALL.mods)}, un projet final par formation`)],

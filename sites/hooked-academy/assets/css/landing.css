@@ -594,9 +594,15 @@ html[lang='ar'] .tc-plan span {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1.62fr) minmax(0, 1fr);
+  /* le clap à gauche, la vidéo de présentation à droite (presque à parts égales) */
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
   align-items: end;
-  gap: clamp(32px, 4vw, 72px);
+  gap: clamp(28px, 3vw, 56px);
+}
+@media (min-width: 900px) {
+  .hero .hero-title {
+    font-size: clamp(54px, 5.4vw, 112px);
+  }
 }
 
 /* L'ardoise : un vrai clap de tournage. Claquettes rayées en acrylique, charnière en acier
@@ -871,6 +877,19 @@ html[lang='ar'] .hero-title {
   display: grid;
   gap: 28px;
   padding-bottom: 6px;
+  align-self: center;
+}
+/* Vidéo de présentation : cadre net, comme les plans de la page */
+.pres--cut {
+  --pres-acc: var(--lime);
+  --pres-ink: #0f0f0d;
+  --pres-ring: var(--rule-ink);
+}
+@media (max-width: 899px) {
+  /* Téléphone : la vidéo avant le clap */
+  .hero-side {
+    order: -1;
+  }
 }
 .hero-sub {
   margin: 0;

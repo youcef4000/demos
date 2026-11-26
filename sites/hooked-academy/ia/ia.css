@@ -633,6 +633,46 @@ html.lenis body {
   flex: none;
 }
 
+/* Vidéo de présentation (héro) : verre violet, bouton citron */
+.pres--glass {
+  --pres-acc: var(--lime);
+  --pres-ink: #0b0a12;
+  --pres-r: 22px;
+  --pres-ring: rgb(200 182 255 / 0.22);
+}
+.pres--glass .pres-box {
+  box-shadow: inset 0 0 0 1px var(--pres-ring), 0 0 0 6px rgb(124 92 255 / 0.08), 0 50px 100px -40px rgb(0 0 0 / 0.95), 0 0 120px -30px rgb(124 92 255 / 0.45);
+}
+@media (min-width: 1400px) {
+  /* Grand écran : le héro s'élargit pour que la vidéo garde de la place */
+  .hero-in.wrap {
+    max-width: 1480px;
+  }
+}
+@media (max-width: 999px) {
+  /* Téléphone et tablette : la vidéo avant le titre */
+  .hero-in > .pres {
+    order: -1;
+  }
+}
+
+/* Générateur : sa propre section, juste sous le héro */
+.gen-sec {
+  position: relative;
+  padding: clamp(56px, 9vw, 110px) 0 clamp(24px, 4vw, 48px);
+}
+.gen-sec-in {
+  display: grid;
+  gap: 40px;
+  align-items: center;
+}
+@media (min-width: 1000px) {
+  .gen-sec-in {
+    grid-template-columns: 1fr 1fr;
+    gap: 4vw;
+  }
+}
+
 /* Générateur */
 .gen {
   position: relative;
@@ -930,8 +970,12 @@ html.lenis body {
     padding-top: calc(var(--nav-h) + 70px);
   }
   .hero-in {
-    grid-template-columns: 1.12fr 0.88fr;
-    gap: 4vw;
+    /* le titre à gauche, la vidéo de présentation à droite, plus large */
+    grid-template-columns: 0.92fr 1.08fr;
+    gap: 3.4vw;
+  }
+  .hero-t {
+    font-size: clamp(3.3rem, 6.4vw, 5.2rem);
   }
   .hero-cta .bt {
     flex: 0 0 auto;
