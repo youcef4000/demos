@@ -14,7 +14,7 @@ Site : `sites/hooked-academy/` → https://hooked-academy.tech/
 
 1. Le visiteur remplit le formulaire de la landing (nom, WhatsApp, e-mail, ville, profil, objectif).
 2. La fiche arrive dans **Admin → Inscriptions** (colonne « Nouvelle »).
-3. L'équipe clique **Contacter** : WhatsApp s'ouvre avec un message prêt (session, tarif, paiement CCP / BaridiMob / espèces).
+3. L'équipe clique **Contacter** : WhatsApp s'ouvre avec un message prêt (session, tarif, paiement à la livraison).
 4. Paiement reçu → **Valider** : l'accès étudiant est créé (code `HA-XXXX-XXXX`) et le message de bienvenue
    (lien, identifiant, code) s'envoie en un clic sur WhatsApp.
 5. L'étudiant se connecte sur `/app/` avec son e-mail (ou téléphone) et son code.

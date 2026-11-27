@@ -18,6 +18,7 @@ import { initPWA } from './pwa.js';
 import { planFromUrl, utm, trackLead, watchDemo } from './suivi.js';
 import { mountPresentation } from './presentation.js';
 import { OUTILS, BUDGETS, CHECKED } from '../../data/outils.js';
+import { wilayaOptions } from '../../data/wilayas.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -125,6 +126,8 @@ $$('.js-amt').forEach((el) => (el.textContent = money(OFFRES[el.dataset.offre]))
 const SOLO = ['creative', 'ia', 'dev'];
 const offerName = (id) => (SOLO.includes(id) ? t(`track.${id}`) : t({ both: 'f.track.b', all: 'f.track.a' }[id] || 'f.track.a'));
 const fForm = $('#form');
+// Wilaya (obligatoire) : les 58, numéro et nom dans la langue de la page (data/wilayas.js)
+$('select[name="wilaya"]', fForm).insertAdjacentHTML('beforeend', wilayaOptions(lang).map((o) => `<option value="${o.value}">${esc(o.label)}</option>`).join(''));
 const fSync = () => {
   const f = $('input[name="formule"]:checked', fForm)?.value || 'all';
   const s = $('input[name="solo"]:checked', fForm)?.value || 'creative';

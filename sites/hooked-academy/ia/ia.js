@@ -17,6 +17,7 @@ import { initPWA } from '../assets/js/pwa.js';
 import { mountSiteBuild } from '../assets/js/site-build.js';
 import { mountCompose } from '../assets/js/compose.js';
 import { mountPresentation } from '../assets/js/presentation.js';
+import { wilayaOptions } from '../data/wilayas.js';
 
 // Vidéo de présentation du héro : prête avant toutes les animations
 mountPresentation(document.getElementById('pres'));
@@ -218,6 +219,8 @@ mountPresentation(document.getElementById('pres'));
   /* Formulaire : même serveur que la landing, source « Landing IA »   */
   /* ---------------------------------------------------------------- */
   const form = $('#form');
+  // Wilaya (obligatoire) : les 58, numéro et nom dans la langue de la page (data/wilayas.js)
+  $('select[name="wilaya"]', form).insertAdjacentHTML('beforeend', wilayaOptions(lang).map((o) => `<option value="${o.value}">${esc(o.label)}</option>`).join(''));
   // La formule (une formation, pack complet, pack Créative + IA), puis la formation si « une formation » :
   // le champ caché `formation` porte l'offre envoyée au serveur (creative, ia, dev, both ou all).
   const fSync = () => {
@@ -265,6 +268,7 @@ mountPresentation(document.getElementById('pres'));
     const mark = (el, ok) => (el.setAttribute('aria-invalid', String(!ok)), ok || bad.push(el));
     mark(f.name, f.name.value.trim().length >= 2);
     mark(f.phone, /^[\d\s+().-]{8,}$/.test(f.phone.value.trim()) && f.phone.value.replace(/\D/g, '').length >= 9);
+    mark(f.wilaya, /^\d{2}$/.test(f.wilaya.value));
     if (f.email.value.trim()) mark(f.email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim()));
     const ok = f.ok.checked;
     if (bad.length || !ok) {

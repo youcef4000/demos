@@ -135,7 +135,7 @@ add({
 
     'ad.apps.lead': 'Glisse une fiche d’une colonne à l’autre, ou ouvre-la pour agir.',
     'ad.apps.csv': 'Export CSV',
-    'ad.apps.search': 'Rechercher : nom, téléphone, ville…',
+    'ad.apps.search': 'Rechercher : nom, téléphone, wilaya…',
     'ad.apps.searchL': 'Rechercher une inscription',
     'ad.apps.new': 'Nouveau',
     'ad.apps.status': 'Statut : <b>{s}</b>',
@@ -144,6 +144,7 @@ add({
     'ad.csv.name': 'Nom',
     'ad.csv.wa': 'WhatsApp',
     'ad.csv.email': 'E-mail',
+    'ad.csv.wilaya': 'Wilaya',
     'ad.csv.city': 'Ville',
     'ad.csv.profil': 'Profil',
     'ad.csv.formation': 'Formation',
@@ -172,6 +173,7 @@ add({
     'ad.dw.history': 'Historique',
     'ad.f.wa': 'WhatsApp',
     'ad.f.email': 'E-mail',
+    'ad.f.wilaya': 'Wilaya',
     'ad.f.city': 'Ville',
     'ad.f.profil': 'Profil',
     'ad.f.level': 'Niveau',
@@ -335,7 +337,7 @@ add({
     'ad.msg.email': 'Identifiant (e-mail) : {v}',
     'ad.msg.phone': 'Identifiant (téléphone) : {v}',
     'ad.msg.contact':
-      'Salam {name} ! Ici l’équipe Hooked Academy. Merci pour ton inscription. On aimerait t’appeler pour te présenter la prochaine session, le tarif et les moyens de paiement (CCP, BaridiMob ou espèces). Quel moment t’arrange ?',
+      'Salam {name} ! Ici l’équipe Hooked Academy. Merci pour ton inscription. On aimerait t’appeler pour te présenter la prochaine session, le tarif et le paiement à la livraison. Quel moment t’arrange ?',
     'ad.msg.demoName': 'Créateur',
   },
 
@@ -469,7 +471,7 @@ add({
 
     'ad.apps.lead': 'Drag a card to another column, or open it to take action.',
     'ad.apps.csv': 'Export CSV',
-    'ad.apps.search': 'Search: name, phone, city…',
+    'ad.apps.search': 'Search: name, phone, wilaya…',
     'ad.apps.searchL': 'Search sign-ups',
     'ad.apps.new': 'New',
     'ad.apps.status': 'Status: <b>{s}</b>',
@@ -478,6 +480,7 @@ add({
     'ad.csv.name': 'Name',
     'ad.csv.wa': 'WhatsApp',
     'ad.csv.email': 'Email',
+    'ad.csv.wilaya': 'Wilaya',
     'ad.csv.city': 'City',
     'ad.csv.profil': 'Profile',
     'ad.csv.formation': 'Course',
@@ -506,6 +509,7 @@ add({
     'ad.dw.history': 'History',
     'ad.f.wa': 'WhatsApp',
     'ad.f.email': 'Email',
+    'ad.f.wilaya': 'Wilaya',
     'ad.f.city': 'City',
     'ad.f.profil': 'Profile',
     'ad.f.level': 'Level',
@@ -668,7 +672,7 @@ add({
     'ad.msg.email': 'Login (email): {v}',
     'ad.msg.phone': 'Login (phone): {v}',
     'ad.msg.contact':
-      'Hi {name}! This is the Hooked Academy team. Thanks for signing up. We’d like to give you a quick call to walk you through the next session, the price and the payment options (CCP, BaridiMob or cash). When would suit you?',
+      'Hi {name}! This is the Hooked Academy team. Thanks for signing up. We’d like to give you a quick call to walk you through the next session, the price and cash on delivery. When would suit you?',
     'ad.msg.demoName': 'creator',
   },
 
@@ -802,7 +806,7 @@ add({
 
     'ad.apps.lead': 'اسحب البطاقة إلى عمود آخر، أو افتحها لاتخاذ الإجراء المناسب.',
     'ad.apps.csv': 'تصدير CSV',
-    'ad.apps.search': 'ابحث بالاسم أو الهاتف أو المدينة…',
+    'ad.apps.search': 'ابحث بالاسم أو الهاتف أو الولاية…',
     'ad.apps.searchL': 'البحث في التسجيلات',
     'ad.apps.new': 'جديد',
     'ad.apps.status': 'الحالة: <b>{s}</b>',
@@ -811,6 +815,7 @@ add({
     'ad.csv.name': 'الاسم',
     'ad.csv.wa': 'WhatsApp',
     'ad.csv.email': 'البريد الإلكتروني',
+    'ad.csv.wilaya': 'الولاية',
     'ad.csv.city': 'المدينة',
     'ad.csv.profil': 'الصفة',
     'ad.csv.formation': 'التكوين',
@@ -839,6 +844,7 @@ add({
     'ad.dw.history': 'السجل',
     'ad.f.wa': 'WhatsApp',
     'ad.f.email': 'البريد الإلكتروني',
+    'ad.f.wilaya': 'الولاية',
     'ad.f.city': 'المدينة',
     'ad.f.profil': 'الصفة',
     'ad.f.level': 'المستوى',
@@ -1001,7 +1007,7 @@ add({
     'ad.msg.email': 'معرّف الدخول (البريد الإلكتروني): {v}',
     'ad.msg.phone': 'معرّف الدخول (رقم الهاتف): {v}',
     'ad.msg.contact':
-      'السلام عليكم {name}! معك فريق Hooked Academy. شكرًا على تسجيلك. نودّ الاتصال بك لنعرّفك بالدورة القادمة وسعرها وطرق الدفع (CCP أو BaridiMob أو نقدًا). ما الوقت الذي يناسبك؟',
+      'السلام عليكم {name}! معك فريق Hooked Academy. شكرًا على تسجيلك. نودّ الاتصال بك لنعرّفك بالدورة القادمة وسعرها والدفع عند الاستلام. ما الوقت الذي يناسبك؟',
     'ad.msg.demoName': 'أيها المبدع',
   },
 });
@@ -1067,7 +1073,6 @@ const EX = {
   'Appel fait, intéressée par la session du mois prochain.': { en: 'Called her: interested in next month’s session.', ar: 'تم الاتصال بها، وهي مهتمة بدورة الشهر القادم.' },
   'Je vends déjà': { en: 'I already sell', ar: 'أبيع فعلًا' },
   'Scaler mes pubs avec l’UGC IA': { en: 'Scale my ads with AI UGC', ar: 'توسيع إعلاناتي باستخدام UGC بالذكاء الاصطناعي' },
-  'Paiement BaridiMob annoncé, en attente de reçu.': { en: 'BaridiMob payment announced, waiting for the receipt.', ar: 'أعلن عن الدفع عبر BaridiMob، في انتظار الوصل.' },
   'Je crée déjà du contenu': { en: 'I already create content', ar: 'أصنع المحتوى فعلًا' },
   'Passer à la vidéo cinématique': { en: 'Move up to cinematic video', ar: 'الانتقال إلى الفيديو السينمائي' },
   'Équipe de 3 personnes': { en: 'Team of 3', ar: 'فريق من 3 أشخاص' },

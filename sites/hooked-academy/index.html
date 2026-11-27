@@ -458,7 +458,7 @@
       <h2 class="h2" id="join-h" data-i18n-html="join.h">Réserve ta place. <span class="nb dim">L’équipe te rappelle.</span></h2>
       <ol class="join-steps">
         <li><b>1</b><div><strong data-i18n="join.s1">Tu remplis le formulaire</strong><span data-i18n="join.s1.x">30 secondes, sans paiement en ligne.</span></div></li>
-        <li><b>2</b><div><strong data-i18n="join.s2">L’équipe te contacte sur WhatsApp</strong><span data-i18n="join.s2.x">Formule, session et paiement (CCP, BaridiMob ou espèces).</span></div></li>
+        <li><b>2</b><div><strong data-i18n="join.s2">L’équipe te contacte sur WhatsApp</strong><span data-i18n="join.s2.x">Formule, session et paiement à la livraison.</span></div></li>
         <li><b>3</b><div><strong data-i18n="join.s3">Tu reçois ton accès</strong><span data-i18n="join.s3.x">Ton espace étudiant s’ouvre : module 1, leçon 1.</span></div></li>
       </ol>
     </div>
@@ -482,6 +482,7 @@
             <label class="fld"><span data-i18n="f.name">Nom et prénom</span><input name="name" autocomplete="name" required minlength="2" placeholder="Ex. : Amina Benali" data-i18n-attr="placeholder:f.name.ph"></label>
             <label class="fld"><span>WhatsApp</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="05 50 00 00 00" pattern="[\d\s+\(\)\.\-]{8,}" dir="ltr"></label>
           </div>
+          <label class="fld"><span data-i18n="f.wilaya">Wilaya</span><select name="wilaya" required autocomplete="address-level1"><option value="" disabled selected data-i18n="f.wilaya.ph">Choisis ta wilaya</option></select></label>
           <div class="fld">
             <span id="f-trk-l" data-i18n="f.track">Choisis ta formule · accès 1 an</span>
             <div class="seg seg--3" role="radiogroup" aria-labelledby="f-trk-l">
@@ -538,7 +539,7 @@
       <details><summary><span class="srt-i" aria-hidden="true"><b>4</b><span>00:00:12,200 --&gt; 00:00:15,600</span></span><span data-i18n="faq.q4">Les outils IA sont-ils payants ?</span></summary><p data-i18n="faq.a4">Plusieurs outils ont une version gratuite suffisante pour apprendre. Pour produire en volume, certains abonnements deviennent utiles : la formation t’explique lesquels choisir selon ton usage et ton budget.</p></details>
       <!-- Hooked Lab pas encore ouvert (data/hooked-lab.js) : question cachée -->
       <details hidden><summary><span class="srt-i" aria-hidden="true"><b>5</b><span>00:00:15,800 --&gt; 00:00:19,400</span></span><span data-i18n="faq.q5">Quel est le lien avec Hooked Lab ?</span></summary><p data-i18n="faq.a5">Hooked Lab est l’application d’analyse de créatives de la même équipe. Dans la formation, tu l’utilises pour décortiquer les publicités qui marchent avant de produire les tiennes.</p></details>
-      <details><summary><span class="srt-i" aria-hidden="true"><b>6</b><span>00:00:19,600 --&gt; 00:00:23,000</span></span><span data-i18n="faq.q6">Comment se passe le paiement ?</span></summary><p data-i18n="faq.a6">Aucun paiement sur le site. Après ton inscription, l’équipe te contacte sur WhatsApp pour confirmer ta formule (une formation au choix, le pack Créative + IA ou le pack complet) et les moyens de paiement (CCP, BaridiMob ou espèces). Ton accès est activé dès la validation.</p></details>
+      <details><summary><span class="srt-i" aria-hidden="true"><b>6</b><span>00:00:19,600 --&gt; 00:00:23,000</span></span><span data-i18n="faq.q6">Comment se passe le paiement ?</span></summary><p data-i18n="faq.a6">Aucun paiement sur le site. Après ton inscription, l’équipe te contacte sur WhatsApp pour confirmer ta formule (une formation au choix, le pack Créative + IA ou le pack complet). Paiement à la livraison : rien à payer avant. Ton accès est activé dès la validation.</p></details>
       <details><summary><span class="srt-i" aria-hidden="true"><b>7</b><span>00:00:23,200 --&gt; 00:00:26,000</span></span><span data-i18n="faq.q7">Est-ce qu’il y a un certificat ?</span></summary><p data-i18n="faq.a7">Oui, un par formation : quand toutes ses leçons sont terminées, les quiz réussis et, pour la Formation IA, ton projet final validé par l’équipe.</p></details>
     </div>
   </section>

@@ -8,6 +8,7 @@
 // publié par le serveur : le site est à jour pour tout le monde, sans passer par GitHub.
 
 import { OFFRES } from '../../data/offres.js';
+import { wilayaLabel } from '../../data/wilayas.js';
 import { LANGS, lang, isRTL, locale, t, tIn, has, fmtNum, fmtDate, switcher, bindSwitchers } from './i18n.js';
 import './i18n/common.js';
 import { plural, exText } from './i18n/admin.js';
@@ -89,6 +90,8 @@ const waNum = (p) => {
 const wa = (phone, text) => `https://wa.me/${waNum(phone)}?text=${encodeURIComponent(text)}`;
 const fmtMin = (s) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, '0')}`;
 const arLine = (s) => (lang === 'ar' || !s ? '' : `<p class="ar-line" lang="ar" dir="rtl">${esc(s)}</p>`);
+// Wilaya d'une inscription, dans la langue de l'écran (« 16 · Alger ») ; vide pour les anciennes inscriptions
+const wlOf = (a) => wilayaLabel(a.wilaya, lang);
 const fold = (s) => String(s || '').normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '').toLowerCase();
 
 // Libellés partagés (common.js) et données d'exemple traduites
@@ -534,7 +537,7 @@ function viewApps() {
   const d = D;
   const q = fold(filter);
   const list = d.applications.filter(
-    (a) => !q || fold(`${a.name} ${exText(a.name)} ${a.email} ${a.phone} ${a.city} ${exText(a.city)} ${a.objectif} ${exText(a.objectif)} ${fmLabel(fmOf(a), true)} ${lgName(lgOf(a))}`).includes(q),
+    (a) => !q || fold(`${a.name} ${exText(a.name)} ${a.email} ${a.phone} ${a.wilaya || ''} ${wilayaLabel(a.wilaya, 'fr')} ${wilayaLabel(a.wilaya, 'ar')} ${a.city} ${exText(a.city)} ${a.objectif} ${exText(a.objectif)} ${fmLabel(fmOf(a), true)} ${lgName(lgOf(a))}`).includes(q),
   );
   shell(
     '#/inscriptions',
@@ -547,7 +550,7 @@ function viewApps() {
         ${list
           .filter((a) => a.status === k)
           .map(
-            (a) => `<button class="kb-card" draggable="true" data-id="${esc(a.id)}" type="button" style="--c:${s.c}"><b>${esc(exText(a.name))}</b><small>${esc(exText(a.objectif) || '—')}</small><div class="kb-meta">${a.exemple ? exTag() : ''}${Date.now() - new Date(a.createdAt) < 864e5 && a.status === 'nouvelle' ? `<span class="kb-new">${t('ad.apps.new')}</span>` : ''}${fmChip(fmOf(a))}${lgOf(a) ? `<span class="kb-lg" title="${esc(`${t('ad.f.lang')} · ${lgName(lgOf(a))}`)}">${lgOf(a).toUpperCase()}</span>` : ''}<span>${esc(prLabel(a.profil))}</span>·<span>${esc(exText(a.city) || '—')}</span>·<span>${esc(ago(a.createdAt))}</span></div></button>`,
+            (a) => `<button class="kb-card" draggable="true" data-id="${esc(a.id)}" type="button" style="--c:${s.c}"><b>${esc(exText(a.name))}</b><small>${esc(exText(a.objectif) || '—')}</small><div class="kb-meta">${a.exemple ? exTag() : ''}${Date.now() - new Date(a.createdAt) < 864e5 && a.status === 'nouvelle' ? `<span class="kb-new">${t('ad.apps.new')}</span>` : ''}${fmChip(fmOf(a))}${lgOf(a) ? `<span class="kb-lg" title="${esc(`${t('ad.f.lang')} · ${lgName(lgOf(a))}`)}">${lgOf(a).toUpperCase()}</span>` : ''}<span>${esc(prLabel(a.profil))}</span>·<span>${esc(wlOf(a) || '—')}</span>·<span>${esc(ago(a.createdAt))}</span></div></button>`,
           )
           .join('')}</section>`,
       )
@@ -584,13 +587,14 @@ function viewApps() {
     });
   });
   $('#csv').addEventListener('click', () => {
-    const H = ['date', 'name', 'wa', 'email', 'city', 'profil', 'formation', 'lang', 'level', 'goal', 'status', 'ex'].map((k) => t(`ad.csv.${k}`));
+    const H = ['date', 'name', 'wa', 'email', 'wilaya', 'city', 'profil', 'formation', 'lang', 'level', 'goal', 'status', 'ex'].map((k) => t(`ad.csv.${k}`));
     const rows = [H].concat(
       d.applications.map((a) => [
         fmtDT(a.createdAt),
         exText(a.name),
         a.phone,
         a.email,
+        wilayaLabel(a.wilaya, 'fr'),
         exText(a.city),
         prLabel(a.profil),
         fmLabel(fmOf(a), true),
@@ -661,7 +665,8 @@ function openApp(id, validation = null) {
     <dl class="dl">
       <dt>${t('ad.f.wa')}</dt><dd dir="ltr">${esc(a.phone || '—')}</dd>
       <dt>${t('ad.f.email')}</dt><dd dir="ltr">${esc(a.email || '—')}</dd>
-      <dt>${t('ad.f.city')}</dt><dd>${esc(exText(a.city) || '—')}</dd>
+      <dt>${t('ad.f.wilaya')}</dt><dd>${esc(wlOf(a) || '—')}</dd>
+      ${a.city ? `<dt>${t('ad.f.city')}</dt><dd>${esc(exText(a.city))}</dd>` : ''}
       <dt>${t('ad.f.profil')}</dt><dd>${esc(prLabel(a.profil))}</dd>
       <dt>${t('ad.f.formation')}</dt><dd>${
         a.status === 'validee'

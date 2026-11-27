@@ -290,6 +290,7 @@ export async function addApplication(form) {
     name: pick('name', 80),
     phone: pick('phone', 30),
     email: pick('email', 120),
+    wilaya: pick('wilaya', 2),
     city: pick('city', 60),
     profil: pick('profil', 20),
     formation: pick('formation', 10),

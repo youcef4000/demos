@@ -121,11 +121,11 @@
    "ar": "كيف يتم الدفع؟"
   },
   "a": {
-   "fr": "Aucun paiement sur le site. Après ton inscription, l’équipe te contacte sur WhatsApp pour confirmer ta formule (une formation au choix, le pack Créative + IA ou le pack complet, accès d’un an) et les moyens de paiement (CCP, BaridiMob ou espèces). Ton accès est activé dès la validation.",
-   "en": "No payment on the website. After you sign up, the team contacts you on WhatsApp to confirm your plan (one course of your choice, the Creative + AI Pack or the Complete Pack, one-year access) and the payment options (CCP, BaridiMob or cash). Your access is activated as soon as it’s approved.",
-   "ar": "لا دفع على الموقع. بعد تسجيلك يتواصل معك الفريق على واتساب لتأكيد صيغتك (تكوين واحد تختاره أو باقة الكرياتيف + الذكاء الاصطناعي أو الباقة الكاملة، مع وصول لمدة سنة) وطرق الدفع (CCP أو BaridiMob أو نقدًا). ويُفعَّل دخولك فور المصادقة."
+   "fr": "Aucun paiement sur le site. Après ton inscription, l’équipe te contacte sur WhatsApp pour confirmer ta formule (une formation au choix, le pack Créative + IA ou le pack complet, accès d’un an). Paiement à la livraison : rien à payer avant. Ton accès est activé dès la validation.",
+   "en": "No payment on the website. After you sign up, the team contacts you on WhatsApp to confirm your plan (one course of your choice, the Creative + AI Pack or the Complete Pack, one-year access). Cash on delivery: nothing to pay upfront. Your access is activated as soon as it’s approved.",
+   "ar": "لا دفع على الموقع. بعد تسجيلك يتواصل معك الفريق على واتساب لتأكيد صيغتك (تكوين واحد تختاره أو باقة الكرياتيف + الذكاء الاصطناعي أو الباقة الكاملة، مع وصول لمدة سنة). الدفع عند الاستلام: لا شيء تدفعه مسبقًا. ويُفعَّل دخولك فور المصادقة."
   },
-  "kw": "paiement, payer, ccp, baridimob, espèces, prix, tarif, combien, payment, pay, price, cash, how much, دفع, سعر, ثمن, كم, ندفع, نخلص, خلاص, الخلاص"
+  "kw": "paiement, payer, livraison, paiement à la livraison, prix, tarif, combien, payment, pay, price, cash on delivery, delivery, how much, الدفع عند الاستلام, الاستلام, دفع, سعر, ثمن, كم, ندفع, نخلص, خلاص, الخلاص"
  },
  {
   "id": "acces",

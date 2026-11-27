@@ -10,7 +10,7 @@
 // - « Je l'ai composé moi-même » (Franke, Schreier et Kaiser, 2010) : l'élève construit sa formule.
 // - Prix de référence réel : la somme des formations vendues séparément, barrée, puis la remise du pack.
 // - Prix ramené à la leçon et au jour (Gourville, 1998).
-// - Moins de douleur de payer : « À payer aujourd'hui : 0 DA », paiement après l'appel (CCP, BaridiMob, espèces).
+// - Moins de douleur de payer : « À payer aujourd'hui : 0 DA », paiement à la livraison, après l'appel.
 // - Progression : l'étape 1 sur 3 est cochée dès qu'une formule est choisie (Nunes et Drèze, 2006).
 // - Suggestion du pack qui ajoute le plus pour le moins, avec le vrai calcul.
 // Mouvement : un retour visuel à chaque choix (chiffres qui basculent, lignes imprimées, tampon) ; rien ne bouge
@@ -54,7 +54,7 @@ add({
     'cp.r.total': 'Total · accès 1 an',
     'cp.r.per': 'soit {l} la leçon · {d} par jour sur un an',
     'cp.r.today': 'À payer aujourd’hui',
-    'cp.r.after': 'Tu règles après l’appel de l’équipe : CCP, BaridiMob ou espèces.',
+    'cp.r.after': 'Tu règles après l’appel de l’équipe : paiement à la livraison.',
     'cp.u.both': 'Ajoute {x} pour {p} de plus : c’est le pack Créative + IA, et tu économises {s}.',
     'cp.u.all': 'Ajoute {x} pour {p} de plus : c’est le pack complet, et tu économises {s}.',
     'cp.u.dev': 'Ajoute Sites & Apps pour {p} de plus au lieu de {q} : c’est le pack complet.',
@@ -76,7 +76,7 @@ add({
     'cp.sr.save': '{o} : {p}, tu économises {s}.',
     'cp.t1': '0 DA à payer en ligne',
     'cp.t2': 'L’équipe t’appelle d’abord',
-    'cp.t3': 'CCP · BaridiMob · espèces',
+    'cp.t3': 'Paiement à la livraison',
     'cp.t4': 'Accès 1 an, ouvert dès la validation',
     'cp.t5': 'Leçons de 2 minutes, en darija',
     'cp.t6': 'Un certificat par formation',
@@ -117,7 +117,7 @@ add({
     'cp.r.total': 'Total · 1-year access',
     'cp.r.per': 'that’s {l} per lesson · {d} a day over a year',
     'cp.r.today': 'To pay today',
-    'cp.r.after': 'You pay after the team’s call: CCP, BaridiMob or cash.',
+    'cp.r.after': 'You pay after the team’s call: cash on delivery.',
     'cp.u.both': 'Add {x} for {p} more: that’s the Creative + AI Pack, and you save {s}.',
     'cp.u.all': 'Add {x} for {p} more: that’s the Complete Pack, and you save {s}.',
     'cp.u.dev': 'Add Sites & Apps for {p} more instead of {q}: that’s the Complete Pack.',
@@ -139,7 +139,7 @@ add({
     'cp.sr.save': '{o}: {p}, you save {s}.',
     'cp.t1': '0 DZD to pay online',
     'cp.t2': 'The team calls you first',
-    'cp.t3': 'CCP · BaridiMob · cash',
+    'cp.t3': 'Cash on delivery',
     'cp.t4': '1-year access, open as soon as it’s approved',
     'cp.t5': '2-minute lessons, in Darija',
     'cp.t6': 'A certificate for each course',
@@ -180,7 +180,7 @@ add({
     'cp.r.total': 'المجموع · وصول لمدة سنة',
     'cp.r.per': 'أي {l} للدرس · {d} في اليوم على مدى سنة',
     'cp.r.today': 'للدفع اليوم',
-    'cp.r.after': 'تدفع بعد مكالمة الفريق: CCP أو BaridiMob أو نقدًا.',
+    'cp.r.after': 'تدفع بعد مكالمة الفريق: الدفع عند الاستلام.',
     'cp.u.both': 'أضف {x} مقابل {p} إضافية: إنها باقة الكرياتيف + الذكاء الاصطناعي، وتوفّر {s}.',
     'cp.u.all': 'أضف {x} مقابل {p} إضافية: إنها الباقة الكاملة، وتوفّر {s}.',
     'cp.u.dev': 'أضف المواقع والتطبيقات مقابل {p} إضافية بدل {q}: إنها الباقة الكاملة.',
@@ -202,7 +202,7 @@ add({
     'cp.sr.save': '{o}: {p}، وتوفّر {s}.',
     'cp.t1': '0 دج للدفع على الإنترنت',
     'cp.t2': 'الفريق يتصل بك أولًا',
-    'cp.t3': 'CCP · BaridiMob · نقدًا',
+    'cp.t3': 'الدفع عند الاستلام',
     'cp.t4': 'وصول لمدة سنة، يُفتح فور المصادقة',
     'cp.t5': 'دروس من دقيقتين، بالدارجة',
     'cp.t6': 'شهادة لكل تكوين',

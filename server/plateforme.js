@@ -772,12 +772,17 @@ export class Plateforme {
     const name = S(v.name, 80);
     const phone = S(v.phone, 30);
     if (name.length < 2 || !normPhone(phone)) fail(400, 'fields');
+    // Wilaya obligatoire : numéro de 01 à 58 (sites/hooked-academy/data/wilayas.js)
+    const ws = typeof v.wilaya === 'string' || typeof v.wilaya === 'number' ? String(v.wilaya).trim() : '';
+    const wn = /^\d{1,2}$/.test(ws) ? Number(ws) : 0;
+    if (wn < 1 || wn > 58) fail(400, 'wilaya');
     const app = {
       id: rid('ins-', 12),
       createdAt: iso(),
       name,
       phone,
       email: normEmail(v.email),
+      wilaya: String(wn).padStart(2, '0'),
       city: S(v.city, 60),
       profil: PROFILS.includes(v.profil) ? v.profil : 'debutant',
       formation: PACKS.includes(v.formation) ? v.formation : 'both',

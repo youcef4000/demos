@@ -99,6 +99,31 @@ if (!app.kv('faq')) {
   }
 }
 
+// Paiement (novembre 2026) : seul le paiement à la livraison est cité. Une question de la FAQ enregistrée qui
+// cite un autre moyen (CCP, BaridiMob…) reprend le texte du site (data/faq.json) ; le reste de la FAQ ne change pas.
+{
+  const OLD = /\bccp\b|baridi|بريدي|بريد الجزائر|virement/i;
+  const faq = app.kv('faq');
+  if (Array.isArray(faq) && faq.some((x) => OLD.test(JSON.stringify(x)))) {
+    try {
+      const site = JSON.parse(await readFile(path.join(SITE, 'data/faq.json'), 'utf8'));
+      const byId = Object.fromEntries(site.map((x) => [x.id, x]));
+      let n = 0;
+      const next = faq.map((x) => {
+        if (!OLD.test(JSON.stringify(x)) || !byId[x.id]) return x;
+        n++;
+        return { ...x, q: byId[x.id].q, a: byId[x.id].a, kw: byId[x.id].kw };
+      });
+      app.setKv('faq', next);
+      app.bump();
+      const left = next.filter((x) => OLD.test(JSON.stringify(x))).map((x) => x.id);
+      console.log(`FAQ : ${n} réponse(s) sur le paiement mises à jour (paiement à la livraison)${left.length ? ` ; à corriger dans l'espace équipe : ${left.join(', ')}` : ''}`);
+    } catch (e) {
+      console.error('FAQ : mise à jour du paiement impossible', e);
+    }
+  }
+}
+
 /* ------------------------------------------------------------------ */
 /* Sauvegarde quotidienne                                              */
 /* ------------------------------------------------------------------ */
