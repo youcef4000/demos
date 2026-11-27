@@ -74,6 +74,14 @@ Liens des publicités : `?plan=creative|ia|sites|pack2|pack3` présélectionne l
 (`pack2` = Créative + IA, `pack3` = pack complet), `?lang=fr|en|ar` ouvre la page dans la langue, et
 `utm_source`, `utm_campaign`, `utm_content` sont gardés pendant la visite puis enregistrés avec l'inscription.
 Exemple : `https://hooked-academy.tech/?lang=ar&plan=pack2&utm_source=facebook&utm_campaign=lancement&utm_content=video-1`.
+Une ancre (`#inscription`, `#formation-dev`…) dans un lien de publicité est ignorée : la page s'ouvre en haut.
+
+Écran vidéo d'arrivée (`sites/hooked-academy/assets/js/gate.js`) : à la première visite de `/` ou `/ia/`, la vidéo de
+présentation s'affiche par-dessus le site flouté ; le bouton « voir la formation » se débloque après 45 s de lecture
+réelle (`GATE_SECONDS`), ou tout de suite si la vidéo ne démarre pas (10 s), échoue ou si le réseau est coupé.
+Vidéo et image : `GATE_VIDEO_SRC` et `GATE_VIDEO_POSTER` en tête du fichier (une vidéo 9:16 marche aussi).
+Un visiteur qui a débloqué l'écran ne le revoit pas ; `?gate=0` le coupe (pour tester la page).
+Pixel : `VideoGatePlay` (lancement), `VideoGate50` (moitié de la vidéo), `VideoGateUnlock` (clic sur le bouton débloqué).
 
 ---
 
